@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商管類筆記｜Business & Management</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23b45309'/%3E%3Cpath d='M6 9h12v9H6z' fill='%23fef3c7'/%3E%3Cpath d='M9 7.5v1.5m3-1.5v1.5m3-1.5v1.5' stroke='%23fef3c7' stroke-width='1.2'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --paper:#faf6ec; --card:#fffdf6; --ink:#3a3126; --sub:#8a7f6d;
+    --amber:#b45309; --amber-soft:#f3e2c3; --line:#e7dcc6;
+    --green:#3f6b4f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Noto Serif TC","Songti TC","PingFang TC","Microsoft JhengHei",serif;
+    background:var(--paper); color:var(--ink); line-height:1.8;
+    min-height:100vh;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:48px 24px 72px}
+  header.hero{padding:40px 8px 28px;border-bottom:3px double var(--amber)}
+  .eyebrow{font-size:13px;letter-spacing:.35em;color:var(--amber);font-weight:600}
+  h1{font-size:clamp(26px,5vw,38px);margin-top:10px;font-weight:900}
+  .sub{margin-top:8px;color:var(--sub);font-size:15px}
+  .meta{margin-top:14px;font-size:13px;color:var(--sub)}
+  .meta a{color:var(--amber);text-decoration:none;border-bottom:1px dotted var(--amber)}
+  section{margin-top:36px}
+  h2{font-size:18px;display:flex;align-items:center;gap:10px;color:var(--amber)}
+  h2 .bar{width:26px;height:4px;background:var(--amber);border-radius:2px}
+  .grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:18px}
+  .card{
+    display:flex;gap:18px;align-items:stretch;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:22px;text-decoration:none;color:inherit;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(180,83,9,.12)}
+  .card .num{
+    flex:0 0 52px;height:52px;border-radius:10px;
+    background:var(--amber-soft);color:var(--amber);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:20px;
+  }
+  .card .body h3{font-size:17px;font-weight:700}
+  .card .body p{margin-top:4px;font-size:14px;color:var(--sub)}
+  .card .body .tag{
+    display:inline-block;margin-top:10px;font-size:12px;color:var(--green);
+    border:1px solid #cfe0d2;background:#eef6ef;border-radius:999px;padding:1px 10px;
+  }
+  .placeholder{
+    border:1.5px dashed var(--line);border-radius:12px;padding:20px 22px;
+    color:var(--sub);font-size:14px;margin-top:16px;
+  }
+  footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--sub);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  @media(min-width:640px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">BUSINESS &amp; MANAGEMENT NOTES</div>
+    <h1>商管類筆記</h1>
+    <p class="sub">經濟學、管理與商業知識的學習頁面彙整，以章節筆記形式整理，方便隨時複習。</p>
+    <p class="meta">GitHub Pages 瀏覽｜<a href="https://github.com/xax89/business-notes" target="_blank" rel="noopener">儲存庫原始碼</a></p>
+  </header>
+
+  <section>
+    <h2><span class="bar"></span>內容列表</h2>
+    <div class="grid">
+      <a class="card" href="microecon-notes.html">
+        <div class="num">01</div>
+        <div class="body">
+          <h3>《微觀人性 學個經》章節筆記</h3>
+          <p>牧翰《個體經濟學》全書 20 章學習筆記：章節總覽、定義、公式整理、圖形概念、例題摘要與考試重點，並標註印刷頁碼。</p>
+          <span class="tag">個體經濟學</span>
+        </div>
+      </a>
+    </div>
+    <div class="placeholder">更多商管類內容（總體經濟、管理學、商業分析等）陸續新增中。</div>
+  </section>
+
+  <footer>
+    <span>商管類筆記 · 學習頁面</span>
+    <span>更新：2026-09-14</span>
+  </footer>
+</div>
+</body>
+</html>
