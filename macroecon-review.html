@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宏觀天地 學總經｜互動複習</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Ctext x='32' y='44' font-size='34' font-family='Georgia,serif' fill='white' text-anchor='middle'%3E%E2%88%91%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fs:16px;
+  --paper:#f6f0e2;
+  --ink:#2b251d;
+  --panel:#fffdf6;
+  --line:#e4d9bf;
+  --muted:#6f6555;
+  --nav-bg:#f1e9d5;
+  --nav-ink:#4a4234;
+  --nav-hover:#e7dcc0;
+  --nav-active:#3c6e8f;
+  --accent:#b5542e;
+  --accent-soft:#fbeae2;
+  --teal:#2c6e9e;
+  --teal-soft:#eef3f4;
+  --green:#1e7d32;
+  --hl:#ffe94a;
+  --radius:12px;
+  --blue:#2c6e9e;--green2:#3a7d44;--orange:#c06a24;--purple:#6b4e8e;--brown:#8a5a3b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif TC","PMingLiU","PingFang TC",serif;
+  font-size:var(--fs);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.8;
+  display:flex;
+  min-height:100vh;
+}
+body.dark{
+  --paper:#16130d;--ink:#e6e0d2;--panel:#201c14;--line:#3a3325;
+  --muted:#a0937a;--nav-bg:#1f1a10;--nav-ink:#cfc4ad;--nav-hover:#332b1b;
+  --nav-active:#4a8ab5;--accent:#e08a55;--accent-soft:#2f2014;
+  --teal:#5f9fc0;--teal-soft:#14242e;--green:#5cb56e;--hl:#5a4a1e;
+  --blue:#5f9fc0;--green2:#5cb56e;--orange:#d98a4a;--purple:#9b7fc0;--brown:#b08a5a;
+}
+/* ===== 側邊目錄（兩層） ===== */
+.sidebar{
+  width:280px;flex-shrink:0;background:var(--nav-bg);color:var(--nav-ink);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 18px 40px;
+  border-right:1px solid var(--line);
+}
+.sidebar .brand{font-weight:700;font-size:15px;letter-spacing:.02em;line-height:1.4;margin-bottom:4px;color:var(--ink)}
+.sidebar .brand .t2{font-size:12px;color:var(--muted);font-weight:400;margin-top:2px}
+.nav-chapter{
+  display:flex;align-items:center;gap:8px;width:100%;padding:4px 10px;border-radius:6px;
+  cursor:pointer;font-size:13.5px;font-weight:700;color:var(--ink);
+  border:none;background:none;text-align:left;margin-top:8px;font-family:inherit;line-height:1.45;
+}
+.nav-chapter:hover{background:var(--nav-hover)}
+.nav-chapter.active{background:var(--nav-active);color:#fff}
+.nav-chapter .num{font-size:11px;font-weight:600;opacity:.65;width:26px;flex-shrink:0}
+.nav-chapter.active .num{opacity:.9}
+.nav-chapter .tag{margin-left:auto;font-size:10px;opacity:.55;letter-spacing:.05em;font-weight:400}
+.nav-chapter .tag.done{color:var(--green2);opacity:1}
+.nav-sub{
+  display:block;width:100%;padding:3px 10px 3px 34px;border-radius:6px;
+  cursor:pointer;font-size:12.5px;color:var(--muted);border:none;background:none;text-align:left;font-family:inherit;line-height:1.45;
+}
+.nav-sub:hover{background:var(--nav-hover);color:var(--ink)}
+.nav-sub.active{color:var(--nav-active);font-weight:700}
+/* ===== 主內容 ===== */
+.main{flex:1;min-width:0;padding:28px 34px 80px}
+.topbar{
+  position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);padding:10px 0 14px;margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.searchbox{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 14px}
+.searchbox svg{width:16px;height:16px;opacity:.45;flex-shrink:0}
+.searchbox input{border:none;outline:none;background:none;font-size:14px;width:100%;color:var(--ink);font-family:inherit}
+.toolbtn{
+  display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;padding:8px 12px;font-size:13px;cursor:pointer;color:var(--ink);font-family:inherit;transition:all .15s;
+}
+.toolbtn:hover{border-color:var(--teal);color:var(--teal)}
+.toolbtn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.toolbtn svg{width:15px;height:15px}
+/* 章頭 */
+.chapter-head{border-left:8px solid var(--teal);padding:6px 0 10px 18px;margin:30px 0 18px}
+.chapter-head .kicker{display:inline-block;font-size:12px;letter-spacing:.15em;color:var(--teal);font-family:"Noto Sans TC",sans-serif;font-weight:600}
+.chapter-head h1{font-family:"Noto Serif TC",serif;font-size:27px;line-height:1.25;margin:2px 0 4px}
+.chapter-head p{color:var(--muted);font-size:14.5px;max-width:760px;margin-top:6px}
+/* 小節 */
+.section{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+.section-head{
+  display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:pointer;user-select:none;
+  font-family:"Noto Serif TC",serif;font-size:19px;font-weight:600;border-bottom:2px solid transparent;transition:border-color .15s;
+}
+.section.open .section-head{border-bottom-color:var(--teal)}
+.section-head .sec-num{color:var(--teal);font-size:12.5px;font-weight:700;font-family:"Noto Sans TC",sans-serif;letter-spacing:.08em;flex-shrink:0}
+.section-head .chev{width:18px;height:18px;margin-left:auto;transition:transform .2s;flex-shrink:0}
+.section.open .section-head .chev{transform:rotate(180deg)}
+.section-body{display:none;padding:4px 20px 18px}
+.section.open .section-body{display:block}
+.section-body p{margin:10px 0;font-size:14.8px}
+.section-body ul{margin:8px 0;padding-left:24px}
+.section-body li{margin:3px 0}
+/* callout 盒子（參考章節筆記風格） */
+.section-body .note{background:#fdf0c2;border-left:4px solid #d9a514;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px}
+.section-body .note::before{content:"重點與結論";display:block;font-family:"Noto Sans TC",sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.12em;color:#8a6d1a;margin-bottom:4px}
+.section-body .warn{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px}
+.section-body .warn::before{content:"考試重點";display:block;font-family:"Noto Sans TC",sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--accent);margin-bottom:4px}
+.section-body .src{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);margin-top:14px;padding-top:10px}
+.section-body .src summary{cursor:pointer;font-size:12.5px;color:var(--teal)}
+.section-body .src pre{white-space:pre-wrap;font-family:"Noto Serif TC",serif;font-size:13px;color:var(--muted);margin-top:8px;max-height:280px;overflow-y:auto}
+/* 公式卡 */
+.formula{background:#fbf4e6;border:1px dashed #c9b88f;border-radius:8px;padding:14px 18px;margin:12px 0;font-size:15.5px;text-align:center;font-family:"Noto Serif TC",serif}
+.formula .f-label{display:block;font-size:11.5px;color:#9a6a1f;letter-spacing:.08em;margin-bottom:4px;font-family:"Noto Sans TC",sans-serif;font-weight:700}
+.formula .f-note{display:block;font-size:12px;color:var(--muted);margin-top:4px;font-family:"Noto Sans TC",sans-serif}
+/* 術語 */
+.term{color:var(--green);font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,var(--green) 55%,transparent);border-radius:3px;padding:0 2px;transition:all .15s}
+.term:hover{background:var(--green);color:#fff;border-bottom:none}
+/* 專有名詞（人名／事件）深紫粗體 */
+.proper{color:#7b2cbf;font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,#7b2cbf 50%,transparent);border-radius:3px;padding:0 2px;transition:background .15s}
+.proper:hover{background:#7b2cbf;color:#fff;border-bottom:none}
+body.dark .proper{color:#b39ddb}
+body.dark .proper:hover{background:#b39ddb;color:#1a1420}
+/* 例題 */
+.problem{background:#eae6da;border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:14px 0}
+.problem .p-head{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14.5px;color:var(--teal);margin-bottom:8px}
+.problem .p-body{font-size:14.5px}
+.problem .opts{margin:10px 0 4px;display:grid;gap:6px}
+.problem .opts div{padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.8px;background:var(--panel)}
+body.dark .problem{background:#26221a}
+.ans-btn{
+  margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:none;border:1.5px solid var(--teal);
+  color:var(--teal);border-radius:8px;padding:7px 16px;font-size:13.5px;cursor:pointer;font-family:inherit;transition:all .15s;
+}
+.ans-btn:hover{background:var(--teal);color:#fff}
+.ans{display:none;margin-top:12px;background:var(--teal-soft);border-radius:8px;padding:12px 16px;font-size:14px}
+.ans.show{display:block}
+.ans .a-label{font-weight:700;color:var(--teal);font-size:13px}
+.ans ul{margin:6px 0 2px;padding-left:22px}
+.ans li{margin:3px 0}
+.ans b{font-weight:700}
+/* 術語卡區 */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin:16px 0}
+.flip-card{perspective:900px;height:150px;cursor:pointer}
+.flip-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border-radius:12px;border:1px solid var(--line);padding:12px;text-align:center}
+.flip-front{background:var(--panel)}
+.flip-front .en{font-size:16px;font-weight:700;color:var(--teal);word-break:break-word}
+.flip-front .zh{font-size:13px;color:var(--muted)}
+.flip-back{background:var(--teal);color:#fff;transform:rotateY(180deg)}
+.flip-back .def{font-size:13px;line-height:1.6}
+.flip-hint{font-size:11px;opacity:.5;margin-top:4px}
+/* ===== 術語表（列表形式） ===== */
+.gloss-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.gloss-cats{display:flex;gap:6px;flex-wrap:wrap}
+.gloss-cat-btn{border:1px solid var(--line);background:var(--panel);border-radius:20px;padding:4px 13px;font-size:12.5px;cursor:pointer;color:var(--muted);transition:all .15s}
+.gloss-cat-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.gloss-progress{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
+.gloss-progress .bar{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.gloss-progress .fill{height:100%;background:var(--teal);width:0%;transition:width .3s}
+.gloss-progress .label{font-size:13px;color:var(--muted);white-space:nowrap}
+.gloss-group{margin-bottom:16px}
+.gloss-group h3{font-size:14px;color:var(--teal);margin:14px 0 8px;padding-left:10px;border-left:3px solid var(--teal);letter-spacing:.04em}
+.gloss-item{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:8px 0;display:flex;gap:12px;align-items:flex-start;transition:border-color .15s}
+.gloss-item.starred{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.gloss-check{width:24px;height:24px;border-radius:7px;border:2px solid var(--line);flex-shrink:0;cursor:pointer;display:grid;place-items:center;margin-top:2px;transition:all .15s;background:none;padding:0}
+.gloss-check svg{width:14px;height:14px;display:none;color:#fff}
+.gloss-check.done{background:var(--teal);border-color:var(--teal)}
+.gloss-check.done svg{display:block}
+.gloss-item.done .gloss-en{text-decoration:line-through;opacity:.55}
+.gloss-main{flex:1;min-width:0}
+.gloss-en{font-weight:700;color:var(--green);font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.gloss-zh{font-size:15px;color:var(--green);font-weight:700;margin-left:2px}
+.gloss-def{font-size:13.5px;margin-top:4px;line-height:1.8}
+.gloss-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
+.gloss-btn{border:1px solid var(--line);background:none;border-radius:7px;padding:3px 10px;font-size:11.5px;cursor:pointer;color:var(--muted);transition:all .15s}
+.gloss-btn:hover{color:var(--teal);border-color:var(--teal)}
+.gloss-btn.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+.gloss-note{display:none;margin-top:8px}
+.gloss-note.show{display:block}
+.gloss-note textarea{width:100%;min-height:56px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;background:var(--paper);color:var(--ink);font-family:inherit;resize:vertical}
+.gloss-note textarea:focus{outline:none;border-color:var(--teal)}
+.gloss-data-actions{display:flex;gap:8px;margin-left:auto}
+/* 搜尋高亮 */
+mark{background:var(--hl);color:inherit;border-radius:2px;padding:0 1px}
+mark.hl{background:var(--hl)}
+/* 重點高亮（使用者標記） */
+.userhl{background:var(--hl);border-radius:3px;cursor:pointer;box-shadow:0 0 0 2px var(--hl)}
+/* 畫記模式 */
+body.marking{cursor:crosshair}
+body.marking .section-body p,body.marking .section-body li,body.marking .section-body .note,body.marking .section-body .warn,body.marking .problem .p-body{cursor:crosshair;border-radius:3px;transition:box-shadow .12s}
+body.marking .section-body p:hover,body.marking .section-body li:hover,body.marking .section-body .note:hover,body.marking .section-body .warn:hover,body.marking .problem .p-body:hover{box-shadow:0 0 0 2px rgba(255,233,74,.45);background:rgba(255,233,74,.12)}
+/* 進度條 */
+.progress-strip{display:flex;gap:6px;margin:14px 0 6px}
+.progress-strip i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.progress-strip i.done{background:var(--teal)}
+.chip{display:inline-flex;align-items:center;gap:5px;background:var(--teal-soft);color:var(--teal);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:500}
+/* 提示條 */
+.banner{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--ink);margin-bottom:18px;display:flex;gap:10px;align-items:flex-start}
+.banner svg{width:18px;height:18px;flex-shrink:0;color:var(--accent);margin-top:2px}
+/* 空狀態 */
+.empty{display:none;text-align:center;padding:60px 20px;color:var(--muted)}
+.empty.show{display:block}
+.empty .big{font-size:40px;margin-bottom:10px}
+.chpage{font-size:12.5px;color:var(--muted);font-family:"Noto Sans TC",sans-serif}
+.chapter-head .ch-points{margin:10px 0 0;padding-left:22px;font-size:14.5px;color:var(--ink)}
+.chapter-head .ch-points li{margin:3px 0}
+/* 方法學習卡（左打勾＋方法名＋公式說明，底下例子） */
+.method-card{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;margin:12px 0;background:var(--panel);overflow:hidden;transition:opacity .2s}
+.method-card .mc-check{width:64px;flex-shrink:0;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;background:var(--panel)}
+.method-card .mc-check input{width:19px;height:19px;accent-color:var(--green);cursor:pointer}
+.method-card .mc-check .mc-lbl{font-size:11px;color:var(--muted)}
+.method-card .mc-check:has(input:checked){background:#eef7ec}
+.method-card .mc-check:has(input:checked) .mc-lbl{color:var(--green);font-weight:700}
+.method-card .mc-left{width:34px;flex-shrink:0;background:var(--teal-soft);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:8px 2px;font-family:"Noto Sans TC",sans-serif;font-weight:700;color:var(--teal);font-size:13px;text-align:center;line-height:1.4;writing-mode:vertical-rl;letter-spacing:.08em}
+.method-card .mc-body{flex:1;padding:12px 16px;font-size:14px;min-width:0}
+.method-card .mc-formula{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--ink)}
+.method-card .mc-detail{font-size:13px;color:var(--muted)}
+.method-card .mc-ex{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:13px}
+/* 學會：刪除線＋黯淡 */
+.method-card.learned{opacity:.55}
+.method-card.learned .mc-formula,.method-card.learned .mc-detail,.method-card.learned .mc-ex{text-decoration:line-through;text-decoration-thickness:1.5px}
+/* 標題式學習卡（標題橫排） */
+.method-card.mc-title .mc-left{writing-mode:initial;width:auto;min-width:96px;padding:10px 8px;font-size:13px}
+body.dark .method-card .mc-check:has(input:checked){background:#16241a}
+@media (max-width:900px){
+  .method-card{flex-wrap:wrap}
+  .method-card .mc-check{width:56px;border-right:1px solid var(--line);border-bottom:none;flex-direction:column;padding:6px}
+  .method-card .mc-left{flex:0 0 auto;width:auto;min-width:88px;border-right:1px solid var(--line);border-bottom:none;padding:8px 14px}
+  .method-card .mc-body{width:100%}
+}
+/* 左右布局公式卡（左說明＋右公式＋底例子） */
+.f-split{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:12px 0;background:var(--panel)}
+.f-split .fs-row{display:flex;flex-wrap:wrap;align-items:stretch}
+.f-split .fs-left{flex:1 1 250px;padding:14px 16px;font-size:14px}
+.f-split .fs-label{font-family:"Noto Sans TC",sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--teal);margin-bottom:6px}
+.f-split .fs-left p{margin:0;font-size:14px}
+.f-split .fs-right{flex:1 1 280px;padding:14px 16px;border-left:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.f-split .fs-right .formula{margin:0;width:100%}
+.f-split .fs-ex{padding:10px 16px;border-top:1px dashed var(--line);background:#f6f1e3;font-size:13.5px}
+body.dark .f-split .fs-ex{background:#201c14}
+@media (max-width:900px){
+  .f-split .fs-right{border-left:none;border-top:1px solid var(--line)}
+}
+/* 比較表格 */
+.tblwrap{overflow-x:auto;margin:14px 0}
+.tblwrap table{border-collapse:separate;border-spacing:0;border:1px solid #e0d5ba;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(120,100,50,.10);width:100%;table-layout:fixed;background:var(--panel);font-size:13.5px}
+.tblwrap caption{caption-side:top;text-align:left;font-weight:800;font-size:14px;color:#4a3f2a;padding:2px 2px 8px;letter-spacing:.02em}
+.tblwrap th,.tblwrap td{border-right:1px solid #e8dfc8;border-bottom:1px solid #e8dfc8;padding:8px 10px;vertical-align:top;word-break:break-word}
+.tblwrap th{background:#e9dcb8;color:#4a3f2a;font-size:13px}
+.tblwrap th:last-child,.tblwrap td:last-child{border-right:none}
+.tblwrap tbody tr:last-child td{border-bottom:none}
+.tblwrap tbody tr:nth-child(even){background:#faf6ea}
+.tblwrap tbody tr:hover{background:#f5eeda}
+body.dark .tblwrap table{border-color:#3a3325;background:#201c14}
+body.dark .tblwrap th{background:#3a3325;color:#e6e0d2}
+body.dark .tblwrap caption{color:#cfc4ad}
+body.dark .tblwrap tbody tr:nth-child(even){background:#262119}
+/* SVG 示意圖 */
+.svgfig{margin:14px 0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+.svgfig figcaption{font-size:12.5px;color:var(--muted);margin-bottom:8px;font-family:"Noto Sans TC",sans-serif;line-height:1.5}
+.svgfig svg{width:100%;height:auto;display:block}
+.ax{stroke:#9a8f78;stroke-width:1.2}
+.axl{font-size:11px;fill:#6f6555;font-family:"Noto Sans TC",sans-serif}
+.lb{font-size:12px;fill:#2b251d;font-family:"Noto Sans TC",sans-serif}
+body.dark .lb{fill:#e6e0d2}
+/* 深色模式的 callout 覆蓋 */
+body.dark .section-body .note{background:#332b1b;border-left-color:#d9a514}
+body.dark .section-body .note::before{color:#e5c15a}
+body.dark .formula{background:#2a2418;border-color:#8a7a50}
+body.dark .formula .f-label{color:#d8b36a}
+/* 響應式 */
+@media (max-width:900px){
+  body{flex-direction:column}
+  .sidebar{width:100%;height:auto;position:static;flex-direction:row;flex-wrap:wrap;gap:4px;padding:14px 12px;border-right:none;border-bottom:1px solid var(--line)}
+  .sidebar .brand{width:100%;padding-bottom:8px;margin-bottom:6px}
+  .nav-chapter{width:auto;margin:2px 2px;padding:5px 10px}
+  .nav-chapter .tag{display:none}
+  .nav-sub{width:auto;display:inline-block;padding:3px 10px;margin:2px 2px}
+  .main{padding:18px 14px 60px}
+  .cards-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+}
+@media print{
+  .sidebar,.topbar,.banner,.no-print{display:none!important}
+  .section-body{display:block!important}
+  body{display:block}
+  .main{padding:0}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 側邊導航 ===== -->
+<nav class="sidebar" id="sidebar" aria-label="章節導航"></nav>
+
+<!-- ===== 主內容 ===== -->
+<main class="main">
+  <div class="topbar no-print">
+    <div class="searchbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" id="searchInput" placeholder="搜尋本章內容…">
+    </div>
+    <button class="toolbtn" id="markToggle" title="畫記模式：開啟後點文字直接高亮，關閉即儲存">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+    </button>
+    <button class="toolbtn" id="darkToggle" title="深色模式">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+    <button class="toolbtn" id="hlToggle" title="顯示／隱藏你的重點標記">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+    </button>
+  </div>
+
+  <div class="banner no-print">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+    <div><b>樣板說明：</b>這是《宏觀天地 學總經》第一章的互動複習樣板。點擊小節展開重點、用術語表打勾複習（重點／筆記都存在本機）、點例題顯示解答。確認這個風格後，我再把其餘章節與另外兩本書做進去。</div>
+  </div>
+
+  <div id="chapterContent"></div>
+  <div class="empty" id="emptyState">
+    <div class="big">🔍</div>
+    <div>沒有找到符合「<span id="emptyKeyword"></span>」的內容</div>
+  </div>
+</main>
+
+<!-- ===== 術語卡模態 ===== -->
+<div id="termModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)closeTerm()">
+  <div style="background:var(--panel);border-radius:16px;max-width:480px;width:100%;padding:26px 28px;position:relative">
+    <button onclick="closeTerm()" style="position:absolute;top:14px;right:16px;border:none;background:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button>
+    <div id="termModalEn" style="font-size:22px;font-weight:700;color:var(--teal);font-family:Georgia,serif"></div>
+    <div id="termModalZh" style="font-size:15px;font-weight:600;margin:4px 0 12px"></div>
+    <div id="termModalDef" style="font-size:14.5px;line-height:1.9;color:var(--ink)"></div>
+  </div>
+</div>
+
+<script>
+/* ===== 資料：全書章節結構 ===== */
+const BOOK = [
+  {n:1, title:"國民所得會計帳", subs:["1.1 國民所得定義與衡量","1.2 流量循環模型","1.3 GDP 的計算","1.4 國民所得的計算","1.5 國民所得的分解","1.6 缺點與所得分配","1.7 物價指數"], done:true, points:["國民所得的定義與衡量方法（GDP 的三種計算方式）","部門流量循環模型（兩部門／三部門／四部門）","所得帳計算鏈：GDP → GNP → NNP → NI → PI → DPI","國民所得會計的缺點與所得分配（洛侖茲曲線、吉尼係數）","物價指數：CPI 與 GDP 平減指數"]},
+  {n:2, title:"古典學派", subs:["2.1 古典學派總論","2.2 貨幣數量學說","2.3 貨幣市場與古典二分法","2.4 商品市場與可貸資金","2.5 就業與勞動市場"], done:true, points:["學派演進：重商主義→重農主義→古典學派（亞當斯密、李嘉圖、薩伊）","費雪交易方程式與劍橋現金餘額方程式：貨幣數量學說","古典二分法與貨幣中立性：貨幣像一層面紗","可貸資金理論：S(r) = I(r) + G − T 決定實質利率","古典勞動市場無貨幣幻覺 → 垂直 AS、充分就業為常態","失業種類：摩擦性／結構性／循環性／季節性／隱藏性"]},
+  {n:3, title:"簡單凱因斯模型", subs:["3.1 凱因斯革命","3.2 行為方程式","3.3 均衡所得決定","3.4 節儉的矛盾","3.5 膨脹與緊縮缺口","3.6 乘數理論"], done:true, points:["凱因斯革命：價格與工資僵固、有效需求不足","消費函數 C = a + bYd、儲蓄函數、投資函數與加速原理","45° 線均衡：AE 與 45° 線交點決定均衡所得","節儉的矛盾：想多儲蓄反而所得下降、儲蓄不增","膨脹與緊縮缺口：實際與潛在產出的差距","乘數理論：政府支出乘數、定額稅乘數、平衡預算乘數、自動安定機能"]},
+  {n:4, title:"IS-LM 模型", subs:["4.1 模型基礎","4.2 IS 曲線","4.3 流動性偏好理論","4.4 LM 曲線","4.5 IS-LM 均衡","4.6 IS-LM 乘數","4.7 政策有效性","4.8 特殊案例"]},
+  {n:5, title:"完整總體經濟學模型", subs:["5.1 總合需求","5.2 總合供給","5.3 完整模型","5.4 政策分析"]},
+  {n:6, title:"開放經濟體系", subs:["6.1 匯率與外匯市場","6.2 利率與利率平價","6.3 匯率與利率的計算","6.4 國際收支平衡","6.5 開放經濟體系的總體模型","6.6 大型與小型開放經濟"]},
+  {n:7, title:"物價膨脹", subs:["7.1 意義與衡量","7.2 物價膨脹的種類","7.3 對物價的預期","7.4 植入預期的總合供給"]},
+  {n:8, title:"菲利普曲線", subs:["8.1 短期菲利普曲線","8.2 預期擴張的菲利普曲線","8.3 政策意涵"]},
+  {n:9, title:"供給面學派", subs:["9.1 供給面經濟學","9.2 拉弗曲線","9.3 政策主張","9.4 供給面學派"]},
+  {n:10,title:"投資理論", subs:["10.1 投資的種類","10.2 新古典投資理論","10.3 Tobin's Q 理論","10.4 加速原理"]},
+  {n:11,title:"消費理論", subs:["11.1 短期與長期消費理論","11.2 李嘉圖等價原理","11.3 生命週期假說","11.4 相對所得假說","11.5 恆常所得假說"]},
+  {n:12,title:"貨幣理論與政策", subs:["12.1 貨幣市場基礎理論","12.2 金融市場概論","12.3 貨幣制度演進","12.4 貨幣的定義與功能","12.5 貨幣政策工具","12.6 貨幣創造乘數","12.7 央行政策目標","12.8 存貨平方根原理","12.9 再探貨幣數量學說"]},
+  {n:13,title:"景氣循環", subs:["13.1 景氣循環的意義","13.2 景氣動向指標","13.3 其他景氣循環"]},
+  {n:14,title:"經濟成長", subs:["14.1 經濟成長的意義","14.2 Harrod-Domar 模型","14.3 新古典成長模型","14.4 內生成長理論"]}
+];
+
+/* ===== 術語資料（點擊卡片時顯示） ===== */
+const TERMS = {
+  "GDP":["Gross Domestic Product","國內生產毛額","一國國內在一定期間內所生產的最終商品與勞務的市場價值總和（以國境為界）。"],
+  "GNP":["Gross National Product","國民生產毛額","一國國民在一定期間內生產的最終商品與勞務之市場價值總和（以國民為界）。GNP = GDP + 國外要素所得淨額。"],
+  "NNP":["Net National Product","國民生產淨額","NNP = GNP − 折舊（資本消耗提列）。"],
+  "NI":["National Income","國民所得","NI = NNP − 間接稅淨額（間接稅 − 補貼）。要素所得總和。"],
+  "PI":["Personal Income","個人所得","PI = NI − 營利事業所得稅 − 企業保留盈餘 + 政府移轉性支付。"],
+  "DPI":["Disposable Personal Income","可支配所得","DPI = PI − 個人直接稅（所得稅等）。家戶真正可自由使用的所得。"],
+  "CPI":["Consumer Price Index","消費者物價指數","衡量一籃固定消費財貨價格變動的物價指數（拉氏指數的一種）。"],
+  "GDP deflator":["GDP Deflator","GDP 平減指數","名目 GDP ÷ 實質 GDP × 100，衡量經濟體內所有商品與勞務的整體物價水準（帕氏指數）。"],
+  "Flow":["Flow Variable","流量","衡量某一期間內的數量或金額，如所得、消費、投資、出口。"],
+  "Stock":["Stock Variable","存量","衡量某一時點上的數量或金額，如資本存量、人口數、政府債務餘額。"],
+  "Direct tax":["Direct Tax","直接稅","直接向個人或廠商課徵、無法轉嫁的稅，如所得稅、財產稅。"],
+  "Indirect tax":["Indirect Tax","間接稅","對商品或勞務課徵、可轉嫁的稅，如消費稅、貨物稅、關稅。"],
+  "Transfer payment":["Transfer Payment","移轉性支付","不以換取商品與勞務為目的的支出，如老農津貼、獎助學金、社會福利。"],
+  "Government purchases":["Government Purchases","政府購買","政府為購買商品與勞務所支付的支出，屬於 GDP 中的 G。"],
+  "Value added":["Value Added","附加價值","廠商產出價值減去中間投入價值的差額；總附加價值 = GDP。"],
+  "Final goods":["Final Goods","最終商品","直接供最終使用（消費或投資）的商品，不再轉售或加工的商品。"],
+  "Intermediate goods":["Intermediate Goods","中間商品","作為其他商品生產投入的商品，不直接計入 GDP（避免重複計算）。"],
+  "Depreciation":["Depreciation","折舊（資本消耗）","固定資本在使用過程中的耗損價值，GNP 扣除折舊得 NNP。"],
+  "Expenditure approach":["Expenditure Approach","支出面法","由最終支出加總計算 GDP：GDP = C + I + G + X − M。"],
+  "Income approach":["Income Approach","所得面法","由要素所得加總計算 GDP（工資＋利息＋利潤＋租金＋間接稅等）。"],
+  "Production approach":["Production Approach","生產面法","由各部門附加價值加總計算 GDP。"],
+  "National income accounting":["National Income Accounting","國民所得會計","以量化指標記錄一國整體生產活動與所得分配的制度，如國民所得、GDP 等。"],
+  "Nominal GDP":["Nominal GDP","名目 GDP","以當期價格計算的 GDP，會受物價變動影響。"],
+  "Real GDP":["Real GDP","實質 GDP","以基期價格計算的 GDP，反映實際產出數量變化。"],
+  "Full employment":["Full Employment","充分就業","勞工市場中沒有循環性失業的狀態，失業率等於自然失業率。"],
+  "Business cycle":["Business Cycle","景氣循環","總體產出圍繞長期趨勢的短期波動。"],
+  "Economic growth":["Economic Growth","經濟成長","一國實質產出或每人實質產出的長期增加。"],
+  "Household":["Household","家戶部門","商品與勞務的需求者、生產要素的供給者；經濟活動循環中支出的來源與所得的歸宿。"],
+  "Firm":["Firm","廠商部門","商品與勞務的供給者、生產要素的需求者；以追求利潤極大化為目標。"],
+  "Factor market":["Factor Market","要素市場","家戶提供生產要素、廠商購買生產要素的市場；又稱資源市場。"],
+  "Goods market":["Goods Market","商品市場","家戶購買最終商品與勞務、廠商販售商品的市場。"],
+  "Leakage":["Leakage","漏出","從所得循環流中流出、未進入下一輪支出的部分：儲蓄、稅收、進口。"],
+  "Injection":["Injection","注入","注入所得循環流的支出：投資、政府支出、出口。"],
+  "Laspeyres index":["Laspeyres Index","拉氏指數","以基期數量為權數的物價指數；CPI 屬於此類，傾向高估物價上漲。"],
+  "Paasche index":["Paasche Index","帕氏指數","以當期數量為權數的物價指數；GDP 平減指數屬於此類。"],
+  "Lorenz curve":["Lorenz Curve","洛侖茲曲線","將累積人口百分比與累積所得百分比對應繪製的曲線，用以衡量所得分配；愈靠近對角線表示分配愈平均。"],
+  "Gini coefficient":["Gini Coefficient","吉尼係數","由洛侖茲曲線導出的所得分配不平等指標，介於 0（完全平均）與 1（完全不均）之間。"],
+  "Fisher equation":["Fisher Equation of Exchange","費雪交易方程式","M·V = P·T，說明貨幣數量、流通速度與交易總值的關係；強調貨幣作為交易媒介的轉移功能。"],
+  "Cambridge cash balance":["Cambridge Cash Balance Equation","劍橋現金餘額方程式","M = kPY，強調貨幣的需求面（交易動機）；k 為貨幣流通速度的倒數，k 越大表示人們握越多現金。"],
+  "Money neutrality":["Money Neutrality","貨幣中立性","貨幣供給變動只使名目變數（物價、名目工資）等比變動，不影響實質變數（產出、就業、實質工資）。貨幣像一層面紗。"],
+  "Classical dichotomy":["Classical Dichotomy","古典二分法","將經濟體系分為實質部門（商品、勞動市場）與貨幣部門（貨幣市場）；實質變數的均衡決定與貨幣部門無關。"],
+  "Walras law":["Walras' Law","瓦拉斯法則","在任意價格組合下，各市場超額需求的總額為零；若有 n−1 個市場結清，最後一個市場必定結清。"],
+  "Say's law":["Say's Law","薩伊法則","供給創造自己的需求（Supply creates its own demand）；生產過程會創造足夠的需求，不會有長期失業。"],
+  "Loanable funds":["Loanable Funds Theory","可貸資金理論","利率由可貸資金（儲蓄）供需決定；古典商品市場均衡：S(r) = I(r) + G − T。"],
+  "Fisher effect":["Fisher Effect","費雪效果","名目利率 = 實質利率 + 預期物價膨脹率；長期下物價膨脹率與名目利率一對一變動。"],
+  "Money illusion":["Money Illusion","貨幣幻覺","人們只看名目價格變動而忽略實質變動的現象；古典學派假設勞動供需雙方皆無貨幣幻覺。"],
+  "Natural rate of unemployment":["Natural Rate of Unemployment","自然失業率","無循環性失業（僅存在摩擦性與結構性失業）時的失業率，對應充分就業狀態。"],
+  "Frictional unemployment":["Frictional Unemployment","摩擦性失業","離開原有工作、尚未找到新工作之間的暫時失業；無法完全消除，可透過職場供需資訊降低。"],
+  "Structural unemployment":["Structural Unemployment","結構性失業","經濟結構變遷（技術改變、產業外移）導致技能不符而產生的失業；靠再教育、轉職訓練解決。"],
+  "Cyclical unemployment":["Cyclical Unemployment","循環性失業","景氣衰退、有效需求萎縮造成的失業；靠政府擴張政策提振景氣解決。"],
+  "Seasonal unemployment":["Seasonal Unemployment","季節性失業","生產活動受氣候或產銷習慣影響的失業，如農閒、建築遇雨季；解決之道為增加副業。"],
+  "Disguised unemployment":["Disguised Unemployment","隱藏性失業","表面有工作但邊際生產力趨近於零（工時不足、職務不適）；狹義失業統計未計入，會低估失業總量。"],
+  "Discouraged workers":["Discouraged Workers","沮喪勞工","因長期找不到工作而退出勞動市場、不再積極求職的人；不計入失業統計會低估失業率。"],
+  "Labor force participation rate":["Labor Force Participation Rate","勞動參與率","勞動力 ÷ 適齡工作人口 × 100%。"],
+  "Invisible hand":["Invisible Hand","看不見的手","亞當斯密提出的市場機能概念：個人的自利動機會引導資源配置，使社會福利極大化。"],
+  "Absolute advantage":["Absolute Advantage","絕對利益","亞當斯密主張：兩國應依絕對勞動成本的高低專業分工生產再交換。"],
+  "Comparative advantage":["Comparative Advantage","比較利益","李嘉圖主張：兩國應專業生產機會成本（相對成本）較低的產品再交易，雙方皆可獲利。"],
+  "Adam Smith":["Adam Smith","亞當斯密","經濟學之父，1776 年著《國富論》，提出看不見的手、分工理論、絕對利益與鑽石—水矛盾。"],
+  "David Ricardo":["David Ricardo","李嘉圖","英國古典經濟學家，提出比較利益、工資鐵律、差別地租理論與勞動價值說。"],
+  "Say":["Jean-Baptiste Say","薩伊（賽伊）","法國經濟學家，提出薩伊法則「供給創造需求」；首位將企業家列為生產要素的學者。"],
+  "Marshall":["Alfred Marshall","馬歇爾","英國經濟學家，1890 年出版《經濟學原理》，提出部分均衡分析與供需市場分析。"],
+  "Fisher":["Irving Fisher","費雪","美國經濟學家，提出交易方程式 MV = PT 與費雪效果（名目利率與預期通膨一對一關係）。"],
+  "Walras":["Léon Walras","瓦拉斯","法國經濟學家，提出一般均衡理論與瓦拉斯法則（各市場超額需求總額為零）。"],
+  "Malthus":["Thomas Robert Malthus","馬爾薩斯","英國人口學家，提出人口論：人口呈幾何級數成長、食物呈算術級數成長，影響李嘉圖的工資鐵律。"],
+  "Milton Friedman":["Milton Friedman","傅利德曼（佛利民）","貨幣學派代表人物，名言「物價膨脹無時無地不是貨幣現象」（Inflation is always and everywhere a monetary phenomenon）。"],
+  "Keynes":["John Maynard Keynes","凱因斯","英國經濟學家，1936 年發表《就業、利息與貨幣一般理論》，主張價格與工資僵固、政府應採擴張政策，被譽為現代總體經濟學之父。"],
+  "Effective demand":["Effective Demand","有效需求","總合需求（AE = C + I + G + X − M）；凱因斯認為失業源自有效需求不足。"],
+  "Consumption function":["Consumption Function","消費函數","消費與可支配所得的關係：C = a + b·Yd，a 為自發性消費、b 為邊際消費傾向。"],
+  "MPC":["Marginal Propensity to Consume","邊際消費傾向（MPC）","可支配所得增加一單位所引起的消費增加量：b = ΔC/ΔYd，0 &lt; b &lt; 1。"],
+  "MPS":["Marginal Propensity to Save","邊際儲蓄傾向（MPS）","可支配所得增加一單位所引起的儲蓄增加量；MPC + MPS = 1。"],
+  "APC":["Average Propensity to Consume","平均消費傾向（APC）","總消費 ÷ 可支配所得：APC = C/Yd；所得越高 APC 越低。"],
+  "Autonomous consumption":["Autonomous Consumption","自發性消費","不受所得影響的消費（a），Yd = 0 時仍有基本生活消費。"],
+  "Induced consumption":["Induced Consumption","誘發性消費","隨可支配所得變動的消費（b·Yd）。"],
+  "Saving function":["Saving Function","儲蓄函數","S = Yd − C = −a + (1−b)·Yd；儲蓄是利率的增函數、消費的減函數。"],
+  "Accelerator principle":["Accelerator Principle","加速原理","薩繆爾森提出：投資與產出變動同向，產出增加會誘發更多投資（I = Ī + Iy·Y）。"],
+  "Lump-sum tax":["Lump-Sum Tax","定額稅","與所得無關的固定稅額；平衡預算乘數在定額稅下為 1。"],
+  "Proportional tax":["Proportional Tax","比例稅","與所得成固定比例的稅；所得增加時平均稅率不變。"],
+  "Progressive tax":["Progressive Tax","累進稅","所得越高稅率越高；所得增加時平均稅率上升。"],
+  "Regressive tax":["Regressive Tax","累退稅","所得越高稅率越低；所得增加時平均稅率下降。"],
+  "Output gap":["Output Gap","產出缺口","實際產出與充分就業（潛在）產出的差距；實際＜潛在為緊縮缺口，實際＞潛在為膨脹缺口。"],
+  "Deflationary gap":["Deflationary Gap","緊縮缺口","相對於充分就業下產量，自發性需求必須增加的數量；實際產出小於潛在產出。"],
+  "Inflationary gap":["Inflationary Gap","膨脹缺口","相對於充分就業下產量，自發性需求必須減少的數量；實際產出大於潛在產出。"],
+  "Paradox of thrift":["Paradox of Thrift","節儉的矛盾","個人想多儲蓄（降低 MPC）反而使均衡所得下降，最終均衡儲蓄不增反減（或維持不變）。"],
+  "Multiplier":["Multiplier","乘數","自發性總需求增加一單位引起均衡所得增加之倍數：k = ΔY/ΔAD。凱因斯認為乘數效果使政府支出有強大拉抬力。"],
+  "Balanced budget multiplier":["Balanced Budget Multiplier","平衡預算乘數","政府支出與定額稅同額增加時（ΔG = ΔT），均衡所得仍增加 ΔG：平衡預算乘數 = 1。"],
+  "Automatic stabilizer":["Automatic Stabilizer","自動安定機能","經濟體系內建的景氣平穩機制：誘發性租稅、失業保險、開放貿易體系；不需政府主動決策即自動緩和波動。"],
+  "Samuelson":["Paul Samuelson","薩繆爾森","美國經濟學家，提出加速原理，融合凱因斯與古典理論，奠定新古典綜合派。"],
+  "45-degree line":["45-Degree Line","45° 線","縱軸 AE、橫軸 Y 的圖中代表 AE = Y 的線，總合支出線與 45° 線之交點決定均衡所得。"]
+};
+
+/* ===== 第一章內容 ===== */
+const CH1_SECTIONS = [
+{
+  id:"1.1", title:"國民所得的定義與衡量方法",
+  body:`
+  <p>總體經濟學站在經濟體系的「整體」角度，研究一國的總合量（產出、所得、就業）與總合價（物價水準）。本章先介紹衡量一國經濟活動的三種量度方式，再說明物價水準的衡量。</p>
+  <div class="note">核心觀念：<b>量</b>（<span class="term" data-term="GDP">GDP</span>、<span class="term" data-term="GNP">GNP</span>、<span class="term" data-term="NNP">NNP</span>、<span class="term" data-term="NI">NI</span>、<span class="term" data-term="PI">PI</span>、<span class="term" data-term="DPI">DPI</span> 等所得帳指標）與<b>價</b>（物價指數）是總體經濟學的兩大主體。</div>
+  <p>衡量一國總合產出主要有三種方法：</p>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="exp"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Expenditure approach">支出面法</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">GDP = C（消費）+ I（投資）+ G（政府購買）+ X − M（淨出口）</div>
+      <div class="mc-detail">由經濟體系的最終支出加總衡量 GDP：家戶消費、廠商投資、政府購買與國外部門淨出口。</div>
+      <div class="mc-ex"><b>例子：</b>C = 500、I = 200、G = 150、X = 120、M = 100 → GDP = 500 + 200 + 150 + (120 − 100) = <b>870</b>。</div>
+    </div>
+  </div>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="prod"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Production approach">生產面法</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">GDP = Σ 各部門附加價值（產出價值 − 中間投入）</div>
+      <div class="mc-detail">由各生產部門的<span class="term" data-term="Value added">附加價值</span>加總衡量 GDP，可避免中間投入的重複計算。</div>
+      <div class="mc-ex"><b>例子：</b>麵包廠賣 100 元麵包、向麵粉廠買 60 元麵粉 → 附加價值 = 100 − 60 = <b>40 元</b>；麵粉廠另計其附加價值。</div>
+    </div>
+  </div>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="inc"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Income approach">所得面法</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">GDP = 工資 + 利息 + 利潤 + 租金 + 間接稅淨額 + 折舊</div>
+      <div class="mc-detail">生產者把銷售收入分配給各要素提供者，把所有要素報酬加總就等於生產總值；再加計間接稅淨額與折舊。</div>
+      <div class="mc-ex"><b>例子：</b>工資 700、利息 150、公司利潤 200、租金 100、業主所得 120、間接稅淨額 230、折舊 250 → GDP = 700+150+200+100+120+230+250 = <b>1750</b>（與例題 4 相同）。</div>
+    </div>
+  </div>
+  <p>常用所得帳指標的關係：</p>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="gnp"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="GNP">GNP</span> 與 <span class="term" data-term="GDP">GDP</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">GNP = GDP + 本國要素在國外所得 − 外國要素在本國所得</div>
+      <div class="mc-detail">以「國民」為界（本國人全球生產）vs 以「國境」為界（境內所有生產）。</div>
+      <div class="mc-ex"><b>例子：</b>台灣工程師赴日本工作：其所得計入台灣 GNP、日本 GDP；日籍人士在台工作：計入台灣 GDP、日本 GNP。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="nnp"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="NNP">NNP</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">NNP = GNP − <span class="term" data-term="Depreciation">折舊</span>（資本消耗提列）</div>
+      <div class="mc-detail">從毛額中扣掉資本設備在使用期間的耗損，得到淨生產價值。</div>
+      <div class="mc-ex"><b>例子：</b>GNP = 1000、機器折舊 = 100 → NNP = <b>900</b>。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="ni"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="NI">NI</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">NI = NNP − <span class="term" data-term="Indirect tax">間接稅淨額</span>（間接稅 − 補貼）</div>
+      <div class="mc-detail">間接稅不是要素報酬，扣除後剩下的才是要素所得（工資＋利息＋利潤＋租金）總和。</div>
+      <div class="mc-ex"><b>例子：</b>NNP = 900、間接稅 80、補貼 30 → 間接稅淨額 = 50 → NI = <b>850</b>。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="pidpi"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="PI">PI</span> → <span class="term" data-term="DPI">DPI</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">PI = NI − 營利事業所得稅 − 企業保留盈餘 + <span class="term" data-term="Transfer payment">移轉性支付</span>；DPI = PI − 個人直接稅</div>
+      <div class="mc-detail">企業未分配給家戶的所得要扣除，政府移轉給家戶的要加回；再扣個人稅即為可支配所得。</div>
+      <div class="mc-ex"><b>例子：</b>NI = 850 − 營所稅 60 − 保留盈餘 40 + 移轉 30 → PI = <b>780</b>；PI − 個人稅 100 → DPI = <b>680</b>。</div>
+    </div>
+  </div>
+  `
+},
+{
+  id:"1.2", title:"國民所得流量循環模型",
+  body:`
+  <p>經濟體系由四大部門組成：<span class="term" data-term="Household">家戶部門</span>、<span class="term" data-term="Firm">廠商部門</span>、政府部門、國外部門。家戶提供生產要素換取報酬，廠商運用要素生產商品與勞務，政府透過稅收與移轉性支付介入，國外部門透過進出口連結。</p>
+  <div class="note"><b>兩部門模型：</b>家戶 ⇄ 廠商（<span class="term" data-term="Factor market">要素市場</span>與<span class="term" data-term="Goods market">商品市場</span>的循環流）。若家戶將部分所得儲蓄，廠商需獲得投資資金注入，循環才能維持均衡。</div>
+  <div class="note"><b>三部門模型：</b>加入政府——政府向家戶與廠商課稅（<span class="term" data-term="Direct tax">直接稅</span>、<span class="term" data-term="Indirect tax">間接稅</span>），並進行<span class="term" data-term="Government purchases">政府購買</span>與<span class="term" data-term="Transfer payment">移轉性支付</span>。</div>
+  <div class="note"><b>四部門模型（開放經濟）：</b>加入國外部門——出口（本國生產外國消費）與進口（外國生產本國消費）。</div>
+  <div class="warn">儲蓄是經濟體系的「<span class="term" data-term="Leakage">漏出</span>」（leakage），投資、政府支出、出口是「<span class="term" data-term="Injection">注入</span>」（injection）；注入 = 漏出時經濟達到均衡。</div>
+  <div class="svgfig">
+    <figcaption>兩部門經濟循環流轉：<b>外圈（灰棕箭頭）</b>為商品與要素的實物流，<b>內圈（藍色箭頭）</b>為貨幣流，兩者同向循環。加入儲蓄（漏出）與投資（注入）後，需 S = I 循環才維持均衡。</figcaption>
+    <svg viewBox="0 0 460 380" role="img" aria-label="經濟循環流轉圖">
+      <defs>
+        <marker id="arwG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7a6a4a"/></marker>
+        <marker id="arwB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c6e9e"/></marker>
+      </defs>
+      <rect x="20" y="20" width="190" height="80" rx="8" fill="none" stroke="#2c6e9e" stroke-width="1.4"/>
+      <text x="115" y="52" text-anchor="middle" class="lb">商品市場</text>
+      <text x="115" y="72" text-anchor="middle" class="axl">商品與勞務</text>
+      <rect x="250" y="20" width="190" height="80" rx="8" fill="none" stroke="#3a7d44" stroke-width="1.4"/>
+      <text x="345" y="52" text-anchor="middle" class="lb">家戶部門</text>
+      <text x="345" y="72" text-anchor="middle" class="axl">Household</text>
+      <rect x="20" y="260" width="190" height="80" rx="8" fill="none" stroke="#3a7d44" stroke-width="1.4"/>
+      <text x="115" y="292" text-anchor="middle" class="lb">廠商部門</text>
+      <text x="115" y="312" text-anchor="middle" class="axl">Firm</text>
+      <rect x="250" y="260" width="190" height="80" rx="8" fill="none" stroke="#2c6e9e" stroke-width="1.4"/>
+      <text x="345" y="292" text-anchor="middle" class="lb">要素市場</text>
+      <text x="345" y="312" text-anchor="middle" class="axl">生產要素</text>
+      <!-- 外圈實體流（灰棕） -->
+      <line x1="345" y1="20" x2="205" y2="20" stroke="#7a6a4a" stroke-width="1.5" marker-end="url(#arwG)"/>
+      <text x="275" y="13" text-anchor="middle" class="axl" fill="#7a6a4a">商品需求</text>
+      <line x1="20" y1="105" x2="20" y2="252" stroke="#7a6a4a" stroke-width="1.5" marker-end="url(#arwG)"/>
+      <text x="14" y="180" text-anchor="middle" class="axl" fill="#7a6a4a" transform="rotate(-90 14 180)">商品供給</text>
+      <line x1="205" y1="340" x2="255" y2="340" stroke="#7a6a4a" stroke-width="1.5" marker-end="url(#arwG)"/>
+      <text x="230" y="356" text-anchor="middle" class="axl" fill="#7a6a4a">要素需求</text>
+      <line x1="440" y1="252" x2="440" y2="105" stroke="#7a6a4a" stroke-width="1.5" marker-end="url(#arwG)"/>
+      <text x="452" y="180" text-anchor="middle" class="axl" fill="#7a6a4a" transform="rotate(90 452 180)">要素供給</text>
+      <!-- 內圈貨幣流（藍） -->
+      <line x1="250" y1="60" x2="210" y2="60" stroke="#2c6e9e" stroke-width="1.8" marker-end="url(#arwB)"/>
+      <text x="230" y="52" text-anchor="middle" class="axl" fill="#2c6e9e">消費支出</text>
+      <line x1="60" y1="100" x2="60" y2="252" stroke="#2c6e9e" stroke-width="1.8" marker-end="url(#arwB)"/>
+      <text x="72" y="180" text-anchor="middle" class="axl" fill="#2c6e9e" transform="rotate(-90 72 180)">銷貨收入</text>
+      <line x1="210" y1="300" x2="250" y2="300" stroke="#2c6e9e" stroke-width="1.8" marker-end="url(#arwB)"/>
+      <text x="230" y="292" text-anchor="middle" class="axl" fill="#2c6e9e">成本支出</text>
+      <line x1="380" y1="260" x2="380" y2="105" stroke="#2c6e9e" stroke-width="1.8" marker-end="url(#arwB)"/>
+      <text x="370" y="180" text-anchor="middle" class="axl" fill="#2c6e9e" transform="rotate(90 370 180)">要素所得</text>
+    </svg>
+  </div>
+  `
+},
+{
+  id:"1.3", title:"國內生產毛額的計算",
+  body:`
+  <p>GDP 只計入<b><span class="term" data-term="Final goods">最終商品與勞務</span></b>，<span class="term" data-term="Intermediate goods">中間商品</span>不重複計算（避免重複計算問題）。計算方式：</p>
+  <div class="formula"><span class="f-label"><span class="term" data-term="Expenditure approach">支出面</span></span>GDP = C + I + G + (X − M)</div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="c"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">C 消費</div>
+    <div class="mc-body">
+      <div class="mc-formula">家戶對商品與勞務的最終消費支出</div>
+      <div class="mc-detail">含耐久財、非耐久財與勞務消費；<b>不含購屋</b>（購屋計入投資 I）。</div>
+      <div class="mc-ex"><b>例子：</b>某國家庭買日用品、外食、看電影等消費 = <b>500</b>。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="i"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">I 投資</div>
+    <div class="mc-body">
+      <div class="mc-formula">固定資本形成毛額（廠房設備、住宅）＋ 存貨增加</div>
+      <div class="mc-detail">經濟學的投資指「實質資本形成」，不是買股票債券等金融資產。</div>
+      <div class="mc-ex"><b>例子：</b>蓋廠房 150、買機器 30、存貨增加 20 → I = <b>200</b>。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="g"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">G 政府購買</div>
+    <div class="mc-body">
+      <div class="mc-formula">政府購買商品與勞務之支出</div>
+      <div class="mc-detail"><b>不含</b><span class="term" data-term="Transfer payment">移轉性支付</span>（津貼、獎助學金），也不含公債利息。</div>
+      <div class="mc-ex"><b>例子：</b>政府採購辦公設備、道路建設支出 = <b>150</b>。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="nx"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">X−M 淨出口</div>
+    <div class="mc-body">
+      <div class="mc-formula">出口 − 進口</div>
+      <div class="mc-detail">出口是外國人買本國生產的商品（＋），進口是本國人買外國生產的商品（−）。</div>
+      <div class="mc-ex"><b>例子：</b>出口 120、進口 100 → 淨出口 = <b>20</b>。</div>
+    </div>
+  </div>
+  <div class="warn"><span class="term" data-term="Transfer payment">移轉性支付</span>（如津貼、獎助學金）不是生產行為，不計入 GDP；二手商品交易、股票債券買賣也不計入當期 GDP。</div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="va"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Value added">附加價值法</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">GDP = Σ（廠商銷售值 − 向其他廠商購買的中間投入）</div>
+      <div class="mc-detail">只加總每個生產階段「新增」的價值，避免中間投入重複計算。</div>
+      <div class="mc-ex"><b>例子：</b>麵包廠賣 100 元麵包、向麵粉廠買 60 元麵粉 → 附加價值 = 100 − 60 = <b>40 元</b>；麵粉廠另計其附加價值。</div>
+    </div>
+  </div>
+  `
+},
+{
+  id:"1.4", title:"國民所得的計算",
+  body:`
+  <p>由 GDP/GNP 逐層扣減到個人可支配所得，是國民所得帳的核心計算鏈：</p>
+  <div class="formula"><span class="f-label">計算鏈</span>GDP → GNP → NNP → NI → PI → DPI</div>
+  <ul style="margin:8px 0 8px 22px;font-size:14.5px">
+    <li>GNP = GDP + 國外要素所得淨額</li>
+    <li>NNP = GNP − <span class="term" data-term="Depreciation">折舊</span>（資本消耗提列）</li>
+    <li>NI = NNP − <span class="term" data-term="Indirect tax">間接稅淨額</span>（間接稅 − 補貼）＝要素所得（工資＋利息＋利潤＋租金）</li>
+    <li>PI = NI − 營利事業所得稅 − 企業保留盈餘 + <span class="term" data-term="Transfer payment">移轉性支付</span></li>
+    <li>DPI = PI − 個人直接稅（所得稅）</li>
+  </ul>
+  <div class="note">記憶口訣：<b>GDP 扣國外淨要素所得得 GNP，扣折舊得 NNP，扣間接稅得 NI，扣企業稅與保留盈餘加移轉得 PI，扣個人稅得 DPI。</b></div>
+  `
+},
+{
+  id:"1.5", title:"國民所得的分解",
+  body:`
+  <p>國民所得可從要素所得面分解：工資與薪資、利息、租金、利潤（含營利事業所得稅與保留盈餘）等。總體經濟學常以 Y（實質產出）代表總合所得，其與利率、就業等變數的關係是後續章節（消費函數、投資函數、貨幣需求）的基礎。</p>
+  <div class="warn">存量與流量的區分：<span class="term" data-term="Flow">流量</span>（所得、消費、投資——某期間）vs <span class="term" data-term="Stock">存量</span>（資本存量、人口、政府債務——某時點）。</div>
+  `
+},
+{
+  id:"1.6", title:"國民所得會計之缺點與所得分配",
+  body:`
+  <p>GDP 作為福利指標的缺點：</p>
+  <ul style="margin:8px 0 8px 22px;font-size:14.5px">
+    <li>忽略非市場交易（家務、地下經濟、自用生產）</li>
+    <li>忽略休閒、環境品質與外部成本</li>
+    <li>無法反映所得分配是否平均</li>
+    <li>商品品質與產品組合變化難以完全捕捉</li>
+    <li>防衛性支出（治安、污染防制）被計入 GDP 但不增加福利</li>
+  </ul>
+  <p>所得分配常用衡量工具：<span class="proper" data-term="Lorenz curve">洛侖茲曲線</span>與<span class="proper" data-term="Gini coefficient">吉尼係數（Gini coefficient）</span>，吉尼係數越接近 0 表示分配越平均。</p>
+  <div class="svgfig">
+    <figcaption>洛侖茲曲線示意：X 軸＝累積人口百分比，Y 軸＝累積所得百分比。45° 線代表「完全平均」；實際曲線越彎曲，所得分配越不均。吉尼係數 G = A ÷ (A + B)，G 越接近 0 越平均。</figcaption>
+    <svg viewBox="0 0 440 350" role="img" aria-label="洛侖茲曲線示意圖">
+      <line x1="60" y1="300" x2="60" y2="40" class="ax"/>
+      <line x1="60" y1="300" x2="400" y2="300" class="ax"/>
+      <line x1="60" y1="300" x2="380" y2="20" stroke="#8a5a3b" stroke-width="1.6" stroke-dasharray="7 5"/>
+      <path d="M60,300 C 170,300 230,258 380,20" fill="none" stroke="#2c6e9e" stroke-width="2.6"/>
+      <polygon points="60,300 380,20 230,258 170,300" fill="rgba(192,106,36,.20)"/>
+      <polygon points="60,300 170,300 230,258 380,20 380,300" fill="rgba(44,110,158,.13)"/>
+      <text x="150" y="235" class="lb" fill="#c06a24">A</text>
+      <text x="162" y="292" class="lb" fill="#2c6e9e">B</text>
+      <text x="92" y="44" class="lb" fill="#8a5a3b">45°（完全平均線）</text>
+      <text x="300" y="322" class="axl">累積人口百分比 100%</text>
+      <text x="14" y="160" class="axl">累積所得 100%</text>
+    </svg>
+  </div>
+  `
+},
+{
+  id:"1.7", title:"物價指數",
+  body:`
+  <p>衡量物價水準的兩種主要指數：</p>
+  <div class="formula"><span class="f-label"><span class="term" data-term="CPI">CPI</span> 消費者物價指數（<span class="proper" data-term="Laspeyres index">拉氏指數</span>）</span>以基期數量為權數：CPI = Σ(Pt·Q₀) ÷ Σ(P₀·Q₀) × 100</div>
+  <div class="formula"><span class="f-label"><span class="term" data-term="GDP deflator">GDP 平減指數</span>（<span class="proper" data-term="Paasche index">帕氏指數</span>）</span>以當期數量為權數：GDP deflator = <span class="term" data-term="Nominal GDP">名目 GDP</span> ÷ <span class="term" data-term="Real GDP">實質 GDP</span> × 100</div>
+  <div class="tblwrap"><table><caption><span class="term" data-term="CPI">CPI</span> 與 <span class="term" data-term="GDP deflator">GDP 平減指數</span>的比較</caption><colgroup><col style="width:22%"><col style="width:39%"><col style="width:39%"></colgroup><thead><tr><th>比較項目</th><th>CPI</th><th>GDP 平減指數</th></tr></thead><tbody>
+  <tr><td><strong>指數類型</strong></td><td><span class="proper" data-term="Laspeyres index">拉氏指數</span>（基期數量為權數）</td><td><span class="proper" data-term="Paasche index">帕氏指數</span>（當期數量為權數）</td></tr>
+  <tr><td><strong>數量籃</strong></td><td>固定（基期）數量籃</td><td>隨當期產出變動的數量</td></tr>
+  <tr><td><strong>涵蓋範圍</strong></td><td>含進口消費品</td><td>只涵蓋國內生產</td></tr>
+  <tr><td><strong>偏誤</strong></td><td>傾向高估物價上漲（替代偏誤、忽略新產品）</td><td>相對準確，隨當期組合調整</td></tr>
+  </tbody></table></div>
+  `
+}
+];
+
+const CH1_PROBLEMS = [
+{
+  q:"某一設立在台的外商公司每年營業額為新台幣八千萬元，其中進口原料支出八百萬元、聘僱薪資三千萬元、房屋租金五百萬元、廣告支出一千萬元，因此該公司一年的利潤為兩千七百萬元。從生產面計算，該公司創造出多少 GDP？",
+  opts:["(A) 8000 萬","(B) 7200 萬","(C) 5700 萬","(D) 2700 萬"],
+  ans:"<b>(B) 7200 萬。</b><ul><li>生產面（附加價值法）= 銷售值 − 中間投入 = 8000 − 800（進口原料）＝ 7200 萬元。</li><li>薪資、租金、廣告是要素報酬與支出，不是中間投入，不需扣除。</li><li>利潤只是附加價值的一部分。</li></ul>"
+},
+{
+  q:"A farmer grows apple, which he sells to a company for $100.<br>The company uses them all to produce cider, which he sells to an ice cream store for $150.<br>The ice cream store turns the cider into ice cream, which he sells to consumers for $180.<br>(1) What is GDP?<br>(2) Calculate the value added of each producer.<br>(3) What is total value added?",
+  opts:[],
+  ans:"<b>(1) GDP = $180</b>（最終商品價值，避免重複計算）。<br><b>(2) 附加價值：</b><ul><li>農夫：$100</li><li>公司：$150 − $100 = $50</li><li>冰淇淋店：$180 − $150 = $30</li></ul><b>(3) 總附加價值 = $100 + $50 + $30 = $180 = GDP</b>"
+},
+{
+  q:"下列何者會計入台灣的 GDP？（複習概念題）",
+  opts:["① 中古車買賣","② 政府發放的老農津貼","③ 家庭主婦的家務勞動","④ 廠商存貨增加","⑤ 進口商品的消費支出"],
+  ans:"<b>只有 ④</b>（存貨增加計入投資 I）。<ul><li>① 二手交易非當期生產。</li><li>② 移轉性支付不計入。</li><li>③ 家務勞動非市場交易。</li><li>⑤ 進口消費品不屬於本國 GDP（C 中要扣 M）。</li></ul>"
+},
+{
+  q:"Using the data: Corporate profits $200, Net interest $150, Indirect taxes less subsidies $230, Depreciation $250, Wages $700, Rental income $100, Proprietors' income $120. GDP equals ?（所得面法）",
+  opts:["(A) $1500","(B) $1650","(C) $1750","(D) $1850"],
+  ans:"<b>(C) $1750。</b>所得面法加總：<ul><li>工資 700</li><li>利息 150</li><li>公司利潤 200</li><li>租金 100</li><li>業主所得 120</li><li>間接稅淨額 230</li><li>折舊 250</li></ul>合計 = 700 + 150 + 200 + 100 + 120 + 230 + 250 = <b>1750</b>"
+}
+];
+
+/* ===== 第二章內容 ===== */
+const CH2_SECTIONS = [
+{
+  id:"2.1", title:"古典學派總論",
+  body:`
+  <p>總體經濟學的發展，主要分為兩大陣營：主張<b>政府放任、減少干預</b>的<span class="proper" data-term="Adam Smith">古典學派</span>（及其後繼：新古典、貨幣學派、新興古典），以及認為政府應採取<b>擴張政策</b>提振景氣、降低失業的<span class="proper">凱因斯學派</span>。本章介紹古典學派的主要理論。</p>
+  <div class="note"><b>學派演進時間軸：</b>
+    <ul style="margin:6px 0 2px 20px">
+      <li>1776 <span class="proper" data-term="Adam Smith">亞當斯密</span>《國富論》→ 1890 <span class="proper" data-term="Marshall">馬歇爾</span>《經濟學原理》：以個體經濟理論為主</li>
+      <li>1930 經濟大蕭條 → 1936 <span class="proper">凱因斯</span>《就業、利息與貨幣一般理論》：現代總體經濟學誕生</li>
+      <li>1970 石油危機導致停滯性物價膨脹 → 貨幣學派、理性預期、供給面學派百家爭鳴</li>
+    </ul></div>
+  <p><b>古典經濟學思想的先驅：</b></p>
+  <ul style="margin:6px 0 10px 20px">
+    <li><span class="proper">重商主義</span>（Mercantilism）：金銀是最重要的財富，重視貿易順差，政府以行政力量介入對外貿易</li>
+    <li><span class="proper">重農主義</span>（Physiocracy）：遵循自然法則，政府管制是多餘的</li>
+  </ul>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="smith"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="proper" data-term="Adam Smith">亞當斯密</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">經濟學之父 ·《國富論》（1776）</div>
+      <div class="mc-detail">提出 <span class="term" data-term="Invisible hand">看不見的手</span>（自利動機引導資源配置）、分工提高生產力、<span class="term" data-term="Absolute advantage">絕對利益</span>、鑽石—水矛盾（價值矛盾）。</div>
+      <div class="mc-ex"><b>例子：</b>麵包師傅為了自己的利益烤麵包，卻無意間滿足了社會的需求——「看不見的手」。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="ricardo"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="proper" data-term="David Ricardo">李嘉圖</span></div>
+    <div class="mc-body">
+      <div class="mc-formula"><span class="term" data-term="Comparative advantage">比較利益</span> · 工資鐵律 · 差別地租 · 勞動價值說</div>
+      <div class="mc-detail">兩國專業生產機會成本較低的產品再交易，雙方皆可獲利；受<span class="proper" data-term="Malthus">馬爾薩斯</span>影響提出工資鐵律（平均所得在最適生活水準附近擺盪）。</div>
+      <div class="mc-ex"><b>例子：</b>台灣做晶片、沙烏地產石油——各自生產機會成本低的產品再交換，總產出最大。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="say"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="proper" data-term="Say">薩伊法則</span></div>
+    <div class="mc-body">
+      <div class="mc-formula"><span class="term" data-term="Say's law">供給創造需求</span>（Supply creates its own demand）</div>
+      <div class="mc-detail">生產過程本身會創造等值的需求 → 不會產生存貨 → 社會可以永遠保持充分就業。前提：理性、資訊完全、市場完全無交易成本。</div>
+      <div class="mc-ex"><b>例子：</b>麵包師傅生產麵包，賣得錢再去買牛奶——供給（麵包）創造了對牛奶的需求。</div>
+    </div>
+  </div>
+  <div class="warn">古典學派三大結論：<b>① 賽伊法則成立、充分就業是常態；② 政府應自由放任；③ 失業與衰退不會源於有效需求不足。</b></div>`
+},
+{
+  id:"2.2", title:"貨幣數量學說",
+  body:`
+  <p>古典學派利用 <span class="proper" data-term="Fisher">費雪</span>的交易方程式捕捉<b>產出、貨幣與物價</b>之間的關係，解釋貨幣在長期如何影響經濟。</p>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="fisher"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="proper" data-term="Fisher">費雪</span>交易方程式</div>
+    <div class="mc-body">
+      <div class="mc-formula">M·V = P·T　→　M·V′ = P·Y</div>
+      <div class="mc-detail">M＝貨幣供給量；V＝貨幣流通速度（單位時間內貨幣作為交易媒介的次數）；T＝總交易量；實務上以國民所得 Y 代替 T，V′ 稱為<span class="term">貨幣所得流通速度</span>。</div>
+      <div class="mc-ex"><b>例子：</b>某經濟體 M = 1000、V = 5 → 名目 GDP = P·Y = <b>5000</b>。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="cambridge"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="proper">劍橋</span>現金餘額方程式</div>
+    <div class="mc-body">
+      <div class="mc-formula">M = k·P·Y（k = 1/V′）</div>
+      <div class="mc-detail">強調貨幣的<span class="term">需求面</span>：k 為交易動機的貨幣需求率，k 越大表示人們握越多現金在手上。轉換可得實質貨幣餘額 M/P = kY，表示對實質貨幣餘額的需求只受實質所得影響。</div>
+      <div class="mc-ex"><b>例子：</b>k = 0.2、Y = 5000、P = 2 → 名目貨幣需求 M = 0.2 × 2 × 5000 = <b>2000</b>。</div>
+    </div>
+  </div>
+  <div class="note"><b>影響貨幣流通速度的因素：</b>
+    <ul style="margin:6px 0 2px 20px">
+      <li><b>V 上升</b>：預期物價膨脹上升、利率上升、對未來信心增強、金融創新、支付頻率上升</li>
+      <li><b>V 下降</b>：持有貨幣意願增加、貨幣的替代品減少、支付同步程度下降</li>
+    </ul></div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="neutral"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Money neutrality">貨幣中立性</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">貨幣供給變動 → 名目變數等比變動，實質變數不變</div>
+      <div class="mc-detail">在充分就業且流通速度為常數的假設下，貨幣供給量的變動只影響絕對物價水準；貨幣就像一層面紗，不會介入實質經濟活動。<span class="proper" data-term="Milton Friedman">傅利德曼</span>稱「物價膨脹無時無地不是貨幣現象」。</div>
+      <div class="mc-ex"><b>例子：</b>貨幣供給增加 10% → 物價上漲 10%，但實質產出、就業與實質工資皆不變。</div>
+    </div>
+  </div>
+  <div class="formula"><span class="f-label">成長率式</span>g(M) + g(V′) = g(P) + g(Y)　→　若 V′、Y 固定，貨幣成長率 = 物價膨脹率</div>`
+},
+{
+  id:"2.3", title:"貨幣市場與古典二分法",
+  body:`
+  <p><span class="proper" data-term="Walras">瓦拉斯</span>的一般均衡概念將經濟問題二分化：<b>實質部門</b>（商品市場＋勞動市場）決定產出與實質利率；<b>貨幣部門</b>（貨幣市場）決定物價水準。</p>
+  <div class="tblwrap"><table><caption>古典二分法 vs 貨幣中立性</caption><colgroup><col style="width:28%"><col style="width:36%"><col style="width:36%"></colgroup><thead><tr><th>比較項目</th><th>古典二分法</th><th>貨幣中立性</th></tr></thead><tbody>
+  <tr><td><strong>討論範圍</strong></td><td>貨幣市場供給與需求的變動</td><td>只討論貨幣供給的變化</td></tr>
+  <tr><td><strong>包容性</strong></td><td>較大</td><td>較小（是二分法的一種特殊情況）</td></tr>
+  </tbody></table></div>
+  <div class="formula"><span class="f-label"><span class="proper" data-term="Walras law">瓦拉斯法則</span></span>Σ Pᵢ·(Qᵢᵈ − Qᵢˢ) = 0</div>
+  <p>在任意價格組合下，各市場超額需求的總額為零。若 n−1 個市場結清，最後一個市場必定結清。</p>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="adclassic"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">古典 <span class="term">總合需求</span>線</div>
+    <div class="mc-body">
+      <div class="mc-formula">M = k·P·Y　→　P = M ÷ (kY)</div>
+      <div class="mc-detail">由貨幣市場均衡導出：其他情況不變下，滿足貨幣市場均衡的所有物價與產出組合。產出越高，同樣貨幣量對應的物價越低，故 AD 為<b>負斜率雙曲線</b>。</div>
+      <div class="mc-ex"><b>例子：</b>M = 2000、k = 0.2 → P = 2000 ÷ (0.2Y) = 10000/Y；Y = 100 時 P = 100。</div>
+    </div>
+  </div>
+  <div class="svgfig">
+    <figcaption>古典總體模型：<b>AS 為垂直線</b>（產出固定於充分就業水準 Y*），AD 為負斜率雙曲線（由貨幣市場導出）；貨幣供給增加使 AD 右移，只推動物價上升，產出不變。</figcaption>
+    <svg viewBox="0 0 420 340" role="img" aria-label="古典 AD-AS 圖">
+      <line x1="60" y1="300" x2="60" y2="30" class="ax"/>
+      <line x1="60" y1="300" x2="400" y2="300" class="ax"/>
+      <line x1="210" y1="300" x2="210" y2="40" stroke="#8a5a3b" stroke-width="2.4"/>
+      <text x="216" y="50" class="lb" fill="#8a5a3b">AS（垂直）</text>
+      <path d="M380,60 C 320,150 260,220 140,290" fill="none" stroke="#2c6e9e" stroke-width="2.4"/>
+      <path d="M340,120 C 300,190 240,250 120,300" fill="none" stroke="#2c6e9e" stroke-width="1.8" stroke-dasharray="6 4"/>
+      <text x="330" y="105" class="axl" fill="#2c6e9e">AD′</text>
+      <text x="252" y="205" class="axl" fill="#2c6e9e">AD</text>
+      <circle cx="210" cy="196" r="4" fill="#b5542e"/>
+      <text x="216" y="190" class="axl" fill="#b5542e">E</text>
+      <text x="130" y="322" class="axl">Y*（充分就業產出）</text>
+      <text x="18" y="160" class="axl">P</text>
+      <text x="385" y="318" class="axl">Y</text>
+      <line x1="210" y1="300" x2="210" y2="196" stroke="#b5542e" stroke-width="1.1" stroke-dasharray="3 3"/>
+      <line x1="60" y1="196" x2="210" y2="196" stroke="#b5542e" stroke-width="1.1" stroke-dasharray="3 3"/>
+      <text x="30" y="192" class="axl" fill="#b5542e">P*</text>
+    </svg>
+  </div>`
+},
+{
+  id:"2.4", title:"商品市場與可貸資金",
+  body:`
+  <p>古典學派認為利率由<b>可貸資金</b>（儲蓄）的供需決定，而非由貨幣市場決定。</p>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="loan"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Loanable funds">可貸資金理論</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">商品市場均衡：S(r) = I(r) + (G − T)</div>
+      <div class="mc-detail">儲蓄（可貸資金供給）＝投資（可貸資金需求）＋政府赤字融通。政府支出增加（赤字擴大）會提高實質利率、<b>排擠</b>民間投資。</div>
+      <div class="mc-ex"><b>例子：</b>S = 100 + 200r、I = 400 − 100r、G−T = 50 → 100+200r = 400−100r+50 → r = <b>1.17</b>。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="fishereff"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Fisher effect">費雪效果</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">名目利率 = 實質利率 + 預期物價膨脹率</div>
+      <div class="mc-detail">描述長期時物價膨脹率與名目利率<b>一對一</b>的關係；貨幣數量學說下，貨幣成長率上升 → 預期通膨上升 → 名目利率同幅上升，實質利率不變。</div>
+      <div class="mc-ex"><b>例子：</b>實質利率 3%、預期通膨 5% → 名目利率 = <b>8%</b>。</div>
+    </div>
+  </div>
+  <div class="warn">古典學派三市場各自決定：<b>勞動市場</b>決定就業與產出（Y*）、<b>貨幣市場</b>決定物價水準（P）、<b>可貸資金市場</b>決定實質利率（r）。</div>`
+},
+{
+  id:"2.5", title:"就業與勞動市場",
+  body:`
+  <p>古典學派的勞動市場假設供需雙方<b>皆無貨幣幻覺</b>（函數中都有物價 P），因此勞動市場隨時結清、保持充分就業。</p>
+  <div class="note"><b>失業的種類：</b>
+    <ul style="margin:6px 0 2px 20px">
+      <li><span class="term" data-term="Frictional unemployment">摩擦性失業</span>：離開舊工作、尚未找到新工作之間的暫時失業（自願性）。靠職場供需資訊降低</li>
+      <li><span class="term" data-term="Structural unemployment">結構性失業</span>：經濟結構變遷導致技能不符（如 ATM 取代行員）。靠再教育、轉職訓練</li>
+      <li><span class="term" data-term="Cyclical unemployment">循環性失業</span>：景氣衰退、有效需求萎縮（非自願性）。靠政府擴大內需</li>
+      <li><span class="term" data-term="Seasonal unemployment">季節性失業</span>：氣候或產銷習慣影響（農閒、鬼月營造）。靠增加副業</li>
+      <li><span class="term" data-term="Disguised unemployment">隱藏性失業</span>：表面有工作但邊際生產力趨近於零，狹義統計會低估失業</li>
+      <li><span class="term" data-term="Discouraged workers">沮喪勞工</span>：退出勞動市場不再積極求職，不計入失業統計 → 低估失業率</li>
+    </ul></div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="natural"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Natural rate of unemployment">自然失業率</span>與充分就業</div>
+    <div class="mc-body">
+      <div class="mc-formula">無循環性失業時的失業率＝自然失業率（僅摩擦性＋結構性）</div>
+      <div class="mc-detail">此時經濟社會達到<span class="term" data-term="Full employment">充分就業</span>，對應的產出水準稱為潛在產出（potential output）。自然失業率不是零失業率。</div>
+      <div class="mc-ex"><b>例子：</b>摩擦性 3%＋結構性 2% → 自然失業率 5%；此時失業率 5% 代表充分就業。</div>
+    </div>
+  </div>
+  <div class="formula"><span class="f-label"><span class="term" data-term="Labor force participation rate">勞動參與率</span></span>勞動參與率 = 勞動力 ÷ 適齡工作人口 × 100%；失業率 = 失業人口 ÷ 勞動力 × 100%</div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="classiclab"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">古典勞動市場</div>
+    <div class="mc-body">
+      <div class="mc-formula">W/P = 邊際勞動生產力（需求）；勞動供給為實質工資的函數</div>
+      <div class="mc-detail">供需函數都含物價 P（無貨幣幻覺）→ 物價變動只使名目工資同幅調整，均衡就業量與實質工資不變 → <b>AS 為垂直線</b>。古典總體模型：勞動市場決定產出、貨幣市場決定物價、可貸資金市場決定利率。</div>
+      <div class="mc-ex"><b>例子：</b>物價上升 10%，名目工資也上升 10%，實質工資 W/P 不變 → 就業量與產出不變。</div>
+    </div>
+  </div>
+  <div class="warn">失業率統計的問題：<b>低估</b>（沮喪勞工退出市場、隱藏性失業未計入、衰退期家庭主婦退出勞動市場）vs <b>高估</b>（失業期間可做其他有價值的事、為領失業輔助金而登記、自然失業率上升非經濟浪費）。</div>`
+}
+];
+const CH2_PROBLEMS = [
+{
+  q:"根據古典學派看法，下列何者正確？（書本例題 2.1）",
+  opts:["(A) 供給自創需求","(B) 政府應採取減稅政策，以刺激人民之工作意願","(C) 失業與經濟衰退之所以產生，是因為有效需求不足所致","(D) 價格具有僵固性"],
+  ans:"<b>(A) 供給自創需求。</b><ul><li>古典學派信守<span class=\"term\" data-term=\"Say's law\">薩伊法則</span>「供給創造需求」</li><li>有效需求不足是凱因斯學派的觀點（C）</li><li>古典學派假設價格與工資完全彈性（D 錯）</li></ul>"
+},
+{
+  q:"下列敘述，以總體經濟中古典學派觀點來看，何者為真？（書本例題 2.2）",
+  opts:["(A) 增加政府支出可提升均衡所得","(B) 勞動市場將永遠維持均衡","(C) 名目變數變動不會影響實質變數","(D) 物價為完全彈性"],
+  ans:"<b>(C) 名目變數變動不會影響實質變數。</b><ul><li>這是<span class=\"term\" data-term=\"Classical dichotomy\">古典二分法</span>與<span class=\"term\" data-term=\"Money neutrality\">貨幣中立性</span>的核心</li><li>(B) 勞動市場「永遠維持均衡」過於絕對——古典主張市場機能使其趨於充分就業，但非永遠維持</li><li>(D) 物價完全彈性是古典的假設而非「為真」的敘述</li></ul>"
+},
+{
+  q:"Classical economists believe that the economy（書本例題 2.3）",
+  opts:["(A) requires activist government intervention to reach its potential level of GDP","(B) is self-regulating and does not require government intervention","(C) can be affected by only monetary policy","(D) is persistently below its potential level of GDP"],
+  ans:"<b>(B) is self-regulating and does not require government intervention.</b><ul><li>古典學派主張市場機能完全、政府放任</li><li>(A)(D) 是凱因斯學派觀點；(C) 古典學派認為貨幣政策只影響物價</li></ul>"
+},
+{
+  q:"給定貨幣需求函數：M/P = 3000 + 0.25Y − 5000r，M 為貨幣需求量、P 為物價指數、Y 為實質所得、r 為利率。若 Y = 10,000、P = 100、r = 0.1，求名目貨幣需求量 M？（書本例題 2.4）",
+  opts:["(A) 50,000","(B) 100,000","(C) 500,000","(D) 5,000,000"],
+  ans:"<b>(C) 500,000。</b><ul><li>實質貨幣需求 M/P = 3000 + 0.25×10000 − 5000×0.1 = 3000 + 2500 − 500 = <b>5000</b></li><li>名目貨幣需求 M = 5000 × P = 5000 × 100 = <b>500,000</b></li></ul>"
+},
+{
+  q:"在既定時期，一國總人口 1320 萬人，適齡工作人口 950 萬人，勞動人口 730 萬人，失業人口 50 萬人。該國之勞動參與率為？（書本例題 2.12）",
+  opts:["(A) 55.3%","(B) 71.5%","(C) 72.0%","(D) 76.8%"],
+  ans:"<b>(D) 76.8%。</b><ul><li>勞動參與率 = 勞動力 ÷ 適齡工作人口 = 730 ÷ 950 ≈ <b>76.8%</b></li><li>總人口、失業人口不直接用於勞動參與率</li></ul>"
+},
+{
+  q:"Frictional unemployment（書本例題 2.13）",
+  opts:["(A) is unemployment associated with normal labor turnover.","(B) is unemployment associated with declining industries.","(C) is voluntary part-time unemployment.","(D) includes discouraged workers."],
+  ans:"<b>(A) is unemployment associated with normal labor turnover.</b><ul><li>摩擦性失業＝正常勞動流動（轉職搜尋）造成的暫時失業</li><li>(B) 衰退產業是結構性失業；(D) 沮喪勞工不計入失業</li></ul>"
+},
+{
+  q:"If the economy enters an expansion,（書本例題 2.14）",
+  opts:["(A) cyclical unemployment increases.","(B) structural unemployment increases.","(C) cyclical unemployment decreases.","(D) structural unemployment decreases."],
+  ans:"<b>(C) cyclical unemployment decreases.</b><ul><li>景氣擴張 → 有效需求上升 → <span class=\"term\" data-term=\"Cyclical unemployment\">循環性失業</span>下降</li><li>結構性失業由經濟結構決定，與景氣循環無直接關係</li></ul>"
+},
+{
+  q:"下列何者應計入失業率？（書本例題 2.21）",
+  opts:["(A) 小高為全職學生，利用閒暇於加油站工讀，因期末考而放棄此工讀工作","(B) 辛先生原任職於飯店，但因工作地點考量決定要辭職並另覓新職","(C) 小華今年 12 歲，決定暫時休學找工作","(D) 大明學校畢業後，目前正在服兵役"],
+  ans:"<b>(B) 辛先生原任職於飯店，但因工作地點考量決定要辭職並另覓新職。</b><ul><li>辭職另覓新職 → 處於搜尋過程 → <span class=\"term\" data-term=\"Frictional unemployment\">摩擦性失業</span>，計入失業率</li><li>(A) 工讀生放棄工讀仍是學生，不在勞動力；(C) 未滿 16 歲不計；(D) 義務役不計入勞動力</li></ul>"
+},
+{
+  q:"下列有關失業的敘述，何者正確？（書本例題 2.22）",
+  opts:["(A) 1970 年代石油價格上漲使傳統工業生產結構改變，此失業稱循環性失業","(B) 自然失業率等於循環性失業加結構性失業","(C) 人們經由「搜尋過程」找到合於自己的工作前，便處於摩擦性失業狀態","(D) 自然失業率又稱為短期失業率"],
+  ans:"<b>(C) 人們經由「搜尋過程」找到合於自己的工作前，便處於摩擦性失業狀態。</b><ul><li>(A) 生產結構改變是<span class=\"term\" data-term=\"Structural unemployment\">結構性失業</span></li><li>(B) 自然失業率＝摩擦性＋結構性（不含循環性）</li><li>(D) 自然失業率是長期概念，不是短期失業率</li></ul>"
+},
+{
+  q:"所謂隱藏性失業是指？（書本例題 2.23）",
+  opts:["(A) 未被解雇，卻因景氣惡化而被減少工時","(B) 只想領失業救濟金卻不想找工作的人","(C) 因為技能不符產業所需而失業的人","(D) 目前有工作卻想跳槽的人"],
+  ans:"<b>(A) 未被解雇，卻因景氣惡化而被減少工時。</b><ul><li><span class=\"term\" data-term=\"Disguised unemployment\">隱藏性失業</span>＝表面有工作但邊際生產力趨近於零（工時不足、職務不適）</li><li>(C) 是結構性失業</li></ul>"
+},
+{
+  q:"小鎮共 100 人：10 個 16 歲以下小孩、10 位退休者、60 位全職工作者、3 位兼職工作者、3 位 16 歲以上全職學生、4 位家庭主婦。其餘的人沒有工作但想要工作，除 1 人外都曾在過去四週積極找工作。求失業率？（書本例題 2.25）",
+  opts:["(A) 10.0%","(B) 12.5%","(C) 14.3%","(D) 16.7%"],
+  ans:"<b>(B) 12.5%。</b><ul><li>就業人口 = 60（全職）+ 3（兼職）= 63</li><li>失業人口 = 其餘 10 人中積極求職者 9 人（1 人未積極找，不計入勞動力）</li><li>勞動力 = 63 + 9 = 72 → 失業率 = 9 ÷ 72 = <b>12.5%</b></li></ul>"
+}
+];
+
+/* ===== 第三章內容 ===== */
+const CH3_SECTIONS = [
+{
+  id:"3.1", title:"凱因斯革命",
+  body:`
+  <p>古典學派認為價格調整可使市場隨時結清；但 1930 年<span class="proper">經濟大蕭條</span>造成大量失業與企業存貨滯銷，古典理論難以解釋。1936 年<span class="proper" data-term="Keynes">凱因斯</span>發表《就業、利息與貨幣一般理論》，主張<b>價格與工資具有僵固性</b>，無法靠調整回到充分就業。凱因斯名言：「長期而言，我們都死了。」（In the long run we are all dead.）</p>
+  <div class="tblwrap"><table><caption>古典 vs 凱因斯</caption><colgroup><col style="width:22%"><col style="width:39%"><col style="width:39%"></colgroup><thead><tr><th>比較項目</th><th>古典學派</th><th>凱因斯學派</th></tr></thead><tbody>
+  <tr><td><strong>價格與工資</strong></td><td>完全彈性</td><td>僵固（工會、選單成本）</td></tr>
+  <tr><td><strong>失業原因</strong></td><td>充分就業是常態</td><td><span class="term" data-term="Effective demand">有效需求</span>不足</td></tr>
+  <tr><td><strong>政府角色</strong></td><td>自由放任</td><td>擴張政策提振景氣</td></tr>
+  <tr><td><strong>政策效力</strong></td><td>財政政策無效</td><td>財政政策有效</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>凱因斯模型三層架構：</b>
+    <ul style="margin:6px 0 2px 20px">
+      <li><b>簡單凱因斯模型</b>：所得為唯一內生變數，利率與物價外生（本章）</li>
+      <li><b>修正凱因斯模型</b>：所得與利率為內生，物價外生（IS-LM）</li>
+      <li><b>完整凱因斯模型</b>：所得、利率與物價皆為內生（AD-AS）</li>
+    </ul></div>
+  <div class="warn">凱因斯學派否定「自由市場價格機制使政府政策對產出決定無能為力」的思想：大量閒置設備下增產不提高單位成本 → 物價機能失效；工會議價使名目工資僵固 → 勞動市場價格機能失效。</div>`
+},
+{
+  id:"3.2", title:"行為方程式",
+  body:`
+  <p>商品市場均衡：總合需求 AE = C + I + G + X − M。凱因斯認為消費是<b>一期決策</b>，與當期絕對（實質）可支配所得相關，而非古典的跨期決策。</p>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="consfn"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Consumption function">消費函數</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">C = a + b·Yd　（Yd = Y − T）</div>
+      <div class="mc-detail"><span class="term" data-term="Autonomous consumption">自發性消費</span> a：無所得仍消費（維持基本生活）；<span class="term" data-term="Induced consumption">誘發性消費</span> b·Yd：隨所得變動。b＝<span class="term" data-term="MPC">邊際消費傾向</span>（0&lt;b&lt;1）。</div>
+      <div class="mc-ex"><b>例子：</b>C = 100 + 0.8Yd → Yd = 1000 時消費 = 100 + 800 = <b>900</b>，儲蓄 = 100。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="savfn"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Saving function">儲蓄函數</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">S = Yd − C = −a + (1−b)·Yd；MPC + MPS = 1</div>
+      <div class="mc-detail">邊際儲蓄傾向 MPS = 1 − b；平均消費傾向 APC = C/Yd 隨所得增加而遞減。儲蓄是利率的增函數（簡單模型中忽略）。</div>
+      <div class="mc-ex"><b>例子：</b>C = 100 + 0.8Yd → S = −100 + 0.2Yd；Yd = 1000 → S = <b>100</b>。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="invfn"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">投資函數</div>
+    <div class="mc-body">
+      <div class="mc-formula">I = Ī + Iy·Y − |Ir|·r　→（簡單模型）I = Ī + Iy·Y</div>
+      <div class="mc-detail">所得越高景氣越好 → 投資越多；利率是投資的機會成本 → 利率越高投資越低。<span class="term" data-term="Accelerator principle">加速原理</span>（<span class="proper" data-term="Samuelson">薩繆爾森</span>）：投資與產出變動同向。</div>
+      <div class="mc-ex"><b>例子：</b>I = 200 + 0.1Y − 50r；Y = 1000、r = 0.04 → I = 200 + 100 − 2 = <b>298</b>。</div>
+    </div>
+  </div>
+  <div class="formula"><span class="f-label">政府與國外部門</span>G = Ḡ；T = T̄ + tY（定額＋比例）；X = X̄（外生）；M = M̄ + mY（m＝邊際進口傾向）</div>
+  <div class="note"><b>稅的種類：</b>
+    <ul style="margin:6px 0 2px 20px">
+      <li><span class="term" data-term="Lump-sum tax">定額稅</span>：與所得無關（T̄）</li>
+      <li><span class="term" data-term="Proportional tax">比例稅</span>：所得固定比例（tY）</li>
+      <li><span class="term" data-term="Progressive tax">累進稅</span>：所得越高稅率越高；<span class="term" data-term="Regressive tax">累退稅</span>：所得越高稅率越低</li>
+    </ul></div>`
+},
+{
+  id:"3.3", title:"均衡所得的決定",
+  body:`
+  <p>簡單凱因斯模型中供給面只是需求面的「影子」：需求在哪裡，供給就在哪裡，以 <span class="term" data-term="45-degree line">45° 線</span>代表總供給線。均衡所得為總合支出線與 45° 線之交點。</p>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="eq3"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">三部門均衡</div>
+    <div class="mc-body">
+      <div class="mc-formula">Y* = (a − bT̄ + Ī + Ḡ) ÷ [1 − b(1−t) − Iy]</div>
+      <div class="mc-detail">均衡條件：AE = Y（45° 線法），或 S + T = I + G（注入＝漏出法）。分母為邊際漏出，須大於 0（穩定條件）。</div>
+      <div class="mc-ex"><b>例子：</b>C = 100 + 0.8Yd、T = 20 + 0.25Y、I = 300、G = 400 → Y* = (100 − 16 + 300 + 400) ÷ [1 − 0.6] = 784 ÷ 0.4 = <b>1960</b>。</div>
+    </div>
+  </div>
+  <div class="svgfig">
+    <figcaption>45° 線圖：AE 線（斜率＝邊際支出傾向）與 45° 線（AE = Y）的交點 E 決定均衡所得 Y*。左圖加入政府支出使 AE 上移 → 均衡所得增加；右圖標示緊縮缺口（實際均衡 Y₁ 低於充分就業 Y*）。</figcaption>
+    <svg viewBox="0 0 440 350" role="img" aria-label="45度線均衡圖">
+      <defs><marker id="arw3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c6e9e"/></marker></defs>
+      <line x1="60" y1="300" x2="60" y2="30" class="ax"/>
+      <line x1="60" y1="300" x2="400" y2="300" class="ax"/>
+      <line x1="60" y1="300" x2="400" y2="20" stroke="#9a8f78" stroke-width="1.8"/>
+      <text x="310" y="62" class="lb" fill="#6f6555">45°（AE = Y）</text>
+      <line x1="80" y1="268" x2="360" y2="60" stroke="#3a7d44" stroke-width="2.4"/>
+      <text x="250" y="180" class="lb" fill="#3a7d44">AE = C + I + G</text>
+      <line x1="80" y1="288" x2="300" y2="120" stroke="#2c6e9e" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="230" y="230" class="lb" fill="#2c6e9e">AE₁（未充分就業）</text>
+      <circle cx="278" cy="122" r="4" fill="#b5542e"/>
+      <text x="286" y="116" class="axl" fill="#b5542e">E₁</text>
+      <circle cx="312" cy="108" r="4" fill="#3a7d44"/>
+      <text x="320" y="102" class="axl" fill="#3a7d44">E*</text>
+      <line x1="278" y1="300" x2="278" y2="122" stroke="#b5542e" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="250" y="316" class="axl">Y₁</text>
+      <line x1="312" y1="300" x2="312" y2="108" stroke="#3a7d44" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="300" y="316" class="axl" fill="#3a7d44">Y*</text>
+      <path d="M278,122 v-36 h34 v36" fill="none" stroke="#b5542e" stroke-width="1.3" stroke-dasharray="4 3"/>
+      <text x="296" y="80" class="axl" fill="#b5542e">緊縮缺口</text>
+    </svg>
+  </div>
+  <div class="warn">非意願性存貨調整：實際 Y &gt; Y* 時存貨意外增加 → 廠商減產；實際 Y &lt; Y* 時存貨意外減少 → 廠商增產，直到 AE = Y。</div>`
+},
+{
+  id:"3.4", title:"節儉的矛盾",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="thrift"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Paradox of thrift">節儉的矛盾</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">自發性儲蓄 ↑（或 MPC ↓）→ 均衡所得 ↓ → 均衡儲蓄不增反減</div>
+      <div class="mc-detail">個人想多儲蓄是好事，但全社會同時多儲蓄 → 消費減少 → 有效需求不足 → 所得下降 → 儲蓄終究無法增加。均衡時 S = I 恆成立。</div>
+      <div class="mc-ex"><b>例子：</b>C = 100 + 0.8Y、I = 200 → Y* = 1500、S* = 200；MPC 降至 0.6 → Y* = 750、S* 仍 = <b>200</b>（想多存卻沒存到）。</div>
+    </div>
+  </div>`
+},
+{
+  id:"3.5", title:"膨脹與緊縮缺口",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="gap"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Output gap">缺口</span>觀念</div>
+    <div class="mc-body">
+      <div class="mc-formula"><span class="term" data-term="Deflationary gap">緊縮缺口</span>＝使 AE 上移至充分就業所需的自發性需求增加量；<span class="term" data-term="Inflationary gap">膨脹缺口</span>＝需減少量</div>
+      <div class="mc-detail">實際產出 &lt; 潛在產出 → 緊縮缺口（未充分就業）；實際產出 &gt; 潛在產出 → 膨脹缺口（超充分就業）。缺口 × 乘數 = 產出缺口。</div>
+      <div class="mc-ex"><b>例子：</b>充分就業產出 Y* = 2000、目前均衡 Y = 1800、乘數 = 4 → 產出缺口 200、緊縮缺口 = 200 ÷ 4 = <b>50</b>（自發性支出需增加 50）。</div>
+    </div>
+  </div>
+  <div class="note"><b>短長期概念：</b>短期（1–5 年）關注產出穩定與景氣循環；長期（10 年以上）關注充分就業產出的成長趨勢。經濟成長研究的是潛在產出的長期成長。</div>`
+},
+{
+  id:"3.6", title:"乘數理論",
+  body:`
+  <p><span class="term" data-term="Multiplier">乘數</span>＝自發性總需求增加引起均衡所得增加的倍數（k = ΔY/ΔAD）。自發性支出增加 → 所得等量增加 → 其中一部分再支出 → 連鎖反應。</p>
+  <div class="tblwrap"><table><caption>各種乘數（三部門，無加速效果）</caption><colgroup><col style="width:34%"><col style="width:66%"></colgroup><thead><tr><th>乘數</th><th>公式</th></tr></thead><tbody>
+  <tr><td>自發性消費／投資／政府支出乘數</td><td>1 ÷ [1 − b(1−t)]</td></tr>
+  <tr><td>定額稅乘數</td><td>−b ÷ [1 − b(1−t)]</td></tr>
+  <tr><td>稅率乘數</td><td>−b·Y ÷ [1 − b(1−t)]</td></tr>
+  <tr><td><span class="term" data-term="Balanced budget multiplier">平衡預算乘數</span>（ΔG = ΔT）</td><td>1</td></tr>
+  <tr><td>開放經濟政府支出乘數（含 m）</td><td>1 ÷ [1 − b(1−t) + m]</td></tr>
+  </tbody></table></div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="mult"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">乘數操作</div>
+    <div class="mc-body">
+      <div class="mc-formula">ΔY = k × ΔAD　；k = 1 ÷ [1 − b(1−t) + m]</div>
+      <div class="mc-detail">分母越大（稅率越高、進口傾向越高、儲蓄越多）乘數越小。邊際稅率與開放貿易會降低乘數 → 波動變小，是<span class="term" data-term="Automatic stabilizer">自動安定機能</span>。</div>
+      <div class="mc-ex"><b>例子：</b>b = 0.8、t = 0.25 → 乘數 = 1 ÷ [1 − 0.6] = <b>2.5</b>；政府支出增 100 → ΔY = 250。</div>
+    </div>
+  </div>
+  <div class="warn">自動安定機能：誘發性租稅（景氣好稅收自動增、景氣差自動減）、失業保險制、開放國際貿易——三者都降低乘數、緩和景氣波動，不需政府主動決策。</div>`
+}
+];
+const CH3_PROBLEMS = [
+{
+  q:"Assume an economy with no government nor foreign trade: C = 100 + 0.8Y, I = 200. Now individuals reduce MPC from 0.8 to 0.6 (autonomous consumption stays at 100). Compute the new equilibrium saving. Is the result a paradox?（書本例題 3.5）",
+  opts:["(A) 新均衡儲蓄 200，是節儉的矛盾","(B) 新均衡儲蓄 300，不是矛盾","(C) 新均衡儲蓄 200，不是矛盾","(D) 新均衡儲蓄 100，是節儉的矛盾"],
+  ans:"<b>(A) 新均衡儲蓄 200，是節儉的矛盾。</b><ul><li>原均衡：Y* = (100+200)÷(1−0.8) = 1500、S* = 200</li><li>MPC 降為 0.6：Y* = 300÷0.4 = 750、S* = Y−C = 750 − (100+450) = <b>200</b></li><li>個人想多儲蓄，均衡儲蓄卻不變 → <span class=\"term\" data-term=\"Paradox of thrift\">節儉的矛盾</span></li></ul>"
+},
+{
+  q:"凱因斯簡單所得支出模型中，如果預擬儲蓄是 240、預擬投資是 220，將造成？（書本例題 3.6）",
+  opts:["(A) 存貨過多，而使所得下降","(B) 所得必須增加使儲蓄與投資平衡","(C) 民間的儲蓄行為將被迫改變","(D) 投資將增加為 240，以達成平衡"],
+  ans:"<b>(A) 存貨過多，而使所得下降。</b><ul><li>S &gt; I → 漏出 &gt; 注入 → 有效需求不足 → 存貨意外增加 → 廠商減產 → 所得下降</li><li>所得下降使儲蓄減少，直到 S = I = 220</li></ul>"
+},
+{
+  q:"If an inflationary gap existed, increasing government spending would（書本例題 3.7）",
+  opts:["(A) eliminate the gap.","(B) make the problem worse.","(C) either reduce or eliminate the gap.","(D) increase the size of the multiplier.","(E) decrease the size of the multiplier."],
+  ans:"<b>(B) make the problem worse.</b><ul><li>膨脹缺口＝需求過熱，再增加政府支出只會使總需求更高、物價壓力更大</li><li>正確政策是減少自發性需求（刪減支出或增稅）</li></ul>"
+},
+{
+  q:"凱因斯模型下：Y = C + I + G + X − M；C = 100 + 0.8Yd；T = 200；G = 200；X = 400；M = 100 + 0.3Y。（1）均衡國民所得？（2）政府支出乘數？（書本例題 3.10）",
+  opts:["(A) Y = 880、乘數 = 2","(B) Y = 1760、乘數 = 5","(C) Y = 880、乘數 = 5","(D) Y = 1100、乘數 = 2"],
+  ans:"<b>(A) Y = 880、乘數 = 2。</b><ul><li>AE = 100 + 0.8(Y−200) + 200 + 400 − (100 + 0.3Y) = 440 + 0.5Y</li><li>Y = 440 + 0.5Y → Y* = <b>880</b></li><li>乘數 = 1 ÷ (1 − 0.8 + 0.3) = 1 ÷ 0.5 = <b>2</b></li></ul>"
+},
+{
+  q:"在簡單凱因斯模型中（不考慮政府與國外部門），若投資增加 200 萬、均衡所得增加 800 萬，則下列何者正確？（書本例題 3.12）",
+  opts:["(A) 乘數為 0.25","(B) 乘數為 4","(C) 邊際消費傾向為 0.5","(D) 邊際消費傾向為 0.4"],
+  ans:"<b>(B) 乘數為 4。</b><ul><li>乘數 = ΔY ÷ ΔI = 800 ÷ 200 = <b>4</b></li><li>1 ÷ (1−b) = 4 → b = 0.75（MPC = 0.75）</li></ul>"
+},
+{
+  q:"封閉經濟體系：C = 400 + 0.8Yd；政府購買 G = 1000；投資 I = 600；稅收淨額 T = −500 + 0.5Y（Yd 為可支配所得、Y 為所得）。均衡所得水準為？（書本例題 3.13）",
+  opts:["(A) 1000","(B) 2000","(C) 4000","(D) 6000"],
+  ans:"<b>(C) 4000。</b><ul><li>Yd = Y − T = Y + 500 − 0.5Y = 500 + 0.5Y</li><li>AE = 400 + 0.8(500 + 0.5Y) + 1000 + 600 = 2400 + 0.4Y</li><li>Y = 2400 + 0.4Y → Y* = <b>4000</b></li></ul>"
+},
+{
+  q:"在簡單凱因斯模型中（無進出口、定額稅制度），關於政府平衡預算乘數的敘述，何者正確？（書本例題 3.14）",
+  opts:["(A) 政府維持收支平衡時，其平衡預算乘數為 1","(B) 政府支出本身並非總需求的一部分","(C) 政府維持收支平衡時，其平衡預算乘數小於 1","(D) 政府維持收支平衡時，其平衡預算乘數大於 1"],
+  ans:"<b>(A) 政府維持收支平衡時，其平衡預算乘數為 1。</b><ul><li>ΔG = ΔT：ΔY = 政府支出乘數×ΔG + 定額稅乘數×ΔT = [1 − b]÷(1−b) × ΔG = <b>ΔG</b></li><li>平衡預算乘數 = 1（即使政府平衡收支，支出仍擴大總需求）</li></ul>"
+},
+{
+  q:"若自動平衡機能（automatic stabilizer）有助於降低景氣波動的幅度，則下列何者敘述為真？（書本例題 3.15）",
+  opts:["(A) 當景氣好時，稅收自動減少、政府支出自動減少","(B) 當景氣好時，稅收自動增加、政府支出自動減少","(C) 當景氣不好時，稅收自動增加、政府支出自動增加","(D) 當景氣不好時，稅收自動減少、政府支出自動減少"],
+  ans:"<b>(B) 當景氣好時，稅收自動增加、政府支出自動減少。</b><ul><li>景氣好 → 所得高 → 誘發性租稅自動增加 → 抑制過熱；失業保險支出自動減少</li><li>景氣差則反向：稅收自動減、救濟支出自動增</li></ul>"
+},
+{
+  q:"甲國島嶼經濟：C = 2000 + 0.8(Y−T)；I = 1000；G = 4000；T = 5000（定額淨稅賦）。（1）均衡產出？（2）投資乘數？（3）充分就業產出為 20000，投資不變時政府支出須增加多少（或淨稅賦降低多少）？（書本例題 3.16）",
+  opts:["(A) Y = 15000、乘數 5、ΔG = 1000（或降稅 1250）","(B) Y = 12000、乘數 4、ΔG = 2000（或降稅 2500）","(C) Y = 15000、乘數 4、ΔG = 1000（或降稅 1000）","(D) Y = 18000、乘數 5、ΔG = 500（或降稅 625）"],
+  ans:"<b>(A) Y = 15000、乘數 5、ΔG = 1000（或降稅 1250）。</b><ul><li>AE = 2000 + 0.8(Y−5000) + 1000 + 4000 = 3000 + 0.8Y → Y* = <b>15000</b></li><li>投資乘數 = 1 ÷ (1−0.8) = <b>5</b>（I 增 500 → ΔY = 2500 驗證）</li><li>目標 ΔY = 20000 − 15000 = 5000：ΔG = 5000÷5 = <b>1000</b>；降稅 ΔT = −5000÷4 = <b>−1250</b>（稅乘數 = −4）</li></ul>"
+}
+];
+
+/* ===== 渲染 ===== */
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function escA(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+
+let currentChapter=1;
+function renderSidebar(){
+  const sb=document.getElementById("sidebar");
+  let html=`<div class="brand">宏觀天地 學總經<div class="t2">研究所複習 · 第 1–14 章</div></div>`;
+  BOOK.forEach(ch=>{
+    html+=`<button class="nav-chapter ${ch.n===currentChapter?'active':''}" data-ch="${ch.n}">
+      <span class="num">${ch.n}</span><span>${esc(ch.title)}</span>
+      ${ch.done?'<span class="tag done">已上線</span>':'<span class="tag">待建</span>'}
+    </button>`;
+    if(ch.subs&&ch.subs.length){
+      ch.subs.forEach(sub=>{
+        const id=(typeof sub==="string")?sub.slice(0,3):sub.id;
+        const title=(typeof sub==="string")?sub:sub.title;
+        html+=`<button class="nav-sub" data-ch="${ch.n}" data-sec="${id}">${esc(title)}</button>`;
+      });
+    }
+  });
+  sb.innerHTML=html;
+  sb.querySelectorAll(".nav-chapter").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const ch=BOOK[+b.dataset.ch-1];
+      if(ch.done){renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});}
+      else{toast("第 "+ch.n+" 章尚未建置");}
+    });
+  });
+  sb.querySelectorAll(".nav-sub").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const ch=BOOK[+b.dataset.ch-1];
+      if(!ch.done){toast("第 "+ch.n+" 章尚未建置");return;}
+      if(currentChapter!==+b.dataset.ch)renderChapter(+b.dataset.ch);
+      const el=document.getElementById("sec-"+b.dataset.sec);
+      if(!el)return;
+      if(!el.classList.contains("open")){const h=el.querySelector(".section-head");if(h)h.click();}
+      setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),60);
+    });
+  });
+}
+
+function renderChapter(n){
+  currentChapter=n;
+  renderSidebar();
+  const book=BOOK[n-1];
+  const sections=CH_SECTIONS[n]||[];
+  const problems=CH_PROBLEMS[n]||[];
+  const c=document.getElementById("chapterContent");
+  let h=`<div class="chapter-head">
+    <span class="kicker">第 ${n} 章</span>
+    <h1>第${n}章 ${esc(book.title)}</h1>
+    <div class="chpage">《宏觀天地 學總經》第 ${n} 章</div>
+    <ul class="ch-points">
+      ${book.points?book.points.map(p=>`<li>${esc(p)}</li>`).join(""):""}
+    </ul>
+    <div class="progress-strip">${book.subs.map((_,i)=>`<i class="${i<book.subs.length?'done':''}"></i>`).join("")}</div>
+  </div>`;
+  sections.forEach((s,i)=>{
+    h+=`<section class="section" id="sec-${s.id}">
+      <div class="section-head" onclick="toggleSec(this)">
+        <span class="sec-num">${s.id}</span><span>${esc(s.title)}</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="section-body">${s.body}</div>
+    </section>`;
+  });
+  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">例題演練</h1><p>先自己作答，再點「顯示答案」核對。</p></div>`;
+  problems.forEach((p,i)=>{
+    h+=`<div class="problem">
+      <div class="p-head"><span>例題 ${i+1}</span></div>
+      <div class="p-body"><p>${p.q}</p>${p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""}
+      <button class="ans-btn" onclick="toggleAns(this)">顯示答案</button>
+      <div class="ans"><span class="a-label">解答</span>：${p.ans}</div></div>
+    </div>`;
+  });
+  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">術語表複習</h1><p>逐條複習：打勾＝已學會、點「重點」畫記、點「筆記」寫自己的註記，進度條自動統計，全部存在本機瀏覽器。</p></div>
+  <div id="glossRoot"></div>`;
+  c.innerHTML=h;
+
+  renderGlossary();
+
+  // 術語點擊（文內：課文名詞＋專有名詞都可開知識卡）
+  c.querySelectorAll(".term,.proper").forEach(t=>{
+    if(!t.dataset.term)return;
+    t.addEventListener("click",e=>{e.stopPropagation();openTerm(t.dataset.term);});
+  });
+  // 方法學習卡打勾（學會標記，存本機；學會＝刪除線＋黯淡）
+  const mcKey="mc_learned_v1";
+  let mcState={};try{mcState=JSON.parse(localStorage.getItem(mcKey)||"{}")}catch(e){}
+  c.querySelectorAll(".method-card input[type=checkbox]").forEach(cb=>{
+    const k=cb.dataset.mc;
+    const card=cb.closest(".method-card");
+    const apply=()=>card.classList.toggle("learned",cb.checked);
+    cb.checked=!!mcState[k];
+    apply();
+    cb.addEventListener("change",()=>{mcState[k]=cb.checked;localStorage.setItem(mcKey,JSON.stringify(mcState));apply();});
+  });
+  // 套用已存高亮
+  applyHighlights();
+}
+
+function toggleSec(head){
+  const sec=head.parentElement;
+  sec.classList.toggle("open");
+}
+function toggleAns(btn){
+  const ans=btn.nextElementSibling;
+  ans.classList.toggle("show");
+  btn.textContent=ans.classList.contains("show")?"隱藏答案":"顯示答案";
+}
+
+/* ===== 術語模態 ===== */
+function openTerm(key){
+  const t=TERMS[key];
+  if(!t){toast("暫無此術語資料");return;}
+  document.getElementById("termModalEn").textContent=t[0];
+  document.getElementById("termModalZh").textContent=t[1];
+  document.getElementById("termModalDef").textContent=t[2];
+  const m=document.getElementById("termModal");
+  m.style.display="flex";
+}
+function closeTerm(){document.getElementById("termModal").style.display="none";}
+
+/* ===== 章節資料對照（每章完成後加入） ===== */
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS};
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS};
+
+/* ===== 術語表（列表形式） ===== */
+const GLOSS_CATS = [
+  {name:"所得帳指標", keys:["GDP","GNP","NNP","NI","PI","DPI","Nominal GDP","Real GDP"]},
+  {name:"衡量方法", keys:["Expenditure approach","Income approach","Production approach","Value added","Final goods","Intermediate goods","Depreciation","National income accounting"]},
+  {name:"物價指數", keys:["CPI","GDP deflator","Laspeyres index","Paasche index"]},
+  {name:"部門與市場", keys:["Household","Firm","Factor market","Goods market","Direct tax","Indirect tax","Transfer payment","Government purchases"]},
+  {name:"循環流轉", keys:["Leakage","Injection"]},
+  {name:"變數性質", keys:["Flow","Stock"]},
+  {name:"所得分配", keys:["Lorenz curve","Gini coefficient"]},
+  {name:"古典學派", keys:["Fisher equation","Cambridge cash balance","Money neutrality","Classical dichotomy","Walras law","Say's law","Loanable funds","Fisher effect","Money illusion"]},
+  {name:"學派與人物", keys:["Adam Smith","David Ricardo","Say","Marshall","Fisher","Walras","Malthus","Milton Friedman","Invisible hand","Absolute advantage","Comparative advantage"]},
+  {name:"凱因斯模型", keys:["Keynes","Effective demand","Consumption function","MPC","MPS","APC","Autonomous consumption","Induced consumption","Saving function","Accelerator principle","45-degree line","Multiplier","Balanced budget multiplier","Paradox of thrift","Deflationary gap","Inflationary gap","Output gap","Automatic stabilizer","Lump-sum tax","Proportional tax","Progressive tax","Regressive tax","Samuelson"]},
+  {name:"勞動市場與失業", keys:["Natural rate of unemployment","Frictional unemployment","Structural unemployment","Cyclical unemployment","Seasonal unemployment","Disguised unemployment","Discouraged workers","Labor force participation rate","Full employment"]},
+  {name:"總體經濟目標", keys:["Full employment","Business cycle","Economic growth"]}
+];
+const GLS = {
+  get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
+  set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+};
+let glossCat="all", glossOnlyUnlearned=false;
+
+function renderGlossary(){
+  const root=document.getElementById("glossRoot");
+  if(!root)return;
+  const learned=GLS.get("macro-gloss-learned",[]);
+  const starred=GLS.get("macro-gloss-star",[]);
+  const notes=GLS.get("macro-gloss-notes",{});
+  const total=Object.keys(TERMS).length;
+  const done=learned.filter(k=>TERMS[k]).length;
+
+  let h=`<div class="gloss-toolbar">
+    <div class="gloss-cats">
+      <button class="gloss-cat-btn ${glossCat==="all"?"active":""}" data-cat="all">全部（${total}）</button>
+      ${GLOSS_CATS.map(c=>`<button class="gloss-cat-btn ${glossCat===c.name?"active":""}" data-cat="${esc(c.name)}">${esc(c.name)}（${c.keys.length}）</button>`).join("")}
+    </div>
+    <div class="gloss-data-actions">
+      <button class="toolbtn" id="onlyUnlearned" title="只看未學會">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </button>
+      <button class="toolbtn" id="exportGloss" title="匯出備份">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+      </button>
+      <button class="toolbtn" id="importGloss" title="匯入備份">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V9m0 0 4 4m-4-4-4 4M4 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="gloss-progress">
+    <div class="bar"><div class="fill" style="width:${total?done/total*100:0}%"></div></div>
+    <div class="label">已學會 ${done} / ${total}</div>
+  </div>`;
+
+  GLOSS_CATS.forEach(cat=>{
+    if(glossCat!=="all"&&glossCat!==cat.name)return;
+    const items=cat.keys.filter(k=>TERMS[k]);
+    if(!items.length)return;
+    const catDone=items.filter(k=>learned.includes(k)).length;
+    h+=`<div class="gloss-group" data-gname="${esc(cat.name)}">
+      <h3>${esc(cat.name)}（${catDone}/${items.length}）</h3>
+      ${items.map(k=>{
+        const [en,zh,def]=TERMS[k];
+        const isLearned=learned.includes(k), isStarred=starred.includes(k);
+        const note=notes[k]||"";
+        if(glossOnlyUnlearned&&isLearned)return "";
+        return `<div class="gloss-item ${isLearned?"done":""} ${isStarred?"starred":""}" data-key="${esc(k)}">
+          <button class="gloss-check ${isLearned?"done":""}" onclick="toggleLearn(&quot;${escA(k)}&quot;)" title="標記已學會">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+          </button>
+          <div class="gloss-main">
+            <div class="gloss-en">${esc(en)}<span class="gloss-zh">${esc(zh)}</span></div>
+            <div class="gloss-def">${esc(def)}</div>
+            <div class="gloss-note ${note?"show":""}" data-note="wrap-${esc(k)}">
+              <textarea placeholder="寫下你自己的重點…" onchange="saveNote('${esc(k)}',this.value)">${esc(note)}</textarea>
+            </div>
+          </div>
+          <div class="gloss-actions">
+            <button class="gloss-btn ${isStarred?"active":""}" onclick="toggleStar(&quot;${escA(k)}&quot;)" title="重點畫記">★ 重點</button>
+            <button class="gloss-btn ${note?"active":""}" onclick="toggleNote(&quot;${escA(k)}&quot;)" title="個人筆記">✎ 筆記</button>
+          </div>
+        </div>`;
+      }).join("")}
+    </div>`;
+  });
+
+  root.innerHTML=h;
+  root.querySelectorAll(".gloss-cat-btn").forEach(b=>{
+    b.addEventListener("click",()=>{glossCat=b.dataset.cat;renderGlossary();});
+  });
+  document.getElementById("onlyUnlearned").addEventListener("click",e=>{
+    glossOnlyUnlearned=!glossOnlyUnlearned;
+    e.currentTarget.classList.toggle("active",glossOnlyUnlearned);
+    renderGlossary();
+  });
+  document.getElementById("exportGloss").addEventListener("click",exportGloss);
+  document.getElementById("importGloss").addEventListener("click",()=>{
+    const inp=document.createElement("input");
+    inp.type="file";inp.accept=".json";
+    inp.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>importGloss(r.result);r.readAsText(f);};
+    inp.click();
+  });
+}
+function toggleLearn(k){
+  let l=GLS.get("macro-gloss-learned",[]);
+  l=l.includes(k)?l.filter(x=>x!==k):[...l,k];
+  GLS.set("macro-gloss-learned",l);
+  renderGlossary();
+}
+function toggleStar(k){
+  let s=GLS.get("macro-gloss-star",[]);
+  s=s.includes(k)?s.filter(x=>x!==k):[...s,k];
+  GLS.set("macro-gloss-star",s);
+  renderGlossary();
+}
+function toggleNote(k){
+  const wrap=document.querySelector(`[data-note="wrap-${k}"]`);
+  if(wrap)wrap.classList.toggle("show");
+}
+function saveNote(k,v){
+  const notes=GLS.get("macro-gloss-notes",{});
+  notes[k]=v;
+  GLS.set("macro-gloss-notes",notes);
+  renderGlossary();
+}
+function exportGloss(){
+  const data={learned:GLS.get("macro-gloss-learned",[]),star:GLS.get("macro-gloss-star",[]),notes:GLS.get("macro-gloss-notes",{})};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="總經術語備份.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast("已匯出備份");
+}
+function importGloss(jsonStr){
+  try{
+    const d=JSON.parse(jsonStr);
+    if(d.learned&&Array.isArray(d.learned)){
+      const cur=GLS.get("macro-gloss-learned",[]);
+      GLS.set("macro-gloss-learned",[...new Set([...cur,...d.learned])]);
+    }
+    if(d.star&&Array.isArray(d.star)){
+      const cur=GLS.get("macro-gloss-star",[]);
+      GLS.set("macro-gloss-star",[...new Set([...cur,...d.star])]);
+    }
+    if(d.notes&&typeof d.notes==="object"){
+      const cur=GLS.get("macro-gloss-notes",{});
+      GLS.set("macro-gloss-notes",{...cur,...d.notes});
+    }
+    toast("已匯入並合併備份");
+    renderGlossary();
+  }catch(e){toast("備份檔案格式錯誤");}
+}
+
+/* ===== 搜尋 ===== */
+const searchInput=document.getElementById("searchInput");
+searchInput.addEventListener("input",()=>{
+  const kw=searchInput.value.trim().toLowerCase();
+  document.querySelectorAll(".section").forEach(s=>{
+    const secOpen=s.classList.contains("open");
+    if(!kw){s.style.display="";if(secOpen)s.classList.add("open");return;}
+    const text=s.textContent.toLowerCase();
+    const hit=text.includes(kw);
+    s.style.display=hit?"":"none";
+    if(hit&&!secOpen)s.classList.add("open");
+  });
+  document.querySelectorAll(".problem").forEach(p=>{
+    if(!kw){p.style.display="";return;}
+    p.style.display=p.textContent.toLowerCase().includes(kw)?"":"none";
+  });
+  document.querySelectorAll("#glossRoot .gloss-item").forEach(c=>{
+    if(!kw){c.style.display="";return;}
+    c.style.display=c.textContent.toLowerCase().includes(kw)?"":"none";
+  });
+  document.querySelectorAll("#glossRoot .gloss-group").forEach(g=>{
+    const visible=[...g.querySelectorAll(".gloss-item")].some(el=>el.style.display!=="none");
+    g.style.display=visible?"":"none";
+  });
+  const anyVisible=[...document.querySelectorAll(".section,.problem,#glossRoot .gloss-item")].some(el=>el.style.display!=="none");
+  document.getElementById("emptyState").classList.toggle("show",!anyVisible);
+  document.getElementById("emptyKeyword").textContent=kw;
+});
+
+/* ===== 重點標記 ===== */
+let hlEnabled=true;
+function getHls(){try{return JSON.parse(localStorage.getItem("macro-hl")||"[]")}catch(e){return[]}}
+function saveHls(h){localStorage.setItem("macro-hl",JSON.stringify(h))}
+
+document.addEventListener("mouseup",e=>{
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed)return;
+  const txt=sel.toString().trim();
+  if(txt.length<2||txt.length>300)return;
+  // 檢查是否點在工具列/按鈕上
+  if(e.target.closest(".toolbtn,.ans-btn,.flip-card,.term,.section-head"))return;
+  const range=sel.getRangeAt(0);
+  const el=range.startContainer.parentElement;
+  if(!el.closest(".section-body,.problem"))return;
+  const hls=getHls();
+  if(hls.some(h=>h.txt===txt))return;
+  hls.push({txt,time:Date.now()});
+  saveHls(hls);
+  applyHighlights();
+  toast("已加入重點標記（點黃色文字可移除）");
+});
+
+function applyHighlights(){
+  const hls=getHls();
+  document.querySelectorAll(".section-body .userhl,.problem .userhl").forEach(el=>el.outerHTML=el.textContent);
+  if(!hlEnabled)return;
+  hls.forEach(h=>{
+    document.querySelectorAll(".section-body p,.section-body .note,.section-body .warn,.problem .p-body").forEach(block=>{
+      const text=block.textContent;
+      if(!text.includes(h.txt))return;
+      if(block.querySelector(".userhl"))return;
+      const idx=text.indexOf(h.txt);
+      const frag=document.createDocumentFragment();
+      frag.appendChild(document.createTextNode(text.slice(0,idx)));
+      const m=document.createElement("mark");
+      m.className="userhl";m.textContent=h.txt;
+      m.addEventListener("click",()=>{
+        const arr=getHls().filter(x=>x.txt!==h.txt);
+        saveHls(arr);applyHighlights();toast("已移除重點標記");
+      });
+      frag.appendChild(m);
+      frag.appendChild(document.createTextNode(text.slice(idx+h.txt.length)));
+      block.replaceChildren(frag);
+    });
+  });
+}
+
+document.getElementById("hlToggle").addEventListener("click",e=>{
+  hlEnabled=!hlEnabled;
+  e.currentTarget.classList.toggle("active",hlEnabled);
+  applyHighlights();
+  toast(hlEnabled?"重點標記已顯示":"重點標記已隱藏");
+});
+
+/* ===== 畫記模式 / 深色 ===== */
+let markMode=false;
+const markBtn=document.getElementById("markToggle");
+markBtn.addEventListener("click",e=>{
+  markMode=!markMode;
+  document.body.classList.toggle("marking",markMode);
+  markBtn.classList.toggle("active",markMode);
+  toast(markMode?"畫記模式開啟：點文字即可高亮（再點一次關閉並儲存）":"畫記模式已關閉，重點已儲存");
+});
+document.addEventListener("click",e=>{
+  if(!markMode)return;
+  if(e.target.closest(".toolbtn,.ans-btn,.term,.section-head"))return;
+  if(e.target.closest(".userhl"))return;
+  const el=e.target.closest(".section-body p,.section-body li,.section-body .note,.section-body .warn,.problem .p-body");
+  if(!el)return;
+  e.preventDefault();e.stopPropagation();
+  const txt=el.textContent.trim();
+  if(txt.length<2||txt.length>500){toast("這段太長，請改用拖選文字畫重點");return;}
+  const hls=getHls();
+  if(hls.some(h=>h.txt===txt))return;
+  hls.push({txt,time:Date.now()});
+  saveHls(hls);
+  applyHighlights();
+  toast("已加入重點標記（點黃色文字可移除）");
+});
+document.getElementById("darkToggle").addEventListener("click",e=>{
+  document.body.classList.toggle("dark");
+  e.currentTarget.classList.toggle("active",document.body.classList.contains("dark"));
+});
+
+/* ===== toast ===== */
+function toast(msg){
+  let t=document.getElementById("toast");
+  if(!t){
+    t=document.createElement("div");
+    t.id="toast";
+    t.style.cssText="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#26303b;color:#fff;padding:10px 18px;border-radius:10px;font-size:13.5px;z-index:99;box-shadow:0 6px 24px rgba(0,0,0,.2);opacity:0;transition:opacity .25s;pointer-events:none";
+    document.body.appendChild(t);
+  }
+  t.textContent=msg;
+  t.style.opacity="1";
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>t.style.opacity="0",1800);
+}
+
+/* ===== 初始化 ===== */
+renderSidebar();
+renderChapter(1);
+</script>
+</body>
+</html>
