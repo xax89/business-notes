@@ -1,0 +1,9 @@
+*.png
+*.py
+*.txt
+*.css
+*.svg
+*.js
+*.bak*
+node_modules/
+figs2/
