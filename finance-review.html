@@ -388,9 +388,9 @@ const BOOK = [
   {n:16, title:"選擇權評價", subs:["16.1 二項式與 BSM","16.2 價值因子與希臘字母"], done:true, points:["BSM：C＝S₀N(d₁)−Ke^(−rt)N(d₂)","五因子：股價、履約價、時間、利率、波動率","波動率↑→call/put 權利金皆↑；時間↑→call/put 皆↑","Δ＝股價變動一元期權價值變動，用於避險"]},
   {n:17, title:"遠期與期貨", subs:["17.1 遠期契約","17.2 期貨與避險"], done:true, points:["遠期：客制、場外；期貨：標準化、交易所、逐日結算","期貨價格 F₀＝S₀(1+r)^T","避險：持有現貨者空頭期貨避險；未來要買者多頭避險"]},
   {n:18, title:"交換契約", subs:["18.1 利率交換","18.2 貨幣交換"], done:true, points:["利率交換：同幣別固定利率換浮動利率","貨幣交換：不同幣別本金與利息互換","交換本質為一系列遠期契約的組合"]},
-  {n:19, title:"資本預算", subs:["19.1 評估指標","19.2 NPV 與 IRR 的取捨"], done:true, points:["NPV＝ΣCFₜ/(1+r)^t − I₀；NPV&gt;0 接受","IRR＝使 NPV=0 的折現率；IRR&gt;必要報酬率接受","回收期法、獲利指數 PI 為輔助指標","互斥方案 NPV 與 IRR 衝突時，以 NPV 為準"]},
-  {n:20, title:"資本預算現金流量", subs:["20.1 相關現金流量","20.2 現金流構成"], done:true, points:["只認增量現金流量；沉沒成本不計、機會成本要計","外部性：侵蝕效果負、綜效正","三段：初始投資、營業 OCF、終結現金流（殘值+回收NWC）"]},
-  {n:21, title:"風險調整與實質選擇權", subs:["21.1 風險調整","21.2 實質選擇權"], done:true, points:["高風險計畫用較高折現率（RADR）","實質選擇權：延遲、擴張、放棄選擇權可增加專案價值"]},
+  {n:19, title:"資金成本", subs:["19.1 概論","19.2 個別資金成本","19.3 WACC"], done:true, points:["資金成本＝投資人對類似風險要求的報酬率（機會成本）","負債 kD＝公司債 YTM；稅後 kD(1−T)；考慮發行成本 f","特別股 kP＝DivP/P₀","普通股 kE：CAPM 法或 Gordon 法 kE=D₁/P₀+g","WACC＝wD·kD(1−T)+wP·kP+wE·kE，權數用市值"],
+  {n:20, title:"投資計畫評估", subs:["20.1 評估指標","20.2 NPV 與 IRR 取捨","20.3 現金流量評估"], done:true, points:["回收期、折現回收期、ARR、NPV、IRR、MIRR、PI","NPV>0 接受；IRR>必要報酬率接受","互斥方案 NPV 與 IRR 衝突時以 NPV 為準；IRR 多重解","沉沒成本不計、機會成本要計、外部性（侵蝕/綜效）","現金流三段：初始投資、營業 OCF、終結（殘值+回收NWC）"]},
+  {n:21, title:"投資風險分析與實質選擇權", subs:["21.1 風險調整","21.2 實質選擇權"], done:true, points:["高風險計畫用 RADR 或確定等值法","實質選擇權：延遲、擴張、放棄，提升專案價值"]},
   {n:22, title:"長期融資", subs:["22.1 權益與負債融資"], done:true, points:["普通股、特別股、公司債、可轉換公司債","租賃：營業租賃 vs 資本租賃"]},
   {n:23, title:"槓桿與資本結構", subs:["23.1 財務槓桿","23.2 MM 定理與權衡理論"], done:true, points:["財務槓桿放大 EPS 對 EBIT 的敏感度","MM 無稅：資本結構與公司價值無關","MM 有稅：V_L＝V_U＋T×D（負債稅盾）","考慮財務困境成本後最適資本結構＝權衡理論","WACC 加權權益與稅後負債成本"]},
   {n:24, title:"股利政策", subs:["24.1 股利無關論與實務"], done:true, points:["MM 股利無關：完美市場股利政策不影響價值","股利方式：現金股利、股票股利、股票分割、庫藏股、股票回購","信號效果：增加股利被視為利多；客戶效果"]},
@@ -577,6 +577,11 @@ const TERMS = {
   "IRR":["Internal Rate of Return (IRR)","內部報酬率","使 NPV=0 的折現率；IRR&gt;必要報酬率接受。"],
   /* 第20、21章 */
   "Real option":["Real Option","實質選擇權","管理當局隨資訊調整策略的彈性，如延遲、擴張、放棄。"],
+  "Cost of capital":["Cost of Capital","資金成本","投資人對類似風險機會要求的報酬率；公司投資的最低門檻。"],
+  "Cost of debt":["Cost of Debt (kD)","負債資金成本","由公司債市價反推 YTM；稅後 kD(1−T)。"],
+  "Cost of equity":["Cost of Equity (kE)","普通股資金成本","CAPM 法 kE=Rf+β(Rm−Rf)；Gordon 法 kE=D₁/P₀+g。"],
+  "WACC":["Weighted Average Cost of Capital (WACC)","加權平均資金成本","wD·kD(1−T)+wP·kP+wE·kE；以市值為權數。"],
+  "MIRR":["Modified IRR","修正內部報酬率","中途現金流按必要報酬率再投資，解決 IRR 多重解爭議。"],
   /* 第23章 */
   "DOL":["Degree of Operating Leverage (DOL)","營運槓桿","固定營運成本使 EBIT 變動放大。"],
   "DFL":["Degree of Financial Leverage (DFL)","財務槓桿","固定利息使 EPS 對 EBIT 變動放大。"],
@@ -1566,45 +1571,65 @@ const CH18_SECTIONS = [
 ];
 
 
-/* ===== 第十九章 ===== */
+/* ===== 第十九章：資金成本 ===== */
 const CH19_SECTIONS = [
 {
-  id:"19.1", title:"資本預算評估指標",
+  id:"19.1", title:"資金成本概論",
   body:`
-  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>指標</th><th>法則</th></tr></thead><tbody>
-  <tr><td><b><span class="term" data-term="NPV">淨現值 NPV</span></b></td><td>NPV＝ΣCFₜ/(1+r)ᵗ − I₀；<b>NPV&gt;0 則接受</b>。最正確的決策指標。</td></tr>
-  <tr><td><b><span class="term" data-term="IRR">內部報酬率 IRR</span></b></td><td>使 NPV=0 的折現率；<b>IRR&gt;必要報酬率則接受</b>。</td></tr>
-  <tr><td><b>回收期</b></td><td>累計現金流量回收初始投資的年數；未考慮時間價值與回收後現金流。</td></tr>
+  <p><b><span class="term" data-term="Cost of capital">資金成本</span></b>是公司使用各種資金的<b>機會成本</b>——代表投資人把錢放在類似風險的其他投資機會上所能拿到的報酬率，也是公司投資計畫必須賺到的<b>最低報酬率</b>。</p>
+  <div class="note"><b>三大資本要素：</b>長期負債、特別股、普通股。<br>正常型計畫的 IRR &gt; 資金成本 ⇔ NPV &gt; 0，接受。<br>風險越大 → 投資人要求報酬率越高 → 資金成本越高。</div>
+  `
+},
+{
+  id:"19.2", title:"個別資金成本",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:24%"><col style="width:76%"></colgroup><thead><tr><th>資金</th><th>計算</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Cost of debt">負債 kD</span></b></td><td>由流通在外公司債市價 <b>反推 YTM</b>（用邊際成本，不是歷史票面利率）；新發行要考慮發行成本 f：實得款＝P₀(1−f)。<b>稅後資金成本 kD(1−T)</b>。</td></tr>
+  <tr><td><b>特別股 kP</b></td><td>kP ＝ DivP ／ P₀（固定股利永續）。</td></tr>
+  <tr><td><b><span class="term" data-term="Cost of equity">普通股 kE</span></b></td><td>保留盈餘成本兩法：<br>• <b>CAPM 法</b>：kE ＝ Rf ＋ β[E(Rm)−Rf]。<br>• <b>Gordon 法</b>：kE ＝ D₁/P₀ ＋ g。<br>新發行普通股要再除以 (1−f)。</td></tr>
+  </tbody></table></div>
+  `
+},
+{
+  id:"19.3", title:"加權平均資金成本 WACC",
+  body:`
+  <div class="formula"><span class="f-label"><span class="term" data-term="WACC">WACC</span></span>WACC ＝ wD·kD(1−T) ＋ wP·kP ＋ wE·kE<span class="f-note">權數 w 用各資金的<b>市價市值</b>，不是帳面價值；負債成本因利息抵稅須乘 (1−T)。</span></div>
+  <div class="note"><b>用途：</b>評估平均風險的投資計畫時以 WACC 折現；風險高於/低於平均者應調整。<br><b>邊際資金成本 MCC</b>：隨募資額增加而上升（發行成本、風險溢酬），與投資機會表 IOS 交點即最適資本預算。</div>
+  `
+}
+];
+
+/* ===== 第二十章：投資計畫評估 ===== */
+const CH20_SECTIONS = [
+{
+  id:"20.1", title:"投資計畫評估指標",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>指標</th><th>法則／缺點</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="NPV">淨現值 NPV</span></b></td><td>NPV＝ΣCFₜ/(1+r)ᵗ − I₀；<b>NPV&gt;0 接受</b>。最正確。</td></tr>
+  <tr><td><b><span class="term" data-term="IRR">內部報酬率 IRR</span></b></td><td>使 NPV=0 的折現率；<b>IRR&gt;r 接受</b>。</td></tr>
+  <tr><td><b>回收期</b></td><td>累計現金流回本的年數；不考慮時間價值與回收後現金流。</td></tr>
+  <tr><td><b>折現回收期</b></td><td>以折現後現金流計算回本點，改善時間價值問題。</td></tr>
+  <tr><td><b><span class="term" data-term="MIRR">MIRR</span></b></td><td>修正 IRR：中途現金流按必要報酬率再投資，解決 IRR 多重解與再投資率假設爭議。</td></tr>
   <tr><td><b>獲利指數 PI</b></td><td>PI＝未來現金流現值／初始投資；PI&gt;1 接受。</td></tr>
   </tbody></table></div>
   `
 },
 {
-  id:"19.2", title:"NPV 與 IRR 的取捨",
+  id:"20.2", title:"NPV 與 IRR 的取捨",
   body:`
-  <div class="warn"><b>衝突情境（互斥方案）：</b>兩者排序不一致，常因<br>• <b>規模不同</b>（投資額一大一小）；<br>• <b>現金流量時間型態不同</b>；<br>• 現金流正負變號兩次以上時 <b>IRR 可能有多解</b>。<br>此時一律以 <b>NPV 為準</b>（NPV 法則與股東財富極大化一致）。</div>
-  `
-}
-];
-
-
-/* ===== 第二十章 ===== */
-const CH20_SECTIONS = [
-{
-  id:"20.1", title:"相關現金流量的認定",
-  body:`
-  <div class="tblwrap"><table><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead><tr><th>項目</th><th>處理</th></tr></thead><tbody>
-  <tr><td><b>沉沒成本</b></td><td>已發生、無論接不接受都收不回 → <b>不計入</b>。</td></tr>
-  <tr><td><b>機會成本</b></td><td>使用既有資產所放棄的最佳替代用途 → <b>要計入</b>。</td></tr>
-  <tr><td><b>外部性</b></td><td>侵蝕（erosion）既有產品銷售為負；綜效（synergy）為正。</td></tr>
-  <tr><td><b>融資現金流</b></td><td>利息、股利不列入專案現金流（已在折現率中反映）。</td></tr>
-  </tbody></table></div>
+  <div class="warn"><b>互斥方案兩者排序衝突：</b><br>• <b>規模不同</b>（投資額一大一小）；<br>• <b>現金流時間型態不同</b>；<br>• 現金流正負變號兩次以上時 <b>IRR 有多解</b>。<br><b>一律以 NPV 為準</b>（NPV 直接衡量股東財富增加）。年限不同可用約當年法。</div>
   `
 },
 {
-  id:"20.2", title:"現金流三段",
+  id:"20.3", title:"資本預算的現金流量評估",
   body:`
-  <div class="note"><b>① 初始投資：</b>設備購置＋裝置費＋增加的 NWC。<br><b>② 營業 OCF：</b>OCF＝EBIT(1−T)＋折舊。<br><b>③ 終結現金流：</b>殘值（稅後）＋回收淨營運資金。</div>
+  <div class="tblwrap"><table><colgroup><col style="width:28%"><col style="width:72%"></colgroup><thead><tr><th>項目</th><th>處理</th></tr></thead><tbody>
+  <tr><td><b>沉沒成本</b></td><td>已發生、不論接不接受都收不回 → <b>不計入</b>。</td></tr>
+  <tr><td><b>機會成本</b></td><td>使用既有資產所放棄的最佳替代用途 → <b>要計入</b>。</td></tr>
+  <tr><td><b>外部性</b></td><td>侵蝕（erosion）既有銷售為負；綜效（synergy）為正。</td></tr>
+  <tr><td><b>融資現金流</b></td><td>利息、股利不列入專案現金流（已在 WACC 折現率反映）。</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>現金流三段：</b><br>① <b>初始投資</b>＝設備＋裝置費＋ΔNWC。<br>② <b>營業 OCF</b>＝EBIT(1−T)＋折舊。<br>③ <b>終結現金流</b>＝稅後殘值＋回收 NWC。</div>
   `
 }
 ];
@@ -1613,17 +1638,16 @@ const CH20_SECTIONS = [
 const CH21_SECTIONS = [
 {
   id:"21.1", title:"風險調整折現率",
-  body:`<p>高風險計畫不能用公司加權平均資金成本折現，應用<b>風險調整折現率 RADR</b>（隨專案風險調高），或用確定等值法調整現金流。</p>`
+  body:`<p>高風險計畫不能用公司 WACC 折現，應用<b>風險調整折現率 RADR</b>（隨專案風險調高），或用<b>確定等值法</b>把高風險未來現金流折成確定金額再折現。</p>`
 },
 {
   id:"21.2", title:"實質選擇權",
   body:`
-  <p>傳統 NPV 忽略管理彈性。<span class="term" data-term="Real option">實質選擇權</span>讓經理人可隨資訊更新調整策略，提高專案真實價值：</p>
-  <div class="note"><b>常見類型：</b>延遲選擇權、擴張（縮減）選擇權、放棄（放棄殘值）選擇權。</div>
+  <p>傳統 NPV 忽略管理彈性。<span class="term" data-term="Real option">實質選擇權</span>讓經理人隨資訊更新調整策略，提高專案真實價值：</p>
+  <div class="note"><b>常見類型：</b>延遲選擇權、擴張（縮減）選擇權、放棄（認賠出場）選擇權。</div>
   `
 }
 ];
-
 
 /* ===== 第二十二章 ===== */
 const CH22_SECTIONS = [
@@ -1875,27 +1899,30 @@ const CH18_PROBLEMS = [
 
 const CH19_PROBLEMS = [
 {
-  q:"兩互斥方案 A、B，NPV_A &gt; NPV_B，但 IRR_A &lt; IRR_B。應如何決策？",
-  opts:["(A) 選 A","(B) 選 B","(C) 兩個都選","(D) 看回收期"],
-  ans:"<b>(A) 選 A。</b>互斥方案 NPV 與 IRR 衝突時以 NPV 為準，因 NPV 直接衡量為股東創造的財富增加。"
+  q:"某公司長期負債市價 $8,000、特別股 $2,000、普通股 $10,000；kD=7%、kP=12%、kE=14%，稅率 T=20%。求 WACC。",
+  opts:[],
+  ans:"總市值＝20,000。w_D=0.4、w_P=0.1、w_E=0.5。<br>WACC＝0.4×7%×(1−0.2)＋0.1×12%＋0.5×14%<br>＝2.24%＋1.2%＋7%＝<b>10.44%</b>。"
 }
 ];
-
 const CH20_PROBLEMS = [
 {
-  q:"一公司為評估新專案花了 $50 萬市調費，不論專案是否進行都已支出。此 $50 萬在 NPV 分析中應？",
-  opts:["(A) 計入初始投資","(B) 不計入","(C) 分年攤提","(D) 視情況而定"],
-  ans:"<b>(B) 不計入。</b>這是沉沒成本，與接不接受專案無關。"
+  q:"兩互斥方案 A、B，NPV_A &gt; NPV_B 但 IRR_A &lt; IRR_B。如何決策？",
+  opts:["(A) 選 A","(B) 選 B","(C) 都選","(D) 看回收期"],
+  ans:"<b>(A) 選 A。</b>互斥方案 NPV 與 IRR 衝突時以 NPV 為準。"
+},
+{
+  q:"為評估新專案花的 $50 萬市調費，不論專案是否進行都已付，應？",
+  opts:["(A) 計入初始投資","(B) 不計入","(C) 分年攤提","(D) 視情況"],
+  ans:"<b>(B) 不計入。</b>這是沉沒成本。"
 }
 ];
 const CH21_PROBLEMS = [
 {
-  q:"計畫可在一年後視市場情況決定是否擴大投資，此管理彈性屬於？",
+  q:"計畫可在一年後視市場情況決定是否擴大投資，此彈性屬於？",
   opts:["(A) 沉沒成本","(B) 實質選擇權","(C) 營業槓桿","(D) 現金折價"],
-  ans:"<b>(B) 實質選擇權。</b>經理人隨資訊調整策略的彈性應計入專案價值。"
+  ans:"<b>(B) 實質選擇權。</b>"
 }
 ];
-
 const CH22_PROBLEMS = [
 {
   q:"特別股相對於普通股的主要特徵是？",
@@ -1978,6 +2005,7 @@ const GLOSS_CATS = [
   {name:"衍生性", keys:["Forward","Futures","Swap"]},
   {name:"資本預算", keys:["NPV","IRR","Real option"]},
   {name:"資本結構", keys:["DOL","DFL","MM","Tradeoff"]},
+  {name:"資金成本與資本預算", keys:["Cost of capital","Cost of debt","Cost of equity","WACC","NPV","IRR","MIRR","Real option"]},
   {name:"股利與營運資金", keys:["Dividend irrelevance","EOQ"]},
   {name:"國際財務", keys:["PPP","IRP"]}
 ];
