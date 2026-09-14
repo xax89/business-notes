@@ -74,7 +74,7 @@ h2.sec .en{display:block;font-size:12.5px;font-family:"Noto Sans TC";font-weight
 .ans .anskey{color:var(--accent);font-weight:700}
 .ans p{margin:6px 0}
 .qactions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;padding:0 18px 14px}
-.mark{font-family:"Noto Sans TC";font-size:12.5px;cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:16px;padding:4px 13px;color:var(--ink-soft);user-select:none}
+.mark{font-family:"Noto Sans TC";font-size:15px;line-height:1;cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:50%;width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink-soft);user-select:none}
 .mark.done.on{background:var(--teal);color:#fff;border-color:var(--teal)}
 .mark.fav.on{background:var(--gold);color:#fff;border-color:var(--gold)}
 .empty{padding:40px;text-align:center;color:var(--ink-soft);font-family:"Noto Sans TC"}
@@ -380,8 +380,8 @@ function qcardHTML(q,i){
       </div>
     </div>
     <div class="qactions">
-      <span class="mark fav ${fav?'on':''}" onclick="toggleFav('${id}')">${fav?'⭐ 已收藏':'☆ 收藏'}</span>
-      <span class="mark done ${done?'on':''}" onclick="mark('${id}')">${done?'☑️ 已熟':'☐ 標為已熟'}</span>
+      <span class="mark fav ${fav?'on':''}" title="${fav?'取消收藏':'收藏'}" onclick="toggleFav('${id}')">${fav?'⭐':'☆'}</span>
+      <span class="mark done ${done?'on':''}" title="${done?'取消已熟':'標為已熟'}" onclick="mark('${id}')">${done?'☑️':'☐'}</span>
     </div>
   </div>`;
 }
