@@ -197,6 +197,22 @@ box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:999;}
   font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;pointer-events:none;}
 .gtip .gt-en{font-weight:800;font-size:13.5px;}
 .gtip .gt-def{margin-top:2px;color:#444;}
+
+/* ===== 小節「學會」打勾（比照總經 method-card） ===== */
+.sec-done{margin-left:auto;display:flex;align-items:center;gap:5px;cursor:pointer;
+  font-size:12px;color:var(--muted);user-select:none;flex-shrink:0;font-family:"Noto Sans TC",sans-serif;}
+.sec-done input{width:15px;height:15px;accent-color:#2c6e9e;cursor:pointer;}
+.sec-done.on{color:#2c6e9e;font-weight:700;}
+.section.done .section-head h3.subsec{color:#7a9c7e;}
+.section.done .sec-done{color:#1e7d32;}
+/* 側欄完成狀態 */
+#toc .toc-l2.done a{color:#8aa08c;text-decoration:line-through;text-decoration-color:rgba(30,125,50,.5);}
+#toc .toc-l2.done a::after{content:"✓";color:#1e7d32;margin-left:4px;font-weight:800;text-decoration:none;}
+/* 總進度 */
+.secprog{display:flex;align-items:center;gap:8px;margin:10px 2px 4px;font-size:12px;color:var(--muted);}
+.secprog .bar{flex:1;height:7px;background:#dfe5ec;border-radius:4px;overflow:hidden;}
+.secprog .bar i{display:block;height:100%;background:#2c6e9e;width:0%;transition:width .3s;}
+.secprog .num{white-space:nowrap;font-weight:700;color:var(--teal, #2c6e9e);}
 </style>
 <style>
 /* ===== 總經複習頁風格覆蓋（疊加，後載入） ===== */
@@ -4576,6 +4592,62 @@ function exportGloss(ch){const data={learned:GLS(ch+'-learned',[]),star:GLS(ch+'
     });
     el.addEventListener('mouseleave',function(){tip.style.display='none';});
   });
+})();
+</script>
+
+<script>
+/* ===== 小節「學會」打勾（localStorage） ===== */
+(function(){
+  var KEY='micro_done_v1';
+  var done={};
+  try{done=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){done={};}
+  function save(){localStorage.setItem(KEY,JSON.stringify(done));}
+  // 側欄總進度條（插在 #toc 頂部）
+  var toc=document.getElementById('toc');
+  if(toc){
+    var prog=document.createElement('div');prog.className='secprog';
+    prog.innerHTML='<span>進度</span><span class="bar"><i></i></span><span class="num"></span>';
+    var brand=toc.querySelector('.brand');
+    if(brand)brand.parentNode.insertBefore(prog,brand.nextSibling);
+    else toc.insertBefore(prog,toc.firstChild);
+  }
+  var secs=document.querySelectorAll('.section');
+  function refresh(){
+    var n=secs.length, c=0;
+    secs.forEach(function(s){
+      var id=s.querySelector('.section-head h3.subsec');
+      var sid=id?id.id:null;
+      if(sid&&done[sid])c++;
+    });
+    var num=document.querySelector('.secprog .num');
+    var bar=document.querySelector('.secprog .bar i');
+    if(num)num.textContent=c+'/'+n;
+    if(bar)bar.style.width=(n?(c/n*100):0)+'%';
+    // 側欄 done 狀態
+    document.querySelectorAll('#toc .toc-l2').forEach(function(li){
+      var a=li.querySelector('a'),t=a?a.getAttribute('data-t'):null;
+      if(t&&done[t])li.classList.add('done');else li.classList.remove('done');
+    });
+  }
+  secs.forEach(function(s){
+    var head=s.querySelector('.section-head');
+    var h3=head?s.querySelector('.section-head h3.subsec'):null;
+    var sid=h3?h3.id:null;
+    if(!head||!sid)return;
+    var lab=document.createElement('label');
+    lab.className='sec-done'+(done[sid]?' on':'');
+    lab.title='已學會此小節';
+    lab.innerHTML='<input type="checkbox"'+(done[sid]?' checked':'')+'><span>學會</span>';
+    lab.addEventListener('change',function(){
+      var ck=lab.querySelector('input');
+      if(ck.checked){done[sid]=1;s.classList.add('done');lab.classList.add('on');}
+      else{delete done[sid];s.classList.remove('done');lab.classList.remove('on');}
+      save();refresh();
+    });
+    if(done[sid])s.classList.add('done');
+    head.appendChild(lab);
+  });
+  refresh();
 })();
 </script>
 </body></html>
