@@ -146,6 +146,14 @@ body.dark .search-panel{background:#26221a;border-color:#4a4234}
 .proper:hover{background:#7b2cbf;color:#fff;border-bottom:none}
 body.dark .proper{color:#b39ddb}
 body.dark .proper:hover{background:#b39ddb;color:#1a1420}
+/* 術語列表與知識卡：人物/書名類紫色粗體 */
+#termModalEn{color:var(--green)}
+#termModalEn.proper,#termModalZh.proper{color:#7b2cbf}
+body.dark #termModalEn.proper,body.dark #termModalZh.proper{color:#b39ddb}
+#termModalDef .proper{color:#7b2cbf;font-weight:700;border-bottom:1.5px dashed color-mix(in srgb,#7b2cbf 50%,transparent)}
+body.dark #termModalDef .proper{color:#b39ddb}
+.gloss-en.proper,.gloss-zh.proper{color:#7b2cbf}
+body.dark .gloss-en.proper,body.dark .gloss-zh.proper{color:#b39ddb}
 /* 例題 */
 .problem{background:#eae6da;border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:14px 0}
 .problem .p-head{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14.5px;color:var(--teal);margin-bottom:8px}
@@ -303,15 +311,28 @@ body.dark .section-body .note::before{color:#e5c15a}
 body.dark .formula{background:#2a2418;border-color:#8a7a50}
 body.dark .formula .f-label{color:#d8b36a}
 /* 響應式 */
+/* 行動端：側欄改為漢堡抽屜 */
+.nav-toggle{display:none}
+.nav-mask{display:none}
 @media (max-width:900px){
   body{flex-direction:column}
-  .sidebar{width:100%;height:auto;position:static;flex-direction:row;flex-wrap:wrap;gap:4px;padding:14px 12px;border-right:none;border-bottom:1px solid var(--line)}
+  .nav-toggle{display:flex}
+  .nav-mask{position:fixed;inset:0;background:rgba(20,16,8,.42);z-index:65;display:none}
+  body.nav-open .nav-mask{display:block}
+  .sidebar{
+    position:fixed;left:0;top:0;bottom:0;height:100vh;width:min(320px,86vw);z-index:70;
+    transform:translateX(-105%);transition:transform .28s ease;
+    border-right:1px solid var(--line);padding:24px 18px 48px;overflow-y:auto;
+  }
+  body.nav-open .sidebar{transform:translateX(0)}
   .sidebar .brand{width:100%;padding-bottom:8px;margin-bottom:6px}
-  .nav-chapter{width:auto;margin:2px 2px;padding:5px 10px}
+  .nav-chapter{width:100%;margin:4px 0;padding:6px 10px}
   .nav-chapter .tag{display:none}
-  .nav-sub{width:auto;display:inline-block;padding:3px 10px;margin:2px 2px}
+  .nav-sub{width:100%;display:block;padding:5px 10px 5px 32px;margin:2px 0}
+  .nav-gloss{width:100%;margin-top:12px}
   .main{padding:18px 14px 60px}
   .cards-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  .search-panel{top:58px;width:calc(100vw - 24px)}
 }
 @media print{
   .sidebar,.topbar,.banner,.no-print{display:none!important}
@@ -321,86 +342,195 @@ body.dark .formula .f-label{color:#d8b36a}
 }
 
 
+/* 公式卡 */
+.formula{background:#fbf4e6;border:1px dashed #c9b88f;border-radius:8px;padding:14px 18px;margin:12px 0;font-size:15.5px;text-align:center;font-family:"Noto Serif TC",serif}
+
+.formula .f-label{display:block;font-size:11.5px;color:#9a6a1f;letter-spacing:.08em;margin-bottom:4px;font-family:"Noto Sans TC",sans-serif;font-weight:700}
+
+.formula .f-note{display:block;font-size:12px;color:var(--muted);margin-top:4px;font-family:"Noto Sans TC",sans-serif}
+
+/* 術語 */
+.term{color:var(--green);font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,var(--green) 55%,transparent);border-radius:3px;padding:0 2px;transition:all .15s}
+
+.term:hover{background:var(--green);color:#fff;border-bottom:none}
+
+/* 專有名詞（人名／事件）深紫粗體 */
+.proper{color:#7b2cbf;font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,#7b2cbf 50%,transparent);border-radius:3px;padding:0 2px;transition:background .15s}
+
+.proper:hover{background:#7b2cbf;color:#fff;border-bottom:none}
+
+body.dark .proper{color:#b39ddb}
+
+body.dark .proper:hover{background:#b39ddb;color:#1a1420}
+
+.problem .opts{margin:10px 0 4px;display:grid;gap:6px}
+
+.problem .opts div{padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.8px;background:var(--panel)}
+
+.flip-back .def{font-size:13px;line-height:1.6}
+
+mark.hl{background:var(--hl)}
+
+/* 方法學習卡（左打勾＋方法名＋公式說明，底下例子） */
+.method-card{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;margin:12px 0;background:var(--panel);overflow:hidden;transition:opacity .2s}
+
+.method-card .mc-check{width:64px;flex-shrink:0;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;background:var(--panel)}
+
+.method-card .mc-check input{width:19px;height:19px;accent-color:var(--green);cursor:pointer}
+
+.method-card .mc-check .mc-lbl{font-size:11px;color:var(--muted)}
+
+.method-card .mc-check:has(input:checked){background:#eef7ec}
+
+.method-card .mc-check:has(input:checked) .mc-lbl{color:var(--green);font-weight:700}
+
+.method-card .mc-left{width:34px;flex-shrink:0;background:var(--teal-soft);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:8px 2px;font-family:"Noto Sans TC",sans-serif;font-weight:700;color:var(--teal);font-size:13px;text-align:center;line-height:1.4;writing-mode:vertical-rl;letter-spacing:.08em}
+
+.method-card .mc-body{flex:1;padding:12px 16px;font-size:14px;min-width:0}
+
+.method-card .mc-formula{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--ink)}
+
+.method-card .mc-detail{font-size:13px;color:var(--muted)}
+
+.method-card .mc-ex{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:13px}
+
+/* 學會：刪除線＋黯淡 */
+.method-card.learned{opacity:.55}
+
+.method-card.learned .mc-formula,.method-card.learned .mc-detail,.method-card.learned .mc-ex{text-decoration:line-through;text-decoration-thickness:1.5px}
+
+/* 標題式學習卡（標題橫排） */
+.method-card.mc-title .mc-left{writing-mode:initial;width:auto;min-width:96px;padding:10px 8px;font-size:13px}
+
+body.dark .method-card .mc-check:has(input:checked){background:#16241a}
+
+.f-split .fs-right .formula{margin:0;width:100%}
+
+body.dark .formula{background:#2a2418;border-color:#8a7a50}
+
+body.dark .formula .f-label{color:#d8b36a}
+
+
+
 /* callout */
 .callout{margin:12px 0;padding:12px 16px;border-radius:0 8px 8px 0;border:1px solid var(--line);}
 
+
 .clabel{font-family:system-ui,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;margin-bottom:4px;}
 
+
 .callout.def{background:var(--panel);}
+
  .callout.def .clabel{color:var(--muted);}
 
+
 .callout.key{background:#fdf3d7;border-left:4px solid #c89632;}
+
  .callout.key .clabel{color:#8a6417;}
 
+
 .callout.formula{background:#fbf7ef;border:1px dashed #d8c9a3;text-align:left;}
+
  .callout.formula .clabel{color:#b07f1f;}
 
+
 .callout.fig{background:var(--panel);}
+
  .callout.fig .clabel{color:#607d99;}
 
+
 .callout.eg{background:var(--panel);}
+
  .callout.eg .clabel{color:#6b4e8e;}
 
+
 .callout.exam{background:#fbeae2;border-left:4px solid #b5542e;}
+
  .callout.exam .clabel{color:#b5542e;}
+
 
 /* 子列表 */
 .sublist{margin:6px 0 2px;padding-left:22px;list-style:disc;}
 
+
 .sublist>li{margin:3px 0;line-height:1.55;}
 
+
 .mc{stroke:var(--red,#b04a3a);stroke-width:2;fill:none;}
+
 
 /* 螢光筆重點（暖黃、斜切、尾端淡出） */
 .hl{background:#fff2b8;
 padding:0 3px;border-radius:2px;color:#2b251d;-webkit-box-decoration-break:clone;box-decoration-break:clone;
 font-weight:600;}
 
+
 .callout.key .clabel{position:relative;}
+
 
 .callout.key{background:linear-gradient(0deg,rgba(200,150,50,.14),rgba(200,150,50,.14)),#f8f2e2;}
 
+
 /* 重要經濟學名詞（墨綠粗體） */
 .term{color:#1e7d32;font-weight:800;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;cursor:pointer;border-bottom:1.5px dashed rgba(30,125,50,.5);border-radius:3px;padding:0 2px;transition:all .15s;}
+
 .term:hover{background:#1e7d32;color:#fff;border-bottom:none;}
+
 
 /* 人物／事件／專有名詞（深紫粗體） */
 .proper{color:#7b2cbf;font-weight:800;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;cursor:pointer;border-bottom:1.5px dashed rgba(123,44,191,.5);border-radius:3px;padding:0 2px;transition:all .15s;}
+
 .proper:hover{background:#7b2cbf;color:#fff;border-bottom:none;}
+
 
 
 /* 例題互動 */
 .probitem{margin:8px 0;}
 
+
 .pq{font-size:14.8px;}
+
 
 .pq .opts{margin:8px 0 2px;display:grid;gap:4px;}
 
+
 .pq .opts div{padding:6px 10px;border:1px solid var(--line);border-radius:6px;font-size:13.8px;background:#f8fafc;line-height:1.6;}
+
 
 .pbtn{margin:8px 0 2px;display:inline-flex;align-items:center;gap:6px;background:none;border:1.5px solid #6b4e8e;color:#6b4e8e;border-radius:7px;padding:5px 14px;font-size:13px;cursor:pointer;font-family:inherit;transition:all .15s;}
 
+
 .pbtn:hover{background:#6b4e8e;color:#fff;}
+
 
 .pans{display:none;margin-top:8px;background:#f7f0f9;border-left:4px solid #6b4e8e;border-radius:0 8px 8px 0;padding:10px 14px;font-size:14px;line-height:1.75;}
 
+
 .pans.show{display:block;}
+
 
 .gen .term{font-size:15px;}
 
+
 .tblwrap .en,.tblwrap .term{white-space:nowrap;}
+
 
 /* ===== 例題收藏按鈕 ===== */
 .favbtn{margin-left:auto;border:1.5px solid #c9a227;background:#fffaf0;color:#a07814;border-radius:7px;
   padding:3px 11px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;flex-shrink:0;}
 
+
 .favbtn:hover{border-color:#a07814;background:#fdf3d7;}
+
 
 .favbtn.on{background:#c9a227;border-color:#c9a227;color:#fff;}
 
+
 .pqhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
 
+
 .pqhead .favbtn{margin-left:auto;}
+
 
 
 /* 名詞懸浮字義 */
@@ -409,119 +539,180 @@ font-weight:600;}
   font-size:13px;line-height:1.6;box-shadow:0 8px 24px rgba(0,0,0,.14);
   font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;pointer-events:none;}
 
+
 .gtip .gt-en{font-weight:800;font-size:13.5px;}
 
+
 .gtip .gt-def{margin-top:2px;color:#444;}
+
 
 
 /* ===== 小節「學會」打勾（比照總經 method-card） ===== */
 .sec-done{margin-left:auto;display:flex;align-items:center;gap:5px;cursor:pointer;
   font-size:12px;color:var(--muted);user-select:none;flex-shrink:0;font-family:"Noto Sans TC",sans-serif;}
 
+
 .sec-done input{width:15px;height:15px;accent-color:#2c6e9e;cursor:pointer;}
+
 
 .sec-done.on{color:#2c6e9e;font-weight:700;}
 
+
 .section.done .sec-done{color:#1e7d32;}
+
 
 
 /* 列點式（重點結論/考試重點/列舉） */
 .callout ul:not(.opts){list-style:disc;padding-left:26px;margin:8px 0;}
 
+
 .callout ul:not(.opts) li{margin:6px 0;}
+
 
 /* callout 卡片化 */
 .callout{background:var(--panel);border:1px solid var(--line);border-radius:10px;}
 
+
 .callout.key{background:#fdf0c2;border-left:4px solid #d9a514;border-radius:0 8px 8px 0;}
+
 
 .callout.key .clabel{color:#8a6d1a;}
 
+
 .callout.exam{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;}
+
 
 .callout.exam .clabel{color:var(--accent);}
 
+
 .callout.def{background:var(--panel);}
 
+
 .callout.fig,.callout.eg{background:var(--panel);}
+
 
 /* 公式卡：米金底、虛線、置中 */
 .callout.formula{background:#fbf4e6;border:1px dashed #c9b88f;border-radius:8px;text-align:left;}
 
+
 .callout.formula .clabel{color:#9a6a1f;text-align:left;}
+
 
 .callout.formula ul{display:inline-block;text-align:left;}
 
+
 body.dark .callout.formula{background:#2a2418;border-color:#8a7a50;}
+
 
 body.dark .callout.formula .clabel{color:#d8b36a;}
 
+
 body.dark .callout.key{background:#332b1b;}
+
 
 /* 例題卡：灰底 + teal 解答 */
 .callout.eg{background:var(--panel);}
 
+
 .probitem{background:#eae6da;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0;list-style:none;}
+
 
 body.dark .probitem{background:#26221a;}
 
+
 .pq{font-size:14.5px;}
 
+
 .pq .opts div{background:var(--panel);border:1px solid var(--line);}
+
 
 .pbtn{margin-top:12px;background:none;border:1.5px solid var(--teal);color:var(--teal);
   border-radius:8px;padding:7px 16px;font-size:13.5px;}
 
+
 .pbtn:hover{background:var(--teal);color:#fff;}
 
+
 .pans{background:var(--teal-soft);border-left:4px solid var(--teal);border-radius:8px;padding:12px 16px;}
+
 
 /* 深色模式 callout */
 body.dark .callout.def,body.dark .callout.fig,body.dark .callout.eg{background:var(--panel);}
 
+
 body.dark .callout.key{border-left-color:#d9a514;}
+
 
 .fold-btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);
   border-radius:8px;padding:7px 12px;font-size:12.5px;cursor:pointer;font-family:inherit;transition:all .15s;}
 
+
 .fold-btn:hover{border-color:var(--teal);color:var(--teal);}
 
+
 body.dark .fold-tools .fold-btn{background:var(--panel);color:var(--ink);}
+
 
 
 /* ===== method-card 概念卡（總經式：左打勾＋標籤＋公式/說明/例子） ===== */
 .method-card{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;margin:12px 0;background:var(--panel);overflow:hidden;transition:opacity .2s}
 
+
 .method-card .mc-check{width:58px;flex-shrink:0;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;background:var(--panel)}
+
 
 .method-card .mc-check input{width:18px;height:18px;accent-color:#1e7d32;cursor:pointer}
 
+
 .method-card .mc-check .mc-lbl{font-size:11px;color:var(--muted)}
+
 
 .method-card .mc-check:has(input:checked){background:#eef7ec}
 
+
 .method-card .mc-check:has(input:checked) .mc-lbl{color:#1e7d32;font-weight:700}
+
 
 .method-card .mc-left{width:96px;flex-shrink:0;background:var(--teal-soft,#eef3f4);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:8px 6px;font-size:13px;text-align:center;line-height:1.5}
 
+
 .method-card .mc-body{flex:1;padding:12px 16px;font-size:14px;min-width:0}
+
 
 .method-card .mc-formula{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--ink)}
 
+
 .method-card .mc-detail{font-size:13.5px;color:var(--muted);line-height:1.75}
+
 
 .method-card .mc-ex{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:13.5px}
 
+
 .method-card.learned{opacity:.55}
+
 
 .method-card.learned .mc-formula,.method-card.learned .mc-detail,.method-card.learned .mc-ex{text-decoration:line-through;text-decoration-thickness:1.5px}
 
 
+
 .figsvg{width:100%;max-width:560px;height:auto;display:block;margin:8px auto;background:#fff;}
+
 
 body.dark .figsvg{background:var(--panel);}
 
+
 p.figcap{font-size:12.5px;color:var(--muted);margin:6px 0 0;line-height:1.6;}
+
+
+.fx{font-family:'Noto Sans TC','PingFang TC','Helvetica Neue',sans-serif;font-weight:600;color:#b5542e;letter-spacing:.2px}
+
+.fx sup,.fx sub{font-size:.72em}
+
+.chfig{margin:14px 0 6px;text-align:center}
+
+.chfig .svgfig{max-width:520px;margin:0 auto}
+
+.chfig figcaption{font-size:12.5px;color:#8a7f6f;margin-top:4px}
 
 .fx{font-family:'Noto Sans TC','PingFang TC','Helvetica Neue',sans-serif;font-weight:600;color:#b5542e;letter-spacing:.2px}
 .fx sup,.fx sub{font-size:.72em}
@@ -529,6 +720,21 @@ p.figcap{font-size:12.5px;color:var(--muted);margin:6px 0 0;line-height:1.6;}
 .chfig .svgfig{max-width:520px;margin:0 auto}
 .chfig figcaption{font-size:12.5px;color:#8a7f6f;margin-top:4px}
 .toolbtn{font-family:inherit}
+/* ===== 對齊總經框架：表格不再截斷（auto 佈局） ===== */
+.tblwrap table{width:100%;table-layout:auto;}
+.tblwrap .en,.tblwrap .term,.tblwrap th,.tblwrap td{white-space:normal;overflow-wrap:break-word;}
+/* ===== 對齊總經框架：重點/考試盒色調 ===== */
+.callout.key{background:#fdf0c2;border-left-color:#d9a514;}
+.callout.key .clabel{color:#8a6d1a;}
+.callout.formula{background:#fbf7ef;border:1px solid var(--line);border-radius:8px;}
+/* ===== 對齊總經框架：例題卡（等同總經 .problem） ===== */
+.section-body ul:has(> .probitem),.callout.eg ul,.callout.eg ol{list-style:none;padding-left:0;margin:0;}
+.probitem{list-style:none;background:#eae6da;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0;}
+.probitem .pq{font-size:14.5px;}
+.probitem .pq .opts div{background:var(--panel);}
+.pbtn{border-color:var(--teal);color:var(--teal);}
+.pbtn:hover{background:var(--teal);color:#fff;}
+.pans{border-left-color:var(--teal);background:var(--teal-soft);}
 
 </style>
 </head>
@@ -536,10 +742,14 @@ p.figcap{font-size:12.5px;color:var(--muted);margin:6px 0 0;line-height:1.6;}
 
 <!-- ===== 側邊導航 ===== -->
 <nav class="sidebar" id="sidebar" aria-label="章節導航"></nav>
+<div class="nav-mask" id="navMask"></div>
 
 <!-- ===== 主內容 ===== -->
 <main class="main">
   <div class="topbar no-print">
+    <button class="toolbtn nav-toggle" id="navToggle" title="目錄">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
     <div class="searchbox">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
       <input type="search" id="searchInput" placeholder="搜尋全書內容…">
@@ -569,8 +779,8 @@ p.figcap{font-size:12.5px;color:var(--muted);margin:6px 0 0;line-height:1.6;}
 <div id="termModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)closeTerm()">
   <div style="background:var(--panel);border-radius:16px;max-width:480px;width:100%;padding:26px 28px;position:relative">
     <button onclick="closeTerm()" style="position:absolute;top:14px;right:16px;border:none;background:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button>
-    <div id="termModalEn" style="font-size:22px;font-weight:700;color:var(--teal);font-family:Georgia,serif"></div>
-    <div id="termModalZh" style="font-size:15px;font-weight:600;margin:4px 0 12px"></div>
+    <div id="termModalEn" style="font-size:22px;font-weight:700;font-family:Georgia,serif"></div>
+    <div id="termModalZh" style="font-size:15px;font-weight:700;margin:4px 0 12px;color:var(--green)"></div>
     <div id="termModalDef" style="font-size:14.5px;line-height:1.9;color:var(--ink)"></div>
   </div>
 </div>
@@ -589,6 +799,13 @@ function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g
 function escA(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 
 let currentChapter=1;
+/* 行動端抽屜開關 */
+const navToggle=document.getElementById("navToggle");
+const navMask=document.getElementById("navMask");
+function closeNav(){document.body.classList.remove("nav-open");}
+if(navToggle)navToggle.addEventListener("click",()=>{document.body.classList.toggle("nav-open");});
+if(navMask)navMask.addEventListener("click",closeNav);
+
 function renderSidebar(){
   const sb=document.getElementById("sidebar");
   let html=`<div class="brand">微觀天地 學個經<div class="t2">研究所複習 · 第 1–20 章</div></div>
@@ -610,11 +827,11 @@ function renderSidebar(){
   });
   sb.innerHTML=html;
   const navGloss=sb.querySelector("#navGloss");
-  if(navGloss)navGloss.addEventListener("click",()=>{renderGlossaryFull();window.scrollTo({top:0,behavior:"smooth"});});
+  if(navGloss)navGloss.addEventListener("click",()=>{renderGlossaryFull();window.scrollTo({top:0,behavior:"smooth"});closeNav();});
   sb.querySelectorAll(".nav-chapter").forEach(b=>{
     b.addEventListener("click",()=>{
       const ch=BOOK[+b.dataset.ch-1];
-      if(ch.done){renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});}
+      if(ch.done){renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});closeNav();}
       else{toast("第 "+ch.n+" 章尚未建置");}
     });
   });
@@ -622,6 +839,7 @@ function renderSidebar(){
     b.addEventListener("click",()=>{
       const ch=BOOK[+b.dataset.ch-1];
       if(!ch.done){toast("第 "+ch.n+" 章尚未建置");return;}
+      closeNav();
       if(currentChapter!==+b.dataset.ch)renderChapter(+b.dataset.ch);
       const el=document.getElementById("sec-"+b.dataset.sec);
       if(!el)return;
@@ -721,12 +939,25 @@ function toggleAns(btn){
 }
 
 /* ===== 術語模態 ===== */
+const PROPER_TERMS=new Set(["Adam Smith","David Ricardo","Say","Marshall","Fisher","Walras","Malthus","Milton Friedman","Friedman","Keynes","Samuelson","Hicks","Hansen","Modigliani","Dusenberry","Schumpeter","Kydland","Prescott","Mundell","Jorgenson","Lucas","Barro","Wealth of Nations","Principles of Economics","General Theory","Fisher equation","Fisher effect","Say's law","Walras law","Cambridge cash balance","Baumol-Tobin model","Gresham's law","Harrod-Domar","Lorenz curve","Gini coefficient","Okun's law","Taylor rule","Pigou effect","Lucas critique","Ricardian equivalence","Laffer curve","Marshall-Lerner condition","Monetarist school"]);
+const PROPER_ZH=["亞當斯密","李嘉圖","賽伊","馬歇爾","費雪","瓦拉斯","馬爾薩斯","弗利曼","傅利曼","凱因斯","薩繆森","希克斯","漢森","莫迪利亞尼","杜森貝利","熊彼得","基德蘭","普雷斯科特","孟岱爾","裘根森","盧卡斯","巴羅","《國富論》","《經濟學原理》","《就業、利息與貨幣一般理論》","劍橋現金餘額說","劍橋學派","貨幣學派","新凱因斯學派"];
+function decorateDef(text){
+  let h=esc(text);
+  PROPER_ZH.forEach(n=>{if(n)h=h.split(n).join('<span class="proper">'+n+'</span>');});
+  return h;
+}
 function openTerm(key){
   const t=TERMS[key];
   if(!t){toast("暫無此術語資料");return;}
-  document.getElementById("termModalEn").textContent=t[0];
-  document.getElementById("termModalZh").textContent=t[1];
-  document.getElementById("termModalDef").textContent=t[2];
+  const enEl=document.getElementById("termModalEn");
+  const zhEl=document.getElementById("termModalZh");
+  const defEl=document.getElementById("termModalDef");
+  const proper=PROPER_TERMS.has(key);
+  enEl.textContent=t[0];
+  enEl.classList.toggle("proper",proper);
+  zhEl.textContent=t[1];
+  zhEl.classList.toggle("proper",proper);
+  defEl.innerHTML=decorateDef(t[2]);
   const m=document.getElementById("termModal");
   m.style.display="flex";
 }
@@ -816,12 +1047,13 @@ function renderGlossary(){
         const isLearned=learned.includes(k), isStarred=starred.includes(k);
         const note=notes[k]||"";
         if(glossOnlyUnlearned&&isLearned)return "";
+        const isProper=PROPER_TERMS.has(k);
         return `<div class="gloss-item ${isLearned?"done":""} ${isStarred?"starred":""}" data-key="${esc(k)}">
           <button class="gloss-check ${isLearned?"done":""}" onclick="toggleLearn(&quot;${escA(k)}&quot;)" title="標記已學會">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
           </button>
           <div class="gloss-main">
-            <div class="gloss-en">${esc(en)}<span class="gloss-zh">${esc(zh)}</span></div>
+            <div class="gloss-en${isProper?" proper":""}">${esc(en)}<span class="gloss-zh${isProper?" proper":""}">${esc(zh)}</span></div>
             <div class="gloss-def">${esc(def)}</div>
             <div class="gloss-note ${note?"show":""}" data-note="wrap-${esc(k)}">
               <textarea placeholder="寫下你自己的重點…" onchange="saveNote('${esc(k)}',this.value)">${esc(note)}</textarea>
