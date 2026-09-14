@@ -372,7 +372,8 @@ body.dark .formula .f-label{color:#d8b36a}
 const BOOK = [
   {n:1, title:"財務金融學概論", subs:["1.1 財務金融學範疇","1.1.1 財務金融學定義","1.1.2 金融市場簡介","1.1.3 投資學簡介","1.2 公司理財概要","1.2.1 企業組織","1.2.2 公司理財與財務管理目標","1.2.3 企業倫理與企業社會責任"], done:true, points:["財務金融學三大主軸：價值、時間、風險；兩條基本法則（TVM、風險趨避）","四大領域：金融市場與機構、投資學、衍生性金融商品、公司理財","直接金融 vs 間接金融；初級市場 vs 次級市場；貨幣市場 vs 資本市場","獨資／合夥／公司三種組織的責任、租稅與融資差異","公司理財四大決策；為何「極大化利潤」不是好目標","正確目標：max V₀ = Σ FCFₜ/(1+WACC)ᵗ ＝ 極大化股東財富"]},
   {n:2, title:"代理問題與公司治理", subs:["2.1 訊息經濟學簡介","2.1.1 訊息不對稱","2.1.2 諾貝爾經濟學獎得主","2.2 公司理財中的代理問題","2.2.1 權益代理問題","2.2.2 負債代理問題","2.2.3 代理成本","2.3 公司治理與管制政策"], done:true, points:["市場失靈四類：公共財、外部性、市場力量、訊息不對稱","逆選擇（契約前、隱藏資訊）vs 道德危險（契約後、隱藏行動）","緩解：訊號發射 signaling、篩選 screening、誘因契約、監督","權益代理問題五樣態：怠惰、特權消費、MBO、過度投資、次佳投資","緩解權益代理：薪資連結、解僱／接管威脅、外部經理人市場、降低 FCF","負債代理四樣態：資產替換、債務積壓、榨取資產、債權稀釋","代理成本四部份：報償機制、監控、約束、剩餘損失","公司治理：OECD 五原則；沙賓法案 SOX"]},
-  {n:3, title:"貨幣時間價值", subs:["3.1 基本概念與運算法則","3.2 現值與終值","3.3 年金","3.4 貸款種類"], done:true, points:["單利 vs 複利；時間旅行三法則（同時點才能合併、複利往未來、折現往過去）","PV = CFₙ/(1+r)ⁿ；FV = CF₀(1+r)ⁿ；PVIF 與 FVIF 互為倒數","普通年金期末發生、期初年金乘 (1+r)；成長年金 PVo = CF/(r-g)","永續年金 PVo = CF/r；成長永續 PVo = CF/(r−g)（r>g）","三種貸款：純折價、純付息、本息分期攤還"]}
+  {n:3, title:"貨幣時間價值", subs:["3.1 基本概念與運算法則","3.2 現值與終值","3.3 年金","3.4 貸款種類"], done:true, points:["單利 vs 複利；時間旅行三法則（同時點才能合併、複利往未來、折現往過去）","PV = CFₙ/(1+r)ⁿ；FV = CF₀(1+r)ⁿ；PVIF 與 FVIF 互為倒數","普通年金期末發生、期初年金乘 (1+r)；成長年金 PVo = CF/(r-g)","永續年金 PVo = CF/r；成長永續 PVo = CF/(r−g)（r>g）","三種貸款：純折價、純付息、本息分期攤還"]},
+  {n:4, title:"利率決定理論", subs:["4.1 利率基本概念","4.1.2 債券與殖利率","4.2 利率的決定","4.3 利率期間結構"], done:true, points:["APR（報價）vs EAR（有效）：EAR = (1+APR/q)^q − 1；q>1 時 EAR>APR","現金流要以「有效期間利率」折現；解題若沒說複利頻率就假設與現金流頻率相同","美國公債：T-bills（≤1年零息）/T-notes（2-10年）/T-bonds（30年）/TIPS（抗通膨）","YTM＝買進持有到期的 IRR；零息債券折價發行、附息債券半年付息","費雪方程式：1+r = (1+r*)(1+πᵉ)；名目利率＝實質無風險利率＋通膨溢酬＋風險溢酬","風險溢酬四項：MRP（到期）、DRP（違約）、LP（流動性）、ERP（匯兌）","殖利率曲線＝YTM 對到期期間；即期利率 vs 隱含遠期利率（無套利幾何平均）"]}
 ];
 
 
@@ -469,10 +470,24 @@ const TERMS = {
   "Growing perpetuity":["Growing Perpetuity","成長型永續年金","PV = CF/(r−g)；收斂條件 r>g。"],
   "Pure discount":["Pure Discount Loan","純折價貸款","折價取得、期間不付息、到期一次償還；零息債券屬之。"],
   "Interest-only":["Interest-Only Loan","純付息貸款","期間每期只付利息、到期才還本；付息債券屬之。"],
-  "Amortized":["Fully Amortized Loan","本息分期攤還","每期固定金額含利息＋部分本金；房貸車貸多屬此類。"]
+  "Amortized":["Fully Amortized Loan","本息分期攤還","每期固定金額含利息＋部分本金；房貸車貸多屬此類。"],
+  /* 第4章：利率 */
+  "APR":["Annual Percentage Rate (APR)","年百分率","銀行牌告的名目年利率；APR/q 為每期名義利率。"],
+  "EAR":["Effective Annual Rate (EAR)","有效年利率","一年內實際賺付的利率：(1+APR/q)^q−1；q>1 時大於 APR。"],
+  "Bond":["Bond","債券","固定收益證券，發行人與持有人間借貸關係的憑證。"],
+  "ZCB":["Zero-Coupon Bond","零息債券","存續期間不付息、折價發行、到期還面額；又稱純折價債券。"],
+  "Coupon bond":["Coupon Bond","附息債券","期間定期付票面利息 I＝M×票面利率，到期還面額。"],
+  "YTM":["Yield to Maturity (YTM)","到期殖利率","買進持有至到期的內部報酬率 IRR；與價格一對一反向。"],
+  "Fisher":["Irving Fisher","費雪","提出費雪方程式：名目利率＝實質利率＋預期通膨。"],
+  "MRP":["Maturity Risk Premium (MRP)","到期風險溢酬","承擔利率波動風險的補償；含價格風險與再投資風險。"],
+  "DRP":["Default Risk Premium (DRP)","違約風險溢酬","補償發行人無法按時付息還本；以信用評等衡量。"],
+  "LP":["Liquidity Premium (LP)","流動性溢酬","補償資產無法迅速不損價變現的風險。"],
+  "ERP":["Exchange-rate Risk Premium (ERP)","匯兌風險溢酬","補償外幣計價債券兌回本國貨幣的匯率風險。"],
+  "Yield curve":["Yield Curve","殖利率曲線","YTM 對到期期間的關係圖；反映利率期間結構。"],
+  "Spot rate":["Spot / Forward Rate","即期／遠期利率","即期為當前承諾未來某時點交割的利率；遠期為現約未來借貸利率，由無套利條件幾何推得。"]
 };
 /* 人名類術語卡，標題用紫色 */
-const PERSON_TERMS=new Set(["Graham","Davis","Akerlof","Spence","Stiglitz"]);
+const PERSON_TERMS=new Set(["Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
 
 const CH1_SECTIONS = [
 {
@@ -992,7 +1007,81 @@ const CH3_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS};
+
+/* ===== 第四章：利率決定理論 ===== */
+const CH4_SECTIONS = [
+{
+  id:"4.1", title:"利率基本概念",
+  body:`
+  <p>利息是使用資金的代價；利率是利息占本金的百分比。報價利率與實際利率可能不同，關鍵在<b>複利頻率 q</b>（一年複利幾次）。</p>
+  <div class="formula"><span class="f-label">有效年利率 EAR</span>EAR = (1 + APR/q)<sup>q</sup> − 1<span class="f-note">q＝1 時 EAR=APR；q&gt;1 時 EAR&gt;APR。</span></div>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="apr"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="APR">APR 年百分率</span></div>
+    <div class="mc-body"><div class="mc-formula">銀行牌告／合約上寫的名目年利率</div>
+    <div class="mc-detail">APR/q 才是每期的「名義期間利率」。</div></div>
+  </div>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="ear"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="EAR">EAR 有效年利率</span></div>
+    <div class="mc-body"><div class="mc-formula">一年內實際賺到／付的真實利率</div>
+    <div class="mc-detail">現金流非一年一次時，再換算有效期間利率：(1+EAR)<sup>m</sup>−1。</div></div>
+  </div>
+  <div class="warn"><b>解題四原則：</b><ul>
+    <li>名義利率換算用「乘除」；有效利率換算用「幾何」（次方）。</li>
+    <li>所有現金流都用<b>有效期間利率</b>折現／複利。</li>
+    <li>題目沒說複利頻率 → 假設它與現金流頻率相同。</li>
+    <li>連續複利：EAR = e<sup>APR</sup> − 1；FV = CF·e<sup>APR·T</sup>，PV = CF·e<sup>−APR·T</sup>。</li>
+  </ul></div>
+  `
+},
+{
+  id:"4.1.2", title:"債券與殖利率",
+  body:`
+  <p><span class="term" data-term="Bond">債券</span>是固定收益證券，發行人＝借入者，持有人＝貸出者。政府公債幾乎無違約風險，公司債有信用風險。</p>
+  <div class="tblwrap"><table><caption>美國政府公債種類</caption><colgroup><col style="width:22%"><col style="width:30%"><col style="width:48%"></colgroup><thead><tr><th>種類</th><th>付息</th><th>到期期間</th></tr></thead><tbody>
+  <tr><td><b>T-bills</b></td><td>零息（純折價）</td><td>4、13、26、52 週（≤1 年）</td></tr>
+  <tr><td><b>T-notes</b></td><td>半年付息</td><td>2、3、5、7、10 年</td></tr>
+  <tr><td><b>T-bonds</b></td><td>半年付息</td><td>30 年</td></tr>
+  <tr><td><b>TIPS</b></td><td>半年付息</td><td>5、10、30 年；面額隨 CPI 調整，可鎖定<b>實質</b>殖利率</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>兩種債券：</b><span class="term" data-term="ZCB">零息債券</span>（折價發行、到期還面額）vs <span class="term" data-term="Coupon bond">附息債券</span>（期間定期付 I = M×票面利率，到期還面額 M）。<br><b><span class="term" data-term="YTM">YTM 殖利率</span></b>＝買進持有到到期的 IRR；價格 P₀ 與 YTM 一對一反向，YTM 可視為市場認可的即期利率。</div>
+  `
+},
+{
+  id:"4.2", title:"利率的決定",
+  body:`
+  <p>市場利率由可貸資金供需決定。名目利率要扣除通膨才反映真實成本。</p>
+  <div class="formula"><span class="f-label"><span class="proper" data-term="Fisher">Fisher</span> 費雪方程式</span>1 + r = (1 + r*)(1 + πᵉ)　→　r ≈ r* + πᵉ<span class="f-note">r 名目、r* 實質、πᵉ 預期通膨率。預期通膨上升則名目利率跟漲＝費雪效果。</span></div>
+  <div class="note"><b>名目利率拆解：</b>r = r*（實質無風險）＋ πᵉ（通膨溢酬）＋ <span class="term" data-term="MRP">MRP</span>＋<span class="term" data-term="DRP">DRP</span>＋<span class="term" data-term="LP">LP</span>＋<span class="term" data-term="ERP">ERP</span></div>
+  <div class="tblwrap"><table><caption>四種風險溢酬</caption><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>溢酬</th><th>補償的風險</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="MRP">到期風險溢酬 MRP</span></b></td><td>利率波動風險：<b>價格風險</b>（投資期間短於到期，利率升則債券跌價，長期債券較大）＋<b>再投資風險</b>（提前拿回的現金再投資時利率可能走低，短期債券較大）。</td></tr>
+  <tr><td><b><span class="term" data-term="DRP">違約風險溢酬 DRP</span></b></td><td>發行人無法按時付息還本。信評 BBB−/Baa 以上為<b>投資級</b>，以下為<b>投機級／高收益／垃圾債券</b>；同天期公司債與公債利率差＝信用利差。</td></tr>
+  <tr><td><b><span class="term" data-term="LP">流動性溢酬 LP</span></b></td><td>無法迅速以不損價變現的風險。</td></tr>
+  <tr><td><b><span class="term" data-term="ERP">匯兌風險溢酬 ERP</span></b></td><td>外幣計價債券兌回本國貨幣時的匯率風險。</td></tr>
+  </tbody></table></div>
+  `
+},
+{
+  id:"4.3", title:"利率期間結構",
+  body:`
+  <p>品質相同、僅到期期間不同的債券，其 YTM 對到期期間作圖，即<span class="term" data-term="Yield curve">殖利率曲線</span>（yield curve）；此關係即<b>利率期間結構</b>。零息公債的殖利率才精準代表即期利率。</p>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="spot"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Spot rate">即期 vs 遠期利率</span></div>
+    <div class="mc-body"><div class="mc-formula">無套利下：(1+₀r<sub>n</sub>)<sup>n</sup> = (1+₀r<sub>1</sub>)(1+₁f<sub>2</sub>)…(1+<sub>n−1</sub>f<sub>n</sub>)</div>
+    <div class="mc-detail">長期即期利率＝短期即期利率與遠期利率的<b>幾何平均</b>；隱含遠期利率 ₁f₂ = (1+₀r₂)²/(1+₀r₁) − 1。</div></div>
+  </div>
+  <div class="note"><b>期間結構三大理論：</b><ul>
+    <li><b>預期理論</b>：長期利率＝未來短期利率預期的平均；曲線形狀反映市場對未來利率走向的預期。</li>
+    <li><b>流動性溢酬（期間溢酬）理論</b>：長期債券利率須加 MRP，故曲線傾向正斜率。</li>
+    <li><b>市場區隔理論</b>：長短期債券分屬不同市場、供需各自決定，彼此不可完全替代。</li>
+  </ul></div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1019,7 +1108,25 @@ const CH3_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS};
+const CH4_PROBLEMS = [
+{
+  q:"<b>範例 4.8（南華財金）</b>　通膨 2.5%、91 天國庫券 3.2%、10 年公債 4.0%、10 年公司債 5.2%。求實質無風險利率、MRP、DRP。",
+  opts:[],
+  ans:"r* = 3.2% − 2.5% = <b>0.7%</b><br>MRP = 10 年公債 − 91 天國庫券 = 4.0% − 3.2% = <b>0.8%</b>（同為政府、違約風險相同，差異只剩到期／利率風險）<br>DRP = 10 年公司債 − 10 年公債 = 5.2% − 4.0% = <b>1.2%</b>（同天期、只差違約風險）。"
+},
+{
+  q:"<b>範例 4.9（政大金融）</b>　五種零息債券 YTM：1 年 12%、2 年 14%、3 年 15%、4 年 15.5%、5 年 15.7%。求第 3 年的隱含遠期利率 ₂f₃。",
+  opts:[],
+  ans:"無套利：(1+₀r₃)³ = (1+₀r₂)² × (1+₂f₃)<br>₂f₃ = (1.15)³/(1.14)² − 1 = 1.520875/1.2996 − 1 ≈ <b>17.03%</b>。"
+},
+{
+  q:"<b>範例 4.1（BD）</b>　電話系統可用 $150,000 買斷，或每月底付 $4,000 租 4 年。公司借款利率 5% APR、半年複利。該買還是租？",
+  opts:[],
+  ans:"先換算有效月利率：EAR = (1+0.05/2)²−1 = 5.0625%；有效月利率 = (1.050625)<sup>1/12</sup>−1 = 0.4124%。<br>租金現值 = 4,000 × PVIFA(0.4124%, 48) ≈ <b>$173,867</b> &gt; $150,000 → <b>應買斷</b>。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1034,7 +1141,8 @@ const GLOSS_CATS = [
   {name:"權益代理", keys:["Shirking","Perks","MBO","LBO","Empire building","Entrenching","FCF hypothesis","Suboptimal","Compensation","Proxy fight","Takeover"]},
   {name:"負債代理", keys:["Asset substitution","Debt overhang","Milking","Claim dilution","Covenant","CB"]},
   {name:"代理成本與治理", keys:["Structuring","Monitoring","Bonding","Residual loss","Corporate governance","Stakeholder"]},
-  {name:"貨幣時間價值", keys:["Simple interest","Compound interest","Discount rate","Risk premium","PV","FV","PVIF","FVIF","Annuity","Ordinary annuity","Annuity due","Growing annuity","Perpetuity","Growing perpetuity","Pure discount","Interest-only","Amortized"]}
+  {name:"貨幣時間價值", keys:["Simple interest","Compound interest","Discount rate","Risk premium","PV","FV","PVIF","FVIF","Annuity","Ordinary annuity","Annuity due","Growing annuity","Perpetuity","Growing perpetuity","Pure discount","Interest-only","Amortized"]},
+  {name:"利率與債券", keys:["APR","EAR","Bond","ZCB","Coupon bond","YTM","Fisher","MRP","DRP","LP","ERP","Yield curve","Spot rate"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1044,7 +1152,8 @@ const GLS = {
 const CH_TERMS_CATS = {
   1:["基本法則","金融市場","投資學","企業組織","理財決策","倫理與CSR"],
   2:["市場失靈","訊息經濟","權益代理","負債代理","代理成本與治理"],
-  3:["貨幣時間價值"]
+  3:["貨幣時間價值"],
+  4:["利率與債券"]
 };
 let glossMode="full", glossChapter=1;
 
