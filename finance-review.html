@@ -384,7 +384,8 @@ const BOOK = [
   {n:12, title:"金融市場與機構", subs:["12.1 金融市場功能","12.2 市場分類與機構"], done:true, points:["資金由盈餘單位流向赤字單位","直接金融（發股發債）vs 間接金融（銀行存貸）","一級市場（IPO/增資）vs 二級市場（流通交易）","貨幣市場（≤1年）vs 資本市場（>1年）","交易所 vs OTC；商銀／投行／券商／基金／央行"]},
   {n:13, title:"普通股與評價", subs:["13.1 普通股特徵","13.2 普通股評價"], done:true, points:["累積投票制：小股東可集中票數爭取席次","新股優先認購權（rights offering）防股權稀釋","DDM：零成長 P₀=D/k；Gordon P₀=D₁/(k−g)","g＝ROE×b；P₀ 為除息後價格","相對評價：forward P/E＝d/(k−g)＝P₀/EPS₁"]},
   {n:14, title:"債券", subs:["14.1 債券種類與風險","14.2 評價與殖利率","14.3 利率風險"], done:true, points:["P₀＝Σ票息/(1+r)^t＋面額/(1+r)^n","YTM＝IRR；YTM＝當期收益率 CY＋資本利得收益率 CGY","溢價 CR&gt;CY&gt;YTM；平價 CR=CY=YTM；折價 CR&lt;CY&lt;YTM","利率↑→價格↓；期限越長、票息越低→價格波動越大","存續期間 duration 衡量利率敏感度；凸性修正大利率變動"]},
-  {n:15, title:"選擇權導論", subs:["15.1 選擇權基本","15.2 交易策略"], done:true, points:["買權 call：有權以履約價 K 買入；賣權 put：有權以 K 賣出","期權買方付權利金、最大損失即權利金；賣方履約義務","歐式僅到期可行權；美式到期前皆可行權","買權賣權平價：C + K/(1+r)^t = P + S₀","常見策略：covered call、protective put、價差"]}
+  {n:15, title:"選擇權導論", subs:["15.1 選擇權基本","15.2 交易策略"], done:true, points:["買權 call：有權以履約價 K 買入；賣權 put：有權以 K 賣出","期權買方付權利金、最大損失即權利金；賣方履約義務","歐式僅到期可行權；美式到期前皆可行權","買權賣權平價：C + K/(1+r)^t = P + S₀","常見策略：covered call、protective put、價差"]},
+  {n:16, title:"選擇權評價", subs:["16.1 二項式與 BSM","16.2 價值因子與希臘字母"], done:true, points:["BSM：C＝S₀N(d₁)−Ke^(−rt)N(d₂)","五因子：股價、履約價、時間、利率、波動率","波動率↑→call/put 權利金皆↑；時間↑→call/put 皆↑","Δ＝股價變動一元期權價值變動，用於避險"]}
 ];
 
 
@@ -551,7 +552,9 @@ const TERMS = {
   /* 第15章 */
   "Call":["Call Option","買權","付權利金，有權以履約價 K 買進標的。"],
   "Put":["Put Option","賣權","付權利金，有權以履約價 K 賣出標的。"],
-  "Put-call parity":["Put-Call Parity","買權賣權平價","C＋K/(1+r)ᵗ＝P＋S₀；連結買賣權與現貨的無套利關係。"]
+  "Put-call parity":["Put-Call Parity","買權賣權平價","C＋K/(1+r)ᵗ＝P＋S₀；連結買賣權與現貨的無套利關係。"],
+  /* 第16章 */
+  "BSM":["Black-Scholes-Merton (BSM)","布萊克-休斯模型","C＝S₀N(d₁)−Ke^(−rt)N(d₂)；欧式选择权评价标准模型。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Gordon","Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1436,7 +1439,32 @@ const CH15_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS};
+
+/* ===== 第十六章 ===== */
+const CH16_SECTIONS = [
+{
+  id:"16.1", title:"二項式與 Black-Scholes",
+  body:`
+  <p><b>二項式模型</b>假設下期股價僅有漲/跌兩種可能，以「複製組合＋無套利」倒推選擇權價值。<b><span class="term" data-term="BSM">Black-Scholes-Merton 模型</span></b>（1973）為連續時間版。</p>
+  <div class="formula"><span class="f-label">買權評價</span>C ＝ S₀ N(d₁) − K e^(−rt) N(d₂)<span class="f-note">N(·) 為標準常態 CDF；r 為連續複合無風險利率。賣權由買賣權平價求得。</span></div>
+  `
+},
+{
+  id:"16.2", title:"價值因子與希臘字母",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>因子變動</th><th>對 call／put 權利金影響</th></tr></thead><tbody>
+  <tr><td>股價 S↑</td><td>call↑；put↓</td></tr>
+  <tr><td>履約價 K↑</td><td>call↓；put↑</td></tr>
+  <tr><td>到期時間 t↑</td><td>call↑；put↑（美式尤然）</td></tr>
+  <tr><td>利率 r↑</td><td>call↑；put↓</td></tr>
+  <tr><td><b>波動率 σ↑</b></td><td><b>call↑；put↑（兩者皆漲）</b></td></tr>
+  </tbody></table></div>
+  <div class="note"><b>Δ（delta）：</b>股價變動 $1 時選擇權價值變動多少；call 的 Δ∈(0,1)，put 的 Δ∈(−1,0)，用以建構避險比率。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1579,7 +1607,15 @@ const CH15_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS};
+const CH16_PROBLEMS = [
+{
+  q:"其他條件不變，標的股價波動率上升時，買權與賣權權利金如何變動？",
+  opts:["(A) 買權漲、賣權跌","(B) 買權跌、賣權漲","(C) 兩者皆漲","(D) 兩者皆跌"],
+  ans:"<b>(C) 兩者皆漲。</b>波動率越大，標的大幅漲跌的機率越大，選擇權「不對稱獲利」特性使 call 與 put 價值都上升。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1606,7 +1642,7 @@ const GLOSS_CATS = [
   {name:"金融市場", keys:["Direct finance","Indirect finance"]},
   {name:"股票評價", keys:["DDM","Gordon"]},
   {name:"債券", keys:["Indenture","Duration","Convexity"]},
-  {name:"選擇權", keys:["Call","Put","Put-call parity"]}
+  {name:"選擇權", keys:["Call","Put","Put-call parity","BSM"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1628,7 +1664,8 @@ const CH_TERMS_CATS = {
   12:["金融市場"],
   13:["股票評價"],
   14:["債券"],
-  15:["選擇權"]
+  15:["選擇權"],
+  16:["選擇權評價"]
 };
 let glossMode="full", glossChapter=1;
 
