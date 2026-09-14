@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>提綱挈領 學統計｜互動複習</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Ctext x='32' y='44' font-size='34' font-family='Georgia,serif' fill='white' text-anchor='middle'%3E%E2%88%91%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fs:16px;
+  --paper:#f6f0e2;
+  --ink:#2b251d;
+  --panel:#fffdf6;
+  --line:#e4d9bf;
+  --muted:#6f6555;
+  --nav-bg:#f1e9d5;
+  --nav-ink:#4a4234;
+  --nav-hover:#e7dcc0;
+  --nav-active:#3c6e8f;
+  --accent:#b5542e;
+  --accent-soft:#fbeae2;
+  --teal:#2c6e9e;
+  --teal-soft:#eef3f4;
+  --green:#1e7d32;
+  --hl:#ffe94a;
+  --radius:12px;
+  --blue:#2c6e9e;--green2:#3a7d44;--orange:#c06a24;--purple:#6b4e8e;--brown:#8a5a3b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif TC","PMingLiU","PingFang TC",serif;
+  font-size:var(--fs);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.8;
+  display:flex;
+  min-height:100vh;
+}
+body.dark{
+  --paper:#16130d;--ink:#e6e0d2;--panel:#201c14;--line:#3a3325;
+  --muted:#a0937a;--nav-bg:#1f1a10;--nav-ink:#cfc4ad;--nav-hover:#332b1b;
+  --nav-active:#4a8ab5;--accent:#e08a55;--accent-soft:#2f2014;
+  --teal:#5f9fc0;--teal-soft:#14242e;--green:#5cb56e;--hl:#5a4a1e;
+  --blue:#5f9fc0;--green2:#5cb56e;--orange:#d98a4a;--purple:#9b7fc0;--brown:#b08a5a;
+}
+/* ===== 側邊目錄（兩層） ===== */
+.sidebar{
+  width:280px;flex-shrink:0;background:var(--nav-bg);color:var(--nav-ink);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 18px 40px;
+  border-right:1px solid var(--line);
+}
+.sidebar .brand{font-weight:700;font-size:15px;letter-spacing:.02em;line-height:1.4;margin-bottom:4px;color:var(--ink)}
+.sidebar .brand .t2{font-size:12px;color:var(--muted);font-weight:400;margin-top:2px}
+.nav-chapter{
+  display:flex;align-items:center;gap:8px;width:100%;padding:4px 10px;border-radius:6px;
+  cursor:pointer;font-size:13.5px;font-weight:700;color:var(--ink);
+  border:none;background:none;text-align:left;margin-top:8px;font-family:inherit;line-height:1.45;
+}
+.nav-chapter:hover{background:var(--nav-hover)}
+.nav-chapter.active{background:var(--nav-active);color:#fff}
+.nav-chapter .num{font-size:11px;font-weight:600;opacity:.65;width:26px;flex-shrink:0}
+.nav-chapter.active .num{opacity:.9}
+.nav-chapter .tag{margin-left:auto;font-size:10px;opacity:.55;letter-spacing:.05em;font-weight:400}
+.nav-chapter .tag.done{color:var(--green2);opacity:1}
+.nav-sub{
+  display:block;width:100%;padding:3px 10px 3px 34px;border-radius:6px;
+  cursor:pointer;font-size:12.5px;color:var(--muted);border:none;background:none;text-align:left;font-family:inherit;line-height:1.45;
+}
+.nav-sub:hover{background:var(--nav-hover);color:var(--ink)}
+.nav-sub.active{color:var(--nav-active);font-weight:700}
+.nav-gloss{
+  display:flex;align-items:center;gap:8px;width:100%;padding:6px 10px;border-radius:6px;margin-top:10px;
+  cursor:pointer;font-size:13.5px;font-weight:700;color:#8a6d1a;border:1.5px dashed #d9b84a;background:#fffaf0;
+  text-align:left;font-family:inherit;line-height:1.45;transition:all .15s;
+}
+.nav-gloss:hover{border-color:#c9a227;color:#c9a227;background:#fff6dd}
+.nav-gloss svg{width:15px;height:15px;flex-shrink:0}
+.nav-gloss.active{background:#c9a227;color:#fff;border-style:solid}
+.search-panel{
+  position:fixed;top:66px;left:50%;transform:translateX(-50%);width:min(680px,92vw);max-height:62vh;overflow:auto;
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.16);z-index:60;
+}
+.search-panel .sp-item{display:block;width:100%;text-align:left;padding:10px 16px;border:none;border-bottom:1px solid var(--line);background:none;cursor:pointer;font-family:inherit;font-size:13.5px;color:var(--ink);line-height:1.5}
+.search-panel .sp-item:hover{background:var(--nav-hover)}
+.search-panel .sp-tag{display:inline-block;font-size:11px;color:var(--teal);font-weight:700;margin-right:8px;letter-spacing:.03em;white-space:nowrap}
+.search-panel .sp-item b{display:block;font-size:13.5px;margin:2px 0}
+.search-panel .sp-snip{display:block;font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search-panel .sp-count{padding:8px 16px;font-size:12px;color:var(--muted);text-align:center}
+.search-panel .sp-empty{padding:24px 16px;text-align:center;color:var(--muted);font-size:13.5px}
+body.dark .search-panel{background:#26221a;border-color:#4a4234}
+/* ===== 主內容 ===== */
+.main{flex:1;min-width:0;padding:28px 34px 80px}
+.topbar{
+  position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);padding:10px 0 14px;margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.searchbox{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 14px}
+.searchbox svg{width:16px;height:16px;opacity:.45;flex-shrink:0}
+.searchbox input{border:none;outline:none;background:none;font-size:14px;width:100%;color:var(--ink);font-family:inherit}
+.toolbtn{
+  display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;padding:8px 12px;font-size:13px;cursor:pointer;color:var(--ink);font-family:inherit;transition:all .15s;
+}
+.toolbtn:hover{border-color:var(--teal);color:var(--teal)}
+.toolbtn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.toolbtn svg{width:15px;height:15px}
+/* 章頭 */
+.chapter-head{border-left:8px solid var(--teal);padding:6px 0 10px 18px;margin:30px 0 18px}
+.chapter-head .kicker{display:inline-block;font-size:12px;letter-spacing:.15em;color:var(--teal);font-family:"Noto Sans TC",sans-serif;font-weight:600}
+.chapter-head h1{font-family:"Noto Serif TC",serif;font-size:27px;line-height:1.25;margin:2px 0 4px}
+.chapter-head p{color:var(--muted);font-size:14.5px;max-width:760px;margin-top:6px}
+/* 小節 */
+.section{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+.section-head{
+  display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:pointer;user-select:none;
+  font-family:"Noto Serif TC",serif;font-size:19px;font-weight:600;border-bottom:2px solid transparent;transition:border-color .15s;
+}
+.section.open .section-head{border-bottom-color:var(--teal)}
+.section-head .sec-num{color:var(--teal);font-size:12.5px;font-weight:700;font-family:"Noto Sans TC",sans-serif;letter-spacing:.08em;flex-shrink:0}
+.section-head .chev{width:18px;height:18px;margin-left:auto;transition:transform .2s;flex-shrink:0}
+.section.open .section-head .chev{transform:rotate(180deg)}
+.section-body{display:none;padding:4px 20px 18px}
+.section.open .section-body{display:block}
+.section-body p{margin:10px 0;font-size:14.8px}
+.section-body ul{margin:8px 0;padding-left:24px}
+.section-body li{margin:3px 0}
+/* callout 盒子（參考章節筆記風格） */
+.section-body .note{background:#fdf0c2;border-left:4px solid #d9a514;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px}
+.section-body .note::before{content:"重點與結論";display:block;font-family:"Noto Sans TC",sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.12em;color:#8a6d1a;margin-bottom:4px}
+.section-body .warn{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px}
+.section-body .warn::before{content:"考試重點";display:block;font-family:"Noto Sans TC",sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--accent);margin-bottom:4px}
+.section-body .src{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);margin-top:14px;padding-top:10px}
+.section-body .src summary{cursor:pointer;font-size:12.5px;color:var(--teal)}
+.section-body .src pre{white-space:pre-wrap;font-family:"Noto Serif TC",serif;font-size:13px;color:var(--muted);margin-top:8px;max-height:280px;overflow-y:auto}
+/* 公式卡 */
+.formula{background:#fbf4e6;border:1px dashed #c9b88f;border-radius:8px;padding:14px 18px;margin:12px 0;font-size:15.5px;text-align:center;font-family:"Noto Serif TC",serif}
+.formula .f-label{display:block;font-size:11.5px;color:#9a6a1f;letter-spacing:.08em;margin-bottom:4px;font-family:"Noto Sans TC",sans-serif;font-weight:700}
+.formula .f-note{display:block;font-size:12px;color:var(--muted);margin-top:4px;font-family:"Noto Sans TC",sans-serif}
+/* 術語 */
+.term{color:var(--green);font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,var(--green) 55%,transparent);border-radius:3px;padding:0 2px;transition:all .15s}
+.term:hover{background:var(--green);color:#fff;border-bottom:none}
+/* 專有名詞（人名／事件）深紫粗體 */
+.proper{color:#7b2cbf;font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,#7b2cbf 50%,transparent);border-radius:3px;padding:0 2px;transition:background .15s}
+.proper:hover{background:#7b2cbf;color:#fff;border-bottom:none}
+body.dark .proper{color:#b39ddb}
+body.dark .proper:hover{background:#b39ddb;color:#1a1420}
+/* 例題 */
+.problem{background:#eae6da;border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:14px 0}
+.problem .p-head{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14.5px;color:var(--teal);margin-bottom:8px}
+.problem .p-body{font-size:14.5px}
+.problem .opts{margin:10px 0 4px;display:grid;gap:6px}
+.problem .opts div{padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.8px;background:var(--panel)}
+body.dark .problem{background:#26221a}
+.ans-btn{
+  margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:none;border:1.5px solid var(--teal);
+  color:var(--teal);border-radius:8px;padding:7px 16px;font-size:13.5px;cursor:pointer;font-family:inherit;transition:all .15s;
+}
+.ans-btn:hover{background:var(--teal);color:#fff}
+.fav{
+  margin-left:auto;background:none;border:1.5px solid var(--line);color:var(--muted);border-radius:8px;
+  padding:3px 12px;font-size:12.5px;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;
+}
+.fav:hover{border-color:#c9a227;color:#c9a227}
+.fav.on{border-color:#c9a227;background:#fffaf0;color:#c9a227;font-weight:700}
+body.dark .fav.on{background:#3a3320}
+.ans{display:none;margin-top:12px;background:var(--teal-soft);border-radius:8px;padding:12px 16px;font-size:14px}
+.ans.show{display:block}
+.ans .a-label{font-weight:700;color:var(--teal);font-size:13px}
+.ans ul{margin:6px 0 2px;padding-left:22px}
+.ans li{margin:3px 0}
+.ans b{font-weight:700}
+/* 術語卡區 */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin:16px 0}
+.flip-card{perspective:900px;height:150px;cursor:pointer}
+.flip-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border-radius:12px;border:1px solid var(--line);padding:12px;text-align:center}
+.flip-front{background:var(--panel)}
+.flip-front .en{font-size:16px;font-weight:700;color:var(--teal);word-break:break-word}
+.flip-front .zh{font-size:13px;color:var(--muted)}
+.flip-back{background:var(--teal);color:#fff;transform:rotateY(180deg)}
+.flip-back .def{font-size:13px;line-height:1.6}
+.flip-hint{font-size:11px;opacity:.5;margin-top:4px}
+/* ===== 術語表（列表形式） ===== */
+.gloss-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.gloss-cats{display:flex;gap:6px;flex-wrap:wrap}
+.gloss-cat-btn{border:1px solid var(--line);background:var(--panel);border-radius:20px;padding:4px 13px;font-size:12.5px;cursor:pointer;color:var(--muted);transition:all .15s}
+.gloss-cat-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.gloss-progress{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
+.gloss-progress .bar{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.gloss-progress .fill{height:100%;background:var(--teal);width:0%;transition:width .3s}
+.gloss-progress .label{font-size:13px;color:var(--muted);white-space:nowrap}
+.gloss-group{margin-bottom:16px}
+.gloss-group h3{font-size:14px;color:var(--teal);margin:14px 0 8px;padding-left:10px;border-left:3px solid var(--teal);letter-spacing:.04em}
+.gloss-item{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:8px 0;display:flex;gap:12px;align-items:flex-start;transition:border-color .15s}
+.gloss-item.starred{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.gloss-check{width:24px;height:24px;border-radius:7px;border:2px solid var(--line);flex-shrink:0;cursor:pointer;display:grid;place-items:center;margin-top:2px;transition:all .15s;background:none;padding:0}
+.gloss-check svg{width:14px;height:14px;display:none;color:#fff}
+.gloss-check.done{background:var(--teal);border-color:var(--teal)}
+.gloss-check.done svg{display:block}
+.gloss-item.done .gloss-en{text-decoration:line-through;opacity:.55}
+.gloss-main{flex:1;min-width:0}
+.gloss-en{font-weight:700;color:var(--green);font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.gloss-zh{font-size:15px;color:var(--green);font-weight:700;margin-left:2px}
+.gloss-def{font-size:13.5px;margin-top:4px;line-height:1.8}
+.gloss-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
+.gloss-btn{border:1px solid var(--line);background:none;border-radius:7px;padding:3px 10px;font-size:11.5px;cursor:pointer;color:var(--muted);transition:all .15s}
+.gloss-btn:hover{color:var(--teal);border-color:var(--teal)}
+.gloss-btn.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+.gloss-note{display:none;margin-top:8px}
+.gloss-note.show{display:block}
+.gloss-note textarea{width:100%;min-height:56px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;background:var(--paper);color:var(--ink);font-family:inherit;resize:vertical}
+.gloss-note textarea:focus{outline:none;border-color:var(--teal)}
+.gloss-data-actions{display:flex;gap:8px;margin-left:auto}
+/* 搜尋高亮 */
+mark{background:var(--hl);color:inherit;border-radius:2px;padding:0 1px}
+mark.hl{background:var(--hl)}
+/* 重點高亮（使用者標記） */
+.userhl{background:var(--hl);border-radius:3px;cursor:pointer;box-shadow:0 0 0 2px var(--hl)}
+/* 畫記模式 */
+body.marking{cursor:crosshair}
+body.marking .section-body p,body.marking .section-body li,body.marking .section-body .note,body.marking .section-body .warn,body.marking .problem .p-body{cursor:crosshair;border-radius:3px;transition:box-shadow .12s}
+body.marking .section-body p:hover,body.marking .section-body li:hover,body.marking .section-body .note:hover,body.marking .section-body .warn:hover,body.marking .problem .p-body:hover{box-shadow:0 0 0 2px rgba(255,233,74,.45);background:rgba(255,233,74,.12)}
+/* 進度條 */
+.progress-strip{display:flex;gap:6px;margin:14px 0 6px}
+.progress-strip i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.progress-strip i.done{background:var(--teal)}
+.chip{display:inline-flex;align-items:center;gap:5px;background:var(--teal-soft);color:var(--teal);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:500}
+/* 提示條 */
+.banner{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--ink);margin-bottom:18px;display:flex;gap:10px;align-items:flex-start}
+.banner svg{width:18px;height:18px;flex-shrink:0;color:var(--accent);margin-top:2px}
+/* 空狀態 */
+.empty{display:none;text-align:center;padding:60px 20px;color:var(--muted)}
+.empty.show{display:block}
+.empty .big{font-size:40px;margin-bottom:10px}
+.chpage{font-size:12.5px;color:var(--muted);font-family:"Noto Sans TC",sans-serif}
+.chapter-head .ch-points{margin:10px 0 0;padding-left:22px;font-size:14.5px;color:var(--ink)}
+.chapter-head .ch-points li{margin:3px 0}
+/* 方法學習卡（左打勾＋方法名＋公式說明，底下例子） */
+.method-card{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;margin:12px 0;background:var(--panel);overflow:hidden;transition:opacity .2s}
+.method-card .mc-check{width:64px;flex-shrink:0;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;background:var(--panel)}
+.method-card .mc-check input{width:19px;height:19px;accent-color:var(--green);cursor:pointer}
+.method-card .mc-check .mc-lbl{font-size:11px;color:var(--muted)}
+.method-card .mc-check:has(input:checked){background:#eef7ec}
+.method-card .mc-check:has(input:checked) .mc-lbl{color:var(--green);font-weight:700}
+.method-card .mc-left{width:34px;flex-shrink:0;background:var(--teal-soft);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:8px 2px;font-family:"Noto Sans TC",sans-serif;font-weight:700;color:var(--teal);font-size:13px;text-align:center;line-height:1.4;writing-mode:vertical-rl;letter-spacing:.08em}
+.method-card .mc-body{flex:1;padding:12px 16px;font-size:14px;min-width:0}
+.method-card .mc-formula{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--ink)}
+.method-card .mc-detail{font-size:13px;color:var(--muted)}
+.method-card .mc-ex{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:13px}
+/* 學會：刪除線＋黯淡 */
+.method-card.learned{opacity:.55}
+.method-card.learned .mc-formula,.method-card.learned .mc-detail,.method-card.learned .mc-ex{text-decoration:line-through;text-decoration-thickness:1.5px}
+/* 標題式學習卡（標題橫排） */
+.method-card.mc-title .mc-left{writing-mode:initial;width:auto;min-width:96px;padding:10px 8px;font-size:13px}
+body.dark .method-card .mc-check:has(input:checked){background:#16241a}
+@media (max-width:900px){
+  .method-card{flex-wrap:wrap}
+  .method-card .mc-check{width:56px;border-right:1px solid var(--line);border-bottom:none;flex-direction:column;padding:6px}
+  .method-card .mc-left{flex:0 0 auto;width:auto;min-width:88px;border-right:1px solid var(--line);border-bottom:none;padding:8px 14px}
+  .method-card .mc-body{width:100%}
+}
+/* 左右布局公式卡（左說明＋右公式＋底例子） */
+.f-split{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:12px 0;background:var(--panel)}
+.f-split .fs-row{display:flex;flex-wrap:wrap;align-items:stretch}
+.f-split .fs-left{flex:1 1 250px;padding:14px 16px;font-size:14px}
+.f-split .fs-label{font-family:"Noto Sans TC",sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--teal);margin-bottom:6px}
+.f-split .fs-left p{margin:0;font-size:14px}
+.f-split .fs-right{flex:1 1 280px;padding:14px 16px;border-left:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.f-split .fs-right .formula{margin:0;width:100%}
+.f-split .fs-ex{padding:10px 16px;border-top:1px dashed var(--line);background:#f6f1e3;font-size:13.5px}
+body.dark .f-split .fs-ex{background:#201c14}
+@media (max-width:900px){
+  .f-split .fs-right{border-left:none;border-top:1px solid var(--line)}
+}
+/* 比較表格 */
+.tblwrap{overflow-x:auto;margin:14px 0}
+.tblwrap table{border-collapse:separate;border-spacing:0;border:1px solid #e0d5ba;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(120,100,50,.10);width:100%;table-layout:fixed;background:var(--panel);font-size:13.5px}
+.tblwrap caption{caption-side:top;text-align:left;font-weight:800;font-size:14px;color:#4a3f2a;padding:2px 2px 8px;letter-spacing:.02em}
+.tblwrap th,.tblwrap td{border-right:1px solid #e8dfc8;border-bottom:1px solid #e8dfc8;padding:8px 10px;vertical-align:top;word-break:break-word}
+.tblwrap th{background:#e9dcb8;color:#4a3f2a;font-size:13px}
+.tblwrap th:last-child,.tblwrap td:last-child{border-right:none}
+.tblwrap tbody tr:last-child td{border-bottom:none}
+.tblwrap tbody tr:nth-child(even){background:#faf6ea}
+.tblwrap tbody tr:hover{background:#f5eeda}
+body.dark .tblwrap table{border-color:#3a3325;background:#201c14}
+body.dark .tblwrap th{background:#3a3325;color:#e6e0d2}
+body.dark .tblwrap caption{color:#cfc4ad}
+body.dark .tblwrap tbody tr:nth-child(even){background:#262119}
+/* SVG 示意圖 */
+.svgfig{margin:14px 0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+.svgfig figcaption{font-size:12.5px;color:var(--muted);margin-bottom:8px;font-family:"Noto Sans TC",sans-serif;line-height:1.5}
+.svgfig svg{width:100%;height:auto;display:block}
+.ax{stroke:#9a8f78;stroke-width:1.2}
+.axl{font-size:11px;fill:#6f6555;font-family:"Noto Sans TC",sans-serif}
+.lb{font-size:12px;fill:#2b251d;font-family:"Noto Sans TC",sans-serif}
+body.dark .lb{fill:#e6e0d2}
+/* 深色模式的 callout 覆蓋 */
+body.dark .section-body .note{background:#332b1b;border-left-color:#d9a514}
+body.dark .section-body .note::before{color:#e5c15a}
+body.dark .formula{background:#2a2418;border-color:#8a7a50}
+body.dark .formula .f-label{color:#d8b36a}
+/* 響應式 */
+@media (max-width:900px){
+  body{flex-direction:column}
+  .sidebar{width:100%;height:auto;position:static;flex-direction:row;flex-wrap:wrap;gap:4px;padding:14px 12px;border-right:none;border-bottom:1px solid var(--line)}
+  .sidebar .brand{width:100%;padding-bottom:8px;margin-bottom:6px}
+  .nav-chapter{width:auto;margin:2px 2px;padding:5px 10px}
+  .nav-chapter .tag{display:none}
+  .nav-sub{width:auto;display:inline-block;padding:3px 10px;margin:2px 2px}
+  .main{padding:18px 14px 60px}
+  .cards-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+}
+@media print{
+  .sidebar,.topbar,.banner,.no-print{display:none!important}
+  .section-body{display:block!important}
+  body{display:block}
+  .main{padding:0}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 側邊導航 ===== -->
+<nav class="sidebar" id="sidebar" aria-label="章節導航"></nav>
+
+<!-- ===== 主內容 ===== -->
+<main class="main">
+  <div class="topbar no-print">
+    <div class="searchbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" id="searchInput" placeholder="搜尋全書內容…">
+    </div>
+    <button class="toolbtn" id="markToggle" title="畫記模式：開啟後點文字直接高亮，關閉即儲存">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+    </button>
+    <button class="toolbtn" id="darkToggle" title="深色模式">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+    <button class="toolbtn" id="hlToggle" title="顯示／隱藏你的重點標記">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+    </button>
+  </div>
+
+  <div id="searchPanel" class="search-panel" style="display:none"></div>
+  <div id="chapterContent"></div>
+  <div class="empty" id="emptyState">
+    <div class="big">🔍</div>
+    <div>沒有找到符合「<span id="emptyKeyword"></span>」的內容</div>
+  </div>
+</main>
+
+<!-- ===== 術語卡模態 ===== -->
+<div id="termModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)closeTerm()">
+  <div style="background:var(--panel);border-radius:16px;max-width:480px;width:100%;padding:26px 28px;position:relative">
+    <button onclick="closeTerm()" style="position:absolute;top:14px;right:16px;border:none;background:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button>
+    <div id="termModalEn" style="font-size:22px;font-weight:700;color:var(--teal);font-family:Georgia,serif"></div>
+    <div id="termModalZh" style="font-size:15px;font-weight:600;margin:4px 0 12px"></div>
+    <div id="termModalDef" style="font-size:14.5px;line-height:1.9;color:var(--ink)"></div>
+  </div>
+</div>
+
+<script>
+/* ===== 資料：全書章節結構（提綱挈領 學統計） ===== */
+const BOOK = [{"n": 1, "title": "統計學概論", "subs": ["1.1 統計學是什麼？", "1.1.2 母體與樣本", "1.1.3 統計學之分類", "1.2.1 變數的測量尺度", "1.2.2 資料之分類"], "points": ["統計學是從雜亂數據中淬煉資訊與知識、以支援決策的學問。", "母體是研究對象全體，樣本是母體的子集合；母數描述母體、統計量描述樣本。", "統計推論＝以樣本統計量歸納推論母體母數，工具為估計與假說檢定。", "資料依測量尺度由低到高分名義、順序、等距、比例四級，資訊含量遞增。", "資料可分屬質/屬量、原始/次級、普查/抽樣，以及橫斷面、時間序列與追蹤資料。"], "ready": true}, {"n": 2, "title": "敘述統計學", "subs": ["2.1 次數分配", "2.2 中央趨勢量數", "2.3 位置量數", "2.4 分散趨勢量數", "2.5 其他量數與課題", "2.6 分配形狀量數", "2.7 探測性資料分析"], "points": ["次數分配把雜亂資料分組劃記，並以長條圖、圓餅圖、直方圖等陳示。", "中央趨勢量數回答「資料中心在哪」：平均數、中位數、眾數最常用。", "位置量數（百分位數、四分位數）回答「某個相對位置是多少」。", "分散趨勢量數回答「資料多散」：變異數、標準差、變異係數、全距。", "偏態係數看分配對稱與否，峰態係數看中央群聚與尾部厚實。", "EDA 以五數字摘要與盒鬚圖，快速呈現分配位置與形狀。"], "ready": true}, {"n": 3, "title": "古典機率論", "subs": ["3.1 基本概念與機率定義", "3.2 公設化機率定義", "3.3 條件機率與獨立事件", "3.4 全機率定理與貝氏定理"], "points": ["隨機實驗、樣本空間、樣本點、事件構成機率論的語言。", "機率有古典、相對次數（客觀）與主觀三種直觀定義，各有適用條件。", "Kolmogorov 三公設（非負、P(S)=1、可數可加）是整套機率論的基石。", "條件機率把樣本空間縮小到已知事件；乘法規則處理「且」、加法規則處理「或」。", "獨立事件互不含資訊；全機率定理拆事件，貝氏定理由結果反推原因。"], "ready": true}, {"n": 4, "title": "隨機變數", "subs": [], "points": ["本章內容製作中，敬請期待"], "ready": false}, {"n": 5, "title": "多元隨機變數", "subs": [], "points": ["本章內容製作中，敬請期待"], "ready": false}, {"n": 6, "title": "常用機率分配模型", "subs": [], "points": ["本章內容製作中，敬請期待"], "ready": false}, {"n": 7, "title": "抽樣方法與抽樣分配", "subs": [], "points": ["本章內容製作中，敬請期待"], "ready": false}, {"n": 8, "title": "點估計", "subs": [], "points": ["本章內容製作中，敬請期待"], "ready": false}, {"n": 9, "title": "區間估計", "subs": [], "points": ["本章內容製作中，敬請期待"], "ready": false}, {"n": 10, "title": "假說檢定", "subs": [], "points": ["本章內容製作中，敬請期待"], "ready": false}, {"n": 11, "title": "變異數分析", "subs": [], "points": ["本章內容製作中，敬請期待"], "ready": false}, {"n": 12, "title": "相關分析與線性迴歸", "subs": [], "points": ["本章內容製作中，敬請期待"], "ready": false}, {"n": 13, "title": "卡方檢定與適合度檢定", "subs": [], "points": ["本章內容製作中，敬請期待"], "ready": false}, {"n": 14, "title": "其他非母數統計方法", "subs": [], "points": ["本章內容製作中，敬請期待"], "ready": false}, {"n": 15, "title": "統計決策理論、時間序列與指數", "subs": [], "points": ["本章內容製作中，敬請期待"], "ready": false}];
+
+/* ===== 術語資料（點擊卡片時顯示） ===== */
+const TERMS = {"Data": ["Data", "資料", "實驗、調查或研究中，對感興趣變數測量或蒐集而得的原始資訊。"], "Statistics": ["Statistics", "統計學", "研究如何從雜亂數據中淬煉資訊與知識、支援決策的應用數學。"], "Variable": ["Variable", "變數", "個體身上可能取不同值的特性、特質或特徵。"], "Population": ["Population", "母體", "研究者主觀欲研究對象的全體集合，大小以大寫 N 表示。"], "Sample": ["Sample", "樣本", "母體的一個子集合，樣本大小以小寫 n 表示。"], "Parameter": ["Parameter", "母數（參數）", "描述母體特徵的測量數值，為固定未知的常數，通用希臘字母表示。"], "Statistic": ["Statistic", "統計量", "描述樣本特徵的測量數值，隨隨機樣本而變，用以推論母數。"], "StatisticalInference": ["Statistical Inference", "統計推論", "由樣本統計量歸納推論母體母數的過程，含估計與假說檢定。"], "DescriptiveStatistics": ["Descriptive Statistics", "敘述統計學", "研究如何蒐集、整理、陳示、分析與解釋大量資料的工具。"], "InferentialStatistics": ["Inferential Statistics", "推論統計學", "由樣本資料推論母體特性、在不確定下協助決策的方法。"], "Census": ["Census", "普查", "對母體全體每一個體進行調查或測量。"], "RandomSample": ["Random Sample", "隨機樣本", "依事先給定機率抽出的樣本，具代表性與可掌握的機率規律。"], "Estimation": ["Estimation", "估計", "以樣本統計量估計未知母數，含點估計與區間估計。"], "HypothesisTesting": ["Hypothesis Testing", "假說檢定", "對母數提出假說並以樣本統計量決定捨棄或建立。"], "DataSet": ["Data Set", "資料集", "整個研究所蒐集到的所有資料。"], "NominalScale": ["Nominal Scale", "名義尺度", "僅供辨識分類的類別尺度，數字只是分類號，不能比較大小。"], "OrdinalScale": ["Ordinal Scale", "順序尺度", "可辨識分類並比較優劣順序，但無法衡量差距大小。"], "IntervalScale": ["Interval Scale", "等距尺度", "可分類、排序且能計算差距大小，但沒有自然零點。"], "RatioScale": ["Ratio Scale", "比例尺度", "具有自然零點、可做加減乘除的最高階測量尺度。"], "QualitativeData": ["Qualitative Data", "屬質資料（類別資料）", "描述性質或類別的資料，必為離散型。"], "QuantitativeData": ["Quantitative Data", "屬量資料", "描述數量多寡的數值資料，分離散型與連續型。"], "DiscreteData": ["Discrete Data", "離散型資料", "不連續、可一一點數的量，如家庭人數。"], "ContinuousData": ["Continuous Data", "連續型資料", "連續不間斷的量，如體重、時間。"], "FrequencyDistribution": ["Frequency Distribution", "次數分配", "資料在各分組中出現次數的分配情形。"], "FrequencyTable": ["Frequency Table", "次數分配表", "將分組與次數列表呈現的表格。"], "BarChart": ["Bar Chart", "長條圖", "以長條長度表示各類別次數的圖形，組間要留間隔。"], "PieChart": ["Pie Chart", "圓餅圖", "以扇形面積比例表示各類別相對次數的圖形。"], "ParetoChart": ["Pareto Chart", "柏雷托圖", "依次數排序並疊加累加次數線的長條圖。"], "Histogram": ["Histogram", "直方圖", "以相鄰長條面積表示連續資料各組次數的圖形。"], "RelativeFrequency": ["Relative Frequency", "相對次數", "各組次數占總次數的比例。"], "Ogive": ["Ogive", "肩形圖", "描繪相對累加次數的折線圖，對應累積分配函數。"], "ArithmeticMean": ["Arithmetic Mean", "算術平均數", "資料和除以個數，即所有資料點的重心。"], "Median": ["Median", "中位數", "排序後最中央的數，一半資料小於、一半大於它。"], "Mode": ["Mode", "眾數", "出現次數最多的資料值。"], "TrimmedMean": ["Trimmed Mean", "截尾平均數", "去除前後各固定比例後再求算的算術平均數。"], "GeometricMean": ["Geometric Mean", "幾何平均數", "n 個正值連乘開 n 次方，適用於成長率、報酬率。"], "HarmonicMean": ["Harmonic Mean", "調和平均數", "倒數之算術平均再取倒數，適用等距離/等金額場合。"], "Percentile": ["Percentile", "百分位數", "有 r% 資料小於等於它的位置量數。"], "Quartile": ["Quartile", "四分位數", "將排序資料切成四等份的三個分割點 Q1、Q2、Q3。"], "Variance": ["Variance", "變異數", "離差平方的平均，衡量資料分散程度。"], "StandardDeviation": ["Standard Deviation", "標準差", "變異數開根號，還原成與原資料相同的單位。"], "CoefficientOfVariation": ["Coefficient of Variation", "變異係數", "標準差除以平均數，用來比較不同尺度或單位資料的相對分散。"], "Range": ["Range", "全距", "最大值減最小值。"], "ZScore": ["Z-score", "z 分數（標準分數）", "資料點減平均數再除以標準差，衡量其相對位置。"], "EmpiricalRule": ["Empirical Rule", "經驗法則（68-95-99.7）", "鐘形分配中約 68%、95%、99.7% 資料落在平均數 ±1、2、3 個標準差內。"], "Outlier": ["Outlier", "離群值", "資料中異常過大或過小的數值。"], "SampleMoment": ["Sample Moment", "樣本動差", "以原點或平均數為基準的各階資料乘平均。"], "Skewness": ["Skewness", "偏態係數", "衡量分配不對稱性，正值右偏、零對稱、負值左偏。"], "Kurtosis": ["Kurtosis", "峰態係數", "衡量分配在中央群聚與尾部厚實的程度，常態峰為 3。"], "FiveNumberSummary": ["Five-number Summary", "五數字摘要", "最小值、Q1、中位數、Q3、最大值。"], "BoxPlot": ["Box Plot", "盒鬚圖", "以五數字摘要繪製的圖形，並以 1.5×IQR 偵測離群值。"], "IQR": ["Interquartile Range (IQR)", "四分位距", "Q3 減 Q1，代表中間 50% 資料的寬度。"], "RandomExperiment": ["Random Experiment", "隨機實驗", "結果不確定、但所有可能結果可明確描述的實驗。"], "SampleSpace": ["Sample Space", "樣本空間 S", "隨機實驗所有可能結果所成的集合。"], "SamplePoint": ["Sample Point", "樣本點", "樣本空間中的一個元素，即一個可能結果。"], "Event": ["Event", "事件", "樣本空間的一個子集合。"], "MutuallyExclusive": ["Mutually Exclusive Events", "互斥事件", "兩事件交集為空集合，不能同時發生。"], "ClassicalProbability": ["Classical Probability", "古典機率定義", "有限且等可能樣本空間中，事件機率＝有利樣本點數÷總樣本點數。"], "RelativeFrequencyProbability": ["Relative Frequency Probability", "相對次數機率", "重複實驗次數趨近無限時事件發生次數的比例。"], "SubjectiveProbability": ["Subjective Probability", "主觀機率", "個人依據證據與知識對事件發生相信程度的機率。"], "KolmogorovAxioms": ["Kolmogorov's Axioms", "柯氏三公設", "非負性、P(S)=1、可數可加性。"], "ProbabilityMeasure": ["Probability Measure", "機率測度", "滿足柯氏三公設的事件集合函數 P(·)。"], "Complement": ["Complement", "餘事件（補集合）", "A′＝不在 A 中的樣本點所成事件，P(A′)=1−P(A)。"], "AdditionRule": ["Addition Rule", "加法規則", "P(A∪B)=P(A)+P(B)−P(A∩B)。"], "SymmetricDifference": ["Symmetric Difference", "對稱差", "A、B 恰一個發生的機率，P(A△B)=P(A)+P(B)−2P(A∩B)。"], "ConditionalProbability": ["Conditional Probability", "條件機率", "給定 B 已發生下 A 的機率，P(A|B)=P(A∩B)/P(B)。"], "MultiplicationRule": ["Multiplication Rule", "乘法規則", "P(A∩B)=P(A|B)P(B)=P(B|A)P(A)。"], "IndependentEvents": ["Independent Events", "獨立事件", "一事件發生與否不影響另一事件的機率，P(A∩B)=P(A)P(B)。"], "DependentEvents": ["Dependent Events", "相依事件", "不獨立的兩事件。"], "PairwiseIndependence": ["Pairwise Independence", "成對獨立", "三事件中任兩兩皆滿足獨立。"], "MutualIndependence": ["Mutual Independence", "完全獨立", "任意多個事件交集機率等於個別機率連乘。"], "JointProbability": ["Joint Probability", "聯合機率", "事件交集的機率 P(A∩B)。"], "MarginalProbability": ["Marginal Probability", "邊際機率", "列聯表邊緣上單一事件的機率。"], "Partition": ["Partition", "分割", "兩兩互斥且集體涵蓋 S 的一組事件。"], "LawOfTotalProbability": ["Law of Total Probability", "全機率定理", "P(B)=ΣP(B|Ai)P(Ai)，Ai 為一組分割。"], "BayesRule": ["Bayes' Rule", "貝氏定理", "由事後條件反推事前條件機率的公式。"], "GamblersFallacy": ["Gambler's Fallacy", "賭徒謬誤", "誤以為獨立事件連開同邊後，下一次會傾向相反。"]};
+
+/* ===== 章節內容對照 ===== */
+const CH_SECTIONS = {"1": [{"id": "1.1", "title": "統計學是什麼？", "body": "<p>數據資料（<span class=\"term\" data-term=\"Data\">資料</span>）充斥日常生活，<span class=\"term\" data-term=\"Statistics\">統計學</span>即是一門研究如何從雜亂無章的數據中，粹煉出有用的資訊或知識的學問，以利研究者作成結論、成為決策依據。</p><p>研究的對象稱為個體或元素，個體身上可能取不同值的特性稱為<span class=\"term\" data-term=\"Variable\">變數</span>；對變數進行測量或觀察所得的「值」就是資料。</p><div class=\"note\"><b>重點：</b>決策支援的鏈條為 數據資料(data) → 資訊(information) → 知識(knowledge) → 制定決策(decision-making)。</div><p>從龐大資料庫中挖掘趨勢、型態、分群與關聯，稱為資料挖掘（data mining）。過度操弄資料所得的錯誤結論，被戲稱為資料釣魚（data dredging）。</p><div class=\"warn\">陷阱：變數的「值」不一定是數，也可以是文字或符號（如姓名、性別）。</div><span class=\"pg\">▸ p.019–021</span>"}, {"id": "1.1.2", "title": "母體與樣本", "body": "<p>研究對象的整個群體稱為<span class=\"term\" data-term=\"Population\">母體</span>，大小記為 N；因母體太大、無法普查或具破壞性實驗時，只抽取其中一部分，此子集合即<span class=\"term\" data-term=\"Sample\">樣本</span>，大小記為 n。</p><div class=\"note\"><b>重點：</b>母數 vs 統計量 ——<span class=\"term\" data-term=\"Parameter\">母數（參數）</span>描述母體特徵，是固定而未知的常數，通用希臘字母；<span class=\"term\" data-term=\"Statistic\">統計量</span>描述樣本特徵，隨每次抽樣而變動。</div><p>研究母數的兩大方法：<span class=\"term\" data-term=\"Census\">普查</span>（對母體全體）與抽樣調查。普查有三大困難：成本太高、無限/概念性母體無法列舉、破壞性實驗不能全做。</p><p><span class=\"term\" data-term=\"StatisticalInference\">統計推論</span>主要包含兩種工具：<span class=\"term\" data-term=\"Estimation\">估計</span>（點估計、區間估計）與<span class=\"term\" data-term=\"HypothesisTesting\">假說檢定</span>。唯有隨機樣本才有代表性，故機率論是推論統計學的基石。</p><div class=\"warn\">易錯：隨機樣本才有可掌握的機率規律；非隨機樣本主觀任意，無法做推論。</div><span class=\"pg\">▸ p.022–026</span>"}, {"id": "1.1.3", "title": "統計學之分類", "body": "<p>依處理問題區分：<span class=\"term\" data-term=\"DescriptiveStatistics\">敘述統計學</span>研究如何把雜亂資料整理成易讀形式，無關母體與樣本；<span class=\"term\" data-term=\"InferentialStatistics\">推論統計學</span>研究如何由樣本推論母體。</p><p>依功能區分：數理統計學研究理論本身的數學推導；應用統計學把工具用到各領域（商用、生物統計、計量經濟、工程統計等）。</p><p>依是否假設母體分配區分：母數統計學（常假設常態或大樣本，推論平均數、變異數等母數）；非母數統計學又稱無母數或分配自由化方法，不對分配形式設限。</p><div class=\"note\"><b>重點：</b>普查只需敘述統計；母體太大、普查做不到，才需要推論統計。</div><span class=\"pg\">▸ p.026–027</span>"}, {"id": "1.2.1", "title": "變數的測量尺度", "body": "<p>史帝文森（Stevens, 1946）依資訊含量把測量尺度由低到高分為四級：</p><table><colgroup><col style=\"width:18%\"><col style=\"width:42%\"><col style=\"width:40%\"></colgroup><tr><th>尺度</th><th>功能</th><th>實例／可做運算</th></tr><tr><td><span class=\"term\" data-term=\"NominalScale\">名義尺度</span></td><td>只辨識分類，數字只是分類號</td><td>性別、血型、背號；無運算</td></tr><tr><td><span class=\"term\" data-term=\"OrdinalScale\">順序尺度</span></td><td>可比較優劣順序</td><td>名次、滿意度等第；&gt;、&lt;</td></tr><tr><td><span class=\"term\" data-term=\"IntervalScale\">等距尺度</span></td><td>可算差距大小，無自然零點</td><td>攝氏溫度、IQ；+、−</td></tr><tr><td><span class=\"term\" data-term=\"RatioScale\">比例尺度</span></td><td>有自然零點，可作乘除</td><td>身高、體重、薪資；+、−、×、÷</td></tr></table><div class=\"warn\">易錯：溫度攝氏/華氏是等距尺度，絕對溫度 K 才是比例尺度；存在「自然零點」是比例尺度的關鍵。</div><span class=\"pg\">▸ p.028–029</span>"}, {"id": "1.2.2", "title": "資料之分類", "body": "<p>依性質分：<span class=\"term\" data-term=\"QualitativeData\">屬質資料</span>（類別資料，必為離散）與<span class=\"term\" data-term=\"QuantitativeData\">屬量資料</span>（數值，再分<span class=\"term\" data-term=\"DiscreteData\">離散型</span>與<span class=\"term\" data-term=\"ContinuousData\">連續型</span>）。</p><p>依來源分：原始資料（自行調查蒐集）與次級資料（取自他人整理）。依涵蓋範圍分：普查資料（母體資料）與抽樣資料（樣本資料）。</p><p>依型態分：橫斷面資料（某時點多個體）、時間序列資料（單一個體隨時間）、追蹤資料/panel data（多個體隨時間）。</p><div class=\"note\"><b>重點：</b>屬質資料即使以數字呈現（如學號、郵遞區號），那個數字也只是分類號，沒有數量意義。</div><span class=\"pg\">▸ p.030–032</span>"}], "2": [{"id": "2.1", "title": "次數分配", "body": "<p>敘述統計的目的在整理、陳示與解釋龐大資料。<span class=\"term\" data-term=\"FrequencyDistribution\">次數分配</span>指資料在各分組中出現次數的分配情形，通常編成<span class=\"term\" data-term=\"FrequencyTable\">次數分配表</span>。</p><p>屬質資料用：<span class=\"term\" data-term=\"BarChart\">長條圖</span>（組間留間隔）、<span class=\"term\" data-term=\"PieChart\">圓餅圖</span>（扇形角度＝360°×相對次數）、<span class=\"term\" data-term=\"ParetoChart\">柏雷托圖</span>（排序並疊加累加次數）。</p><p>屬量連續資料分組原則為互斥且週延。先求全距 R＝最大值−最小值，再定組數 k 與組距 h：R ≈ k×h。</p><div class=\"formula\"><span class=\"f-label\">Sturges 法則</span>k = 1 + log₂N = 1 + 3.322·log₁₀N</div><p>組界由組限上下各加減半個基本單位而得；組中點＝(上組限＋下組限)/2。屬量資料可用<span class=\"term\" data-term=\"Histogram\">直方圖</span>與<span class=\"term\" data-term=\"Ogive\">肩形圖</span>，其中相對次數折線對應 pdf、相對累加次數折線對應 cdf。</p><div class=\"warn\">陷阱：長條圖組間要留間隔；直方圖組間相鄰不留空隙，兩者不可混用。</div><span class=\"pg\">▸ p.034–042</span>"}, {"id": "2.2", "title": "中央趨勢量數", "body": "<p>中央趨勢量數用一個數摘要「資料中心在哪」。</p><p><span class=\"term\" data-term=\"ArithmeticMean\">算術平均數</span> μ = (1/N)ΣXi（母體）、x̄ = (1/n)ΣXi（樣本），物理意義即資料重心；分組資料假設各組資料落在組中點。</p><p><span class=\"term\" data-term=\"Median\">中位數</span> me 為排序後最中央的數，一半資料小於它、一半大於它；它對離群值穩健（robust）。<span class=\"term\" data-term=\"Mode\">眾數</span> mo 為出現次數最多者，名義尺度只能用眾數。</p><div class=\"note\"><b>重點：</b>對稱分配 μ=me=mo；右偏（正偏）μ≥me≥mo；左偏（負偏）mo≥me≥μ。</div><p><span class=\"term\" data-term=\"TrimmedMean\">截尾平均數</span>刪去前後各 100p% 再平均（建議 p=0.1~0.2）；<span class=\"term\" data-term=\"GeometricMean\">幾何平均數</span>適用成長率/報酬率；<span class=\"term\" data-term=\"HarmonicMean\">調和平均數</span>適用等距離求平均速度或等金額求平均價格。算術平均是 0% 截尾平均，中位數是 50% 截尾平均。</p><span class=\"pg\">▸ p.043–053</span>"}, {"id": "2.3", "title": "位置量數", "body": "<p>位置量數回答「某個相對位置是多少」，不一定在中央。<span class=\"term\" data-term=\"Percentile\">第 r 百分位數</span> Pr 表示有 r% 資料小於等於它；作法是把排序資料切 99 刀成 100 等份。</p><p>計算位置 i = n×r/100：若 i 為整數，Pr 取 X(i) 與 X(i+1) 之間；若不為整數，Pr = X(⌈i⌉)。</p><p><span class=\"term\" data-term=\"Quartile\">四分位數</span>把資料切 3 刀成 4 等份：Q1=P25、Q2=P50=D5=me、Q3=P75；十分位數把資料切成 10 等份。</p><div class=\"note\"><b>重點：</b>Q2 就是中位數，故很少單獨稱「第 2 四分位數」。</div><span class=\"pg\">▸ p.054–058</span>"}, {"id": "2.4", "title": "分散趨勢量數", "body": "<p>分散趨勢量數摘要「資料多散」。<span class=\"term\" data-term=\"Variance\">變異數</span>採離差平方平均：母體 σ² = (1/N)Σ(Xi−μ)²；樣本 S² = (1/(n−1))Σ(Xi−x̄)²。</p><div class=\"warn\">易錯：樣本變異數除以 n−1 而非 n，因為用 x̄ 估 μ 損失一個自由度，如此 S² 才是 σ² 的不偏估計量。</div><p><span class=\"term\" data-term=\"StandardDeviation\">標準差</span> σ=√σ²、S=√S²，把單位還原成與原資料相同。標準差具平移不變性：Yi=Xi+b 時 Sy=Sx；Yi=aXi 時 Sy=|a|·Sx。</p><p><span class=\"term\" data-term=\"CoefficientOfVariation\">變異係數</span> CV = (S/x̄)×100%，無單位，用來比較尺度或單位不同的兩筆資料。<span class=\"term\" data-term=\"Range\">全距</span> R = X(n)−X(1)，極易受離群值影響；經驗上 S ≈ R/4。</p><span class=\"pg\">▸ p.059–067</span>"}, {"id": "2.5", "title": "其他量數與課題", "body": "<p><span class=\"term\" data-term=\"ZScore\">z 分數</span>（標準分數）衡量單一資料點在整筆資料中的相對位置：zi = (Xi−μ)/σ 或 (Xi−x̄)/S。z=2 表示比平均數大 2 個標準差；比較不同科目或不同資料集的成績時特別有用。</p><p>若分配接近鐘形，有<span class=\"term\" data-term=\"EmpiricalRule\">經驗法則</span>（68-95-99.7）：約 68% 資料落在 μ±σ 內、約 95% 落在 μ±2σ 內、約 99.7% 落在 μ±3σ 內。</p><p><span class=\"term\" data-term=\"Outlier\">離群值</span>是異常過大或過小的數據，分析前應先檢視資料可靠性。</p><div class=\"note\"><b>重點：</b>z 分數本質上就是後面機率論的「標準化」動作。</div><span class=\"pg\">▸ p.068–070</span>"}, {"id": "2.6", "title": "分配形狀量數", "body": "<p>形狀量數關心兩件事：<span class=\"term\" data-term=\"Skewness\">偏態</span>（對稱與否）與<span class=\"term\" data-term=\"Kurtosis\">峰態</span>（中央群聚與尾部厚薄）。</p><p><span class=\"term\" data-term=\"SampleMoment\">動差體系</span>由 Karl Pearson 創：原動差以原點為基準，主動差以平均數為基準。一階動差含中央趨勢、二階含分散、三階含偏態、四階含峰態。</p><div class=\"note\"><b>重點：</b>偏態係數 a3：&gt;0 右偏（正偏）、=0 對稱、&lt;0 左偏（負偏）；Pearson 法 sk = 3(x̄−me)/S。</div><p>峰態係數 a4：&gt;3 高狹峰（leptokurtic，肥尾）、=3 常態峰（mesokurtic）、&lt;3 低闊峰（platykurtic，瘦尾）；超額峰態 = a4−3。</p><span class=\"pg\">▸ p.071–077</span>"}, {"id": "2.7", "title": "探測性資料分析（EDA）", "body": "<p>EDA 由 John Tukey 提倡，以簡單計算與簡易圖形快速呈現分配的位置與形狀。</p><p><span class=\"term\" data-term=\"FiveNumberSummary\">五數字摘要</span>：最小值、Q1、中位數 me、Q3、最大值；兩兩之間各含約 25% 資料，相鄰差距小代表該處密度大。</p><p><span class=\"term\" data-term=\"BoxPlot\">盒鬚圖</span>以 Q1、Q3 畫盒（盒寬即 <span class=\"term\" data-term=\"IQR\">IQR</span> = Q3−Q1），盒中畫中位數；由 Q1、Q3 各延伸 1.5×IQR 為內籬、3×IQR 為外籬。</p><div class=\"warn\">陷阱：內籬與外籬之間者為溫和（嫌疑）離群值，外籬之外者為嚴重離群值。</div><span class=\"pg\">▸ p.078–082</span>"}], "3": [{"id": "3.1", "title": "基本概念與機率定義", "body": "<p><span class=\"term\" data-term=\"RandomExperiment\">隨機實驗</span>的所有可能結果構成<span class=\"term\" data-term=\"SampleSpace\">樣本空間 S</span>，其中每個結果是<span class=\"term\" data-term=\"SamplePoint\">樣本點</span>；樣本空間分有限、可數無限（皆屬離散）與不可數無限（連續）。S 的子集合稱為<span class=\"term\" data-term=\"Event\">事件</span>，實際結果落於事件之內即稱事件發生。<span class=\"term\" data-term=\"MutuallyExclusive\">互斥事件</span>指交集為空集、不能同時發生。</p><p>三種直觀的機率定義：</p><table><colgroup><col style=\"width:22%\"><col style=\"width:48%\"><col style=\"width:30%\"></colgroup><tr><th>定義</th><th>內容</th><th>限制</th></tr><tr><td><span class=\"term\" data-term=\"ClassicalProbability\">古典機率</span></td><td>P(A) = 有利樣本點數 ÷ 總樣本點數</td><td>有限且等可能</td></tr><tr><td><span class=\"term\" data-term=\"RelativeFrequencyProbability\">相對次數機率</span></td><td>實驗次數趨無限時 A 發生比例之極限</td><td>無法重複無限次</td></tr><tr><td><span class=\"term\" data-term=\"SubjectiveProbability\">主觀機率</span></td><td>個人依證據與知識的相信程度</td><td>無客觀標準</td></tr></table><div class=\"note\"><b>重點：</b>古典定義要求每個樣本點「等可能」，這是它常被誤用的地方。</div><span class=\"pg\">▸ p.083–089</span>"}, {"id": "3.2", "title": "公設化機率定義", "body": "<p>俄國數學家 Kolmogorov（1933）為機率論公設化。<span class=\"term\" data-term=\"KolmogorovAxioms\">柯氏三公設</span>：(1) 非負性 P(A)≥0；(2) 正規性 P(S)=1；(3) 可數可加性——兩兩互斥事件聯集的機率等於個別機率之和。滿足三公設的集合函數即<span class=\"term\" data-term=\"ProbabilityMeasure\">機率測度</span>。</p><div class=\"formula\"><span class=\"f-label\">核心推論</span>P(A′) = 1 − P(A)；0 ≤ P(A) ≤ 1；P(∅) = 0</div><p><span class=\"term\" data-term=\"AdditionRule\">加法規則</span>：P(A∪B) = P(A)+P(B)−P(A∩B)；互斥時簡化為 P(A)+P(B)。恰一個發生的<span class=\"term\" data-term=\"SymmetricDifference\">對稱差</span>：P(A△B)=P(A)+P(B)−2P(A∩B)。</p><p>若 A⊂B 則 P(A)≤P(B)。此外有 Boole 不等式 P(A∪B)≤P(A)+P(B) 與 Bonferroni 不等式 P(A∩B)≥1−P(A′)−P(B′)。</p><div class=\"warn\">易錯：P(∅)=0，但機率為 0 的事件不一定是空事件（連續樣本空間中單點機率即為 0）。</div><span class=\"pg\">▸ p.090–097</span>"}, {"id": "3.3", "title": "條件機率與獨立事件", "body": "<p>若 P(B)&gt;0，<span class=\"term\" data-term=\"ConditionalProbability\">條件機率</span> P(A|B) = P(A∩B)/P(B)。可把 B 視為縮小後的新樣本空間。</p><div class=\"formula\"><span class=\"f-label\">乘法規則</span>P(A∩B) = P(A|B)·P(B) = P(B|A)·P(A)</div><p>聯集是「或」用加法、交集是「且」用乘法。列聯表中，交集機率稱<span class=\"term\" data-term=\"JointProbability\">聯合機率</span>，邊緣上單一事件的機率稱<span class=\"term\" data-term=\"MarginalProbability\">邊際機率</span>。</p><p>兩事件<span class=\"term\" data-term=\"IndependentEvents\">獨立</span>若且唯若 P(A∩B)=P(A)P(B)（等價於 P(A|B)=P(A)）；否則稱<span class=\"term\" data-term=\"DependentEvents\">相依事件</span>。獨立與互斥是完全不同的概念：互斥純粹是集合概念，獨立則牽涉機率。</p><p>三事件<span class=\"term\" data-term=\"PairwiseIndependence\">成對獨立</span>指任兩兩獨立；<span class=\"term\" data-term=\"MutualIndependence\">完全獨立</span>還要求三者交集機率等於個別機率連乘。完全獨立蘊含成對獨立，反之不然。</p><div class=\"warn\">陷阱：賭徒謬誤——以為獨立事件連開同邊後下一次會傾向相反，這是對「獨立」的誤解。</div><span class=\"pg\">▸ p.098–110</span>"}, {"id": "3.4", "title": "全機率定理與貝氏定理", "body": "<p>一組<span class=\"term\" data-term=\"Partition\">分割</span>同時滿足兩兩互斥與集體包含（聯集＝S）；A 與 A′ 是最簡單的一組分割。</p><div class=\"formula\"><span class=\"f-label\">全機率定理</span>P(B) = Σᵢ P(B|Aᵢ)·P(Aᵢ)，A₁,…,Aₙ 為一組分割</div><p><span class=\"term\" data-term=\"BayesRule\">貝氏定理</span>把「事前」與「事後」條件機率連起來：</p><div class=\"formula\"><span class=\"f-label\">Bayes</span>P(Aₖ|B) = P(B|Aₖ)·P(Aₖ) ÷ Σᵢ P(B|Aᵢ)·P(Aᵢ)</div><p>分母就是全機率定理。貝氏定理用於「已知結果、反推原因」，經典應如 Monty Hall 問題——換門策略中車機率為 2/3，不換僅 1/3。</p><div class=\"note\"><b>重點：</b>貝氏定理＝條件機率定義＋乘法規則＋全機率定理，沒有新東西。</div><span class=\"pg\">▸ p.111–120</span>"}], "4": [{"id": "·", "title": "本章即將推出", "body": "<div class=\"note\"><b>本章待補（Coming soon）</b><br>目前已完成第 1–3 章，後續章節將陸續補上。</div>"}], "5": [{"id": "·", "title": "本章即將推出", "body": "<div class=\"note\"><b>本章待補（Coming soon）</b><br>目前已完成第 1–3 章，後續章節將陸續補上。</div>"}], "6": [{"id": "·", "title": "本章即將推出", "body": "<div class=\"note\"><b>本章待補（Coming soon）</b><br>目前已完成第 1–3 章，後續章節將陸續補上。</div>"}], "7": [{"id": "·", "title": "本章即將推出", "body": "<div class=\"note\"><b>本章待補（Coming soon）</b><br>目前已完成第 1–3 章，後續章節將陸續補上。</div>"}], "8": [{"id": "·", "title": "本章即將推出", "body": "<div class=\"note\"><b>本章待補（Coming soon）</b><br>目前已完成第 1–3 章，後續章節將陸續補上。</div>"}], "9": [{"id": "·", "title": "本章即將推出", "body": "<div class=\"note\"><b>本章待補（Coming soon）</b><br>目前已完成第 1–3 章，後續章節將陸續補上。</div>"}], "10": [{"id": "·", "title": "本章即將推出", "body": "<div class=\"note\"><b>本章待補（Coming soon）</b><br>目前已完成第 1–3 章，後續章節將陸續補上。</div>"}], "11": [{"id": "·", "title": "本章即將推出", "body": "<div class=\"note\"><b>本章待補（Coming soon）</b><br>目前已完成第 1–3 章，後續章節將陸續補上。</div>"}], "12": [{"id": "·", "title": "本章即將推出", "body": "<div class=\"note\"><b>本章待補（Coming soon）</b><br>目前已完成第 1–3 章，後續章節將陸續補上。</div>"}], "13": [{"id": "·", "title": "本章即將推出", "body": "<div class=\"note\"><b>本章待補（Coming soon）</b><br>目前已完成第 1–3 章，後續章節將陸續補上。</div>"}], "14": [{"id": "·", "title": "本章即將推出", "body": "<div class=\"note\"><b>本章待補（Coming soon）</b><br>目前已完成第 1–3 章，後續章節將陸續補上。</div>"}], "15": [{"id": "·", "title": "本章即將推出", "body": "<div class=\"note\"><b>本章待補（Coming soon）</b><br>目前已完成第 1–3 章，後續章節將陸續補上。</div>"}]};
+const CH_PROBLEMS = {"1": [{"q": "「The process of analyzing sample data in order to draw conclusions about the characteristics of a population」稱為下列何者？(a) descriptive statistics (b) statistical inference (c) data analysis (d) data summarization", "opts": ["(a) descriptive statistics", "(b) statistical inference", "(c) data analysis", "(d) data summarization"], "ans": "(b) statistical inference——由樣本資料推論母體特徵，正是統計推論的定義。"}, {"q": "問卷題目「非常贊成、贊成、中立、不贊成、非常不贊成」的量測尺度為何？(a)類別 (b)名目 (c)順序 (d)等距 (e)比例", "opts": ["(a)類別", "(b)名目", "(c)順序", "(d)等距", "(e)比例"], "ans": "(c) 順序尺度——可比較贊成程度高低，但「贊成多少」的差距無法衡量。"}, {"q": "試指出下列變數的測量尺度：(1)婚姻狀況（已婚=1,未婚=2,離婚=3,分居=4）；(2)薪資（元）；(3)學歷（高中=1…研究所=4）。", "opts": [], "ans": "(1) 名義尺度（編號只是分類）；(2) 比例尺度（有自然零點、可乘除）；(3) 順序尺度（只有高低次序）。"}], "2": [{"q": "基金經理人稱過去三年報酬率為 25%、−45%、90%，平均 23% 勝過大盤。你同意嗎？", "opts": [], "ans": "不同意。算術平均 23% 會高估；應用幾何平均：√(1.25×0.55×1.90)−1 ≈ 1.093−1 = 9.3%，並未擊敗大盤。"}, {"q": "甲生統計 66 分（全班平均 50、SD 11），微積分 82 分（全班平均 73、SD 9），同一批考生，哪一科表現較傑出？", "opts": [], "ans": "算 z 分數：統計 z=(66−50)/11≈1.45；微積分 z=(82−73)/9=1。甲生在統計學相對表現較傑出。"}, {"q": "BMW 10 位業務上月銷車：15,23,4,19,18,10,10,8,28,19。求第 40 百分位數與上下四分位數。", "opts": [], "ans": "排序：4,8,10,10,15,18,19,19,23,28。i=10×0.4=4 為整數，P40=(X₍₄₎+X₍₅₎)/2=(10+15)/2=12.5；Q1=P25=X₍₃₎=10；Q3=P75=X₍₈₎=19。"}], "3": [{"q": "若 P(B)=0.30、P(A|B)=0.40、P(B|A)=0.50，求 P(A)。", "opts": [], "ans": "由乘法規則 P(A∩B)=P(A|B)P(B)=0.4×0.3=0.12；又 P(A∩B)=P(B|A)P(A)=0.5·P(A)，故 P(A)=0.12/0.5=0.24。"}, {"q": "Monty Hall 問題：三扇門一車二羊，你選一門後主持人開一扇有羊的門，問「換門」與「不換門」哪個中車機率高？", "opts": ["換門", "不換門"], "ans": "換門中車機率 2/3，不換僅 1/3，故應換門；若以丟銅板混合決定，機率回到 1/2。"}, {"q": "擲兩顆公正骰子，點數和為 8 的機率？點數和為 2 的機率？", "opts": [], "ans": "樣本空間共 36 點。和為 8 的有利點：(2,6),(3,5),(4,4),(5,3),(6,2) 共 5 個，機率 5/36；和為 2 只有 (1,1)，機率 1/36。"}], "4": [], "5": [], "6": [], "7": [], "8": [], "9": [], "10": [], "11": [], "12": [], "13": [], "14": [], "15": []};
+
+/* ===== 術語分類 ===== */
+const GLOSS_CATS = [{"name": "統計學基本概念", "keys": ["Data", "Statistics", "Variable", "StatisticalInference", "DescriptiveStatistics", "InferentialStatistics", "Estimation", "HypothesisTesting", "DataSet"]}, {"name": "母體與樣本", "keys": ["Population", "Sample", "Parameter", "Statistic", "Census", "RandomSample"]}, {"name": "測量尺度", "keys": ["NominalScale", "OrdinalScale", "IntervalScale", "RatioScale"]}, {"name": "資料類型", "keys": ["QualitativeData", "QuantitativeData", "DiscreteData", "ContinuousData"]}, {"name": "次數分配與圖形", "keys": ["FrequencyDistribution", "FrequencyTable", "BarChart", "PieChart", "ParetoChart", "Histogram", "RelativeFrequency", "Ogive"]}, {"name": "中央趨勢量數", "keys": ["ArithmeticMean", "Median", "Mode", "TrimmedMean", "GeometricMean", "HarmonicMean"]}, {"name": "位置量數", "keys": ["Percentile", "Quartile", "ZScore"]}, {"name": "分散趨勢量數", "keys": ["Variance", "StandardDeviation", "CoefficientOfVariation", "Range", "EmpiricalRule", "Outlier"]}, {"name": "分配形狀與 EDA", "keys": ["SampleMoment", "Skewness", "Kurtosis", "FiveNumberSummary", "BoxPlot", "IQR"]}, {"name": "機率基本概念", "keys": ["RandomExperiment", "SampleSpace", "SamplePoint", "Event", "MutuallyExclusive"]}, {"name": "三種機率定義", "keys": ["ClassicalProbability", "RelativeFrequencyProbability", "SubjectiveProbability"]}, {"name": "柯氏公設與定理", "keys": ["KolmogorovAxioms", "ProbabilityMeasure", "Complement", "AdditionRule", "SymmetricDifference"]}, {"name": "條件機率與獨立", "keys": ["ConditionalProbability", "MultiplicationRule", "IndependentEvents", "DependentEvents", "PairwiseIndependence", "MutualIndependence", "JointProbability", "MarginalProbability", "GamblersFallacy"]}, {"name": "貝氏定理", "keys": ["Partition", "LawOfTotalProbability", "BayesRule"]}];
+const CH_TERMS_CATS = {"1": ["統計學基本概念", "母體與樣本", "測量尺度", "資料類型"], "2": ["次數分配與圖形", "中央趨勢量數", "位置量數", "分散趨勢量數", "分配形狀與 EDA"], "3": ["機率基本概念", "三種機率定義", "柯氏公設與定理", "條件機率與獨立", "貝氏定理"], "4": [], "5": [], "6": [], "7": [], "8": [], "9": [], "10": [], "11": [], "12": [], "13": [], "14": [], "15": []};
+
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function escA(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+
+let currentChapter=1;
+function renderSidebar(){
+  const sb=document.getElementById("sidebar");
+  let html=`<div class="brand">提綱挈領 學統計<div class="t2">研究所複習 · 第 1–15 章</div></div>
+  <button class="nav-gloss" id="navGloss" title="統整全書術語，可篩選與打勾複習">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>術語複習表
+  </button>`;
+  BOOK.forEach(ch=>{
+    html+=`<button class="nav-chapter ${ch.n===currentChapter?'active':''}" data-ch="${ch.n}">
+      <span class="num">${ch.n}</span><span>${esc(ch.title)}</span>
+      ${ch.ready?'<span class="tag done">已上線</span>':'<span class="tag">待補</span>'}
+    </button>`;
+    if(ch.subs&&ch.subs.length){
+      ch.subs.forEach(sub=>{
+        const id=(typeof sub==="string")?sub.slice(0,3):sub.id;
+        const title=(typeof sub==="string")?sub:sub.title;
+        html+=`<button class="nav-sub" data-ch="${ch.n}" data-sec="${id}">${esc(title)}</button>`;
+      });
+    }
+  });
+  sb.innerHTML=html;
+  const navGloss=sb.querySelector("#navGloss");
+  if(navGloss)navGloss.addEventListener("click",()=>{renderGlossaryFull();window.scrollTo({top:0,behavior:"smooth"});});
+  sb.querySelectorAll(".nav-chapter").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const ch=BOOK[+b.dataset.ch-1];
+      renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+  sb.querySelectorAll(".nav-sub").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const ch=BOOK[+b.dataset.ch-1];
+      if(!ch.ready)return;
+      if(currentChapter!==+b.dataset.ch)renderChapter(+b.dataset.ch);
+      const el=document.getElementById("sec-"+b.dataset.sec);
+      if(!el)return;
+      if(!el.classList.contains("open")){const h=el.querySelector(".section-head");if(h)h.click();}
+      setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),60);
+    });
+  });
+}
+
+function renderChapter(n){
+  currentChapter=n;
+  renderSidebar();
+  const book=BOOK[n-1];
+  const sections=CH_SECTIONS[n]||[];
+  const problems=CH_PROBLEMS[n]||[];
+  const c=document.getElementById("chapterContent");
+  const favStoreKey="stat_fav_v1";
+  let favState={};try{favState=JSON.parse(localStorage.getItem(favStoreKey)||"{}")}catch(e){}
+  const favPool={};
+  let h=`<div class="chapter-head">
+    <span class="kicker">第 ${n} 章</span>
+    <h1>第${n}章 ${esc(book.title)}</h1>
+    <div class="chpage">《提綱挈領 學統計》第 ${n} 章</div>
+    <ul class="ch-points">
+      ${book.points?book.points.map(p=>`<li>${esc(p)}</li>`).join(""):""}
+    </ul>
+    <div class="progress-strip">${book.subs.map((_,i)=>`<i class="${i<book.subs.length?'done':''}"></i>`).join("")}</div>
+  </div>`;
+  sections.forEach((s,i)=>{
+    h+=`<section class="section" id="sec-${s.id}">
+      <div class="section-head" onclick="toggleSec(this)">
+        <span class="sec-num">${s.id}</span><span>${esc(s.title)}</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="section-body">${s.body}</div>
+    </section>`;
+  });
+  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">例題演練</h1><p>先自己作答，再點「顯示答案」核對。</p></div>`;
+  problems.forEach((p,i)=>{
+    const fk=n+"-"+(i+1);
+    favPool[fk]={t:"第 "+n+" 章 · 例題 "+(i+1),q:p.q+(p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""),a:p.ans};
+    const isFav=!!favState[fk];
+    h+=`<div class="problem" id="prob-${n}-${i+1}">
+      <div class="p-head"><span>例題 ${i+1}</span><button class="fav ${isFav?"on":""}" data-fav="${fk}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
+      <div class="p-body"><p>${p.q}</p>${p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""}
+      <button class="ans-btn" onclick="toggleAns(this)">顯示答案</button>
+      <div class="ans"><span class="a-label">解答</span>：${p.ans}</div></div>
+    </div>`;
+  });
+  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">本章術語</h1><p>本章出現的術語：打勾＝已學會、★重點、✎筆記。全書術語總表在左側「術語複習表」。</p></div>
+  <div id="chGlossRoot"></div>`;
+  c.innerHTML=h;
+
+  glossMode="chapter";glossChapter=n;
+  renderGlossary();
+
+  // 例題收藏（錯題收集，存本機，與題庫頁共用 macro_fav_v1）
+  c.querySelectorAll(".fav").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const k=b.dataset.fav;
+      if(favState[k]){delete favState[k];}else{favState[k]=favPool[k];}
+      try{localStorage.setItem(favStoreKey,JSON.stringify(favState));}catch(e){}
+      const on=!!favState[k];
+      b.classList.toggle("on",on);
+      b.textContent=on?"★ 已收藏":"☆ 收藏";
+    });
+  });
+
+  // 術語點擊（文內：課文名詞＋專有名詞都可開知識卡）
+  c.querySelectorAll(".term,.proper").forEach(t=>{
+    if(!t.dataset.term)return;
+    t.addEventListener("click",e=>{e.stopPropagation();openTerm(t.dataset.term);});
+  });
+  // 方法學習卡打勾（學會標記，存本機；學會＝刪除線＋黯淡）
+  const mcKey="stat_mc_v1";
+  let mcState={};try{mcState=JSON.parse(localStorage.getItem(mcKey)||"{}")}catch(e){}
+  c.querySelectorAll(".method-card input[type=checkbox]").forEach(cb=>{
+    const k=cb.dataset.mc;
+    const card=cb.closest(".method-card");
+    const apply=()=>card.classList.toggle("learned",cb.checked);
+    cb.checked=!!mcState[k];
+    apply();
+    cb.addEventListener("change",()=>{mcState[k]=cb.checked;localStorage.setItem(mcKey,JSON.stringify(mcState));apply();});
+  });
+  // 套用已存高亮
+  applyHighlights();
+}
+
+function toggleSec(head){
+  const sec=head.parentElement;
+  sec.classList.toggle("open");
+}
+function toggleAns(btn){
+  const ans=btn.nextElementSibling;
+  ans.classList.toggle("show");
+  btn.textContent=ans.classList.contains("show")?"隱藏答案":"顯示答案";
+}
+
+/* ===== 術語模態 ===== */
+function openTerm(key){
+  const t=TERMS[key];
+  if(!t){toast("暫無此術語資料");return;}
+  document.getElementById("termModalEn").textContent=t[0];
+  document.getElementById("termModalZh").textContent=t[1];
+  document.getElementById("termModalDef").textContent=t[2];
+  const m=document.getElementById("termModal");
+  m.style.display="flex";
+}
+function closeTerm(){document.getElementById("termModal").style.display="none";}
+
+/* ===== 章節資料對照（每章完成後加入） ===== */
+
+/* ===== 術語表（列表形式） ===== */
+const GLS = {
+  get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
+  set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+};
+
+let glossMode="full", glossChapter=1;
+
+let glossCat="all", glossOnlyUnlearned=false;
+
+function renderGlossaryFull(){
+  glossMode="full";
+  currentChapter=0;
+  renderSidebar();
+  const c=document.getElementById("chapterContent");
+  c.innerHTML=`<div class="chapter-head">
+    <span class="kicker">全書複習</span>
+    <h1>術語複習表</h1>
+    <p>統整全書 ${Object.keys(TERMS).length} 個術語：打勾＝已學會、★重點、✎筆記。用分類按鈕與「只看未學會」篩選，進度自動統計，全部存在本機瀏覽器。</p>
+  </div>
+  <div id="glossFullRoot"></div>`;
+  glossCat="all";
+  renderGlossary();
+}
+function glossCatsForMode(){
+  if(glossMode==="full")return GLOSS_CATS;
+  const names=CH_TERMS_CATS[glossChapter]||[];
+  return GLOSS_CATS.filter(c=>names.includes(c.name));
+}
+function renderGlossary(){
+  const root=document.getElementById(glossMode==="full"?"glossFullRoot":"chGlossRoot");
+  if(!root)return;
+  const learned=GLS.get("stat-gloss-learned",[]);
+  const starred=GLS.get("stat-gloss-star",[]);
+  const notes=GLS.get("stat-gloss-notes",{});
+  const cats=glossCatsForMode();
+  const allKeys=cats.flatMap(c=>c.keys).filter(k=>TERMS[k]);
+  const total=allKeys.length;
+  const done=allKeys.filter(k=>learned.includes(k)).length;
+
+  let h=`<div class="gloss-toolbar">
+    <div class="gloss-cats">`;
+  if(glossMode==="full"){
+    h+=`<button class="gloss-cat-btn ${glossCat==="all"?"active":""}" data-cat="all">全部（${total}）</button>
+      ${cats.map(c=>`<button class="gloss-cat-btn ${glossCat===c.name?"active":""}" data-cat="${esc(c.name)}">${esc(c.name)}（${c.keys.filter(k=>TERMS[k]).length}）</button>`).join("")}`;
+  }else{
+    h+=`<span class="gloss-cat-label">本章術語 · ${cats.map(c=>esc(c.name)).join(" ／ ")}</span>`;
+  }
+  h+=`</div>
+    <div class="gloss-data-actions">
+      <button class="toolbtn ${glossOnlyUnlearned?"active":""}" id="onlyUnlearned" title="只看未學會">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </button>
+      <button class="toolbtn" id="exportGloss" title="匯出備份">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+      </button>
+      <button class="toolbtn" id="importGloss" title="匯入備份">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V9m0 0 4 4m-4-4-4 4M4 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="gloss-progress">
+    <div class="bar"><div class="fill" style="width:${total?done/total*100:0}%"></div></div>
+    <div class="label">已學會 ${done} / ${total}</div>
+  </div>`;
+
+  cats.forEach(cat=>{
+    if(glossMode==="full"&&glossCat!=="all"&&glossCat!==cat.name)return;
+    const items=cat.keys.filter(k=>TERMS[k]);
+    if(!items.length)return;
+    const catDone=items.filter(k=>learned.includes(k)).length;
+    h+=`<div class="gloss-group" data-gname="${esc(cat.name)}">
+      <h3>${esc(cat.name)}（${catDone}/${items.length}）</h3>
+      ${items.map(k=>{
+        const [en,zh,def]=TERMS[k];
+        const isLearned=learned.includes(k), isStarred=starred.includes(k);
+        const note=notes[k]||"";
+        if(glossOnlyUnlearned&&isLearned)return "";
+        return `<div class="gloss-item ${isLearned?"done":""} ${isStarred?"starred":""}" data-key="${esc(k)}">
+          <button class="gloss-check ${isLearned?"done":""}" onclick="toggleLearn(&quot;${escA(k)}&quot;)" title="標記已學會">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+          </button>
+          <div class="gloss-main">
+            <div class="gloss-en">${esc(en)}<span class="gloss-zh">${esc(zh)}</span></div>
+            <div class="gloss-def">${esc(def)}</div>
+            <div class="gloss-note ${note?"show":""}" data-note="wrap-${esc(k)}">
+              <textarea placeholder="寫下你自己的重點…" onchange="saveNote('${esc(k)}',this.value)">${esc(note)}</textarea>
+            </div>
+          </div>
+          <div class="gloss-actions">
+            <button class="gloss-btn ${isStarred?"active":""}" onclick="toggleStar(&quot;${escA(k)}&quot;)" title="重點畫記">★ 重點</button>
+            <button class="gloss-btn ${note?"active":""}" onclick="toggleNote(&quot;${escA(k)}&quot;)" title="個人筆記">✎ 筆記</button>
+          </div>
+        </div>`;
+      }).join("")}
+    </div>`;
+  });
+
+  root.innerHTML=h;
+  if(glossMode==="full"){
+    root.querySelectorAll(".gloss-cat-btn").forEach(b=>{
+      b.addEventListener("click",()=>{glossCat=b.dataset.cat;renderGlossary();});
+    });
+  }
+  document.getElementById("onlyUnlearned").addEventListener("click",e=>{
+    glossOnlyUnlearned=!glossOnlyUnlearned;
+    e.currentTarget.classList.toggle("active",glossOnlyUnlearned);
+    renderGlossary();
+  });
+  document.getElementById("exportGloss").addEventListener("click",exportGloss);
+  document.getElementById("importGloss").addEventListener("click",()=>{
+    const inp=document.createElement("input");
+    inp.type="file";inp.accept=".json";
+    inp.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>importGloss(r.result);r.readAsText(f);};
+    inp.click();
+  });
+}
+function toggleLearn(k){
+  let l=GLS.get("stat-gloss-learned",[]);
+  l=l.includes(k)?l.filter(x=>x!==k):[...l,k];
+  GLS.set("stat-gloss-learned",l);
+  renderGlossary();
+}
+function toggleStar(k){
+  let s=GLS.get("stat-gloss-star",[]);
+  s=s.includes(k)?s.filter(x=>x!==k):[...s,k];
+  GLS.set("stat-gloss-star",s);
+  renderGlossary();
+}
+function toggleNote(k){
+  const wrap=document.querySelector(`[data-note="wrap-${k}"]`);
+  if(wrap)wrap.classList.toggle("show");
+}
+function saveNote(k,v){
+  const notes=GLS.get("stat-gloss-notes",{});
+  notes[k]=v;
+  GLS.set("stat-gloss-notes",notes);
+  renderGlossary();
+}
+function exportGloss(){
+  const data={learned:GLS.get("stat-gloss-learned",[]),star:GLS.get("stat-gloss-star",[]),notes:GLS.get("stat-gloss-notes",{})};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="統計術語備份.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast("已匯出備份");
+}
+function importGloss(jsonStr){
+  try{
+    const d=JSON.parse(jsonStr);
+    if(d.learned&&Array.isArray(d.learned)){
+      const cur=GLS.get("stat-gloss-learned",[]);
+      GLS.set("stat-gloss-learned",[...new Set([...cur,...d.learned])]);
+    }
+    if(d.star&&Array.isArray(d.star)){
+      const cur=GLS.get("stat-gloss-star",[]);
+      GLS.set("stat-gloss-star",[...new Set([...cur,...d.star])]);
+    }
+    if(d.notes&&typeof d.notes==="object"){
+      const cur=GLS.get("stat-gloss-notes",{});
+      GLS.set("stat-gloss-notes",{...cur,...d.notes});
+    }
+    toast("已匯入並合併備份");
+    renderGlossary();
+  }catch(e){toast("備份檔案格式錯誤");}
+}
+
+/* ===== 全書搜尋 ===== */
+const searchInput=document.getElementById("searchInput");
+const searchPanel=document.getElementById("searchPanel");
+function stripHtml(t){return String(t||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();}
+function buildSearchIndex(){
+  const idx=[];
+  BOOK.forEach(ch=>{
+    if(!ch.ready)return;
+    const n=ch.n;
+    idx.push({type:"ch",n,title:ch.title,text:ch.title});
+    (CH_SECTIONS[n]||[]).forEach(sec=>{
+      idx.push({type:"sec",n,id:sec.id,title:sec.title,text:sec.title+" "+stripHtml(sec.body)});
+    });
+    (CH_PROBLEMS[n]||[]).forEach((p,i)=>{
+      idx.push({type:"prob",n,no:i+1,text:stripHtml(p.q)+" "+stripHtml(p.ans||"")});
+    });
+  });
+  Object.keys(TERMS).forEach(k=>{
+    const [en,zh,def]=TERMS[k];
+    idx.push({type:"term",key:k,en,zh,def,text:en+" "+zh+" "+def});
+  });
+  return idx;
+}
+const SEARCH_IDX=buildSearchIndex();
+searchInput.addEventListener("input",()=>{
+  const kw=searchInput.value.trim().toLowerCase();
+  if(!kw){searchPanel.style.display="none";return;}
+  const hits=SEARCH_IDX.filter(x=>x.text.toLowerCase().includes(kw)).slice(0,40);
+  if(!hits.length){
+    searchPanel.innerHTML=`<div class="sp-empty">找不到「${esc(kw)}」相關內容，試試其他關鍵字。</div>`;
+    searchPanel.style.display="block";return;
+  }
+  searchPanel.innerHTML=hits.map(h=>{
+    if(h.type==="ch")return `<button class="sp-item" data-act="ch" data-n="${h.n}"><span class="sp-tag">第${h.n}章</span><b>${esc(h.title)}</b><span class="sp-snip">整章內容</span></button>`;
+    if(h.type==="sec")return `<button class="sp-item" data-act="sec" data-n="${h.n}" data-id="${esc(h.id)}"><span class="sp-tag">第${h.n}章·小節</span><b>${esc(h.title)}</b><span class="sp-snip">${esc(h.text.slice(0,70))}</span></button>`;
+    if(h.type==="prob")return `<button class="sp-item" data-act="prob" data-n="${h.n}" data-no="${h.no}"><span class="sp-tag">第${h.n}章·例題${h.no}</span><span class="sp-snip">${esc(h.text.slice(0,80))}</span></button>`;
+    return `<button class="sp-item" data-act="term" data-key="${esc(h.key)}"><span class="sp-tag">術語</span><b>${esc(h.en)} ${esc(h.zh)}</b><span class="sp-snip">${esc(h.def.slice(0,60))}</span></button>`;
+  }).join("")+`<div class="sp-count">找到 ${hits.length} 筆相關內容</div>`;
+  searchPanel.style.display="block";
+});
+searchPanel.addEventListener("click",e=>{
+  const item=e.target.closest(".sp-item");
+  if(!item)return;
+  const act=item.dataset.act;
+  searchPanel.style.display="none";
+  searchInput.value="";
+  if(act==="ch"){
+    renderChapter(+item.dataset.n);
+    window.scrollTo({top:0,behavior:"smooth"});
+  }else if(act==="sec"){
+    renderChapter(+item.dataset.n);
+    setTimeout(()=>{
+      const el=document.getElementById("sec-"+item.dataset.id);
+      if(el){el.classList.add("open");el.scrollIntoView({behavior:"smooth",block:"start"});}
+    },60);
+  }else if(act==="prob"){
+    renderChapter(+item.dataset.n);
+    setTimeout(()=>{
+      const el=document.getElementById("prob-"+item.dataset.n+"-"+item.dataset.no);
+      if(el)el.scrollIntoView({behavior:"smooth",block:"start"});
+    },60);
+  }else if(act==="term"){
+    openTerm(item.dataset.key);
+  }
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){searchPanel.style.display="none";searchInput.blur();}
+});
+
+
+/* ===== 重點標記 ===== */
+let hlEnabled=true;
+function getHls(){try{return JSON.parse(localStorage.getItem("stat-hl")||"[]")}catch(e){return[]}}
+function saveHls(h){localStorage.setItem("stat-hl",JSON.stringify(h))}
+
+document.addEventListener("mouseup",e=>{
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed)return;
+  const txt=sel.toString().trim();
+  if(txt.length<2||txt.length>300)return;
+  // 檢查是否點在工具列/按鈕上
+  if(e.target.closest(".toolbtn,.ans-btn,.flip-card,.term,.section-head"))return;
+  const range=sel.getRangeAt(0);
+  const el=range.startContainer.parentElement;
+  if(!el.closest(".section-body,.problem"))return;
+  const hls=getHls();
+  if(hls.some(h=>h.txt===txt))return;
+  hls.push({txt,time:Date.now()});
+  saveHls(hls);
+  applyHighlights();
+  toast("已加入重點標記（點黃色文字可移除）");
+});
+
+function applyHighlights(){
+  const hls=getHls();
+  document.querySelectorAll(".section-body .userhl,.problem .userhl").forEach(el=>el.outerHTML=el.textContent);
+  if(!hlEnabled)return;
+  hls.forEach(h=>{
+    document.querySelectorAll(".section-body p,.section-body .note,.section-body .warn,.problem .p-body").forEach(block=>{
+      const text=block.textContent;
+      if(!text.includes(h.txt))return;
+      if(block.querySelector(".userhl"))return;
+      const idx=text.indexOf(h.txt);
+      const frag=document.createDocumentFragment();
+      frag.appendChild(document.createTextNode(text.slice(0,idx)));
+      const m=document.createElement("mark");
+      m.className="userhl";m.textContent=h.txt;
+      m.addEventListener("click",()=>{
+        const arr=getHls().filter(x=>x.txt!==h.txt);
+        saveHls(arr);applyHighlights();toast("已移除重點標記");
+      });
+      frag.appendChild(m);
+      frag.appendChild(document.createTextNode(text.slice(idx+h.txt.length)));
+      block.replaceChildren(frag);
+    });
+  });
+}
+
+document.getElementById("hlToggle").addEventListener("click",e=>{
+  hlEnabled=!hlEnabled;
+  e.currentTarget.classList.toggle("active",hlEnabled);
+  applyHighlights();
+  toast(hlEnabled?"重點標記已顯示":"重點標記已隱藏");
+});
+
+/* ===== 畫記模式 / 深色 ===== */
+let markMode=false;
+const markBtn=document.getElementById("markToggle");
+markBtn.addEventListener("click",e=>{
+  markMode=!markMode;
+  document.body.classList.toggle("marking",markMode);
+  markBtn.classList.toggle("active",markMode);
+  toast(markMode?"畫記模式開啟：點文字即可高亮（再點一次關閉並儲存）":"畫記模式已關閉，重點已儲存");
+});
+document.addEventListener("click",e=>{
+  if(!markMode)return;
+  if(e.target.closest(".toolbtn,.ans-btn,.term,.section-head"))return;
+  if(e.target.closest(".userhl"))return;
+  const el=e.target.closest(".section-body p,.section-body li,.section-body .note,.section-body .warn,.problem .p-body");
+  if(!el)return;
+  e.preventDefault();e.stopPropagation();
+  const txt=el.textContent.trim();
+  if(txt.length<2||txt.length>500){toast("這段太長，請改用拖選文字畫重點");return;}
+  const hls=getHls();
+  if(hls.some(h=>h.txt===txt))return;
+  hls.push({txt,time:Date.now()});
+  saveHls(hls);
+  applyHighlights();
+  toast("已加入重點標記（點黃色文字可移除）");
+});
+document.getElementById("darkToggle").addEventListener("click",e=>{
+  document.body.classList.toggle("dark");
+  e.currentTarget.classList.toggle("active",document.body.classList.contains("dark"));
+});
+
+/* ===== toast ===== */
+function toast(msg){
+  let t=document.getElementById("toast");
+  if(!t){
+    t=document.createElement("div");
+    t.id="toast";
+    t.style.cssText="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#26303b;color:#fff;padding:10px 18px;border-radius:10px;font-size:13.5px;z-index:99;box-shadow:0 6px 24px rgba(0,0,0,.2);opacity:0;transition:opacity .25s;pointer-events:none";
+    document.body.appendChild(t);
+  }
+  t.textContent=msg;
+  t.style.opacity="1";
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>t.style.opacity="0",1800);
+}
+
+/* ===== 初始化 ===== */
+renderSidebar();
+renderChapter(1);
+</script>
+</body>
+</html>
