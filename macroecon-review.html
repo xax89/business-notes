@@ -140,6 +140,13 @@ body.dark .problem{background:#26221a}
   color:var(--teal);border-radius:8px;padding:7px 16px;font-size:13.5px;cursor:pointer;font-family:inherit;transition:all .15s;
 }
 .ans-btn:hover{background:var(--teal);color:#fff}
+.fav{
+  margin-left:auto;background:none;border:1.5px solid var(--line);color:var(--muted);border-radius:8px;
+  padding:3px 12px;font-size:12.5px;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;
+}
+.fav:hover{border-color:#c9a227;color:#c9a227}
+.fav.on{border-color:#c9a227;background:#fffaf0;color:#c9a227;font-weight:700}
+body.dark .fav.on{background:#3a3320}
 .ans{display:none;margin-top:12px;background:var(--teal-soft);border-radius:8px;padding:12px 16px;font-size:14px}
 .ans.show{display:block}
 .ans .a-label{font-weight:700;color:var(--teal);font-size:13px}
@@ -2695,6 +2702,9 @@ function renderChapter(n){
   const sections=CH_SECTIONS[n]||[];
   const problems=CH_PROBLEMS[n]||[];
   const c=document.getElementById("chapterContent");
+  const favStoreKey="macro_fav_v1";
+  let favState={};try{favState=JSON.parse(localStorage.getItem(favStoreKey)||"{}")}catch(e){}
+  const favPool={};
   let h=`<div class="chapter-head">
     <span class="kicker">第 ${n} 章</span>
     <h1>第${n}章 ${esc(book.title)}</h1>
@@ -2715,8 +2725,11 @@ function renderChapter(n){
   });
   h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">例題演練</h1><p>先自己作答，再點「顯示答案」核對。</p></div>`;
   problems.forEach((p,i)=>{
+    const fk=n+"-"+(i+1);
+    favPool[fk]={t:"第 "+n+" 章 · 例題 "+(i+1),q:p.q+(p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""),a:p.ans};
+    const isFav=!!favState[fk];
     h+=`<div class="problem">
-      <div class="p-head"><span>例題 ${i+1}</span></div>
+      <div class="p-head"><span>例題 ${i+1}</span><button class="fav ${isFav?"on":""}" data-fav="${fk}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
       <div class="p-body"><p>${p.q}</p>${p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""}
       <button class="ans-btn" onclick="toggleAns(this)">顯示答案</button>
       <div class="ans"><span class="a-label">解答</span>：${p.ans}</div></div>
@@ -2727,6 +2740,18 @@ function renderChapter(n){
   c.innerHTML=h;
 
   renderGlossary();
+
+  // 例題收藏（錯題收集，存本機，與題庫頁共用 macro_fav_v1）
+  c.querySelectorAll(".fav").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const k=b.dataset.fav;
+      if(favState[k]){delete favState[k];}else{favState[k]=favPool[k];}
+      try{localStorage.setItem(favStoreKey,JSON.stringify(favState));}catch(e){}
+      const on=!!favState[k];
+      b.classList.toggle("on",on);
+      b.textContent=on?"★ 已收藏":"☆ 收藏";
+    });
+  });
 
   // 術語點擊（文內：課文名詞＋專有名詞都可開知識卡）
   c.querySelectorAll(".term,.proper").forEach(t=>{

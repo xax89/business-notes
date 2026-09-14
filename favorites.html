@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>題庫收藏｜微觀人性 學個經</title>
+<title>題庫收藏｜總經 × 微觀</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23c9a227'/%3E%3Cpath d='M12 4l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 9.7l5.4-.8z' fill='%23fff'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -20,7 +20,11 @@ header{margin-top:22px;border-left:8px solid var(--gold);padding:4px 0 12px 18px
 .kicker{font-size:12px;letter-spacing:.2em;color:var(--gold);font-weight:700;font-family:"Noto Sans TC",sans-serif}
 h1{font-size:28px;margin-top:2px}
 .sub{color:var(--muted);font-size:14px;margin-top:6px}
-.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:22px 0 8px}
+.tabs{display:flex;gap:8px;margin:22px 0 0;border-bottom:2px solid var(--line)}
+.tab{border:1px solid var(--line);border-bottom:none;background:var(--panel);border-radius:9px 9px 0 0;padding:9px 22px;font-size:14px;cursor:pointer;color:var(--muted);font-family:inherit;transition:all .15s}
+.tab:hover{color:var(--teal)}
+.tab.active{background:var(--gold-soft);border-color:var(--gold);color:var(--gold);font-weight:700}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px 0 8px}
 .tool{border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:7px 16px;font-size:13.5px;cursor:pointer;color:var(--ink);font-family:inherit;transition:all .15s}
 .tool:hover{border-color:var(--teal);color:var(--teal)}
 .tool.danger:hover{border-color:var(--accent);color:var(--accent)}
@@ -37,6 +41,8 @@ h1{font-size:28px;margin-top:2px}
 .fa{margin-top:10px;display:none}
 .fa.show{display:block;background:var(--teal-soft);border-radius:8px;padding:10px 14px;font-size:14px}
 .fa .al{font-weight:800;color:var(--teal);font-size:12.5px;display:block;margin-bottom:2px}
+.fa ul{margin:6px 0 2px;padding-left:22px}
+.fa li{margin:3px 0}
 .empty{text-align:center;color:var(--muted);padding:70px 20px;border:1.5px dashed var(--line);border-radius:12px;margin-top:18px}
 .empty .big{font-size:40px;color:var(--gold);display:block;margin-bottom:8px}
 .empty a{color:var(--teal)}
@@ -50,34 +56,47 @@ h1{font-size:28px;margin-top:2px}
   <header>
     <div class="kicker">MY PROBLEM BANK</div>
     <h1>題庫收藏</h1>
-    <p class="sub">《微觀人性 學個經》筆記中標記收藏的例題，集中於此複習。收藏與取消會即時同步。</p>
+    <p class="sub">在總經複習／微觀筆記的例題上點「☆ 收藏」，錯題就會集中在這裡。收藏與取消會即時同步。</p>
   </header>
-  <div class="note">收藏資料儲存在此瀏覽器的本機（localStorage）——在 GitHub Pages 網頁版使用時，與筆記頁共用同一份收藏。若清除瀏覽器資料會一併清空。</div>
+  <div class="note">收藏資料儲存在此瀏覽器的本機（localStorage）——GitHub Pages 網頁版下，總經與微觀各自獨立收藏，與對應的複習頁共用同一份。若清除瀏覽器資料會一併清空。</div>
+  <div class="tabs">
+    <button class="tab active" data-tab="macro">總經收藏</button>
+    <button class="tab" data-tab="micro">微觀收藏</button>
+  </div>
   <div class="tools">
     <button class="tool" id="expandAll">全部展開解答</button>
     <button class="tool" id="collapseAll">全部收合解答</button>
-    <button class="tool danger" id="clearAll">清空收藏</button>
+    <button class="tool danger" id="clearAll">清空此區收藏</button>
     <span class="count" id="count">0 題</span>
   </div>
   <div id="list"></div>
   <div class="empty" id="empty" style="display:none">
     <span class="big">☆</span>
-    還沒有收藏任何題目。
-    <div class="tip">回到 <a href="microecon-notes.html">微觀筆記</a>，在每題例題右上角點「☆ 收藏」即可加入這裡。</div>
+    <span id="emptyText">還沒有收藏任何題目。</span>
+    <div class="tip" id="emptyTip">回到 <a id="emptyLink" href="macroecon-review.html">總經複習</a>，在每題例題右上角點「☆ 收藏」即可加入這裡。</div>
   </div>
 </div>
 <script>
 (function(){
-  var KEY='micro_fav_v1';
+  var KEYS={macro:'macro_fav_v1',micro:'micro_fav_v1'};
+  var LINKS={macro:['macroecon-review.html','總經複習'],micro:['microecon-notes.html','微觀筆記']};
+  var tab='macro';
   var list=document.getElementById('list'),empty=document.getElementById('empty'),countEl=document.getElementById('count');
-  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return {};}}
-  function save(o){localStorage.setItem(KEY,JSON.stringify(o));}
+  var emptyText=document.getElementById('emptyText'),emptyTip=document.getElementById('emptyTip'),emptyLink=document.getElementById('emptyLink');
+  function load(){try{return JSON.parse(localStorage.getItem(KEYS[tab])||'{}');}catch(e){return {};}}
+  function save(o){localStorage.setItem(KEYS[tab],JSON.stringify(o));}
   function render(){
     var fav=load();
     var ids=Object.keys(fav);
     countEl.textContent=ids.length+' 題';
     list.innerHTML='';
-    if(ids.length===0){empty.style.display='block';return;}
+    if(ids.length===0){
+      empty.style.display='block';
+      emptyText.textContent='「'+tabName(tab)+'」還沒有收藏任何題目。';
+      emptyLink.href=LINKS[tab][0];emptyLink.textContent=LINKS[tab][1];
+      emptyTip.innerHTML='回到 <a href="'+LINKS[tab][0]+'">'+LINKS[tab][1]+'</a>，在每題例題右上角點「☆ 收藏」即可加入這裡。';
+      return;
+    }
     empty.style.display='none';
     ids.sort().forEach(function(id){
       var it=fav[id];
@@ -102,6 +121,15 @@ h1{font-size:28px;margin-top:2px}
       list.appendChild(card);
     });
   }
+  function tabName(t){return t==='macro'?'總經':'微觀';}
+  document.querySelectorAll('.tab').forEach(function(tb){
+    tb.addEventListener('click',function(){
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+      tb.classList.add('active');
+      tab=tb.dataset.tab;
+      render();
+    });
+  });
   document.getElementById('expandAll').addEventListener('click',function(){
     document.querySelectorAll('.fa').forEach(function(x){x.classList.add('show');});
     document.querySelectorAll('.fcard .tool').forEach(function(b){if(b.textContent.indexOf('隱藏')<0&&b.textContent.indexOf('解答')>-1)b.textContent='隱藏解答';});
@@ -111,7 +139,7 @@ h1{font-size:28px;margin-top:2px}
     document.querySelectorAll('.fcard .tool').forEach(function(b){if(b.textContent.indexOf('顯示')>-1)b.textContent='顯示解答';});
   });
   document.getElementById('clearAll').addEventListener('click',function(){
-    if(confirm('確定清空全部收藏？此操作無法復原。')){localStorage.removeItem(KEY);render();}
+    if(confirm('確定清空「'+tabName(tab)+'」全部收藏？此操作無法復原。')){localStorage.removeItem(KEYS[tab]);render();}
   });
   render();
 })();
