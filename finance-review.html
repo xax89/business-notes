@@ -1303,8 +1303,8 @@ const CH10X = {
   </tbody></table></div>
   `
 };
-/* 把 CH10X 併入 CH10_SECTIONS */
-const CH10_SECTIONS = (function(){var a=CH10_SECTIONS.slice(); a.push(CH10X); return a;})();
+/* 把 CH10X 併入 CH10_SECTIONS（原陣列 const，內容可 push） */
+CH10_SECTIONS.push(CH10X);
 
 /* ===== 第十一章 ===== */
 const CH11_SECTIONS = [
