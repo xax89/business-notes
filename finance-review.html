@@ -387,7 +387,7 @@ const BOOK = [
   {n:15, title:"選擇權導論", subs:["15.1 選擇權基本","15.2 交易策略"], done:true, points:["買權 call：有權以履約價 K 買入；賣權 put：有權以 K 賣出","期權買方付權利金、最大損失即權利金；賣方履約義務","歐式僅到期可行權；美式到期前皆可行權","買權賣權平價：C + K/(1+r)^t = P + S₀","常見策略：covered call、protective put、價差"]},
   {n:16, title:"選擇權評價", subs:["16.1 二項式與 BSM","16.2 價值因子與希臘字母"], done:true, points:["BSM：C＝S₀N(d₁)−Ke^(−rt)N(d₂)","五因子：股價、履約價、時間、利率、波動率","波動率↑→call/put 權利金皆↑；時間↑→call/put 皆↑","Δ＝股價變動一元期權價值變動，用於避險"]},
   {n:17, title:"遠期與期貨", subs:["17.1 遠期契約","17.2 期貨與避險"], done:true, points:["遠期：客制、場外；期貨：標準化、交易所、逐日結算","期貨價格 F₀＝S₀(1+r)^T","避險：持有現貨者空頭期貨避險；未來要買者多頭避險"]},
-  {n:18, title:"交換契約", subs:["18.1 利率交換","18.2 貨幣交換"], done:true, points:["利率交換：同幣別固定利率換浮動利率","貨幣交換：不同幣別本金與利息互換","交換本質為一系列遠期契約的組合"]},
+  {n:18, title:"其他衍生性商品與風險管理", subs:["18.1 交換","18.2 其他衍生性商品"], done:true, points:["利率交換（同幣別固定換浮動）、貨幣交換、CDS","認股權證 warrants：公司發行、可轉換為普通股","可轉換公司�：債性+股性，轉換標的為普通股","交換本質為一系列遠期契約的組合"]},
   {n:19, title:"資金成本", subs:["19.1 概論","19.2 個別資金成本","19.3 WACC"], done:true, points:["資金成本＝投資人對類似風險要求的報酬率（機會成本）","負債 kD＝公司債 YTM；稅後 kD(1−T)；考慮發行成本 f","特別股 kP＝DivP/P₀","普通股 kE：CAPM 法或 Gordon 法 kE=D₁/P₀+g","WACC＝wD·kD(1−T)+wP·kP+wE·kE，權數用市值"],
   {n:20, title:"投資計畫評估", subs:["20.1 評估指標","20.2 NPV 與 IRR 取捨","20.3 現金流量評估"], done:true, points:["回收期、折現回收期、ARR、NPV、IRR、MIRR、PI","NPV>0 接受；IRR>必要報酬率接受","互斥方案 NPV 與 IRR 衝突時以 NPV 為準；IRR 多重解","沉沒成本不計、機會成本要計、外部性（侵蝕/綜效）","現金流三段：初始投資、營業 OCF、終結（殘值+回收NWC）"]},
   {n:21, title:"投資風險分析與實質選擇權", subs:["21.1 風險調整","21.2 實質選擇權"], done:true, points:["高風險計畫用 RADR 或確定等值法","實質選擇權：延遲、擴張、放棄，提升專案價值"]},
@@ -572,6 +572,9 @@ const TERMS = {
   "Forward":["Forward Contract","遠期契約","客製化、場外交易的未來交割約定。"],
   "Futures":["Futures Contract","期貨契約","標準化、交易所交易、逐日結算。"],
   "Swap":["Swap","交換契約","一系列未來現金流互換；如利率交換、貨幣交換。"],
+  "CDS":["Credit Default Swap (CDS)","信用違約交換","買方付權利金，標的違約時賣方賠償；單獨交易信用風險。"],
+  "Warrant":["Warrant","認股權證","公司發行、可依約定價格認購新股的權利。"],
+  "Convertible bond":["Convertible Bond","可轉換公司債","公司債附加轉換為普通股的選擇權。"],
   /* 第19章 */
   "NPV":["Net Present Value (NPV)","淨現值","未來現金流折現減初始投資；NPV&gt;0 接受。"],
   "IRR":["Internal Rate of Return (IRR)","內部報酬率","使 NPV=0 的折現率；IRR&gt;必要報酬率接受。"],
@@ -1562,10 +1565,21 @@ const CH17_SECTIONS = [
 /* ===== 第十八章 ===== */
 const CH18_SECTIONS = [
 {
-  id:"18.1", title:"交換契約",
+  id:"18.1", title:"交換",
   body:`
   <p><span class="term" data-term="Swap">交換（swap）</span>：交易雙方約定在一段期間內交換一連串現金流量，本質是一系列遠期契約的組合。</p>
-  <div class="note"><b>利率交換：</b>同幣別下，一方支付固定利率、另一方支付浮動利率（如 LIBOR），僅交換淨額利息、不換本金。<br><b>貨幣交換：</b>不同幣別間互換本金與利息，用以規避匯率風險。</div>
+  <div class="note"><b>利率交換：</b>同幣別下，一方付固定、另一方付浮動（如 LIBOR），僅交換淨額利息、不換本金。<br><b>貨幣交換：</b>不同幣別間互換本金與利息，規避匯率風險。<br><b><span class="term" data-term="CDS">信用違約交換 CDS</span>：</b>買方定期付權利金，若標的債券違約，賣方賠償損失——把信用風險單獨切出來交易。</div>
+  `
+},
+{
+  id:"18.2", title:"其他衍生性商品",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>商品</th><th>說明</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Warrant">認股權證 warrants</span></b></td><td>由<b>公司自己發行</b>，持有人可用約定價格向公司買進新股；不同於在交易所買的選擇權。</td></tr>
+  <tr><td><b>掩護性權證</b></td><td>由第三方（投資銀行）發行，標的為已流通股票，與公司無關。</td></tr>
+  <tr><td><b><span class="term" data-term="Convertible bond">可轉換公司債</span></b></td><td>公司債附加「轉換為普通股」的選擇權；兼具有債券的固定收益與股票的上漲潛力，票面利率較低。</td></tr>
+  <tr><td><b>利率選擇權／新奇選擇權</b></td><td>以利率為標的；新奇選擇權如障礙選擇權、亞式選擇權等。</td></tr>
+  </tbody></table></div>
   `
 }
 ];
@@ -2002,7 +2016,7 @@ const GLOSS_CATS = [
   {name:"股票評價", keys:["DDM","Gordon"]},
   {name:"債券", keys:["Indenture","Duration","Convexity"]},
   {name:"選擇權", keys:["Call","Put","Put-call parity","BSM"]},
-  {name:"衍生性", keys:["Forward","Futures","Swap"]},
+  {name:"衍生性", keys:["Forward","Futures","Swap","CDS","Warrant","Convertible bond"]},
   {name:"資本預算", keys:["NPV","IRR","Real option"]},
   {name:"資本結構", keys:["DOL","DFL","MM","Tradeoff"]},
   {name:"資金成本與資本預算", keys:["Cost of capital","Cost of debt","Cost of equity","WACC","NPV","IRR","MIRR","Real option"]},
