@@ -380,7 +380,8 @@ const BOOK = [
   {n:8, title:"報酬與風險的衡量", subs:["8.1 衡量報酬的指標","8.2 歷史報酬與風險","8.3 預期報酬與風險"], done:true, points:["HPR＝(期末價+股利−買價)/買價；APR vs EAR","時間加權 vs 金額加權（IRR）報酬率","算術平均 vs 幾何平均；E(R)=ΣpᵢRᵢ","變異數/標準差衡量絕對風險；CV＝σ/E(R) 為相對風險","半變異數只衡量低於期望值的下方風險","Knight：風險（機率可知）vs 不確定性（機率不可知）"]},
   {n:9, title:"現代資產組合理論", subs:["9.1 組合報酬與風險","9.2 馬可維茲理論與效率前緣","9.3 加入無風險資產"], done:true, points:["Markowitz 1952 MPT、1990 諾獎；平均數-變異數架構","E(Rp)=ΣwᵢE(Rᵢ)；σp²=ΣΣwᵢwⱼσᵢⱼ（n²項）","MVP 最小變異數組合；效率前緣＝MVP 以上段","加入 Rf 後效率邊界為自 Rf 切效率前緣的直線＝CML","兩基金分離：所有人都持有「無風險資產＋市場組合 M」"]},
   {n:10, title:"資本資產定價模式 CAPM", subs:["10.1 CAPM","10.2 特徵線與實證","10.3 風險調整績效指標"], done:true, points:["βi=Cov(Ri,Rm)/σm²，衡量系統風險","CAPM/SML：E(Ri)=Rf+βi[E(Rm)−Rf]","CML 用總風險 σp；SML 用系統風險 β","特徵線：Ri−Rf=α+β(Rm−Rf)+ε；殘差＝個別風險","績效指標：Sharpe（σ分母）、Treynor（β分母）、Jensen α、IR、M²","單一資產 β 不穩，組合 β 較穩；APT 為多因子延伸"]},
-  {n:11, title:"效率市場與行為財務", subs:["11.1 效率市場假說","11.2 行為財務學"], done:true, points:["EMH 三形式：弱式／半強式／強式","弱式→技術分析無用；半強式→基本分析無用","異常：反應過度／反應不足；Grossman-Stiglitz 詭論","行為財務：系統性認知偏誤＋套利限制"]}
+  {n:11, title:"效率市場與行為財務", subs:["11.1 效率市場假說","11.2 行為財務學"], done:true, points:["EMH 三形式：弱式／半強式／強式","弱式→技術分析無用；半強式→基本分析無用","異常：反應過度／反應不足；Grossman-Stiglitz 詭論","行為財務：過度自信、易取性、錨定、確認偏誤、框架效應、心理帳戶、後悔趨避"]},
+  {n:12, title:"金融市場與機構", subs:["12.1 金融市場功能","12.2 市場分類與機構"], done:true, points:["資金由盈餘單位流向赤字單位","直接金融（發股發債）vs 間接金融（銀行存貸）","一級市場（IPO/增資）vs 二級市場（流通交易）","貨幣市場（≤1年）vs 資本市場（>1年）","交易所 vs OTC；商銀／投行／券商／基金／央行"]}
 ];
 
 
@@ -533,7 +534,10 @@ const TERMS = {
   "Information ratio":["Information Ratio","資訊比率","αp/殘差標準差；主動選股能力指標。"],
   /* 第11章 */
   "EMH":["Efficient Market Hypothesis (EMH)","效率市場假說","價格充分反映資訊；分弱式、半強式、強式。"],
-  "Grossman-Stiglitz":["Grossman-Stiglitz Paradox","效率市場詭論","取得資訊有成本，故完全效率市場不可能存在。"]
+  "Grossman-Stiglitz":["Grossman-Stiglitz Paradox","效率市場詭論","取得資訊有成本，故完全效率市場不可能存在。"],
+  /* 第12章 */
+  "Direct finance":["Direct Finance","直接金融","赤字單位直接對大眾發行股債籌資，仲介僅撮合。"],
+  "Indirect finance":["Indirect Finance","間接金融","透過銀行等仲介存貸，仲介承擔信用風險。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1320,7 +1324,33 @@ const CH11_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS};
+
+/* ===== 第十二章 ===== */
+const CH12_SECTIONS = [
+{
+  id:"12.1", title:"金融市場的功能",
+  body:`
+  <p>金融市場引導資金由資金<b>盈餘單位</b>（儲蓄者）流向<b>赤字單位</b>（需資金者），完成資源配置、風險分攤與價格發現。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>途徑</th><th>說明</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Direct finance">直接金融</span></b></td><td>赤字單位直接對投資大眾發行股票、債券籌資；金融機構僅擔任承銷／仲介。</td></tr>
+  <tr><td><b><span class="term" data-term="Indirect finance">間接金融</span></b></td><td>透過金融仲介（如銀行）：儲蓄者存款、銀行再放款給需要者，銀行承擔信用風險。</td></tr>
+  </tbody></table></div>
+  `
+},
+{
+  id:"12.2", title:"市場分類與金融機構",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>分類軸</th><th>區分</th></tr></thead><tbody>
+  <tr><td><b>發行／流通</b></td><td><b>一級市場</b>：證券首次發行（IPO、現金增資、公司債發行）；<b>二級市場</b>：已發行證券在投資人間流通買賣。</td></tr>
+  <tr><td><b>期限</b></td><td><b>貨幣市場</b>：≤1 年（國庫券、商業本票、可轉讓定存單、銀行承兌匯票）；<b>資本市場</b>：&gt;1 年（股票、中長期債券）。</td></tr>
+  <tr><td><b>交易場所</b></td><td>集中交易市場（交易所）vs 店頭市場 OTC。</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>主要機構：</b>商業銀行（存放款）、投資銀行（承銷）、證券商（經紀／自營）、共同基金／投信、中央銀行（貨幣政策）。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1431,7 +1461,15 @@ const CH11_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS};
+const CH12_PROBLEMS = [
+{
+  q:"企業首次對外公開發行股票以籌資，屬於哪個市場？",
+  opts:["(A) 貨幣市場","(B) 二級市場","(C) 一級市場","(D) 店頭市場"],
+  ans:"<b>(C) 一級市場。</b>IPO 是證券首次發行給投資大眾；之後投資人互相買賣才是二級市場。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1454,7 +1492,8 @@ const GLOSS_CATS = [
   {name:"報酬與風險", keys:["HPR","State of nature","Knight","CV"]},
   {name:"投資組合理論", keys:["Markowitz","Efficient frontier","MVP","CML","Separation theorem"]},
   {name:"CAPM", keys:["Beta","SML","APT","Sharpe","Treynor","Jensen alpha","Information ratio"]},
-  {name:"效率與行為財務", keys:["EMH","Grossman-Stiglitz"]}
+  {name:"效率與行為財務", keys:["EMH","Grossman-Stiglitz"]},
+  {name:"金融市場", keys:["Direct finance","Indirect finance"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1472,7 +1511,8 @@ const CH_TERMS_CATS = {
   8:["報酬與風險"],
   9:["投資組合理論"],
   10:["CAPM"],
-  11:["效率與行為財務"]
+  11:["效率與行為財務"],
+  12:["金融市場"]
 };
 let glossMode="full", glossChapter=1;
 
