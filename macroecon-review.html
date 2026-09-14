@@ -71,6 +71,26 @@ body.dark{
 }
 .nav-sub:hover{background:var(--nav-hover);color:var(--ink)}
 .nav-sub.active{color:var(--nav-active);font-weight:700}
+.nav-gloss{
+  display:flex;align-items:center;gap:8px;width:100%;padding:6px 10px;border-radius:6px;margin-top:10px;
+  cursor:pointer;font-size:13.5px;font-weight:700;color:#8a6d1a;border:1.5px dashed #d9b84a;background:#fffaf0;
+  text-align:left;font-family:inherit;line-height:1.45;transition:all .15s;
+}
+.nav-gloss:hover{border-color:#c9a227;color:#c9a227;background:#fff6dd}
+.nav-gloss svg{width:15px;height:15px;flex-shrink:0}
+.nav-gloss.active{background:#c9a227;color:#fff;border-style:solid}
+.search-panel{
+  position:fixed;top:66px;left:50%;transform:translateX(-50%);width:min(680px,92vw);max-height:62vh;overflow:auto;
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.16);z-index:60;
+}
+.search-panel .sp-item{display:block;width:100%;text-align:left;padding:10px 16px;border:none;border-bottom:1px solid var(--line);background:none;cursor:pointer;font-family:inherit;font-size:13.5px;color:var(--ink);line-height:1.5}
+.search-panel .sp-item:hover{background:var(--nav-hover)}
+.search-panel .sp-tag{display:inline-block;font-size:11px;color:var(--teal);font-weight:700;margin-right:8px;letter-spacing:.03em;white-space:nowrap}
+.search-panel .sp-item b{display:block;font-size:13.5px;margin:2px 0}
+.search-panel .sp-snip{display:block;font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search-panel .sp-count{padding:8px 16px;font-size:12px;color:var(--muted);text-align:center}
+.search-panel .sp-empty{padding:24px 16px;text-align:center;color:var(--muted);font-size:13.5px}
+body.dark .search-panel{background:#26221a;border-color:#4a4234}
 /* ===== 主內容 ===== */
 .main{flex:1;min-width:0;padding:28px 34px 80px}
 .topbar{
@@ -313,7 +333,7 @@ body.dark .formula .f-label{color:#d8b36a}
   <div class="topbar no-print">
     <div class="searchbox">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-      <input type="search" id="searchInput" placeholder="搜尋本章內容…">
+      <input type="search" id="searchInput" placeholder="搜尋全書內容…">
     </div>
     <button class="toolbtn" id="markToggle" title="畫記模式：開啟後點文字直接高亮，關閉即儲存">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
@@ -326,6 +346,7 @@ body.dark .formula .f-label{color:#d8b36a}
     </button>
   </div>
 
+  <div id="searchPanel" class="search-panel" style="display:none"></div>
   <div id="chapterContent"></div>
   <div class="empty" id="emptyState">
     <div class="big">🔍</div>
@@ -2663,7 +2684,10 @@ function escA(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/
 let currentChapter=1;
 function renderSidebar(){
   const sb=document.getElementById("sidebar");
-  let html=`<div class="brand">宏觀天地 學總經<div class="t2">研究所複習 · 第 1–14 章</div></div>`;
+  let html=`<div class="brand">宏觀天地 學總經<div class="t2">研究所複習 · 第 1–14 章</div></div>
+  <button class="nav-gloss" id="navGloss" title="統整全書術語，可篩選與打勾複習">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>術語複習表
+  </button>`;
   BOOK.forEach(ch=>{
     html+=`<button class="nav-chapter ${ch.n===currentChapter?'active':''}" data-ch="${ch.n}">
       <span class="num">${ch.n}</span><span>${esc(ch.title)}</span>
@@ -2678,6 +2702,8 @@ function renderSidebar(){
     }
   });
   sb.innerHTML=html;
+  const navGloss=sb.querySelector("#navGloss");
+  if(navGloss)navGloss.addEventListener("click",()=>{renderGlossaryFull();window.scrollTo({top:0,behavior:"smooth"});});
   sb.querySelectorAll(".nav-chapter").forEach(b=>{
     b.addEventListener("click",()=>{
       const ch=BOOK[+b.dataset.ch-1];
@@ -2731,17 +2757,18 @@ function renderChapter(n){
     const fk=n+"-"+(i+1);
     favPool[fk]={t:"第 "+n+" 章 · 例題 "+(i+1),q:p.q+(p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""),a:p.ans};
     const isFav=!!favState[fk];
-    h+=`<div class="problem">
+    h+=`<div class="problem" id="prob-${n}-${i+1}">
       <div class="p-head"><span>例題 ${i+1}</span><button class="fav ${isFav?"on":""}" data-fav="${fk}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
       <div class="p-body"><p>${p.q}</p>${p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""}
       <button class="ans-btn" onclick="toggleAns(this)">顯示答案</button>
       <div class="ans"><span class="a-label">解答</span>：${p.ans}</div></div>
     </div>`;
   });
-  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">術語表複習</h1><p>逐條複習：打勾＝已學會、點「重點」畫記、點「筆記」寫自己的註記，進度條自動統計，全部存在本機瀏覽器。</p></div>
-  <div id="glossRoot"></div>`;
+  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">本章術語</h1><p>本章出現的術語：打勾＝已學會、★重點、✎筆記。全書術語總表在左側「術語複習表」。</p></div>
+  <div id="chGlossRoot"></div>`;
   c.innerHTML=h;
 
+  glossMode="chapter";glossChapter=n;
   renderGlossary();
 
   // 例題收藏（錯題收集，存本機，與題庫頁共用 macro_fav_v1）
@@ -2831,24 +2858,68 @@ const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
   set(k,v){localStorage.setItem(k,JSON.stringify(v))}
 };
+
+const CH_TERMS_CATS = {
+  1:["所得帳指標","衡量方法","物價指數","部門與市場","循環流轉","變數性質","所得分配"],
+  2:["古典學派","勞動市場與失業"],
+  3:["凱因斯模型"],
+  4:["IS-LM 模型"],
+  5:["完整模型 AD-AS"],
+  6:["開放經濟"],
+  7:["物價膨脹與預期"],
+  8:["菲利普曲線"],
+  9:["學派與人物"],
+  10:["投資理論"],
+  11:["消費理論"],
+  12:["貨幣理論","總體經濟目標"],
+  13:["景氣循環"],
+  14:["經濟成長"]
+};
+let glossMode="full", glossChapter=1;
+
 let glossCat="all", glossOnlyUnlearned=false;
 
+function renderGlossaryFull(){
+  glossMode="full";
+  currentChapter=0;
+  renderSidebar();
+  const c=document.getElementById("chapterContent");
+  c.innerHTML=`<div class="chapter-head">
+    <span class="kicker">全書複習</span>
+    <h1>術語複習表</h1>
+    <p>統整全書 ${Object.keys(TERMS).length} 個術語：打勾＝已學會、★重點、✎筆記。用分類按鈕與「只看未學會」篩選，進度自動統計，全部存在本機瀏覽器。</p>
+  </div>
+  <div id="glossFullRoot"></div>`;
+  glossCat="all";
+  renderGlossary();
+}
+function glossCatsForMode(){
+  if(glossMode==="full")return GLOSS_CATS;
+  const names=CH_TERMS_CATS[glossChapter]||[];
+  return GLOSS_CATS.filter(c=>names.includes(c.name));
+}
 function renderGlossary(){
-  const root=document.getElementById("glossRoot");
+  const root=document.getElementById(glossMode==="full"?"glossFullRoot":"chGlossRoot");
   if(!root)return;
   const learned=GLS.get("macro-gloss-learned",[]);
   const starred=GLS.get("macro-gloss-star",[]);
   const notes=GLS.get("macro-gloss-notes",{});
-  const total=Object.keys(TERMS).length;
-  const done=learned.filter(k=>TERMS[k]).length;
+  const cats=glossCatsForMode();
+  const allKeys=cats.flatMap(c=>c.keys).filter(k=>TERMS[k]);
+  const total=allKeys.length;
+  const done=allKeys.filter(k=>learned.includes(k)).length;
 
   let h=`<div class="gloss-toolbar">
-    <div class="gloss-cats">
-      <button class="gloss-cat-btn ${glossCat==="all"?"active":""}" data-cat="all">全部（${total}）</button>
-      ${GLOSS_CATS.map(c=>`<button class="gloss-cat-btn ${glossCat===c.name?"active":""}" data-cat="${esc(c.name)}">${esc(c.name)}（${c.keys.length}）</button>`).join("")}
-    </div>
+    <div class="gloss-cats">`;
+  if(glossMode==="full"){
+    h+=`<button class="gloss-cat-btn ${glossCat==="all"?"active":""}" data-cat="all">全部（${total}）</button>
+      ${cats.map(c=>`<button class="gloss-cat-btn ${glossCat===c.name?"active":""}" data-cat="${esc(c.name)}">${esc(c.name)}（${c.keys.filter(k=>TERMS[k]).length}）</button>`).join("")}`;
+  }else{
+    h+=`<span class="gloss-cat-label">本章術語 · ${cats.map(c=>esc(c.name)).join(" ／ ")}</span>`;
+  }
+  h+=`</div>
     <div class="gloss-data-actions">
-      <button class="toolbtn" id="onlyUnlearned" title="只看未學會">
+      <button class="toolbtn ${glossOnlyUnlearned?"active":""}" id="onlyUnlearned" title="只看未學會">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
       </button>
       <button class="toolbtn" id="exportGloss" title="匯出備份">
@@ -2864,8 +2935,8 @@ function renderGlossary(){
     <div class="label">已學會 ${done} / ${total}</div>
   </div>`;
 
-  GLOSS_CATS.forEach(cat=>{
-    if(glossCat!=="all"&&glossCat!==cat.name)return;
+  cats.forEach(cat=>{
+    if(glossMode==="full"&&glossCat!=="all"&&glossCat!==cat.name)return;
     const items=cat.keys.filter(k=>TERMS[k]);
     if(!items.length)return;
     const catDone=items.filter(k=>learned.includes(k)).length;
@@ -2897,9 +2968,11 @@ function renderGlossary(){
   });
 
   root.innerHTML=h;
-  root.querySelectorAll(".gloss-cat-btn").forEach(b=>{
-    b.addEventListener("click",()=>{glossCat=b.dataset.cat;renderGlossary();});
-  });
+  if(glossMode==="full"){
+    root.querySelectorAll(".gloss-cat-btn").forEach(b=>{
+      b.addEventListener("click",()=>{glossCat=b.dataset.cat;renderGlossary();});
+    });
+  }
   document.getElementById("onlyUnlearned").addEventListener("click",e=>{
     glossOnlyUnlearned=!glossOnlyUnlearned;
     e.currentTarget.classList.toggle("active",glossOnlyUnlearned);
@@ -2965,34 +3038,75 @@ function importGloss(jsonStr){
   }catch(e){toast("備份檔案格式錯誤");}
 }
 
-/* ===== 搜尋 ===== */
+/* ===== 全書搜尋 ===== */
 const searchInput=document.getElementById("searchInput");
+const searchPanel=document.getElementById("searchPanel");
+function stripHtml(t){return String(t||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();}
+function buildSearchIndex(){
+  const idx=[];
+  BOOK.forEach(ch=>{
+    if(!ch.done)return;
+    const n=ch.n;
+    idx.push({type:"ch",n,title:ch.title,text:ch.title});
+    (CH_SECTIONS[n]||[]).forEach(sec=>{
+      idx.push({type:"sec",n,id:sec.id,title:sec.title,text:sec.title+" "+stripHtml(sec.body)});
+    });
+    (CH_PROBLEMS[n]||[]).forEach((p,i)=>{
+      idx.push({type:"prob",n,no:i+1,text:stripHtml(p.q)+" "+stripHtml(p.ans||"")});
+    });
+  });
+  Object.keys(TERMS).forEach(k=>{
+    const [en,zh,def]=TERMS[k];
+    idx.push({type:"term",key:k,en,zh,def,text:en+" "+zh+" "+def});
+  });
+  return idx;
+}
+const SEARCH_IDX=buildSearchIndex();
 searchInput.addEventListener("input",()=>{
   const kw=searchInput.value.trim().toLowerCase();
-  document.querySelectorAll(".section").forEach(s=>{
-    const secOpen=s.classList.contains("open");
-    if(!kw){s.style.display="";if(secOpen)s.classList.add("open");return;}
-    const text=s.textContent.toLowerCase();
-    const hit=text.includes(kw);
-    s.style.display=hit?"":"none";
-    if(hit&&!secOpen)s.classList.add("open");
-  });
-  document.querySelectorAll(".problem").forEach(p=>{
-    if(!kw){p.style.display="";return;}
-    p.style.display=p.textContent.toLowerCase().includes(kw)?"":"none";
-  });
-  document.querySelectorAll("#glossRoot .gloss-item").forEach(c=>{
-    if(!kw){c.style.display="";return;}
-    c.style.display=c.textContent.toLowerCase().includes(kw)?"":"none";
-  });
-  document.querySelectorAll("#glossRoot .gloss-group").forEach(g=>{
-    const visible=[...g.querySelectorAll(".gloss-item")].some(el=>el.style.display!=="none");
-    g.style.display=visible?"":"none";
-  });
-  const anyVisible=[...document.querySelectorAll(".section,.problem,#glossRoot .gloss-item")].some(el=>el.style.display!=="none");
-  document.getElementById("emptyState").classList.toggle("show",!anyVisible);
-  document.getElementById("emptyKeyword").textContent=kw;
+  if(!kw){searchPanel.style.display="none";return;}
+  const hits=SEARCH_IDX.filter(x=>x.text.toLowerCase().includes(kw)).slice(0,40);
+  if(!hits.length){
+    searchPanel.innerHTML=`<div class="sp-empty">找不到「${esc(kw)}」相關內容，試試其他關鍵字。</div>`;
+    searchPanel.style.display="block";return;
+  }
+  searchPanel.innerHTML=hits.map(h=>{
+    if(h.type==="ch")return `<button class="sp-item" data-act="ch" data-n="${h.n}"><span class="sp-tag">第${h.n}章</span><b>${esc(h.title)}</b><span class="sp-snip">整章內容</span></button>`;
+    if(h.type==="sec")return `<button class="sp-item" data-act="sec" data-n="${h.n}" data-id="${esc(h.id)}"><span class="sp-tag">第${h.n}章·小節</span><b>${esc(h.title)}</b><span class="sp-snip">${esc(h.text.slice(0,70))}</span></button>`;
+    if(h.type==="prob")return `<button class="sp-item" data-act="prob" data-n="${h.n}" data-no="${h.no}"><span class="sp-tag">第${h.n}章·例題${h.no}</span><span class="sp-snip">${esc(h.text.slice(0,80))}</span></button>`;
+    return `<button class="sp-item" data-act="term" data-key="${esc(h.key)}"><span class="sp-tag">術語</span><b>${esc(h.en)} ${esc(h.zh)}</b><span class="sp-snip">${esc(h.def.slice(0,60))}</span></button>`;
+  }).join("")+`<div class="sp-count">找到 ${hits.length} 筆相關內容</div>`;
+  searchPanel.style.display="block";
 });
+searchPanel.addEventListener("click",e=>{
+  const item=e.target.closest(".sp-item");
+  if(!item)return;
+  const act=item.dataset.act;
+  searchPanel.style.display="none";
+  searchInput.value="";
+  if(act==="ch"){
+    renderChapter(+item.dataset.n);
+    window.scrollTo({top:0,behavior:"smooth"});
+  }else if(act==="sec"){
+    renderChapter(+item.dataset.n);
+    setTimeout(()=>{
+      const el=document.getElementById("sec-"+item.dataset.id);
+      if(el){el.classList.add("open");el.scrollIntoView({behavior:"smooth",block:"start"});}
+    },60);
+  }else if(act==="prob"){
+    renderChapter(+item.dataset.n);
+    setTimeout(()=>{
+      const el=document.getElementById("prob-"+item.dataset.n+"-"+item.dataset.no);
+      if(el)el.scrollIntoView({behavior:"smooth",block:"start"});
+    },60);
+  }else if(act==="term"){
+    openTerm(item.dataset.key);
+  }
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){searchPanel.style.display="none";searchInput.blur();}
+});
+
 
 /* ===== 重點標記 ===== */
 let hlEnabled=true;
