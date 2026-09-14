@@ -326,11 +326,6 @@ body.dark .formula .f-label{color:#d8b36a}
     </button>
   </div>
 
-  <div class="banner no-print">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
-    <div><b>樣板說明：</b>這是《宏觀天地 學總經》第一章的互動複習樣板。點擊小節展開重點、用術語表打勾複習（重點／筆記都存在本機）、點例題顯示解答。確認這個風格後，我再把其餘章節與另外兩本書做進去。</div>
-  </div>
-
   <div id="chapterContent"></div>
   <div class="empty" id="emptyState">
     <div class="big">🔍</div>
@@ -370,6 +365,14 @@ const BOOK = [
 
 /* ===== 術語資料（點擊卡片時顯示） ===== */
 const TERMS = {
+  "45-degree line":["45-degree line","45°線","凱因斯交叉圖中表示總支出＝總產出的參考線，與 AE 線的交點決定均衡所得。"],
+  "Dusenberry":["Dusenberry","杜森貝利","提出相對所得假說：消費取決於相對所得，受示範效果與制輪效果影響。"],
+  "Expectations-augmented AS":["Expectations-augmented AS","植入預期總合供給（EAS）","把預期物價納入的總合供給曲線：預期物價上升使 AS 左移，形成停滯性通膨。"],
+  "Jorgenson":["Jorgenson","裘根森","提出新古典投資理論：廠商依資本使用者成本決定最適資本存量。"],
+  "Menu cost theory":["Menu cost theory","菜單成本理論","新興凱因斯學派主張：調整價格需付出菜單成本，故短期價格具僵固性。"],
+  "Mundell":["Mundell","孟岱爾","提出 Mundell-Fleming 模型：開放經濟下政策效果取決於匯率制度；也是三元悖論的代表學者。"],
+  "Pigou effect":["Pigou effect","皮古效果（實質餘額效果）","物價下跌使實質財富增加、消費上升，用以解決古典不一致性。"],
+  "Taylor rule":["Taylor rule","泰勒法則","央行依通膨缺口與產出缺口調整名目利率的貨幣政策規則。"],
   "GDP":["Gross Domestic Product","國內生產毛額","一國國內在一定期間內所生產的最終商品與勞務的市場價值總和（以國境為界）。"],
   "GNP":["Gross National Product","國民生產毛額","一國國民在一定期間內生產的最終商品與勞務之市場價值總和（以國民為界）。GNP = GDP + 國外要素所得淨額。"],
   "NNP":["Net National Product","國民生產淨額","NNP = GNP − 折舊（資本消耗提列）。"],
@@ -2801,34 +2804,28 @@ const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
-  {name:"所得帳指標", keys:["GDP","GNP","NNP","NI","PI","DPI","Nominal GDP","Real GDP"]},
-  {name:"衡量方法", keys:["Expenditure approach","Income approach","Production approach","Value added","Final goods","Intermediate goods","Depreciation","National income accounting"]},
-  {name:"物價指數", keys:["CPI","GDP deflator","Laspeyres index","Paasche index"]},
-  {name:"部門與市場", keys:["Household","Firm","Factor market","Goods market","Direct tax","Indirect tax","Transfer payment","Government purchases"]},
-  {name:"循環流轉", keys:["Leakage","Injection"]},
-  {name:"變數性質", keys:["Flow","Stock"]},
-  {name:"所得分配", keys:["Lorenz curve","Gini coefficient"]},
-  {name:"古典學派", keys:["Fisher equation","Cambridge cash balance","Money neutrality","Classical dichotomy","Walras law","Say's law","Loanable funds","Fisher effect","Money illusion"]},
-  {name:"經濟成長", keys:["Growth accounting","Total factor productivity","Solow residual","Harrod-Domar","Natural rate of growth","Warranted rate of growth","Knife-edge","Steady state","Golden rule","Absolute convergence","Conditional convergence","Endogenous growth","Rule of 70","Malthus","Barro"]},
-  {name:"景氣循環", keys:["Business cycle","Leading indicators","Coincident indicators","Lagging indicators","Procyclical","Countercyclical","Political business cycle","Real business cycle","Intertemporal substitution","Schumpeter","Kydland","Prescott"]},
-  {name:"貨幣理論", keys:["High-powered money","Money multiplier","Required reserve ratio","Open market operation","Discount rate","Quasi money","Gresham's law","Fiat money","Baumol-Tobin model","Modern quantity theory"]},
-  {name:"消費理論", keys:["Absolute income hypothesis","Life-cycle hypothesis","Relative income hypothesis","Demonstration effect","Ratchet effect","Permanent income","Modigliani","Dusenberry"]},
-  {name:"投資理論", keys:["Net present value","Marginal efficiency of investment","Tobin's q","User's cost","Investment tax credit","Jorgenson"]},
-  {name:"學派與人物", keys:["Adam Smith","David Ricardo","Say","Marshall","Fisher","Walras","Malthus","Milton Friedman","Invisible hand","Absolute advantage","Comparative advantage"]},
-  {name:"經濟成長", keys:["Growth accounting","Total factor productivity","Solow residual","Harrod-Domar","Natural rate of growth","Warranted rate of growth","Knife-edge","Steady state","Golden rule","Absolute convergence","Conditional convergence","Endogenous growth","Rule of 70","Malthus","Barro"]},
-  {name:"景氣循環", keys:["Business cycle","Leading indicators","Coincident indicators","Lagging indicators","Procyclical","Countercyclical","Political business cycle","Real business cycle","Intertemporal substitution","Schumpeter","Kydland","Prescott"]},
-  {name:"貨幣理論", keys:["High-powered money","Money multiplier","Required reserve ratio","Open market operation","Discount rate","Quasi money","Gresham's law","Fiat money","Baumol-Tobin model","Modern quantity theory"]},
-  {name:"消費理論", keys:["Absolute income hypothesis","Life-cycle hypothesis","Relative income hypothesis","Demonstration effect","Ratchet effect","Permanent income","Modigliani","Dusenberry"]},
-  {name:"投資理論", keys:["Net present value","Marginal efficiency of investment","Tobin's q","User's cost","Investment tax credit","Jorgenson"]},
-  {name:"學派與人物", keys:["Friedman","Monetarist school","Permanent income hypothesis","Money supply rule","Inside lag","Lucas critique","Ricardian equivalence","Laffer curve","Efficiency wage","New Keynesian"]},
-  {name:"菲利普曲線", keys:["Phillips curve","Misery index","Sacrifice ratio","Natural-rate hypothesis","Accelerationist hypothesis","Okun's law","Taylor rule"]},
-  {name:"物價膨脹與預期", keys:["Inflation","Demand-pull inflation","Cost-push inflation","Stagflation","Imported inflation","Shoeleather cost","Menu cost","Adaptive expectations","Rational expectations","Lucas","Expectations-augmented AS"]},
-  {name:"開放經濟", keys:["Exchange rate","Foreign exchange reserve","Purchasing power parity","Interest rate parity","Balance of payments","Marshall-Lerner condition","J-curve","Sterilization","Impossible trinity","Mundell"]},
-  {name:"完整模型 AD-AS", keys:["Aggregate demand","Aggregate supply","Money illusion","Sticky wage","Wealth effect","Interest rate effect","Classical inconsistency","Pigou effect"]},
-  {name:"IS-LM 模型", keys:["Hicks","Hansen","IS curve","LM curve","Liquidity preference","Money demand","Liquidity trap","Crowding out","Transmission mechanism"]},
-  {name:"凱因斯模型", keys:["Keynes","Effective demand","Consumption function","MPC","MPS","APC","Autonomous consumption","Induced consumption","Saving function","Accelerator principle","45-degree line","Multiplier","Balanced budget multiplier","Paradox of thrift","Deflationary gap","Inflationary gap","Output gap","Automatic stabilizer","Lump-sum tax","Proportional tax","Progressive tax","Regressive tax","Samuelson"]},
-  {name:"勞動市場與失業", keys:["Natural rate of unemployment","Frictional unemployment","Structural unemployment","Cyclical unemployment","Seasonal unemployment","Disguised unemployment","Discouraged workers","Labor force participation rate","Full employment"]},
-  {name:"總體經濟目標", keys:["Full employment","Business cycle","Economic growth"]}
+  {name:"所得帳指標", keys:["GDP", "GNP", "NNP", "NI", "PI", "DPI", "Nominal GDP", "Real GDP"]},
+  {name:"衡量方法", keys:["Expenditure approach", "Income approach", "Production approach", "Value added", "Final goods", "Intermediate goods", "Depreciation", "National income accounting"]},
+  {name:"物價指數", keys:["CPI", "GDP deflator", "Laspeyres index", "Paasche index"]},
+  {name:"部門與市場", keys:["Household", "Firm", "Factor market", "Goods market", "Direct tax", "Indirect tax", "Transfer payment", "Government purchases"]},
+  {name:"循環流轉", keys:["Leakage", "Injection"]},
+  {name:"變數性質", keys:["Flow", "Stock"]},
+  {name:"所得分配", keys:["Lorenz curve", "Gini coefficient"]},
+  {name:"古典學派", keys:["Fisher equation", "Cambridge cash balance", "Money neutrality", "Classical dichotomy", "Walras law", "Say's law", "Loanable funds", "Fisher effect", "Money illusion"]},
+  {name:"經濟成長", keys:["Growth accounting", "Total factor productivity", "Solow residual", "Harrod-Domar", "Natural rate of growth", "Warranted rate of growth", "Knife-edge", "Steady state", "Golden rule", "Absolute convergence", "Conditional convergence", "Endogenous growth", "Rule of 70", "Malthus", "Barro"]},
+  {name:"景氣循環", keys:["Business cycle", "Leading indicators", "Coincident indicators", "Lagging indicators", "Procyclical", "Countercyclical", "Political business cycle", "Real business cycle", "Intertemporal substitution", "Schumpeter", "Kydland", "Prescott"]},
+  {name:"貨幣理論", keys:["High-powered money", "Money multiplier", "Required reserve ratio", "Open market operation", "Discount rate", "Quasi money", "Gresham's law", "Fiat money", "Baumol-Tobin model", "Modern quantity theory"]},
+  {name:"消費理論", keys:["Absolute income hypothesis", "Life-cycle hypothesis", "Relative income hypothesis", "Demonstration effect", "Ratchet effect", "Permanent income", "Modigliani", "Dusenberry"]},
+  {name:"投資理論", keys:["Net present value", "Marginal efficiency of investment", "Tobin's q", "User's cost", "Investment tax credit", "Jorgenson"]},
+  {name:"學派與人物", keys:["Adam Smith", "David Ricardo", "Say", "Marshall", "Fisher", "Walras", "Malthus", "Milton Friedman", "Invisible hand", "Absolute advantage", "Comparative advantage", "Friedman", "Monetarist school", "Permanent income hypothesis", "Money supply rule", "Inside lag", "Lucas critique", "Ricardian equivalence", "Laffer curve", "Efficiency wage", "New Keynesian"]},
+  {name:"菲利普曲線", keys:["Phillips curve", "Misery index", "Sacrifice ratio", "Natural-rate hypothesis", "Accelerationist hypothesis", "Okun's law", "Taylor rule"]},
+  {name:"物價膨脹與預期", keys:["Inflation", "Demand-pull inflation", "Cost-push inflation", "Stagflation", "Imported inflation", "Shoeleather cost", "Menu cost", "Adaptive expectations", "Rational expectations", "Lucas", "Expectations-augmented AS", "Menu cost theory"]},
+  {name:"開放經濟", keys:["Exchange rate", "Foreign exchange reserve", "Purchasing power parity", "Interest rate parity", "Balance of payments", "Marshall-Lerner condition", "J-curve", "Sterilization", "Impossible trinity", "Mundell"]},
+  {name:"完整模型 AD-AS", keys:["Aggregate demand", "Aggregate supply", "Money illusion", "Sticky wage", "Wealth effect", "Interest rate effect", "Classical inconsistency", "Pigou effect"]},
+  {name:"IS-LM 模型", keys:["Hicks", "Hansen", "IS curve", "LM curve", "Liquidity preference", "Money demand", "Liquidity trap", "Crowding out", "Transmission mechanism"]},
+  {name:"凱因斯模型", keys:["Keynes", "Effective demand", "Consumption function", "MPC", "MPS", "APC", "Autonomous consumption", "Induced consumption", "Saving function", "Accelerator principle", "45-degree line", "Multiplier", "Balanced budget multiplier", "Paradox of thrift", "Deflationary gap", "Inflationary gap", "Output gap", "Automatic stabilizer", "Lump-sum tax", "Proportional tax", "Progressive tax", "Regressive tax", "Samuelson"]},
+  {name:"勞動市場與失業", keys:["Natural rate of unemployment", "Frictional unemployment", "Structural unemployment", "Cyclical unemployment", "Seasonal unemployment", "Disguised unemployment", "Discouraged workers", "Labor force participation rate", "Full employment"]},
+  {name:"總體經濟目標", keys:["Full employment", "Business cycle", "Economic growth"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
