@@ -370,7 +370,8 @@ body.dark .formula .f-label{color:#d8b36a}
 <script>
 /* ===== 資料：全書章節結構 ===== */
 const BOOK = [
-  {n:1, title:"財務金融學概論", subs:["1.1 財務金融學範疇","1.1.1 財務金融學定義","1.1.2 金融市場簡介","1.1.3 投資學簡介","1.2 公司理財概要","1.2.1 企業組織","1.2.2 公司理財與財務管理目標","1.2.3 企業倫理與企業社會責任"], done:true, points:["財務金融學三大主軸：價值、時間、風險；兩條基本法則（TVM、風險趨避）","四大領域：金融市場與機構、投資學、衍生性金融商品、公司理財","直接金融 vs 間接金融；初級市場 vs 次級市場；貨幣市場 vs 資本市場","獨資／合夥／公司三種組織的責任、租稅與融資差異","公司理財四大決策；為何「極大化利潤」不是好目標","正確目標：max V₀ = Σ FCFₜ/(1+WACC)ᵗ ＝ 極大化股東財富"]}
+  {n:1, title:"財務金融學概論", subs:["1.1 財務金融學範疇","1.1.1 財務金融學定義","1.1.2 金融市場簡介","1.1.3 投資學簡介","1.2 公司理財概要","1.2.1 企業組織","1.2.2 公司理財與財務管理目標","1.2.3 企業倫理與企業社會責任"], done:true, points:["財務金融學三大主軸：價值、時間、風險；兩條基本法則（TVM、風險趨避）","四大領域：金融市場與機構、投資學、衍生性金融商品、公司理財","直接金融 vs 間接金融；初級市場 vs 次級市場；貨幣市場 vs 資本市場","獨資／合夥／公司三種組織的責任、租稅與融資差異","公司理財四大決策；為何「極大化利潤」不是好目標","正確目標：max V₀ = Σ FCFₜ/(1+WACC)ᵗ ＝ 極大化股東財富"]},
+  {n:2, title:"代理問題與公司治理", subs:["2.1 訊息經濟學簡介","2.1.1 訊息不對稱","2.1.2 諾貝爾經濟學獎得主","2.2 公司理財中的代理問題","2.2.1 權益代理問題","2.2.2 負債代理問題","2.2.3 代理成本","2.3 公司治理與管制政策"], done:true, points:["市場失靈四類：公共財、外部性、市場力量、訊息不對稱","逆選擇（契約前、隱藏資訊）vs 道德危險（契約後、隱藏行動）","緩解：訊號發射 signaling、篩選 screening、誘因契約、監督","權益代理問題五樣態：怠惰、特權消費、MBO、過度投資、次佳投資","緩解權益代理：薪資連結、解僱／接管威脅、外部經理人市場、降低 FCF","負債代理四樣態：資產替換、債務積壓、榨取資產、債權稀釋","代理成本四部份：報償機制、監控、約束、剩餘損失","公司治理：OECD 五原則；沙賓法案 SOX"]}
 ];
 
 
@@ -408,10 +409,51 @@ const TERMS = {
   "Business ethics":["Business Ethics","企業倫理","經營者服膺的行為標準與道德判準；長期終將反映在公司價值。"],
   "CSR":["Corporate Social Responsibility（CSR）","企業社會責任","企業對增進社會整體利益所應承擔的責任；Keith Davis 提出五命題。"],
   "Davis":["Keith Davis","戴維斯","提出企業社會責任五命題：\n① 社會責任源自社會權力\n② 雙向開放系統（接收意見、對外公開）\n③ 決策應把社會成本與利益一併計入\n④ 社會成本應轉嫁消費者\n⑤ 身為「企業公民」有責任關注本業以外的社會問題。"],
-  "Social capital":["Social Capital","社會資本","人際互信、共同價值構成的社會網絡；倫理與 CSR 的花費可視為對社會資本的投資。"]
+  "Social capital":["Social Capital","社會資本","人際互信、共同價值構成的社會網絡；倫理與 CSR 的花費可視為對社會資本的投資。"],
+  /* 第2章：市場失靈與訊息經濟 */
+  "Market failure":["Market Failure","市場失靈","價格機制無法達成經濟效率配置；四類：公共財、外部性、市場力量、訊息不對稱。"],
+  "Public goods":["Public Goods","公共財","具非敵對與非排他性（國防、堤防），易生搭便車問題，通常由政府提供。"],
+  "Externality":["Externality","外部性","經濟行為的成本或效益外溢到第三方；污染為負向、教育為正向。"],
+  "Market power":["Market Power","市場力量","進入障礙下獨占或寡占，減產抬價造成無謂損失。"],
+  "Info asymmetry":["Information Asymmetry","訊息不對稱","交易一方握有他方不知道的資訊；衍生逆選擇與道德危險。"],
+  "Adverse selection":["Adverse Selection","逆選擇","契約發生前的隱藏資訊問題；市場只剩劣品成交（檸檬市場）。"],
+  "Moral hazard":["Moral Hazard","道德危險","契約簽訂後的隱藏行動問題；當事人事後改變行為使他方受損。"],
+  "Hidden info":["Hidden Information / Action","隱藏資訊／行動","前者對應逆選擇，後者對應道德危險。"],
+  "Signaling":["Signaling","訊號發射","資訊優勢方主動傳遞可信訊息（如長保固、學歷）以促成交易。"],
+  "Screening":["Screening","篩選","資訊劣勢方設計選項，讓不同類型的人自動分群（如保單組合）。"],
+  "Incentive contract":["Incentive Contract","誘因契約","讓委託人與代理人利益一致的契約設計，緩解道德危險。"],
+  "Akerlof":["George A. Akerlof","阿克洛夫","2001 諾貝爾獎；提出檸檬市場（逆選擇）理論。"],
+  "Spence":["Michael Spence","斯賓斯","2001 諾貝爾獎；提出勞動市場訊號發射理論。"],
+  "Stiglitz":["Joseph E. Stiglitz","史迪格利茨","2001 諾貝爾獎；提出保險市場篩選機制。"],
+  /* 第2章：代理問題樣態與緩解 */
+  "Shirking":["Shirking","工作怠惰","經理人不盡力、摸魚，因努力成果多歸股東。"],
+  "Perks":["Perquisites (Perks)","特權消費","以公司資源滿足經理人私欲或收買人心的非金錢利益。"],
+  "MBO":["Management Buyout (MBO)","管理買下","經理人買下所經營公司，可能先打壓股價；靠舉債者即 LBO。"],
+  "LBO":["Leveraged Buyout (LBO)","槓桿收購","以目標公司資產或現金流為擔保舉債收購；常發行垃圾債券。"],
+  "Empire building":["Empire Building","帝國建立","過度投資以擴大公司規模與自身影響力。"],
+  "Entrenching":["Entrenching Investment","鞏固地位型投資","選擇讓自己不可或缺的投資案，鞏固經理人地位。"],
+  "FCF hypothesis":["Free Cash Flow Hypothesis","自由現金流量假說","Jensen（1986）：FCF 越多越可能投入 NPV<0 的不當投資或亂花。"],
+  "Suboptimal":["Suboptimal Investment","次佳投資","經理人為保飯碗放棄高風險高報酬案，改選低風險低報酬的安全牌。"],
+  "Compensation":["Compensation Scheme","薪資報償制度","ESO、績效股票、績效紅利，把經理人報償與股價連結。"],
+  "Proxy fight":["Proxy Fight","委託書戰爭","不滿股東大量收購委託書以爭奪董事會，威脅撤換管理階層。"],
+  "Takeover":["Hostile Takeover","敵意接管","經營不佳使股價低於真實價值，遭外部併購後撤換管理階層。"],
+  /* 第2章：負債代理 */
+  "Asset substitution":["Asset Substitution","資產替換","借錢後改投高風險專案，成功獨享、失敗與債權人分擔；又稱風險移轉。"],
+  "Debt overhang":["Debt Overhang","債務積壓","瀕臨破產時，NPV>0 新投資的獲益幾乎全歸債權人，股寧可放棄。"],
+  "Milking":["Milking the Property","榨取資產","借錢後發鉅額股利或庫藏股，使公司償債能力下降。"],
+  "Claim dilution":["Claim Dilution","債權稀釋","未經原債權人同意再舉新債，破產時同顺位受償，稀釋原債權。"],
+  "Covenant":["Restrictive Covenant","限制條款","債券契約中約束股東行為（限制股利、負債比等），分消極與積極條款。"],
+  "CB":["Convertible Bond (CB)","可轉換公司債","債權人可依約轉換為股票，以在股東圖利時自保。"],
+  /* 第2章：代理成本與公司治理 */
+  "Structuring":["Structuring Expenditure","報償機制成本","誘因契約中薪資、紅利、選擇權等耗費的資源。"],
+  "Monitoring":["Monitoring Expenditure","監控成本","主理人為監督代理人所投入的花費（監察人、會計師）。"],
+  "Bonding":["Bonding Expenditure","約束成本","代理人自我約束以取信對方的花費（信用評等、主動揭露）。"],
+  "Residual loss":["Residual Loss","剩餘損失","窮盡各機制後仍無法避免的損失，含錯失良機的機會成本。"],
+  "Corporate governance":["Corporate Governance","公司治理","統御管理公司的整套機制，保障股東並兼顧利害關係人。"],
+  "Stakeholder":["Stakeholder","利害關係人","股東以外對公司有權益者：員工、債權人、客戶、社區、政府。"]
 };
 /* 人名類術語卡，標題用紫色 */
-const PERSON_TERMS=new Set(["Graham","Davis"]);
+const PERSON_TERMS=new Set(["Graham","Davis","Akerlof","Spence","Stiglitz"]);
 
 const CH1_SECTIONS = [
 {
@@ -727,8 +769,158 @@ function openTerm(key){
 function closeTerm(){document.getElementById("termModal").style.display="none";}
 
 /* ===== 章節資料對照（每章完成後加入） ===== */
-const CH_SECTIONS={1:CH1_SECTIONS};
-const CH_PROBLEMS={1:CH1_PROBLEMS};
+
+/* ===== 第二章：代理問題與公司治理 ===== */
+const CH2_SECTIONS = [
+{
+  id:"2.1", title:"訊息經濟學簡介",
+  body:`
+  <p>Adam Smith《國富論》提出「看不見的手」：完全競爭市場下價格機制可使社會達巴瑞圖效率。但當價格機制無法達成效率時，即為<span class="term" data-term="Market failure">市場失靈</span>，有四類：</p>
+  <div class="tblwrap"><table><caption>市場失靈四類型</caption><colgroup><col style="width:22%"><col style="width:52%"><col style="width:26%"></colgroup><thead><tr><th>類型</th><th>意義</th><th>解方</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Public goods">公共財</span></b></td><td>非敵對、非排他；人人想搭便車，提供不足。</td><td>政府收稅提供（國防、堤防）</td></tr>
+  <tr><td><b><span class="term" data-term="Externality">外部性</span></b></td><td>成本／效益外溢到第三方（污染＝負向；教育＝正向）。</td><td>外部成本內化、政府補貼</td></tr>
+  <tr><td><b><span class="term" data-term="Market power">市場力量</span></b></td><td>進入障礙形成獨占／寡占，減產抬價，造成無謂損失。</td><td>反托拉斯法、促進競爭</td></tr>
+  <tr><td><b><span class="term" data-term="Info asymmetry">訊息不對稱</span></b></td><td>買賣雙方資訊不對等，互信不足使市場機制崩潰。</td><td>誘因契約、訊號發射、篩選</td></tr>
+  </tbody></table></div>
+  `
+},
+{
+  id:"2.1.1", title:"訊息不對稱",
+  body:`
+  <p>訊息不對稱導致兩種市場失靈型態，時點與隱藏項目不同：</p>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="adv"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Adverse selection">逆選擇</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">契約<b>發生前</b>的<span class="term" data-term="Hidden info">隱藏資訊</span></div>
+      <div class="mc-detail">資訊優勢方握有弱勢方不知道的資訊，互信不足 → 市場只剩劣品成交（lemon）。</div>
+      <div class="mc-ex"><b>例：</b>二手車只剩爛車成交；健康保險只剩高風險者願意買。<br><b>解：</b><span class="term" data-term="Signaling">訊號發射</span>（優勢方主動傳遞可信訊息，如長保固）；<span class="term" data-term="Screening">篩選</span>（劣勢方設計選項讓對方自動分群，如不同保單）。</div>
+    </div>
+  </div>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="mor"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Moral hazard">道德危險</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">契約<b>簽訂後</b>的<span class="term" data-term="Hidden info">隱藏行動</span></div>
+      <div class="mc-detail">有保險後當事人降低戒心（如加保後開車不謹慎），損失由保險公司承擔。</div>
+      <div class="mc-ex"><b>解：</b>弱勢方投入監督成本；事前簽<span class="term" data-term="Incentive contract">誘因契約</span>，讓雙方利益一致。<br><b>延伸：</b><span class="term" data-term="Agency problem">委託—代理關係</span>中代理人追尋私利，是道德危險的典型。</div>
+    </div>
+  </div>
+  `
+},
+{
+  id:"2.1.2", title:"諾貝爾經濟學獎得主",
+  body:`
+  <p>訊息經濟學與財金理論多次獲諾貝爾獎。與本章直接相關者：</p>
+  <div class="note"><b>2001 年同獲：</b><span class="proper" data-term="Akerlof">Akerlof</span>（逆選擇／檸檬市場）、<span class="proper" data-term="Spence">Spence</span>（訊號發射）、<span class="proper" data-term="Stiglitz">Stiglitz</span>（篩選）。<br><b>2016 年：</b>Oliver Hart、Bengt Holmstrom（契約理論）。<br><b>其他財金相關：</b>2013 Fama/Hansen/Shiller（效率市場、GMM、股價可預測性）；1997 Merton、Scholes（選擇權定價）；1990 Markowitz、Miller、Sharpe（MPT、MM、CAPM）；1985 Modigliani（MM 定理）。</div>
+  `
+},
+{
+  id:"2.2", title:"公司理財中的代理問題",
+  body:`
+  <p><span class="term" data-term="Agency problem">委託—代理關係</span>（principal–agent relationship）：主理人（principal）雇用代理人（agent）代為行事。理論上代理人應以主理人最大利益為目標，但<span class="term" data-term="Info asymmetry">訊息不對稱</span>下主理人無法監控每個決策，代理人有誘因追求私利，即代理問題。</p>
+  <div class="warn">公司組織中有兩類代理衝突：<br>① <b>權益代理問題</b>：股東（主理人）vs 經理人（代理人）。<br>② <b>負債代理問題</b>：債權人（主理人）vs 股東（代理人）。</div>
+  `
+},
+{
+  id:"2.2.1", title:"權益代理問題",
+  body:`
+  <p>股東把營運管理權交給經理人；若經理人只領固定薪資，在訊息不對稱下可能圖利自己。五種常見樣態：</p>
+  <div class="tblwrap"><table><caption>權益代理問題五樣態</caption><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>樣態</th><th>說明</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Shirking">工作怠惰</span></b></td><td>shirking：摸魚打混、上班辦私事；努力成果多歸股東，自己只領固定薪。</td></tr>
+  <tr><td><b><span class="term" data-term="Perks">特權消費</span></b></td><td>perquisites：高級公務車、昂貴裝潢、過度公司旅遊，慷股東之慨自肥或收買人心。</td></tr>
+  <tr><td><b><span class="term" data-term="MBO">管理買下 MBO</span></b></td><td>經理人欲買下公司，故意打壓股價；若靠舉債收購即 <span class="term" data-term="LBO">LBO 槓桿收購</span>，發行的多為垃圾債券。</td></tr>
+  <tr><td><b><span class="term" data-term="Empire building">過度投資／帝國建立</span></b></td><td>擴大公司規模、安插人馬；含<span class="term" data-term="Entrenching">鞏固地位型投資</span>（entrenching investment）。Jensen 提出<span class="term" data-term="FCF hypothesis">自由現金流量假說</span>：FCF 越多越容易投入 NPV&lt;0 的濫投資。</td></tr>
+  <tr><td><b><span class="term" data-term="Suboptimal">次佳投資／避免風險</span></b></td><td>放棄高風險高報酬（NPV 大）的最佳案，選擇低風險低報酬的安全牌，以保飯碗。</td></tr>
+  </tbody></table></div>
+  <p><b>緩解方法：</b></p>
+  <ul>
+    <li><span class="term" data-term="Compensation">薪資報償制度</span>：誘因契約，薪資與股價／績效連結（員工選擇權 ESO、績效股票、績效紅利）。</li>
+    <li><span class="term" data-term="Proxy fight">解僱威脅／委託書戰爭</span>：不滿股東收購委託書，爭奪董事會。</li>
+    <li><span class="term" data-term="Takeover">接管威脅</span>：績效差使股價低迷，可能遭<span class="term" data-term="Takeover">敵意併購</span>而被換掉。</li>
+    <li><b>外部管理人力市場</b>：經理人相互挖角、身價浮動，戮力經營以抬高身價。</li>
+    <li><b>降低自由現金流量</b>：發高現金股利／庫藏股／減資；提高負債或特別股（固定利息／股利支出）。</li>
+  </ul>
+  <div class="note">Jensen & Meckling（1976）：經理人持股比例越低，權益代理問題越嚴重；股權分散的公司只需少數持股即可掌握董事會，更容易圖利周邊（如關係人交易、衛星廠利益輸送）。</div>
+  `
+},
+{
+  id:"2.2.2", title:"負債代理問題",
+  body:`
+  <p>債權人把資金交給股東經營，期望固定利息與還本；兩方都是或有求償權，但報償條件不同。經營決策由股東掌控，股東可能傷害債權人以圖利自己。四種樣態：</p>
+  <div class="tblwrap"><table><caption>負債代理問題四樣態</caption><colgroup><col style="width:24%"><col style="width:76%"></colgroup><thead><tr><th>樣態</th><th>說明</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Asset substitution">資產替換</span></b></td><td>又稱風險移轉 risk shifting：借錢後改投高風險專案。成功股東獨享，失敗損失共同承擔；負債利率不變，股東把風險嫁給債權人。</td></tr>
+  <tr><td><b><span class="term" data-term="Debt overhang">債務積壓</span></b></td><td>又稱投資不足：陷於財務危機時，NPV&gt;0 的新投資只讓債權人受償，股東白忙，寧可放棄。</td></tr>
+  <tr><td><b><span class="term" data-term="Milking">榨取資產</span></b></td><td>cashing out：借錢後發鉅額現金股利或庫藏股，現金進股東口袋，公司負債比與違約風險上升。</td></tr>
+  <tr><td><b><span class="term" data-term="Claim dilution">債權稀釋</span></b></td><td>未經原債權人同意再發新債或借款，破產時與原債權人同顺位受償，稀釋原債權。</td></tr>
+  </tbody></table></div>
+  <p><b>緩解方法：</b></p>
+  <ul>
+    <li><b>提高借款利率</b>：理性債權人預先設算代理風險，把成本轉嫁給股東。</li>
+    <li><b>定期揭露重大訊息</b>：財報經會計師認證，降低訊息不對稱。</li>
+    <li><span class="term" data-term="Covenant">訂定限制條款</span>（protective covenant）：債券契約中限制股利、負債比、資產處分等（消極條款）；要求維持流動性、按期公告（積極條款）。</li>
+    <li><b>發行附轉換權利債券</b>：<span class="term" data-term="CB">可轉換公司債 CB</span>、附認股權證公司債，債權人可轉股自保。</li>
+  </ul>
+  <div class="note">選擇權觀點：股權可視為對公司資產的<b>買權</b>，標的波動度越大買權越值錢——故股東有誘因提高營運或財務風險。負債代理問題多發生在財務危機、高風險小型或高科技公司；藍籌、國營企業少見。</div>
+  `
+},
+{
+  id:"2.2.3", title:"代理成本",
+  body:`
+  <p>Fama & Jensen（1983）：代理成本＝代理問題本身的損失，加上緩解代理問題所付出的成本。分四部份：</p>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="agc1"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Structuring">報償機制成本</span></div>
+    <div class="mc-body"><div class="mc-formula">structuring expenditure</div>
+    <div class="mc-detail">誘因契約中的薪資、員工選擇權、績效紅利等，耗費公司資源。</div></div>
+  </div>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="agc2"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Monitoring">監控成本</span></div>
+    <div class="mc-body"><div class="mc-formula">monitoring expenditure</div>
+    <div class="mc-detail">主理人發起：監察人制度、外部會計師稽核等監督花費。</div></div>
+  </div>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="agc3"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Bonding">約束成本</span></div>
+    <div class="mc-body"><div class="mc-formula">bonding expenditure（擔保成本）</div>
+    <div class="mc-detail">代理人自我約束取信對方：付費信用評等、主動揭露、接受限制條款。</div></div>
+  </div>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="agc4"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Residual loss">剩餘損失</span></div>
+    <div class="mc-body"><div class="mc-formula">residual loss</div>
+    <div class="mc-detail">窮盡各種機制後仍無法避免的損失，含因受監督綁手綁腳而錯失良機的機會損失。</div></div>
+  </div>
+  `
+},
+{
+  id:"2.3", title:"公司治理與管制政策",
+  body:`
+  <p><span class="term" data-term="Corporate governance">公司治理</span>（corporate governance）＝統御與管理公司的整套機制，落實經營者責任，保障股東權益並兼顧<span class="term" data-term="Stakeholder">利害關係人</span>（stakeholders：員工、債權人、客戶、社區、政府）。</p>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="oecd"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">OECD 公司治理五原則</div>
+    <div class="mc-body">
+      <div class="mc-formula">① 保障股東權益<br>② 確保股東受公平對待<br>③ 利害關係人的角色<br>④ 資訊揭露及透明化<br>⑤ 董事會責任</div>
+    </div>
+  </div>
+  <p><b>落實作法：</b>健全內部控制、獨立董監事制度、強化資訊公開、健全會計制度（會計師輪簽）、整合併購與破產法制、保障投資人權益（電子投票、股東提案權）。</p>
+  <div class="warn"><b>沙賓法案 SOX（2002）：</b>恩隆（Enron）、世界通訊（Worldcom）醜聞後美國立法。<br>① 審計獨立：會計師輪簽、不得與客戶有審計外業務。<br>② 高階經理人對財報簽字負責，明知不實可判刑。<br>③ 建立更嚴謹財務內控制度，經理人與會計師均須評估。<br>④ 證券分析師利益關係須揭露。<br><b>缺點：</b>提高營運成本。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS};
+const CH2_PROBLEMS = [
+{
+  q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
+  opts:[],
+  ans:"<b>(1) 選 Project B。</b><ul><li>E(股A) = 0.5×2300 + 0.5×3800 = <b>$3,050</b></li><li>E(股B) = 0.5×0 + 0.5×6200 = <b>$3,100</b></li><li>股東自利選 B，但 E(債B)=0.5×100+0.5×700=$400 &lt; E(債A)=$700——股東圖利、債權人受損，正是<span class='term' data-term='Asset substitution'>資產替換</span>。</li></ul><b>(2) 全權益選 Project A。</b><ul><li>E(公司A)=0.5×3000+0.5×4500=$3,750</li><li>E(公司B)=0.5×100+0.5×6900=$3,500</li><li>此時股東價值＝公司價值，選總價值高的 A。</li></ul>"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -737,7 +929,12 @@ const GLOSS_CATS = [
   {name:"投資學", keys:["Real/Financial assets","Portfolio","Allocation/Selection","Investment/Speculation","Graham"]},
   {name:"企業組織", keys:["Sole proprietorship","Partnership","Corporation","Limited liability","Double taxation","Agency problem"]},
   {name:"理財決策", keys:["Capital budgeting","Capital structure","Working capital","Payout policy","FCF","WACC","Fundamental value"]},
-  {name:"倫理與CSR", keys:["Business ethics","CSR","Davis","Social capital"]}
+  {name:"倫理與CSR", keys:["Business ethics","CSR","Davis","Social capital"]},
+  {name:"市場失靈", keys:["Market failure","Public goods","Externality","Market power","Info asymmetry"]},
+  {name:"訊息經濟", keys:["Adverse selection","Moral hazard","Hidden info","Signaling","Screening","Incentive contract","Akerlof","Spence","Stiglitz"]},
+  {name:"權益代理", keys:["Shirking","Perks","MBO","LBO","Empire building","Entrenching","FCF hypothesis","Suboptimal","Compensation","Proxy fight","Takeover"]},
+  {name:"負債代理", keys:["Asset substitution","Debt overhang","Milking","Claim dilution","Covenant","CB"]},
+  {name:"代理成本與治理", keys:["Structuring","Monitoring","Bonding","Residual loss","Corporate governance","Stakeholder"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -745,7 +942,8 @@ const GLS = {
 };
 
 const CH_TERMS_CATS = {
-  1:["基本法則","金融市場","投資學","企業組織","理財決策","倫理與CSR"]
+  1:["基本法則","金融市場","投資學","企業組織","理財決策","倫理與CSR"],
+  2:["市場失靈","訊息經濟","權益代理","負債代理","代理成本與治理"]
 };
 let glossMode="full", glossChapter=1;
 
