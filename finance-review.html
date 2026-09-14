@@ -375,7 +375,8 @@ const BOOK = [
   {n:3, title:"貨幣時間價值", subs:["3.1 基本概念與運算法則","3.2 現值與終值","3.3 年金","3.4 貸款種類"], done:true, points:["單利 vs 複利；時間旅行三法則（同時點才能合併、複利往未來、折現往過去）","PV = CFₙ/(1+r)ⁿ；FV = CF₀(1+r)ⁿ；PVIF 與 FVIF 互為倒數","普通年金期末發生、期初年金乘 (1+r)；成長年金 PVo = CF/(r-g)","永續年金 PVo = CF/r；成長永續 PVo = CF/(r−g)（r>g）","三種貸款：純折價、純付息、本息分期攤還"]},
   {n:4, title:"利率決定理論", subs:["4.1 利率基本概念","4.1.2 債券與殖利率","4.2 利率的決定","4.3 利率期間結構"], done:true, points:["APR（報價）vs EAR（有效）：EAR = (1+APR/q)^q − 1；q>1 時 EAR>APR","現金流要以「有效期間利率」折現；解題若沒說複利頻率就假設與現金流頻率相同","美國公債：T-bills（≤1年零息）/T-notes（2-10年）/T-bonds（30年）/TIPS（抗通膨）","YTM＝買進持有到期的 IRR；零息債券折價發行、附息債券半年付息","費雪方程式：1+r = (1+r*)(1+πᵉ)；名目利率＝實質無風險利率＋通膨溢酬＋風險溢酬","風險溢酬四項：MRP（到期）、DRP（違約）、LP（流動性）、ERP（匯兌）","殖利率曲線＝YTM 對到期期間；即期利率 vs 隱含遠期利率（無套利幾何平均）"]},
   {n:5, title:"財務報表與現金流量", subs:["5.1 財務報表","5.2 財務管理學的現金流量概念"], done:true, points:["四大報表：資產負債表、綜合損益表、現金流量表、權益變動表","會計方程式：資產＝負債＋股東權益；應計基礎 vs 現金基礎","NWC（淨營運資金）＝流動資產 − 流動負債","OCF＝NOPAT＋折舊＝EBIT(1−T)＋折舊","NOPAT＝EBIT(1−T)（假想利息也要扣稅，稅盾留待 WACC 處理）","財務決策重現金流而非會計利潤"]},
-  {n:6, title:"財務報表分析", subs:["6.1 共同比分析","6.2 財務比率分析"], done:true, points:["共同比（垂直）分析：資產負債表除以總資產、損益表除以銷貨","資產管理：存貨周轉率=COGS/存貨、應收周轉率=銷貨/A/R、總資產周轉率","現金轉換循環 CCC = DSI + DSO − DPO","流動性：流動比率、速動比率（酸性測試）、現金比率","獲利性：毛利率、營業利益率、ROA、ROE","投資價值：EPS、P/E、P/B、股利殖利率","杜邦：ROE＝净利率×总资产周轉率×權益乘數"]}
+  {n:6, title:"財務報表分析", subs:["6.1 共同比分析","6.2 財務比率分析"], done:true, points:["共同比（垂直）分析：資產負債表除以總資產、損益表除以銷貨","資產管理：存貨周轉率=COGS/存貨、應收周轉率=銷貨/A/R、總資產周轉率","現金轉換循環 CCC = DSI + DSO − DPO","流動性：流動比率、速動比率（酸性測試）、現金比率","獲利性：毛利率、營業利益率、ROA、ROE","投資價值：EPS、P/E、P/B、股利殖利率","杜邦：ROE＝净利率×总资产周轉率×權益乘數"]},
+  {n:7, title:"財務預測與規劃", subs:["7.1 財務預測","7.2 財務政策與成長率"], done:true, points:["銷售百分比法：資產隨銷售成長","EFN/AFN＝資產增加 − 自發性負債增加 − 保留盈餘增加","內部成長率 gᵢ＝ROE×b／(1−ROE×b)（不對外融資）","維持成長率 gₛ＝ROE×b／(1−ROE×b)（維持 D/E 不變、不發新股）","b＝盈餘保留率＝1−股利支付率 d"]}
 ];
 
 
@@ -501,7 +502,11 @@ const TERMS = {
   "Profitability":["Profitability Ratio","獲利性比率","毛利率、營業利益率、淨利率、ROA、ROE。"],
   "Market ratio":["Market Ratio","投資價值比率","EPS、P/E、P/B、股利殖利率。"],
   "CCC":["Cash Conversion Cycle","現金轉換循環","存貨天數＋應收天數−應付天數。"],
-  "DuPont":["DuPont Analysis","杜邦分析","ROE＝淨利率×總資產周轉率×權益乘數。"]
+  "DuPont":["DuPont Analysis","杜邦分析","ROE＝淨利率×總資產周轉率×權益乘數。"],
+  /* 第7章 */
+  "EFN":["External Financing Needed (EFN)","外部資金需求","成長所需資產扣除自發負債與保留盈餘後的資金缺口。"],
+  "IGR":["Internal Growth Rate","內部成長率","完全不對外融資下可達成的成長率 gᵢ＝ROE×b/(1−ROE×b)。"],
+  "SGR":["Sustainable Growth Rate","永續成長率","維持 D/E 不變、不發新股的成長率 gₛ＝ROE×b/(1−ROE×b)。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1153,7 +1158,30 @@ const CH6_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS};
+
+/* ===== 第七章 ===== */
+const CH7_SECTIONS = [
+{
+  id:"7.1", title:"財務預測",
+  body:`
+  <p><b>銷售百分比法</b>假設各項資產隨銷售額成長。步驟：建立假設 → 估算資產增加 → 編製 pro forma 報表 → 估算外部資金需求 → 選擇融資方式。</p>
+  <div class="formula"><span class="f-label"><span class="term" data-term="EFN">外部資金需求 EFN</span></span>EFN ＝ 資產增加 − 自發性負債增加 − 保留盈餘增加<span class="f-note">＝ A₀×g − SL₀×g − NI₁×b（無閒置產能）。</span></div>
+  <div class="note"><b>有閒置產能 k（k&lt;100%）：</b>固定資產增量＝FA₀×k×g − FA₀×(1−k)；若仍有閒置則 AFA＝0。<br><b>b＝盈餘保留率＝1−d</b>（d＝股利支付率）；自發性負債＝應付帳款、應付費用等隨銷售自動變動的負債。</div>
+  `
+},
+{
+  id:"7.2", title:"財務政策與成長率",
+  body:`
+  <div class="tblwrap"><table><caption>兩種永續成長率</caption><colgroup><col style="width:24%"><col style="width:76%"></colgroup><thead><tr><th>成長率</th><th>條件與公式</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="IGR">內部成長率 gᵢ</span></b></td><td>完全不對外融資（含不發新股、不借新債）。gᵢ = ROE×b / (1−ROE×b)；簡化版 ROE×b。</td></tr>
+  <tr><td><b><span class="term" data-term="SGR">維持（永續）成長率 gₛ</span></b></td><td>維持負債權益比 D/E 不變、不發新股。gₛ = ROE×b / (1−ROE×b)。</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>成長率取決於：</b>保留率 b 越高、ROE 越高 → 成長越快。ROE 又受杜邦三因素（淨利率、總資產周轉率、權益乘數）影響。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1224,7 +1252,15 @@ const CH6_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS};
+const CH7_PROBLEMS = [
+{
+  q:"<b>範例 7.2（高科大）</b>　UFO 公司今年銷貨 $1,000，邊際淨利率 10%，股利支付率 50%，產能利用率 80%。明年銷貨增至 $1,500。流動資產合計 $850（現金150+應收300+存貨400）、固定資產淨額 $650；自發性負債（應付帳款100+應付費用100）$200。求 AFN。",
+  opts:[],
+  ans:"g = (1500−1000)/1000 = 50%；b = 1−0.5 = 0.5。<br>ACA = 850×0.5 = 425<br>AFA = 650×0.8×0.5 − 650×(1−0.8) = 260 − 130 = 130<br>ASL = 200×0.5 = 100<br>保留盈餘增加 = 0.10×1500×0.5 = 75<br><b>AFN = 425 + 130 − 100 − 75 = $380</b>。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1242,7 +1278,8 @@ const GLOSS_CATS = [
   {name:"貨幣時間價值", keys:["Simple interest","Compound interest","Discount rate","Risk premium","PV","FV","PVIF","FVIF","Annuity","Ordinary annuity","Annuity due","Growing annuity","Perpetuity","Growing perpetuity","Pure discount","Interest-only","Amortized"]},
   {name:"利率與債券", keys:["APR","EAR","Bond","ZCB","Coupon bond","YTM","Fisher","MRP","DRP","LP","ERP","Yield curve","Spot rate"]},
   {name:"財報與現金流", keys:["GAAP","IFRS","Balance sheet","NWC","OCF"]},
-  {name:"財報分析", keys:["Common size","Activity ratio","Liquidity ratio","Leverage ratio","Profitability","Market ratio","CCC","DuPont"]}
+  {name:"財報分析", keys:["Common size","Activity ratio","Liquidity ratio","Leverage ratio","Profitability","Market ratio","CCC","DuPont"]},
+  {name:"預測與成長", keys:["EFN","IGR","SGR"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1255,7 +1292,8 @@ const CH_TERMS_CATS = {
   3:["貨幣時間價值"],
   4:["利率與債券"],
   5:["財報與現金流"],
-  6:["財報分析"]
+  6:["財報分析"],
+  7:["預測與成長"]
 };
 let glossMode="full", glossChapter=1;
 
