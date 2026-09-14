@@ -392,7 +392,12 @@ const BOOK = [
   {n:20, title:"資本預算現金流量", subs:["20.1 相關現金流量","20.2 現金流構成"], done:true, points:["只認增量現金流量；沉沒成本不計、機會成本要計","外部性：侵蝕效果負、綜效正","三段：初始投資、營業 OCF、終結現金流（殘值+回收NWC）"]},
   {n:21, title:"風險調整與實質選擇權", subs:["21.1 風險調整","21.2 實質選擇權"], done:true, points:["高風險計畫用較高折現率（RADR）","實質選擇權：延遲、擴張、放棄選擇權可增加專案價值"]},
   {n:22, title:"長期融資", subs:["22.1 權益與負債融資"], done:true, points:["普通股、特別股、公司債、可轉換公司債","租賃：營業租賃 vs 資本租賃"]},
-  {n:23, title:"槓桿與資本結構", subs:["23.1 財務槓桿","23.2 MM 定理與權衡理論"], done:true, points:["財務槓桿放大 EPS 對 EBIT 的敏感度","MM 無稅：資本結構與公司價值無關","MM 有稅：V_L＝V_U＋T×D（負債稅盾）","考慮財務困境成本後最適資本結構＝權衡理論","WACC 加權權益與稅後負債成本"]}
+  {n:23, title:"槓桿與資本結構", subs:["23.1 財務槓桿","23.2 MM 定理與權衡理論"], done:true, points:["財務槓桿放大 EPS 對 EBIT 的敏感度","MM 無稅：資本結構與公司價值無關","MM 有稅：V_L＝V_U＋T×D（負債稅盾）","考慮財務困境成本後最適資本結構＝權衡理論","WACC 加權權益與稅後負債成本"]},
+  {n:24, title:"股利政策", subs:["24.1 股利無關論與實務"], done:true, points:["MM 股利無關：完美市場股利政策不影響價值","股利方式：現金股利、股票股利、股票分割、庫藏股、股票回購","信號效果：增加股利被視為利多；客戶效果"]},
+  {n:25, title:"短期融資", subs:["25.1 短期融資工具"], done:true, points:["商業本票、銀行短期借款、應收帳款融通","信用條件如 2/10, net 30：折扣成本年化很高"]},
+  {n:26, title:"營運資金管理", subs:["26.1 現金／應收／存貨"], done:true, points:["現金管理： Baumol/BAT、Miller-Orr","應收帳款授信政策；存貨 EOQ","NWC＝CA−CL；兼顧流動性與獲利性"]},
+  {n:27, title:"併購", subs:["27.1 併購動機與評價"], done:true, points:["動機：綜效、規模經濟、多角化","綜效＝合併後價值−個別價值和；注意 EPS 稀釋"]},
+  {n:28, title:"國際財務", subs:["28.1 匯率與平價"], done:true, points:["直接/間接匯率；買入賣出價","購買力平價 PPP；利率平價 IRP","國際投資的匯率風險與政治風險"]}
 ];
 
 
@@ -575,7 +580,12 @@ const TERMS = {
   "DOL":["Degree of Operating Leverage (DOL)","營運槓桿","固定營運成本使 EBIT 變動放大。"],
   "DFL":["Degree of Financial Leverage (DFL)","財務槓桿","固定利息使 EPS 對 EBIT 變動放大。"],
   "MM":["Modigliani-Miller Theorem","MM 定理","完美市場下資本結構與價值無關；含稅時 V_L=V_U+T×D。"],
-  "Tradeoff":["Trade-off Theory","權衡理論","平衡負債稅盾利益與財務困境成本，決定最適負債比。"]
+  "Tradeoff":["Trade-off Theory","權衡理論","平衡負債稅盾利益與財務困境成本，決定最適負債比。"],
+  /* 第24-28章 */
+  "Dividend irrelevance":["Dividend Irrelevance (MM)","股利無關論","完美市場下股利政策不影響公司價值。"],
+  "EOQ":["Economic Order Quantity (EOQ)","經濟訂購量","平衡訂購成本與持有成本的最適訂購量 √(2DS/H)。"],
+  "PPP":["Purchasing Power Parity (PPP)","購買力平價","匯率變動率≈兩國通膨率差。"],
+  "IRP":["Interest Rate Parity (IRP)","利率平價","遠期與即期匯率差≈兩國利率差；消除套利。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Gordon","Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1606,7 +1616,60 @@ const CH23_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS,17:CH17_SECTIONS,18:CH18_SECTIONS,19:CH19_SECTIONS,20:CH20_SECTIONS,21:CH21_SECTIONS,22:CH22_SECTIONS,23:CH23_SECTIONS};
+
+/* ===== 第二十四章 ===== */
+const CH24_SECTIONS = [
+{
+  id:"24.1", title:"股利政策",
+  body:`
+  <div class="note"><b><span class="term" data-term="Dividend irrelevance">MM 股利無關論</span>：</b>完美市場下，公司價值由獲利能力決定，盈餘「保留再投資」或「發放」不影響股東財富（股東可自行複製股利）。<br><b>實務：</b><br>• 股利發放形式：現金股利、股票股利、股票分割、庫藏股買回。<br>• <b>信號效果</b>：提高股利通常被市場解讀為管理當局對未來獲利有信心。<br>• <b>客戶效果</b>：不同投資人偏好不同股利政策，各取所需。</div>
+  `
+}
+];
+/* ===== 第二十五章 ===== */
+const CH25_SECTIONS = [
+{
+  id:"25.1", title:"短期融資",
+  body:`
+  <div class="note"><b>工具：</b>商業本票 CP、銀行短期借款（信用額度）、應收帳款融資、存貨擔保借款。<br><b>信用條件 2/10, net 30：</b>10 天內付款享 2% 折扣，否則 30 天全額。放棄折扣的隱含年化成本 ≈ 2%/(1−2%)×365/20 ≈ <b>37%</b>，極高，故應盡量拿折扣。</div>
+  `
+}
+];
+/* ===== 第二十六章 ===== */
+const CH26_SECTIONS = [
+{
+  id:"26.1", title:"營運資金管理",
+  body:`
+  <p>NWC＝流動資產−流動負債。管理目標：在流動性與獲利性間取平衡。</p>
+  <div class="note"><b>現金管理：</b>Baumol（存貨模型）、Miller-Orr（隨機模型）決定最適現金餘額。<br><b>應收帳款：</b>授信標準、信用條件、收帳政策。<br><b>存貨：</b><span class="term" data-term="EOQ">經濟訂購量 EOQ</span>＝√(2DS/H)。</div>
+  `
+}
+];
+/* ===== 第二十七章 ===== */
+const CH27_SECTIONS = [
+{
+  id:"27.1", title:"併購",
+  body:`
+  <div class="note"><b>動機：</b>綜效（synergy，1+1&gt;2）、規模經濟、垂直整合、多角化、稅盾。<br><b>綜效</b>＝合併後公司價值 − 雙方個別價值之和。<br><b>注意：</b>以股票換股時可能稀釋 EPS；併購溢價常侵蝕購併方股東利益。</div>
+  `
+}
+];
+/* ===== 第二十八章 ===== */
+const CH28_SECTIONS = [
+{
+  id:"28.1", title:"國際財務",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>觀念</th><th>內容</th></tr></thead><tbody>
+  <tr><td><b>匯率</b></td><td>直接/間接報價；即期 vs 遠期。</td></tr>
+  <tr><td><b><span class="term" data-term="PPP">購買力平價 PPP</span></b></td><td>兩國匯率變動率 ≈ 兩國通膨率差；長期決定匯率。</td></tr>
+  <tr><td><b><span class="term" data-term="IRP">利率平價 IRP</span></b></td><td>遠期匯率與即期匯率的差距 ≈ 兩國利率差（無套利）。</td></tr>
+  <tr><td><b>風險</b></td><td>匯率風險（交易/換算/經濟曝險）與政治風險。</td></tr>
+  </tbody></table></div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS,17:CH17_SECTIONS,18:CH18_SECTIONS,19:CH19_SECTIONS,20:CH20_SECTIONS,21:CH21_SECTIONS,22:CH22_SECTIONS,23:CH23_SECTIONS,24:CH24_SECTIONS,25:CH25_SECTIONS,26:CH26_SECTIONS,27:CH27_SECTIONS,28:CH28_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1810,7 +1873,43 @@ const CH23_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS,17:CH17_PROBLEMS,18:CH18_PROBLEMS,19:CH19_PROBLEMS,20:CH20_PROBLEMS,21:CH21_PROBLEMS,22:CH22_PROBLEMS,23:CH23_PROBLEMS};
+const CH24_PROBLEMS = [
+{
+  q:"依 MM 股利無關論，提高現金股利發放率（在投資政策不變下）對股東財富的影響？",
+  opts:["(A) 增加","(B) 減少","(C) 不變","(D) 視景氣而定"],
+  ans:"<b>(C) 不變。</b>完美市場下，股利只是把同一塊錢從公司帳上移到股東口袋，股東可自行調整，價值由投資政策決定。"
+}
+];
+const CH25_PROBLEMS = [
+{
+  q:"供應商給予信用條件 2/10, net 30。若放棄折扣，隱含年利率約為？",
+  opts:["(A) 2%","(B) 24%","(C) 約 37%","(D) 30%"],
+  ans:"<b>(C) 約 37%</b>：(0.02/0.98)×(365/20) ≈ 37.2%，故應盡量在折扣期內付款。"
+}
+];
+const CH26_PROBLEMS = [
+{
+  q:"最適現金餘額的 Baumol 模型，與存貨管理的何種模型同構？",
+  opts:["(A) EOQ","(B) CAPM","(C) GGM","(D) CML"],
+  ans:"<b>(A) EOQ 經濟訂購量。</b>現金視為一種存貨，在持有成本與交易成本間取最適。"
+}
+];
+const CH27_PROBLEMS = [
+{
+  q:"併購的綜效是指？",
+  opts:["(A) 併購溢價","(B) 合併後價值減雙方個別價值和","(C) EPS 稀釋","(D) 商譽"],
+  ans:"<b>(B)</b>：Synergy＝V(AB)−[V(A)+V(B)]，來自成本節省或收入增加。"
+}
+];
+const CH28_PROBLEMS = [
+{
+  q:"依利率平價，若本國利率高於外國，遠期外匯相對即期應？",
+  opts:["(A) 升水","(B) 貼水","(C) 不變","(D) 無關"],
+  ans:"<b>(B) 貼水。</b>高利率貨幣遠期貶值（貼水），以消除套利空間。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS,17:CH17_PROBLEMS,18:CH18_PROBLEMS,19:CH19_PROBLEMS,20:CH20_PROBLEMS,21:CH21_PROBLEMS,22:CH22_PROBLEMS,23:CH23_PROBLEMS,24:CH24_PROBLEMS,25:CH25_PROBLEMS,26:CH26_PROBLEMS,27:CH27_PROBLEMS,28:CH28_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1840,7 +1939,9 @@ const GLOSS_CATS = [
   {name:"選擇權", keys:["Call","Put","Put-call parity","BSM"]},
   {name:"衍生性", keys:["Forward","Futures","Swap"]},
   {name:"資本預算", keys:["NPV","IRR","Real option"]},
-  {name:"資本結構", keys:["DOL","DFL","MM","Tradeoff"]}
+  {name:"資本結構", keys:["DOL","DFL","MM","Tradeoff"]},
+  {name:"股利與營運資金", keys:["Dividend irrelevance","EOQ"]},
+  {name:"國際財務", keys:["PPP","IRP"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1870,7 +1971,12 @@ const CH_TERMS_CATS = {
   20:["資本預算現金流"],
   21:["風險調整與實質選擇權"],
   22:["長期融資"],
-  23:["資本結構"]
+  23:["資本結構"],
+  24:["股利政策"],
+  25:["短期融資"],
+  26:["營運資金"],
+  27:["併購"],
+  28:["國際財務"]
 };
 let glossMode="full", glossChapter=1;
 
