@@ -52,12 +52,6 @@ body.dark{
   position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 18px 40px;
   border-right:1px solid var(--line);
 }
-.sidebar .backhome{
-  display:inline-block;margin-bottom:12px;font-size:12.5px;color:var(--nav-ink);
-  text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:5px 12px;
-  background:var(--panel);transition:all .15s;line-height:1.6;
-}
-.sidebar .backhome:hover{border-color:var(--teal);color:var(--teal)}
 .sidebar .brand{font-weight:700;font-size:15px;letter-spacing:.02em;line-height:1.4;margin-bottom:4px;color:var(--ink)}
 .sidebar .brand .t2{font-size:12px;color:var(--muted);font-weight:400;margin-top:2px}
 .nav-chapter{
@@ -353,18 +347,19 @@ const BOOK = [
   {n:1, title:"國民所得會計帳", subs:["1.1 國民所得定義與衡量","1.2 流量循環模型","1.3 GDP 的計算","1.4 國民所得的計算","1.5 國民所得的分解","1.6 缺點與所得分配","1.7 物價指數"], done:true, points:["國民所得的定義與衡量方法（GDP 的三種計算方式）","部門流量循環模型（兩部門／三部門／四部門）","所得帳計算鏈：GDP → GNP → NNP → NI → PI → DPI","國民所得會計的缺點與所得分配（洛侖茲曲線、吉尼係數）","物價指數：CPI 與 GDP 平減指數"]},
   {n:2, title:"古典學派", subs:["2.1 古典學派總論","2.2 貨幣數量學說","2.3 貨幣市場與古典二分法","2.4 商品市場與可貸資金","2.5 就業與勞動市場"], done:true, points:["學派演進：重商主義→重農主義→古典學派（亞當斯密、李嘉圖、薩伊）","費雪交易方程式與劍橋現金餘額方程式：貨幣數量學說","古典二分法與貨幣中立性：貨幣像一層面紗","可貸資金理論：S(r) = I(r) + G − T 決定實質利率","古典勞動市場無貨幣幻覺 → 垂直 AS、充分就業為常態","失業種類：摩擦性／結構性／循環性／季節性／隱藏性"]},
   {n:3, title:"簡單凱因斯模型", subs:["3.1 凱因斯革命","3.2 行為方程式","3.3 均衡所得決定","3.4 節儉的矛盾","3.5 膨脹與緊縮缺口","3.6 乘數理論"], done:true, points:["凱因斯革命：價格與工資僵固、有效需求不足","消費函數 C = a + bYd、儲蓄函數、投資函數與加速原理","45° 線均衡：AE 與 45° 線交點決定均衡所得","節儉的矛盾：想多儲蓄反而所得下降、儲蓄不增","膨脹與緊縮缺口：實際與潛在產出的差距","乘數理論：政府支出乘數、定額稅乘數、平衡預算乘數、自動安定機能"]},
-  {n:4, title:"IS-LM 模型", subs:["4.1 模型基礎","4.2 IS 曲線","4.3 流動性偏好理論","4.4 LM 曲線","4.5 IS-LM 均衡","4.6 IS-LM 乘數","4.7 政策有效性","4.8 特殊案例"]},
-  {n:5, title:"完整總體經濟學模型", subs:["5.1 總合需求","5.2 總合供給","5.3 完整模型","5.4 政策分析"]},
-  {n:6, title:"開放經濟體系", subs:["6.1 匯率與外匯市場","6.2 利率與利率平價","6.3 匯率與利率的計算","6.4 國際收支平衡","6.5 開放經濟體系的總體模型","6.6 大型與小型開放經濟"]},
-  {n:7, title:"物價膨脹", subs:["7.1 意義與衡量","7.2 物價膨脹的種類","7.3 對物價的預期","7.4 植入預期的總合供給"]},
-  {n:8, title:"菲利普曲線", subs:["8.1 短期菲利普曲線","8.2 預期擴張的菲利普曲線","8.3 政策意涵"]},
-  {n:9, title:"供給面學派", subs:["9.1 供給面經濟學","9.2 拉弗曲線","9.3 政策主張","9.4 供給面學派"]},
-  {n:10,title:"投資理論", subs:["10.1 投資的種類","10.2 新古典投資理論","10.3 Tobin's Q 理論","10.4 加速原理"]},
-  {n:11,title:"消費理論", subs:["11.1 短期與長期消費理論","11.2 李嘉圖等價原理","11.3 生命週期假說","11.4 相對所得假說","11.5 恆常所得假說"]},
-  {n:12,title:"貨幣理論與政策", subs:["12.1 貨幣市場基礎理論","12.2 金融市場概論","12.3 貨幣制度演進","12.4 貨幣的定義與功能","12.5 貨幣政策工具","12.6 貨幣創造乘數","12.7 央行政策目標","12.8 存貨平方根原理","12.9 再探貨幣數量學說"]},
-  {n:13,title:"景氣循環", subs:["13.1 景氣循環的意義","13.2 景氣動向指標","13.3 其他景氣循環"]},
-  {n:14,title:"經濟成長", subs:["14.1 經濟成長的意義","14.2 Harrod-Domar 模型","14.3 新古典成長模型","14.4 內生成長理論"]}
+  {n:4, title:"IS-LM 模型", subs:["4.1 IS-LM 模型基礎","4.2 IS 曲線：商品市場均衡","4.3 流動性偏好與 LM 曲線","4.4 IS-LM 均衡與調整","4.5 財政與貨幣政策","4.6 排擠效果"], done:true, points:["IS 曲線：商品市場均衡，利率↑→投資↓→所得↓（負斜率）","流動性偏好理論：貨幣需求三動機（交易、預防、投機）","LM 曲線：貨幣市場均衡，所得↑→貨幣需求↑→利率↑（正斜率）","IS-LM 交點＝商品與貨幣市場同時均衡","財政擴張 IS 右移、貨幣擴張 LM 右移","排擠效果：財政政策使利率上升、民間投資減少","特殊情況：流動性陷阱（LM 水平）、投資陷阱（IS 垂直）"]},
+  {n:5, title:"完整總體經濟學模型", subs:["5.1 AD：總合需求曲線","5.2 AD 的特殊情況","5.3 AS：總合供給曲線","5.4 完整凱因斯模型（AD-AS）","5.5 古典不一致性與解決"], done:true, points:["AD 曲線負斜率：物價↑→實質貨幣供給↓→利率↑→所得↓","AD 特殊情況：流動性陷阱（水平）、投資陷阱（垂直）","AS 三階段：凱因斯水平段、中間段、古典垂直段","AD-AS 均衡決定物價與產出","古典不一致性：自發支出乘數 vs 政府支出乘數","Pigou 效果、實質餘額效果解決古典不一致性"]},
+  {n:6, title:"開放經濟體系", subs:["6.1 國際金融概論與外匯市場","6.2 匯率與利率的計算","6.3 國際收支（BOP）","6.4 開放經濟的 IS-LM-BP 模型","6.5 政策效果分析（Mundell-Fleming）","6.6 J 曲線"], done:true, points:["匯率定義：一國貨幣以另一國貨幣表示的價格；升值貶值","利率平價、購買力平價；交叉匯率與套利計算","國際收支 BOP：經常帳＋資本帳＋官方準備","IS-LM-BP 模型：內外均衡同時決定","Mundell-Fleming：浮動匯率下貨幣政策有效、固定匯率下財政政策有效","三元悖論：匯率穩定、資本自由移動、獨立貨幣政策不可兼得","J 曲線：貶值初期貿易餘額先惡化再改善"]},
+  {n:7, title:"物價膨脹", subs:["7.1 物價膨脹的定義","7.2 物價膨脹的種類","7.3 物價膨脹的影響","7.4 預期的種類","7.5 植入預期的總合供給（EAS）"], done:true, points:["通膨定義與衡量（CPI、GDP 平減指數、通膨率）","需求拉動、成本推動、進口性通膨、停滯性通膨","通膨影響：皮鞋成本、菜單成本、財富重分配","預期種類：靜態、適應性、理性預期（盧卡斯）","植入預期的 EAS：預期物價↑→AS 左移→停滯性通膨"]},
+  {n:8, title:"菲利普曲線", subs:["8.1 短期菲利普曲線","8.2 引進預期菲利普曲線","8.3 其他說明：奧肯定律與泰勒法則"], done:true, points:["短期菲利普曲線：通膨與失業反向取捨","預期擴張的菲利普曲線：預期通膨↑→SRPC 上移","加速論（自然率假說）：長期菲利普曲線垂直","痛苦指數＝失業率＋通膨率；犧牲比率","奧肯定律：失業變動與產出缺口的關係","泰勒法則：央行依通膨缺口與產出缺口調整利率"]},
+  {n:9, title:"供給面學派", subs:["9.1 前言：總體經濟思想的演變","9.2 貨幣學派","9.3 理性預期學派（新興古典學派）","9.4 供給面學派","9.5 新興凱因斯學派"], done:true, points:["貨幣學派（弗利曼）：貨幣最重要、貨幣成長法則、恆常所得","理性預期（盧卡斯）：政策無效性命題、盧卡斯批判","供給面學派：拉弗曲線、減稅刺激供給","新興凱因斯：工資物價僵固、菜單成本、效率工資","李嘉圖等價：公債融通等同租稅融通"]},
+  {n:10,title:"投資理論", subs:["10.1 投資與淨現值法（NPV）","10.2 邊際投資效率（MEI）","10.3 Tobin's Q 理論","10.4 新古典投資理論"], done:true, points:["投資的種類：固定投資、住宅投資、存貨投資","NPV 淨現值法：現值＞成本則投資","MEI 邊際投資效率：投資使 MEI = 利率","Tobin's Q：q＞1 投資增加（股價市值／資本重置成本）","新古典投資理論（Jorgenson）：使用者成本決定最適資本存量","加速原理：投資隨產出變動"]},
+  {n:11,title:"消費理論", subs:["11.1 短期與長期消費理論","11.2 李嘉圖等價原理","11.3 生命週期假說","11.4 相對所得假說","11.5 恆常所得假說"], done:true, points:["凱因斯絕對所得：C=a+bY；長期 C=kY","李嘉圖等價：降稅等同未來增稅、消費不變","Barro 回應：利他動機使生命無限","莫迪利亞尼生命週期：消費=財富現值固定比例","杜森貝利相對所得：示範、制輪效果","弗利曼恆常所得：暫時性政策對消費無助益"]},
+  {n:12,title:"貨幣理論與政策", subs:["12.1 貨幣市場基礎理論","12.2 金融市場概論","12.3 貨幣制度演進","12.4 貨幣的定義與功能","12.5 貨幣創造乘數","12.6 央行政策目標與貨幣需求理論"], done:true, points:["貨幣供給由大眾(C/D)、銀行(R/D)、央行(H)決定","M1A/M1B/M2/L 階層；準貨幣不具完全流動性","葛萊興法則：劣幣驅逐良幣","央行工具：公開市場、重貼現率、法定準備率","貨幣乘數 m=(k+1)/(k+rd+re)","IS 擾動→穩定利率；LM 擾動→穩定貨幣量","鮑莫爾-托賓：M*=√(bY/2R)","新貨幣數量說：長期貨幣只影響物價"]},
+  {n:13,title:"景氣循環", subs:["13.1 景氣循環的意義","13.2 景氣動向指標與對策信號","13.3 順景氣與逆景氣變數","13.4 景氣循環理論"], done:true, points:["景氣循環四階段：擴張、頂峰、衰退、谷底","連續兩季實質產出下跌＝衰退","領先／同時／落後指標；景氣燈號九項構成","順景氣：消費投資；逆景氣：失業率","熊彼得創新、貨幣學派、政治景氣循環","實質景氣循環：生產力衝擊＋勞動跨期替代","新興古典：錯誤預期；新興凱因斯：政策仍有效"]},
+  {n:14,title:"經濟成長", subs:["14.1 成長會計式","14.2 古典與 Harrod-Domar 成長理論","14.3 新古典成長理論（Solow-Swan）","14.4 內生成長理論"], done:true, points:["成長會計：ΔY/Y = ΔA/A + αKΔK/K + αLΔL/L","索洛殘差＝間接估計的技術成長率","Harrod-Domar：刀刃均衡（要素不可替代）","Solow：恆定狀態 sf(k)=(n+δ)k 自動收斂","黃金法則：f′(k)=n+δ 極大化消費","絕對收斂 vs 相對收斂；70 法則","AK 模型：資本邊際產量不遞減→內生成長"]},
 ];
+
 
 /* ===== 術語資料（點擊卡片時顯示） ===== */
 const TERMS = {
@@ -455,7 +450,105 @@ const TERMS = {
   "Balanced budget multiplier":["Balanced Budget Multiplier","平衡預算乘數","政府支出與定額稅同額增加時（ΔG = ΔT），均衡所得仍增加 ΔG：平衡預算乘數 = 1。"],
   "Automatic stabilizer":["Automatic Stabilizer","自動安定機能","經濟體系內建的景氣平穩機制：誘發性租稅、失業保險、開放貿易體系；不需政府主動決策即自動緩和波動。"],
   "Samuelson":["Paul Samuelson","薩繆爾森","美國經濟學家，提出加速原理，融合凱因斯與古典理論，奠定新古典綜合派。"],
-  "45-degree line":["45-Degree Line","45° 線","縱軸 AE、橫軸 Y 的圖中代表 AE = Y 的線，總合支出線與 45° 線之交點決定均衡所得。"]
+  "Hicks":["John Hicks","希克斯","英國經濟學家，1937 年以一般均衡架構重新詮釋凱因斯，提出 IS-LL 模型（後更名 IS-LM），獲 1972 年諾貝爾獎。"],
+  "Hansen":["Alvin Hansen","韓森","美國凱因斯學派代表，1949 年發現並推廣希克斯的 IS-LL 模型，更名為 IS-LM 模型（Hicks-Hansen Model）。"],
+  "IS curve":["IS Curve","IS 曲線","商品市場均衡線：使 S+T = I+G 的所得與利率組合軌跡，負斜率（利率↑ → 投資↓ → 所得↓）。"],
+  "LM curve":["LM Curve","LM 曲線","貨幣市場均衡線：使實質貨幣供給 = 貨幣需求（M/P = L(Y,r)）的組合軌跡，正斜率（所得↑ → 貨幣需求↑ → 利率↑）。"],
+  "Liquidity preference":["Liquidity Preference Theory","流動性偏好理論","凱因斯說明貨幣需求來源的理論：人們因流動性偏好而持有貨幣，需求來自交易、預防與投機三動機。"],
+  "Money demand":["Money Demand","貨幣需求","Md = L(Y, r) = A + Ly·Y − |Lr|·r；交易與預防動機隨所得增加，投機動機隨利率反向變動。"],
+  "Liquidity trap":["Liquidity Trap","流動性陷阱","利率極低時貨幣需求利率彈性無限大，LM 呈水平線：貨幣政策無效、財政政策效果完全發揮、無排擠效果。"],
+  "Crowding out":["Crowding-Out Effect","排擠效果","政府支出增加 → 利率上升 → 民間投資下降，財政政策效果被削弱；LM 越陡（垂直＝古典）排擠越大，LM 水平（流動性陷阱）無排擠。"],
+  "Transmission mechanism":["Transmission Mechanism","貨幣傳導機制","貨幣供給增加 → 利率下降 → 投資增加 → 商品需求增加 → 產出上升的傳遞過程。"],
+  "Aggregate demand":["Aggregate Demand","總合需求（AD）","商品市場與貨幣市場同時均衡下，物價與產出的組合軌跡；物價↑ → 實質餘額↓ → 利率↑ → 投資↓ → 所得↓，故負斜率。"],
+  "Aggregate supply":["Aggregate Supply","總合供給（AS）","勞動市場均衡下，物價與產出的組合軌跡；凱因斯（貨幣幻覺）為正斜率，古典為垂直於充分就業產出。"],
+  "Money illusion":["Money Illusion","貨幣幻覺","勞動供給方只看到名目工資、無法掌握真實物價，誤以為實質工資上升而增供給；完全貨幣幻覺使 AS 正斜率。"],
+  "Sticky wage":["Sticky Wage Theory","僵固工資理論","工會力量使名目工資只能漲不能跌；物價下跌時就業量下跌更多，產生非自願性失業。"],
+  "Wealth effect":["Wealth Effect","財富效果","物價上升 → 實質財富（實質餘額）下降 → 消費減少 → 總需求下降，AD 負斜率的來源之一。"],
+  "Interest rate effect":["Interest-Rate Effect","利率效果","物價上升 → 實質貨幣供給下降 → 利率上升 → 投資減少 → 總需求下降，AD 負斜率的來源之一。"],
+  "Classical inconsistency":["Classical Inconsistency","古典不一致性","流動性陷阱下 AD 垂直、古典 AS 亦垂直，兩線不相交：物價調整無法結清市場，存在超額供給。"],
+  "Exchange rate":["Exchange Rate","匯率","兩種貨幣的交換比率；直接報價（1 單位外幣＝多少本國幣）與間接報價（1 單位本國幣＝多少外幣）。"],
+  "Foreign exchange reserve":["Foreign Exchange Reserve","外匯存底","一國貨幣當局（央行）持有、可隨時變現的對外債權（外國通貨、外幣存款、外國票據與有價證券）。"],
+  "Purchasing power parity":["Purchasing Power Parity","購買力平價（PPP）","同種商品在不同國家以同一貨幣計價應相同：e = P/P*（絕對 PPP）；兩國通膨差等於匯率變動率（相對 PPP）。"],
+  "Interest rate parity":["Interest Rate Parity","利率平價","資本自由移動下，本國與外國資產報酬趨於一致：R = R* + (eᵉ−e)/e（未拋補 IRP）。"],
+  "Balance of payments":["Balance of Payments","國際收支（BOP）","一國與外國經濟交易的紀錄，含經常帳（商品、勞務、要素所得、移轉）與資本金融帳（資本與金融資產交易）。"],
+  "Marshall-Lerner condition":["Marshall-Lerner Condition","馬歇爾-婁勒條件","貶值能改善貿易收支的條件：出口需求彈性＋進口需求彈性（絕對值）&gt; 1。"],
+  "J-curve":["J-Curve Effect","J 曲線效應","貨幣貶值初期貿易收支先惡化（契約已訂、數量無法迅速調整），經過一段時間後才改善，軌跡呈 J 形。"],
+  "Sterilization":["Sterilization Operations","沖銷措施","央行在公開市場買賣債券，抵銷因外匯干預造成的貨幣供給變動：賣匯買債券（釋貨幣）、買匯賣債券（收貨幣）。"],
+  "Impossible trinity":["Impossible Trinity","不可能的三頭馬車","一國無法同時擁有：固定匯率、資本完全自由移動、貨幣政策自主性三種條件，只能擇其二。"],
+  "Inflation":["Inflation","物價膨脹","物價水準持續上漲的現象；依程度分溫和（1–3%）、快步（3–10%）、奔騰（兩位數）、惡性（50% 以上）。"],
+  "Demand-pull inflation":["Demand-Pull Inflation","需求拉動型物價膨脹","擴張性政策或需求過分擴張使 AD 右移造成的物價持續上漲；貨幣數量持續增加是其必要條件。"],
+  "Cost-push inflation":["Cost-Push Inflation","成本推動型物價膨脹","生產成本（工資、原物料）增加使 AS 左移造成的物價上漲，伴隨產出減少。"],
+  "Stagflation":["Stagflation","停滯性膨脹","成本推動下物價上漲與產出（就業）減少同時發生的現象；政府陷入政策兩難。"],
+  "Imported inflation":["Imported Inflation","輸入型物價膨脹","進口品物價上升使國內物價上漲：進口品變貴 → 需求轉向國內商品、生活成本↑ → 工資要求↑。"],
+  "Shoeleather cost":["Shoeleather Cost","鞋皮成本","物價膨脹使人們減少貨幣持有、頻繁跑銀行換資產所耗費的時間與精力成本。"],
+  "Menu cost":["Menu Cost","菜單成本","廠商重新訂定價格的成本（重印目錄、改標籤、刊登廣告）；物價膨脹時必須頻繁更動價格。"],
+  "Adaptive expectations":["Adaptive Expectations","適應性預期","卡甘（Cagan）1956 提出：預期＝歷史資料的加權平均，離本期越遠權重越小；存在系統性預測誤差（只做 λ 比例的修正）。"],
+  "Rational expectations":["Rational Expectations","理性預期","穆思（Muth）1961 提出、<span class='proper'>盧卡斯</span>應用於總體：主觀預期＝經濟理論的客觀條件期望值；運用一切可得資訊、不犯系統性錯誤。"],
+  "Lucas":["Robert Lucas","盧卡斯","理性預期學派（新興古典）領袖，1995 年諾貝爾獎；盧卡斯批判：政策評估須考慮民眾預期的理性反應。"],
+  "Phillips curve":["Phillips Curve","菲利普曲線","<span class='proper'>菲利普</span>（1958）以英國 1861–1957 資料發現：失業率與貨幣工資變動率呈穩定反向非線性關係；薩繆爾森與索洛（1960）改以物價膨脹率表示。"],
+  "Misery index":["Misery Index","痛苦指數","物價膨脹率＋失業率；衡量一國民眾對經濟不滿程度的簡易指標。"],
+  "Sacrifice ratio":["Sacrifice Ratio","犧牲比率","降低 1% 物價膨脹所需減少的產出比例；衡量反膨脹政策成本的指標。"],
+  "Natural-rate hypothesis":["Natural-Rate Hypothesis","自然率假說","長期而言失業率回到自然失業率，總需求變動只在短期影響產出與就業、長期無影響（貨幣學派主張）。"],
+  "Accelerationist hypothesis":["Accelerationist Hypothesis","加速膨脹假說","實際失業率長期低於自然失業率會引起物價膨脹預期，使物價加速上漲。"],
+  "Okun's law":["Okun's Law","奧肯定律","實際產出成長率與失業率變化呈反向關係：失業率每高於自然率 1%，產出約低於潛在產出 2%。"],
+  "Friedman":["Milton Friedman","弗利曼（弗里德曼）","貨幣學派領袖，1976 年諾貝爾獎；「只有貨幣最重要」；主張以貨幣供給法則取代權衡性政策、反對凱因斯干預。"],
+  "Monetarist school":["Monetarist School","貨幣學派","1950 年代後期興起的反凱因斯革命主流：貨幣供給對名目所得有決定性影響；長期貨幣中立、短期影響實質變數；私人部門內在穩定、不穩定來自政府干預。"],
+  "Permanent income hypothesis":["Permanent Income Hypothesis","恆常所得假說","弗利曼提出：消費取決於恆常所得（長期平均），暫時性所得變動的消費效果不顯著 → 短期 MPC 小、凱因斯乘數效果不明顯。"],
+  "Money supply rule":["Money Supply Rule","貨幣供給法則","弗利曼主張央行以固定法則穩定貨幣供給成長率，取代權衡性（discretionary）政策。"],
+  "Inside lag":["Inside Lag","內在落後","經濟體系受到外在衝擊到政策行動反映此衝擊的時間差距（含資料、認知、立法、傳導落後）；貨幣政策的內在落後較短。"],
+  "Lucas critique":["Lucas Critique","盧卡斯批判","盧卡斯對傳統計量政策評估的批評：估計出的參數（如適應預期修正係數）會隨政策法則改變而調整，評估政策效果時須考慮人們對政策的預期。"],
+  "Ricardian equivalence":["Ricardian Equivalence","李嘉圖等價原理","理性預期學派主張：以債券融通的減稅無效——既定的政府支出下，債券融通與租稅融通有相同效果（民眾預期未來增稅而增加儲蓄）。"],
+  "Laffer curve":["Laffer Curve","拉弗爾曲線","<span class='proper'>拉弗爾</span>提出：政府稅收隨稅率上升先增後減；稅率高過某一限度會抑制工作與投資誘因、稅基縮小。供給面學派減稅政策的理論基礎。"],
+  "Efficiency wage":["Efficiency Wage","效率工資","廠商為追求利潤極大而支付高於市場結清水準的工資以提升生產效率（Solow 條件：生產效率的實質工資彈性 = 1）；解釋實質工資僵固與非自願性失業。"],
+  "Net present value":["Net Present Value","淨現值（NPV）","投資計畫的淨報酬以市場實質利率折現的現值：NPV = −CF₀ + Σ CFₜ/(1+r)ᵗ；NPV &gt; 0 值得投資，利率↑ → NPV↓ → 投資↓。"],
+  "Marginal efficiency of investment":["Marginal Efficiency of Investment","邊際投資效率（MEI）","使投資計畫淨現值為零的折現率（內部報酬率 IRR）；MEI &gt; r 值得投資，投資為實質利率的減函數。"],
+  "Tobin's q":["Tobin's Q Theory","托賓 q 理論","資本之市場價值／資本之重置成本；q &gt; 1 → 增加投資，q &lt; 1 → 減少投資。q = MPK/R。"],
+  "User's cost":["User's Cost of Capital","資本使用者成本","資本租金成本 = 利率＋折舊−資本利得：rₖ = (i − π) + δ；最適資本存量：MPK = rₖ。"],
+  "Investment tax credit":["Investment Tax Credit","投資抵減","廠商每投資一元可抵減特定比例的營利事業所得稅；降低使用者成本、增加最適資本存量（稅收抵減不影響稅率）。"],
+  "Absolute income hypothesis":["Absolute Income Hypothesis","絕對所得假說","凱因斯提出：消費與短期絕對所得正相關，與利率無關；C = a + bY，a&gt;0、1&gt;b&gt;0。"],
+  "Life-cycle hypothesis":["Life-Cycle Hypothesis","生命週期假說","<span class='proper'>莫迪利亞尼</span>提出：消費者在整個生命週期中安排消費與儲蓄，消費為一生財富現值的固定比例；解釋短期有截距、長期過原點。"],
+  "Relative income hypothesis":["Relative Income Hypothesis","相對所得假說","<span class='proper'>杜森貝利</span>提出：消費受相對所得水準影響，受示範效果與制輪效果制約。"],
+  "Demonstration effect":["Demonstration Effect","示範效果","消費行為受參考群體消費行為的影響（與他人比較）。"],
+  "Ratchet effect":["Ratchet Effect","制輪效果","消費受過去消費習慣影響，所得下降時消費無法立即調整（棘輪效應）。"],
+  "Permanent income":["Permanent Income","恆常所得","弗利曼：所得分恆常所得（長期平均）與暫時所得；消費變動與恆常所得變動比值為常數、與暫時所得幾乎為零 → 暫時性政策對消費無助益。"],
+  "Modigliani":["Franco Modigliani","莫迪利亞尼","義大利裔美國經濟學家，提出生命週期假說（1985 年諾貝爾獎）。"],
+  "High-powered money":["High-Powered Money","強力貨幣（準備貨幣）","H = C + R：一般大眾與銀行持有的現金＋其他銀行在央行的存款；又稱貨幣基數，是存款貨幣創造的基礎，分非借入準備與借入準備。"],
+  "Money multiplier":["Money Multiplier","貨幣乘數","增加一單位強力貨幣所創造的貨幣供給量：m = (k+1)/(k+r_d+r_e)；k 現金流失率、r_d 法定準備率、r_e 超額準備率。"],
+  "Required reserve ratio":["Required Reserve Ratio","法定存款準備率","央行規定商業銀行必須將吸收存款的一定比例做為庫存現金或轉存央行，以支付存款人提款所需；法定準備與超額準備（爛頭寸）。"],
+  "Open market operation":["Open Market Operation","公開市場操作","央行在公開市場買賣債券以調整準備貨幣：買入債券 → 貨幣供給增加；賣出債券 → 貨幣供給減少。"],
+  "Discount rate":["Discount Rate","重貼現率","商業銀行以票券為抵押向央行借款的利率；央行降低重貼現率 → 鼓勵銀行借款 → 準備貨幣放出 → 貨幣供給增加。"],
+  "Quasi money":["Quasi Money","準貨幣","定期存款＋定期儲蓄存款＋郵匯局轉存款：具法償性，但不具完全流動性與普遍性；M₂ − M₁B。"],
+  "Gresham's law":["Gresham's Law","葛萊興法則","劣幣驅逐良幣：面值相同但重量色澤較差的新幣被用作交易媒介，良幣被窖藏保值（商品貨幣制度下）。"],
+  "Fiat money":["Fiat Money","法定貨幣（強制貨幣）","不可兌換金銀的紙幣，價值建立在法律強制性（無限法償）；通貨是央行的負債，存款貨幣是銀行體系的負債。"],
+  "Baumol-Tobin model":["Baumol-Tobin Model","鮑莫爾-托賓存貨模型","交易性貨幣需求的最適化模型：M* = √(bY/2R)；平均持有現金隨所得與手續費增加、隨利率提高而減少（貨幣需求與利率反向）。"],
+  "Modern quantity theory":["Modern Quantity Theory of Money","新貨幣數量學說","弗利曼：MV = PY；短期貨幣供給變動使物價與實質產出同向變動、長期只影響物價（回到充分就業）。"],
+  "Business cycle":["Business Cycle","景氣循環","經濟體系短期波動（需求面）：擴張、頂峰、衰退、谷底循環出現；與長期成長趨勢（供給面）不同。"],
+  "Leading indicators":["Leading Indicators","領先指標","領先於景氣轉折的指標：股價指數、貨幣供給、新接訂單、建照面積、PMI（&gt;50 好轉）等。"],
+  "Coincident indicators":["Coincident Indicators","同時指標","與景氣同步變動：工業生產指數、製造業銷售量、非農業部門就業人口、實質海關出口值等。"],
+  "Lagging indicators":["Lagging Indicators","落後指標","落後於景氣轉折：失業率（倒數）、物價膨脹率、名目利率、銀行放款、存貨對銷售比率等。"],
+  "Procyclical":["Procyclical","順景氣循環","經濟變數與景氣同向移動（消費、投資）；消費同時是景氣同步指標。"],
+  "Countercyclical":["Countercyclical","逆景氣循環","經濟變數與景氣反向移動，如失業率。"],
+  "Political business cycle":["Political Business Cycle","政治景氣循環","執政者為連任在選前擴張、選後緊縮，使失業、通膨與產出隨選舉週期波動。"],
+  "Real business cycle":["Real Business Cycle","實質景氣循環","<span class='proper'>普瑞斯考特</span>與<span class='proper'>基德蘭</span>提出：景氣循環是充分就業產出趨勢本身的波動，源於生產力衝擊與勞動跨期替代；貨幣中立。"],
+  "Intertemporal substitution":["Intertemporal Substitution","勞動的跨期替代","實質工資暫時提高時增加勞動供給（多工作少休閒），之後再補休閒；實質利率上升也誘使多工作。"],
+  "Schumpeter":["Joseph Schumpeter","熊彼得","提出創新理論：創新活動破壞舊均衡、朝向新均衡，景氣循環是經濟發展過程中的正常現象。"],
+  "Kydland":["Finn Kydland","基德蘭","挪威經濟學家，提出實質景氣循環理論（2004 年諾貝爾獎）。"],
+  "Prescott":["Edward Prescott","普瑞斯考特","美國經濟學家，提出實質景氣循環理論（2004 年諾貝爾獎）。"],
+  "Growth accounting":["Growth Accounting","成長會計式","Y = AF(K,L)：經濟成長分解為資本成長、勞動成長與技術進步的貢獻；ΔY/Y = ΔA/A + α_K·ΔK/K + α_L·ΔL/L。"],
+  "Total factor productivity":["Total Factor Productivity","總要素生產力（TFP）","生產函數中的技術因子 A：代表無法由資本與勞動解釋的產出貢獻。"],
+  "Solow residual":["Solow Residual","索洛殘差","由實證資料間接估計的技術成長率：ΔA/A = ΔY/Y − α_K·ΔK/K − α_L·ΔL/L。"],
+  "Harrod-Domar":["Harrod-Domar Model","哈羅德-多馬模型","以凱因斯儲蓄-投資分析為基礎的成長模型：Y = min(K/v, L/u) 里昂鐵夫生產函數；三成長率（實際 Ga、保證 Gw、自然 Gn）。"],
+  "Natural rate of growth":["Natural Rate of Growth","自然成長率（Gₙ）","勞動力增加所能增加的產出成長率（充分就業下的成長率）：Gₙ = n。"],
+  "Warranted rate of growth":["Warranted Rate of Growth","保證成長率（G_w）","可貸資金市場均衡、資本充分利用下的成長率：G_w = s/v（s 儲蓄率、v 資本產出比）。"],
+  "Knife-edge":["Knife-Edge Equilibrium","刀刃均衡","Harrod-Domar 的不安定均衡：一旦偏離 G_a=G_w=G_n，無內生力量使其回復（要素不可替代所致）。"],
+  "Steady state":["Steady State","恆定狀態","Solow 模型中人均資本不變的狀態：sf(k) = (n+δ)k；人均所得成長率為零、總產出以 n 成長。"],
+  "Golden rule":["Golden Rule","黃金法則","極大化恆定狀態人均消費的條件：f′(k) = n+δ（無有效勞動）或 f′(k) = n+g+δ（有有效勞動）。"],
+  "Absolute convergence":["Absolute Convergence","絕對收斂假說","經濟結構類似的國家，期初人均所得較低者有較高成長率，最後收斂至相同恆定狀態。"],
+  "Conditional convergence":["Conditional Convergence","相對收斂假說","經濟結構不同的國家，成長率取決於期初人均資本與自身恆定狀態的相對差距。"],
+  "Endogenous growth":["Endogenous Growth","內生成長理論","1980 年代末 Romer、Lucas 發展：技術進步源於內生（知識、人力資本累積）；AK 模型資本邊際產量不遞減。"],
+  "Rule of 70":["Rule of 70","70 法則","估計變數加倍所需年數：70 ÷ 年成長率。例：成長率 7% → 約 10 年加倍。"],
+  "Malthus":["Thomas Malthus","馬爾薩斯","古典成長理論代表：人口呈幾何級數、糧食呈算術級數成長 → 對經濟成長持悲觀看法。"],
+  "Barro":["Robert Barro","巴羅","提出 AK 內生成長模型（1990）：資本與人力資本可互相替代 → 資本邊際產量不遞減。"]
 };
 
 /* ===== 第一章內容 ===== */
@@ -967,7 +1060,1397 @@ const CH2_PROBLEMS = [
 }
 ];
 
-/* ===== 第三章內容 ===== */
+/* ===== 第十四章內容 ===== */
+const CH14_SECTIONS = [
+{
+  id:"14.1", title:"成長會計式",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="growth"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">成長會計</div>
+    <div class="mc-body">
+      <div class="mc-formula">ΔY/Y = ΔA/A + α_K·ΔK/K + α_L·ΔL/L（α_K + α_L = 1）</div>
+      <div class="mc-detail">Y = A·F(K,L)：經濟成長分解為資本貢獻、勞動貢獻與技術進步（<span class="term" data-term="Total factor productivity">TFP</span>）。α_K、α_L 為資本與勞動產量彈性（貢獻份額）。技術 A 無法直接觀察，由實際數據間接估計 → <span class="term" data-term="Solow residual">索洛殘差</span>。</div>
+      <div class="mc-ex"><b>例子：</b>Cobb-Douglas Y = AK^0.4L^0.6：資本成長 3%、勞動成長 2%、技術成長 1% → GDP 成長 = 1% + 0.4×3% + 0.6×2% = <b>3.4%</b>。</div>
+    </div>
+  </div>`
+},
+{
+  id:"14.2", title:"古典與 Harrod-Domar 成長理論",
+  body:`
+  <div class="tblwrap"><table><caption>成長理論的演進</caption><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>理論</th><th>內容</th></tr></thead><tbody>
+  <tr><td>古典成長（<span class="proper" data-term="Malthus">馬爾薩斯</span>）</td><td>人口呈幾何級數、糧食呈算術級數成長 → 成長終將停滯，生活水準僅能維持基本生活（悲觀）</td></tr>
+  <tr><td>凱因斯成長觀</td><td>有效需求創造供給：政府持續增加支出 → 乘數效果使所得增加</td></tr>
+  <tr><td><span class="term" data-term="Harrod-Domar">Harrod-Domar</span></td><td>投資不僅是需求的一部分，更透過資本累積影響總供給；Y = min(K/v, L/u) 里昂鐵夫生產函數（要素完全互補、固定規模報酬、無技術進步）</td></tr>
+  </tbody></table></div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="harrod"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">三成長率</div>
+    <div class="mc-body">
+      <div class="mc-formula">G_a = s/v（實際）；G_w = s/v（保證）；G_n = n（自然）</div>
+      <div class="mc-detail"><span class="term" data-term="Natural rate of growth">自然成長率</span>＝勞動充分就業下的成長率；<span class="term" data-term="Warranted rate of growth">保證成長率</span>＝資本充分利用下的成長率；均衡條件 G_a = G_w = G_n = s/v = n → 黃金時代。</div>
+      <div class="mc-ex"><b>例子：</b>儲蓄率 s=20%、資本產出比 v=4 → G_w = 5%；勞動成長率 n=5% → 黃金時代達成。</div>
+    </div>
+  </div>
+  <div class="warn">因 s、v、n 皆為外生，偏離均衡後無內生力量回復 → <span class="term" data-term="Knife-edge">刀刃均衡</span>（不安定）。Solow 以要素可替代的新古典生產函數修正之。</div>`
+},
+{
+  id:"14.3", title:"新古典成長理論（Solow-Swan）",
+  body:`
+  <div class="svgfig">
+    <figcaption>Solow 模型恆定狀態：sf(k) 與 (n+δ)k 的交點決定人均資本 k*；k 在 k* 左側時 Δk&gt;0、右側時 Δk&lt;0，自動收斂。</figcaption>
+    <svg viewBox="0 0 440 280" role="img" aria-label="Solow 模型圖">
+      <defs><marker id="arw14" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c6e9e"/></marker></defs>
+      <line x1="70" y1="240" x2="70" y2="30" class="ax"/>
+      <line x1="70" y1="240" x2="410" y2="240" class="ax"/>
+      <text x="10" y="40" class="axl">y</text>
+      <text x="406" y="256" class="axl">k</text>
+      <path d="M80,230 C150,200 240,130 380,60" fill="none" stroke="#b5542e" stroke-width="2.4"/>
+      <text x="330" y="70" class="lb" fill="#b5542e">y = f(k)</text>
+      <path d="M90,230 C160,215 240,160 370,105" fill="none" stroke="#2c6e9e" stroke-width="2.4"/>
+      <text x="310" y="115" class="lb" fill="#2c6e9e">sf(k)</text>
+      <line x1="80" y1="232" x2="400" y2="60" stroke="#7b2cbf" stroke-width="1.8"/>
+      <text x="330" y="90" class="lb" fill="#7b2cbf">(n+δ)k</text>
+      <line x1="235" y1="240" x2="235" y2="130" stroke="#6f6555" stroke-width="1" stroke-dasharray="4 4"/>
+      <text x="222" y="258" class="axl" fill="#6f6555">k*</text>
+      <circle cx="235" cy="138" r="4" fill="#b5542e"/>
+      <text x="100" y="175" class="lb" fill="#6f6555">Δk&gt;0</text>
+      <text x="285" y="175" class="lb" fill="#6f6555">Δk&lt;0</text>
+    </svg>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="solow"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">恆定狀態</div>
+    <div class="mc-body">
+      <div class="mc-formula">基本累積方程式：Δk = sf(k) − (n+δ)k；恆定狀態 sf(k) = (n+δ)k</div>
+      <div class="mc-detail">生產函數規模報酬不變、邊際產出遞減、要素可替代。恆定狀態人均資本成長率為零、人均所得成長率為零、總產出以 n 成長。儲蓄率↑ → k*、y*↑（但不成長率）；人口成長率↑ → k*、y*↓。</div>
+      <div class="mc-ex"><b>例子：</b>Y = K^0.5L^0.5、s=0.25、δ=0.125 → 0.25√k = 0.125k → k* = <b>4</b>、y* = 2。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="golden"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">黃金法則</div>
+    <div class="mc-body">
+      <div class="mc-formula">f′(k_g) = n+δ（無有效勞動）；加入有效勞動：f′(k_g) = n+g+δ</div>
+      <div class="mc-detail">極大化恆定狀態人均消費 c = f(k) − sf(k)：資本的邊際產出等於有效折舊率。黃金法則儲蓄率 s_g = (n+δ)k_g/f(k_g)。</div>
+      <div class="mc-ex"><b>例子：</b>Y=K^0.5L^0.5、δ=0.125：f′(k)=0.125 → k_g=16 → s_g = <b>0.5</b>。</div>
+    </div>
+  </div>
+  <div class="note"><b>收斂假說</b>：<span class="term" data-term="Absolute convergence">絕對收斂</span>（結構類似國家，期初所得低者成長快）；<span class="term" data-term="Conditional convergence">相對收斂</span>（成長率取決於與自身恆定狀態的差距）。<b>三分之一法則</b>（Solow 估計美國：人均資本 +1% → 人均產出 +0.33%）；<span class="term" data-term="Rule of 70">70 法則</span>：加倍年數 = 70 ÷ 成長率。</div>`
+},
+{
+  id:"14.4", title:"內生成長理論",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="akmodel"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">AK 模型</div>
+    <div class="mc-body">
+      <div class="mc-formula">Y = AK（資本與人力資本可互相替代）；Δk/k = sA − δ</div>
+      <div class="mc-detail"><span class="proper" data-term="Barro">Barro</span>（1990）：資本邊際產量<b>不遞減</b> → 只要 sA &gt; δ，人均資本與產出持續成長（不需外生技術進步）。強調知識與人力資本累積的貢獻；強者恆強、弱者恆弱。</div>
+      <div class="mc-ex"><b>例子：</b>A=0.3、s=0.3、δ=0.05 → sA−δ = 0.04 &gt; 0 → 人均資本每年成長 4%。</div>
+    </div>
+  </div>
+  <div class="note"><span class="term" data-term="Endogenous growth">內生成長理論</span>（Romer、Lucas）：技術進步源於內生（人力資本 H、知識累積），解決 Solow 模型技術外生（天降甘霖）無法解釋成長來源的問題。</div>`
+}
+];
+const CH14_PROBLEMS = [
+{
+  q:"Which of the following is the \"balanced growth\"?（書本例題 14.2）",
+  opts:["(A) All industries in the economy are growing at the same rate","(B) Growth rates in services and in goods are equal","(C) Output, capital, and effective labor are all growing at the same rate","(D) The growth rate of capital is equal to the rate of depreciation"],
+  ans:"<b>(C) Output, capital, and effective labor are all growing at the same rate。</b><ul><li>平衡成長（均衡成長路徑）：所有變數以相同比率成長</li><li>Solow 恆定狀態下總產出、資本、有效勞動同以 n 成長</li></ul>"
+},
+{
+  q:"Consider the following Solow model. Y = K^0.5L^0.5, Δk = sy − δk, L remains constant, s = 0.25, δ = 0.125. The k* in the steady state is（書本例題 14.3）",
+  opts:["(A) 2","(B) 4","(C) 8","(D) 16"],
+  ans:"<b>(B) 4。</b><ul><li>恆定狀態：sy = δk → 0.25√k = 0.125k</li><li>兩邊 ×8：2√k = k → √k = 2 → k* = <b>4</b>、y* = 2</li></ul>"
+},
+{
+  q:"Following question 14.3, the optimal saving rate to maximize the consumption per worker (the Golden Rule) is（書本例題 14.4）",
+  opts:["(A) 0.25","(B) 0.5","(C) 0.75","(D) 1"],
+  ans:"<b>(B) 0.5。</b><ul><li>黃金法則：f′(k) = δ → 0.5k^−0.5 = 0.125 → k_g = 16</li><li>s_g = δk_g/f(k_g) = 0.125×16/4 = <b>0.5</b></li></ul>"
+},
+{
+  q:"索洛模型中，折舊率提高，則均衡每人所得（書本例題 14.5）",
+  opts:["(A) 上升","(B) 難以判斷","(C) 下降","(D) 不變"],
+  ans:"<b>(C) 下降。</b><ul><li>δ↑ → (n+δ)k 線左旋上移 → k*↓、y*↓</li><li>每人所得下降（需更多產出補折舊）</li></ul>"
+},
+{
+  q:"An increase in the saving rate ______ the steady-state value of capital per worker, and ______ the steady-state value of output per worker.（書本例題 14.6）",
+  opts:["(A) Increases; increases","(B) Increases; decreases","(C) Decreases; increases","(D) Decreases; decreases"],
+  ans:"<b>(A) Increases; increases。</b><ul><li>s↑ → sf(k) 曲線上移 → k*↑、y*↑（水準效果）</li><li>但恆定狀態的成長率不受儲蓄率影響</li></ul>"
+},
+{
+  q:"Consider the Solow model Y = A·K^α·(HL)^(1−α), where H grows at g, L grows at n, physical capital depreciates at δ, saving rate = s. What is the steady-state value of capital per effective labor?（書本例題 14.7）",
+  opts:["(A) [sA/(n+g+δ)]^(1/(1−α))","(B) [sA/(n+δ)]^(1/(1−α))","(C) [sA/(g+δ)]^(1/(1−α))","(D) [A/(n+g+δ)]^(1/(1−α))"],
+  ans:"<b>(A) [sA/(n+g+δ)]^(1/(1−α))。</b><ul><li>有效勞動 EL = HL，有效折舊率 = n+g+δ</li><li>恆定狀態：sf(k̃) = (n+g+δ)k̃ → k̃* = [sA/(n+g+δ)]^(1/(1−α))</li></ul>"
+},
+{
+  q:"Following question 14.7, what is the golden rule saving rate?（書本例題 14.8）",
+  opts:["(A) α","(B) 1−α","(C) (1−α)/α","(D) α/(1−α)"],
+  ans:"<b>(A) α。</b><ul><li>Cobb-Douglas：黃金法則儲蓄率 = 資本份額 α</li><li>α=1/3 時 s_g = 1/3</li></ul>"
+},
+{
+  q:"下列何者為 Solow 模型「恆定狀態」的條件？（綜合題）",
+  opts:["(A) sf(k) = (n+δ)k","(B) sf(k) = nk","(C) f′(k) = n+δ","(D) ΔY/Y = ΔK/K"],
+  ans:"<b>(A) sf(k) = (n+δ)k。</b><ul><li>人均資本不變：儲蓄（投資）恰好補足折舊與人口成長的稀釋</li><li>(C) 是黃金法則條件；(B) 忽略折舊</li></ul>"
+}
+];
+const CH13_SECTIONS = [
+{
+  id:"13.1", title:"景氣循環的意義",
+  body:`
+  <p><span class="term" data-term="Business cycle">景氣循環</span>＝經濟體系的短期波動（需求面）；經濟成長＝勞動生產力長期提升（供給面）。實務上連續兩季實質產出下跌即為衰退。</p>
+  <div class="svgfig">
+    <figcaption>景氣循環的四階段：擴張（a→b）、頂峰（b）、衰退（b→c）、谷底（d），圍繞長期成長趨勢波動。</figcaption>
+    <svg viewBox="0 0 440 240" role="img" aria-label="景氣循環圖">
+      <defs><marker id="arw13" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c6e9e"/></marker></defs>
+      <line x1="60" y1="200" x2="60" y2="30" class="ax"/>
+      <line x1="60" y1="200" x2="420" y2="200" class="ax"/>
+      <text x="8" y="40" class="axl">產出</text>
+      <text x="412" y="216" class="axl">時間</text>
+      <line x1="70" y1="120" x2="410" y2="120" stroke="#9a8f78" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <text x="330" y="112" class="lb" fill="#6f6555">長期成長趨勢</text>
+      <path d="M70,150 C100,148 130,142 170,92 C210,42 250,50 285,95 C320,140 350,165 390,158" fill="none" stroke="#2c6e9e" stroke-width="2.6"/>
+      <circle cx="170" cy="92" r="4" fill="#b5542e"/>
+      <text x="160" y="78" class="lb" fill="#b5542e">頂峰</text>
+      <circle cx="390" cy="158" r="4" fill="#7b2cbf"/>
+      <text x="360" y="188" class="lb" fill="#7b2cbf">谷底</text>
+      <text x="110" y="168" class="lb">擴張</text>
+      <text x="230" y="128" class="lb">衰退</text>
+      <text x="330" y="145" class="lb">復甦</text>
+    </svg>
+  </div>`
+},
+{
+  id:"13.2", title:"景氣動向指標與對策信號",
+  body:`
+  <div class="tblwrap"><table><caption>台灣主要景氣指標（國發會）</caption><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>類別</th><th>構成項目</th></tr></thead><tbody>
+  <tr><td><span class="term" data-term="Leading indicators">領先指標</span></td><td>股價指數、實質貨幣總計數 M1B、海關出口值變動率與外銷訂單指數、建照面積、躉售物價、採購經理人指數（PMI &gt; 50 好轉）、長短期利率利差（擴大＝景氣好轉）、首次請領失業救濟人數、實質半導體設備進口值、製造業營業氣候測驗點</td></tr>
+  <tr><td><span class="term" data-term="Coincident indicators">同時指標</span></td><td>工業生產指數、製造業銷售量指數、企業總用電量、批發零售餐飲業營業額、非農業部門就業人口、實質海關出口值、實質機械與電機設備進口值、製造業每月薪資變動率、票據交換金額變動率、個人所得</td></tr>
+  <tr><td><span class="term" data-term="Lagging indicators">落後指標</span></td><td>失業率（倒數）、工業與服務業受僱員工人數、製造業單位產出生產成本、金融業隔夜拆款利率、全體貨幣機構放款與投資、製造業與商業存貨對銷售量比率、失業平均存續期間</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>景氣對策信號（景氣燈號）</b>：由 M1B、股價指數、工業生產指數、非農業部門就業人口、實質海關出口值、實質機械與電機設備進口值、製造業銷售量指數等九項構成。紅燈＝過熱（強力緊縮）、黃紅燈＝注意、綠燈＝穩定、黃藍燈＝注意、藍燈＝低迷（強力刺激復甦）。</div>`
+},
+{
+  id:"13.3", title:"順景氣與逆景氣變數",
+  body:`
+  <div class="tblwrap"><table><caption>重要經濟變數與景氣的關係</caption><colgroup><col style="width:40%"><col style="width:22%"><col style="width:38%"></colgroup><thead><tr><th>變數</th><th>方向</th><th>時間點</th></tr></thead><tbody>
+  <tr><td>工業生產指數</td><td>順</td><td>同時</td></tr>
+  <tr><td>製造業新接訂單、PMI</td><td>順</td><td>領先</td></tr>
+  <tr><td>消費</td><td>順</td><td>同時</td></tr>
+  <tr><td>企業固定投資、住宅投資、存貨投資</td><td>順</td><td>同時／領先（投資波動大於消費）</td></tr>
+  <tr><td>貨幣供給量、S&amp;P 500 股價指數</td><td>順</td><td>領先</td></tr>
+  <tr><td>消費者物價指數、物價膨脹率、名目利率</td><td>順</td><td>落後</td></tr>
+  <tr><td>失業率</td><td><b>逆</b></td><td>落後</td></tr>
+  <tr><td>實質利率</td><td>不明確</td><td>—</td></tr>
+  </tbody></table></div>
+  <div class="note">耐久財工業的波動大於非耐久財或服務業。</div>`
+},
+{
+  id:"13.4", title:"景氣循環理論",
+  body:`
+  <div class="tblwrap"><table><caption>各家景氣循環理論</caption><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>理論</th><th>內容</th></tr></thead><tbody>
+  <tr><td><span class="proper" data-term="Schumpeter">熊彼得</span>創新理論</td><td>創新是社會進步原動力：破壞舊均衡、朝向新均衡；景氣循環是經濟發展的正常現象</td></tr>
+  <tr><td>貨幣學派</td><td>貨幣是景氣循環主因：央行以貨幣政策法則（固定成長）取代權衡政策；投資對利率敏感 → 不主張財政政策</td></tr>
+  <tr><td>凱因斯心理預期</td><td>企業經營者過度樂觀→投資過度→繁榮；察覺後過度悲觀→緊縮投資→衰退</td></tr>
+  <tr><td>凱因斯學派</td><td>民間投資變動是主因：主張積極反循環政策（Countercyclical policy）穩定總合需求</td></tr>
+  <tr><td><span class="term" data-term="Political business cycle">政治景氣循環</span></td><td>執政者選前擴張提振景氣、選後緊縮壓制通膨 → 經濟隨選舉週期波動</td></tr>
+  <tr><td>新興古典（盧卡斯）</td><td>對物價與工資的錯誤預期造成勞動供給波動 → 景氣循環；被預期的政策無效</td></tr>
+  <tr><td>新興凱因斯</td><td>接受理性預期但市場有不完美機制：反循環政策效果打折但仍有效</td></tr>
+  <tr><td><span class="term" data-term="Real business cycle">實質景氣循環</span></td><td><span class="proper" data-term="Kydland">基德蘭</span>與<span class="proper" data-term="Prescott">普瑞斯考特</span>：景氣循環是成長趨勢本身的波動，源於生產力衝擊與<span class="term" data-term="Intertemporal substitution">勞動跨期替代</span>；貨幣中立、物價充分調整</td></tr>
+  </tbody></table></div>`
+}
+];
+const CH13_PROBLEMS = [
+{
+  q:"下列何者不是景氣循環的領先指標？（書本例題 13.1）",
+  opts:["(A) 平均工作與加班時數","(B) 製造業新接訂單變動率","(C) 工業生產指數變動率","(D) 股價指數變動率"],
+  ans:"<b>(C) 工業生產指數變動率。</b><ul><li>工業生產指數是<b>同時指標</b>，與景氣同步</li><li>平均工作與加班時數、新接訂單、股價指數皆為領先指標</li></ul>"
+},
+{
+  q:"下列指標中，哪些是景氣領先指標？（書本例題 13.3）",
+  opts:["(A) 工業生產指數變動率","(B) 製造業成品存貨率","(C) 股價指數變動率","(D) 貨幣供給 M1B 變動率","(E) 製造業新接訂單指數變動率"],
+  ans:"<b>(C)(D)(E)。</b><ul><li>股價指數、M1B、新接訂單皆領先景氣轉折</li><li>(A) 工業生產指數為同時指標；(B) 成品存貨率為落後指標</li></ul>"
+},
+{
+  q:"根據實質景氣循環模型（書本例題 13.4）",
+  opts:["(A) 因為長期的勞動契約，使得物價水準具僵固性","(B) 因為資訊的不完整，使非預期的政策產生效果","(C) 貨幣供給的變動，對短期的產出水準沒有影響","(D) 物價水準可以充分調整"],
+  ans:"<b>(D) 物價水準可以充分調整。</b><ul><li>RBC：市場全面結清、價格具完全彈性、貨幣中立</li><li>(C) 是對的但不完整——RBC 主張貨幣對短期產出也無影響（中立）</li></ul>"
+},
+{
+  q:"根據新古典理性預期的景氣循環理論，非預期的總合需求減少會（書本例題 13.5）",
+  opts:["(A) 降低實質工資，增加就業及產出","(B) 增加實質工資，減少就業及產出","(C) 增加實質工資，增加就業及產出","(D) 降低實質工資，減少就業及產出"],
+  ans:"<b>(D) 降低實質工資，減少就業及產出。</b><ul><li>非預期需求減少 → 廠商誤以為相對價格下降 → 減少生產與勞動雇用量</li><li>錯誤預期（貨幣幻覺）造成供給波動</li></ul>"
+},
+{
+  q:"下列何者不是實質景氣循環理論主張的干擾景氣波動的因素？（書本例題 13.6）",
+  opts:["(A) 增進勞力或資本的品質","(B) 技術創新","(C) 政府嚴格的環保法令","(D) 充分就業"],
+  ans:"<b>(D) 充分就業。</b><ul><li>RBC 主張生產力衝擊（技術、要素品質、法令等供給面因素）引起波動</li><li>「充分就業」是描述狀態而非干擾因素</li></ul>"
+},
+{
+  q:"Real business cycle theory says that the factor leading to the business cycle is changes in（書本例題 13.7）",
+  opts:["(A) Animal spirits","(B) The growth rate of the quantity of money","(C) Only aggregate demand","(D) The growth rate of productivity"],
+  ans:"<b>(D) The growth rate of productivity。</b><ul><li>RBC：生產力成長率的變動（技術衝擊）是景氣循環的根源</li><li>貨幣中立 → 貨幣成長率不是主因</li></ul>"
+}
+];
+const CH12_SECTIONS = [
+{
+  id:"12.1", title:"貨幣市場基礎理論",
+  body:`
+  <p>貨幣供給量並非完全由央行左右，由<b>一般社會大眾、商業銀行、中央銀行</b>三方相互作用決定：</p>
+  <div class="tblwrap"><table><caption>決定貨幣供給的三個變數</caption><colgroup><col style="width:34%"><col style="width:66%"></colgroup><thead><tr><th>變數</th><th>決定者與內容</th></tr></thead><tbody>
+  <tr><td>現金—存款比率（C/D = k）</td><td>大眾自發決定現金與活期存款的比例（現金流失率）；k↑ → 乘數↓</td></tr>
+  <tr><td>準備金—存款比率（R/D = r）</td><td>商業銀行：法定準備率 r_d（央行規定）＋超額準備率 r_e（銀行自願，爛頭寸）</td></tr>
+  <tr><td><span class="term" data-term="High-powered money">強力貨幣</span>（H = C + R）</td><td>央行：公開市場操作（非借入準備）＋貼現窗口（借入準備）</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>準備金</b>＝銀行庫存現金＋銀行在央行的存款；用途：滿足存戶提款與結算、銀行間調頭寸支付。準備金—存款比例必須小於 1。</div>`
+},
+{
+  id:"12.2", title:"金融市場概論",
+  body:`
+  <div class="tblwrap"><table><caption>金融市場分類</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead><tr><th>市場</th><th>內容</th></tr></thead><tbody>
+  <tr><td>貨幣市場</td><td>一年期以下短期資產：金融業拆款、國庫券、商業本票、銀行承兌匯票、可轉讓定存單；風險低、流動性高</td></tr>
+  <tr><td>資本市場</td><td>一年期以上或不定期限（股票）：債券與股票；中長期資金</td></tr>
+  </tbody></table></div>`
+},
+{
+  id:"12.3", title:"貨幣制度演進",
+  body:`
+  <div class="tblwrap"><table><caption>貨幣制度的演進</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead><tr><th>制度</th><th>內容</th></tr></thead><tbody>
+  <tr><td>商品貨幣</td><td>本身具商品價值（耐久、同質、易分割、價格穩定）；<span class="term" data-term="Gresham's law">葛萊興法則</span>：劣幣驅逐良幣</td></tr>
+  <tr><td>可兌換紙幣</td><td>金本位（19 世紀末，1933 年前美鈔可兌金幣）；金匯本位（二戰後 Bretton Woods，1971 年史密斯寧協定取消兌換）</td></tr>
+  <tr><td><span class="term" data-term="Fiat money">法定貨幣</span></td><td>不可兌換紙幣：價值建立在法律強制性（無限法償）；通貨是央行負債、存款貨幣（支票、活存）是銀行體系負債</td></tr>
+  </tbody></table></div>`
+},
+{
+  id:"12.4", title:"貨幣的定義與功能",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="moneydef"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">貨幣定義</div>
+    <div class="mc-body">
+      <div class="mc-formula">M₁A = 通貨＋支票存款＋活期存款；M₁B = M₁A＋活期儲蓄存款；M₂ = M₁B＋<span class="term" data-term="Quasi money">準貨幣</span></div>
+      <div class="mc-detail">通貨＝央行發行流通在外的紙幣與輔幣；活期存款＝無息支票帳戶；其他支票存款＝NOW、ATS。信用卡額度非貨幣供給組成要素（先消費後付款的信用工具）。</div>
+      <div class="mc-ex"><b>例子：</b>M₂ 變動而 M₁B 不變：定存轉活存（準貨幣轉 M₁B）→ M₁B↑、M₂ 不變。</div>
+    </div>
+  </div>
+  <div class="note"><b>貨幣的功能</b>：交易媒介（最基本，克服慾望雙重一致性）、衡量價值的單位（記帳單位）、延期支付的標準、價值貯藏（保存購買力）。</div>`
+},
+{
+  id:"12.5", title:"貨幣創造乘數",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="moneycreate"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">貨幣乘數</div>
+    <div class="mc-body">
+      <div class="mc-formula">簡易模型：m = (k+1)/(k+r_d+r_e)；k=0、無超額準備時 m = 1/r</div>
+      <div class="mc-detail">央行釋出 1 單位強力貨幣，經存款創造過程使貨幣供給增加 m 倍。k、r_d、r_e 任一上升 → 乘數下降。</div>
+      <div class="mc-ex"><b>例子：</b>r=20%、k=0 → m=5；央行買債 10 元 → ΔM = 10+8+6.4+… = <b>50 元</b>。</div>
+    </div>
+  </div>
+  <div class="warn">完整模型再加入活期儲蓄存款 s 與定期存款 t（各別準備率）：m = (k+1+s+t)/(k+r_d+r_e+r_t·t+r_s·s)。央行資產負債表：資產（國外資產、政府債券、對金融機構債權）／負債（準備貨幣、政府存款、央行單券等）。</div>`
+},
+{
+  id:"12.6", title:"央行政策目標與貨幣需求理論",
+  body:`
+  <div class="tblwrap"><table><caption>外生衝擊下的政策選擇（IS-LM）</caption><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup><thead><tr><th>衝擊來源</th><th>穩定貨幣供給量</th><th>穩定利率</th></tr></thead><tbody>
+  <tr><td>商品市場（IS 擾動）</td><td>產出波動較大（LM 不動，沿 LM 移動）</td><td>貨幣供給須增加配合 → 產出波動較小 ✓</td></tr>
+  <tr><td>貨幣市場（LM 擾動）</td><td>LM 不動 → 產出不變 ✓</td><td>貨幣供給須減少 → 產出波動較大</td></tr>
+  </tbody></table></div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="baumol"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Baumol-Tobin model">鮑莫爾-托賓</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">M* = √(bY/2R)；Z = 2M*；n = Y/Z</div>
+      <div class="mc-detail">交易性貨幣需求的最適化：持有貨幣的總成本＝交易成本＋利息損失。所得↑、手續費↑ → 平均持有現金↑；利率↑ → 持有現金↓、提款次數↑。貨幣需求與所得、利率皆有關。</div>
+      <div class="mc-ex"><b>例子：</b>Y=60 萬、利率 6%、每次手續費 100 元 → M* = √(100×60萬÷(2×0.06)) ≈ <b>22,361 元</b>。</div>
+    </div>
+  </div>
+  <div class="note"><b>新貨幣數量學說</b>（<span class="term" data-term="Modern quantity theory">Modern QTM</span>）：短期貨幣供給變動使物價與實質產出同向變動；長期回到充分就業 → 貨幣只影響物價（通膨永遠是貨幣現象）。</div>`
+}
+];
+const CH12_PROBLEMS = [
+{
+  q:"The information in the table pertains to an imaginary economy: Large time deposits $80, Small time deposits $75, Demand deposits $75, Other check deposits $40, Saving deposits $10, Traveler's checks $1, Money market mutual funds $15, Currency $110, Available credit on credit card $10. Find M1 and M2.（書本例題 12.8）",
+  opts:["(A) M1 = 226、M2 = 326","(B) M1 = 236、M2 = 336","(C) M1 = 226、M2 = 336","(D) M1 = 216、M2 = 316"],
+  ans:"<b>(A) M1 = 226、M2 = 326。</b><ul><li>M1 = 通貨 110＋旅行支票 1＋活期存款 75＋其他支票存款 40 = <b>226</b></li><li>M2 = M1＋小額定存 75＋儲蓄存款 10＋MMMF 15 = <b>326</b></li><li>信用卡額度 10 不計入貨幣供給</li></ul>"
+},
+{
+  q:"The Fed can increase the price level by conducting open market ______ and ______ the discount rate.（書本例題 12.9）",
+  opts:["(A) Sales; raising","(B) Sales; lowering","(C) Purchases; raising","(D) Purchases; lowering"],
+  ans:"<b>(D) Purchases; lowering。</b><ul><li>買入公債 → 準備貨幣↑；降低貼現率 → 銀行借款↑ → 貨幣供給增加 → 物價上升</li></ul>"
+},
+{
+  q:"下列哪一項中央銀行的措施使貨幣供給增加？（書本例題 12.10）",
+  opts:["(A) 降低重貼現率","(B) 公開市場操作買入國庫券","(C) 買入外匯","(D) 降低法定準備率","(E) 以上皆正確"],
+  ans:"<b>(E) 以上皆正確。</b><ul><li>四項都是擴張性貨幣操作：放出準備貨幣或提高乘數</li></ul>"
+},
+{
+  q:"如果中央銀行調升存款準備率，則（書本例題 12.11）",
+  opts:["(A) IS 線不變、LM 線左移，利率上升、所得減少","(B) IS 線不變、LM 線右移，利率下跌、所得增加","(C) IS 線左移、LM 線不變，利率下跌、所得減少","(D) IS 線右移、LM 線不變，利率上升、所得增加"],
+  ans:"<b>(A) IS 線不變、LM 線左移，利率上升、所得減少。</b><ul><li>準備率↑ → 貨幣乘數↓ → 貨幣供給↓ → LM 左移</li><li>利率↑、所得↓（緊縮效果）</li></ul>"
+},
+{
+  q:"下列敘述何者正確？（書本例題 12.16）",
+  opts:["(A) 市場利率越高，銀行持有超額準備的機會成本越小","(B) 銀行體系的超額準備增加，貨幣供給將增加","(C) 景氣好的時候，銀行體系的超額準備會增加","(D) 超額準備越高貨幣供給乘數越小"],
+  ans:"<b>(D) 超額準備越高貨幣供給乘數越小。</b><ul><li>m = (k+1)/(k+r_d+r_e)：r_e↑ → 乘數↓</li><li>(A) 利率越高機會成本越大；(B) 超額準備↑ → 放款↓ → 貨幣供給↓</li></ul>"
+},
+{
+  q:"假設銀行體系的存款法定準備率為 10%、超額準備率為 10%、現金流出率為 15%，則貨幣乘數是多少？（書本例題 12.18）",
+  opts:["(A) 約 3.29","(B) 約 2.86","(C) 約 4.33","(D) 約 5.0"],
+  ans:"<b>(A) 約 3.29。</b><ul><li>m = (k+1)/(k+r_d+r_e) = (0.15+1)/(0.15+0.10+0.10)</li><li>= 1.15/0.35 ≈ <b>3.29</b></li></ul>"
+},
+{
+  q:"在社會大眾只保有存款、不保有通貨的假設下，若存款準備率為 0.2，央行釋出 100 億元準備貨幣，最後可使貨幣供給增加的最大數量為？若改為某人將床底下找到的 100 億元存入銀行，答案變為？（書本例題 12.19）",
+  opts:["(A) 500 億；400 億","(B) 500 億；500 億","(C) 400 億；500 億","(D) 100 億；500 億"],
+  ans:"<b>(A) 500 億；400 億。</b><ul><li>央行釋出：k=0 → m = 1/0.2 = 5 → ΔM = 5×100 = <b>500 億</b></li><li>床底現金存入：準備增加 100 → 存款創造 500；但通貨減少 100 → 淨增加 <b>400 億</b></li></ul>"
+},
+{
+  q:"假設台灣的貨幣基礎為 200 億元、央行的法定準備率為 10%、通貨存款比率為 20%，則貨幣供給量為？（書本例題 12.20）",
+  opts:["(A) 400 億","(B) 800 億","(C) 1200 億","(D) 1600 億"],
+  ans:"<b>(B) 800 億。</b><ul><li>m = (k+1)/(k+r_d) = (0.2+1)/(0.2+0.1) = 1.2/0.3 = 4</li><li>M = m×H = 4×200 = <b>800 億</b></li></ul>"
+},
+{
+  q:"強力貨幣是指（書本例題 12.21）",
+  opts:["(A) 準備貨幣加上通貨","(B) 法定準備加存款","(C) 銀行準備加通貨","(D) 存款加通貨"],
+  ans:"<b>(C) 銀行準備加通貨。</b><ul><li>H = C + R：大眾持有通貨＋銀行準備金（庫存現金＋在央行存款）</li><li>是存款貨幣創造的基礎（貨幣基數）</li></ul>"
+},
+{
+  q:"下列事件對於貨幣需求之影響，何者正確？（書本例題 12.24）",
+  opts:["(A) 自動提款機設立增加，將使貨幣需求降低","(B) 信用卡普及將使貨幣需求降低","(C) 央行提高存款準備率，均衡時將使貨幣需求增加","(D) 所得增加將使投機性貨幣需求增加","(E) 利率和貨幣需求量呈反比"],
+  ans:"<b>(E) 利率和貨幣需求量呈反比。</b><ul><li>利率↑ → 持有貨幣機會成本↑ → 貨幣需求↓</li><li>(A)(B) 也降低貨幣需求但非最佳單選；(D) 所得增加使<b>交易性</b>需求增加</li></ul>"
+},
+{
+  q:"In the Baumol-Tobin theory of transactions demand for money, the number of trips to the bank will（書本例題 12.26）",
+  opts:["(A) Increase as the interest rate decreases","(B) Decrease as expenditure increases","(C) Increase as wealth increases","(D) Increase as the interest rate increases"],
+  ans:"<b>(D) Increase as the interest rate increases。</b><ul><li>利率↑ → 持有現金機會成本↑ → 平均現金持有↓ → 提款次數↑</li></ul>"
+},
+{
+  q:"The opportunity cost of holding money（書本例題 12.27）",
+  opts:["(A) Increases when the interest rate decreases, so people desire to hold more of it","(B) Increases when the interest rate decreases, so people desire to hold less of it","(C) Decreases when the interest rate decreases, so people desire to hold more of it","(D) Decreases when the interest rate decreases, so people desire to hold less of it"],
+  ans:"<b>(C) 利率下降 → 持有貨幣機會成本下降 → 需求增加。</b><ul><li>機會成本＝放棄的利息（利率）</li><li>利率↓ → 持有貨幣更划算 → 貨幣需求↑</li></ul>"
+},
+{
+  q:"某甲每年所得 600,000 元、活期儲蓄存款利率 6%、每次提款手續費 100 元。以 Baumol 存貨模型分析：平均持有現金餘額？平均提款間隔約多少天？每年提款次數？（書本例題 12.28）",
+  opts:["(A) 約 22,361 元；約 27 天；約 13.4 次","(B) 約 31,623 元；約 20 天；約 19 次","(C) 約 10,000 元；約 60 天；約 6 次","(D) 約 22,361 元；約 60 天；約 6 次"],
+  ans:"<b>(A) 約 22,361 元；約 27 天；約 13.4 次。</b><ul><li>M* = √(bY/2R) = √(100×600,000÷(2×0.06)) = √5×10⁸ ≈ <b>22,361 元</b></li><li>每次取款 Z = 2M* ≈ 44,721；次數 n = 600,000/44,721 ≈ <b>13.4 次/年</b></li><li>間隔 = 365/13.4 ≈ <b>27 天</b></li><li>利率降為 4% → 平均持有現金增至約 27,386 元、提款次數減少</li></ul>"
+}
+];
+const CH11_SECTIONS = [
+{
+  id:"11.1", title:"短期與長期消費理論",
+  body:`
+  <div class="svgfig">
+    <figcaption>短期消費函數 C = a + bY 有正截距；長期消費函數 C = kY 通過原點（APC 長期固定）。</figcaption>
+    <svg viewBox="0 0 420 280" role="img" aria-label="短期與長期消費函數圖">
+      <defs><marker id="arw11" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c6e9e"/></marker></defs>
+      <line x1="70" y1="240" x2="70" y2="40" class="ax"/>
+      <line x1="70" y1="240" x2="390" y2="240" class="ax"/>
+      <text x="14" y="46" class="axl" fill="#6f6555">C 消費</text>
+      <text x="386" y="258" class="axl">Y 所得</text>
+      <line x1="80" y1="230" x2="370" y2="60" stroke="#9a8f78" stroke-width="1.4" stroke-dasharray="5 4"/>
+      <text x="330" y="70" class="lb" fill="#6f6555">45°（C=Y）</text>
+      <line x1="120" y1="210" x2="360" y2="85" stroke="#2c6e9e" stroke-width="2.4"/>
+      <text x="300" y="130" class="lb" fill="#2c6e9e">長期 C = kY</text>
+      <line x1="120" y1="200" x2="360" y2="110" stroke="#b5542e" stroke-width="2.4"/>
+      <text x="300" y="150" class="lb" fill="#b5542e">短期 C = a + bY</text>
+      <line x1="120" y1="200" x2="120" y2="242" stroke="#b5542e" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="100" y="254" class="axl" fill="#b5542e">a（截距）</text>
+    </svg>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="consumption"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">消費理論</div>
+    <div class="mc-body">
+      <div class="mc-formula">短期（凱因斯）：C = a + bY；長期：C = kY（0&lt;k&lt;1）</div>
+      <div class="mc-detail"><span class="term" data-term="Absolute income hypothesis">絕對所得假說</span>：消費與短期絕對所得正相關、與利率無關。長期資料（1869–1938 時間序列）顯示消費與所得呈固定比例（過原點）。</div>
+      <div class="mc-ex"><b>例子：</b>短期 APC 隨所得增加而下降；長期 APC 固定（庫茲涅茨之謎的解答）。</div>
+    </div>
+  </div>`
+},
+{
+  id:"11.2", title:"李嘉圖等價原理",
+  body:`
+  <p>具有前瞻性的消費者將政府負債視為未來租稅：政府支出不變下，降稅等同未來增稅；公債融通與租稅融通對消費決策無異。</p>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="ricardo"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Ricardian equivalence">李嘉圖等價</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">政府跨期預算：T₁ − G₁ = (1+r)(G₀ − T₀)；消費者的跨期預算線不變</div>
+      <div class="mc-detail">減稅 ΔT → 未來增稅 (1+r)ΔT（本利和）→ 跨期預算線不變、原賦點移動 → 最適消費點不變 → 消費者不增加本期消費而增加儲蓄。</div>
+      <div class="mc-ex"><b>例子：</b>政府減稅 1000 元（利率 10%）→ 消費者預期未來多繳 1100 元 → 儲蓄 1000 元 → 消費不變。</div>
+    </div>
+  </div>
+  <div class="tblwrap"><table><caption>凱因斯學派的質疑與 Barro 的回應</caption><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead><tr><th>質疑</th><th>Barro 回應</th></tr></thead><tbody>
+  <tr><td>人的生命有限，不可能無限生命</td><td>效用函數納入下一代（利他動機）→ 生命可視為無限</td></tr>
+  <tr><td>不會認為政府支出全由自己償還</td><td>財富增加幅度較小，仍具部分實質效果</td></tr>
+  <tr><td>民間借貸利率與政府利率不同</td><td>借貸市場不完全；政府效率有限制</td></tr>
+  <tr><td>政府不可能只課定額稅</td><td>存在所得稅時等價效果打折</td></tr>
+  </tbody></table></div>`
+},
+{
+  id:"11.3", title:"生命週期假說",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="lifecycle"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="proper" data-term="Modigliani">莫迪利亞尼</span>生命週期</div>
+    <div class="mc-body">
+      <div class="mc-formula">C₁ = k·PV₁ = k[WR₁ + ((N−1)θ+1)Y₁ˡ] = a + bY₁</div>
+      <div class="mc-detail">消費者依一生全部預期所得安排消費與儲蓄：財富現值（WR）＋勞動所得現值。短期非勞動資產不變 → 有截距（解釋凱因斯）；長期資產累積使短期函數上移 → 過原點。</div>
+      <div class="mc-ex"><b>例子：</b>退休後勞動所得為零，但可動用累積的財產（WR）維持平穩消費。</div>
+    </div>
+  </div>`
+},
+{
+  id:"11.4", title:"相對所得假說",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="relative"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="proper" data-term="Dusenberry">杜森貝利</span>相對所得</div>
+    <div class="mc-body">
+      <div class="mc-formula">C 取決於相對所得（相對於他人與相對於自己過去）</div>
+      <div class="mc-detail"><span class="term" data-term="Demonstration effect">示範效果</span>：消費受參考群體影響；<span class="term" data-term="Ratchet effect">制輪效果</span>：消費受過去習慣影響、所得下降時消費無法立即調整。</div>
+      <div class="mc-ex"><b>例子：</b>景氣衰退時消費不會等比下降（棘輪）；看到鄰居換新車也跟著消費（示範）。</div>
+    </div>
+  </div>`
+},
+{
+  id:"11.5", title:"恆常所得假說",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="permanent"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="proper" data-term="Friedman">弗利曼</span>恆常所得</div>
+    <div class="mc-body">
+      <div class="mc-formula">ΔC/ΔYᴾ = 常數；ΔC/ΔYᵗʳ ≈ 0</div>
+      <div class="mc-detail">所得分恆常所得（長期平均）與暫時所得。消費變動與恆常所得變動比值為常數、與暫時所得幾乎為零 → 權衡性政策只能提高暫時所得 → 對刺激消費沒有助益。</div>
+      <div class="mc-ex"><b>例子：</b>暫時性減稅（一年）→ 恆常所得不變 → 消費幾乎不變；永久性減稅 → 消費大幅增加。</div>
+    </div>
+  </div>`
+}
+];
+const CH11_PROBLEMS = [
+{
+  q:"消費函數是指（書本例題 11.1）",
+  opts:["(A) 家計單位的消費支出與當期可支配所得之間的關係","(B) 政府部門的消費支出與當期稅收的關係","(C) 企業單位的採購支出與當期營業收入之間的關係","(D) 家計單位的消費支出與當期儲蓄之間的關係"],
+  ans:"<b>(A) 家計單位的消費支出與當期可支配所得之間的關係。</b><ul><li>消費函數 C = a + bY 描述家計消費與所得（可支配所得）的關係</li></ul>"
+},
+{
+  q:"According to the permanent income theory of consumption, the government tax cut multiplier will be small if the tax cut is perceived to be（書本例題 11.2）",
+  opts:["(A) Permanent","(B) Temporary","(C) Monetary","(D) Real","(E) Nominal"],
+  ans:"<b>(B) Temporary。</b><ul><li>暫時性減稅 → 恆常所得不變 → 消費幾乎不變 → 乘數小</li><li>永久性減稅 → 恆常所得上升 → 消費大幅增加</li></ul>"
+},
+{
+  q:"每年春節前後因為年終獎金的發放使得消費增加，假設年終獎金的制度廢除，併入平常的薪水中，則此變革可能導致：I. 利率水準上升；II. 消費水準上升（書本例題 11.3）",
+  opts:["(A) 僅 I 正確","(B) 僅 I、II 正確","(C) 僅 I、III 正確","(D) 均不正確"],
+  ans:"<b>(B) 僅 I、II 正確。</b><ul><li>獎金併入平常薪資 → 暫時所得變恆常所得 → 恆常所得↑ → 消費水準上升（II ✓）</li><li>消費↑ → 儲蓄↓ → 可貸資金供給↓ → 利率水準上升（I ✓）</li></ul>"
+}
+];
+const CH10_SECTIONS = [
+{
+  id:"10.1", title:"投資與淨現值法（NPV）",
+  body:`
+  <p>投資在總需求中占比不到 20%，但經濟波動主要來自投資的波動：每次衰退前投資大幅減少、復甦始於投資增加。短期投資提高當期產出；長期投資累積資本存量、提高生產產能。</p>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="npv"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Net present value">NPV 法</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">NPV = −CF₀ + CF₁/(1+r) + CF₂/(1+r)² + … + CFₙ/(1+r)ⁿ</div>
+      <div class="mc-detail">考量：效益年限 n、現時購入成本 CF₀、每年淨現金流入 CFₜ、折現率 r（市場實質利率）。無資金限制：NPV&gt;0 即投資，按 NPV 大小排序；有資金限制：NPV&gt;0 且符合預算。市場利率↑ → NPV↓ → 投資↓。</div>
+      <div class="mc-ex"><b>例子：</b>投資 1000 萬、兩年收入 550 萬與 605 萬：NPV = −1000 + 550/1.1 + 605/1.21 = <b>0</b>（恰好收支相抵）。</div>
+    </div>
+  </div>`
+},
+{
+  id:"10.2", title:"邊際投資效率（MEI）",
+  body:`
+  <div class="svgfig">
+    <figcaption>MEI 曲線：投資為實質利率的減函數。利率 r₀ 時投資 I₀；利率升至 r₁ 時投資減少至 I₁。</figcaption>
+    <svg viewBox="0 0 400 280" role="img" aria-label="MEI 曲線圖">
+      <defs><marker id="arw10" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c6e9e"/></marker></defs>
+      <line x1="70" y1="240" x2="70" y2="40" class="ax"/>
+      <line x1="70" y1="240" x2="390" y2="240" class="ax"/>
+      <text x="14" y="46" class="axl" fill="#6f6555">r 利率</text>
+      <text x="386" y="258" class="axl">I 投資</text>
+      <path d="M95,70 C 170,120 260,190 370,235" fill="none" stroke="#2c6e9e" stroke-width="2.6"/>
+      <text x="300" y="120" class="lb" fill="#2c6e9e" transform="rotate(-35 300 120)">MEI 曲線</text>
+      <line x1="150" y1="140" x2="150" y2="242" stroke="#b5542e" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <line x1="250" y1="86" x2="250" y2="242" stroke="#b5542e" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <text x="128" y="254" class="axl" fill="#b5542e">I₀</text>
+      <text x="228" y="254" class="axl" fill="#b5542e">I₁</text>
+      <circle cx="150" cy="140" r="4" fill="#b5542e"/><text x="160" y="132" class="lb" fill="#b5542e">r₀</text>
+      <circle cx="250" cy="86" r="4" fill="#b5542e"/><text x="260" y="78" class="lb" fill="#b5542e">r₁</text>
+    </svg>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="mei"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Marginal efficiency of investment">MEI</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">NPV = −CF₀ + Σ CFₜ/(1+MEI)ᵗ = 0；I = I(MEI − r)</div>
+      <div class="mc-detail">MEI 是使 NPV 為零的折現率（內部報酬率）。MEI &gt; r → 值得投資（NPV&gt;0）；MEI &lt; r → 不值得；MEI = r → 可投資可不投資。</div>
+      <div class="mc-ex"><b>例子：</b>利率 10%：A 計畫 MEI 17.7%、D 計畫 50% → 皆值得投資；利率升至 20% 時 A 變不值得。</div>
+    </div>
+  </div>`
+},
+{
+  id:"10.3", title:"Tobin's Q 理論",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="tobinq"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Tobin's q">托賓 q</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">q = 資本之市場價值 ÷ 資本之重置成本 = MPK ÷ R</div>
+      <div class="mc-detail">q &gt; 1：資本財市價大於重置成本 → 廠商增加投資；q &lt; 1：市價小於重置成本 → 減少投資。q 受投資環境、政府政策、國際金融情勢、本國資金市場影響。</div>
+      <div class="mc-ex"><b>例子：</b>股市繁榮（市價↑）→ q &gt; 1 → 廠商發行股票籌資擴充設備。</div>
+    </div>
+  </div>`
+},
+{
+  id:"10.4", title:"新古典投資理論",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="user"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="proper" data-term="Jorgenson">裘根森</span>使用者成本</div>
+    <div class="mc-body">
+      <div class="mc-formula">最適資本存量：MPK = rₖ = (i − π) + δ</div>
+      <div class="mc-detail">資本使用者成本（租金成本）＝實質利率＋折舊−資本利得。MPK &gt; rₖ → 增加資本存量（投資）；MPK &lt; rₖ → 減少。</div>
+      <div class="mc-ex"><b>例子：</b>利率 i=8%、通膨 π=2%、折舊 δ=5% → rₖ = 6%+5% = 11%；資本邊際生產力 15% &gt; 11% → 增加投資。</div>
+    </div>
+  </div>
+  <div class="tblwrap"><table><caption>比較靜態分析</caption><colgroup><col style="width:34%"><col style="width:66%"></colgroup><thead><tr><th>變動</th><th>效果</th></tr></thead><tbody>
+  <tr><td>折舊率 δ↑</td><td>使用者成本↑ → 最適資本存量 K* ↓</td></tr>
+  <tr><td>物價膨脹率 π↑</td><td>使用者成本↓（資本利得）→ K* ↑</td></tr>
+  <tr><td><span class="term" data-term="Investment tax credit">投資抵減</span></td><td>抵減比例↑ → 使用者成本↓ → K* ↑</td></tr>
+  <tr><td>資本邊際生產力↑</td><td>MPK 上移 → K* ↑</td></tr>
+  </tbody></table></div>`
+}
+];
+const CH10_PROBLEMS = [
+{
+  q:"下列何者不是總體經濟學中的投資定義？（書本例題 10.1）",
+  opts:["(A) 廠商在竹科新蓋的晶圓廠","(B) 企業添購的新電腦","(C) 廠商賣不出去而增加的存貨","(D) 上班族所購買的共同基金"],
+  ans:"<b>(D) 上班族所購買的共同基金。</b><ul><li>共同基金是金融資產交易（儲蓄），不是實質資本形成</li><li>投資＝固定資本形成＋存貨變動（含賣不出去的存貨累積）</li></ul>"
+},
+{
+  q:"Which of the following statement is true?（書本例題 10.2）",
+  opts:["(A) Investment equals the capital stock minus depreciation","(B) Investment and the capital stock are equal","(C) The increase in investment is equal to the capital stock minus depreciation","(D) The increase in the capital stock is equal to investment minus depreciation"],
+  ans:"<b>(D) 資本存量的增加＝投資減折舊。</b><ul><li>ΔK = I（毛投資）− δK（折舊）＝淨投資</li></ul>"
+},
+{
+  q:"Your firm has capital stock of $10 million and a depreciation of 15%. Gross investment is $3 million. How much is the net investment?（書本例題 10.3）",
+  opts:["(A) $1.5 million","(B) $1.8 million","(C) $3 million","(D) $4.5 million"],
+  ans:"<b>(A) $1.5 million。</b><ul><li>折舊 = 15% × 1000 萬 = 150 萬</li><li>淨投資 = 毛投資 − 折舊 = 300 − 150 = <b>150 萬</b></li></ul>"
+},
+{
+  q:"假設你今天以 150 元買入一張台積電股票，下列何者正確？（書本例題 10.4）",
+  opts:["(A) 若一年後付 10 元股利、跌至 90 元，則年報酬率為 −30%","(B) 若一年後付 10 元股利、跌了 40 元，則年報酬率為 20%","(C) 若一年後付 10 元股利、漲至 190 元，則年報酬率為 30%","(D) 若一年後付 10 元股利、漲了 20 元，則年報酬率為 20%"],
+  ans:"<b>(D) 年報酬率 20%。</b><ul><li>報酬率 = (股利＋價格變動) ÷ 成本</li><li>(D)：(10+20)/150 = <b>20%</b></li><li>(A)：(10−60)/150 = −33.3%；(C)：(10+40)/150 = 33.3%</li></ul>"
+},
+{
+  q:"三種購屋方式：（甲）一次付清 400 萬；（乙）頭期款 200 萬、每年底付 60 萬付 4 年；（丙）每年底付 130 萬付 4 年。利率 10% 時？（書本例題 10.5）",
+  opts:["(A) 甲法最便宜","(B) 乙法最便宜","(C) 丙法最便宜","(D) 不論利率為何甲法都最便宜"],
+  ans:"<b>(B) 乙法最便宜。</b><ul><li>甲 PV = 400 萬</li><li>乙 PV = 200 + 60×年金現值(10%,4) = 200 + 60×3.1699 ≈ <b>390.2 萬</b></li><li>丙 PV = 130×3.1699 ≈ 412.1 萬</li><li>乙 &lt; 甲 &lt; 丙 → 乙最便宜</li></ul>"
+},
+{
+  q:"在下列何種情況之下，投資會減少？（書本例題 10.7）",
+  opts:["(A) 自發性消費上升","(B) 投資人對未來的預期報酬感到悲觀","(C) 自發性儲蓄下跌","(D) 國民所得增加"],
+  ans:"<b>(B) 投資人對未來的預期報酬感到悲觀。</b><ul><li>預期報酬↓ → MEI 下降 → 投資減少</li><li>國民所得增加（加速原理）與自發性消費上升 → 投資增加</li></ul>"
+},
+{
+  q:"下列哪個情況會使得資本存量減少？（書本例題 10.8）",
+  opts:["(A) 消費超過投資","(B) 淨投資為零","(C) 折舊超過毛投資","(D) 失業率增高"],
+  ans:"<b>(C) 折舊超過毛投資。</b><ul><li>ΔK = 毛投資 − 折舊 &lt; 0 → 資本存量減少</li><li>淨投資為零 → 資本存量不變</li></ul>"
+},
+{
+  q:"A 計畫成本 1000 萬、兩年收入 550 萬與 605 萬；B 計畫成本 300 萬、三年收入 110、121、131.1 萬（年終發生）。以投資邊際效率為選擇標準，何計畫較值得？（書本例題 10.9）",
+  opts:["(A) A 計畫","(B) B 計畫","(C) 兩者相同","(D) 無法判斷"],
+  ans:"<b>(A) A 計畫。</b><ul><li>A：1000 = 550/(1+r) + 605/(1+r)² → MEI_A = <b>10%</b></li><li>B：300 = 110/(1+r) + 121/(1+r)² + 131.1/(1+r)³ → MEI_B ≈ <b>9.9%</b></li><li>MEI_A &gt; MEI_B → A 較值得投資</li></ul>"
+},
+{
+  q:"投資計畫（只有一年收入）：A 成本 850 報酬 1000；B 成本 900 報酬 950；C 成本 1100 報酬 1200；D 成本 400 報酬 600；E 成本 700 報酬 900。市場利率 10% 時哪些值得做？利率提高時哪一項原本值得的計畫變成不值得？（書本例題 10.10）",
+  opts:["(A) 值得做 A、D、E；利率升至 20% 時 A 變不值得","(B) 值得做 A、C、D；利率升至 20% 時 C 變不值得","(C) 值得做 B、D、E；利率升至 20% 時 B 變不值得","(D) 值得做 A、D；利率升至 20% 時 E 變不值得"],
+  ans:"<b>(A) 值得做 A、D、E；利率升至 20% 時 A 變不值得。</b><ul><li>MEI：A = 1000/850−1 = 17.6%；B = 5.6%；C = 9.1%；D = 50%；E = 28.6%</li><li>r=10% 時 MEI&gt;10%：A、D、E 值得做</li><li>r=20% 時 MEI&gt;20%：僅 D、E → A（17.6%）變不值得</li></ul>"
+},
+{
+  q:"Tobin's q is the ratio of the（書本例題 10.11）",
+  opts:["(A) Market value of installed capital to the replacement cost of installed capital","(B) Profit of capital to the rental rate of capital","(C) Rental rate of capital to the replacement cost of capital","(D) Profit of capital to the marginal product of capital"],
+  ans:"<b>(A) 已安裝資本的市場價值 ÷ 其重置成本。</b><ul><li>q &gt; 1 → 增加投資；q &lt; 1 → 減少投資</li></ul>"
+},
+{
+  q:"若托賓 q 值大於一，這表示（書本例題 10.12）",
+  opts:["(A) 市場的利率大於公司的資本報酬率","(B) 公司的投資報酬低於資金成本","(C) 公司的資產現值大於其重置成本","(D) 公司的投資報酬率大於資產的折舊率"],
+  ans:"<b>(C) 公司的資產現值大於其重置成本。</b><ul><li>q = 市場價值/重置成本 &gt; 1 → 市價高於重置成本</li><li>廠商有誘因增加投資（發行股票籌資擴充）</li></ul>"
+},
+{
+  q:"一瓶酒的價值為 V(t) = ke^(αt)，市場利率為 r，窖藏無成本，求何時出售價值最大。（書本例題 10.13）",
+  opts:["(A) α &gt; r 時越晚賣越好、α &lt; r 時立即賣、α = r 時無差異","(B) 永遠立即出售","(C) α &gt; r 時立即賣、α &lt; r 時越晚賣越好","(D) 與 α、r 無關"],
+  ans:"<b>(A) α &gt; r 時越晚賣越好、α &lt; r 時立即賣、α = r 時無差異。</b><ul><li>出售現值 = V(t)·e^(−rt) = k·e^[(α−r)t]</li><li>α − r &gt; 0 → 指數上升 → 越晚賣越好（t→∞）</li><li>α − r &lt; 0 → 指數下降 → 立即出售（t=0）</li><li>α = r → 現值恆為 k → 任何時點無差異</li></ul>"
+}
+];
+const CH9_SECTIONS = [
+{
+  id:"9.1", title:"前言：總體經濟思想的演變",
+  body:`
+  <div class="tblwrap"><table><caption>總體經濟學派演進</caption><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>時期</th><th>主流與事件</th></tr></thead><tbody>
+  <tr><td>1930 以前</td><td>古典／新古典學派（賽伊法則、貨幣數量學說）</td></tr>
+  <tr><td>1930 大蕭條</td><td>古典理論無法解釋全面長期失業 → 凱因斯革命</td></tr>
+  <tr><td>二戰後～1960 末</td><td>凱因斯學派稱霸；擴張政策埋下日後通膨之因、政府不當干預</td></tr>
+  <tr><td>1970 起</td><td>韓戰越戰、石油危機 → 停滯性膨脹 → 凱因斯失去駕馭力 → 貨幣學派興起</td></tr>
+  <tr><td>1970 末後</td><td>理性預期學派（新興古典）、供給面學派、新興凱因斯學派</td></tr>
+  </tbody></table></div>`
+},
+{
+  id:"9.2", title:"貨幣學派",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="monet"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="proper" data-term="Friedman">弗利曼</span>觀點</div>
+    <div class="mc-body">
+      <div class="mc-formula">新貨幣數量說：Ṁ/M = Ṗ/P + Ẏ/Y − ηᵧ·(Ṙ/R)</div>
+      <div class="mc-detail">貨幣供給量對名目所得有決定性影響；長期貨幣中立（通膨永遠是貨幣現象）、短期影響實質變數；私人部門內在穩定，不穩定來自政府干預。</div>
+      <div class="mc-ex"><b>例子：</b>貨幣供給成長率不穩定 → 產出與就業週期性變動；以固定法則（<span class="term" data-term="Money supply rule">貨幣供給法則</span>）取代權衡性政策。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="pih"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Permanent income hypothesis">恆常所得</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">C = c·Yᴾ（恆常所得）；暫時性所得變動對消費影響小</div>
+      <div class="mc-detail">強調消費平穩性：短期 MPC 小 → 凱因斯乘數效果不明顯；長期 MPC 較大。自然失業率假說：長期失業率回到自然率，受技術結構、人口、資本影響。</div>
+      <div class="mc-ex"><b>例子：</b>中獎（暫時所得）不會大幅增加消費；升遷加薪（恆常所得）才會。</div>
+    </div>
+  </div>
+  <div class="note"><b>政策落後問題</b>：內在落後（<span class="term" data-term="Inside lag">Inside lag</span>，含資料、認知、立法、傳導落後）＋外在落後（政策到產生影響的差距）。貨幣政策內在落後較短（央行決議即可執行）、財政政策立法落後較高。</div>`
+},
+{
+  id:"9.3", title:"理性預期學派（新興古典學派）",
+  body:`
+  <div class="tblwrap"><table><caption>理性預期學派要點</caption><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>主張</th><th>內容</th></tr></thead><tbody>
+  <tr><td>代表人物</td><td><span class="proper" data-term="Lucas">盧卡斯</span>（1972 均衡景氣循環）、Barro、Sargent</td></tr>
+  <tr><td>政策中立性</td><td>被完全預料到的系統性政策只影響物價與名目工資、對實質產出無效；未預料到的非系統性政策有實質效果（但只能騙一次）</td></tr>
+  <tr><td>菲利普曲線</td><td>理性預期下長期與短期 PC 皆垂直於自然失業率 → 通膨與失業無抵換</td></tr>
+  <tr><td><span class="term" data-term="Ricardian equivalence">李嘉圖等價</span></td><td>債券融通的減稅無效：民眾預期未來增稅而增加儲蓄</td></tr>
+  <tr><td><span class="term" data-term="Lucas critique">盧卡斯批判</span></td><td>傳統計量模型的參數會隨政策法則改變，政策評估須考慮預期</td></tr>
+  </tbody></table></div>`
+},
+{
+  id:"9.4", title:"供給面學派",
+  body:`
+  <div class="svgfig">
+    <figcaption>拉弗爾曲線：稅率 t 上升時稅收先增後減；超過最適稅率後，高稅率抑制工作與投資誘因、稅基縮小。</figcaption>
+    <svg viewBox="0 0 420 280" role="img" aria-label="拉弗爾曲線圖">
+      <defs><marker id="arw9" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c6e9e"/></marker></defs>
+      <line x1="70" y1="240" x2="70" y2="40" class="ax"/>
+      <line x1="70" y1="240" x2="400" y2="240" class="ax"/>
+      <text x="20" y="46" class="axl" fill="#6f6555">T 稅收</text>
+      <text x="396" y="258" class="axl">t 稅率</text>
+      <path d="M90,235 C 150,80 240,60 380,230" fill="none" stroke="#2c6e9e" stroke-width="2.6"/>
+      <line x1="240" y1="60" x2="240" y2="242" stroke="#b5542e" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <text x="212" y="254" class="axl" fill="#b5542e">最適稅率 t*</text>
+      <circle cx="240" cy="62" r="4" fill="#b5542e"/>
+      <text x="252" y="56" class="lb" fill="#b5542e">最高稅收</text>
+      <text x="300" y="190" class="lb" fill="#2c6e9e">拉弗爾曲線</text>
+      <text x="96" y="254" class="axl">0</text>
+      <text x="100" y="120" class="lb" fill="#6f6555">減稅區（稅率過高區）</text>
+    </svg>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="supply"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">供給面政策</div>
+    <div class="mc-body">
+      <div class="mc-formula">稅後工資率 W = (1−t)·W′；T = t·Y(t)，dT/dt = Y(1+E<sub>ty</sub>)</div>
+      <div class="mc-detail">減稅 → 稅後工資率上升 → 工作誘因↑（替代效果）、有效需求↑ → AS 與 AD 右移；長期儲蓄↑、資本累積、技術進步 → LAS 右移，實現充分就業與物價穩定。</div>
+      <div class="mc-ex"><b>例子：</b>雷根 1981 減稅政策：以減稅刺激供給、縮小政府預算赤字、配合貨幣學派降低貨幣供給成長。</div>
+    </div>
+  </div>`
+},
+{
+  id:"9.5", title:"新興凱因斯學派",
+  body:`
+  <div class="tblwrap"><table><caption>解釋工資物價僵固的理論</caption><colgroup><col style="width:28%"><col style="width:72%"></colgroup><thead><tr><th>理論</th><th>內容</th></tr></thead><tbody>
+  <tr><td><span class="term" data-term="Efficiency wage">效率工資</span></td><td>廠商支付高工資提升生產效率（Solow 條件：實質工資彈性=1）；降低工資雖省成本但降低效率 → 工資僵固、非自願性失業</td></tr>
+  <tr><td>契約工資理論</td><td>勞資於 t−1 期以契約訂定 t 期名目工資，契約內工資具向上與向下僵固性；契約期內擴張政策有效</td></tr>
+  <tr><td><span class="term" data-term="Menu cost theory">菜單成本</span></td><td>調價收益 &lt; 換菜單成本 → 廠商不調價 → 物價僵固</td></tr>
+  <tr><td>顧客市場</td><td>為維持顧客忠誠度不願調價（拍賣市場 vs 顧客市場）</td></tr>
+  </tbody></table></div>
+  <div class="warn">結論：工資與物價皆有僵固性 → 即使政策被理性預期者完全預料，短期仍然有效（費雪、曼昆等）。</div>`
+}
+];
+const CH9_PROBLEMS = [
+{
+  q:"The Lucas critique is an objection to the assumption that（書本例題 9.1）",
+  opts:["(A) Historical relationships between macroeconomic variables will continue to hold after new policies are in place","(B) Inflation is always and everywhere a monetary phenomenon","(C) There is a negative relationship between inflation and unemployment","(D) People form expectations rationally"],
+  ans:"<b>(A) 總體變數間的歷史關係在新政策實施後仍會繼續成立。</b><ul><li>盧卡斯批判：政策改變會改變人們的預期 → 模型的結構參數會跟著調整</li><li>故用歷史資料估計的關係來評估新政策會產生錯誤</li></ul>"
+},
+{
+  q:"下列敘述何者不是理性預期學派的觀點？（書本例題 9.2）",
+  opts:["(A) 人們對未來的預期會參考過去及未來的相關資訊","(B) 工資及物價具有不易調整的僵固性","(C) 短期總合供給線不是垂直的，而是正斜率的","(D) 預期不到的政策才有效，預期到的政策將無效"],
+  ans:"<b>(B) 工資及物價具有不易調整的僵固性。</b><ul><li>工資物價僵固是<b>新興凱因斯學派</b>的主張，非理性預期學派</li><li>理性預期學派：市場結清、價格機能完全、政策短期也無效（(D) 是其政策主張）</li></ul>"
+},
+{
+  q:"Rational expectation theory suggests that（書本例題 9.3）",
+  opts:["(A) Only unexpected changes in the stock of money affect the price level","(B) Only unexpected changes in the stock of money affect the level of output","(C) Only expected changes in the stock of money affect the level of output","(D) None of the above is true"],
+  ans:"<b>(B) 只有未預期到的貨幣存量變動會影響產出水準。</b><ul><li>被預料到的貨幣擴張只影響物價（政策中立性）</li><li>未預料到的政策才能暫時影響實質產出</li></ul>"
+},
+{
+  q:"Which of the following is inconsistent with New Classical School of economics?（書本例題 9.4）",
+  opts:["(A) If the government announces its intended tight monetary policy, reducing inflation need not be at the cost of increased unemployment","(B) If expected inflation is not equal to the realized one, the labor market is not at full employment","(C) If there are negative shocks to aggregate demand, there is no need for government economic policy to intervene","(D) Surprises in monetary policies does not affect the real output"],
+  ans:"<b>(D) 貨幣政策的意外不會影響實質產出。</b><ul><li>新興古典主張：<b>未預料</b>的貨幣政策<b>會</b>影響實質產出（預料到的才無效）</li><li>(A) 宣布的緊縮政策被預期 → 通膨下降不需付出失業代價</li></ul>"
+},
+{
+  q:"給定盧卡斯總合供給與需求線如下：yᵈ = 100 + 0.8(50 − P)；yˢ = 132 + 0.2(P − Pᵉ)。求算均衡時之物價與產出水準。（書本例題 9.5）",
+  opts:["(A) P = 10、Y = 132","(B) P = 40、Y = 100","(C) P = 50、Y = 132","(D) P = 10、Y = 140"],
+  ans:"<b>(A) P = 10、Y = 132。</b><ul><li>長期均衡（理性預期）：P = Pᵉ → yˢ = 132</li><li>代入需求線：132 = 100 + 0.8(50 − P) → 0.8P = 8 → P = <b>10</b></li><li>均衡（P = 10, Y = 132）</li></ul>"
+}
+];
+const CH8_SECTIONS = [
+{
+  id:"8.1", title:"短期菲利普曲線",
+  body:`
+  <p><span class="proper" data-term="Phillips curve">菲利普</span>（1958）利用英國 1861–1957 資料發現失業率與貨幣工資變動率的反向非線性關係；1960 年<span class="proper">薩繆爾森</span>與<span class="proper">索洛</span>改以物價膨脹率表示，形成通膨—失業的抵換關係。</p>
+  <div class="svgfig">
+    <figcaption>短期菲利普曲線：失業率 u 越低，物價膨脹率 π 越高（抵換關係）。</figcaption>
+    <svg viewBox="0 0 400 280" role="img" aria-label="短期菲利普曲線圖">
+      <defs><marker id="arw8" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c6e9e"/></marker></defs>
+      <line x1="70" y1="240" x2="70" y2="40" class="ax"/>
+      <line x1="70" y1="240" x2="390" y2="240" class="ax"/>
+      <text x="18" y="46" class="axl" fill="#6f6555">π 物價膨脹率</text>
+      <text x="386" y="258" class="axl">u 失業率</text>
+      <path d="M80,60 C 150,120 230,190 360,230" fill="none" stroke="#2c6e9e" stroke-width="2.6"/>
+      <text x="300" y="150" class="lb" fill="#2c6e9e" transform="rotate(-28 300 150)">SRPC（負斜率）</text>
+      <line x1="150" y1="60" x2="150" y2="242" stroke="#b5542e" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <text x="128" y="254" class="axl" fill="#b5542e">自然失業率 u*</text>
+      <circle cx="150" cy="165" r="4" fill="#b5542e"/><text x="160" y="160" class="lb" fill="#b5542e">A（u*, 0）</text>
+      <circle cx="220" cy="120" r="4" fill="#2c6e9e"/><text x="230" y="115" class="lb" fill="#2c6e9e">B（u&lt;u*, π&gt;0）</text>
+    </svg>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="srpc"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">短期 PC</div>
+    <div class="mc-body">
+      <div class="mc-formula">π = β(u* − u)，β &gt; 0（新古典分配：Ẇ/W = Ṗ/P + MṖN/MPN）</div>
+      <div class="mc-detail">失業率與通膨率抵換：政府可用高失業換低通膨，或以高通膨換低失業（政策菜單選擇）。AD-AS 導出：AD 右移 → 產出↑、失業低於自然率 → 通膨為正。</div>
+      <div class="mc-ex"><b>例子：</b>π = 0.025 − u，物價指數由 120 降至 117（通膨 −2.5%）→ 0.025−u = −0.025 → u = <b>5%</b>。</div>
+    </div>
+  </div>
+  <div class="note"><b>犧牲比率</b>（<span class="term" data-term="Sacrifice ratio">Sacrifice ratio</span>）＝降低 1% 通膨所需減少的產出比例；<b>痛苦指數</b>（<span class="term" data-term="Misery index">Misery index</span>）＝通膨率＋失業率。社會無異曲線（通膨與失業皆厭惡品）與 PC 相切得最適組合：最適失業率小於自然失業率、最適通膨大於零。</div>`
+},
+{
+  id:"8.2", title:"引進預期菲利普曲線",
+  body:`
+  <p>1968 年貨幣學派（<span class="proper">費德曼</span>）提出兩大疑問：物價膨脹若被民眾預期，PC 仍穩定嗎？長期抵換關係存在嗎？故修正為植入預期的菲利普曲線：</p>
+  <div class="tblwrap"><table><caption>調整係數 Q 的兩種情況</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead><tr><th>情況</th><th>結果</th></tr></thead><tbody>
+  <tr><td>Q = 1（工資可隨預期通膨完全調整）</td><td>長期 PC 為垂直線（自然失業率）；短期 PC 因預期通膨上升而右移；<b>自然率假說</b>、<b>加速膨脹假說</b></td></tr>
+  <tr><td>Q &lt; 1（貨幣工資無法完全調整、民眾有貨幣幻覺）</td><td>長期 PC 為負斜率（抵換仍存在但效果較短期小）；政府可部分壓低失業率</td></tr>
+  </tbody></table></div>
+  <div class="warn">Q = 1 且長期：人們完全預期通膨 → LRPC 垂直於自然失業率 → 總需求變動（政策）長期不影響產出與就業。政府想把失業率壓在自然率以下，只會使物價加速上漲（<span class="term" data-term="Accelerationist hypothesis">加速膨脹假說</span>）。</div>`
+},
+{
+  id:"8.3", title:"其他說明：奧肯定律與泰勒法則",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="okun"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Okun's law">奧肯定律</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">(Y − Ȳ)/Ȳ = −o(u − u*)，o &gt; 0</div>
+      <div class="mc-detail">實際產出成長率與失業率變化呈反向關係：失業率越高、產出越低；就業人數越多、產出越大。</div>
+      <div class="mc-ex"><b>例子：</b>失業率由 5% 升至 7%（高於自然率 2%）→ 產出約低於潛在產出 4%。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="taylor"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Taylor rule">泰勒法則</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">R = r* + π + 0.5(π − π*) + 0.5(y − ȳ)</div>
+      <div class="mc-detail">央行依通膨缺口與產出缺口調整名目利率：通膨高於目標或產出高於潛在 → 升息；反之降息。台灣以隔夜拆款利率為操作目標。</div>
+      <div class="mc-ex"><b>例子：</b>π*=2%、r*=3%、π=5%、產出低於趨勢 5% → R = 3+5+0.5×3+0.5×(−5) = <b>7%</b>。</div>
+    </div>
+  </div>`
+}
+];
+const CH8_PROBLEMS = [
+{
+  q:"Which of the following best fits the definition: “A curve that shows the short-run trade-off between inflation and unemployment”?（書本例題 8.1）",
+  opts:["(A) Lorenz Curve","(B) Money Demand Curve","(C) Phillips Curve","(D) Production Possibility Frontier"],
+  ans:"<b>(C) Phillips Curve。</b><ul><li>菲利普曲線＝通膨與失業的短期抵換關係</li><li>洛侖茲曲線為所得分配、生產可能曲線為兩種財貨的生產組合</li></ul>"
+},
+{
+  q:"The misery index is calculated as the（書本例題 8.2）",
+  opts:["(A) Inflation rate plus GDP growth rate","(B) Inflation rate minus the unemployment rate","(C) Inflation rate plus the unemployment rate","(D) Unemployment rate plus GDP growth rate"],
+  ans:"<b>(C) Inflation rate plus the unemployment rate。</b><ul><li>痛苦指數＝通膨率＋失業率，衡量民眾對經濟的不滿程度</li></ul>"
+},
+{
+  q:"假如一經濟社會之菲利普曲線為：π = 0.025 − u。若 2001 年及 2002 年之物價指數分別為 120 及 117，則依據菲利普曲線模式，2002 年之失業率應為？（書本例題 8.3）",
+  opts:["(A) 0%","(B) 1%","(C) 2.5%","(D) 5%"],
+  ans:"<b>(D) 5%。</b><ul><li>2002 通膨率 = (117−120)/120 = −2.5% = −0.025</li><li>代入：−0.025 = 0.025 − u → u = <b>0.05 = 5%</b></li></ul>"
+},
+{
+  q:"通膨率 π = π₀ − 4(u − u*)，u* 為自然失業率。假設 π₀ = 4%、結構性與摩擦性失業率之和為 2%。若政府追求零通膨率，則本期承受的失業率為何？（書本例題 8.4）",
+  opts:["(A) 7%","(B) 5%","(C) 3%","(D) 1%"],
+  ans:"<b>(C) 3%。</b><ul><li>自然失業率 u* = 結構性＋摩擦性 = 2%</li><li>零通膨：0 = 4 − 4(u − 2) → 4u = 12 → u = <b>3%</b></li></ul>"
+},
+{
+  q:"The newer view of the Phillips curve implies that（書本例題 8.5）",
+  opts:["(A) The natural rate of unemployment can be reduced by expansionary monetary policy.","(B) In the long run unemployment does not move towards a natural rate if there is frictional unemployment.","(C) An increase in the money supply affects output and prices in the short run, but only affects prices in the long run.","(D) There is a clear continuous trade-off between unemployment and inflation.","(E) Stagflation can best be addressed by implementing expansionary fiscal policies."],
+  ans:"<b>(C) 貨幣供給增加短期影響產出與物價、長期只影響物價。</b><ul><li>貨幣中立性：長期貨幣政策不影響實質變數（產出回到自然率）</li><li>(A) 自然失業率無法用貨幣政策降低；(D) 長期無抵換（LRPC 垂直）</li></ul>"
+},
+{
+  q:"The Phillips curve is the relation between inflation and unemployment that holds for a given natural rate of unemployment and a（書本例題 8.6）",
+  opts:["(A) Given rate of inflation","(B) Given expected level of unemployment","(C) Given level of unemployment","(D) Given expected rate of inflation"],
+  ans:"<b>(D) Given expected rate of inflation。</b><ul><li>短期 PC 是在<b>給定預期通膨</b>下的通膨—失業關係；預期通膨改變 → PC 移動</li></ul>"
+},
+{
+  q:"預期物價膨脹率上升會造成（書本例題 8.7）",
+  opts:["(A) 短期 Phillips 曲線下移","(B) 短期 Phillips 曲線上移","(C) 長期 Phillips 曲線下移","(D) 長期 Phillips 曲線上移"],
+  ans:"<b>(B) 短期 Phillips 曲線上移。</b><ul><li>預期通膨上升 → 同一失業率對應更高的通膨 → SRPC 上移（右移）</li><li>長期 PC 垂直，不因預期改變而移動</li></ul>"
+},
+{
+  q:"Based on the theory of the expectations-augmented Phillips curve, if the expected inflation rate is 2%, the short-run Phillips curve will（書本例題 8.9）",
+  opts:["(A) Have a kink at an inflation rate of 2%","(B) Be the same as the long-run Phillips curve","(C) Intersect the long-run Phillips curve at the natural unemployment rate, when the inflation rate is 2%","(D) Be horizontal at an expected inflation rate of 2%"],
+  ans:"<b>(C) 在自然失業率、通膨 2% 處與長期 PC 相交。</b><ul><li>短期 PC：π = β(u*−u) + πᵉ；πᵉ=2% 時與垂直 LRPC（u=u*）交於 π=2%</li></ul>"
+},
+{
+  q:"According to the Taylor rule, the Federal Reserve raises the real interest rate as the output gap or the inflation rate ______（書本例題 8.10）",
+  opts:["(A) Increases; increase","(B) Increases; decrease","(C) Increases; remains constant","(D) Decreases; increase","(E) Decreases; decrease"],
+  ans:"<b>(A) Increases; increase。</b><ul><li>泰勒法則：通膨高於目標或產出高於潛在 → 升息</li><li>反之，通膨或產出缺口下降 → 降息</li></ul>"
+},
+{
+  q:"Use the Taylor rule to set the short-term interest rate: inflation target is 2%, the long-term target for the interest rate is 3%, the current rate of inflation is 5%, and output is 5% below its trend.（書本例題 8.11）",
+  opts:["(A) 5.5%","(B) 7%","(C) 8%","(D) 9%"],
+  ans:"<b>(B) 7%。</b><ul><li>泰勒法則：R = r* + π + 0.5(π − π*) + 0.5(y − ȳ)</li><li>= 3% + 5% + 0.5×(5%−2%) + 0.5×(−5%)</li><li>= 3 + 5 + 1.5 − 2.5 = <b>7%</b></li></ul>"
+}
+];
+const CH7_SECTIONS = [
+{
+  id:"7.1", title:"物價膨脹的定義",
+  body:`
+  <p><span class="term" data-term="Inflation">物價膨脹</span>＝物價水準持續上漲的現象（非一次性的價格調整）。依程度劃分：</p>
+  <div class="tblwrap"><table><caption>物價膨脹的程度分類</caption><colgroup><col style="width:28%"><col style="width:38%"><col style="width:34%"></colgroup><thead><tr><th>類型</th><th>膨脹率</th><th>影響</th></tr></thead><tbody>
+  <tr><td>溫和（爬行）</td><td>1–3%</td><td>低且穩定，不引起預期，可作為經濟成長潤滑劑</td></tr>
+  <tr><td>快步（奔跑）</td><td>3–10%</td><td>開始造成不利影響</td></tr>
+  <tr><td>奔騰</td><td>兩位數以上（甚至幾十%）</td><td>貨幣購買力快速下降、行為改變</td></tr>
+  <tr><td>惡性</td><td>50% 以上持續</td><td>失去價值貯藏功能、喪失交易功能</td></tr>
+  </tbody></table></div>`
+},
+{
+  id:"7.2", title:"物價膨脹的種類",
+  body:`
+  <div class="tblwrap"><table><caption>物價膨脹的五種類型</caption><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>類型</th><th>機制</th></tr></thead><tbody>
+  <tr><td><span class="term" data-term="Demand-pull inflation">需求拉動型</span></td><td>擴張性政策／需求過分擴張 → AD 右移 → 物價持續上漲；需要貨幣數量持續增加</td></tr>
+  <tr><td><span class="term" data-term="Cost-push inflation">成本推動型</span></td><td>生產成本增加（工資、油價）→ AS 左移 → 物價↑、產出↓（<span class="term" data-term="Stagflation">停滯性膨脹</span>）</td></tr>
+  <tr><td>預期心理型</td><td>大眾預期物價上漲 → 要求更高工資 → 成本增加 → 物價上漲（自我實現）</td></tr>
+  <tr><td>結構型</td><td>部門間發展不均、勞動力轉移不易 → 快速發展部門物價上漲擴散到整個經濟</td></tr>
+  <tr><td><span class="term" data-term="Imported inflation">輸入型</span></td><td>進口品物價上升 → 需求轉向國內商品、生活成本提高 → 工資要求↑ → 國內物價上漲</td></tr>
+  </tbody></table></div>
+  <div class="warn">工資與物價螺旋（wage-price spiral）：成本推動 → 物價↑ → 勞動要求更高工資 → 成本再↑；政府若追求就業穩定而擴張，只會使物價不斷攀升。政策兩難：成本推動下維持物價穩定須減少 AD（失業↑）或維持就業（物價↑）。</div>`
+},
+{
+  id:"7.3", title:"物價膨脹的影響",
+  body:`
+  <p>實際物價膨脹 = 預期物價膨脹 + 未預料到的物價膨脹（π = πᵉ + πᵘⁿ）。</p>
+  <div class="tblwrap"><table><caption>預料到的 vs 未預料到的物價膨脹</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead><tr><th>類型</th><th>影響</th></tr></thead><tbody>
+  <tr><td>預料到的（πᵉ）</td><td>鞋皮成本、<span class="term" data-term="Menu cost">菜單成本</span>、資源重配置成本、名目稅制造成額外稅負；政府得利（物價膨脹稅）、民眾受害</td></tr>
+  <tr><td>未預料到的</td><td>財富重分配：實際 π &gt; 預期 π → 債務人（勞工）有利、債權人（雇主、存款人）受害；反之相反</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>例子（借貸契約）：</b>林林借 10 元給任任，預期通膨 10% → 約定歸還 11 元。若實際通膨更高（物價 15）→ 債權人實質購買力下降（受害）、債務人受益；若實際通膨更低（物價 0.5）→ 債權人受益、債務人受害。</div>
+  <div class="warn">依賴固定退休金或固定薪資者，在未預料到的高物價膨脹下損失最大。</div>`
+},
+{
+  id:"7.4", title:"預期的種類",
+  body:`
+  <div class="tblwrap"><table><caption>三種預期形成方式</caption><colgroup><col style="width:20%"><col style="width:80%"></colgroup><thead><tr><th>類型</th><th>內容</th></tr></thead><tbody>
+  <tr><td>靜態預期</td><td>完全以初始物價值預期，不做任何修正（Pᵉ = P₀ 常數）</td></tr>
+  <tr><td><span class="term" data-term="Adaptive expectations">適應性預期</span></td><td>卡甘 1956：預期＝歷史資料加權平均（越遠權重越小）；出現誤差只做 λ 比例的修正 → 存在系統性預測誤差、向後看</td></tr>
+  <tr><td><span class="term" data-term="Rational expectations">理性預期</span></td><td>穆思 1961、<span class="proper" data-term="Lucas">盧卡斯</span>推廣：主觀預期＝客觀條件期望值；運用一切資訊（含政策）、有理論背景、不犯系統性錯誤、向前看</td></tr>
+  </tbody></table></div>`
+},
+{
+  id:"7.5", title:"植入預期的總合供給（EAS）",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="eas"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Expectations-augmented AS">EAS 曲線</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">勞動供給：Wˢ = Pᵉ·g(Nˢ)；勞動需求：Wᵈ = P·f(Nᵈ)</div>
+      <div class="mc-detail">勞動供給方依<b>預期物價</b>決定供給（訊息不完全），廠商完全知道物價。預期物價 &lt; 實際物價 → 就業增加、產出上升（正斜率）；預期物價 = 實際物價 → 就業回到自然水準。</div>
+      <div class="mc-ex"><b>例子：</b>預期物價上漲率上升 → 勞動供給左移幅度大 → 均衡就業量減少 → EAS 左移。</div>
+    </div>
+  </div>
+  <div class="warn">EAS 介於古典（垂直）與凱因斯（正斜率）之間：短期實際物價偏離預期時有正斜率，長期預期調整後回復垂直（自然產出）。</div>`
+}
+];
+const CH7_PROBLEMS = [
+{
+  q:"A demand-pull inflation requires persistent increases in（書本例題 7.3）",
+  opts:["(A) Real wage","(B) Income tax rate","(C) Interest rates","(D) The quantity of money"],
+  ans:"<b>(D) The quantity of money。</b><ul><li>需求拉動型物價膨脹＝總需求持續擴張的結果，需要貨幣數量持續增加支撐</li><li>貨幣數量增加 → AD 右移 → 物價持續上漲</li></ul>"
+},
+{
+  q:"下列哪項因素不會造成需求拉動的物價膨脹？（書本例題 7.5）",
+  opts:["(A) 人們講究流行與名牌","(B) 中央銀行調降存款準備率","(C) 政府增加基礎建設","(D) 國外景氣衰退"],
+  ans:"<b>(D) 國外景氣衰退。</b><ul><li>國外衰退 → 本國出口↓ → AD 減少 → 反而不會需求拉動</li><li>(A) 消費型態改變、(B) 貨幣擴張、(C) 政府支出增加都使 AD 右移</li></ul>"
+},
+{
+  q:"若實際物價膨脹率高於預期物價膨脹率，則下列何者正確？（書本例題 7.7）",
+  opts:["(A) 實質利率會比預期來得高","(B) 所有人都會因此受到傷害","(C) 對資方不利、對勞方有利","(D) 對債務人有利、對債權人不利"],
+  ans:"<b>(D) 對債務人有利、對債權人不利。</b><ul><li>實質利率 = 名目利率 − 實際通膨 &lt; 名目利率 − 預期通膨 → 實質利率比預期低</li><li>債權人（存款人、雇主）實質購買力下降、債務人（貸款人、勞工）受益</li></ul>"
+},
+{
+  q:"當物價膨脹率發生時，未更動商品標價而引發的成本被稱為：（書本例題 7.9）",
+  opts:["(A) 鞋皮成本","(B) 資訊成本","(C) 邊際成本","(D) 菜單成本"],
+  ans:"<b>(D) 菜單成本。</b><ul><li>菜單成本＝廠商重新訂定價格的成本（重印目錄、改標籤、刊登廣告）</li><li>鞋皮成本是民眾減少貨幣持有、頻繁跑銀行的成本</li></ul>"
+},
+{
+  q:"According to the rational expectations hypothesis, expectations can defeat an expansionary monetary policy by（書本例題 7.12）",
+  opts:["(A) An upward shift in the aggregate supply curve.","(B) A downward shift in the aggregate supply curve.","(C) A downward shift in the aggregate demand curve.","(D) None of the above."],
+  ans:"<b>(A) An upward shift in the aggregate supply curve。</b><ul><li>理性預期下，民眾預期貨幣擴張 → 物價上漲 → 要求更高工資 → AS 上移（左移）</li><li>結果：物價上升、產出不變——政策被預期「打敗」</li></ul>"
+},
+{
+  q:"Suppose the economy is operating in long-run equilibrium. If a positive demand shock hits the economy, we would expect（書本例題 7.13）",
+  opts:["(A) A short-run increase in real GDP and the price level, and a long-run decrease in real GDP and an increase in the price level.","(B) A short-run increase in real GDP and the price level, and a long-run increase in real GDP and an increase in the price level.","(C) A short-run increase in real GDP and the price level, and a long-run decrease in real GDP and a decrease in the price level.","(D) A short-run increase in real GDP and the price level, and a long-run increase in real GDP and a decrease in the price level."],
+  ans:"<b>(A) Short-run ↑Y ↑P；Long-run Y 回到自然率（相對下降）、P 更高。</b><ul><li>短期：AD 右移 → 產出高於自然率、物價上升</li><li>長期：預期物價調整 → AS 上移 → 產出回到自然率、物價更高</li></ul>"
+},
+{
+  q:"If the short-run IS-LM equilibrium occurs at a level of income below the natural level of output, then in the long run the price level will ______, shifting the ______ curve to the right and returning output to the natural level.（書本例題 7.14）",
+  opts:["(A) Decrease; LM","(B) Increase; LM","(C) Increase; IS","(D) Decrease; IS","(E) Not change; IS"],
+  ans:"<b>(A) Decrease; LM。</b><ul><li>所得低於自然率 → 失業高 → 物價有下跌壓力（長期）</li><li>物價↓ → 實質貨幣供給 M/P↑ → LM 右移 → 所得回升至自然率</li></ul>"
+}
+];
+const CH6_SECTIONS = [
+{
+  id:"6.1", title:"國際金融概論與外匯市場",
+  body:`
+  <p>開放經濟體系透過三管道與外國互動：<b>商品與勞務的國際貿易、國際間資金的移動、國際貨幣的交換</b>（<span class="proper">Frenkel 1986</span>）。1960 年前多用部分均衡分析外匯市場；1960 年代起<span class="proper" data-term="Mundell">孟岱爾</span>以一般均衡分析外匯市場與其他市場的互動。</p>
+  <div class="note"><b>外匯的範圍</b>（不限於外幣）：
+    <ul style="margin:6px 0 2px 20px">
+      <li>外國通貨（紙幣與輔幣）、外幣存款</li>
+      <li>外國票據（外幣支票、銀行本票、匯票）、外國有價證券（外幣公債、公司債、國庫券）</li>
+      <li><span class="term" data-term="Foreign exchange reserve">外匯存底</span>＝央行持有的外國通貨、外幣存款、外國票據與有價證券</li>
+      <li>國際準備＝外匯存底＋IMF 準備部位＋特別提款權（SDRs）＋貨幣性黃金</li>
+    </ul></div>
+  <div class="warn">台灣 1980 年退出 IMF、非會員國，無準備部位與 SDRs，故外匯存底＝國際準備。里芬（Triffin）建議外匯存底以能支付 3–6 個月進口為宜；葛林斯潘–奎若第法則：應支應一年內到期的所有外債。</div>`
+},
+{
+  id:"6.2", title:"匯率與利率的計算",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="ppp"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Purchasing power parity">購買力平價</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">絕對 PPP：e = P ÷ P*；相對 PPP：匯率變動率 ≈ 本國通膨 − 外國通膨</div>
+      <div class="mc-detail">單一價格法則成立下，同種商品各國以同一貨幣計價應相同；名目匯率調整使各國物價趨於一致。據此可判斷幣值高估或低估。</div>
+      <div class="mc-ex"><b>例子：</b>大麥克台灣 100 元、日本 300 日圓 → PPP 匯率 = 3 日圓/台幣；實際 2.84 → 台幣被低估 → 預期台幣升值。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="irp"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Interest rate parity">利率平價</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">(1+R)·e = (1+R*)·eᵉ → R = R* + (eᵉ − e) ÷ e</div>
+      <div class="mc-detail">資本自由移動下，本國與外國資產報酬趨於一致。本國利率高 → 資本流入 → 本幣升值；反之貶值。</div>
+      <div class="mc-ex"><b>例子：</b>本國利率 5%、外國 3%、即期匯率 30 → 預期匯率 ≈ 30×(1.05/1.03) ≈ <b>30.58</b>。</div>
+    </div>
+  </div>
+  <div class="note"><b>大麥克指數</b>（經濟學人雜誌）：以各國大麥克價格推算 PPP 匯率，與實際匯率比較判斷高估／低估。本國幣相對外幣被高估時，出口競爭力較弱。</div>`
+},
+{
+  id:"6.3", title:"國際收支（BOP）",
+  body:`
+  <p><span class="term" data-term="Balance of payments">國際收支帳</span>紀錄一國與外國的全部經濟交易。貸方（Credit）＝本國收到外國支付（出口、外資流入）；借方（Debit）＝本國支付外國（進口、資本流出）。</p>
+  <div class="tblwrap"><table><caption>BOP 主要項目</caption><colgroup><col style="width:44%"><col style="width:56%"></colgroup><thead><tr><th>帳戶</th><th>內容</th></tr></thead><tbody>
+  <tr><td>經常帳</td><td>商品貿易、勞務、要素所得（股利、利息）、單邊移轉</td></tr>
+  <tr><td>資本與金融帳</td><td>短期／長期資本移動、直接投資、證券投資、央行外匯存底變動</td></tr>
+  <tr><td>誤差與遺漏</td><td>統計誤差（借貸方必須平衡）</td></tr>
+  </tbody></table></div>
+  <div class="warn">國際收支餘額＝經常帳＋資本金融帳（含誤差與遺漏）＝0（恆等式）。本國持有外國債券增加、對外直接投資＝資本流出（借方）；外國持有本國股票、外國直接投資來台＝資本流入（貸方）。</div>`
+},
+{
+  id:"6.4", title:"開放經濟的 IS-LM-BP 模型",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="openis"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">開放 IS</div>
+    <div class="mc-body">
+      <div class="mc-formula">Y = C + I + G + X − M；B = X(Y*, q) − q·M(Y, q)</div>
+      <div class="mc-detail">加入淨出口後：本國所得↑ → 進口↑ → 經常帳惡化（B 為 Y 的減函數）；外國所得↑ → 出口↑ → 經常帳改善；<span class="term" data-term="Marshall-Lerner condition">馬歇爾-婁勒條件</span>成立時貶值（q↑）改善貿易收支。</div>
+      <div class="mc-ex"><b>例子：</b>馬婁條件 Ex+Em &gt; 1 成立 → 台幣貶值 → 淨出口↑ → IS 右移。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="bp"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">BP 曲線</div>
+    <div class="mc-body">
+      <div class="mc-formula">BP = B(Y, q) + K(R − R*) = 0</div>
+      <div class="mc-detail">國際收支均衡線：本國利率↑ → 資本流入（K 為 R 的增函數）；外國利率↑ → 資本流出。資本完全移動時 BP 水平；完全不移動時 BP 垂直。</div>
+      <div class="mc-ex"><b>例子：</b>資本高度移動 → BP 近水平；本國利率上升 → 大量資本流入 → BOP 順差 → 本幣升值壓力。</div>
+    </div>
+  </div>
+  <div class="warn"><span class="term" data-term="Sterilization">沖銷措施</span>：央行賣匯（外匯存底↓）後在公開市場買債券釋放強力貨幣，或買匯後賣債券收回貨幣，以抵銷外匯干預對貨幣供給的影響。完全沖銷（λ=1）時貨幣供給不受外匯干預影響。</div>`
+},
+{
+  id:"6.5", title:"政策效果分析（Mundell-Fleming）",
+  body:`
+  <div class="tblwrap"><table><caption>Mundell 命題（資本完全移動）</caption><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup><thead><tr><th>政策</th><th>固定匯率</th><th>浮動匯率</th></tr></thead><tbody>
+  <tr><td>擴張性財政政策</td><td>有效（資本流入、LM 右移強化效果）</td><td>無效（升值抵銷出口，完全排擠）</td></tr>
+  <tr><td>擴張性貨幣政策</td><td>無效（利率↓ → 資本流出 → 賣匯回收貨幣）</td><td>有效（貶值 → 出口↑ 強化效果）</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>資本低度移動（Flemming 命題）：</b>BP 正斜率；固定匯率＋完全沖銷下外匯市場可不均衡（準均衡）。財政擴張使利率↑所得↑，效果介於完全移動與封閉經濟之間。</div>
+  <div class="warn">不可能的三頭馬車（<span class="term" data-term="Impossible trinity">三元悖論</span>）：匯率固定、資本完全自由移動、貨幣政策自主性三者只能擇其二。雙赤字：政府預算赤字與貿易帳赤字同時發生。</div>`
+},
+{
+  id:"6.6", title:"J 曲線",
+  body:`
+  <div class="svgfig">
+    <figcaption>J 曲線效應：貨幣貶值初期貿易收支反而惡化（既有契約以舊匯率計價、數量無法迅速調整），經過一段時間後才轉為改善。</figcaption>
+    <svg viewBox="0 0 440 300" role="img" aria-label="J 曲線圖">
+      <defs><marker id="arw6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c6e9e"/></marker></defs>
+      <line x1="60" y1="150" x2="420" y2="150" stroke="#9a8f78" stroke-width="1.4" stroke-dasharray="5 4"/>
+      <text x="424" y="154" class="axl" fill="#6f6555">B（貿易收支）</text>
+      <line x1="80" y1="260" x2="80" y2="40" class="ax"/>
+      <line x1="80" y1="260" x2="420" y2="260" class="ax"/>
+      <line x1="150" y1="150" x2="150" y2="262" stroke="#b5542e" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <text x="128" y="278" class="axl" fill="#b5542e">貶值時點 t₀</text>
+      <path d="M150,150 C 165,205 190,225 240,205 C 300,180 360,165 410,150" fill="none" stroke="#2c6e9e" stroke-width="2.6"/>
+      <text x="360" y="130" class="lb" fill="#2c6e9e">J 曲線</text>
+      <text x="96" y="272" class="axl">0</text>
+      <text x="400" y="284" class="axl">時間 t</text>
+    </svg>
+  </div>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="jcurve"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left">J 曲線</div>
+    <div class="mc-body">
+      <div class="mc-formula">貶值 → 貿易收支先惡化（短期）→ 後改善（長期）</div>
+      <div class="mc-detail">短期進出口數量無法迅速調整：① 進出口契約早已簽訂；② 消費者對價格變化的反應有時間遲延。長期數量調整後，在<span class="term" data-term="Marshall-Lerner condition">馬歇爾-婁勒條件</span>成立下貿易收支改善。</div>
+      <div class="mc-ex"><b>例子：</b>本幣貶值 10%：初期進口帳單以舊數量×新價格 → 貿易收支惡化；半年後出口量↑、進口量↓ → 收支改善。</div>
+    </div>
+  </div>`
+}
+];
+const CH6_PROBLEMS = [
+{
+  q:"Purchasing-power parity holds between Uganda and Rwanda, cassava is the only commodity.（1）2019 年 Uganda 一罐 cassava 2 shillings、Rwanda 4 francs，匯率？（2）之後 Uganda 通膨 7%/年、Rwanda 3.5%/年，20 年間價格與匯率如何變？（書本例題 6.10）",
+  opts:["(A) 1 shilling = 2 francs；Uganda 物價漲約 3.9 倍、shilling 對 franc 貶值","(B) 1 shilling = 0.5 franc；shilling 升值","(C) 1 franc = 2 shillings；兩國物價同漲","(D) 匯率不變、物價同步上漲"],
+  ans:"<b>(A) 1 shilling = 2 francs；Uganda 物價漲約 3.9 倍、shilling 對 franc 貶值。</b><ul><li>PPP：2 shillings = 4 francs → 1 shilling = <b>2 francs</b></li><li>20 年後：Uganda 物價 = 2×1.07²⁰ ≈ <b>7.74</b>（漲 3.87 倍）、Rwanda = 4×1.035²⁰ ≈ <b>7.96</b>（漲 1.99 倍）</li><li>相對 PPP：shilling 需貶值以維持購買力一致</li></ul>"
+},
+{
+  q:"台灣麥當勞一個大麥克 100 元新台幣、日本 300 日圓；目前匯率 1 台幣 = 2.84 日圓。依 PPP 理論，近期台幣相對日圓會？（書本例題 6.11）",
+  opts:["(A) 升值","(B) 貶值","(C) 不變","(D) 無法判斷"],
+  ans:"<b>(A) 升值。</b><ul><li>PPP 均衡匯率 = 300 ÷ 100 = <b>3 日圓/台幣</b></li><li>實際 2.84 &lt; 3 → 台幣被<b>低估</b>（日圓相對高估）</li><li>低估的貨幣有升值壓力 → 台幣近期會升值</li></ul>"
+},
+{
+  q:"本國持有外國債券增加 150、外國持有本國債券減少 20、外國持有本國股票增加 100、本國在國外銀行存款減少 50、本國對外國直接投資 80、本國商品出口 200。國際收支餘額？（書本例題 6.16）",
+  opts:["(A) 順差 100","(B) 逆差 100","(C) 順差 150","(D) 平衡"],
+  ans:"<b>(A) 順差 100。</b><ul><li>流入（貸方）：出口 200 ＋ 外國持本國股票 100 ＋ 本國在國外存款減少 50 = 350</li><li>流出（借方）：本國持外國債券 150 ＋ 外國減持本國債券 20 ＋ 對外直接投資 80 = 250</li><li>餘額 = 350 − 250 = <b>順差 100</b></li></ul>"
+},
+{
+  q:"在固定匯率制度、資本高速移動下，小型經濟體系實施擴張性財政政策將使得：（書本例題 6.21）",
+  opts:["(A) 外匯存底增加","(B) 利率下跌","(C) 貨幣貶值","(D) 所得不變"],
+  ans:"<b>(A) 外匯存底增加。</b><ul><li>財政擴張 → IS 右移 → 利率↑ → 資本大量流入 → 本幣升值壓力</li><li>央行買匯維持固定匯率 → 外匯存底↑、貨幣供給↑（LM 右移）→ 所得進一步增加、利率回到原水準</li></ul>"
+},
+{
+  q:"Suppose the Central Bank implements expansionary monetary policy under fixed exchange rate（資本完全移動）. Effect on output, net exports, and interest rate?（書本例題 6.22）",
+  opts:["(A) Y 增加、NX 增加、r 下降","(B) Y 不變、NX 不變、r 不變","(C) Y 增加、NX 不變、r 不變","(D) Y 不變、NX 增加、r 下降"],
+  ans:"<b>(B) Y 不變、NX 不變、r 不變。</b><ul><li>貨幣擴張 → LM 右移 → 利率↓ → 資本流出 → 本幣貶值壓力</li><li>央行賣匯維持匯率 → 貨幣供給回收 → LM 回到原位</li><li>結論：固定匯率＋資本完全移動下貨幣政策<b>完全無效</b></li></ul>"
+},
+{
+  q:"根據 IS-LM-BP 模型，下列敘述何者正確？（書本例題 6.23）",
+  opts:["(A) 固定匯率、資本完全移動下，財政政策無效","(B) 浮動匯率、資本低度移動下，擴張性財政政策將使本國貨幣升值","(C) 固定匯率、資本低度移動下，擴張性財政政策將使本國國際收支赤字","(D) 以上皆非"],
+  ans:"<b>(C) 固定匯率、資本低度移動下，擴張性財政政策將使本國國際收支赤字。</b><ul><li>財政擴張：Y↑ → 進口↑（經常帳惡化）；r↑ → 資本流入（少）</li><li>資本低度移動：資本流入不足以抵銷進口增加 → BOP 赤字</li><li>(A) 固定匯率＋資本完全移動下財政政策<b>有效</b>（Mundell）</li></ul>"
+},
+{
+  q:"True or False: The Marshall-Lerner Condition states that depreciation has a favorable effect on the current account only if the sum of export and import elasticity is greater than one.（書本例題 6.25）",
+  opts:["(A) True","(B) False"],
+  ans:"<b>(A) True。</b><ul><li>馬歇爾-婁勒條件：出口需求彈性＋進口需求彈性（絕對值）&gt; 1 → 貶值改善貿易收支</li><li>若和小於 1，貶值反而使貿易收支惡化</li></ul>"
+}
+];
+const CH5_SECTIONS = [
+{
+  id:"5.1", title:"AD：總合需求曲線",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="ad"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Aggregate demand">AD 曲線</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">IS 與 LM 同時均衡下，物價 P 與產出 Y 的組合軌跡；負斜率</div>
+      <div class="mc-detail">由 IS-LM 導出：物價變動改變實質貨幣供給 M/P → LM 移動 → 均衡所得反向變動。負斜率來自三效果。</div>
+      <div class="mc-ex"><b>例子：</b>M = 900 固定，P 上升 → M/P 下降 → LM 左移 → r↑、Y↓：AD 負斜率。</div>
+    </div>
+  </div>
+  <div class="tblwrap"><table><caption>AD 負斜率的三個效果</caption><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>效果</th><th>機制（物價 P 上升時）</th></tr></thead><tbody>
+  <tr><td><span class="term" data-term="Interest rate effect">利率效果</span></td><td>P↑ → M/P↓ → 利率↑ → 投資↓ → 總需求↓</td></tr>
+  <tr><td><span class="term" data-term="Wealth effect">財富效果</span></td><td>P↑ → 實質財富↓ → 消費↓ → 總需求↓</td></tr>
+  <tr><td>國際貿易效果</td><td>P↑ → 本國商品相對變貴 → 出口↓進口↑ → 淨出口↓ → 總需求↓</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>AD 移動：</b>貨幣供給↑、政府支出↑、減稅、消費者信心↑、出口↑（馬婁條件成立下貶值）→ AD 右移；反向則左移。貨幣需求減少（金融創新）→ LM 右移 → AD 右移。</div>
+  <div class="warn">貨幣供給增加使 AD 水平右移、垂直上移（整體向右上移動）。貨幣需求對所得敏感度越大、或投資對利率敏感度越小，貨幣供給增加使 AD 右移的幅度越小。</div>`
+},
+{
+  id:"5.2", title:"AD 的特殊情況",
+  body:`
+  <div class="tblwrap"><table><caption>特殊情況下的 AD 形狀</caption><colgroup><col style="width:44%"><col style="width:56%"></colgroup><thead><tr><th>情況</th><th>AD 形狀</th></tr></thead><tbody>
+  <tr><td><span class="term" data-term="Liquidity trap">流動性陷阱</span>且不具<span class="term" data-term="Pigou effect">皮古效果</span></td><td>垂直線（物價下降 LM 已水平，無法再降利率）</td></tr>
+  <tr><td>流動性陷阱但具皮古效果</td><td>回復負斜率（物價↓ → 實質財富↑ → 消費↑ → Y↑）</td></tr>
+  <tr><td>貨幣需求對利率敏感度極大（LM 近水平）</td><td>AD 趨近垂直（貨幣政策傳導弱）</td></tr>
+  </tbody></table></div>
+  <div class="warn">流動性陷阱下貨幣政策無法透過利率影響投資，AD 垂直 → 貨幣政策無效；加入皮古效果後物價下跌仍能提振消費，AD 恢復負斜率。</div>`
+},
+{
+  id:"5.3", title:"AS：總合供給曲線",
+  body:`
+  <p><span class="term" data-term="Aggregate supply">AS 曲線</span>＝勞動市場達成均衡時，產出與物價的組合軌跡。形狀取決於勞動市場的假設：</p>
+  <div class="tblwrap"><table><caption>AS 三種形狀</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead><tr><th>學派</th><th>假設與 AS 形狀</th></tr></thead><tbody>
+  <tr><td>凱因斯（完全貨幣幻覺）</td><td>勞動供給方有<span class="term" data-term="Money illusion">貨幣幻覺</span>（只看名目工資）：物價↑ → 勞動需求↑ → 就業↑ → 產出↑，AS 正斜率（凸向縱軸）</td></tr>
+  <tr><td>凱因斯＋僵固工資</td><td>名目工資只能漲不能跌（<span class="term" data-term="Sticky wage">僵固工資</span>）：物價下跌時就業下降更多，物價上升段仍正斜率</td></tr>
+  <tr><td>古典</td><td>勞動供給無貨幣幻覺：物價↑ 名目工資同步調整，就業不變，AS 垂直於充分就業產出</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>AS 移動因素：</b>生產力↑、生產資源（勞動、資本）數量↑、技術進步、資源價格↓、法令制度環境改善 → AS 右移；反向則左移。<b>國外所得水準影響的是 AD（出口）不是 AS。</b></div>`
+},
+{
+  id:"5.4", title:"完整凱因斯模型（AD-AS）",
+  body:`
+  <div class="svgfig">
+    <figcaption>AD-AS 均衡：AD 與 AS 交點決定均衡物價與產出。古典垂直 AS 下，貨幣供給增加使 AD 右移 → 物價同比例上升、產出不變（貨幣中立）；技術進步使 AS 右移 → 物價下降、產出增加。</figcaption>
+    <svg viewBox="0 0 440 330" role="img" aria-label="AD-AS 圖">
+      <defs><marker id="arw5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c6e9e"/></marker></defs>
+      <line x1="60" y1="290" x2="60" y2="30" class="ax"/>
+      <line x1="60" y1="290" x2="400" y2="290" class="ax"/>
+      <line x1="150" y1="40" x2="150" y2="290" stroke="#3a7d44" stroke-width="2.4"/>
+      <text x="136" y="36" class="lb" fill="#3a7d44">AS（古典）</text>
+      <line x1="150" y1="60" x2="390" y2="250" stroke="#3a7d44" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="352" y="270" class="lb" fill="#3a7d44">AS（凱因斯）</text>
+      <line x1="110" y1="250" x2="370" y2="60" stroke="#2c6e9e" stroke-width="2.4"/>
+      <text x="356" y="70" class="lb" fill="#2c6e9e">AD</text>
+      <circle cx="242" cy="158" r="4.5" fill="#b5542e"/>
+      <text x="252" y="150" class="axl" fill="#b5542e">E</text>
+      <line x1="150" y1="158" x2="242" y2="158" stroke="#b5542e" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="126" y="162" class="axl">P*</text>
+      <line x1="242" y1="290" x2="242" y2="158" stroke="#b5542e" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="230" y="306" class="axl">Y*</text>
+      <line x1="130" y1="225" x2="350" y2="85" stroke="#2c6e9e" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="322" y="110" class="lb" fill="#2c6e9e">AD′（M↑）</text>
+      <circle cx="150" cy="122" r="4" fill="#b5542e"/>
+      <text x="160" y="116" class="axl" fill="#b5542e">E′</text>
+      <text x="186" y="316" class="lb" fill="#6f6555">貨幣供給↑：P 同升、Y 不變（古典垂直 AS）</text>
+    </svg>
+  </div>
+  <div class="tblwrap"><table><caption>完整模型的政策效果（古典垂直 AS）</caption><colgroup><col style="width:36%"><col style="width:32%"><col style="width:32%"></colgroup><thead><tr><th>政策</th><th>產出 Y</th><th>物價 P</th></tr></thead><tbody>
+  <tr><td>政府支出↑（財政擴張）</td><td>不變（完全排擠）</td><td>上升</td></tr>
+  <tr><td>貨幣供給↑</td><td>不變（貨幣中立）</td><td>同比例上升</td></tr>
+  <tr><td>技術進步／資本累積（AS 右移）</td><td>增加</td><td>下降</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>乘數大小的排序：</b>簡單凱因斯乘數（M，物價利率不變）&gt; IS-LM 乘數（M*，利率可變）&gt; AD-AS 乘數（M**，利率物價皆可變）。</div>`
+},
+{
+  id:"5.5", title:"古典不一致性與解決",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="inconsist"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Classical inconsistency">古典不一致性</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">流動性陷阱（AD 垂直）＋古典 AS（垂直）→ 兩線無交點</div>
+      <div class="mc-detail">古典假設充分就業使 AS 垂直；凱因斯流動性陷阱使 AD 也垂直 → 無均衡：物價無論升降都無法結清市場，存在持續超額供給。</div>
+      <div class="mc-ex"><b>解決：</b>凱因斯加入名目工資向下僵固性 → 物價下跌時 AS 轉為正斜率 → 與 AD 相交，市場結清（但勞動市場出現非自願性失業）。</div>
+    </div>
+  </div>`
+}
+];
+const CH5_PROBLEMS = [
+{
+  q:"A monetary injection by the central bank（書本例題 5.1）",
+  opts:["(A) Increases interest rates and increases aggregate demand.","(B) Increases interest rates and decreases aggregate demand.","(C) Decreases interest rates and decreases aggregate demand.","(D) Decreases interest rates and increases aggregate demand."],
+  ans:"<b>(D) Decreases interest rates and increases aggregate demand.</b><ul><li>貨幣供給↑ → LM 右移 → 利率下降</li><li>利率↓ → 投資↑ → 總合需求↑ → AD 右移</li></ul>"
+},
+{
+  q:"下列哪一項因素能使總合需求曲線右移？（書本例題 5.2）",
+  opts:["(A) 取消投資稅額抵減","(B) 科技進步提升資本的獲利能力","(C) 物價水準下降","(D) 貨幣供給減少"],
+  ans:"<b>(B) 科技進步提升資本的獲利能力。</b><ul><li>投資獲利↑ → 自發性投資↑ → IS 右移 → AD 右移</li><li>(A)(D) 使 AD 左移；(C) 是沿 AD 移動不是曲線移動</li></ul>"
+},
+{
+  q:"「利率效果」指的是：如果一個國家的物價水準上升，則（書本例題 5.3）",
+  opts:["(A) 實質貨幣供給上升、利率上升、投資支出減少","(B) 實質貨幣供給上升、利率下降、投資支出增加","(C) 實質貨幣供給下降、利率上升、投資支出減少","(D) 實質貨幣供給下降、利率下降、投資支出增加"],
+  ans:"<b>(C) 實質貨幣供給下降、利率上升、投資支出減少。</b><ul><li>P↑ → M/P↓ → 貨幣市場超額需求 → 利率↑</li><li>利率↑ → 投資成本↑ → 投資支出↓ → 總需求↓</li></ul>"
+},
+{
+  q:"「財富效果」指的是：如果一個國家的物價水準上升，則（書本例題 5.4）",
+  opts:["(A) 實質財富上升、消費支出增加","(B) 實質財富上升、消費支出減少","(C) 實質財富下降、消費支出增加","(D) 實質財富下降、消費支出減少"],
+  ans:"<b>(D) 實質財富下降、消費支出減少。</b><ul><li>P↑ → 實質餘額（實質財富）下降 → 財富縮水 → 消費↓</li><li>消費↓ → 總需求↓（AD 負斜率第二個來源）</li></ul>"
+},
+{
+  q:"If the short-run aggregate supply curve is horizontal, then（書本例題 5.12）",
+  opts:["(A) The money supply is irrelevant in the short run.","(B) It shows fixed prices.","(C) The money supply cannot affect output in the short run.","(D) It shows fixed output."],
+  ans:"<b>(B) It shows fixed prices。</b><ul><li>水平 AS＝物價固定（價格僵固），擴張政策只增加產出不影響物價</li><li>貨幣供給在短期可影響產出（非無關）</li></ul>"
+},
+{
+  q:"Which is most likely to cause an increase in short-run aggregate supply?（書本例題 5.13）",
+  opts:["(A) A decline in the productivity of labor.","(B) An increase in expected prices.","(C) A reduction in resource prices.","(D) An increase in the price level."],
+  ans:"<b>(C) A reduction in resource prices。</b><ul><li>資源（原料）價格↓ → 生產成本↓ → 廠商願意增產 → AS 右移</li><li>(A) 生產力↓ → AS 左移；(D) 是沿 AS 移動</li></ul>"
+},
+{
+  q:"下列哪一項不屬於決定總合供給的因素？（書本例題 5.15）",
+  opts:["(A) 生產力的變動","(B) 法律與制度環境變化","(C) 國外所得水準","(D) 本國生產資源可用數量"],
+  ans:"<b>(C) 國外所得水準。</b><ul><li>國外所得影響本國出口 → 影響 <b>AD</b>，不影響 AS</li><li>生產力、制度環境、生產資源數量都是 AS 的決定因素</li></ul>"
+},
+{
+  q:"An advance in technology that increases productivity and an increase in the working-age population results in a（書本例題 5.16）",
+  opts:["(A) rightward shift of the labor supply curve","(B) rightward shift of the labor demand curve","(C) rightward shift of the labor demand and supply curve","(D) no change to the production function"],
+  ans:"<b>(C) rightward shift of the labor demand and supply curve。</b><ul><li>技術進步 → 勞動邊際產出↑ → 勞動需求右移</li><li>勞動年齡人口↑ → 勞動供給右移</li><li>兩者皆右移 → 就業↑、產出↑、AS 右移</li></ul>"
+},
+{
+  q:"政府支出增加：簡單凱因斯模型乘數為 M、IS-LM 模型為 M*、AD-AS 模型為 M**，排序何者正確？（書本例題 5.18）",
+  opts:["(A) M &gt; M* &gt; M**","(B) M* &gt; M &gt; M**","(C) M* &gt; M** &gt; M","(D) M** &gt; M* &gt; M"],
+  ans:"<b>(A) M &gt; M* &gt; M**。</b><ul><li>模型越完整，被「內部化」的調整越多：利率上升（排擠）與物價上升（實質餘額↓）都會削弱乘數</li><li>簡單凱因斯乘數最大、AD-AS 乘數最小</li></ul>"
+}
+];
+const CH4_SECTIONS = [
+{
+  id:"4.1", title:"IS-LM 模型基礎",
+  body:`
+  <p>簡單凱因斯模型未考慮貨幣對國民所得的影響，也忽略利率對投資的作用。1937 年<span class="proper" data-term="Hicks">希克斯</span>以一般均衡架構重新詮釋凱因斯，1949 年由<span class="proper" data-term="Hansen">韓森</span>推廣並更名為 IS-LM（Hicks-Hansen Model）：同時分析商品市場與貨幣市場，決定均衡國民所得與利率。</p>
+  <div class="note"><b>模型要點：</b>
+    <ul style="margin:6px 0 2px 20px">
+      <li>討論的市場有商品、貨幣與債券三大市場，但依<span class="proper" data-term="Say's law">瓦拉斯法則</span>（本章此處以債券市場為剩餘市場）只需分析商品與貨幣市場</li>
+      <li>結合消費（S）、投資（I）、貨幣需求（L）、貨幣供給（M）四大因素</li>
+      <li>投資受實質利率影響：I = Ī + I(r) + I(Y)，I′ &lt; 0、Iy &gt; 0</li>
+    </ul></div>
+  <div class="warn">IS-LM 模型引進貨幣與利率分析國民所得決定，並可分析財政與貨幣政策的作用及相互關係。縱軸放實質利率 r。</div>`
+},
+{
+  id:"4.2", title:"IS 曲線：商品市場均衡",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="is"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="IS curve">IS 曲線</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">Y = C + I + G（或 S + T = I + G）；斜率 dr/dY = −[1−b(1−t)] ÷ |Ir| &lt; 0</div>
+      <div class="mc-detail">代表商品市場均衡的所得與利率組合軌跡：利率↑ → 投資機會成本↑ → 投資↓ → 總需求↓ → 均衡所得↓，故負斜率。投資對利率敏感度 |Ir| 越大，IS 越平坦。</div>
+      <div class="mc-ex"><b>例子：</b>C = 100+0.8Yd、T = 50、I = 200−100r、G = 300 → IS：Y = 460+0.8Y−100r → <b>Y = 2300 − 500r</b>。</div>
+    </div>
+  </div>
+  <div class="tblwrap"><table><caption>IS 曲線的移動</caption><colgroup><col style="width:50%"><col style="width:50%"></colgroup><thead><tr><th>變數增加</th><th>IS 移動</th></tr></thead><tbody>
+  <tr><td>自發性消費 a、政府支出 G、自發性投資、移轉支出 R</td><td>右移（水平 ΔY = ΔA÷[1−b(1−t)]）</td></tr>
+  <tr><td>定額稅 T̄、稅率 t</td><td>左移</td></tr>
+  </tbody></table></div>`
+},
+{
+  id:"4.3", title:"流動性偏好與 LM 曲線",
+  body:`
+  <p><span class="term" data-term="Liquidity preference">流動性偏好理論</span>說明貨幣需求的三個動機：<b>交易動機</b>（日常支付，隨所得增加）、<b>預防動機</b>（應付意外，隨所得增加）、<b>投機動機</b>（以貨幣代替債券，隨利率反向變動）。</p>
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="lm"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="LM curve">LM 曲線</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">M/P = L(Y, r) = A + Ly·Y − |Lr|·r → r = (Ly·Y − A + M/P) ÷ |Lr|</div>
+      <div class="mc-detail">代表貨幣市場均衡的組合軌跡：所得↑ → 交易與預防動機貨幣需求↑ → 出現超額需求 → 利率↑，故正斜率。斜率 = Ly ÷ |Lr|。</div>
+      <div class="mc-ex"><b>例子：</b>M/P = 900、L = Y − 10000r → LM：Y − 10000r = 900 → <b>Y = 900 + 10000r</b>。</div>
+    </div>
+  </div>
+  <div class="tblwrap"><table><caption>LM 曲線的極端情形與移動</caption><colgroup><col style="width:40%"><col style="width:60%"></colgroup><thead><tr><th>情形</th><th>形狀／影響</th></tr></thead><tbody>
+  <tr><td>貨幣需求對利率敏感度為零（|Lr| = 0，古典）</td><td>LM 垂直；財政政策完全排擠、貨幣政策效果最大</td></tr>
+  <tr><td>貨幣需求對利率敏感度無限大（<span class="term" data-term="Liquidity trap">流動性陷阱</span>）</td><td>LM 水平；貨幣政策無效、財政政策效果完全發揮</td></tr>
+  <tr><td>貨幣供給 M 增加</td><td>LM 右移（利率↓、所得↑）</td></tr>
+  <tr><td>物價 P 上升（實質餘額減少）</td><td>LM 左移</td></tr>
+  </tbody></table></div>
+  <div class="warn">貨幣需求的利率彈性：利率變動 1% 引起貨幣需求變動的百分比；所得彈性同理。流動性陷阱下貨幣需求彈性無限大，不管貨幣供給怎麼增加，利率幾乎不下降。</div>`
+},
+{
+  id:"4.4", title:"IS-LM 均衡與調整",
+  body:`
+  <div class="svgfig">
+    <figcaption>IS-LM 均衡：商品市場（IS，負斜率）與貨幣市場（LM，正斜率）同時均衡於 E 點，決定均衡所得 Y* 與利率 r*。IS 右方＝商品超額供給（需減產）、LM 左方＝貨幣超額供給（利率需下降）。</figcaption>
+    <svg viewBox="0 0 440 330" role="img" aria-label="IS-LM 均衡圖">
+      <defs><marker id="arw4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2c6e9e"/></marker></defs>
+      <line x1="60" y1="290" x2="60" y2="30" class="ax"/>
+      <line x1="60" y1="290" x2="400" y2="290" class="ax"/>
+      <line x1="140" y1="40" x2="380" y2="270" stroke="#3a7d44" stroke-width="2.4"/>
+      <text x="300" y="42" class="lb" fill="#3a7d44">LM</text>
+      <line x1="110" y1="250" x2="360" y2="60" stroke="#2c6e9e" stroke-width="2.4"/>
+      <text x="352" y="74" class="lb" fill="#2c6e9e">IS</text>
+      <circle cx="236" cy="158" r="4.5" fill="#b5542e"/>
+      <text x="246" y="150" class="axl" fill="#b5542e">E</text>
+      <line x1="236" y1="290" x2="236" y2="158" stroke="#b5542e" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="216" y="306" class="axl">Y*</text>
+      <line x1="60" y1="158" x2="236" y2="158" stroke="#b5542e" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="14" y="162" class="axl">r*</text>
+      <text x="388" y="312" class="axl">Y</text>
+      <text x="26" y="40" class="axl">r</text>
+      <line x1="110" y1="250" x2="330" y2="106" stroke="#b5542e" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="326" y="130" class="lb" fill="#b5542e">IS′（G↑）</text>
+      <circle cx="268" cy="142" r="4" fill="#3a7d44"/>
+      <text x="278" y="136" class="axl" fill="#3a7d44">E′</text>
+      <text x="188" y="66" class="lb" fill="#6f6555">財政擴張：IS 右移 → r↑、Y↑</text>
+    </svg>
+  </div>
+  <div class="note"><b>調整過程（<span class="proper">對應原理</span>，薩繆爾森提出）：</b>
+    <ul style="margin:6px 0 2px 20px">
+      <li>商品市場靠產出調整（速度慢）：IS 右方投資過低 → 商品超額供給 → 減產</li>
+      <li>貨幣市場靠利率調整（速度快）：LM 左方貨幣超額供給 → 利率下降</li>
+      <li>貨幣市場調整較快，可假設貨幣市場恆處均衡，調整沿 LM 進行</li>
+    </ul></div>`
+},
+{
+  id:"4.5", title:"財政與貨幣政策",
+  body:`
+  <p>IS-LM 乘數模型（利率可變、物價不變）導出政府支出乘數（財政政策乘數）、定額稅乘數、平衡預算乘數與貨幣乘數。財政擴張使 IS 右移，貨幣擴張使 LM 右移。</p>
+  <div class="tblwrap"><table><caption>政策效果比較</caption><colgroup><col style="width:30%"><col style="width:35%"><col style="width:35%"></colgroup><thead><tr><th>政策</th><th>對所得</th><th>對利率</th></tr></thead><tbody>
+  <tr><td>政府支出↑／減稅（IS 右移）</td><td>增加（但受排擠削弱）</td><td>上升</td></tr>
+  <tr><td>貨幣供給↑（LM 右移）</td><td>增加</td><td>下降</td></tr>
+  <tr><td>貨幣融通（ΔG = ΔM）</td><td>增加（IS、LM 同右移）</td><td>不一定</td></tr>
+  </tbody></table></div>
+  <div class="formula"><span class="f-label">貨幣乘數（IS-LM）</span>ΔY/ΔM = (|Ir| ÷ |Lr|) ÷ [1 − b(1−t) + |Ir|·Ly÷|Lr|]；貨幣政策透過<span class="term" data-term="Transmission mechanism">貨幣傳導機制</span>：M↑ → r↓ → I↑ → Y↑</div>
+  <div class="warn">貨幣供給擴張並非直接增加商品需求，而是先使利率下降、誘發投資增加，再帶動產出上升——這就是貨幣傳導機制。貨幣供給增加使均衡所得增加、均衡利率下降。</div>`
+},
+{
+  id:"4.6", title:"排擠效果",
+  body:`
+  <div class="method-card mc-title">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="crowd"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Crowding out">排擠效果</span></div>
+    <div class="mc-body">
+      <div class="mc-formula">政府支出↑ → 利率↑ → 民間投資↓ → 財政政策效果被削弱</div>
+      <div class="mc-detail">公部門支出增加造成私部門支出減少的現象。LM 正斜率時部分排擠；LM 垂直（古典）完全排擠、財政政策無效；LM 水平（流動性陷阱）無排擠；貨幣融通時利率不一定上升，不見得排擠。</div>
+      <div class="mc-ex"><b>例子：</b>LM 垂直時政府支出增加 100，利率飆升、Y 不變——C+I+G 中 G 的增加完全被 I 的減少抵銷。</div>
+    </div>
+  </div>
+  <div class="warn">LM 越陡（貨幣需求對利率越不敏感）排擠越大；LM 越平排擠越小。LM 水平時財政政策乘數 = 簡單凱因斯乘數（效果最大）。</div>`
+}
+];
+const CH4_PROBLEMS = [
+{
+  q:"在凱因斯流動性陷阱下：（書本例題 4.11）",
+  opts:["(A) 貨幣的需求彈性無限大","(B) 財政政策無效","(C) 貨幣政策效果充分發揮","(D) 貨幣的需求彈性等於零"],
+  ans:"<b>(A) 貨幣的需求彈性無限大。</b><ul><li>流動性陷阱：利率極低、貨幣需求利率彈性無限大，LM 水平</li><li>貨幣政策無效（利率已不會再降），財政政策效果完全發揮</li></ul>"
+},
+{
+  q:"Which statement on the IS curve is correct?（書本例題 4.19）",
+  opts:["(A) The point to the right of a given IS curve represents an excess demand for goods.","(B) The point to the right of a given IS curve represents an excess demand for bonds.","(C) When investment is less sensitive to the interest rate, the IS curve is steeper.","(D) When the IS curve is steeper, the effect of a given monetary policy action is greater."],
+  ans:"<b>(C) When investment is less sensitive to the interest rate, the IS curve is steeper.</b><ul><li>IS 右方：商品市場超額供給（非需求）；與債券市場無直接關係</li><li>IS 斜率 = −[1−b(1−t)]÷|Ir|：|Ir| 越小（投資對利率越不敏感）→ IS 越陡</li><li>IS 越陡 → 貨幣政策（LM 移動）對所得的影響越小（不是越大）</li></ul>"
+},
+{
+  q:"位於 IS 左方的點代表：（書本例題 4.20）",
+  opts:["(A) 儲蓄與稅收之和小於投資與政府支出總額","(B) 儲蓄與稅收之和大於投資與政府支出總額","(C) 有超額的貨幣供給","(D) 有超額的貨幣需求"],
+  ans:"<b>(A) 儲蓄與稅收之和小於投資與政府支出總額。</b><ul><li>IS 左方＝所得低於均衡 → 儲蓄少 → S+T &lt; I+G → 商品市場超額需求</li><li>與貨幣市場無關（C、D 屬 LM 判斷）</li></ul>"
+},
+{
+  q:"某點在 IS 曲線的右方、但在 LM 曲線的左方，則：（書本例題 4.21）",
+  opts:["(A) 商品及貨幣市場皆有超額需求","(B) 商品及貨幣市場皆有超額供給","(C) 商品市場有超額需求、貨幣市場有超額供給","(D) 商品市場有超額供給、貨幣市場有超額需求"],
+  ans:"<b>(B) 商品及貨幣市場皆有超額供給。</b><ul><li>IS 右方：所得過高 → 儲蓄過多 → 商品超額供給</li><li>LM 左方：所得過低 → 貨幣需求不足 → 貨幣超額供給</li><li>調整：商品市場減產、貨幣市場利率下降</li></ul>"
+},
+{
+  q:"C = 100 + 0.8Yd；T = 500；I = 200 − 100r；G = 550；Md = Y − 10000r；Ms = 900。（1）均衡所得與利率？（2）均衡消費？（書本例題 4.25）",
+  opts:["(A) r ≈ 0.129、Y ≈ 2186、C ≈ 1449","(B) r ≈ 0.05、Y ≈ 1400、C ≈ 820","(C) r ≈ 0.2、Y ≈ 2900、C ≈ 2020","(D) r ≈ 0.1、Y ≈ 2200、C ≈ 1460"],
+  ans:"<b>(A) r ≈ 0.129、Y ≈ 2186、C ≈ 1449。</b><ul><li>IS：Y = 100 + 0.8(Y−500) + 200 − 100r + 550 → Y = 2300 − 500r</li><li>LM：Y − 10000r = 900 → Y = 900 + 10000r</li><li>聯立：2300 − 500r = 900 + 10000r → r = <b>0.129</b>、Y = <b>2186</b></li><li>C = 100 + 0.8×1686 = <b>1449</b></li></ul>"
+},
+{
+  q:"下列有關排擠效果的敘述，何者是不正確的？（書本例題 4.32）",
+  opts:["(A) 因財政政策刺激所引發的利率上升，為構成排擠效果的基本原因","(B) 當 LM 曲線為水平線時，排擠效果達最大","(C) 當 LM 曲線為垂直線時，排擠效果達最大","(D) 排擠效果將降低財政政策的效果"],
+  ans:"<b>(B) 當 LM 曲線為水平線時，排擠效果達最大。</b><ul><li>LM 水平（流動性陷阱）時利率不變 → <b>沒有排擠</b>、財政政策效果最大</li><li>LM 垂直（古典）時排擠效果達最大（完全排擠）</li></ul>"
+},
+{
+  q:"Crowding-out effect refers to a（書本例題 4.34）",
+  opts:["(A) fall in interest rates that reduces private investment","(B) rise in private investment that reduces private consumption","(C) rise in government borrowing that reduces private sector investing","(D) rise in interest rate that reduces the supply of loanable funds"],
+  ans:"<b>(C) rise in government borrowing that reduces private sector investing。</b><ul><li>政府支出增加（借款增加）→ 利率上升 → 民間投資減少</li><li>(A) 利率下降是反向；核心是政府支出排擠民間投資</li></ul>"
+}
+];
 const CH3_SECTIONS = [
 {
   id:"3.1", title:"凱因斯革命",
@@ -1170,7 +2653,7 @@ function escA(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/
 let currentChapter=1;
 function renderSidebar(){
   const sb=document.getElementById("sidebar");
-  let html=`<a href="./index.html" class="backhome">← 商管類首頁</a><div class="brand">宏觀天地 學總經<div class="t2">研究所複習 · 第 1–14 章</div></div>`;
+  let html=`<div class="brand">宏觀天地 學總經<div class="t2">研究所複習 · 第 1–14 章</div></div>`;
   BOOK.forEach(ch=>{
     html+=`<button class="nav-chapter ${ch.n===currentChapter?'active':''}" data-ch="${ch.n}">
       <span class="num">${ch.n}</span><span>${esc(ch.title)}</span>
@@ -1288,8 +2771,8 @@ function openTerm(key){
 function closeTerm(){document.getElementById("termModal").style.display="none";}
 
 /* ===== 章節資料對照（每章完成後加入） ===== */
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS};
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS};
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS};
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1301,7 +2784,23 @@ const GLOSS_CATS = [
   {name:"變數性質", keys:["Flow","Stock"]},
   {name:"所得分配", keys:["Lorenz curve","Gini coefficient"]},
   {name:"古典學派", keys:["Fisher equation","Cambridge cash balance","Money neutrality","Classical dichotomy","Walras law","Say's law","Loanable funds","Fisher effect","Money illusion"]},
+  {name:"經濟成長", keys:["Growth accounting","Total factor productivity","Solow residual","Harrod-Domar","Natural rate of growth","Warranted rate of growth","Knife-edge","Steady state","Golden rule","Absolute convergence","Conditional convergence","Endogenous growth","Rule of 70","Malthus","Barro"]},
+  {name:"景氣循環", keys:["Business cycle","Leading indicators","Coincident indicators","Lagging indicators","Procyclical","Countercyclical","Political business cycle","Real business cycle","Intertemporal substitution","Schumpeter","Kydland","Prescott"]},
+  {name:"貨幣理論", keys:["High-powered money","Money multiplier","Required reserve ratio","Open market operation","Discount rate","Quasi money","Gresham's law","Fiat money","Baumol-Tobin model","Modern quantity theory"]},
+  {name:"消費理論", keys:["Absolute income hypothesis","Life-cycle hypothesis","Relative income hypothesis","Demonstration effect","Ratchet effect","Permanent income","Modigliani","Dusenberry"]},
+  {name:"投資理論", keys:["Net present value","Marginal efficiency of investment","Tobin's q","User's cost","Investment tax credit","Jorgenson"]},
   {name:"學派與人物", keys:["Adam Smith","David Ricardo","Say","Marshall","Fisher","Walras","Malthus","Milton Friedman","Invisible hand","Absolute advantage","Comparative advantage"]},
+  {name:"經濟成長", keys:["Growth accounting","Total factor productivity","Solow residual","Harrod-Domar","Natural rate of growth","Warranted rate of growth","Knife-edge","Steady state","Golden rule","Absolute convergence","Conditional convergence","Endogenous growth","Rule of 70","Malthus","Barro"]},
+  {name:"景氣循環", keys:["Business cycle","Leading indicators","Coincident indicators","Lagging indicators","Procyclical","Countercyclical","Political business cycle","Real business cycle","Intertemporal substitution","Schumpeter","Kydland","Prescott"]},
+  {name:"貨幣理論", keys:["High-powered money","Money multiplier","Required reserve ratio","Open market operation","Discount rate","Quasi money","Gresham's law","Fiat money","Baumol-Tobin model","Modern quantity theory"]},
+  {name:"消費理論", keys:["Absolute income hypothesis","Life-cycle hypothesis","Relative income hypothesis","Demonstration effect","Ratchet effect","Permanent income","Modigliani","Dusenberry"]},
+  {name:"投資理論", keys:["Net present value","Marginal efficiency of investment","Tobin's q","User's cost","Investment tax credit","Jorgenson"]},
+  {name:"學派與人物", keys:["Friedman","Monetarist school","Permanent income hypothesis","Money supply rule","Inside lag","Lucas critique","Ricardian equivalence","Laffer curve","Efficiency wage","New Keynesian"]},
+  {name:"菲利普曲線", keys:["Phillips curve","Misery index","Sacrifice ratio","Natural-rate hypothesis","Accelerationist hypothesis","Okun's law","Taylor rule"]},
+  {name:"物價膨脹與預期", keys:["Inflation","Demand-pull inflation","Cost-push inflation","Stagflation","Imported inflation","Shoeleather cost","Menu cost","Adaptive expectations","Rational expectations","Lucas","Expectations-augmented AS"]},
+  {name:"開放經濟", keys:["Exchange rate","Foreign exchange reserve","Purchasing power parity","Interest rate parity","Balance of payments","Marshall-Lerner condition","J-curve","Sterilization","Impossible trinity","Mundell"]},
+  {name:"完整模型 AD-AS", keys:["Aggregate demand","Aggregate supply","Money illusion","Sticky wage","Wealth effect","Interest rate effect","Classical inconsistency","Pigou effect"]},
+  {name:"IS-LM 模型", keys:["Hicks","Hansen","IS curve","LM curve","Liquidity preference","Money demand","Liquidity trap","Crowding out","Transmission mechanism"]},
   {name:"凱因斯模型", keys:["Keynes","Effective demand","Consumption function","MPC","MPS","APC","Autonomous consumption","Induced consumption","Saving function","Accelerator principle","45-degree line","Multiplier","Balanced budget multiplier","Paradox of thrift","Deflationary gap","Inflationary gap","Output gap","Automatic stabilizer","Lump-sum tax","Proportional tax","Progressive tax","Regressive tax","Samuelson"]},
   {name:"勞動市場與失業", keys:["Natural rate of unemployment","Frictional unemployment","Structural unemployment","Cyclical unemployment","Seasonal unemployment","Disguised unemployment","Discouraged workers","Labor force participation rate","Full employment"]},
   {name:"總體經濟目標", keys:["Full employment","Business cycle","Economic growth"]}
