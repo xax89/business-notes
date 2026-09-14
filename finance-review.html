@@ -379,7 +379,8 @@ const BOOK = [
   {n:7, title:"財務預測與規劃", subs:["7.1 財務預測","7.2 財務政策與成長率"], done:true, points:["銷售百分比法：資產隨銷售成長","EFN/AFN＝資產增加 − 自發性負債增加 − 保留盈餘增加","內部成長率 gᵢ＝ROE×b／(1−ROE×b)（不對外融資）","維持成長率 gₛ＝ROE×b／(1−ROE×b)（維持 D/E 不變、不發新股）","b＝盈餘保留率＝1−股利支付率 d"]},
   {n:8, title:"報酬與風險的衡量", subs:["8.1 衡量報酬的指標","8.2 歷史報酬與風險","8.3 預期報酬與風險"], done:true, points:["HPR＝(期末價+股利−買價)/買價；APR vs EAR","時間加權 vs 金額加權（IRR）報酬率","算術平均 vs 幾何平均；E(R)=ΣpᵢRᵢ","變異數/標準差衡量絕對風險；CV＝σ/E(R) 為相對風險","半變異數只衡量低於期望值的下方風險","Knight：風險（機率可知）vs 不確定性（機率不可知）"]},
   {n:9, title:"現代資產組合理論", subs:["9.1 組合報酬與風險","9.2 馬可維茲理論與效率前緣","9.3 加入無風險資產"], done:true, points:["Markowitz 1952 MPT、1990 諾獎；平均數-變異數架構","E(Rp)=ΣwᵢE(Rᵢ)；σp²=ΣΣwᵢwⱼσᵢⱼ（n²項）","MVP 最小變異數組合；效率前緣＝MVP 以上段","加入 Rf 後效率邊界為自 Rf 切效率前緣的直線＝CML","兩基金分離：所有人都持有「無風險資產＋市場組合 M」"]},
-  {n:10, title:"資本資產定價模式 CAPM", subs:["10.1 CAPM","10.2 特徵線與實證"], done:true, points:["βi=Cov(Ri,Rm)/σm²，衡量系統風險","CAPM/SML：E(Ri)=Rf+βi[E(Rm)−Rf]","CML 用總風險 σp；SML 用系統風險 β","特徵線：Ri−Rf=α+β(Rm−Rf)+ε；殘差＝個別風險","通膨↑→SML 平行上移；風險趨避↑→SML 斜率↑","單一資產 β 不穩，組合 β 較穩；APT 為多因子延伸"]}
+  {n:10, title:"資本資產定價模式 CAPM", subs:["10.1 CAPM","10.2 特徵線與實證","10.3 風險調整績效指標"], done:true, points:["βi=Cov(Ri,Rm)/σm²，衡量系統風險","CAPM/SML：E(Ri)=Rf+βi[E(Rm)−Rf]","CML 用總風險 σp；SML 用系統風險 β","特徵線：Ri−Rf=α+β(Rm−Rf)+ε；殘差＝個別風險","績效指標：Sharpe（σ分母）、Treynor（β分母）、Jensen α、IR、M²","單一資產 β 不穩，組合 β 較穩；APT 為多因子延伸"]},
+  {n:11, title:"效率市場與行為財務", subs:["11.1 效率市場假說","11.2 行為財務學"], done:true, points:["EMH 三形式：弱式／半強式／強式","弱式→技術分析無用；半強式→基本分析無用","異常：反應過度／反應不足；Grossman-Stiglitz 詭論","行為財務：系統性認知偏誤＋套利限制"]}
 ];
 
 
@@ -524,7 +525,15 @@ const TERMS = {
   /* 第10章 */
   "Beta":["Beta (β)","貝他係數","β=Cov(Ri,Rm)/σm²，衡量系統風險；只此部分給風險溢酬。"],
   "SML":["Security Market Line (SML)","證券市場線","E(Ri)=Rf+βi[E(Rm)−Rf]；以 β 為橫軸的 CAPM。"],
-  "APT":["Arbitrage Pricing Theory (APT)","套利訂價理論","CAPM 延伸，以多個系統因子解證券報酬。"]
+  "APT":["Arbitrage Pricing Theory (APT)","套利訂價理論","CAPM 延伸，以多個系統因子解證券報酬。"],
+  /* 第10.3 績效指標 */
+  "Sharpe":["Sharpe Ratio","夏普指標","(Rp−Rf)/σp，以總風險為分母。"],
+  "Treynor":["Treynor Ratio","崔諾指標","(Rp−Rf)/βp，以系統風險為分母。"],
+  "Jensen alpha":["Jensen's Alpha"," Jensen α","Rp−[Rf+βp(Rm−Rf)]；衡量 SML 上方的超額報酬。"],
+  "Information ratio":["Information Ratio","資訊比率","αp/殘差標準差；主動選股能力指標。"],
+  /* 第11章 */
+  "EMH":["Efficient Market Hypothesis (EMH)","效率市場假說","價格充分反映資訊；分弱式、半強式、強式。"],
+  "Grossman-Stiglitz":["Grossman-Stiglitz Paradox","效率市場詭論","取得資訊有成本，故完全效率市場不可能存在。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1272,7 +1281,46 @@ const CH10_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS};
+
+/* ===== 第十章補：風險調整績效指標（併入 CH10_SECTIONS） ===== */
+const CH10X = {
+  id:"10.3", title:"風險調整績效指標",
+  body:`
+  <div class="tblwrap"><table><caption>五大績效指標（分母差異是考點）</caption><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>指標</th><th>公式／意義</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Sharpe">Sharpe ratio</span></b></td><td>(Rp−Rf)／σp；以<b>總風險 σ</b>為分母。</td></tr>
+  <tr><td><b><span class="term" data-term="Treynor">Treynor ratio</span></b></td><td>(Rp−Rf)／βp；以<b>系統風險 β</b>為分母。</td></tr>
+  <tr><td><b><span class="term" data-term="Jensen alpha">Jensen's α</span></b></td><td>Rp−[Rf+βp(Rm−Rf)]；α&gt;0 表在 SML 上方、有超額報酬。</td></tr>
+  <tr><td><b><span class="term" data-term="Information ratio">資訊比率 IR</span></b></td><td>αp／殘差標準差 σ(e,p)；每承擔一單位非系統風險賺得的超額報酬，衡量選股能力。</td></tr>
+  <tr><td><b>M²</b></td><td>把組合槓桿調整到與市場同風險後，與市場報酬之差。</td></tr>
+  </tbody></table></div>
+  `
+};
+/* 把 CH10X 併入 CH10_SECTIONS */
+const CH10_SECTIONS = (function(){var a=CH10_SECTIONS.slice(); a.push(CH10X); return a;})();
+
+/* ===== 第十一章 ===== */
+const CH11_SECTIONS = [
+{
+  id:"11.1", title:"效率市場假說 EMH",
+  body:`
+  <p><span class="term" data-term="EMH">效率市場假說</span>：股價已充分且立即反映所有可得資訊，投資人無法利用舊資訊賺取風險調整後超額報酬。三形式：</p>
+  <div class="tblwrap"><table><colgroup><col style="width:20%"><col style="width:80%"></colgroup><thead><tr><th>形式</th><th>反映資訊／隱含意義</th></tr></thead><tbody>
+  <tr><td><b>弱式</b></td><td>已反映<b>歷史交易資訊</b>（價量）→ <b>技術分析無用</b>。</td></tr>
+  <tr><td><b>半強式</b></td><td>已反映<b>所有公開資訊</b>（財報、新聞）→ <b>基本分析無用</b>。</td></tr>
+  <tr><td><b>強式</b></td><td>已反映<b>所有資訊（含內線）</b>→ 內線交易也無法獲利。</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>異常現象：</b>反應過度（overreaction）、反應不足（underreaction）均違反 EMH。<br><b><span class="term" data-term="Grossman-Stiglitz">Grossman-Stiglitz 詭論</span>：</b>取得資訊有成本；若市場完全有效，無人願意付成本找資訊，價格又怎麼反映資訊？故完全效率市場不可能存在，效率應是光譜。</div>
+  `
+},
+{
+  id:"11.2", title:"行為財務學",
+  body:`
+  <p>從心理學出發，認為人並非完全理性，會產生<b>系統性認知偏誤</b>；加上真實市場有交易成本與套利限制（arbitrage limits），價格可長期偏離基本面。常見偏誤：過度自信、錨定、損趨避、框架效應、處分效果等。</p>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1375,7 +1423,15 @@ const CH10_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS};
+const CH11_PROBLEMS = [
+{
+  q:"在半強式效率市場中，下列何者投資人最難賺取超額報酬？",
+  opts:["(A) 依賴歷史股價型態做技術分析","(B) 仔細分析公開財報做基本分析","(C) 聽取未公開的內線消息","(D) (A) 與 (B) 都很難"],
+  ans:"<b>(D)</b>。半強式市場價格已反映所有公開資訊，技術分析（弱式）與基本分析（半強式）皆無法持續獲利；內線消息則牽涉強式效率與法規。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1397,7 +1453,8 @@ const GLOSS_CATS = [
   {name:"預測與成長", keys:["EFN","IGR","SGR"]},
   {name:"報酬與風險", keys:["HPR","State of nature","Knight","CV"]},
   {name:"投資組合理論", keys:["Markowitz","Efficient frontier","MVP","CML","Separation theorem"]},
-  {name:"CAPM", keys:["Beta","SML","APT"]}
+  {name:"CAPM", keys:["Beta","SML","APT","Sharpe","Treynor","Jensen alpha","Information ratio"]},
+  {name:"效率與行為財務", keys:["EMH","Grossman-Stiglitz"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1414,7 +1471,8 @@ const CH_TERMS_CATS = {
   7:["預測與成長"],
   8:["報酬與風險"],
   9:["投資組合理論"],
-  10:["CAPM"]
+  10:["CAPM"],
+  11:["效率與行為財務"]
 };
 let glossMode="full", glossChapter=1;
 
