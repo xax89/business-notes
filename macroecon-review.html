@@ -305,15 +305,28 @@ body.dark .section-body .note::before{color:#e5c15a}
 body.dark .formula{background:#2a2418;border-color:#8a7a50}
 body.dark .formula .f-label{color:#d8b36a}
 /* 響應式 */
+/* 行動端：側欄改為漢堡抽屜 */
+.nav-toggle{display:none}
+.nav-mask{display:none}
 @media (max-width:900px){
   body{flex-direction:column}
-  .sidebar{width:100%;height:auto;position:static;flex-direction:row;flex-wrap:wrap;gap:4px;padding:14px 12px;border-right:none;border-bottom:1px solid var(--line)}
+  .nav-toggle{display:flex}
+  .nav-mask{position:fixed;inset:0;background:rgba(20,16,8,.42);z-index:65;display:none}
+  body.nav-open .nav-mask{display:block}
+  .sidebar{
+    position:fixed;left:0;top:0;bottom:0;height:100vh;width:min(320px,86vw);z-index:70;
+    transform:translateX(-105%);transition:transform .28s ease;
+    border-right:1px solid var(--line);padding:24px 18px 48px;overflow-y:auto;
+  }
+  body.nav-open .sidebar{transform:translateX(0)}
   .sidebar .brand{width:100%;padding-bottom:8px;margin-bottom:6px}
-  .nav-chapter{width:auto;margin:2px 2px;padding:5px 10px}
+  .nav-chapter{width:100%;margin:4px 0;padding:6px 10px}
   .nav-chapter .tag{display:none}
-  .nav-sub{width:auto;display:inline-block;padding:3px 10px;margin:2px 2px}
+  .nav-sub{width:100%;display:block;padding:5px 10px 5px 32px;margin:2px 0}
+  .nav-gloss{width:100%;margin-top:12px}
   .main{padding:18px 14px 60px}
   .cards-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  .search-panel{top:58px;width:calc(100vw - 24px)}
 }
 @media print{
   .sidebar,.topbar,.banner,.no-print{display:none!important}
@@ -327,10 +340,14 @@ body.dark .formula .f-label{color:#d8b36a}
 
 <!-- ===== 側邊導航 ===== -->
 <nav class="sidebar" id="sidebar" aria-label="章節導航"></nav>
+<div class="nav-mask" id="navMask"></div>
 
 <!-- ===== 主內容 ===== -->
 <main class="main">
   <div class="topbar no-print">
+    <button class="toolbtn nav-toggle" id="navToggle" title="目錄">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
     <div class="searchbox">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
       <input type="search" id="searchInput" placeholder="搜尋全書內容…">
@@ -2682,6 +2699,13 @@ function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g
 function escA(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 
 let currentChapter=1;
+/* 行動端抽屜開關 */
+const navToggle=document.getElementById("navToggle");
+const navMask=document.getElementById("navMask");
+function closeNav(){document.body.classList.remove("nav-open");}
+if(navToggle)navToggle.addEventListener("click",()=>{document.body.classList.toggle("nav-open");});
+if(navMask)navMask.addEventListener("click",closeNav);
+
 function renderSidebar(){
   const sb=document.getElementById("sidebar");
   let html=`<div class="brand">宏觀天地 學總經<div class="t2">研究所複習 · 第 1–14 章</div></div>
@@ -2703,11 +2727,11 @@ function renderSidebar(){
   });
   sb.innerHTML=html;
   const navGloss=sb.querySelector("#navGloss");
-  if(navGloss)navGloss.addEventListener("click",()=>{renderGlossaryFull();window.scrollTo({top:0,behavior:"smooth"});});
+  if(navGloss)navGloss.addEventListener("click",()=>{renderGlossaryFull();window.scrollTo({top:0,behavior:"smooth"});closeNav();});
   sb.querySelectorAll(".nav-chapter").forEach(b=>{
     b.addEventListener("click",()=>{
       const ch=BOOK[+b.dataset.ch-1];
-      if(ch.done){renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});}
+      if(ch.done){renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});closeNav();}
       else{toast("第 "+ch.n+" 章尚未建置");}
     });
   });
@@ -2715,6 +2739,7 @@ function renderSidebar(){
     b.addEventListener("click",()=>{
       const ch=BOOK[+b.dataset.ch-1];
       if(!ch.done){toast("第 "+ch.n+" 章尚未建置");return;}
+      closeNav();
       if(currentChapter!==+b.dataset.ch)renderChapter(+b.dataset.ch);
       const el=document.getElementById("sec-"+b.dataset.sec);
       if(!el)return;
