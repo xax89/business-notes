@@ -378,7 +378,8 @@ const BOOK = [
   {n:6, title:"財務報表分析", subs:["6.1 共同比分析","6.2 財務比率分析"], done:true, points:["共同比（垂直）分析：資產負債表除以總資產、損益表除以銷貨","資產管理：存貨周轉率=COGS/存貨、應收周轉率=銷貨/A/R、總資產周轉率","現金轉換循環 CCC = DSI + DSO − DPO","流動性：流動比率、速動比率（酸性測試）、現金比率","獲利性：毛利率、營業利益率、ROA、ROE","投資價值：EPS、P/E、P/B、股利殖利率","杜邦：ROE＝净利率×总资产周轉率×權益乘數"]},
   {n:7, title:"財務預測與規劃", subs:["7.1 財務預測","7.2 財務政策與成長率"], done:true, points:["銷售百分比法：資產隨銷售成長","EFN/AFN＝資產增加 − 自發性負債增加 − 保留盈餘增加","內部成長率 gᵢ＝ROE×b／(1−ROE×b)（不對外融資）","維持成長率 gₛ＝ROE×b／(1−ROE×b)（維持 D/E 不變、不發新股）","b＝盈餘保留率＝1−股利支付率 d"]},
   {n:8, title:"報酬與風險的衡量", subs:["8.1 衡量報酬的指標","8.2 歷史報酬與風險","8.3 預期報酬與風險"], done:true, points:["HPR＝(期末價+股利−買價)/買價；APR vs EAR","時間加權 vs 金額加權（IRR）報酬率","算術平均 vs 幾何平均；E(R)=ΣpᵢRᵢ","變異數/標準差衡量絕對風險；CV＝σ/E(R) 為相對風險","半變異數只衡量低於期望值的下方風險","Knight：風險（機率可知）vs 不確定性（機率不可知）"]},
-  {n:9, title:"現代資產組合理論", subs:["9.1 組合報酬與風險","9.2 馬可維茲理論與效率前緣","9.3 加入無風險資產"], done:true, points:["Markowitz 1952 MPT、1990 諾獎；平均數-變異數架構","E(Rp)=ΣwᵢE(Rᵢ)；σp²=ΣΣwᵢwⱼσᵢⱼ（n²項）","MVP 最小變異數組合；效率前緣＝MVP 以上段","加入 Rf 後效率邊界為自 Rf 切效率前緣的直線＝CML","兩基金分離：所有人都持有「無風險資產＋市場組合 M」"]}
+  {n:9, title:"現代資產組合理論", subs:["9.1 組合報酬與風險","9.2 馬可維茲理論與效率前緣","9.3 加入無風險資產"], done:true, points:["Markowitz 1952 MPT、1990 諾獎；平均數-變異數架構","E(Rp)=ΣwᵢE(Rᵢ)；σp²=ΣΣwᵢwⱼσᵢⱼ（n²項）","MVP 最小變異數組合；效率前緣＝MVP 以上段","加入 Rf 後效率邊界為自 Rf 切效率前緣的直線＝CML","兩基金分離：所有人都持有「無風險資產＋市場組合 M」"]},
+  {n:10, title:"資本資產定價模式 CAPM", subs:["10.1 CAPM","10.2 特徵線與實證"], done:true, points:["βi=Cov(Ri,Rm)/σm²，衡量系統風險","CAPM/SML：E(Ri)=Rf+βi[E(Rm)−Rf]","CML 用總風險 σp；SML 用系統風險 β","特徵線：Ri−Rf=α+β(Rm−Rf)+ε；殘差＝個別風險","通膨↑→SML 平行上移；風險趨避↑→SML 斜率↑","單一資產 β 不穩，組合 β 較穩；APT 為多因子延伸"]}
 ];
 
 
@@ -519,7 +520,11 @@ const TERMS = {
   "Efficient frontier":["Efficient Frontier","效率前緣","給定風險報酬最大、給定報酬風險最小的組合集合。"],
   "MVP":["Minimum Variance Portfolio (MVP)","最小變異數組合","整個投資機會集合中風險最低的組合。"],
   "CML":["Capital Market Line (CML)","資本市場線","自 Rf 切效率前緣的直線，描述最適組合風險報酬。"],
-  "Separation theorem":["Separation Theorem","兩基金分離定理","投資人僅持有無風險資產＋市場組合 M，決策與風險偏好分離。"]
+  "Separation theorem":["Separation Theorem","兩基金分離定理","投資人僅持有無風險資產＋市場組合 M，決策與風險偏好分離。"],
+  /* 第10章 */
+  "Beta":["Beta (β)","貝他係數","β=Cov(Ri,Rm)/σm²，衡量系統風險；只此部分給風險溢酬。"],
+  "SML":["Security Market Line (SML)","證券市場線","E(Ri)=Rf+βi[E(Rm)−Rf]；以 β 為橫軸的 CAPM。"],
+  "APT":["Arbitrage Pricing Theory (APT)","套利訂價理論","CAPM 延伸，以多個系統因子解證券報酬。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1247,7 +1252,27 @@ const CH9_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS};
+
+/* ===== 第十章 CAPM ===== */
+const CH10_SECTIONS = [
+{
+  id:"10.1", title:"CAPM",
+  body:`
+  <div class="formula"><span class="f-label"><span class="term" data-term="Beta">貝他係數 β</span></span>βᵢ ＝ Cov(Rᵢ,Rₘ)／σₘ²<span class="f-note">衡量個別資產對市場組合的系統風險敏感度。β&lt;0 代表反向變動（如賣權，作避險用）。</span></div>
+  <div class="formula"><span class="f-label"><span class="term" data-term="SML">證券市場線 SML</span></span>E(Rᵢ) ＝ Rf ＋ βᵢ [ E(Rₘ) − Rf ]<span class="f-note">風險溢酬只補償系統風險。</span></div>
+  <div class="note"><b>CML vs SML：</b>CML 橫軸是總風險 σp（只描述效率組合）；SML 橫軸是 β（所有資產）。SML 斜率＝市場風險溢酬。<br><b>比較靜態：</b>通膨↑→Rf 與 E(Rm) 同步上升，SML <b>平行上移</b>；風險趨避↑→溢酬擴大，SML <b>斜率變陡</b>。</div>
+  `
+},
+{
+  id:"10.2", title:"特徵線與實證",
+  body:`
+  <div class="formula"><span class="f-label">特徵線（單指數模式）</span>Rᵢ − Rf ＝ α ＋ βᵢ (Rₘ − Rf) ＋ ε<span class="f-note">殘差 ε 為個別（非系統）風險；截距 α ＝ Jensen's alpha。</span></div>
+  <div class="note"><b>解讀：</b>殘差散得越開 → 個別風險越大；斜率越大 → 系統風險越大；R² 越高 → 報酬被市場解釋比例越高。<br><b>實證：</b>單一資產 β 不穩，但 10 檔以上組合的 β 較穩。<b><span class="term" data-term="APT">APT 套利訂價理論</span></b>為 CAPM 延伸，以多因子解釋報酬。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1342,7 +1367,15 @@ const CH9_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS};
+const CH10_PROBLEMS = [
+{
+  q:"<b>範例 10.6（BKM）</b>　股票 A、B 的特徵線：A 的殘差散得較開但截距較高；B 的斜率較陡、數據緊貼迴歸線。(1) 誰的公司特定風險高？(2) 誰的系統風險高？(3) 誰 R² 高？(4) 誰的 Jensen α 高？(5) 誰與市場相關性高？",
+  opts:[],
+  ans:"(1) <b>A</b>（殘差大）；(2) <b>B</b>（β 斜率大）；(3) <b>B</b>（貼合度高）；(4) <b>A</b>（截距大）；(5) <b>B</b>（線性相關強）。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1363,7 +1396,8 @@ const GLOSS_CATS = [
   {name:"財報分析", keys:["Common size","Activity ratio","Liquidity ratio","Leverage ratio","Profitability","Market ratio","CCC","DuPont"]},
   {name:"預測與成長", keys:["EFN","IGR","SGR"]},
   {name:"報酬與風險", keys:["HPR","State of nature","Knight","CV"]},
-  {name:"投資組合理論", keys:["Markowitz","Efficient frontier","MVP","CML","Separation theorem"]}
+  {name:"投資組合理論", keys:["Markowitz","Efficient frontier","MVP","CML","Separation theorem"]},
+  {name:"CAPM", keys:["Beta","SML","APT"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1379,7 +1413,8 @@ const CH_TERMS_CATS = {
   6:["財報分析"],
   7:["預測與成長"],
   8:["報酬與風險"],
-  9:["投資組合理論"]
+  9:["投資組合理論"],
+  10:["CAPM"]
 };
 let glossMode="full", glossChapter=1;
 
