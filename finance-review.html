@@ -381,7 +381,7 @@ const BOOK = [
   {n:9, title:"現代資產組合理論", subs:["9.1 組合報酬與風險","9.2 馬可維茲理論與效率前緣","9.3 加入無風險資產"], done:true, points:["Markowitz 1952 MPT、1990 諾獎；平均數-變異數架構","E(Rp)=ΣwᵢE(Rᵢ)；σp²=ΣΣwᵢwⱼσᵢⱼ（n²項）","MVP 最小變異數組合；效率前緣＝MVP 以上段","加入 Rf 後效率邊界為自 Rf 切效率前緣的直線＝CML","兩基金分離：所有人都持有「無風險資產＋市場組合 M」"]},
   {n:10, title:"資本資產定價模式 CAPM", subs:["10.1 CAPM","10.2 特徵線與實證","10.3 風險調整績效指標","10.4 多因子模型"], done:true, points:["βi=Cov(Ri,Rm)/σm²，衡量系統風險","CAPM/SML：E(Ri)=Rf+βi[E(Rm)−Rf]","CML 用總風險 σp；SML 用系統風險 β","特徵線：Ri−Rf=α+β(Rm−Rf)+ε；殘差＝個別風險","績效指標：Sharpe/Treynor/Jensen α/IR/M²","Fama-French 三因子：市場、SMB（規模）、HML（價值）","Carhart 四因子再加 PR1YR（動量）","APT：多因子線性組合，純粹因子組合溢酬"]},
   {n:11, title:"效率市場與行為財務", subs:["11.1 EMH","11.2 行為財務學"], done:true, points:["Fama 1970 EMH：價格立即充分反映資訊","弱式→技術分析無用；半強式→基本分析無用；強式→內線也無用","弱式檢定：自我相關、連檢定、交易法則回測","半強式檢定：事件研究法、報酬預測研究法","Grossman-Stiglitz 詭論；規模/價值/動量異常","行為財務：認知偏誤＋套利限制"]},
-  {n:12, title:"金融市場與機構", subs:["12.1 金融市場功能","12.2 市場分類與機構"], done:true, points:["資金由盈餘單位流向赤字單位","直接金融（發股發債）vs 間接金融（銀行存貸）","一級市場（IPO/增資）vs 二級市場（流通交易）","貨幣市場（≤1年）vs 資本市場（>1年）","交易所 vs OTC；商銀／投行／券商／基金／央行"]},
+  {n:12, title:"金融市場與機構", subs:["12.1 金融市場功能","12.2 市場分類與機構","12.3 金融機構分類","12.4 新金融商品"], done:true, points:["資金由盈餘單位流向赤字單位","直接金融 vs 間接金融","一級市場 vs 二級市場；貨幣市場 vs 資本市場","銀行業/證券業/保險業分類","新金融商品：界限選擇權、彩虹選擇權、認購/售權證、認股權證"]},
   {n:13, title:"普通股與評價", subs:["13.1 普通股特徵","13.2 普通股評價"], done:true, points:["累積投票制：小股東可集中票數爭取席次","新股優先認購權（rights offering）防股權稀釋","DDM：零成長 P₀=D/k；Gordon P₀=D₁/(k−g)","g＝ROE×b；P₀ 為除息後價格","相對評價：forward P/E＝d/(k−g)＝P₀/EPS₁"]},
   {n:14, title:"債券", subs:["14.1 債券種類與風險","14.2 評價與殖利率","14.3 利率風險"], done:true, points:["P₀＝Σ票息/(1+r)^t＋面額/(1+r)^n","YTM＝IRR；YTM＝當期收益率 CY＋資本利得收益率 CGY","溢價 CR&gt;CY&gt;YTM；平價 CR=CY=YTM；折價 CR&lt;CY&lt;YTM","利率↑→價格↓；期限越長、票息越低→價格波動越大","存續期間 duration 衡量利率敏感度；凸性修正大利率變動"]},
   {n:15, title:"選擇權導論", subs:["15.1 選擇權基本","15.2 交易策略"], done:true, points:["買權 call：有權以履約價 K 買入；賣權 put：有權以 K 賣出","期權買方付權利金、最大損失即權利金；賣方履約義務","歐式僅到期可行權；美式到期前皆可行權","買權賣權平價：C + K/(1+r)^t = P + S₀","常見策略：covered call、protective put、價差"]},
@@ -575,6 +575,7 @@ const TERMS = {
   "Swap":["Swap","交換契約","一系列未來現金流互換；如利率交換、貨幣交換。"],
   "CDS":["Credit Default Swap (CDS)","信用違約交換","買方付權利金，標的違約時賣方賠償；單獨交易信用風險。"],
   "Warrant":["Warrant","認股權證","公司發行、可依約定價格認購新股的權利。"],
+  "Barrier option":["Barrier Option","界限選擇權","損益取決於存續期間是否觸及預定價格水準。"],
   "Convertible bond":["Convertible Bond","可轉換公司債","公司債附加轉換為普通股的選擇權。"],
   /* 第19章 */
   "NPV":["Net Present Value (NPV)","淨現值","未來現金流折現減初始投資；NPV&gt;0 接受。"],
@@ -1462,6 +1463,28 @@ const CH12_SECTIONS = [
   <tr><td><b>交易場所</b></td><td>集中交易市場（交易所）vs 店頭市場 OTC。</td></tr>
   </tbody></table></div>
   <div class="note"><b>主要機構：</b>商業銀行（存放款）、投資銀行（承銷）、證券商（經紀／自營）、共同基金／投信、中央銀行（貨幣政策）。</div>
+  `
+},
+{
+  id:"12.3", title:"金融機構分類",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:20%"><col style="width:80%"></colgroup><thead><tr><th>類別</th><th>業務</th></tr></thead><tbody>
+  <tr><td><b>銀行業</b></td><td>商業銀行（存放款、企金、外匯）、專業銀行（土地、中小企銀、輸出入）、信用合作社、農漁會、郵局。</td></tr>
+  <tr><td><b>證券業</b></td><td>證券商（經紀商－次級市場、自營商、承銷商－初級市場）、投信、投顧、證券金融公司（融資融券）、創投、票券業。</td></tr>
+  <tr><td><b>保險業</b></td><td>人壽保險、財產保險。</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>商業銀行</b>靠存放款利差獲利，是間接金融的核心；集所有證券業務於一身者稱<b>綜合券商</b>（類似美國投資銀行）。</div>
+  `
+},
+{
+  id:"12.4", title:"新金融商品",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>商品</th><th>說明</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Barrier option">界限選擇權</span></b></td><td>損益取決於存續期間是否觸及某價格水準；分 Knock-out（觸及失效）與 Knock-in（觸及生效）。</td></tr>
+  <tr><td><b>彩虹選擇權</b></td><td>損益取決於多種標的價格關係；雙色彩虹＝兩標的價格乘積。</td></tr>
+  <tr><td><b>認購／認售權證</b></td><td>由<b>標的公司以外</b>的券商或銀行發行，與公司無關。</td></tr>
+  <tr><td><b><span class="term" data-term="Warrant">認股權證</span></b></td><td>由<b>公司自己發行</b>，常搭配公司債發行（附認股權證公司債）。</td></tr>
+  </tbody></table></div>
   `
 }
 ];
