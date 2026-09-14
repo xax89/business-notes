@@ -397,7 +397,7 @@ const BOOK = [
   {n:25, title:"短期融資", subs:["25.1 短期融資工具"], done:true, points:["商業本票、銀行短期借款、應收帳款融通","信用條件如 2/10, net 30：折扣成本年化很高"]},
   {n:26, title:"營運資金管理", subs:["26.1 現金管理","26.2 應收帳款","26.3 存貨"], done:true, points:["NWC=流動資產−流動負債；流動性 vs 獲利性平衡","Baumol 模型：最適現金餘額=(2bT/i)^0.5","Miller-Orr：隨機現金流量下設上下限","應收帳款：授信標準/信用條件/收帳政策","EOQ=(2DS/H)^0.5"]},
   {n:27, title:"併購與公司控制權", subs:["27.1 併購","27.2 防禦手段","27.3 價值評估"], done:true, points:["併購類型：水平/垂直/綜合","綜效=合併價值−個別價值和","防禦手段：金降落傘、毒藥丸、白衣騎士、皇冠之珠","贏者詛咒；股票交換可能稀釋EPS"]},
-  {n:28, title:"國際財務", subs:["28.1 匯率與平價"], done:true, points:["直接/間接匯率；買入賣出價","購買力平價 PPP；利率平價 IRP","國際投資的匯率風險與政治風險"]}
+  {n:28, title:"國際財務管理", subs:["28.1 外匯市場","28.2 匯率決定理論","28.3 匯率風險"], done:true, points:["直接/間接報價；即期 vs 遠期","絕對 PPP：匯率=兩國物價水準比","相對 PPP：匯率變動率≈通膨率差","IRP：遠期折溢價≈利率差","國際費雪效果：名目利率差≈預期通膨差","匯率風險：交易/換算/經濟曝險"]}
 ];
 
 
@@ -1853,14 +1853,36 @@ const CH27_SECTIONS = [
 /* ===== 第二十八章 ===== */
 const CH28_SECTIONS = [
 {
-  id:"28.1", title:"國際財務",
+  id:"28.1", title:"外匯市場與外匯交易",
   body:`
   <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>觀念</th><th>內容</th></tr></thead><tbody>
-  <tr><td><b>匯率</b></td><td>直接/間接報價；即期 vs 遠期。</td></tr>
-  <tr><td><b><span class="term" data-term="PPP">購買力平價 PPP</span></b></td><td>兩國匯率變動率 ≈ 兩國通膨率差；長期決定匯率。</td></tr>
-  <tr><td><b><span class="term" data-term="IRP">利率平價 IRP</span></b></td><td>遠期匯率與即期匯率的差距 ≈ 兩國利率差（無套利）。</td></tr>
-  <tr><td><b>風險</b></td><td>匯率風險（交易/換算/經濟曝險）與政治風險。</td></tr>
+  <tr><td><b>報價</b></td><td><b>直接報價</b>：外幣兌本國幣；<b>間接報價</b>：本國幣兌外幣。</td></tr>
+  <tr><td><b>即期匯率</b></td><td>現貨外匯交易，T+2 交割。</td></tr>
+  <tr><td><b>遠期匯率</b></td><td>約定未來某時點以預定匯率交割；用於規避匯率風險。</td></tr>
+  <tr><td><b>外匯交換（swap）</b></td><td>即期買進同時遠期賣出，或反向。</td></tr>
   </tbody></table></div>
+  `
+},
+{
+  id:"28.2", title:"匯率決定理論",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>理論</th><th>說明</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="PPP">絕對購買力平價 PPP</span></b></td><td>S ＝ P_本國 ／ P_外國；同一籃子商品在兩國同價（長期）。</td></tr>
+  <tr><td><b>相對 PPP</b></td><td>匯率變動率 ≈ 兩國通膨率差。</td></tr>
+  <tr><td><b><span class="term" data-term="IRP">利率平價 IRP</span></b></td><td>(F−S)/S ≈ i_本國 − i_外國；遠期折溢價反映利率差（無套利）。</td></tr>
+  <tr><td><b>國際費雪效果</b></td><td>名目利率差 ≈ 預期通膨率差 ≈ 預期匯率變動率。</td></tr>
+  </tbody></table></div>
+  `
+},
+{
+  id:"28.3", title:"匯率風險",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>風險類型</th><th>說明</th></tr></thead><tbody>
+  <tr><td><b>交易曝險</b></td><td>已簽約未交割的外幣收付，因匯率波動影響損益。</td></tr>
+  <tr><td><b>換算（會計）曝險</b></td><td>合併財報時海外子公司資產負債換算成本國幣的帳面波動。</td></tr>
+  <tr><td><b>經濟曝險</b></td><td>長期匯率波動影響公司未來銷售與競爭力。</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>政治風險：</b>外國政府外匯管制、財產徵收、匯入匯出限制。</div>
   `
 }
 ];
