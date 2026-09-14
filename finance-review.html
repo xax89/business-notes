@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>運籌帷幄學財管 · 第 1 章 財務金融學概論</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>財</text></svg>">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+<style>
+:root{
+  --paper:#f5efe2; --card:#fffdf6; --ink:#2b2a26; --ink-soft:#55524a;
+  --line:#ddd2ba; --accent:#9a3b2e; --accent-soft:#f0e2dc;
+  --teal:#2f5d62; --teal-soft:#e2ecec; --gold:#b8860b;
+  --sidebar:280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif TC", serif; background:var(--paper); color:var(--ink);
+  line-height:1.85; font-size:16px;
+}
+/* ===== 頂部進度 ===== */
+#progressbar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:100;transition:width .2s}
+/* ===== 標頭 ===== */
+header.mast{
+  background:#2b2a26; color:#f5efe2; padding:38px 24px 30px;
+  border-bottom:4px solid var(--accent);
+}
+.mast-inner{max-width:1100px;margin:0 auto}
+.mast .kicker{font-family:"Noto Sans TC";font-size:13px;letter-spacing:.2em;opacity:.7;text-transform:uppercase}
+.mast h1{font-size:30px;font-weight:900;margin:6px 0 4px;letter-spacing:.03em}
+.mast .sub{font-family:"Noto Sans TC";font-size:14px;opacity:.75}
+.mast .meta{margin-top:14px;font-family:"Noto Sans TC";font-size:13px;opacity:.6}
+/* ===== 版面 ===== */
+.layout{max-width:1100px;margin:0 auto;display:flex;gap:32px;padding:28px 24px 80px}
+nav.toc{
+  width:var(--sidebar);flex-shrink:0;position:sticky;top:20px;align-self:flex-start;
+  max-height:calc(100vh - 40px);overflow:auto;
+  font-family:"Noto Sans TC";font-size:14px;
+}
+nav.toc h4{font-size:12px;letter-spacing:.15em;color:var(--ink-soft);margin:14px 0 6px;text-transform:uppercase}
+nav.toc a{display:block;color:var(--ink);text-decoration:none;padding:5px 10px;border-left:2px solid transparent;border-radius:0 4px 4px 0}
+nav.toc a:hover{background:var(--accent-soft)}
+nav.toc a.active{background:var(--accent-soft);border-left-color:var(--accent);font-weight:500}
+nav.toc a.lvl2{padding-left:24px;font-size:13px;color:var(--ink-soft)}
+main{flex:1;min-width:0}
+/* ===== 元件 ===== */
+h2.sec{font-size:26px;font-weight:900;margin:46px 0 6px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+h2.sec .en{display:block;font-size:13px;font-family:"Noto Sans TC";font-weight:400;color:var(--ink-soft);letter-spacing:.15em;margin-top:4px}
+h3.sub{font-size:20px;font-weight:700;margin:34px 0 12px;color:var(--teal)}
+p{margin:12px 0}
+.lead{font-size:17px;color:var(--ink-soft)}
+.corebox{
+  background:var(--teal-soft);border-left:4px solid var(--teal);padding:14px 18px;border-radius:0 8px 8px 0;
+  margin:18px 0;font-size:15.5px;
+}
+.corebox b{color:var(--teal)}
+/* 重點卡片（可打勾） */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;position:relative;
+  transition:box-shadow .2s;
+}
+.card.checked{border-color:var(--teal);background:var(--teal-soft)}
+.card h5{font-size:16px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.card .body{font-size:14.5px;color:var(--ink-soft)}
+.card .ex{font-size:13.5px;color:var(--ink-soft);margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
+.card .ex b{color:var(--accent)}
+.chk{
+  margin-left:auto;flex-shrink:0;cursor:pointer;font-family:"Noto Sans TC";font-size:12px;
+  border:1px solid var(--line);background:#fff;border-radius:20px;padding:3px 10px;color:var(--ink-soft);user-select:none;
+}
+.card.checked .chk{background:var(--teal);color:#fff;border-color:var(--teal)}
+/* 公式 */
+.formula{
+  background:#2b2a26;color:#f5efe2;padding:14px 18px;border-radius:8px;text-align:center;
+  font-size:17px;margin:16px 0;letter-spacing:.02em;overflow-x:auto;
+}
+.formula .where{display:block;font-size:12.5px;opacity:.7;margin-top:8px;text-align:left;line-height:1.6}
+/* 範例 */
+.example{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;margin:18px 0;overflow:hidden;
+}
+.example .q{padding:16px 18px}
+.example .tag{font-family:"Noto Sans TC";font-size:12px;background:var(--accent);color:#fff;padding:2px 10px;border-radius:4px;margin-right:8px}
+.example .q b.title{font-size:16px}
+.example .opts{margin-top:10px;font-family:"Noto Sans TC";font-size:14px;color:var(--ink-soft)}
+.toggle{
+  font-family:"Noto Sans TC";font-size:13px;cursor:pointer;background:var(--ink);color:var(--paper);
+  border:none;padding:8px 18px;width:100%;text-align:left;
+}
+.answer{display:none;padding:14px 18px;border-top:1px solid var(--line);font-size:14.5px;background:#fbf7ee}
+.answer.show{display:block}
+.answer .ans{color:var(--accent);font-weight:700}
+/* 表格 */
+table.cmp{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;background:var(--card);table-layout:fixed}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+table.cmp th{background:#efe7d3;font-weight:700}
+/* 術語表 */
+.glossary{margin-top:20px}
+.glos-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0;font-family:"Noto Sans TC"}
+.glos-tabs button{
+  border:1px solid var(--line);background:var(--card);border-radius:20px;padding:5px 13px;font-size:13px;cursor:pointer;
+}
+.glos-tabs button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.glos-item{
+  background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:10px;
+}
+.glos-item.checked{border-color:var(--teal)}
+.glos-item .en{font-family:"Noto Sans TC";font-size:12.5px;color:var(--teal);letter-spacing:.05em}
+.glos-item .zh{font-size:16px;font-weight:700}
+.glos-item .def{font-size:14px;color:var(--ink-soft);margin-top:4px}
+.glos-item .acts{margin-top:8px;font-family:"Noto Sans TC";font-size:12px;display:flex;gap:10px}
+.glos-item .acts span{cursor:pointer;color:var(--ink-soft)}
+.glos-item .acts .star.on{color:var(--gold)}
+.progress-wrap{
+  position:sticky;bottom:0;background:var(--paper);border-top:2px solid var(--line);
+  padding:10px 24px;font-family:"Noto Sans TC";font-size:13px;
+}
+.progress-wrap .bar{height:8px;background:#e5dcc6;border-radius:4px;overflow:hidden;margin-top:6px}
+.progress-wrap .bar i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+footer{max-width:1100px;margin:0 auto;padding:20px 24px;font-family:"Noto Sans TC";font-size:12.5px;color:var(--ink-soft)}
+@media(max-width:860px){
+  .layout{flex-direction:column}
+  nav.toc{width:100%;position:static;max-height:none}
+  .cards{grid-template-columns:1fr}
+  .mast h1{font-size:23px}
+}
+</style>
+</head>
+<body>
+<div id="progressbar"></div>
+<header class="mast">
+  <div class="mast-inner">
+    <div class="kicker">研究所複習 · Lecture Notes in Finance</div>
+    <h1>運籌帷幄學財管（二版）</h1>
+    <div class="sub">第 1 章　財務金融學概論　Introduction to Finance</div>
+    <div class="meta">互動筆記樣板：重點卡片打勾與術語進度皆存於本機瀏覽器。確認風格後再續作其餘章。</div>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="toc" id="toc">
+  <h4>本章導覽</h4>
+  <a href="#ch1">第 1 章總覽</a>
+  <a href="#s11">1.1 財務金融學範疇</a>
+  <a href="#s111" class="lvl2">1.1.1 財務金融學定義</a>
+  <a href="#s112" class="lvl2">1.1.2 金融市場簡介</a>
+  <a href="#s113" class="lvl2">1.1.3 投資學簡介</a>
+  <a href="#s12">1.2 公司理財概要</a>
+  <a href="#s121" class="lvl2">1.2.1 企業組織</a>
+  <a href="#s122" class="lvl2">1.2.2 理財目標</a>
+  <a href="#s123" class="lvl2">1.2.3 企業倫理與 CSR</a>
+  <a href="#examples">範例演練</a>
+  <a href="#glossary">術語表複習</a>
+</nav>
+
+<main>
+<!-- ===== 第1章總覽 ===== -->
+<h2 class="sec" id="ch1">第 1 章　財務金融學概論
+  <span class="en">Introduction to Finance</span>
+</h2>
+<p class="lead">「Literature was formerly an art and finance a trade; today it is the reverse.」——Joseph Roux</p>
+<p>財務金融學（finance）探討金錢與金融證券的議題，處理重點圍繞在<b>價值（value）、時間（time）、風險（risk）</b>三大面向（一體兩面即報酬 return）。本章先建立學門地圖、金融市場運作，再導入公司理財的核心：<b>極大化公司基本價值 V₀</b>。</p>
+<div class="corebox">
+  <b>本章地圖：</b>1.1 先認識學門範疇、金融市場與投資學 → 1.2 再聚焦「公司」：企業組織型態、四大財務決策、正確的理財目標，最後是企業倫理與 CSR。
+</div>
+<ul style="margin:14px 0 14px 22px;font-size:15.5px">
+  <li>兩條財務金融基本法則：今日的一元 &gt; 明日的一元；穩當的一元 &gt; 有風險的一元</li>
+  <li>四大領域：金融市場與機構、投資學、衍生性金融商品、公司理財</li>
+  <li>直接金融 vs 間接金融；初級市場 vs 次級市場</li>
+  <li>獨資／合夥／公司三種組織的責任與租稅差異</li>
+  <li>公司理財四大決策；為何「極大化利潤」不是好目標</li>
+  <li>正確目標：max V₀ = Σ FCFₜ / (1+WACC)ᵗ = 極大化股東財富</li>
+</ul>
+
+<!-- ===== 1.1 ===== -->
+<h3 class="sub" id="s11">1.1　財務金融學範疇</h3>
+<p>依資金管理主體分為<b>企業財務金融學、個人財務金融學、財政學</b>三類，本書重心在企業財務金融學。BMA（2017）歸納出兩條基本法則：</p>
+<div class="cards">
+  <div class="card" data-id="c1a">
+    <h5>法則一：貨幣時間價值<span class="chk">學會</span></h5>
+    <div class="body">「今日的一元比明日的一元更有價值」。今日儲蓄投資可生利息，反映社會大眾的<b>時間偏好</b>（time preference），即<b>貨幣時間價值 TVM</b>。</div>
+  </div>
+  <div class="card" data-id="c1b">
+    <h5>法則二：風險趨避<span class="chk">學會</span></h5>
+    <div class="body">「穩當能取得的一元比暴露在風險下的一元更有價值」。理性決策者普遍厭惡風險，稱為<b>風險趨避者</b>（risk averter）——把風險視為「惡財」（bad）的人。</div>
+  </div>
+</div>
+
+<h3 class="sub" id="s111">1.1.1　財務金融學定義</h3>
+<p>財務金融學是研究資金的<b>籌集、融通、管理、規劃、使用</b>等議題的科學，主要涵蓋四大領域：</p>
+<table class="cmp">
+  <colgroup><col style="width:26%"><col style="width:48%"><col style="width:26%"></colgroup>
+  <thead><tr><th>領域</th><th>角度與核心議題</th><th>代表教科書</th></tr></thead>
+  <tbody>
+    <tr><td><b>金融市場與機構</b></td><td>資金供需雙方融通的場所；金融機構提供中介與服務，提升運作效率。</td><td>SC、Mishkin、FMJ、沈中華</td></tr>
+    <tr><td><b>投資學</b></td><td>站在「資金有餘者」角度，分析各金融資產報酬、定價、風險評估，並探討資產配置（MPT）。</td><td>BKM、BR、SAB</td></tr>
+    <tr><td><b>衍生性金融商品</b></td><td>損益「衍生」自標的資產；功能為避險、投機、套利。分遠期、期貨、選擇權、交換四大類。</td><td>Hull、陳威光</td></tr>
+    <tr><td><b>公司理財</b></td><td>站在「公司」觀點，探討資本預算、資本結構、營運資金、支付政策四大決策。</td><td>RWJJ、BMA、BD、BE</td></tr>
+  </tbody>
+</table>
+
+<h3 class="sub" id="s112">1.1.2　金融市場簡介</h3>
+<p>金融市場是資金供需雙方融通與交易的場所，交易結果決定<b>市場利率</b>與<b>金融證券價格</b>。一個市場的三組成要素：交易商品（資金／金融證券）、供需雙方、交易場所與機制（交易所 vs OTC）。</p>
+<div class="cards">
+  <div class="card" data-id="c2a">
+    <h5>資金有餘 vs 赤字單位<span class="chk">學會</span></h5>
+    <div class="body">收入 &gt; 支出者為<b>資金有餘單位</b>（家戶為主，供給者）；支出 &gt; 收入者為<b>資金赤字單位</b>（企業與政府為主，需求者）。企業閒置資金、家戶背房貸時角色可互換。</div>
+  </div>
+  <div class="card" data-id="c2b">
+    <h5>金融市場四大功能<span class="chk">學會</span></h5>
+    <div class="body">① 資金效率配置（儲蓄流向實質投資）② 提供流動性 ③ 多角化分散風險、可避險 ④ 由價格提供內含價值資訊（EMH 下立即正確反應）。</div>
+  </div>
+  <div class="card" data-id="c2c">
+    <h5>依到期期間分<span class="chk">學會</span></h5>
+    <div class="body"><b>貨幣市場</b>：一年內到期（T-bill、BA、CP、NCD）；<b>資本市場</b>：一年以上長期債券與股票；另有外匯市場、衍生性市場。</div>
+  </div>
+  <div class="card" data-id="c2d">
+    <h5>依交易性質分<span class="chk">學會</span></h5>
+    <div class="body"><b>初級市場</b>：發行新證券（IPO、現金增資、發新債）；<b>次級市場</b>：已發行證券流通買賣，決定市場價值。次級市場愈活絡，初級市場愈好募資。</div>
+  </div>
+</div>
+<p><b>直接金融 vs 間接金融</b>（Table 1.1）：</p>
+<table class="cmp">
+  <colgroup><col style="width:30%"><col style="width:35%"><col style="width:35%"></colgroup>
+  <thead><tr><th>比較</th><th>直接金融</th><th>間接金融</th></tr></thead>
+  <tbody>
+    <tr><td>融通管道</td><td>由金融機構輔助，直接在市場發行證券</td><td>透過金融中介機構</td></tr>
+    <tr><td>投資者報酬</td><td>較高</td><td>較低（利差歸中介）</td></tr>
+    <tr><td>風險承擔</td><td>投資人自行承擔，較高</td><td>中介承擔違約風險，較低</td></tr>
+    <tr><td>資訊揭露</td><td>須充分揭露給投資人</td><td>不揭露給投資人</td></tr>
+    <tr><td>參與機構</td><td>綜合證券商、投資銀行、票券金融公司</td><td>商業銀行、保險公司、共同基金</td></tr>
+  </tbody>
+</table>
+
+<h3 class="sub" id="s113">1.1.3　投資學簡介</h3>
+<p>資金有餘者將儲蓄以某種資產形式持有，即「投資」；所持資產集合為<b>投資組合（portfolio）</b>。投資人面對兩大決策：<b>資產配置</b>（債券／股票／不動產等大類之間）與<b>證券選擇</b>（各大類中選哪一檔標的）。</p>
+<div class="cards">
+  <div class="card" data-id="c3a">
+    <h5>實質資產 vs 金融資產<span class="chk">學會</span></h5>
+    <div class="body"><b>實質資產</b>：直接創造經濟價值（廠房、機器、土地、技術、商譽），流動性差。<b>金融資產</b>：對實質資產求償權的憑證（股票、債券、衍生性商品），流動性佳。</div>
+  </div>
+  <div class="card" data-id="c3b">
+    <h5>投資 vs 投機（Graham）<span class="chk">學會</span></h5>
+    <div class="body">Graham《證券分析》：經妥適分析、能保證本金安全且報酬適當者為<b>投資</b>，否則為<b>投機</b>。投機者主動承擔風險賺取風險溢酬，持有期間通常較短。兩者非互斥。</div>
+    <div class="ex">財金學「投資」指買金融資產；總體經濟學的投資（I=ΔK）僅指資本財累積——次級市場買股票在總經看只是股權移轉。</div>
+  </div>
+</div>
+
+<!-- ===== 1.2 ===== -->
+<h3 class="sub" id="s12">1.2　公司理財概要</h3>
+
+<h3 class="sub" id="s121">1.2.1　企業組織</h3>
+<p>企業是以創造價值為目標、組織多人經濟活動的團體。業主可選擇三種型態：</p>
+<table class="cmp">
+  <colgroup><col style="width:18%"><col style="width:41%"><col style="width:41%"></colgroup>
+  <thead><tr><th>型態</th><th>優點</th><th>缺點</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><b>獨資</b><br>sole proprietorship</td>
+      <td>法令管制少、成立容易；無雙重課稅；所有權與經營權合一，無代理問題。</td>
+      <td>無限清償責任；壽命有限（隨業主）；擴張與融資困難；所有權易手困難。</td>
+    </tr>
+    <tr>
+      <td><b>合夥</b><br>partnership</td>
+      <td>設立仍較公司簡單；盈餘直接課個人綜合所得，無雙重課稅。<br>分<b>一般合夥（GP，無限連帶）</b>與<b>有限合夥（LP，出資額為限）</b>。</td>
+      <td>GP 仍負無限責任；權益資金限於合夥人財富；對外舉債不易。</td>
+    </tr>
+    <tr>
+      <td><b>公司</b><br>corporation</td>
+      <td>股東<b>有限責任</b>；所有權易轉換（股票轉手）；<b>永續存在</b>；股票有次級市場流動性，易募集大量股權與債權資金。</td>
+      <td><b>雙重課稅</b>（營所稅＋股東個人稅）；所有權與管理權分離→<b>代理問題</b>；政府管制多；成立程序複雜。</td>
+    </tr>
+  </tbody>
+</table>
+<p><b>公司的種類</b>：無限公司、有限公司、兩合公司、<b>股份有限公司</b>。股份有限公司依股票是否公開流通分：<b>私下募集</b>（私有公司，成本低、時效佳、內部資訊無須公開）→ <b>公開發行</b> → 再分<b>興櫃 → 上櫃 → 上市</b>。</p>
+<div class="corebox">
+  <b>關鍵：</b>公司最大特色是<b>所有權與管理權分離</b>（股東太多、所有權易轉、專業經理人）。這提升效率，但因兩方利益不可能 100% 一致，額外產生<b>代理問題</b>（下一章主題）。
+</div>
+
+<h3 class="sub" id="s122">1.2.2　公司理財與財務管理目標</h3>
+<p>大型公司財務部門中：<b>財務長（Treasurer）</b>管現金、信用、資本支出、財務規劃；<b>主計長（Controller）</b>管財務會計、成本會計、稅務、資訊系統。以資產負債表模型看，公司理財有四大決策：</p>
+<div class="cards">
+  <div class="card" data-id="c4a"><h5>① 資本預算<span class="chk">學會</span></h5><div class="body">決定投資什麼計畫、購置哪些固定資產（投資案可行性與風險評估）。</div></div>
+  <div class="card" data-id="c4b"><h5>② 資本結構<span class="chk">學會</span></h5><div class="body">投資所需資金如何來——普通股、特別股、負債的比例組合。</div></div>
+  <div class="card" data-id="c4c"><h5>③ 淨營運資金管理<span class="chk">學會</span></h5><div class="body">營運中現金流入流出時間不配合，須保有適當流動性。</div></div>
+  <div class="card" data-id="c4d"><h5>④ 股利支付政策<span class="chk">學會</span></h5><div class="body">償債後剩餘現金流，多少保留再投資、多少發還股東。</div></div>
+</div>
+<p><b>為何不該用「極大化利潤」當目標？</b>① 不同時間區間的利潤極大化彼此矛盾；② 會計利潤採權責基礎，與現金流時間點不一致（忽視貨幣時間價值）；③ 未考慮風險與不確定性。</p>
+<div class="corebox">
+  <b>正確目標：</b>公司未來自由現金流量 FCFₜ 以<b>加權平均資金成本 WACC（kₐ）</b>折現，即公司基本價值 V₀。負債價值固定下，max V₀ ＝ 極大化股東財富 ＝（合法手段）極大化股價。效率市場下股價長期會反映 V₀。
+</div>
+<div class="formula">
+  V₀ = Σ<sub>t=1..∞</sub> FCF̃ₜ / (1 + kₐ)<sup>t</sup>
+  <span class="where">
+    V₀：現在（t=0）的公司基本價值（內含價值）｜FCF̃ₜ：第 t 年預期自由現金流量（隨機變數，僅為期望值）｜kₐ：加權平均資金成本 WACC（機會成本，取決於資金來源與風險）。
+    提高 V₀ 的兩手段：增加未來 FCFₜ、或降低 WACC。
+  </span>
+</div>
+
+<h3 class="sub" id="s123">1.2.3　企業倫理與企業社會責任</h3>
+<p><b>企業倫理</b>是經營者服膺的行為標準與道德判準；它與「公司價值極大化」並不衝突——不法或不道德手段短期或能省錢，長期被揭露後商譽受創（如安隆、Theranos、博達），最終損及公司價值。<b>企業社會責任（CSR）</b>指增進社會整體利益的責任。Keith Davis 提出五命題：</p>
+<div class="cards">
+  <div class="card" data-id="c5a"><h5>社會責任五命題<span class="chk">學會</span></h5><div class="body">① 社會責任源自社會權力；② 企業是雙向開放系統（接收意見、對外公開）；③ 每項決策應把社會成本與利益一併計入；④ 社會成本應轉嫁消費者；⑤ 身為「企業公民」有責任關注本業以外的社會問題。</div></div>
+  <div class="card" data-id="c5b"><h5>社會資本<span class="chk">學會</span></h5><div class="body">相對於物質資本、人力資本，<b>社會資本</b>是人際互信、共同價值構成的社會網絡。堅守倫理與 CSR 的花費可視為對社會資本的投資——長期提升公司形象、人才與銷售，與 max V₀ 不相違背。</div></div>
+</div>
+
+<!-- ===== 範例 ===== -->
+<h2 class="sec" id="examples">範例演練</h2>
+<p class="lead">先自己作答，再點「顯示解答」核對。</p>
+
+<div class="example">
+  <div class="q">
+    <b class="title"><span class="tag">範例 1.1 · 東華財金</span>企業組織與清償責任</b>
+    <p>某事業破產，變賣所有資產後仍積欠 $250,000。</p>
+    <p>(1) 若為<b>有限合夥</b>，你與合夥人各出資 $200,000 的一半。你是<b>一般合夥人</b>，對方是<b>有限合夥人</b>。兩人各須清償多少？<br>
+    (2) 若為<b>獨資</b>，你須清償多少？<br>
+    (3) 若為<b>公司</b>，你持有 50% 股份（公開發行時以 $200,000 買入），你須清償多少？</p>
+  </div>
+  <button class="toggle" onclick="ans('ans11')">▶ 顯示解答</button>
+  <div class="answer" id="ans11">
+    <p><span class="ans">(1) 你 $250,000；合夥人 $0。</span> 對方是有限合夥人，清償責任以出資額為限、不實際經營，故剩餘負債不必再清償；你是一般合夥人，負無限清償責任，$250,000 全額由你負責。</p>
+    <p><span class="ans">(2) $250,000。</span> 獨資業主負無限連帶清償責任，須以個人財產清償。</p>
+    <p><span class="ans">(3) $0。</span> 公司股東負有限責任，損失以出資額為限；公司清算後仍有的負債，股東不再補繳。</p>
+  </div>
+</div>
+
+<div class="example">
+  <div class="q">
+    <b class="title"><span class="tag">範例 1.2 · 成大財金</span>公司基本價值 V₀</b>
+    <p>Vasudevan Inc. 預估自由現金流量（百萬元）如下，WACC = 13%；第 3 年後 FCF 依第 2→3 年的成長率永續成長。求第 0 年的營運價值 V₀。</p>
+    <div class="opts">
+    Year：1　2　3<br>
+    FCF：−$20　$42　$45
+    </div>
+  </div>
+  <button class="toggle" onclick="ans('ans12')">▶ 顯示解答</button>
+  <div class="answer" id="ans12">
+    <p><span class="ans">成長率 g = 45/42 − 1 ≈ 7.14%。</span> 第 3 年後為永續成長年金，終值 P₃ = FCF₃(1+g)/(WACC−g)。</p>
+    <p>V₀ = −20/1.13¹ + 42/1.13² + [45×(1+0.0714)/(0.13−0.0714)]/1.13³ ≈ <b>$585 百萬</b>（小數請對照原書 p.39）。</p>
+    <p style="margin-top:8px">觀念：第 1 年 FCF 為負是投資期；重點在於用 WACC 折現所有未來 FCF，永續期用 <b>V = FCFₙ(1+g)/(WACC−g)</b>。</p>
+  </div>
+</div>
+
+<!-- ===== 術語表 ===== -->
+<h2 class="sec" id="glossary">術語表複習</h2>
+<p class="lead">逐條打勾＝已學會。分類可篩選；進度存於本機。</p>
+<div class="glos-tabs" id="glosTabs">
+  <button class="on" data-cat="all">全部</button>
+  <button data-cat="law">基本法則</button>
+  <button data-cat="mkt">金融市場</button>
+  <button data-cat="inv">投資學</button>
+  <button data-cat="org">企業組織</button>
+  <button data-cat="decision">理財決策</button>
+  <button data-cat="ethics">倫理與CSR</button>
+</div>
+<div class="glossary" id="glosList"></div>
+
+</main>
+</div>
+
+<div class="progress-wrap">
+  <div>已學會重點 <b id="pc-card">0</b> 項　·　術語 <b id="pc-glos">0</b> 個</div>
+  <div class="bar"><i id="pc-bar"></i></div>
+</div>
+
+<footer>
+  內容依《運籌帷幄學財管（二版）》OCR 整理 · 公式與範例數字請對照原書頁　·　筆記進度存於 localStorage
+</footer>
+
+<script>
+/* ===== 互動狀態：打勾卡片、術語 ===== */
+const KEY='fin-notes-ch1';
+let state=JSON.parse(localStorage.getItem(KEY)||'{}');
+function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+function isOn(id){return !!state[id];}
+function toggle(id){state[id]=!state[id];save();refresh();}
+
+/* 卡片打勾 */
+function cardHTML(id,title,body,ex){
+  const on=isOn(id);
+  return `<div class="card ${on?'checked':''}" data-id="${id}">
+    <h5>${title}<span class="chk" onclick="toggle('${id}')">${on?'✓ 學會':'學會'}</span></h5>
+    <div class="body">${body}</div>
+    ${ex?`<div class="ex">${ex}</div>`:''}
+  </div>`;
+}
+function renderCards(sel){
+  document.querySelectorAll(sel+' [data-id]').forEach(el=>{
+    const id=el.dataset.id, on=isOn(id);
+    el.classList.toggle('checked',on);
+    el.querySelector('.chk').textContent=on?'✓ 學會':'學會';
+  });
+}
+/* 範例折疊 */
+function ans(id){const a=document.getElementById(id);a.classList.toggle('show');}
+/* 進度統計 */
+function refresh(){
+  const cards=document.querySelectorAll('.card[data-id]');
+  const cOn=document.querySelectorAll('.card.checked').length;
+  const gItems=document.querySelectorAll('.glos-item[data-id]');
+  const gOn=document.querySelectorAll('.glos-item.checked').length;
+  document.getElementById('pc-card').textContent=cOn+' / '+cards.length;
+  document.getElementById('pc-glos').textContent=gOn+' / '+gItems.length;
+  const total=cards.length+gItems.length;
+  const done=cOn+gOn;
+  document.getElementById('pc-bar').style.width=(total?done/total*100:0)+'%';
+}
+/* 頂部滾動進度 + TOC 高亮 */
+/* ===== 術語表資料 ===== */
+const GLOS=[
+ // cat, en, zh, def
+ ['law','Time Value of Money','貨幣時間價值','今日的一元比明日的一元更有價值，反映時間偏好；未來現金流須折現。'],
+ ['law','Risk Aversion','風險趨避','理性決策者普遍厭惡風險，把風險視為惡財；穩當的一元勝過有風險的一元。'],
+ ['law','Value / Time / Risk','價值、時間、風險','財務金融學三大主軸，一體兩面即報酬 return。'],
+ ['law','Financial Securities','金融證券','對金融資產求償權的工具；內含價值高者交易價格也高。'],
+ ['mkt','Funds Surplus / Deficit Unit','資金有餘／赤字單位','收入>支出者為有餘單位（家戶為主，供給者）；支出>收入者為赤字單位（企業、政府為主，需求者）。'],
+ ['mkt','Direct / Indirect Financing','直接／間接金融','直接：發行證券向投資人募資（券商、投行協助）；間接：透過銀行、保險、基金等中介。'],
+ ['mkt','Primary / Secondary Market','初級／次級市場','初級：發行新證券（IPO、增資）；次級：已發行證券流通買賣，決定市場價值。'],
+ ['mkt','Money / Capital Market','貨幣／資本市場','貨幣市場交易一年內短期工具（T-bill、CP、NCD）；資本市場交易一年以上長期債券與股票。'],
+ ['mkt','Liquidity','流動性','金融證券在不損失價值下迅速變現的能力。'],
+ ['mkt','EMH 效率市場假說','效率市場假說','市場價格會立即且正確反應攸關內含價值的所有資訊（第11章主題）。'],
+ ['inv','Real / Financial Assets','實質／金融資產','實質資產直接創造價值（廠房、技術）；金融資產是對實質資產的求償權憑證。'],
+ ['inv','Portfolio','投資組合','投資人所持各項資產的集合。'],
+ ['inv','Asset Allocation / Security Selection','資產配置／證券選擇','前者決定大類資產（股/債/不動產）比例；後者在各類中挑選個別標的。'],
+ ['inv','Investment vs Speculation','投資 vs 投機','Graham 定義：經妥適分析、保證本金安全與適當報酬者為投資，否則為投機。'],
+ ['org','Sole Proprietorship','獨資','一人擁有；成立易、無雙重課稅，但負無限清償責任、壽命有限、融資難。'],
+ ['org','Partnership (GP / LP)','合夥','一般合夥人負無限連帶責任並經營；有限合夥人出資額為限、不參與經營。'],
+ ['org','Corporation','公司','依法登記的法人；股東負有限責任、永續存在、易移轉所有權，但有雙重課稅與代理問題。'],
+ ['org','Limited Liability','有限責任','股東對公司債務的責任僅以出資額為限。'],
+ ['org','Double Taxation','雙重課稅','公司盈利課營所稅，稅後盈餘發給股東再課個人所得稅。'],
+ ['org','Agency Problem','代理問題','所有權與管理權分離後，經理人未必追求股東財富極大化而產生的利益衝突（第2章主題）。'],
+ ['decision','Capital Budgeting','資本預算','評估並決定從事哪些投資計畫、購置哪些固定資產。'],
+ ['decision','Capital Structure','資本結構','普通股、特別股、負債等資金來源的比例組合。'],
+ ['decision','Working Capital Management','淨營運資金管理','維持適當流動性，因應營運中現金流入流出的時間落差。'],
+ ['decision','Payout Policy','支付政策','償債後剩餘現金流，多少保留再投資、多少發放給股東。'],
+ ['decision','Free Cash Flow (FCF)','自由現金流量','公司正常營運下扣除成本、費用、稅與必要投資後，可分配給債權人與股東的淨現金流。'],
+ ['decision','WACC (kₐ)','加權平均資金成本','各資金來源的機會成本加權平均，作為折現率；取決於資金來源與風險。'],
+ ['decision','Fundamental Value (V₀)','公司基本價值','V₀=Σ FCF̃ₜ/(1+kₐ)ᵗ；max V₀＝極大化股東財富＝合法下極大化股價。'],
+ ['ethics','Business Ethics','企業倫理','經營者服膺的行為標準與道德判準，長期會反映在公司價值。'],
+ ['ethics','CSR 企業社會責任','企業社會責任','企業對增進社會整體利益所應承擔的責任；Keith Davis 五命題。'],
+ ['ethics','Social Capital','社會資本','人際互信、共同價值構成的社會網絡；倫理與 CSR 的花費可視為對社會資本的投資。'],
+];
+const CATNAME={law:'基本法則',mkt:'金融市場',inv:'投資學',org:'企業組織',decision:'理財決策',ethics:'倫理與CSR'};
+function glosHTML(item,i){
+  const id='g'+i, on=isOn(id);
+  return `<div class="glos-item ${on?'checked':''}" data-id="${id}" data-cat="${item[0]}">
+    <div><span class="en">${item[1]}</span>　<span class="zh">${item[2]}</span></div>
+    <div class="def">${item[3]}</div>
+    <div class="acts"><span class="glos-toggle" onclick="event.stopPropagation();toggle('${id}')">${on?'✓ 已會':'○ 標為已會'}</span></div>
+  </div>`;
+}
+function renderGlos(cat){
+  const list=document.getElementById('glosList');
+  list.innerHTML=GLOS.map((it,i)=>glosHTML(it,i)).join('');
+  list.querySelectorAll('.glos-item').forEach(el=>{
+    el.onclick=()=>toggle(el.dataset.id);
+  });
+  applyFilter(cat||'all');
+}
+function applyFilter(cat){
+  document.querySelectorAll('#glosList .glos-item').forEach(el=>{
+    el.style.display=(cat==='all'||el.dataset.cat===cat)?'':'none';
+  });
+}
+document.getElementById('glosTabs').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  document.querySelectorAll('#glosTabs button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); applyFilter(b.dataset.cat);
+});
+/* 重新整理打勾狀態（含術語） */
+const _refresh=refresh;
+refresh=function(){
+  _refresh();
+  document.querySelectorAll('.glos-item').forEach(el=>{
+    const on=isOn(el.dataset.id);
+    el.classList.toggle('checked',on);
+    const t=el.querySelector('.glos-toggle'); if(t)t.textContent=on?'✓ 已會':'○ 標為已會';
+  });
+};
+renderGlos('all');
+refresh();
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('progressbar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  const secs=document.querySelectorAll('h2.sec,h3.sub');
+  let cur='';
+  secs.forEach(s=>{if(s.getBoundingClientRect().top<120)cur=s.id;});
+  document.querySelectorAll('#toc a').forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+});
+</script>
+</body>
+</html>
