@@ -379,8 +379,8 @@ const BOOK = [
   {n:7, title:"財務預測與規劃", subs:["7.1 財務預測","7.2 財務政策與成長率"], done:true, points:["銷售百分比法：資產隨銷售成長","EFN/AFN＝資產增加 − 自發性負債增加 − 保留盈餘增加","內部成長率 gᵢ＝ROE×b／(1−ROE×b)（不對外融資）","維持成長率 gₛ＝ROE×b／(1−ROE×b)（維持 D/E 不變、不發新股）","b＝盈餘保留率＝1−股利支付率 d"]},
   {n:8, title:"報酬與風險的衡量", subs:["8.1 衡量報酬的指標","8.2 歷史報酬與風險","8.3 預期報酬與風險"], done:true, points:["HPR＝(期末價+股利−買價)/買價；APR vs EAR","時間加權 vs 金額加權（IRR）報酬率","算術平均 vs 幾何平均；E(R)=ΣpᵢRᵢ","變異數/標準差衡量絕對風險；CV＝σ/E(R) 為相對風險","半變異數只衡量低於期望值的下方風險","Knight：風險（機率可知）vs 不確定性（機率不可知）"]},
   {n:9, title:"現代資產組合理論", subs:["9.1 組合報酬與風險","9.2 馬可維茲理論與效率前緣","9.3 加入無風險資產"], done:true, points:["Markowitz 1952 MPT、1990 諾獎；平均數-變異數架構","E(Rp)=ΣwᵢE(Rᵢ)；σp²=ΣΣwᵢwⱼσᵢⱼ（n²項）","MVP 最小變異數組合；效率前緣＝MVP 以上段","加入 Rf 後效率邊界為自 Rf 切效率前緣的直線＝CML","兩基金分離：所有人都持有「無風險資產＋市場組合 M」"]},
-  {n:10, title:"資本資產定價模式 CAPM", subs:["10.1 CAPM","10.2 特徵線與實證","10.3 風險調整績效指標"], done:true, points:["βi=Cov(Ri,Rm)/σm²，衡量系統風險","CAPM/SML：E(Ri)=Rf+βi[E(Rm)−Rf]","CML 用總風險 σp；SML 用系統風險 β","特徵線：Ri−Rf=α+β(Rm−Rf)+ε；殘差＝個別風險","績效指標：Sharpe（σ分母）、Treynor（β分母）、Jensen α、IR、M²","單一資產 β 不穩，組合 β 較穩；APT 為多因子延伸"]},
-  {n:11, title:"效率市場與行為財務", subs:["11.1 效率市場假說","11.2 行為財務學"], done:true, points:["EMH 三形式：弱式／半強式／強式","弱式→技術分析無用；半強式→基本分析無用","異常：反應過度／反應不足；Grossman-Stiglitz 詭論","行為財務：過度自信、易取性、錨定、確認偏誤、框架效應、心理帳戶、後悔趨避"]},
+  {n:10, title:"資本資產定價模式 CAPM", subs:["10.1 CAPM","10.2 特徵線與實證","10.3 風險調整績效指標","10.4 多因子模型"], done:true, points:["βi=Cov(Ri,Rm)/σm²，衡量系統風險","CAPM/SML：E(Ri)=Rf+βi[E(Rm)−Rf]","CML 用總風險 σp；SML 用系統風險 β","特徵線：Ri−Rf=α+β(Rm−Rf)+ε；殘差＝個別風險","績效指標：Sharpe/Treynor/Jensen α/IR/M²","Fama-French 三因子：市場、SMB（規模）、HML（價值）","Carhart 四因子再加 PR1YR（動量）","APT：多因子線性組合，純粹因子組合溢酬"]},
+  {n:11, title:"效率市場與行為財務", subs:["11.1 EMH","11.2 行為財務學"], done:true, points:["Fama 1970 EMH：價格立即充分反映資訊","弱式→技術分析無用；半強式→基本分析無用；強式→內線也無用","弱式檢定：自我相關、連檢定、交易法則回測","半強式檢定：事件研究法、報酬預測研究法","Grossman-Stiglitz 詭論；規模/價值/動量異常","行為財務：認知偏誤＋套利限制"]},
   {n:12, title:"金融市場與機構", subs:["12.1 金融市場功能","12.2 市場分類與機構"], done:true, points:["資金由盈餘單位流向赤字單位","直接金融（發股發債）vs 間接金融（銀行存貸）","一級市場（IPO/增資）vs 二級市場（流通交易）","貨幣市場（≤1年）vs 資本市場（>1年）","交易所 vs OTC；商銀／投行／券商／基金／央行"]},
   {n:13, title:"普通股與評價", subs:["13.1 普通股特徵","13.2 普通股評價"], done:true, points:["累積投票制：小股東可集中票數爭取席次","新股優先認購權（rights offering）防股權稀釋","DDM：零成長 P₀=D/k；Gordon P₀=D₁/(k−g)","g＝ROE×b；P₀ 為除息後價格","相對評價：forward P/E＝d/(k−g)＝P₀/EPS₁"]},
   {n:14, title:"債券", subs:["14.1 債券種類與風險","14.2 評價與殖利率","14.3 利率風險"], done:true, points:["P₀＝Σ票息/(1+r)^t＋面額/(1+r)^n","YTM＝IRR；YTM＝當期收益率 CY＋資本利得收益率 CGY","溢價 CR&gt;CY&gt;YTM；平價 CR=CY=YTM；折價 CR&lt;CY&lt;YTM","利率↑→價格↓；期限越長、票息越低→價格波動越大","存續期間 duration 衡量利率敏感度；凸性修正大利率變動"]},
@@ -552,6 +552,7 @@ const TERMS = {
   /* 第11章 */
   "EMH":["Efficient Market Hypothesis (EMH)","效率市場假說","價格充分反映資訊；分弱式、半強式、強式。"],
   "Grossman-Stiglitz":["Grossman-Stiglitz Paradox","效率市場詭論","取得資訊有成本，故完全效率市場不可能存在。"],
+  "FF3":["Fama-French Three-Factor Model","三因子模型","市場+SMB(規模)+HML(價值)；Carhart 再加入動量因子。"],
   /* 第12章 */
   "Direct finance":["Direct Finance","直接金融","赤字單位直接對大眾發行股債籌資，仲介僅撮合。"],
   "Indirect finance":["Indirect Finance","間接金融","透過銀行等仲介存貸，仲介承擔信用風險。"],
@@ -1396,28 +1397,49 @@ const CH10X = {
 /* 把 CH10X 併入 CH10_SECTIONS（原陣列 const，內容可 push） */
 CH10_SECTIONS.push(CH10X);
 
+/* 第10.4 多因子模型 */
+const CH10Y = {
+  id:"10.4", title:"多因子模型",
+  body:`
+  <p>CAPM 單一市場因子無法解釋實證上的規模效應與價值效應，Fama 與 French 提出三因子：</p>
+  <div class="formula"><span class="f-label"><span class="term" data-term="FF3">Fama-French 三因子</span></span>Rᵢ−Rf ＝ αᵢ ＋ β(Rm−Rf) ＋ βₛ·SMB ＋ β_H·HML<span class="f-note">SMB＝小公司減大公司報酬（規模因子）；HML＝高 B/M 減低 B/M 報酬（價值因子）。</span></div>
+  <div class="note"><b>實證現象：</b><br>• <b>規模效應</b>：小公司股票長期報酬高於大公司。<br>• <b>價值效應（B/M 效應）</b>：高 B/M 的價值股報酬高於低 B/M 的成長股。<br>• <b>動量效應</b>（Carhart 加入）：過去一年漲得多的股票未來仍續漲——<b>四因子模型</b>再加 PR1YR。</div>
+  <div class="note"><b><span class="term" data-term="APT">APT 套利訂價理論</span></b>：E(Rᵢ) ＝ Rf ＋ βᵢ₁λ₁ ＋ βᵢ₂λ₂ ＋ … ；λⱼ 為純粹因子組合的風險溢酬。若有資產違反此式，套利者會介入直到機會消失。</div>
+  `
+};
+CH10_SECTIONS.push(CH10Y);
+
 /* ===== 第十一章 ===== */
 const CH11_SECTIONS = [
 {
   id:"11.1", title:"效率市場假說 EMH",
   body:`
-  <p><span class="term" data-term="EMH">效率市場假說</span>：股價已充分且立即反映所有可得資訊，投資人無法利用舊資訊賺取風險調整後超額報酬。三形式：</p>
-  <div class="tblwrap"><table><colgroup><col style="width:20%"><col style="width:80%"></colgroup><thead><tr><th>形式</th><th>反映資訊／隱含意義</th></tr></thead><tbody>
-  <tr><td><b>弱式</b></td><td>已反映<b>歷史交易資訊</b>（價量）→ <b>技術分析無用</b>。</td></tr>
-  <tr><td><b>半強式</b></td><td>已反映<b>所有公開資訊</b>（財報、新聞）→ <b>基本分析無用</b>。</td></tr>
-  <tr><td><b>強式</b></td><td>已反映<b>所有資訊（含內線）</b>→ 內線交易也無法獲利。</td></tr>
+  <p><b><span class="term" data-term="EMH">EMH</span></b>（Fama 1970）：證券價格總是「正確且立即」反映所有關於基本價值的可得資訊。前提：資訊充分流通、新資訊隨機獨立出現、交易者理性套利。</p>
+  <div class="tblwrap"><table><caption>三形式效率市場</caption><colgroup><col style="width:18%"><col style="width:42%"><col style="width:40%"></colgroup><thead><tr><th>形式</th><th>反映的資訊</th><th>無效的分析</th></tr></thead><tbody>
+  <tr><td><b>弱式</b></td><td>歷史價量資料</td><td><b>技術分析無用</b>（K 線、均線、型態）。<br>檢定：自我相關係數、連檢定、交易法則回測。</td></tr>
+  <tr><td><b>半強式</b></td><td>所有公開資訊（財報、新聞）</td><td><b>基本分析無用</b>。<br>檢定：<b>事件研究法</b>（如併購公告日 CAR 跳升後不再累積）、報酬預測研究法。</td></tr>
+  <tr><td><b>強式</b></td><td>所有資訊（含內線）</td><td>內線交易也無法獲利。</td></tr>
   </tbody></table></div>
-  <div class="note"><b>異常現象：</b>反應過度（overreaction）、反應不足（underreaction）均違反 EMH。<br><b><span class="term" data-term="Grossman-Stiglitz">Grossman-Stiglitz 詭論</span>：</b>取得資訊有成本；若市場完全有效，無人願意付成本找資訊，價格又怎麼反映資訊？故完全效率市場不可能存在，效率應是光譜。</div>
+  <div class="warn"><b>迷思導正：</b>股價變化仍有原因（只是新資訊隨機）；效率市場不代表可隨機選股（仍需多角化、配合風險偏好）；市場時機（高點增資、低點回購）與創造性會計窗飾皆無效。</div>
+  <div class="note"><b>對市場的挑戰：</b><br>• <span class="term" data-term="Grossman-Stiglitz">Grossman-Stiglitz 詭論</span>：取得資訊有成本，完全效率市場不可能存在。<br>• <b>異常現象</b>：規模效應、價值效應（B/M）、動量效應、過度反應／反應不足、泡沫與崩盤。</div>
   `
 },
 {
   id:"11.2", title:"行為財務學",
   body:`
-  <p>從心理學出發，認為人並非完全理性，會產生<b>系統性認知偏誤</b>；加上真實市場有交易成本與套利限制（arbitrage limits），價格可長期偏離基本面。常見偏誤：過度自信、錨定、損趨避、框架效應、處分效果等。</p>
+  <p>從心理學出發，認為人並非完全理性，會有系統性認知偏誤；加上真實市場有交易成本、套利有限制，價格可長期偏離基本面。</p>
+  <div class="tblwrap"><caption>常見認知偏誤</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead><tr><th>偏誤</th><th>說明</th></tr></thead><tbody>
+  <tr><td><b>過度自信</b></td><td>高估自己的知識與預測能力。</td></tr>
+  <tr><td><b>易取性偏誤</b></td><td>依賴容易想到的資訊；造成「家鄉偏誤」（超配本國股票）。</td></tr>
+  <tr><td><b>錨定效應</b></td><td>受初始參考值錨定，調整不足。</td></tr>
+  <tr><td><b>確認偏誤</b></td><td>只找支持自己定見的證據。</td></tr>
+  <tr><td><b>框架效應</b></td><td>相同問題不同陳述方式導致不同決策。</td></tr>
+  <tr><td><b>心理帳戶</b></td><td>不同來源的錢分開管理；賭贏的錢虛擲（家錢效果）。</td></tr>
+  <tr><td><b>後悔趨避</b></td><td>怕犯錯後悔而選擇從眾或不動。</td></tr>
+  </tbody></table></div>
   `
 }
 ];
-
 
 /* ===== 第十二章 ===== */
 const CH12_SECTIONS = [
@@ -2010,7 +2032,7 @@ const GLOSS_CATS = [
   {name:"預測與成長", keys:["EFN","IGR","SGR"]},
   {name:"報酬與風險", keys:["HPR","State of nature","Knight","CV"]},
   {name:"投資組合理論", keys:["Markowitz","Efficient frontier","MVP","CML","Separation theorem"]},
-  {name:"CAPM", keys:["Beta","SML","APT","Sharpe","Treynor","Jensen alpha","Information ratio"]},
+  {name:"CAPM", keys:["Beta","SML","APT","Sharpe","Treynor","Jensen alpha","Information ratio","FF3"]},
   {name:"效率與行為財務", keys:["EMH","Grossman-Stiglitz"]},
   {name:"金融市場", keys:["Direct finance","Indirect finance"]},
   {name:"股票評價", keys:["DDM","Gordon"]},
