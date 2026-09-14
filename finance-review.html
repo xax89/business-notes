@@ -371,7 +371,8 @@ body.dark .formula .f-label{color:#d8b36a}
 /* ===== 資料：全書章節結構 ===== */
 const BOOK = [
   {n:1, title:"財務金融學概論", subs:["1.1 財務金融學範疇","1.1.1 財務金融學定義","1.1.2 金融市場簡介","1.1.3 投資學簡介","1.2 公司理財概要","1.2.1 企業組織","1.2.2 公司理財與財務管理目標","1.2.3 企業倫理與企業社會責任"], done:true, points:["財務金融學三大主軸：價值、時間、風險；兩條基本法則（TVM、風險趨避）","四大領域：金融市場與機構、投資學、衍生性金融商品、公司理財","直接金融 vs 間接金融；初級市場 vs 次級市場；貨幣市場 vs 資本市場","獨資／合夥／公司三種組織的責任、租稅與融資差異","公司理財四大決策；為何「極大化利潤」不是好目標","正確目標：max V₀ = Σ FCFₜ/(1+WACC)ᵗ ＝ 極大化股東財富"]},
-  {n:2, title:"代理問題與公司治理", subs:["2.1 訊息經濟學簡介","2.1.1 訊息不對稱","2.1.2 諾貝爾經濟學獎得主","2.2 公司理財中的代理問題","2.2.1 權益代理問題","2.2.2 負債代理問題","2.2.3 代理成本","2.3 公司治理與管制政策"], done:true, points:["市場失靈四類：公共財、外部性、市場力量、訊息不對稱","逆選擇（契約前、隱藏資訊）vs 道德危險（契約後、隱藏行動）","緩解：訊號發射 signaling、篩選 screening、誘因契約、監督","權益代理問題五樣態：怠惰、特權消費、MBO、過度投資、次佳投資","緩解權益代理：薪資連結、解僱／接管威脅、外部經理人市場、降低 FCF","負債代理四樣態：資產替換、債務積壓、榨取資產、債權稀釋","代理成本四部份：報償機制、監控、約束、剩餘損失","公司治理：OECD 五原則；沙賓法案 SOX"]}
+  {n:2, title:"代理問題與公司治理", subs:["2.1 訊息經濟學簡介","2.1.1 訊息不對稱","2.1.2 諾貝爾經濟學獎得主","2.2 公司理財中的代理問題","2.2.1 權益代理問題","2.2.2 負債代理問題","2.2.3 代理成本","2.3 公司治理與管制政策"], done:true, points:["市場失靈四類：公共財、外部性、市場力量、訊息不對稱","逆選擇（契約前、隱藏資訊）vs 道德危險（契約後、隱藏行動）","緩解：訊號發射 signaling、篩選 screening、誘因契約、監督","權益代理問題五樣態：怠惰、特權消費、MBO、過度投資、次佳投資","緩解權益代理：薪資連結、解僱／接管威脅、外部經理人市場、降低 FCF","負債代理四樣態：資產替換、債務積壓、榨取資產、債權稀釋","代理成本四部份：報償機制、監控、約束、剩餘損失","公司治理：OECD 五原則；沙賓法案 SOX"]},
+  {n:3, title:"貨幣時間價值", subs:["3.1 基本概念與運算法則","3.2 現值與終值","3.3 年金","3.4 貸款種類"], done:true, points:["單利 vs 複利；時間旅行三法則（同時點才能合併、複利往未來、折現往過去）","PV = CFₙ/(1+r)ⁿ；FV = CF₀(1+r)ⁿ；PVIF 與 FVIF 互為倒數","普通年金期末發生、期初年金乘 (1+r)；成長年金 PVo = CF/(r-g)","永續年金 PVo = CF/r；成長永續 PVo = CF/(r−g)（r>g）","三種貸款：純折價、純付息、本息分期攤還"]}
 ];
 
 
@@ -450,7 +451,25 @@ const TERMS = {
   "Bonding":["Bonding Expenditure","約束成本","代理人自我約束以取信對方的花費（信用評等、主動揭露）。"],
   "Residual loss":["Residual Loss","剩餘損失","窮盡各機制後仍無法避免的損失，含錯失良機的機會成本。"],
   "Corporate governance":["Corporate Governance","公司治理","統御管理公司的整套機制，保障股東並兼顧利害關係人。"],
-  "Stakeholder":["Stakeholder","利害關係人","股東以外對公司有權益者：員工、債權人、客戶、社區、政府。"]
+  "Stakeholder":["Stakeholder","利害關係人","股東以外對公司有權益者：員工、債權人、客戶、社區、政府。"],
+  /* 第3章：TVM */
+  "Simple interest":["Simple Interest","單利","僅原始本金賺息，利息不再生息：本利和＝本金×(1+r×n)。"],
+  "Compound interest":["Compound Interest","複利","本金連同已生利息再投資，利上加利：本利和＝本金×(1+r)ⁿ。"],
+  "Discount rate":["Discount Rate","折現率","把未來現金流折成現值所用利率 r；又稱資本化率、門檻率，反映資金機會成本。"],
+  "Risk premium":["Risk Premium","風險溢酬","承擔風險所要求的額外報酬；r = r<sub>f</sub> + 風險溢酬。"],
+  "PV":["Present Value (PV)","現值","未來現金流折回今日的價值。"],
+  "FV":["Future Value (FV)","終值","今日現金流複利到未來某時點的價值。"],
+  "PVIF":["PVIF(r,n)","現值利率因子","1/(1+r)ⁿ；未來 1 元折現到今日的因子。"],
+  "FVIF":["FVIF(r,n)","終值利率因子","(1+r)ⁿ；今日 1 元複利到未來的因子；與 PVIF 互為倒數。"],
+  "Annuity":["Annuity","年金","金額相等、定期發生的現金流量。"],
+  "Ordinary annuity":["Ordinary Annuity","普通年金","現金流發生在每期期末；又稱遞延年金。"],
+  "Annuity due":["Annuity Due","期初年金","現金流發生在每期期初；價值＝普通年金×(1+r)。"],
+  "Growing annuity":["Growing Annuity","成長型年金","每期以固定 g 成長；遞減型則 g 為負。"],
+  "Perpetuity":["Perpetuity","永續年金","永遠定期發生的相等現金流；PV = CF/r（如英國 consols）。"],
+  "Growing perpetuity":["Growing Perpetuity","成長型永續年金","PV = CF/(r−g)；收斂條件 r>g。"],
+  "Pure discount":["Pure Discount Loan","純折價貸款","折價取得、期間不付息、到期一次償還；零息債券屬之。"],
+  "Interest-only":["Interest-Only Loan","純付息貸款","期間每期只付利息、到期才還本；付息債券屬之。"],
+  "Amortized":["Fully Amortized Loan","本息分期攤還","每期固定金額含利息＋部分本金；房貸車貸多屬此類。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Graham","Davis","Akerlof","Spence","Stiglitz"]);
@@ -911,7 +930,69 @@ const CH2_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS};
+
+/* ===== 第三章：貨幣時間價值 ===== */
+const CH3_SECTIONS = [
+{
+  id:"3.1", title:"基本概念與運算法則",
+  body:`
+  <p>今日的一元比未來一元更值錢——把錢拿去投資可生利息，此差異即<span class="term" data-term="TVM">貨幣時間價值</span>。利息有兩種算法：</p>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="si"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Simple interest">單利</span></div>
+    <div class="mc-body"><div class="mc-formula">本利和 ＝ 本金 × (1 + r × n)</div>
+    <div class="mc-detail">只有原始本金賺利息，利息不再孳息。</div></div>
+  </div>
+  <div class="method-card">
+    <label class="mc-check" title="已學會"><input type="checkbox" data-mc="ci"><span class="mc-lbl">學會</span></label>
+    <div class="mc-left"><span class="term" data-term="Compound interest">複利</span></div>
+    <div class="mc-body"><div class="mc-formula">本利和 ＝ 本金 × (1 + r)<sup>n</sup></div>
+    <div class="mc-detail">本金連同過去利息再投資，利上加利（interest on interest）。</div></div>
+  </div>
+  <div class="warn"><b>時間旅行三法則（three rules of time travel）：</b><ul>
+    <li>只有<b>同一時點</b>的現金流量才能相加或比較；不同時點先移到同時點。</li>
+    <li>往未來移動：用<b>複利 compounding</b>，乘 (1+r)<sup>n</sup>。</li>
+    <li>往過去移動：用<b>折現 discounting</b>，除 (1+r)<sup>n</sup>。</li>
+  </ul></div>
+  <p>所用利率 r 又稱<span class="term" data-term="Discount rate">折現率／資本化率／門檻率</span>，反映一元資金使用一年的機會成本。無風險現金流用無風險利率 r<sub>f</sub>；有風險則 r = r<sub>f</sub> + <span class="term" data-term="Risk premium">風險溢酬</span>。</p>
+  `
+},
+{
+  id:"3.2", title:"現值與終值",
+  body:`
+  <div class="formula"><span class="f-label"><span class="term" data-term="PV">現值 PV</span></span>PV₀ = CFₙ / (1+r)<sup>n</sup> = CFₙ × <span class="term" data-term="PVIF">PVIF(r,n)</span><span class="f-note">未來現金流折回今日。</span></div>
+  <div class="formula"><span class="f-label"><span class="term" data-term="FV">終值 FV</span></span>FV<sub>n</sub> = CF₀ × (1+r)<sup>n</sup> = CF₀ × <span class="term" data-term="FVIF">FVIF(r,n)</span><span class="f-note">今日現金流複利到未來。</span></div>
+  <div class="note"><b>因子性質：</b>r 固定時，PV 與期數 n 反向；FV 與 n 正向。n 固定時，PV 與 r 反向；FV 與 r 正向。<br>PVIF(r,n) × FVIF(r,n) = 1（互為倒數）。<br>一系列現金流：PV₀ = Σ CF<sub>t</sub>/(1+r)<sup>t</sup>；FV<sub>n</sub> = Σ CF<sub>t</sub>(1+r)<sup>n−t</sup>。</div>
+  `
+},
+{
+  id:"3.3", title:"年金",
+  body:`
+  <p><span class="term" data-term="Annuity">年金</span>＝金額相等、定期發生的現金流。按發生時點分：</p>
+  <div class="tblwrap"><table><caption>年金種類與公式</caption><colgroup><col style="width:24%"><col style="width:76%"></colgroup><thead><tr><th>種類</th><th>公式／重點</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Ordinary annuity">普通年金</span></b></td><td>現金流在<b>期末</b>發生。PV₀ = CF × PVIFA(r,n)；FV<sub>n</sub> = CF × FVIFA(r,n)。</td></tr>
+  <tr><td><b><span class="term" data-term="Annuity due">期初年金</span></b></td><td>現金流在<b>期初</b>發生。＝普通年金整體前移一期：PV 或 FV 再乘 (1+r)。</td></tr>
+  <tr><td><b><span class="term" data-term="Growing annuity">成長型年金</span></b></td><td>每期以 g 固定成長。PV₀ = CF/(r−g) × [1 − ((1+g)/(1+r))<sup>n</sup>]；遞減則 g 為負。</td></tr>
+  <tr><td><b><span class="term" data-term="Perpetuity">永續年金</span></b></td><td>永續不停。<b>PV₀ = CF / r</b>（如英國 consols 永續公債）。</td></tr>
+  <tr><td><b><span class="term" data-term="Growing perpetuity">成長型永續年金</span></b></td><td><b>PV₀ = CF / (r − g)</b>，收斂條件 <b>r &gt; g</b>；否則現值發散。</td></tr>
+  </tbody></table></div>
+  <div class="note">FVIFA(r,n) = PVIFA(r,n) × (1+r)<sup>n</sup>。<b>頻率</b>：現金流可半年、每月一次，此時 r 與 n 都要換成對應期間的週期利率（如年利率 ÷ 12、期數 × 12）。</div>
+  `
+},
+{
+  id:"3.4", title:"貸款種類",
+  body:`
+  <div class="tblwrap"><table><caption>三種基本貸款攤還型態</caption><colgroup><col style="width:24%"><col style="width:50%"><col style="width:26%"></colgroup><thead><tr><th>類型</th><th>還本付息方式</th><th>對應債券</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Pure discount">純折價貸款</span></b></td><td>取得低於面額的借款，期間不付息，到期一次償還全額。</td><td>零息債券</td></tr>
+  <tr><td><b><span class="term" data-term="Interest-only">純付息貸款</span></b></td><td>期間每期只付利息，本金不減，到期一次還本。</td><td>付息債券</td></tr>
+  <tr><td><b><span class="term" data-term="Amortized">本息分期攤還</span></b></td><td>每期攤還固定金額，含當期利息＋部分本金；本金逐期減少。房貸、車貸多屬此類。</td><td>固定給付貸款</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>攤還表（amortization schedule）：</b>每期固定還款中，利息占比逐期遞減、本金占比逐期遞增（因所欠本金越來越少）。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -920,7 +1001,25 @@ const CH2_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS};
+const CH3_PROBLEMS = [
+{
+  q:"<b>範例 3.1（成大財金）</b>　Faith 存 $4,500、年利 4%：(1) 單利 8 年後本利和與利息各多少？(2) 複利 8 年後呢？",
+  opts:[],
+  ans:"<b>(1) 單利：</b>本利和 = 4500×(1+0.04×8) = <b>$5,940</b>；利息 = 4500×0.04×8 = <b>$1,440</b>。<br><b>(2) 複利：</b>本利和 = 4500×(1.04)<sup>8</sup> = <b>$6,158.56</b>；利息 = 6158.56−4500 = <b>$1,658.56</b>（利上加利多賺約 $218）。"
+},
+{
+  q:"<b>範例 3.4（東華財金）</b>　25 歲生日將收到信託金：祖母在你 5 歲時以 5% 投資 $10,000。你打算把錢以 8.5% 再投資，65 歲起分 20 年年底提領、領到 0。每年可領多少？",
+  opts:[],
+  ans:"先算 65 歲時的終值，再反求年金：<br>FV<sub>65</sub> = 10,000×(1.05)<sup>20</sup>×(1.085)<sup>40</sup> = <b>$693,386.70</b><br>693,386.70 = CF × PVIFA(8.5%,20)<br>CF = <b>$73,270.85</b>（每年年底可領約 7.33 萬）。"
+},
+{
+  q:"<b>範例 3.9（BD 習題）</b>　你想永續資贊母校 MBA 畢業舞會：每年 $30,000，學校投資報酬 8%，第一次舞會在兩年後。(1) 現在要捐多少？(2) 若成本每年漲 4% 通膨，要捐多少？",
+  opts:[],
+  ans:"<b>(1) 固定金額：</b>永續年金在第 1 年的现值為 30,000/0.08 = 375,000；但第一次舞會在 2 年後，再折現一期：PV₀ = 375,000/1.08 = <b>$347,222</b>。<br><b>(2) 成長型永續：</b>PV₀ = [30,000/(0.08−0.04)] / 1.08 = 750,000/1.08 = <b>$694,444</b>。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -934,7 +1033,8 @@ const GLOSS_CATS = [
   {name:"訊息經濟", keys:["Adverse selection","Moral hazard","Hidden info","Signaling","Screening","Incentive contract","Akerlof","Spence","Stiglitz"]},
   {name:"權益代理", keys:["Shirking","Perks","MBO","LBO","Empire building","Entrenching","FCF hypothesis","Suboptimal","Compensation","Proxy fight","Takeover"]},
   {name:"負債代理", keys:["Asset substitution","Debt overhang","Milking","Claim dilution","Covenant","CB"]},
-  {name:"代理成本與治理", keys:["Structuring","Monitoring","Bonding","Residual loss","Corporate governance","Stakeholder"]}
+  {name:"代理成本與治理", keys:["Structuring","Monitoring","Bonding","Residual loss","Corporate governance","Stakeholder"]},
+  {name:"貨幣時間價值", keys:["Simple interest","Compound interest","Discount rate","Risk premium","PV","FV","PVIF","FVIF","Annuity","Ordinary annuity","Annuity due","Growing annuity","Perpetuity","Growing perpetuity","Pure discount","Interest-only","Amortized"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -943,7 +1043,8 @@ const GLS = {
 
 const CH_TERMS_CATS = {
   1:["基本法則","金融市場","投資學","企業組織","理財決策","倫理與CSR"],
-  2:["市場失靈","訊息經濟","權益代理","負債代理","代理成本與治理"]
+  2:["市場失靈","訊息經濟","權益代理","負債代理","代理成本與治理"],
+  3:["貨幣時間價值"]
 };
 let glossMode="full", glossChapter=1;
 
