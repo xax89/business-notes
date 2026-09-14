@@ -387,7 +387,8 @@ const BOOK = [
   {n:15, title:"選擇權導論", subs:["15.1 選擇權基本","15.2 交易策略"], done:true, points:["買權 call：有權以履約價 K 買入；賣權 put：有權以 K 賣出","期權買方付權利金、最大損失即權利金；賣方履約義務","歐式僅到期可行權；美式到期前皆可行權","買權賣權平價：C + K/(1+r)^t = P + S₀","常見策略：covered call、protective put、價差"]},
   {n:16, title:"選擇權評價", subs:["16.1 二項式與 BSM","16.2 價值因子與希臘字母"], done:true, points:["BSM：C＝S₀N(d₁)−Ke^(−rt)N(d₂)","五因子：股價、履約價、時間、利率、波動率","波動率↑→call/put 權利金皆↑；時間↑→call/put 皆↑","Δ＝股價變動一元期權價值變動，用於避險"]},
   {n:17, title:"遠期與期貨", subs:["17.1 遠期契約","17.2 期貨與避險"], done:true, points:["遠期：客制、場外；期貨：標準化、交易所、逐日結算","期貨價格 F₀＝S₀(1+r)^T","避險：持有現貨者空頭期貨避險；未來要買者多頭避險"]},
-  {n:18, title:"交換契約", subs:["18.1 利率交換","18.2 貨幣交換"], done:true, points:["利率交換：同幣別固定利率換浮動利率","貨幣交換：不同幣別本金與利息互換","交換本質為一系列遠期契約的組合"]}
+  {n:18, title:"交換契約", subs:["18.1 利率交換","18.2 貨幣交換"], done:true, points:["利率交換：同幣別固定利率換浮動利率","貨幣交換：不同幣別本金與利息互換","交換本質為一系列遠期契約的組合"]},
+  {n:19, title:"資本預算", subs:["19.1 評估指標","19.2 NPV 與 IRR 的取捨"], done:true, points:["NPV＝ΣCFₜ/(1+r)^t − I₀；NPV&gt;0 接受","IRR＝使 NPV=0 的折現率；IRR&gt;必要報酬率接受","回收期法、獲利指數 PI 為輔助指標","互斥方案 NPV 與 IRR 衝突時，以 NPV 為準"]}
 ];
 
 
@@ -560,7 +561,10 @@ const TERMS = {
   /* 第17、18章 */
   "Forward":["Forward Contract","遠期契約","客製化、場外交易的未來交割約定。"],
   "Futures":["Futures Contract","期貨契約","標準化、交易所交易、逐日結算。"],
-  "Swap":["Swap","交換契約","一系列未來現金流互換；如利率交換、貨幣交換。"]
+  "Swap":["Swap","交換契約","一系列未來現金流互換；如利率交換、貨幣交換。"],
+  /* 第19章 */
+  "NPV":["Net Present Value (NPV)","淨現值","未來現金流折現減初始投資；NPV&gt;0 接受。"],
+  "IRR":["Internal Rate of Return (IRR)","內部報酬率","使 NPV=0 的折現率；IRR&gt;必要報酬率接受。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Gordon","Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1502,7 +1506,29 @@ const CH18_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS,17:CH17_SECTIONS,18:CH18_SECTIONS};
+
+/* ===== 第十九章 ===== */
+const CH19_SECTIONS = [
+{
+  id:"19.1", title:"資本預算評估指標",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>指標</th><th>法則</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="NPV">淨現值 NPV</span></b></td><td>NPV＝ΣCFₜ/(1+r)ᵗ − I₀；<b>NPV&gt;0 則接受</b>。最正確的決策指標。</td></tr>
+  <tr><td><b><span class="term" data-term="IRR">內部報酬率 IRR</span></b></td><td>使 NPV=0 的折現率；<b>IRR&gt;必要報酬率則接受</b>。</td></tr>
+  <tr><td><b>回收期</b></td><td>累計現金流量回收初始投資的年數；未考慮時間價值與回收後現金流。</td></tr>
+  <tr><td><b>獲利指數 PI</b></td><td>PI＝未來現金流現值／初始投資；PI&gt;1 接受。</td></tr>
+  </tbody></table></div>
+  `
+},
+{
+  id:"19.2", title:"NPV 與 IRR 的取捨",
+  body:`
+  <div class="warn"><b>衝突情境（互斥方案）：</b>兩者排序不一致，常因<br>• <b>規模不同</b>（投資額一大一小）；<br>• <b>現金流量時間型態不同</b>；<br>• 現金流正負變號兩次以上時 <b>IRR 可能有多解</b>。<br>此時一律以 <b>NPV 為準</b>（NPV 法則與股東財富極大化一致）。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS,17:CH17_SECTIONS,18:CH18_SECTIONS,19:CH19_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1668,7 +1694,15 @@ const CH18_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS,17:CH17_PROBLEMS,18:CH18_PROBLEMS};
+const CH19_PROBLEMS = [
+{
+  q:"兩互斥方案 A、B，NPV_A &gt; NPV_B，但 IRR_A &lt; IRR_B。應如何決策？",
+  opts:["(A) 選 A","(B) 選 B","(C) 兩個都選","(D) 看回收期"],
+  ans:"<b>(A) 選 A。</b>互斥方案 NPV 與 IRR 衝突時以 NPV 為準，因 NPV 直接衡量為股東創造的財富增加。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS,17:CH17_PROBLEMS,18:CH18_PROBLEMS,19:CH19_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1696,7 +1730,8 @@ const GLOSS_CATS = [
   {name:"股票評價", keys:["DDM","Gordon"]},
   {name:"債券", keys:["Indenture","Duration","Convexity"]},
   {name:"選擇權", keys:["Call","Put","Put-call parity","BSM"]},
-  {name:"衍生性", keys:["Forward","Futures","Swap"]}
+  {name:"衍生性", keys:["Forward","Futures","Swap"]},
+  {name:"資本預算", keys:["NPV","IRR"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1721,7 +1756,8 @@ const CH_TERMS_CATS = {
   15:["選擇權"],
   16:["選擇權評價"],
   17:["期貨"],
-  18:["交換"]
+  18:["交換"],
+  19:["資本預算"]
 };
 let glossMode="full", glossChapter=1;
 
