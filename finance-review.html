@@ -373,7 +373,8 @@ const BOOK = [
   {n:1, title:"財務金融學概論", subs:["1.1 財務金融學範疇","1.1.1 財務金融學定義","1.1.2 金融市場簡介","1.1.3 投資學簡介","1.2 公司理財概要","1.2.1 企業組織","1.2.2 公司理財與財務管理目標","1.2.3 企業倫理與企業社會責任"], done:true, points:["財務金融學三大主軸：價值、時間、風險；兩條基本法則（TVM、風險趨避）","四大領域：金融市場與機構、投資學、衍生性金融商品、公司理財","直接金融 vs 間接金融；初級市場 vs 次級市場；貨幣市場 vs 資本市場","獨資／合夥／公司三種組織的責任、租稅與融資差異","公司理財四大決策；為何「極大化利潤」不是好目標","正確目標：max V₀ = Σ FCFₜ/(1+WACC)ᵗ ＝ 極大化股東財富"]},
   {n:2, title:"代理問題與公司治理", subs:["2.1 訊息經濟學簡介","2.1.1 訊息不對稱","2.1.2 諾貝爾經濟學獎得主","2.2 公司理財中的代理問題","2.2.1 權益代理問題","2.2.2 負債代理問題","2.2.3 代理成本","2.3 公司治理與管制政策"], done:true, points:["市場失靈四類：公共財、外部性、市場力量、訊息不對稱","逆選擇（契約前、隱藏資訊）vs 道德危險（契約後、隱藏行動）","緩解：訊號發射 signaling、篩選 screening、誘因契約、監督","權益代理問題五樣態：怠惰、特權消費、MBO、過度投資、次佳投資","緩解權益代理：薪資連結、解僱／接管威脅、外部經理人市場、降低 FCF","負債代理四樣態：資產替換、債務積壓、榨取資產、債權稀釋","代理成本四部份：報償機制、監控、約束、剩餘損失","公司治理：OECD 五原則；沙賓法案 SOX"]},
   {n:3, title:"貨幣時間價值", subs:["3.1 基本概念與運算法則","3.2 現值與終值","3.3 年金","3.4 貸款種類"], done:true, points:["單利 vs 複利；時間旅行三法則（同時點才能合併、複利往未來、折現往過去）","PV = CFₙ/(1+r)ⁿ；FV = CF₀(1+r)ⁿ；PVIF 與 FVIF 互為倒數","普通年金期末發生、期初年金乘 (1+r)；成長年金 PVo = CF/(r-g)","永續年金 PVo = CF/r；成長永續 PVo = CF/(r−g)（r>g）","三種貸款：純折價、純付息、本息分期攤還"]},
-  {n:4, title:"利率決定理論", subs:["4.1 利率基本概念","4.1.2 債券與殖利率","4.2 利率的決定","4.3 利率期間結構"], done:true, points:["APR（報價）vs EAR（有效）：EAR = (1+APR/q)^q − 1；q>1 時 EAR>APR","現金流要以「有效期間利率」折現；解題若沒說複利頻率就假設與現金流頻率相同","美國公債：T-bills（≤1年零息）/T-notes（2-10年）/T-bonds（30年）/TIPS（抗通膨）","YTM＝買進持有到期的 IRR；零息債券折價發行、附息債券半年付息","費雪方程式：1+r = (1+r*)(1+πᵉ)；名目利率＝實質無風險利率＋通膨溢酬＋風險溢酬","風險溢酬四項：MRP（到期）、DRP（違約）、LP（流動性）、ERP（匯兌）","殖利率曲線＝YTM 對到期期間；即期利率 vs 隱含遠期利率（無套利幾何平均）"]}
+  {n:4, title:"利率決定理論", subs:["4.1 利率基本概念","4.1.2 債券與殖利率","4.2 利率的決定","4.3 利率期間結構"], done:true, points:["APR（報價）vs EAR（有效）：EAR = (1+APR/q)^q − 1；q>1 時 EAR>APR","現金流要以「有效期間利率」折現；解題若沒說複利頻率就假設與現金流頻率相同","美國公債：T-bills（≤1年零息）/T-notes（2-10年）/T-bonds（30年）/TIPS（抗通膨）","YTM＝買進持有到期的 IRR；零息債券折價發行、附息債券半年付息","費雪方程式：1+r = (1+r*)(1+πᵉ)；名目利率＝實質無風險利率＋通膨溢酬＋風險溢酬","風險溢酬四項：MRP（到期）、DRP（違約）、LP（流動性）、ERP（匯兌）","殖利率曲線＝YTM 對到期期間；即期利率 vs 隱含遠期利率（無套利幾何平均）"]},
+  {n:5, title:"財務報表與現金流量", subs:["5.1 財務報表","5.2 財務管理學的現金流量概念"], done:true, points:["四大報表：資產負債表、綜合損益表、現金流量表、權益變動表","會計方程式：資產＝負債＋股東權益；應計基礎 vs 現金基礎","NWC（淨營運資金）＝流動資產 − 流動負債","OCF＝NOPAT＋折舊＝EBIT(1−T)＋折舊","NOPAT＝EBIT(1−T)（假想利息也要扣稅，稅盾留待 WACC 處理）","財務決策重現金流而非會計利潤"]}
 ];
 
 
@@ -484,7 +485,13 @@ const TERMS = {
   "LP":["Liquidity Premium (LP)","流動性溢酬","補償資產無法迅速不損價變現的風險。"],
   "ERP":["Exchange-rate Risk Premium (ERP)","匯兌風險溢酬","補償外幣計價債券兌回本國貨幣的匯率風險。"],
   "Yield curve":["Yield Curve","殖利率曲線","YTM 對到期期間的關係圖；反映利率期間結構。"],
-  "Spot rate":["Spot / Forward Rate","即期／遠期利率","即期為當前承諾未來某時點交割的利率；遠期為現約未來借貸利率，由無套利條件幾何推得。"]
+  "Spot rate":["Spot / Forward Rate","即期／遠期利率","即期為當前承諾未來某時點交割的利率；遠期為現約未來借貸利率，由無套利條件幾何推得。"],
+  /* 第5章：財報與現金流 */
+  "GAAP":["GAAP","一般公認會計原則","編製財務報表的會計規範。"],
+  "IFRS":["IFRS","國際財務報導準則","國際會計準則理事會制定；台灣上市櫃公司 2013 起採用，利跨國比較。"],
+  "Balance sheet":["Balance Sheet","資產負債表","特定時點靜態財務狀況；資產＝負債＋權益。"],
+  "NWC":["Net Working Capital (NWC)","淨營運資金","流動資產 − 流動負債；衡量短期償債緩衝。"],
+  "OCF":["Operating Cash Flow (OCF)","營運現金流量","OCF＝NOPAT＋折舊＝EBIT(1−T)＋折舊。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1081,7 +1088,35 @@ const CH4_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS};
+
+/* ===== 第五章：財務報表與現金流量 ===== */
+const CH5_SECTIONS = [
+{
+  id:"5.1", title:"財務報表",
+  body:`
+  <p>財報依 <span class="term" data-term="GAAP">GAAP</span>／<span class="term" data-term="IFRS">IFRS</span> 編製，採<b>應計基礎</b>（權責發生制）——收入費用發生時即入帳，不論現金是否收付。四大報表：</p>
+  <div class="tblwrap"><table><caption>四大財務報表</caption><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>報表</th><th>性質／重點</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Balance sheet">資產負債表</span></b></td><td>特定時點的<b>存量</b>（stock）狀況；左側資金運用＝資產，右側資金來源＝負債＋權益。</td></tr>
+  <tr><td><b>綜合損益表</b></td><td>一段期間的<b>流量</b>（flow）；營收−費用＝稅後淨利。</td></tr>
+  <tr><td><b>現金流量表</b></td><td>營業、投資、融資三大活動的現金進出。</td></tr>
+  <tr><td><b>權益變動表</b></td><td>股本、資本公積、保留盈餘的期間變動。</td></tr>
+  </tbody></table></div>
+  <div class="formula"><span class="f-label">會計方程式</span>資產 ＝ 負債 ＋ 股東權益<span class="f-note">資產負債表恆等式。</span></div>
+  <div class="note"><b>流動性排序（資產）：</b>現金及約當現金（≤90 天：T-bill、CP、BA）＞有價證券（91 天–1 年）＞應收帳款＞存貨＞預付費用。前三者合稱<b>速動資產</b>。<br><b><span class="term" data-term="NWC">淨營運資金 NWC</span> ＝ 流動資產 CA − 流動負債 CL</b>（毛營運資金＝CA）。</div>
+  <div class="warn">財務決策重視「現金流時間點」，與應計基礎算出的會計利潤不同——所以要把會計數字轉成現金流量。</div>
+  `
+},
+{
+  id:"5.2", title:"財務管理學的現金流量概念",
+  body:`
+  <div class="formula"><span class="f-label">NOPAT 稅後營業淨利</span>NOPAT ＝ EBIT × (1 − T) ＝ 淨利 ＋ 利息×(1−T)<span class="f-note">又稱不舉債淨利 unlevered NI。假想利息也要扣稅，稅盾留待 WACC 處理，避免重複計入。</span></div>
+  <div class="formula"><span class="f-label"><span class="term" data-term="OCF">營運現金流量 OCF</span></span>OCF ＝ NOPAT ＋ 折舊 ＝ EBIT(1−T) ＋ 折舊<span class="f-note">折舊為非現金費用，加回。</span></div>
+  <div class="note"><b>口訣：</b>財務學的現金流是<b>流量</b>（一段時間內），會計現金流量表則因應計基礎而與財務決策所需略有出入。NOPAT 是股東＋債權人稅後共享的餅。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1126,7 +1161,20 @@ const CH4_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS};
+const CH5_PROBLEMS = [
+{
+  q:"某公司本年 EBIT = $1,000，利息費用 $200，稅率 T = 20%，折舊 $150。求 NOPAT 與 OCF。",
+  opts:[],
+  ans:"NOPAT = EBIT(1−T) = 1000×0.8 = <b>$800</b>。<br>OCF = NOPAT + 折舊 = 800 + 150 = <b>$950</b>。<br>（驗：稅前淨利 = 1000−200 = 800；稅後淨利 = 640；OCF = 淨利 + 利息(1−T) + 折舊 = 640 + 160 + 150 = 950。）"
+},
+{
+  q:"下列何者是「存量（stock）」觀念的財務報表？",
+  opts:["(A) 綜合損益表","(B) 現金流量表","(C) 資產負債表","(D) 權益變動表"],
+  ans:"<b>(C) 資產負債表。</b>它表達某一特定時點的財務狀況，屬於存量；損益表、現金流量表、權益變動表都是一段期間的流量。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1142,7 +1190,8 @@ const GLOSS_CATS = [
   {name:"負債代理", keys:["Asset substitution","Debt overhang","Milking","Claim dilution","Covenant","CB"]},
   {name:"代理成本與治理", keys:["Structuring","Monitoring","Bonding","Residual loss","Corporate governance","Stakeholder"]},
   {name:"貨幣時間價值", keys:["Simple interest","Compound interest","Discount rate","Risk premium","PV","FV","PVIF","FVIF","Annuity","Ordinary annuity","Annuity due","Growing annuity","Perpetuity","Growing perpetuity","Pure discount","Interest-only","Amortized"]},
-  {name:"利率與債券", keys:["APR","EAR","Bond","ZCB","Coupon bond","YTM","Fisher","MRP","DRP","LP","ERP","Yield curve","Spot rate"]}
+  {name:"利率與債券", keys:["APR","EAR","Bond","ZCB","Coupon bond","YTM","Fisher","MRP","DRP","LP","ERP","Yield curve","Spot rate"]},
+  {name:"財報與現金流", keys:["GAAP","IFRS","Balance sheet","NWC","OCF"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1153,7 +1202,8 @@ const CH_TERMS_CATS = {
   1:["基本法則","金融市場","投資學","企業組織","理財決策","倫理與CSR"],
   2:["市場失靈","訊息經濟","權益代理","負債代理","代理成本與治理"],
   3:["貨幣時間價值"],
-  4:["利率與債券"]
+  4:["利率與債券"],
+  5:["財報與現金流"]
 };
 let glossMode="full", glossChapter=1;
 
