@@ -386,7 +386,7 @@ const BOOK = [
   {n:14, title:"債券", subs:["14.1 債券種類與風險","14.2 評價與殖利率","14.3 利率風險"], done:true, points:["P₀＝Σ票息/(1+r)^t＋面額/(1+r)^n","YTM＝IRR；YTM＝當期收益率 CY＋資本利得收益率 CGY","溢價 CR&gt;CY&gt;YTM；平價 CR=CY=YTM；折價 CR&lt;CY&lt;YTM","利率↑→價格↓；期限越長、票息越低→價格波動越大","存續期間 duration 衡量利率敏感度；凸性修正大利率變動"]},
   {n:15, title:"選擇權導論", subs:["15.1 選擇權基本","15.2 交易策略"], done:true, points:["買權 call：有權以履約價 K 買入；賣權 put：有權以 K 賣出","期權買方付權利金、最大損失即權利金；賣方履約義務","歐式僅到期可行權；美式到期前皆可行權","買權賣權平價：C + K/(1+r)^t = P + S₀","常見策略：covered call、protective put、價差"]},
   {n:16, title:"選擇權評價", subs:["16.1 二項式與 BSM","16.2 價值因子與希臘字母"], done:true, points:["BSM：C＝S₀N(d₁)−Ke^(−rt)N(d₂)","五因子：股價、履約價、時間、利率、波動率","波動率↑→call/put 權利金皆↑；時間↑→call/put 皆↑","Δ＝股價變動一元期權價值變動，用於避險"]},
-  {n:17, title:"遠期與期貨", subs:["17.1 遠期契約","17.2 期貨與避險"], done:true, points:["遠期：客制、場外；期貨：標準化、交易所、逐日結算","期貨價格 F₀＝S₀(1+r)^T","避險：持有現貨者空頭期貨避險；未來要買者多頭避險"]},
+  {n:17, title:"遠期與期貨", subs:["17.1 遠期契約","17.2 期貨與避險","17.3 基差與避險比率","17.4 期貨定價理論"], done:true, points:["遠期客制 OTC；期貨標準化交易所、逐日結算","持有成本 F₀=S₀(1+r)^T","基差＝現貨−期貨，到期收斂為0","常態市場（F>S）vs 逆價市場（F<S）"]},
   {n:18, title:"其他衍生性商品與風險管理", subs:["18.1 交換","18.2 其他衍生性商品"], done:true, points:["利率交換（同幣別固定換浮動）、貨幣交換、CDS","認股權證 warrants：公司發行、可轉換為普通股","可轉換公司�：債性+股性，轉換標的為普通股","交換本質為一系列遠期契約的組合"]},
   {n:19, title:"資金成本", subs:["19.1 概論","19.2 個別資金成本","19.3 WACC"], done:true, points:["資金成本＝投資人對類似風險要求的報酬率（機會成本）","負債 kD＝公司債 YTM；稅後 kD(1−T)；考慮發行成本 f","特別股 kP＝DivP/P₀","普通股 kE：CAPM 法或 Gordon 法 kE=D₁/P₀+g","WACC＝wD·kD(1−T)+wP·kP+wE·kE，權數用市值"],
   {n:20, title:"投資計畫評估", subs:["20.1 評估指標","20.2 NPV 與 IRR 取捨","20.3 現金流量評估"], done:true, points:["回收期、折現回收期、ARR、NPV、IRR、MIRR、PI","NPV>0 接受；IRR>必要報酬率接受","互斥方案 NPV 與 IRR 衝突時以 NPV 為準；IRR 多重解","沉沒成本不計、機會成本要計、外部性（侵蝕/綜效）","現金流三段：初始投資、營業 OCF、終結（殘值+回收NWC）"]},
@@ -572,6 +572,8 @@ const TERMS = {
   /* 第17、18章 */
   "Forward":["Forward Contract","遠期契約","客製化、場外交易的未來交割約定。"],
   "Futures":["Futures Contract","期貨契約","標準化、交易所交易、逐日結算。"],
+  "Basis":["Basis","基差","現貨價格減期貨價格；隨到期收斂至0。"],
+  "Cost of carry":["Cost of Carry","持有成本理論","F₀=S₀(1+r)ᵀ；融資+儲存−收益。"],
   "Swap":["Swap","交換契約","一系列未來現金流互換；如利率交換、貨幣交換。"],
   "CDS":["Credit Default Swap (CDS)","信用違約交換","買方付權利金，標的違約時賣方賠償；單獨交易信用風險。"],
   "Warrant":["Warrant","認股權證","公司發行、可依約定價格認購新股的權利。"],
@@ -1604,6 +1606,23 @@ const CH17_SECTIONS = [
   body:`
   <div class="note"><b>空頭避險：</b>已持有現貨（或未來有現貨要賣）→ 放空期貨，價格下跌期貨獲利補償現貨損失。<br><b>多頭避險：</b>未來要買進現貨 → 買進期貨，避免價格上漲。</div>
   `
+},
+{
+  id:"17.3", title:"基差、價差與避險比率",
+  body:`
+  <div class="formula"><span class="f-label"><span class="term" data-term="Basis">基差 basis</span></span>basis ＝ 現貨價格 S － 期貨價格 F<span class="f-note">隨到期日逼近收斂至 0；期貨到期基差風險消失。</span></div>
+  <div class="note"><b>避險比率</b>＝應持有的期貨口數；若現貨與期貨標的不完全相同（交叉避險），需依相關係數與波動度調整。</div>
+  `
+},
+{
+  id:"17.4", title:"期貨定價理論",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>理論</th><th>說明</th></tr></thead><tbody>
+  <tr><td><b>預期理論</b></td><td>期貨價格＝市場對未來現貨價格的預期。</td></tr>
+  <tr><td><b><span class="term" data-term="Cost of carry">持有成本理論</span></b></td><td>F₀ ＝ S₀(1+r)ᵀ ；持有現貨的融資成本、儲存成本減去收益。</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>常態市場 contango：</b>F &gt; S（遠月高於近月），反映持有成本。<br><b>逆價市場 backwardation：</b>F &lt; S（遠月低於近月），通常因持有現貨有便利收益。</div>
+  `
 }
 ];
 
@@ -2061,7 +2080,7 @@ const GLOSS_CATS = [
   {name:"股票評價", keys:["DDM","Gordon"]},
   {name:"債券", keys:["Indenture","Duration","Convexity"]},
   {name:"選擇權", keys:["Call","Put","Put-call parity","BSM"]},
-  {name:"衍生性", keys:["Forward","Futures","Swap","CDS","Warrant","Convertible bond"]},
+  {name:"衍生性", keys:["Forward","Futures","Swap","CDS","Warrant","Convertible bond","Basis","Cost of carry"]},
   {name:"資本預算", keys:["NPV","IRR","Real option"]},
   {name:"資本結構", keys:["DOL","DFL","MM","Tradeoff"]},
   {name:"資金成本與資本預算", keys:["Cost of capital","Cost of debt","Cost of equity","WACC","NPV","IRR","MIRR","Real option"]},
