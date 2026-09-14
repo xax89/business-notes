@@ -382,7 +382,8 @@ const BOOK = [
   {n:10, title:"資本資產定價模式 CAPM", subs:["10.1 CAPM","10.2 特徵線與實證","10.3 風險調整績效指標"], done:true, points:["βi=Cov(Ri,Rm)/σm²，衡量系統風險","CAPM/SML：E(Ri)=Rf+βi[E(Rm)−Rf]","CML 用總風險 σp；SML 用系統風險 β","特徵線：Ri−Rf=α+β(Rm−Rf)+ε；殘差＝個別風險","績效指標：Sharpe（σ分母）、Treynor（β分母）、Jensen α、IR、M²","單一資產 β 不穩，組合 β 較穩；APT 為多因子延伸"]},
   {n:11, title:"效率市場與行為財務", subs:["11.1 效率市場假說","11.2 行為財務學"], done:true, points:["EMH 三形式：弱式／半強式／強式","弱式→技術分析無用；半強式→基本分析無用","異常：反應過度／反應不足；Grossman-Stiglitz 詭論","行為財務：過度自信、易取性、錨定、確認偏誤、框架效應、心理帳戶、後悔趨避"]},
   {n:12, title:"金融市場與機構", subs:["12.1 金融市場功能","12.2 市場分類與機構"], done:true, points:["資金由盈餘單位流向赤字單位","直接金融（發股發債）vs 間接金融（銀行存貸）","一級市場（IPO/增資）vs 二級市場（流通交易）","貨幣市場（≤1年）vs 資本市場（>1年）","交易所 vs OTC；商銀／投行／券商／基金／央行"]},
-  {n:13, title:"普通股與評價", subs:["13.1 普通股特徵","13.2 普通股評價"], done:true, points:["累積投票制：小股東可集中票數爭取席次","新股優先認購權（rights offering）防股權稀釋","DDM：零成長 P₀=D/k；Gordon P₀=D₁/(k−g)","g＝ROE×b；P₀ 為除息後價格","相對評價：forward P/E＝d/(k−g)＝P₀/EPS₁"]}
+  {n:13, title:"普通股與評價", subs:["13.1 普通股特徵","13.2 普通股評價"], done:true, points:["累積投票制：小股東可集中票數爭取席次","新股優先認購權（rights offering）防股權稀釋","DDM：零成長 P₀=D/k；Gordon P₀=D₁/(k−g)","g＝ROE×b；P₀ 為除息後價格","相對評價：forward P/E＝d/(k−g)＝P₀/EPS₁"]},
+  {n:14, title:"債券", subs:["14.1 債券種類與風險","14.2 評價與殖利率","14.3 利率風險"], done:true, points:["P₀＝Σ票息/(1+r)^t＋面額/(1+r)^n","YTM＝IRR；YTM＝當期收益率 CY＋資本利得收益率 CGY","溢價 CR&gt;CY&gt;YTM；平價 CR=CY=YTM；折價 CR&lt;CY&lt;YTM","利率↑→價格↓；期限越長、票息越低→價格波動越大","存續期間 duration 衡量利率敏感度；凸性修正大利率變動"]}
 ];
 
 
@@ -541,7 +542,11 @@ const TERMS = {
   "Indirect finance":["Indirect Finance","間接金融","透過銀行等仲介存貸，仲介承擔信用風險。"],
   /* 第13章 */
   "DDM":["Dividend Discount Model (DDM)","股利折現模式","股票價值＝未來股利折現至今日。"],
-  "Gordon":["Myron J. Gordon","戈登","1959 提出固定成長股利折現模型 P₀=D₁/(k−g)。"]
+  "Gordon":["Myron J. Gordon","戈登","1959 提出固定成長股利折現模型 P₀=D₁/(k−g)。"],
+  /* 第14章 */
+  "Indenture":["Bond Indenture","債券契約","載明發行公司與債權人權利義務的法律文件。"],
+  "Duration":["Duration (Macaulay)","存續期間","現金流量現值加權平均回收年期，衡量利率敏感度。"],
+  "Convexity":["Convexity","凸性","價格-利率曲線曲率；利率變動大時修正 duration 的誤差。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Gordon","Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1374,7 +1379,38 @@ const CH13_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS};
+
+/* ===== 第十四章 ===== */
+const CH14_SECTIONS = [
+{
+  id:"14.1", title:"債券種類與風險",
+  body:`
+  <p>債券風險：違約風險、流動性風險、匯兌風險。發行時須載明<b><span class="term" data-term="Indenture">債券契約 indenture</span></b>（面額、票面利率、到期、擔保、償債基金等）。</p>
+  <div class="note"><b>種類：</b>信用債券（無擔保）、次順位信用債（求償權靠後、利率較高）、抵押債券（以固定資產擔保）。<b>償債基金</b>要求每年提列固定金額提前贖回部分，降低到期違約風險。</div>
+  `
+},
+{
+  id:"14.2", title:"債券評價與殖利率",
+  body:`
+  <div class="formula"><span class="f-label">債券評價</span>P₀ ＝ Σ票息 C／(1+r)ᵗ ＋ 面額 F／(1+r)ⁿ<span class="f-note">YTM 即使上式成立的折現率 r，本質為 IRR。</span></div>
+  <div class="formula"><span class="f-label">殖利率拆解</span>YTM ＝ 當期收益率 CY ＋ 資本利得收益率 CGY<span class="f-note">CY＝C/P₀；CGY＝(P₁−P₀)/P₀。</span></div>
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>類型</th><th>關係</th></tr></thead><tbody>
+  <tr><td><b>溢價債券</b></td><td>P₀ &gt; 面額 → CR &gt; CY &gt; YTM（CGY&lt;0）</td></tr>
+  <tr><td><b>平價債券</b></td><td>P₀ = 面額 → CR = CY = YTM</td></tr>
+  <tr><td><b>折價債券</b></td><td>P₀ &lt; 面額 → CR &lt; CY &lt; YTM（CGY&gt;0）</td></tr>
+  </tbody></table></div>
+  <div class="warn">YTM 真正等於實現報酬率的三假設：持有到期、不違約、期間利息都能按 YTM 再投資。</div>
+  `
+},
+{
+  id:"14.3", title:"利率風險：存續期間與凸性",
+  body:`
+  <div class="note"><b>價格與利率反向：</b>利率↑→價格↓。<b>利率敏感度</b>：期限越長、票面利率越低 → 價格波動越大。<br><b><span class="term" data-term="Duration">存續期間 duration</span></b>：以現金流量現值加權的平均回收年期，衡量利率變動 1% 的價格變動百分比。<br><b><span class="term" data-term="Convexity">凸性 convexity</span></b>：利率變動大時，只靠 duration 會有誤差，需以凸性（價格-利率曲線的曲率）修正；同條件下凸性越高越有利。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1501,7 +1537,15 @@ const CH13_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS};
+const CH14_PROBLEMS = [
+{
+  q:"一債券票面利率 8%、市價等於面額（平價）。下列何者正確？",
+  opts:["(A) CR &gt; CY &gt; YTM","(B) CR &lt; CY &lt; YTM","(C) CR = CY = YTM","(D) 三者無固定關係"],
+  ans:"<b>(C) CR = CY = YTM。</b>平價發行時 P₀＝面額，資本利得收益率 CGY=0，故當期收益率＝票面利率＝YTM。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1526,7 +1570,8 @@ const GLOSS_CATS = [
   {name:"CAPM", keys:["Beta","SML","APT","Sharpe","Treynor","Jensen alpha","Information ratio"]},
   {name:"效率與行為財務", keys:["EMH","Grossman-Stiglitz"]},
   {name:"金融市場", keys:["Direct finance","Indirect finance"]},
-  {name:"股票評價", keys:["DDM","Gordon"]}
+  {name:"股票評價", keys:["DDM","Gordon"]},
+  {name:"債券", keys:["Indenture","Duration","Convexity"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1546,7 +1591,8 @@ const CH_TERMS_CATS = {
   10:["CAPM"],
   11:["效率與行為財務"],
   12:["金融市場"],
-  13:["股票評價"]
+  13:["股票評價"],
+  14:["債券"]
 };
 let glossMode="full", glossChapter=1;
 
