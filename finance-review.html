@@ -388,7 +388,9 @@ const BOOK = [
   {n:16, title:"選擇權評價", subs:["16.1 二項式與 BSM","16.2 價值因子與希臘字母"], done:true, points:["BSM：C＝S₀N(d₁)−Ke^(−rt)N(d₂)","五因子：股價、履約價、時間、利率、波動率","波動率↑→call/put 權利金皆↑；時間↑→call/put 皆↑","Δ＝股價變動一元期權價值變動，用於避險"]},
   {n:17, title:"遠期與期貨", subs:["17.1 遠期契約","17.2 期貨與避險"], done:true, points:["遠期：客制、場外；期貨：標準化、交易所、逐日結算","期貨價格 F₀＝S₀(1+r)^T","避險：持有現貨者空頭期貨避險；未來要買者多頭避險"]},
   {n:18, title:"交換契約", subs:["18.1 利率交換","18.2 貨幣交換"], done:true, points:["利率交換：同幣別固定利率換浮動利率","貨幣交換：不同幣別本金與利息互換","交換本質為一系列遠期契約的組合"]},
-  {n:19, title:"資本預算", subs:["19.1 評估指標","19.2 NPV 與 IRR 的取捨"], done:true, points:["NPV＝ΣCFₜ/(1+r)^t − I₀；NPV&gt;0 接受","IRR＝使 NPV=0 的折現率；IRR&gt;必要報酬率接受","回收期法、獲利指數 PI 為輔助指標","互斥方案 NPV 與 IRR 衝突時，以 NPV 為準"]}
+  {n:19, title:"資本預算", subs:["19.1 評估指標","19.2 NPV 與 IRR 的取捨"], done:true, points:["NPV＝ΣCFₜ/(1+r)^t − I₀；NPV&gt;0 接受","IRR＝使 NPV=0 的折現率；IRR&gt;必要報酬率接受","回收期法、獲利指數 PI 為輔助指標","互斥方案 NPV 與 IRR 衝突時，以 NPV 為準"]},
+  {n:20, title:"資本預算現金流量", subs:["20.1 相關現金流量","20.2 現金流構成"], done:true, points:["只認增量現金流量；沉沒成本不計、機會成本要計","外部性：侵蝕效果負、綜效正","三段：初始投資、營業 OCF、終結現金流（殘值+回收NWC）"]},
+  {n:21, title:"風險調整與實質選擇權", subs:["21.1 風險調整","21.2 實質選擇權"], done:true, points:["高風險計畫用較高折現率（RADR）","實質選擇權：延遲、擴張、放棄選擇權可增加專案價值"]}
 ];
 
 
@@ -564,7 +566,9 @@ const TERMS = {
   "Swap":["Swap","交換契約","一系列未來現金流互換；如利率交換、貨幣交換。"],
   /* 第19章 */
   "NPV":["Net Present Value (NPV)","淨現值","未來現金流折現減初始投資；NPV&gt;0 接受。"],
-  "IRR":["Internal Rate of Return (IRR)","內部報酬率","使 NPV=0 的折現率；IRR&gt;必要報酬率接受。"]
+  "IRR":["Internal Rate of Return (IRR)","內部報酬率","使 NPV=0 的折現率；IRR&gt;必要報酬率接受。"],
+  /* 第20、21章 */
+  "Real option":["Real Option","實質選擇權","管理當局隨資訊調整策略的彈性，如延遲、擴張、放棄。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Gordon","Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1528,7 +1532,44 @@ const CH19_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS,17:CH17_SECTIONS,18:CH18_SECTIONS,19:CH19_SECTIONS};
+
+/* ===== 第二十章 ===== */
+const CH20_SECTIONS = [
+{
+  id:"20.1", title:"相關現金流量的認定",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead><tr><th>項目</th><th>處理</th></tr></thead><tbody>
+  <tr><td><b>沉沒成本</b></td><td>已發生、無論接不接受都收不回 → <b>不計入</b>。</td></tr>
+  <tr><td><b>機會成本</b></td><td>使用既有資產所放棄的最佳替代用途 → <b>要計入</b>。</td></tr>
+  <tr><td><b>外部性</b></td><td>侵蝕（erosion）既有產品銷售為負；綜效（synergy）為正。</td></tr>
+  <tr><td><b>融資現金流</b></td><td>利息、股利不列入專案現金流（已在折現率中反映）。</td></tr>
+  </tbody></table></div>
+  `
+},
+{
+  id:"20.2", title:"現金流三段",
+  body:`
+  <div class="note"><b>① 初始投資：</b>設備購置＋裝置費＋增加的 NWC。<br><b>② 營業 OCF：</b>OCF＝EBIT(1−T)＋折舊。<br><b>③ 終結現金流：</b>殘值（稅後）＋回收淨營運資金。</div>
+  `
+}
+];
+
+/* ===== 第二十一章 ===== */
+const CH21_SECTIONS = [
+{
+  id:"21.1", title:"風險調整折現率",
+  body:`<p>高風險計畫不能用公司加權平均資金成本折現，應用<b>風險調整折現率 RADR</b>（隨專案風險調高），或用確定等值法調整現金流。</p>`
+},
+{
+  id:"21.2", title:"實質選擇權",
+  body:`
+  <p>傳統 NPV 忽略管理彈性。<span class="term" data-term="Real option">實質選擇權</span>讓經理人可隨資訊更新調整策略，提高專案真實價值：</p>
+  <div class="note"><b>常見類型：</b>延遲選擇權、擴張（縮減）選擇權、放棄（放棄殘值）選擇權。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS,17:CH17_SECTIONS,18:CH18_SECTIONS,19:CH19_SECTIONS,20:CH20_SECTIONS,21:CH21_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1702,7 +1743,22 @@ const CH19_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS,17:CH17_PROBLEMS,18:CH18_PROBLEMS,19:CH19_PROBLEMS};
+const CH20_PROBLEMS = [
+{
+  q:"一公司為評估新專案花了 $50 萬市調費，不論專案是否進行都已支出。此 $50 萬在 NPV 分析中應？",
+  opts:["(A) 計入初始投資","(B) 不計入","(C) 分年攤提","(D) 視情況而定"],
+  ans:"<b>(B) 不計入。</b>這是沉沒成本，與接不接受專案無關。"
+}
+];
+const CH21_PROBLEMS = [
+{
+  q:"計畫可在一年後視市場情況決定是否擴大投資，此管理彈性屬於？",
+  opts:["(A) 沉沒成本","(B) 實質選擇權","(C) 營業槓桿","(D) 現金折價"],
+  ans:"<b>(B) 實質選擇權。</b>經理人隨資訊調整策略的彈性應計入專案價值。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS,17:CH17_PROBLEMS,18:CH18_PROBLEMS,19:CH19_PROBLEMS,20:CH20_PROBLEMS,21:CH21_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1731,7 +1787,7 @@ const GLOSS_CATS = [
   {name:"債券", keys:["Indenture","Duration","Convexity"]},
   {name:"選擇權", keys:["Call","Put","Put-call parity","BSM"]},
   {name:"衍生性", keys:["Forward","Futures","Swap"]},
-  {name:"資本預算", keys:["NPV","IRR"]}
+  {name:"資本預算", keys:["NPV","IRR","Real option"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1757,7 +1813,9 @@ const CH_TERMS_CATS = {
   16:["選擇權評價"],
   17:["期貨"],
   18:["交換"],
-  19:["資本預算"]
+  19:["資本預算"],
+  20:["資本預算現金流"],
+  21:["風險調整與實質選擇權"]
 };
 let glossMode="full", glossChapter=1;
 
