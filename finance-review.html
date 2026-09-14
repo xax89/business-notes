@@ -206,7 +206,10 @@ body.dark .fav.on{background:#3a3320}
 .gloss-main{flex:1;min-width:0}
 .gloss-en{font-weight:700;color:var(--green);font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .gloss-zh{font-size:15px;color:var(--green);font-weight:700;margin-left:2px}
-.gloss-def{font-size:13.5px;margin-top:4px;line-height:1.8}
+.gloss-en.is-person{color:var(--purple)}
+.gloss-en.is-person .gloss-zh{color:var(--purple)}
+.gloss-def{font-size:13.5px;margin-top:4px;line-height:1.8;white-space:pre-line}
+.booktitle{color:var(--purple);font-weight:700;padding:0 1px}
 .gloss-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
 .gloss-btn{border:1px solid var(--line);background:none;border-radius:7px;padding:3px 10px;font-size:11.5px;cursor:pointer;color:var(--muted);transition:all .15s}
 .gloss-btn:hover{color:var(--teal);border-color:var(--teal)}
@@ -379,18 +382,18 @@ const TERMS = {
   "Finance":["Finance","財務金融學","研究資金的籌集、融通、管理、規劃與使用，圍繞價值、時間、風險三大面向。"],
   "Securities":["Financial Securities","金融證券","對金融資產求償權的工具（股票、債券等）；內含價值高者市場價格也高。"],
   "Surplus/Deficit":["Funds Surplus / Deficit Unit","資金有餘／赤字單位","收入大於支出者為有餘單位（家戶為主，供給者）；支出大於收入者為赤字單位（企業、政府為主，需求者）。"],
-  "Direct/Indirect":["Direct / Indirect Financing","直接／間接金融","直接：發行證券向投資人募資（券商、投行協助）；間接：透過銀行、保險、基金等金融中介。"],
-  "Primary/Secondary":["Primary / Secondary Market","初級／次級市場","初級：發行新證券（IPO、現金增資、發新債）；次級：已發行證券流通買賣，決定市場價值。"],
-  "Money/Capital":["Money / Capital Market","貨幣／資本市場","貨幣市場交易一年內短期工具（T-bill、CP、NCD）；資本市場交易一年以上長期債券與股票。"],
+  "Direct/Indirect":["Direct / Indirect Financing","直接／間接金融","直接：發行證券向投資人募資（券商、投行協助）。\n間接：透過銀行、保險、基金等金融中介。"],
+  "Primary/Secondary":["Primary / Secondary Market","初級／次級市場","初級：發行新證券（IPO、現金增資、發新債）。\n次級：已發行證券流通買賣，決定市場價值。"],
+  "Money/Capital":["Money / Capital Market","貨幣／資本市場","貨幣市場：交易一年內短期工具（T-bill、CP、NCD）。\n資本市場：交易一年以上長期債券與股票。"],
   "Liquidity":["Liquidity","流動性","金融證券在不損失價值下迅速變現的能力。"],
   "EMH":["Efficient Market Hypothesis（EMH）","效率市場假說","市場價格會立即且正確地反應攸關內含價值的所有資訊（本書第 11 章主題）。"],
-  "Real/Financial assets":["Real / Financial Assets","實質／金融資產","實質資產直接創造經濟價值（廠房、機器、技術），流動性差；金融資產是對實質資產求償權的憑證，流動性佳。"],
+  "Real/Financial assets":["Real / Financial Assets","實質／金融資產","實質資產：直接創造經濟價值（廠房、機器、技術），流動性差。\n金融資產：對實質資產求償權的憑證，流動性佳。"],
   "Portfolio":["Portfolio","投資組合","投資人所持各項資產的集合。"],
   "Allocation/Selection":["Asset Allocation / Security Selection","資產配置／證券選擇","前者決定大類資產（股、債、不動產）比例；後者在各大類中挑選個別標的。"],
   "Investment/Speculation":["Investment vs Speculation","投資 vs 投機","Graham《證券分析》：經妥適分析、保證本金安全與適當報酬者為投資，否則為投機；兩者非互斥。"],
-  "Graham":["Benjamin Graham","葛拉漢","《證券分析》作者，價值投資之父；定義投資為「經妥適分析、保證本金安全與適當報酬」。"],
+  "Graham":["Benjamin Graham","葛拉漢","《證券分析》作者，價值投資之父。\n定義投資為「經妥適分析、保證本金安全與適當報酬」。"],
   "Sole proprietorship":["Sole Proprietorship","獨資","一人擁有；成立易、無雙重課稅，但負無限清償責任、壽命有限、融資困難。"],
-  "Partnership":["Partnership (GP / LP)","合夥","一般合夥人（GP）負無限連帶責任並經營；有限合夥人（LP）責任以出資額為限、不參與經營。"],
+  "Partnership":["Partnership (GP / LP)","合夥","一般合夥人（GP）：負無限連帶責任並經營。\n有限合夥人（LP）：責任以出資額為限、不參與經營。"],
   "Corporation":["Corporation","公司","依法登記的法人；股東負有限責任、永續存在、易移轉所有權，但有雙重課稅與代理問題。"],
   "Limited liability":["Limited Liability","有限責任","股東對公司債務的清償責任僅以出資額為限。"],
   "Double taxation":["Double Taxation","雙重課稅","公司盈利先課營利事業所得稅，稅後盈餘發給股東再課個人綜合所得稅。"],
@@ -404,9 +407,11 @@ const TERMS = {
   "Fundamental value":["Fundamental Value（V₀）","公司基本價值","V₀ = Σ FCF̃ₜ/(1+kₐ)ᵗ；max V₀ ＝ 極大化股東財富 ＝ 合法下極大化股價。"],
   "Business ethics":["Business Ethics","企業倫理","經營者服膺的行為標準與道德判準；長期終將反映在公司價值。"],
   "CSR":["Corporate Social Responsibility（CSR）","企業社會責任","企業對增進社會整體利益所應承擔的責任；Keith Davis 提出五命題。"],
-  "Davis":["Keith Davis","戴維斯","提出企業社會責任五命題：社會責任源自社會權力、雙向開放、計入社會成本利益、成本轉嫁消費者、企業公民責任。"],
+  "Davis":["Keith Davis","戴維斯","提出企業社會責任五命題：\n① 社會責任源自社會權力\n② 雙向開放系統（接收意見、對外公開）\n③ 決策應把社會成本與利益一併計入\n④ 社會成本應轉嫁消費者\n⑤ 身為「企業公民」有責任關注本業以外的社會問題。"],
   "Social capital":["Social Capital","社會資本","人際互信、共同價值構成的社會網絡；倫理與 CSR 的花費可視為對社會資本的投資。"]
 };
+/* 人名類術語卡，標題用紫色 */
+const PERSON_TERMS=new Set(["Graham","Davis"]);
 
 const CH1_SECTIONS = [
 {
@@ -458,7 +463,12 @@ const CH1_SECTIONS = [
       <div class="mc-detail">企業閒置資金、家戶背房貸時角色可互換。</div>
     </div>
   </div>
-  <div class="note"><b>金融市場四大功能：</b>① 資金效率配置（儲蓄流向實質投資）② 提供<span class="term" data-term="Liquidity">流動性</span> ③ 多角化分散風險、可避險 ④ 由價格提供內含價值資訊（<span class="term" data-term="EMH">EMH</span> 下立即正確反應）。</div>
+  <div class="note"><b>金融市場四大功能：</b><ul>
+    <li>資金效率配置（儲蓄流向實質投資）。</li>
+    <li>提供<span class="term" data-term="Liquidity">流動性</span>。</li>
+    <li>多角化分散風險、可避險。</li>
+    <li>由價格提供內含價值資訊（<span class="term" data-term="EMH">EMH</span> 下立即正確反應）。</li>
+  </ul></div>
   <div class="method-card mc-title">
     <label class="mc-check" title="已學會"><input type="checkbox" data-mc="mkclass"><span class="mc-lbl">學會</span></label>
     <div class="mc-left">市場分類</div>
@@ -492,7 +502,7 @@ const CH1_SECTIONS = [
     <label class="mc-check" title="已學會"><input type="checkbox" data-mc="invspec"><span class="mc-lbl">學會</span></label>
     <div class="mc-left"><span class="proper" data-term="Graham">Graham</span><br><span class="term" data-term="Investment/Speculation">投資 vs 投機</span></div>
     <div class="mc-body">
-      <div class="mc-formula">經妥適分析、保證本金安全與適當報酬者為投資，否則為投機</div>
+      <div class="mc-formula"><span class="booktitle">《證券分析》</span>：經妥適分析、保證本金安全與適當報酬者為投資，否則為投機</div>
       <div class="mc-detail">投機者主動承擔風險賺取風險溢酬，持有期間通常較短。兩者非互斥。</div>
       <div class="mc-ex"><b>易混觀念：</b>財金學「投資」指買金融資產；總體經濟學的投資（I=ΔK）僅指資本財累積——次級市場買股票在總經看只是股權移轉，非投資。</div>
     </div>
@@ -515,12 +525,20 @@ const CH1_SECTIONS = [
 {
   id:"1.2.2", title:"公司理財與財務管理目標",
   body:`
-  <p>大型公司財務部門中：<b>財務長（Treasurer）</b>管現金、信用、資本支出、財務規劃；<b>主計長（Controller）</b>管財務會計、成本會計、稅務、資訊系統。以資產負債表模型看，公司理財有四大決策：</p>
+  <p>大型公司財務部門中，以資產負債表模型看，公司理財有四大決策。先認識兩個關鍵角色：</p>
+  <ul>
+    <li><b>財務長（Treasurer）</b>：管現金、信用、資本支出、財務規劃。</li>
+    <li><b>主計長（Controller）</b>：管財務會計、成本會計、稅務、資訊系統。</li>
+  </ul>
   <div class="method-card"><label class="mc-check" title="已學會"><input type="checkbox" data-mc="cb"><span class="mc-lbl">學會</span></label><div class="mc-left"><span class="term" data-term="Capital budgeting">資本預算</span></div><div class="mc-body"><div class="mc-formula">決定投資什麼計畫、購置哪些固定資產</div><div class="mc-detail">投資案可行性與風險評估。</div></div></div>
   <div class="method-card"><label class="mc-check" title="已學會"><input type="checkbox" data-mc="cs"><span class="mc-lbl">學會</span></label><div class="mc-left"><span class="term" data-term="Capital structure">資本結構</span></div><div class="mc-body"><div class="mc-formula">普通股、特別股、負債的比例組合</div><div class="mc-detail">投資所需資金如何來。</div></div></div>
   <div class="method-card"><label class="mc-check" title="已學會"><input type="checkbox" data-mc="wc"><span class="mc-lbl">學會</span></label><div class="mc-left"><span class="term" data-term="Working capital">淨營運資金</span></div><div class="mc-body"><div class="mc-formula">維持適當流動性</div><div class="mc-detail">因應營運中現金流入流出的時間落差。</div></div></div>
   <div class="method-card"><label class="mc-check" title="已學會"><input type="checkbox" data-mc="po"><span class="mc-lbl">學會</span></label><div class="mc-left"><span class="term" data-term="Payout policy">支付政策</span></div><div class="mc-body"><div class="mc-formula">剩餘現金流多少保留、多少發股東</div><div class="mc-detail">股利政策。</div></div></div>
-  <div class="warn"><b>為何不該用「極大化利潤」當目標？</b>① 不同時間區間的利潤極大化彼此矛盾；② 會計利潤採權責基礎，與現金流時間點不一致（忽視<span class="term" data-term="TVM">貨幣時間價值</span>）；③ 未考慮風險與不確定性。</div>
+  <div class="warn"><b>為何不該用「極大化利潤」當目標？</b><ul>
+    <li>不同時間區間的利潤極大化彼此矛盾。</li>
+    <li>會計利潤採權責基礎，與現金流時間點不一致（忽視<span class="term" data-term="TVM">貨幣時間價值</span>）。</li>
+    <li>未考慮風險與不確定性。</li>
+  </ul></div>
   <div class="note"><b>正確目標：</b>公司未來<span class="term" data-term="FCF">自由現金流量</span> FCFₜ 以<span class="term" data-term="WACC">加權平均資金成本 WACC（kₐ）</span>折現，即公司基本價值 V₀。負債價值固定下，max V₀ ＝ 極大化股東財富 ＝（合法手段）極大化股價。</div>
   <div class="formula"><span class="f-label"><span class="term" data-term="Fundamental value">公司基本價值</span></span>V₀ = Σ<sub>t=1..∞</sub> FCF̃ₜ / (1 + kₐ)<sup>t</sup><span class="f-note">提高 V₀ 兩手段：增加未來 FCFₜ，或降低 WACC。</span></div>
   `
@@ -806,7 +824,7 @@ function renderGlossary(){
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
           </button>
           <div class="gloss-main">
-            <div class="gloss-en">${esc(en)}<span class="gloss-zh">${esc(zh)}</span></div>
+            <div class="gloss-en${PERSON_TERMS.has(k)?" is-person":""}">${esc(en)}<span class="gloss-zh">${esc(zh)}</span></div>
             <div class="gloss-def">${esc(def)}</div>
             <div class="gloss-note ${note?"show":""}" data-note="wrap-${esc(k)}">
               <textarea placeholder="寫下你自己的重點…" onchange="saveNote('${esc(k)}',this.value)">${esc(note)}</textarea>
