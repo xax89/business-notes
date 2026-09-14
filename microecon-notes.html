@@ -52,13 +52,13 @@ code{background:#e8eef4;padding:1px 5px;border-radius:4px;font-family:ui-monospa
 .clabel{font-family:system-ui,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;margin-bottom:4px;}
 .callout.def{background:#f1f4f7;} .callout.def .clabel{color:var(--muted);}
 .callout.key{background:#fdf3d7;border-left:4px solid #c89632;} .callout.key .clabel{color:#8a6417;}
-.callout.formula{background:#fbf7ef;border:1px dashed #d8c9a3;} .callout.formula .clabel{color:#b07f1f;}
+.callout.formula{background:#fbf7ef;border:1px dashed #d8c9a3;text-align:left;} .callout.formula .clabel{color:#b07f1f;}
 .callout.fig{background:#edf2f6;} .callout.fig .clabel{color:#607d99;}
 .callout.eg{background:#f4eef6;} .callout.eg .clabel{color:#6b4e8e;}
 .callout.exam{background:#fbeae2;border-left:4px solid #b5542e;} .callout.exam .clabel{color:#b5542e;}
 /* 表格 */
 .tblwrap{overflow-x:auto;margin:12px 0;}
-table{border-collapse:collapse;width:auto;max-width:100%;table-layout:fixed;background:var(--panel);font-size:14px;font-family:system-ui,-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;}
+table{border-collapse:collapse;width:auto;max-width:100%;table-layout:auto;background:var(--panel);font-size:14px;font-family:system-ui,-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;}
 th,td{border:1px solid var(--line);padding:6px 9px;vertical-align:top;word-break:break-word;}
 th{background:#e3eaf1;font-weight:700;}
 tbody tr:nth-child(even){background:#f8fafc;}
@@ -107,9 +107,9 @@ font-weight:600;}
 .callout.key .clabel{position:relative;}
 .callout.key{background:linear-gradient(0deg,rgba(200,150,50,.14),rgba(200,150,50,.14)),#f8f2e2;}
 /* 重要經濟學名詞（墨綠粗體） */
-.term{color:#1e7d32;font-weight:700;}
+.term{color:#1e7d32;font-weight:800;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;}
 /* 人物／事件／專有名詞（深紫粗體） */
-.proper{color:#7b2cbf;font-weight:700;}
+.proper{color:#7b2cbf;font-weight:800;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;}
 /* 回到頂部 */
 #topBtn{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;
 background:#1f3a5f;color:#fff;border:none;cursor:pointer;display:none;align-items:center;justify-content:center;
@@ -177,6 +177,18 @@ box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:999;}
 .tblwrap td,.tblwrap th{overflow-wrap:anywhere;word-break:normal;}
 .tblwrap .en,.tblwrap .term{white-space:nowrap;}
 .tblwrap caption{font-size:15.5px;font-weight:900;}
+
+/* ===== scroll spy 高亮 ===== */
+#toc a.active{background:#2c6e9e;color:#fff;border-radius:6px;}
+#toc .toc-l1 a.active{background:#1f3a5f;color:#fff;}
+#toc .toc-l2 a.active{background:#2c6e9e;color:#fff;font-weight:800;}
+/* ===== 例題收藏按鈕 ===== */
+.favbtn{margin-left:auto;border:1.5px solid #c9a227;background:#fffaf0;color:#a07814;border-radius:7px;
+  padding:3px 11px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;flex-shrink:0;}
+.favbtn:hover{border-color:#a07814;background:#fdf3d7;}
+.favbtn.on{background:#c9a227;border-color:#c9a227;color:#fff;}
+.pqhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
+.pqhead .favbtn{margin-left:auto;}
 </style>
 <style>
 /* ===== 總經複習頁風格覆蓋（疊加，後載入） ===== */
@@ -233,8 +245,8 @@ h3.subsec{border-bottom-color:var(--line);}
 .callout.def{background:var(--panel);}
 .callout.fig,.callout.eg{background:var(--panel);}
 /* 公式卡：米金底、虛線、置中 */
-.callout.formula{background:#fbf4e6;border:1px dashed #c9b88f;border-radius:8px;text-align:center;}
-.callout.formula .clabel{color:#9a6a1f;text-align:center;}
+.callout.formula{background:#fbf4e6;border:1px dashed #c9b88f;border-radius:8px;text-align:left;}
+.callout.formula .clabel{color:#9a6a1f;text-align:left;}
 .callout.formula ul{display:inline-block;text-align:left;}
 body.dark .callout.formula{background:#2a2418;border-color:#8a7a50;}
 body.dark .callout.formula .clabel{color:#d8b36a;}
@@ -4460,4 +4472,56 @@ function exportGloss(ch){const data={learned:GLS(ch+'-learned',[]),star:GLS(ch+'
 
 </div></div><h3 class="subsec" id="ch20_gloss">本章術語表</h3>
 <div class="gloss-sec" data-gloss="ch20"></div>
+
+<script>
+/* ===== scroll spy：高亮目前閱讀小節 ===== */
+(function(){
+  var secs=document.querySelectorAll('h3.subsec[id]');
+  var links={};
+  document.querySelectorAll('#toc a[data-t]').forEach(function(a){links[a.getAttribute('data-t')]=a;});
+  function update(){
+    var cur=null, vp=window.innerHeight*0.35;
+    secs.forEach(function(s){var r=s.getBoundingClientRect();if(r.top<=vp&&r.bottom>0)cur=s.id;});
+    if(!cur&&secs.length){var last=secs[secs.length-1];if(last.getBoundingClientRect().top<vp)cur=last.id;}
+    if(!cur&&secs.length){var first=secs[0];if(first.getBoundingClientRect().top>0)cur=first.id;}
+    document.querySelectorAll('#toc a.active').forEach(function(a){a.classList.remove('active');});
+    if(cur&&links[cur])links[cur].classList.add('active');
+    var ch=cur?cur.split('_')[0]:null;
+    if(ch&&links[ch])links[ch].classList.add('active');
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('resize',update);
+  setTimeout(update,300);
+})();
+/* ===== 例題收藏 ===== */
+(function(){
+  var KEY='micro_fav_v1';
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return {};}}
+  function save(o){localStorage.setItem(KEY,JSON.stringify(o));}
+  var fav=load();
+  document.querySelectorAll('.probitem').forEach(function(it){
+    var strong=it.querySelector('.pq strong');
+    if(!strong)return;
+    var m=strong.textContent.match(/例題\s*([\d.]+)/);
+    var id=m?('prob-'+m[1].replace('.','-')):null;
+    if(!id)return;
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='favbtn'+(fav[id]?' on':'');btn.textContent=fav[id]?'★ 已收藏':'☆ 收藏';
+    btn.title='收藏此題';
+    btn.addEventListener('click',function(){
+      if(fav[id]){delete fav[id];btn.className='favbtn';btn.textContent='☆ 收藏';}
+      else{
+        var pq=it.querySelector('.pq'),pan=it.querySelector('.pans');
+        fav[id]={t:strong.textContent.replace(/[：:].*$/,''),q:pq?pq.innerHTML:'',a:pan?pan.innerHTML:''};
+        btn.className='favbtn on';btn.textContent='★ 已收藏';
+      }
+      save(fav);
+    });
+    var hd=document.createElement('div');hd.className='pqhead';
+    strong.parentNode.insertBefore(hd,strong);
+    hd.appendChild(strong);
+    hd.appendChild(btn);
+  });
+})();
+</script>
 </body></html>

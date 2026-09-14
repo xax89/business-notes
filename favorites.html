@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>題庫收藏｜微觀人性 學個經</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23c9a227'/%3E%3Cpath d='M12 4l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 9.7l5.4-.8z' fill='%23fff'/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#f6f0e2;--ink:#2b251d;--panel:#fffdf6;--line:#e4d9bf;--muted:#6f6555;
+  --teal:#2c6e9e;--teal-soft:#eef3f4;--green:#1e7d32;--accent:#b5542e;--hl:#fff2b8;
+  --gold:#c9a227;--gold-soft:#fffaf0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Noto Serif TC","Songti TC","PingFang TC",serif;background:var(--paper);color:var(--ink);line-height:1.8}
+.wrap{max-width:960px;margin:0 auto;padding:40px 28px 90px}
+.backhome{display:inline-block;font-size:13px;color:var(--teal);text-decoration:none;border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:5px 14px;transition:all .15s}
+.backhome:hover{border-color:var(--teal)}
+header{margin-top:22px;border-left:8px solid var(--gold);padding:4px 0 12px 18px}
+.kicker{font-size:12px;letter-spacing:.2em;color:var(--gold);font-weight:700;font-family:"Noto Sans TC",sans-serif}
+h1{font-size:28px;margin-top:2px}
+.sub{color:var(--muted);font-size:14px;margin-top:6px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:22px 0 8px}
+.tool{border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:7px 16px;font-size:13.5px;cursor:pointer;color:var(--ink);font-family:inherit;transition:all .15s}
+.tool:hover{border-color:var(--teal);color:var(--teal)}
+.tool.danger:hover{border-color:var(--accent);color:var(--accent)}
+.count{font-size:13px;color:var(--muted);margin-left:auto}
+#list{display:grid;gap:16px;margin-top:16px}
+.fcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+.fhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.fhead .pt{font-weight:800;color:var(--teal);font-size:15px}
+.fhead .rm{margin-left:auto;border:1px solid #e0b3a8;background:#fdf3f0;color:var(--accent);border-radius:7px;padding:3px 12px;font-size:12.5px;cursor:pointer;font-family:inherit}
+.fhead .rm:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.fq{font-size:14.8px}
+.fq .opts{margin:8px 0 2px;display:grid;gap:4px}
+.fq .opts div{padding:6px 10px;border:1px solid var(--line);border-radius:6px;font-size:13.8px;background:#f8fafc;line-height:1.6}
+.fa{margin-top:10px;display:none}
+.fa.show{display:block;background:var(--teal-soft);border-radius:8px;padding:10px 14px;font-size:14px}
+.fa .al{font-weight:800;color:var(--teal);font-size:12.5px;display:block;margin-bottom:2px}
+.empty{text-align:center;color:var(--muted);padding:70px 20px;border:1.5px dashed var(--line);border-radius:12px;margin-top:18px}
+.empty .big{font-size:40px;color:var(--gold);display:block;margin-bottom:8px}
+.empty a{color:var(--teal)}
+.empty .tip{font-size:13px;margin-top:10px;color:var(--muted)}
+.note{background:#fdf0c2;border-left:4px solid #d9a514;padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0;font-size:13.5px;color:#6f5d1a}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backhome" href="./index.html">← 商管類首頁</a>
+  <header>
+    <div class="kicker">MY PROBLEM BANK</div>
+    <h1>題庫收藏</h1>
+    <p class="sub">《微觀人性 學個經》筆記中標記收藏的例題，集中於此複習。收藏與取消會即時同步。</p>
+  </header>
+  <div class="note">收藏資料儲存在此瀏覽器的本機（localStorage）——在 GitHub Pages 網頁版使用時，與筆記頁共用同一份收藏。若清除瀏覽器資料會一併清空。</div>
+  <div class="tools">
+    <button class="tool" id="expandAll">全部展開解答</button>
+    <button class="tool" id="collapseAll">全部收合解答</button>
+    <button class="tool danger" id="clearAll">清空收藏</button>
+    <span class="count" id="count">0 題</span>
+  </div>
+  <div id="list"></div>
+  <div class="empty" id="empty" style="display:none">
+    <span class="big">☆</span>
+    還沒有收藏任何題目。
+    <div class="tip">回到 <a href="microecon-notes.html">微觀筆記</a>，在每題例題右上角點「☆ 收藏」即可加入這裡。</div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='micro_fav_v1';
+  var list=document.getElementById('list'),empty=document.getElementById('empty'),countEl=document.getElementById('count');
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return {};}}
+  function save(o){localStorage.setItem(KEY,JSON.stringify(o));}
+  function render(){
+    var fav=load();
+    var ids=Object.keys(fav);
+    countEl.textContent=ids.length+' 題';
+    list.innerHTML='';
+    if(ids.length===0){empty.style.display='block';return;}
+    empty.style.display='none';
+    ids.sort().forEach(function(id){
+      var it=fav[id];
+      var card=document.createElement('div');card.className='fcard';card.dataset.id=id;
+      var head=document.createElement('div');head.className='fhead';
+      var pt=document.createElement('span');pt.className='pt';pt.textContent=it.t||id;
+      var rm=document.createElement('button');rm.className='rm';rm.textContent='取消收藏';
+      rm.addEventListener('click',function(){
+        var f=load();delete f[id];save(f);render();
+      });
+      head.appendChild(pt);head.appendChild(rm);
+      var q=document.createElement('div');q.className='fq';q.innerHTML=it.q||'';
+      var ab=document.createElement('button');ab.className='tool';ab.textContent='顯示解答';ab.style.marginTop='10px';
+      var a=document.createElement('div');a.className='fa';
+      if(it.a){a.innerHTML='<span class="al">書中解法要點</span>'+it.a;}
+      ab.addEventListener('click',function(){
+        var show=a.classList.toggle('show');
+        ab.textContent=show?'隱藏解答':'顯示解答';
+      });
+      card.appendChild(head);card.appendChild(q);
+      if(it.a){card.appendChild(ab);card.appendChild(a);}
+      list.appendChild(card);
+    });
+  }
+  document.getElementById('expandAll').addEventListener('click',function(){
+    document.querySelectorAll('.fa').forEach(function(x){x.classList.add('show');});
+    document.querySelectorAll('.fcard .tool').forEach(function(b){if(b.textContent.indexOf('隱藏')<0&&b.textContent.indexOf('解答')>-1)b.textContent='隱藏解答';});
+  });
+  document.getElementById('collapseAll').addEventListener('click',function(){
+    document.querySelectorAll('.fa').forEach(function(x){x.classList.remove('show');});
+    document.querySelectorAll('.fcard .tool').forEach(function(b){if(b.textContent.indexOf('顯示')>-1)b.textContent='顯示解答';});
+  });
+  document.getElementById('clearAll').addEventListener('click',function(){
+    if(confirm('確定清空全部收藏？此操作無法復原。')){localStorage.removeItem(KEY);render();}
+  });
+  render();
+})();
+</script>
+</body>
+</html>
