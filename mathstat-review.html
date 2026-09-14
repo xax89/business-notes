@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>統計學～數理統計 複習筆記</title>
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="%23f6f0e2"/><text x="16" y="23" font-size="19" font-family="Georgia,serif" font-style="italic" fill="%23b5542e" text-anchor="middle">&#931;</text></svg>'>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css" media="print" onload="this.media='all'">
+<style>
+:root{
+  --fs:16px;
+  --paper:#f6f0e2; --ink:#2b251d; --panel:#fffdf6; --line:#e4d9bf; --muted:#6f6555;
+  --nav-bg:#f1e9d5; --nav-ink:#4a4234; --nav-hover:#e7dcc0; --nav-active:#3c6e8f;
+  --accent:#b5542e; --accent-soft:#fbeae2;
+  --teal:#2c6e9e; --teal-soft:#eef3f4;
+  --green:#1e7d32; --hl:#ffe94a; --radius:12px;
+  --blue:#2c6e9e; --green2:#3a7d44; --orange:#c06a24; --purple:#6b4e8e; --brown:#8a5a3b;
+}
+body.dark{
+  --paper:#16130d; --ink:#e6e0d2; --panel:#201c14; --line:#3a3325; --muted:#a0937a;
+  --nav-bg:#1f1a10; --nav-ink:#cfc4ad; --nav-hover:#332b1b; --nav-active:#4a8ab5;
+  --accent:#e08a55; --accent-soft:#2f2014;
+  --teal:#5f9fc0; --teal-soft:#14242e; --green:#5cb56e; --hl:#5a4a1e;
+  --blue:#5f9fc0; --green2:#5cb56e; --orange:#d98a4a; --purple:#9b7fc0; --brown:#b08a5a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif TC","PMingLiU","PingFang TC","Songti TC",serif;
+  font-size:var(--fs); background:var(--paper); color:var(--ink);
+  line-height:1.85; display:flex; min-height:100vh;
+}
+::selection{background:var(--hl)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button{font-family:inherit;cursor:pointer}
+/* ===== 側邊目錄（兩層） ===== */
+.sidebar{
+  width:280px;flex-shrink:0;background:var(--nav-bg);color:var(--nav-ink);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 18px 40px;
+  border-right:1px solid var(--line);z-index:60;
+}
+.sidebar .brand{font-weight:700;font-size:15px;letter-spacing:.02em;line-height:1.4;margin-bottom:4px;color:var(--ink)}
+.sidebar .brand .t2{font-size:12px;color:var(--muted);font-weight:400;margin-top:2px}
+.nav-chapter{
+  display:flex;align-items:center;gap:8px;width:100%;padding:4px 10px;border-radius:6px;
+  cursor:pointer;font-size:13.5px;font-weight:700;color:var(--ink);
+  border:none;background:none;text-align:left;margin-top:8px;line-height:1.45;
+}
+.nav-chapter:hover{background:var(--nav-hover)}
+.nav-chapter.active{background:var(--nav-active);color:#fff}
+.nav-chapter .num{font-size:11px;font-weight:600;opacity:.65;width:26px;flex-shrink:0}
+.nav-chapter.active .num{opacity:.9}
+.nav-chapter .tag{margin-left:auto;font-size:10px;opacity:.55;letter-spacing:.05em;font-weight:400;white-space:nowrap}
+.nav-chapter .tag.done{color:var(--green2);opacity:1}
+.nav-chapter.active .tag{color:#fff;opacity:.85}
+.nav-sub{
+  display:block;width:100%;padding:3px 10px 3px 34px;border-radius:6px;
+  cursor:pointer;font-size:12.5px;color:var(--muted);border:none;background:none;text-align:left;line-height:1.45;
+}
+.nav-sub:hover{background:var(--nav-hover);color:var(--ink)}
+.nav-sub.active{color:var(--nav-active);font-weight:700}
+.nav-gloss{
+  display:flex;align-items:center;gap:8px;width:100%;padding:6px 10px;border-radius:6px;margin-top:12px;
+  cursor:pointer;font-size:13.5px;font-weight:700;color:#8a6d1a;border:1.5px dashed #d9b84a;background:#fffaf0;
+  text-align:left;line-height:1.45;transition:all .15s;
+}
+body.dark .nav-gloss{color:#d9b84a;border-color:#8a6d1a;background:#201c14}
+.nav-gloss:hover{border-color:#c9a227;color:#c9a227;background:#fff6dd}
+.nav-gloss svg{width:15px;height:15px;flex-shrink:0}
+.nav-gloss.active{background:#c9a227;color:#fff;border-style:solid}
+.sidebar-close{display:none;position:absolute;top:14px;right:12px;background:none;border:none;color:var(--muted);padding:4px}
+/* ===== 主內容 ===== */
+.main{flex:1;min-width:0;padding:0 42px 90px}
+.topbar{
+  display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  padding:14px 0;margin-bottom:14px;border-bottom:1px solid var(--line);
+}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:6px 8px}
+.searchbox{display:flex;align-items:center;gap:8px;flex:1;max-width:560px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:7px 12px;position:relative}
+.searchbox svg{width:15px;height:15px;color:var(--muted);flex-shrink:0}
+.searchbox input{flex:1;border:none;background:none;color:var(--ink);font-size:14px;font-family:inherit;outline:none}
+.searchbox input::placeholder{color:var(--muted)}
+.search-panel{
+  position:absolute;top:calc(100% + 8px);left:0;right:0;background:var(--panel);
+  border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 30px rgba(43,37,29,.14);
+  max-height:380px;overflow-y:auto;display:none;z-index:70;
+}
+.search-panel.open{display:block}
+.search-panel .sp-item{display:block;width:100%;text-align:left;background:none;border:none;padding:9px 14px;border-bottom:1px solid var(--line);color:var(--ink);font-size:13.5px;line-height:1.5}
+.search-panel .sp-item:hover{background:var(--teal-soft)}
+.search-panel .sp-tag{display:inline-block;font-size:10px;color:var(--teal);border:1px solid var(--line);border-radius:4px;padding:0 5px;margin-right:6px;vertical-align:1px}
+.search-panel .sp-snip{display:block;color:var(--muted);font-size:12px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-panel .sp-empty{padding:16px;color:var(--muted);font-size:13.5px;text-align:center}
+.toolbtn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.toolbtn:hover{background:var(--nav-hover)}
+.toolbtn svg{width:17px;height:17px}
+/* ===== 章頭 ===== */
+.chapter-head{padding:26px 0 20px;border-bottom:2px solid var(--line);margin-bottom:26px}
+.chapter-head .kicker{font-size:12.5px;letter-spacing:.18em;color:var(--accent);font-weight:700;margin-bottom:10px}
+.chapter-head h1{font-size:31px;font-weight:900;letter-spacing:.02em;line-height:1.35}
+.chapter-head h1 .en-sub{display:block;font-size:15px;font-weight:600;color:var(--muted);letter-spacing:.06em;margin-top:4px}
+.chapter-head p{color:var(--muted);margin-top:14px;font-size:15px;max-width:880px}
+.chapter-head .key-points{margin-top:16px;padding-left:2px;list-style:none}
+.chapter-head .key-points li{padding:5px 0 5px 22px;position:relative;font-size:14.5px}
+.chapter-head .key-points li::before{content:"";position:absolute;left:4px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--teal)}
+/* ===== 小節 ===== */
+.section{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);margin:14px 0;overflow:hidden}
+.section-head{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;background:var(--panel);user-select:none}
+.section.open .section-head{background:var(--teal-soft)}
+.section-head .sec-num{font-size:12px;font-weight:800;color:var(--teal);letter-spacing:.05em;white-space:nowrap}
+.section.open .sec-num{color:var(--accent)}
+.section-head h2{flex:1;font-size:17.5px;font-weight:800;line-height:1.4}
+.section-head .chev{width:18px;height:18px;color:var(--muted);transition:transform .25s;flex-shrink:0}
+.section.open .section-head .chev{transform:rotate(90deg)}
+.section-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.section.open .section-body{grid-template-rows:1fr}
+.section-body>div{overflow:hidden}
+.section-inner{padding:8px 22px 22px}
+.section-inner h3{font-size:15.5px;font-weight:800;color:var(--accent);margin:22px 0 8px;padding-left:10px;border-left:4px solid var(--accent)}
+.section-inner h4{font-size:14.5px;font-weight:800;color:var(--teal);margin:16px 0 6px}
+.section-inner p{margin:8px 0;font-size:14.5px}
+.section-inner ul{margin:6px 0 6px 4px;padding-left:20px;font-size:14.5px}
+.section-inner li{margin:4px 0}
+/* callout */
+.note,.warn{border-radius:10px;padding:10px 14px 10px 16px;margin:10px 0;font-size:13.5px;position:relative}
+.note{background:var(--teal-soft);border-left:4px solid var(--teal)}
+.note::before{content:"註";display:inline-block;font-weight:800;color:var(--teal);margin-right:6px;font-size:12px}
+.warn{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.warn::before{content:"注意";display:inline-block;font-weight:800;color:var(--accent);margin-right:6px;font-size:12px}
+.src{margin:10px 0}
+.src summary{cursor:pointer;font-size:13px;color:var(--muted);user-select:none}
+.src pre{margin-top:8px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px;font-size:12.5px;overflow-x:auto;white-space:pre-wrap}
+/* 定義／定理盒 */
+.thm{border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:12px 0;overflow:hidden}
+.thm .thm-head{display:flex;gap:8px;align-items:baseline;padding:9px 16px;font-weight:800;font-size:14px;border-bottom:1px dashed var(--line)}
+.thm.def .thm-head{background:var(--accent-soft);color:var(--accent)}
+.thm.thm1 .thm-head{background:var(--teal-soft);color:var(--teal)}
+.thm .thm-body{padding:10px 16px;font-size:14.5px}
+.thm .thm-body p{margin:6px 0}
+.thm .thm-body .proof{margin-top:8px;font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+/* 公式卡 */
+.formula{display:flex;gap:14px;background:var(--teal-soft);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;padding:12px 16px;margin:12px 0;align-items:flex-start;min-width:0}
+.formula .f-label{flex-shrink:0;font-size:11px;font-weight:800;color:var(--teal);letter-spacing:.12em;padding-top:7px;min-width:34px}
+.formula .f-body{flex:1;font-size:14.5px;min-width:0}
+.formula .f-note{font-size:12.5px;color:var(--muted);margin-top:4px}
+/* 例題 */
+.problem{border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:14px 0;overflow:hidden}
+.problem .p-head{display:flex;align-items:center;gap:8px;padding:9px 16px;background:var(--nav-hover);font-weight:800;font-size:14px}
+.problem .p-head .p-src{margin-left:auto;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.04em;white-space:nowrap}
+.problem .p-body{padding:12px 16px;font-size:14.5px}
+.problem .p-body p{margin:6px 0}
+.problem .opts{margin:8px 0;font-size:14.5px}
+.problem .opts div{padding:2px 0}
+.ans-btn{margin:4px 0 12px 16px;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:7px 16px;font-size:13px;font-weight:700}
+.ans-btn:hover{filter:brightness(1.08)}
+.ans{display:none;border-top:1px dashed var(--line);background:var(--paper);padding:12px 16px;font-size:14px}
+.ans.show{display:block}
+.ans .a-label{font-weight:800;color:var(--accent);margin-bottom:6px}
+.ans ul{margin:4px 0 4px 20px}
+/* 表格 */
+.tbl-wrap{overflow-x:auto;margin:12px 0}
+table.tbl{border-collapse:collapse;width:100%;font-size:13.5px;table-layout:fixed}
+table.tbl th,table.tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.tbl th{background:var(--nav-hover);font-weight:800}
+table.tbl tr:nth-child(even) td{background:color-mix(in srgb, var(--panel) 60%, transparent)}
+/* ===== 例題演練區 ===== */
+.practice{border:2px solid var(--green2);border-radius:14px;background:var(--panel);margin:34px 0;padding:22px 24px}
+.practice>h2{font-size:21px;font-weight:900;color:var(--green2);margin-bottom:4px}
+.practice>.sub{color:var(--muted);font-size:13.5px;margin-bottom:14px}
+/* ===== 術語表 ===== */
+.gloss-section{border:2px solid #d9b84a;border-radius:14px;background:var(--panel);margin:34px 0;padding:22px 24px}
+.gloss-section>h2{font-size:21px;font-weight:900;color:#8a6d1a;margin-bottom:4px}
+.gloss-section>.sub{color:var(--muted);font-size:13.5px;margin-bottom:14px}
+.gloss-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px}
+.gloss-cats{display:flex;flex-wrap:wrap;gap:6px}
+.gloss-cat-btn{border:1px solid var(--line);background:var(--paper);border-radius:20px;padding:4px 13px;font-size:12.5px;color:var(--muted)}
+.gloss-cat-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);font-weight:700}
+.gloss-progress{flex:1;min-width:180px;display:flex;align-items:center;gap:10px}
+.gloss-progress .bar{flex:1;height:8px;background:var(--paper);border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.gloss-progress .fill{height:100%;width:0;background:var(--green2);border-radius:99px;transition:width .3s}
+.gloss-progress .label{font-size:12px;color:var(--muted);white-space:nowrap}
+.gloss-group h3{font-size:14px;font-weight:800;color:var(--teal);margin:18px 0 6px;padding-left:9px;border-left:4px solid var(--teal)}
+.gloss-item{display:flex;align-items:flex-start;gap:12px;padding:9px 6px;border-bottom:1px dashed var(--line)}
+.gloss-item.starred{background:#fffaf0}
+body.dark .gloss-item.starred{background:#2a2418}
+.gloss-check{flex-shrink:0;width:24px;height:24px;border:1.5px solid var(--line);border-radius:6px;background:var(--panel);display:flex;align-items:center;justify-content:center;margin-top:3px;transition:all .15s}
+.gloss-check svg{width:14px;height:14px;color:transparent}
+.gloss-check.done{background:var(--green2);border-color:var(--green2)}
+.gloss-check.done svg{color:#fff}
+.gloss-main{flex:1;min-width:0}
+.gloss-en{font-weight:700;font-size:14.5px}
+.gloss-item.done .gloss-en{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+.gloss-zh{color:var(--accent);font-weight:600;font-size:13px;margin-left:8px}
+.gloss-def{font-size:13px;color:var(--muted);margin-top:2px}
+.gloss-acts{margin-top:5px;display:flex;gap:8px}
+.gloss-acts button{background:none;border:1px solid var(--line);border-radius:6px;font-size:11.5px;color:var(--muted);padding:2px 9px}
+.gloss-acts button.on{background:var(--hl);color:var(--ink);border-color:#c9a227;font-weight:700}
+/* ===== 後續章節 roadmap ===== */
+.roadmap{border:1px dashed var(--line);border-radius:12px;padding:18px 20px;margin:30px 0;background:var(--panel)}
+.roadmap h2{font-size:17px;font-weight:900;color:var(--muted);margin-bottom:8px}
+.roadmap .rm-item{display:flex;gap:10px;align-items:baseline;padding:5px 0;font-size:14px}
+.roadmap .rm-item b{color:var(--teal);white-space:nowrap}
+.roadmap .rm-item span{color:var(--muted)}
+/* footer */
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+/* KaTeX */
+.katex{font-size:0.95em}
+.katex-mathml{display:none}
+.katex-display{margin:10px 0;overflow-x:auto;overflow-y:hidden;max-width:100%;padding:3px 0;-webkit-overflow-scrolling:touch}
+/* 標記 highlight（搜尋） */
+mark{background:var(--hl);color:var(--ink);padding:0 2px;border-radius:3px}
+/* ===== 響應式 ===== */
+.mask{display:none;position:fixed;inset:0;background:rgba(20,15,8,.4);z-index:55}
+@media (max-width:960px){
+  html,body{overflow-x:hidden}
+  .sidebar{display:none;position:fixed;left:0;top:0;box-shadow:20px 0 50px rgba(20,15,8,.25)}
+  .sidebar.open{display:block;animation:drawerIn .25s ease}
+  @keyframes drawerIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+  .sidebar-close{display:block}
+  .mask.show{display:block}
+  .main{padding:0 18px 80px;min-width:0}
+  .section-body>div,.section-inner,.tbl-wrap{min-width:0}
+  .menu-btn{display:block;min-width:44px;min-height:40px}
+  .searchbox input{font-size:16px}
+  .nav-chapter,.nav-sub{font-size:14px;padding:9px 12px}
+  .tbl-wrap table.tbl{min-width:560px}
+  .chapter-head h1{font-size:24px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+/* ===== 術語表 ===== */
+.gloss-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.gloss-progress{flex:1 1 180px;min-width:150px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.gloss-progress > span{display:block;height:100%;width:0%;background:var(--green);transition:width .3s}
+.gloss-progress-txt{font-size:12px;color:var(--muted);font-weight:600}
+.gloss-cats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.gloss-cat{font-size:12.5px;padding:3px 11px;border-radius:99px;border:1px solid var(--line);background:var(--panel);cursor:pointer;color:var(--ink);letter-spacing:.04em}
+.gloss-cat.active{background:var(--nav-active);border-color:var(--nav-active);color:#fff}
+.gloss-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.gloss-item{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 13px;display:flex;gap:10px;align-items:flex-start}
+.gloss-item input{width:16px;height:16px;margin-top:5px;accent-color:var(--green);flex:none}
+.gloss-item .g-t{font-weight:700;font-size:14.5px}
+.gloss-item .g-d{font-size:13px;color:var(--muted);margin-top:2px;line-height:1.6}
+.gloss-item .g-cat{display:inline-block;font-size:11px;padding:1px 8px;border-radius:99px;margin-bottom:3px;background:var(--accent-soft);color:var(--accent)}
+.gloss-item.done .g-t{text-decoration:line-through;opacity:.55}
+.gloss-random{margin-left:auto}
+/* ===== 路線圖 ===== */
+.roadmap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:8px}
+.roadmap-card{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:12px;padding:14px 16px}
+.roadmap-card.done{border-left-color:var(--green)}
+.roadmap-card .r-t{font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
+.roadmap-card .r-s{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.65}
+.roadmap-card .r-badge{font-size:11px;padding:2px 9px;border-radius:99px;font-weight:600}
+.roadmap-card.done .r-badge{background:var(--teal-soft);color:var(--teal)}
+.roadmap-card.pending .r-badge{background:var(--accent-soft);color:var(--accent)}
+/* ===== 搜尋 ===== */
+.search-hide{display:none!important}
+.search-empty{padding:30px 0;text-align:center;color:var(--muted);font-size:14px}
+body.searching .section:not(.search-hit){display:none}
+body.searching .search-hit{display:block}
+mark{background:var(--hl);padding:0 2px;border-radius:3px}
+/* ===== 頁尾 ===== */
+.page-footer{margin-top:70px;padding:26px 4px 14px;border-top:2px solid var(--line);color:var(--muted);font-size:12.5px;line-height:1.9}
+.page-footer b{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<!-- ===== 側邊目錄 ===== -->
+<aside class="sidebar" id="sidebar">
+  <button class="sidebar-close" id="sidebarClose" aria-label="關閉目錄"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="brand">統計學～數理統計
+    <div class="t2">研究所複習 · 第 1–4 章 · 張翔老師主講</div>
+  </div>
+  <nav id="navChapters">
+    <button class="nav-chapter active" data-jump="ch1"><span class="num">CH1</span>點估計理論<span class="tag done">已完成</span></button>
+    <button class="nav-chapter" data-jump="ch2"><span class="num">CH2</span>大樣本理論<span class="tag done">已完成</span></button>
+    <button class="nav-chapter" data-jump="ch3"><span class="num">CH3</span>假說檢定理論<span class="tag done">已完成</span></button>
+    <button class="nav-chapter" data-jump="roadmap"><span class="num">CH4</span>財務工程數學<span class="tag">待建</span></button>
+  </nav>
+  <div class="nav-subhead">第1章 點估計理論</div>
+  <nav class="nav-subs">
+    <button class="nav-sub" data-jump="s11">1.1 充份性</button>
+    <button class="nav-sub" data-jump="s111">1.1.1 充份統計量之定義</button>
+    <button class="nav-sub" data-jump="s112">1.1.2 分解定理</button>
+    <button class="nav-sub" data-jump="s113">1.1.3 指標函數的運用</button>
+    <button class="nav-sub" data-jump="s114">1.1.4 指數族</button>
+    <button class="nav-sub" data-jump="s12">1.2 尋找 UMVUE</button>
+    <button class="nav-sub" data-jump="s121">1.2.1 Rao-Blackwell 改進</button>
+    <button class="nav-sub" data-jump="s122">1.2.2 Cramér-Rao 下界</button>
+    <button class="nav-sub" data-jump="s13">1.3 貝氏統計方法</button>
+  </nav>
+  <div class="nav-subhead">第2章 大樣本理論</div>
+  <nav class="nav-subs">
+    <button class="nav-sub" data-jump="s21">2.1 大樣本理論</button>
+    <button class="nav-sub" data-jump="s211">2.1.1 分配收斂</button>
+    <button class="nav-sub" data-jump="s212">2.1.2 機率收斂</button>
+    <button class="nav-sub" data-jump="s213">2.1.3 極限分配進階</button>
+  </nav>
+  <div class="nav-subhead">第3章 假說檢定理論</div>
+  <nav class="nav-subs">
+    <button class="nav-sub" data-jump="s31">3.1 最強力檢定</button>
+    <button class="nav-sub" data-jump="s311">3.1.1 Neyman-Pearson 引理</button>
+    <button class="nav-sub" data-jump="s312">3.1.2 均勻最強力檢定</button>
+    <button class="nav-sub" data-jump="s32">3.2 廣義概似比</button>
+    <button class="nav-sub" data-jump="s321">3.2.1 GLRT</button>
+    <button class="nav-sub" data-jump="s322">3.2.2 GLRT 大樣本性質</button>
+  </nav>
+  <button class="nav-gloss" data-jump="gloss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>術語表複習</button>
+</aside>
+<div class="mask" id="mask"></div>
+
+<!-- ===== 主內容 ===== -->
+<main class="main" id="main">
+  <div class="topbar">
+    <button class="menu-btn" id="menuBtn" aria-label="開啟目錄"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <div class="searchbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="searchInput" placeholder="搜尋章節、例題、術語…" autocomplete="off">
+      <div class="search-panel" id="searchPanel"></div>
+    </div>
+    <button class="toolbtn" id="darkBtn" aria-label="深色模式" title="深色模式">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+
+  <!-- ===== 第 1 章 ===== -->
+  <div class="chapter-head" id="ch1">
+    <div class="kicker">研究所複習 · 數理統計 · 第 1 章</div>
+    <h1>第1章 點估計理論<span class="en-sub">THEORY OF POINT ESTIMATION · 書頁 5–72</span></h1>
+    <p>本章是《統計學～數理統計》的開場：先從「統計量如何濃縮樣本資訊」出發，建立充份統計量與分解定理；接著介紹指數族與完備充份統計量，用 Rao-Blackwell、Lehmann-Scheffé 定理與 Cramér-Rao 下界這三條路線尋找 UMVUE；最後進入貝氏統計方法，以事前分配與樣本資訊共同修正對母數的看法。</p>
+    <ul class="key-points">
+      <li>充份統計量：定義、分解定理（Fisher–Neyman）、最小充份統計量</li>
+      <li>指標函數：值域與母數有關時，如何嚴謹地寫出 pdf</li>
+      <li>指數族：涵蓋常態、Poisson、Gamma 等常用分配，是找完備充份統計量的利器</li>
+      <li>UMVUE 三路線：Rao-Blackwell 改進、Lehmann-Scheffé 定理、Cramér-Rao 下界</li>
+      <li>貝氏估計：事前分配 → 事後分配 → 貝氏估計量</li>
+    </ul>
+  </div>
+<!-- ===== 1.1 充份性 ===== -->
+  <section class="section open" id="s11">
+    <div class="section-head">
+      <span class="sec-num">§1.1</span><h2>充份性</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p>設 $X_1, X_2, \ldots, X_n$ 為一組樣本大小 $n$ 的<b>隨機樣本</b>（random sample），抽自母體分配 $f(x;\theta)$，其中 $\theta$ 為未知待估母數。我們用<b>統計量</b>（statistic）來濃縮樣本：</p>
+      <div class="formula"><div class="f-label">統計量</div><div class="f-body">$$T = T(X_1, X_2, \ldots, X_n)$$<div class="f-note">隨機樣本的函數組合，但<b>不能含有未知母數 $\theta$</b>；是整套樣本的「資訊縮減」（information reduction）。</div></div></div>
+      <p>隨機樣本中，對推論 $\theta$ 而言，有些資訊「有用」、有些「無用」。理想的統計量應該做到<b>去蕪存菁</b>——只縮減掉垃圾資訊，保留所有有用資訊，這就是<b>充份統計量</b>（sufficient statistic）的核心精神。</p>
+      <div class="note">直覺類比：充份統計量就像「雞精」——它已經包含雞的全部營養精華，有了雞精，就不需要再回去啃整隻雞了（好不好吃是另一回事）。</div>
+      <p>推論 $\theta$ 時可用的統計量千千百百種，先從滿足充份性的下手，正是現代統計學奠基者之一<b>羅納德·費雪（Ronald Fisher）</b>所揭櫫的<b>充份性原則</b>（sufficiency principle，1922）：不滿足充份性的統計量已有資訊遺漏，幾乎不必考慮。</p>
+      <ul>
+        <li>充份統計量<b>不是唯一</b>的：找到一個，通常就能找到無限多個（一對一函數轉換）。</li>
+        <li>只要做到「存菁」即可為充份統計量，未必要做到「去蕪」。</li>
+      </ul>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 1.1.1 充份統計量之定義 ===== -->
+  <section class="section open" id="s111">
+    <div class="section-head">
+      <span class="sec-num">§1.1.1</span><h2>充份統計量之定義</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <div class="thm def"><div class="thm-head">定義 1.1（充份統計量，sufficient statistic）</div><div class="thm-body">
+        <p>若在給定統計量 $S$ 之下，隨機樣本 $X_1, X_2, \ldots, X_n$ 的<b>條件機率函數</b>（conditional pmf/pdf given $S=s$）</p>
+        <div class="formula"><div class="f-label">充份性</div><div class="f-body">$$f_{X_1,\ldots,X_n \mid S}(x_1,\ldots,x_n \mid s) \ \text{與母數 } \theta \ \text{無關，} \quad \forall s \in R_S$$<div class="f-note">對 $S$ 的所有可能值皆成立，則稱 $S$ 為 $\theta$ 之充份統計量（數學意義：給定 $S$ 後，樣本中已不存留關於 $\theta$ 的殘餘資訊）。</div></div></div>
+      </div></div>
+      <p>換句話說：有了充份統計量 $S$，推論 $\theta$ 所需的資訊就足夠充份，不必再回頭檢視原始樣本或任何其他統計量。</p>
+
+      <h4>範例 1.1　二元隨機變數的充份性（元智財金）</h4>
+      <p>A pair of binary random variables $(X_1, X_2)$ has the distribution in the table. The parameter $M$ can take values $0,1,2,3,4$. Is $X_1 + X_2$ a sufficient statistic for $M$?</p>
+      <div class="tbl-wrap"><table class="tbl"><colgroup><col style="width:30%"><col style="width:22%"><col style="width:24%"><col style="width:24%"></colgroup>
+        <tr><th>$X_1$</th><th>$X_2$</th><th>Probability</th><th>對應 $S$</th></tr>
+        <tr><td>0</td><td>0</td><td>$(12-7M+M^2)/12$</td><td>$S=0$</td></tr>
+        <tr><td>0</td><td>1</td><td>$(4M-M^2)/12$</td><td>$S=1$</td></tr>
+        <tr><td>1</td><td>0</td><td>$(4M-M^2)/12$</td><td>$S=1$</td></tr>
+        <tr><td>1</td><td>1</td><td>$(M^2-M)/12$</td><td>$S=2$</td></tr>
+      </table></div>
+      <p><b>解：</b>令 $S=X_1+X_2$，先由合併求 $S$ 的機率分配：</p>
+      <div class="formula"><div class="f-label">分配</div><div class="f-body">$$f_S(s) = \begin{cases} \dfrac{12-7M+M^2}{12}, & s=0 \\[6pt] \dfrac{4M-M^2}{6}, & s=1 \\[6pt] \dfrac{M^2-M}{12}, & s=2 \end{cases}$$</div></div>
+      <p>再算條件機率 $P\big(X_1=x_1,\, X_2=x_2 \mid S=s\big)$：</p>
+      <div class="tbl-wrap"><table class="tbl"><colgroup><col style="width:52%"><col style="width:16%"><col style="width:16%"><col style="width:16%"></colgroup>
+        <tr><th>條件機率</th><th>$X_1$</th><th>$X_2$</th><th>$S$</th></tr>
+        <tr><td>$P(X_1=0,X_2=0 \mid S=0)=1$</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>$P(X_1=0,X_2=1 \mid S=1)=\tfrac12$</td><td>0</td><td>1</td><td>1</td></tr>
+        <tr><td>$P(X_1=1,X_2=0 \mid S=1)=\tfrac12$</td><td>1</td><td>0</td><td>1</td></tr>
+        <tr><td>$P(X_1=1,X_2=1 \mid S=2)=1$</td><td>1</td><td>1</td><td>2</td></tr>
+      </table></div>
+      <p>在給定 $S=s$（$s=0,1,2$）下，條件機率皆與母數 $M$ 無關，故 $S=X_1+X_2$ 為 $M$ 之充份統計量。</p>
+
+      <h4>範例 1.2　驗證「不是」充份統計量（中山應數）</h4>
+      <p>Let $X_1, X_2$ be i.i.d. with $f(x)=\begin{cases}e^{-\theta}, & x=0 \\ \theta e^{-\theta}, & x=1 \\ 1-(\theta+1)e^{-\theta}, & x=2\end{cases}$. Show $X_1+X_2$ is <b>not</b> a sufficient statistic for $\theta$.</p>
+      <p><b>解：</b>只要找到一個 $S=s$，使條件機率與 $\theta$ 有關即可。取 $S=2$：</p>
+      <div class="formula"><div class="f-label">反例</div><div class="f-body">$$P(S=2)=\theta^2 e^{-2\theta}+2\big[e^{-\theta}-(\theta+1)e^{-2\theta}\big]$$<div class="f-note">因此 $P(X_1=1,X_2=1 \mid S=2)=\dfrac{\theta^2 e^{-2\theta}}{P(S=2)}$ 仍含有 $\theta$，與 $\theta$ 有關，故 $S$ 不為 $\theta$ 之充份統計量。</div></div></div>
+
+      <h4>範例 1.3　擲硬幣：正面總數是充份統計量</h4>
+      <p>A coin is tossed $n$ times; we wish to estimate the probability of heads $p$. Show the total number of heads $S$ is a sufficient statistic for $p$.</p>
+      <p><b>解：</b>令 $X_i=\begin{cases}1, & \text{第 } i \text{ 次正面}\\0, & \text{第 } i \text{ 次背面}\end{cases}$，則 $X_i \overset{\text{iid}}{\sim} \text{Ber}(p)$，$S=\sum_{i=1}^n X_i \sim \text{Bin}(n,p)$。由定義：</p>
+      <div class="formula"><div class="f-label">條件密度</div><div class="f-body">$$f_{X\mid S}(x\mid s)=\frac{f_X(x)}{f_S(s)}=\frac{\prod_{i=1}^n p^{x_i}(1-p)^{1-x_i}}{\binom{n}{s}p^s(1-p)^{n-s}}=\frac{1}{\binom{n}{s}}$$<div class="f-note">與 $p$ 無關，$\forall s=0,1,\ldots,n$，故 $S=\sum X_i$ 為 $p$ 之充份統計量。</div></div></div>
+
+      <p>充份統計量並不唯一，其中攜帶訊息最精簡（再精簡就失去充份性）者，稱為<b>最小充份統計量</b>（minimal sufficient statistic）。</p>
+      <div class="thm def"><div class="thm-head">定義 1.4（最小充份統計量）</div><div class="thm-body">
+        <p>若 $\theta$ 的某個充份統計量 $S^*$，可以寫成 $\theta$ 之<b>任意</b>充份統計量 $S_1, S_2, \ldots$ 的函數轉換，則稱 $S^*$ 為最小充份統計量。</p>
+        <p class="proof">資料縮減的兩種方式：①維度縮減（$n$ 維樣本 → 1 維統計量）；②多對一函數轉換（一對一轉換不縮減訊息，轉換前後稱「等價統計量」）。最小充份統計量的一對一函數轉換仍為最小充份統計量，故存在時有無限多個。</p>
+      </div></div>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 1.1.2 分解定理 ===== -->
+  <section class="section open" id="s112">
+    <div class="section-head">
+      <span class="sec-num">§1.1.2</span><h2>分解定理</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p>用定義 1.1 找充份統計量很麻煩，好在我们有<b>分解定理</b>（factorization theorem），把「條件分配與 $\theta$ 無關」轉化為「聯合 pdf 可以拆成兩部分相乘」。</p>
+      <div class="thm thm1"><div class="thm-head">定理 1.2（分解定理，Fisher–Neyman factorization theorem）</div><div class="thm-body">
+        <p>設 $X_1,\ldots,X_n$ 抽自母體 $f(x;\theta)$。則 $S$ 為 $\theta$ 之充份統計量的<b>充要條件</b>為：聯合機率函數可拆解為</p>
+        <div class="formula"><div class="f-label">分解</div><div class="f-body">$$f(x_1,\ldots,x_n;\theta)=g(s;\theta)\cdot h(x_1,\ldots,x_n)$$<div class="f-note">$g$ 可含 $\theta$ 與 $s$（且只透過 $s$ 依賴樣本）；$h$ 不含 $\theta$。證：見 Casella &amp; Berger, <i>Statistical Inference</i>, pp. 276–277。</div></div></div>
+        <p>亦稱費雪–尼曼分解定理，或 Halmos–Savage 分解定理。</p>
+      </div></div>
+
+      <h4>範例 1.3（續）　用分解定理重驗</h4>
+      <p>$X_1,\ldots,X_n \overset{\text{iid}}{\sim}\text{Ber}(p)$：</p>
+      <div class="formula"><div class="f-label">分解</div><div class="f-body">$$f(x_1,\ldots,x_n;p)=p^{\sum x_i}(1-p)^{n-\sum x_i}=\underbrace{p^{s}(1-p)^{n-s}}_{g(s;p)}\cdot 1$$<div class="f-note">取 $h=1$，由分解定理知 $S=\sum X_i$ 為 $p$ 之充份統計量。</div></div></div>
+      <p>因樣本比例 $\bar{X}$（即樣本平均數）是 $S$ 的一對一函數轉換，$\bar{X}$ 同樣是 $p$ 的充份統計量，兩者為<b>等價統計量</b>（equivalent statistics）。</p>
+
+      <h4>範例 1.4　指數分配：樣本和為充份統計量</h4>
+      <p>$X_1,\ldots,X_n \overset{\text{iid}}{\sim}\text{Exp}(\beta)$（期望值 $\beta$）。驗證 $S=\sum X_i$ 為 $\beta$ 之充份統計量（用定義與分解定理各一次）。</p>
+      <div class="formula"><div class="f-label">分解</div><div class="f-body">$$f(x_1,\ldots,x_n;\beta)=\prod_{i=1}^n \frac{1}{\beta}e^{-x_i/\beta}=\underbrace{\beta^{-n}e^{-s/\beta}}_{g(s;\beta)}\cdot 1$$<div class="f-note">由分解定理，$S=\sum X_i$ 為充份統計量；$\bar{X}=S/n$ 亦為充份統計量，兩者等價。</div></div></div>
+
+      <h4>範例 1.5　Poisson（台大財金）</h4>
+      <p>設 $\{X_i\}_{i=1}^n \overset{\text{iid}}{\sim}\text{Poi}(\lambda)$，$\lambda$ 未知。寫出 $\lambda$ 之參數空間並求一個充份統計量 $T$。</p>
+      <p><b>解：</b>參數空間 $\Theta=\{\lambda \mid \lambda>0\}$。分解：</p>
+      <div class="formula"><div class="f-label">分解</div><div class="f-body">$$f(x_1,\ldots,x_n;\lambda)=\prod_{i=1}^n\frac{e^{-\lambda}\lambda^{x_i}}{x_i!}=\underbrace{e^{-n\lambda}\lambda^{\sum x_i}}_{g(s;\lambda)}\cdot\frac{1}{\prod x_i!}$$<div class="f-note">$S=\sum X_i$ 為 $\lambda$ 之充份統計量；樣本平均數 $\bar{X}$ 亦為充份統計量。</div></div></div>
+
+      <h4>範例 1.6　$f(x;\theta)=\theta x^{\theta-1}$（政大經研）</h4>
+      <p>Let $X_1,\ldots,X_n$ be a random sample from $f(x;\theta)=\theta x^{\theta-1},\ 0&lt;x&lt;1,\ \theta&gt;0$.</p>
+      <p>（1）求 $\theta$ 之 MLE　（2）$\sum X_i$ 是否為充份統計量？若否，求一個充份統計量。</p>
+      <p><b>解：</b>（1）$\ell(\theta)=n\ln\theta+(\theta-1)\sum_{i=1}^n\ln x_i$，一階條件</p>
+      <div class="formula"><div class="f-label">MLE</div><div class="f-body">$$\frac{n}{\theta}+\sum_{i=1}^n\ln x_i=0 \ \Longrightarrow\ \hat{\theta}_{MLE}=-\frac{n}{\sum_{i=1}^n\ln X_i}$$</div></div>
+      <p>（2）$\sum X_i$ 不是充份統計量。分解：</p>
+      <div class="formula"><div class="f-label">分解</div><div class="f-body">$$f(x_1,\ldots,x_n;\theta)=\theta^n\Big(\prod_{i=1}^n x_i\Big)^{\theta-1}=\underbrace{\theta^n\Big(\prod x_i\Big)^{\theta-1}}_{g(s;\theta)}\cdot 1$$<div class="f-note">$S=\prod_{i=1}^n X_i$ 為充份統計量；樣本幾何平均數 $m_g=\big(\prod X_i\big)^{1/n}$ 與其等價，亦為充份統計量。</div></div></div>
+
+      <div class="thm thm1"><div class="thm-head">定理 1.3（MLE 與充份統計量的關係）</div><div class="thm-body">
+        <p>若最大概似估計量 $\hat{\theta}_{MLE}$ 存在且唯一，則 $\hat{\theta}_{MLE}$ 必為某充份統計量 $S$ 的函數轉換。</p>
+        <p class="proof">證：見葉小蓁（2006）《高等統計學》頁 269–270；或 Bain &amp; Engelhardt (1992) p. 342。反例：MLE 不唯一時（如 U(θ−1,θ+1)），MLE 可能不是充份統計量的函數轉換。</p>
+      </div></div>
+      <p>多數情況下 MLE 也因此滿足充份性，但存在例外（後續範例 1.13 給出反例：MLE 是充份統計量的函數轉換，但本身不是充份統計量）。</p>
+
+      <h4>範例 1.7　指數分配（速率參數 $\lambda$，中興農藝）</h4>
+      <p>Show that $\sum_{i=1}^n X_i$ from $\text{Exp}(\lambda)$ with pdf $f(x;\lambda)=\lambda e^{-\lambda x}$ is a sufficient statistic for $\lambda$.</p>
+      <p><b>解：</b>$f(x_1,\ldots,x_n;\lambda)=\lambda^n e^{-\lambda\sum x_i}$，取 $g(s;\lambda)=\lambda^n e^{-\lambda s}$、$h=1$，故 $\sum X_i$ 為充份統計量。MLE $\hat\lambda_{MLE}=1/\bar{X}=n/\sum X_i$ 為其一對一函數轉換，故 $\hat\lambda_{MLE}$ 亦為充份統計量且與 $\sum X_i$ 等價。</p>
+
+      <h4>範例 1.8　常態分配三種情境（淡江財金）</h4>
+      <p>$X_1,\ldots,X_n \overset{\text{iid}}{\sim} N(\mu,\sigma^2)$，由分解定理可得：</p>
+      <div class="tbl-wrap"><table class="tbl"><colgroup><col style="width:38%"><col style="width:34%"><col style="width:28%"></colgroup>
+        <tr><th>情境</th><th>聯合 pdf 分解</th><th>充份統計量</th></tr>
+        <tr><td>（1）$\mu$ 未知、$\sigma^2$ 已知</td><td>$\propto e^{-\frac{1}{2\sigma^2}\sum(x_i-\mu)^2}$</td><td>$\sum X_i$</td></tr>
+        <tr><td>（2）$\mu=0$、$\sigma^2$ 未知</td><td>$\propto (\sigma^2)^{-n/2}e^{-\frac{1}{2\sigma^2}\sum x_i^2}$</td><td>$\sum X_i^2$</td></tr>
+        <tr><td>（3）$\mu$、$\sigma^2$ 皆未知</td><td>$\propto (\sigma^2)^{-n/2}e^{-\frac{n(\bar x-\mu)^2+\sum(x_i-\bar x)^2}{2\sigma^2}}$</td><td>$\big(\sum X_i,\ \sum X_i^2\big)$</td></tr>
+      </table></div>
+
+      <h4>範例 1.9　常態（兩母數皆未知，中央財金）</h4>
+      <p>請找出一元常態分配 $N(\mu,\sigma^2)$（$\mu,\sigma^2$ 皆未知）的充份統計量。</p>
+      <p><b>解：</b>由分解定理，$\big(\sum X_i,\ \sum X_i^2\big)$ 為 $(\mu,\sigma^2)$ 之一個<b>2 維聯合充份統計量</b>（jointly sufficient statistic）；常用的 $\big(\bar{X},\ S^2\big)$（樣本平均數與樣本變異數）與其等價，同樣是充份統計量。</p>
+      <div class="note">一般原則：母數向量有 $k$ 個未知母數時，需要至少 $k$ 維度的聯合充份統計量。整套樣本 $(X_1,\ldots,X_n)$ 本身當然是 $n$ 維充份統計量，只是太厚重；順序統計量 $(X_{(1)},\ldots,X_{(n)})$ 亦然。</div>
+
+      <h4>範例 1.10　Gamma 分配（交大財金）</h4>
+      <p>Recall that $X\sim\text{Gamma}(\alpha,\lambda)$ has pdf $f(x;\alpha,\lambda)=\dfrac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}$. Find two sufficient statistics for the gamma distribution.</p>
+      <p><b>解：</b></p>
+      <div class="formula"><div class="f-label">分解</div><div class="f-body">$$f(x_1,\ldots,x_n;\alpha,\lambda)=\Big(\frac{\lambda^\alpha}{\Gamma(\alpha)}\Big)^n e^{\alpha\sum\ln x_i-\lambda\sum x_i}\cdot\frac{1}{\prod x_i}$$<div class="f-note">取 $g=\big(\lambda^\alpha/\Gamma(\alpha)\big)^n e^{\alpha\sum\ln x_i-\lambda\sum x_i}$、$h=1/\prod x_i$，故 $\big(\sum X_i,\ \sum\ln X_i\big)$ 為 $(\alpha,\lambda)$ 之一個 2 維聯合充份統計量（如 $\big(\sum\ln X_i,\ \bar{X}\big)$ 亦為充份統計量）。</div></div></div>
+    </div></div></div>
+  </section>
+  <!-- ===== 1.1.3 指標函數的運用 ===== -->
+  <section class="section open" id="s113">
+    <div class="section-head">
+      <span class="sec-num">§1.1.3</span><h2>指標函數的運用</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p>當母體分配的值域（support）與待估母數 $\theta$ 有關時（典型如均勻分配 $U(0,\theta)$），機率函數必須用<b>指標函數</b>（indicator function）嚴謹記載：</p>
+      <div class="formula"><div class="f-label">指標函數</div><div class="f-body">$$I_A(x)=\begin{cases}1, & x\in A\\ 0, & x\notin A\end{cases} \qquad \text{例：}\ X\sim U(0,\theta) \iff f_X(x)=\frac{1}{\theta}I_{[0,\theta]}(x)$$<div class="f-note">此時樣本極端值（order statistics）往往成為充份統計量與 MLE 的關鍵。</div></div></div>
+
+      <h4>範例 1.11　$U(0,\theta)$ 之 MME 與 MLE（台大財金）</h4>
+      <p>設 $X\sim U(0,\theta)$，隨機抽取 $X_1,\ldots,X_n$。（1）以動差法估計 $\theta$ 並驗證不偏性；（2）以最大概似法估計 $\theta$ 並驗證不偏性；（3）寫出參數空間並求一個充份統計量。</p>
+      <p><b>解：</b>（1）動差法：</p>
+      <div class="formula"><div class="f-label">MME</div><div class="f-body">$$E(X)=\frac{\theta}{2}=\bar{X} \;\Rightarrow\; \hat{\theta}_{MME}=2\bar{X}, \qquad E(2\bar{X})=2\cdot\frac{\theta}{2}=\theta \ \text{（不偏）}$$</div></div>
+      <p>（2）最大概似法：</p>
+      <div class="formula"><div class="f-label">MLE</div><div class="f-body">$$L(\theta)=\prod_{i=1}^n \frac{1}{\theta}I_{[0,\theta]}(x_i)=\theta^{-n}I_{[0,\theta]}\big(x_{(n)}\big)\;\Rightarrow\; \hat{\theta}_{MLE}=X_{(n)}$$<div class="f-note">欲使 $L(\theta)$ 最大，$\theta$ 應取 $[X_{(n)},\infty)$ 中之最小者，即 $X_{(n)}$。令 $Y_n=X_{(n)}$，則 $f_{Y_n}(y)=ny^{n-1}/\theta^n$，故 $E(Y_n)=\frac{n}{n+1}\theta\neq\theta$：<b>低估了 $\theta$，為偏誤估計量</b>（bias $=-\theta/(n+1)$）。</div></div></div>
+      <p>（3）$\Omega=\{\theta\mid\theta>0\}$。取 $g(x_{(n)};\theta)=\theta^{-n}I_{[0,\theta]}(x_{(n)})$、$h=1$，由分解定理知 $\hat{\theta}_{MLE}=X_{(n)}$ 為 $\theta$ 之充份統計量；而 $\hat{\theta}_{MME}=2\bar{X}$ 並非充份統計量。</p>
+
+      <h4>範例 1.12　$f(x;\theta)=e^{-(x-\theta)}$：極小值為 MLE</h4>
+      <p>Let $X_1,\ldots,X_n$ be a random sample from $f(x;\theta)=e^{-(x-\theta)}$，$\theta&lt;x&lt;\infty$. Find the MLE and a sufficient statistic for $\theta$.</p>
+      <p><b>解：</b>寫入指標函數後分解：</p>
+      <div class="formula"><div class="f-label">分解</div><div class="f-body">$$L(\theta)=e^{-\sum x_i+n\theta}\cdot I_{(\theta,\infty)}(x_{(1)}) = \underbrace{e^{n\theta}I_{(\theta,\infty)}(x_{(1)})}_{g(x_{(1)};\theta)}\cdot\underbrace{e^{-\sum x_i}}_{h}$$<div class="f-note">$\theta$ 越大 $e^{n\theta}$ 越大，但須滿足 $\theta\le x_{(1)}$，故 $\hat{\theta}_{MLE}=X_{(1)}$；由分解定理，$X_{(1)}$ 為 $\theta$ 之充份統計量。</div></div></div>
+
+      <h4>範例 1.13　$U(\theta,2\theta)$：MLE 為充份統計量之函數，卻非充份統計量（政大金融）</h4>
+      <p>Suppose $X_1,\ldots,X_n \sim U(\theta,2\theta)$，$\theta&gt;0$.（1）MME；（2）MLE；（3）find a sufficient statistic (other than the trivial solution).</p>
+      <p><b>解：</b>（1）$E(X)=\frac{\theta+2\theta}{2}=\frac{3\theta}{2}=\bar{X}\Rightarrow\hat{\theta}_{MME}=\frac{2}{3}\bar{X}$。</p>
+      <p>（2）</p>
+      <div class="formula"><div class="f-label">MLE</div><div class="f-body">$$L(\theta)=\theta^{-n}I_{(0,\theta]}(x_{(1)})\cdot I_{[\theta,2\theta]}(x_{(n)}) \;\Rightarrow\; \theta\in\Big[\frac{x_{(n)}}{2},\ x_{(1)}\Big],\quad \hat{\theta}_{MLE}=\frac{X_{(n)}}{2}$$<div class="f-note">$\theta$ 越小 $\theta^{-n}$ 越大，故在可行區間 $[X_{(n)}/2,\ X_{(1)}]$ 取下界。</div></div></div>
+      <p>（3）</p>
+      <div class="formula"><div class="f-label">充份統計量</div><div class="f-body">$$f(x_1,\ldots,x_n;\theta)=\theta^{-n}I_{(0,\theta]}(x_{(1)})I_{[\theta,2\theta]}(x_{(n)}) \;\Rightarrow\; S=\big(X_{(1)},\ X_{(n)}\big)\ \text{為 2 維聯合充份統計量}$$<div class="f-note"><b>罕見反例</b>：MLE $\hat{\theta}_{MLE}=X_{(n)}/2$ 是充份統計量的函數轉換（$X_{(n)}/2=0\cdot X_{(1)}+\tfrac12 X_{(n)}$），但並非一對一轉換，縮減過度，<b>本身不是充份統計量</b>。</div></div></div>
+
+      <h4>範例 1.14　$U(\theta-1,\theta+1)$：MLE 不唯一</h4>
+      <p>Suppose $X_1,\ldots,X_n \sim U(\theta-1,\theta+1)$，$\theta&gt;0$.（1）MLE；（2）sufficient statistic.</p>
+      <p><b>解：</b>（1）</p>
+      <div class="formula"><div class="f-label">MLE</div><div class="f-body">$$L(\theta)=2^{-n}I_{[\theta-1,\theta]}(x_{(1)})I_{[\theta,\theta+1]}(x_{(n)}) \;\Rightarrow\; \theta\in\big[X_{(n)}-1,\ X_{(1)}+1\big]$$<div class="f-note">$2^{-n}$ 與 $\theta$ 無關，只要落在可行區間 $[X_{(n)}-1,\ X_{(1)}+1]$ 內皆可：<b>MLE 有無限多個、不唯一</b>。</div></div></div>
+      <p>（2）由分解定理，$S=(X_{(1)},X_{(n)})$ 為 $\theta$ 之 2 維聯合充份統計量。</p>
+      <div class="note">小結：值域與 $\theta$ 有關時，MLE 幾乎都落在「樣本極值」上（取最大或最小的可行 $\theta$），充份統計量也常是極值（或極值組合）——這是考試最愛考的型態。</div>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 1.1.4 指數族 ===== -->
+  <section class="section open" id="s114">
+    <div class="section-head">
+      <span class="sec-num">§1.1.4</span><h2>指數族</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p><b>分配族</b>（family of distributions）指機率函數數學形式相同、僅母數值不同的整群分配，例如 $\{N(\mu,4)\}_{\mu\in\mathbb{R}}$ 是常態分配族。有一「大家族」涵蓋常態、Poisson、Gamma 等常用分配，統計性質特別好，稱為<b>指數族</b>（exponential family）：</p>
+      <div class="thm def"><div class="thm-head">定義 1.5（指數族，exponential family）</div><div class="thm-body">
+        <p>若機率密度（質量）函數可寫成</p>
+        <div class="formula"><div class="f-label">指數族</div><div class="f-body">$$f(x;\boldsymbol{\theta})=a(\boldsymbol{\theta})\,b(x)\,\exp\Big\{\sum_{j=1}^{k}c_j(\boldsymbol{\theta})\,t_j(x)\Big\}, \qquad \boldsymbol{\theta}=(\theta_1,\ldots,\theta_k)$$<div class="f-note">$k$ 個母數的指數族：$c_j(\cdot)$ 與 $t_j(\cdot)$ 各 $k$ 項；且值域 $R_X$（支撐）與母數 $\boldsymbol{\theta}$ 無關。單母數分配（如 Poisson）只有 1 項。</div></div></div>
+      </div></div>
+      <div class="tbl-wrap"><table class="tbl"><colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+        <tr><th>屬於指數族</th><th>不屬於指數族</th></tr>
+        <tr><td>二項式（$n$ 已知，僅 $p$ 未知）、負二項式（$r$ 已知，僅 $p$ 未知）、Poisson、指數分配（$\beta$ 或 $\lambda$ 系統）、平移指數（平移量已知）、Gamma、Beta、常態、Weibull</td><td>超幾何、均勻分配、平移指數（平移量未知）、二項式（$n$ 與 $p$ 皆未知）、負二項式（$r$ 與 $p$ 皆未知）</td></tr>
+      </table></div>
+
+      <h4>範例 1.15　驗證七大著名分配屬於指數族</h4>
+      <p>驗證下列分配皆為指數族：Poisson；Binomial（$n$ 已知）；Exp（$\beta$ 系統）；Exp（$\lambda$ 系統）；雙參數指數（平移量已知）；常態；Gamma。</p>
+      <div class="tbl-wrap"><table class="tbl"><colgroup><col style="width:22%"><col style="width:48%"><col style="width:30%"></colgroup>
+        <tr><th>分配</th><th>拆解 $f(x;\theta)=a(\theta)b(x)e^{c(\theta)t(x)}$</th><th>充份統計量（定理 1.6）</th></tr>
+        <tr><td>Poi$(\lambda)$</td><td>$a(\lambda)=e^{-\lambda},\ b(x)=\tfrac1{x!},\ c_1(\lambda)=\ln\lambda,\ t_1(x)=x$</td><td>$\sum X_i$</td></tr>
+        <tr><td>Bin$(n,p)$（$n$ 已知）</td><td>$a(p)=(1-p)^n,\ b(x)=\binom{n}{x},\ c_1(p)=\ln\tfrac{p}{1-p},\ t_1(x)=x$</td><td>$\sum X_i$</td></tr>
+        <tr><td>Exp$(\beta)$</td><td>$a(\beta)=\tfrac1\beta,\ b(x)=1,\ c_1(\beta)=-\tfrac1\beta,\ t_1(x)=x$</td><td>$\sum X_i$</td></tr>
+        <tr><td>Exp$(\lambda)$</td><td>$a(\lambda)=\lambda,\ b(x)=1,\ c_1(\lambda)=-\lambda,\ t_1(x)=x$</td><td>$\sum X_i$</td></tr>
+        <tr><td>$N(\mu,\sigma^2)$（$\mu$ 未知）</td><td>$c_1(\mu)=\tfrac{\mu}{\sigma^2},\ t_1(x)=x$（連同 $a(\mu)=e^{-\mu^2/2\sigma^2}/\sqrt{2\pi\sigma^2}$）</td><td>$\sum X_i$</td></tr>
+        <tr><td>$N(\mu,\sigma^2)$（$\mu,\sigma^2$ 皆未知）</td><td>$c_1=\tfrac{\mu}{\sigma^2},\ t_1=x;\ c_2=-\tfrac1{2\sigma^2},\ t_2=x^2$</td><td>$\big(\sum X_i,\ \sum X_i^2\big)$</td></tr>
+        <tr><td>Gamma$(\alpha,\lambda)$</td><td>$c_1=\alpha,\ t_1=\ln x;\ c_2=-\lambda,\ t_2=x$</td><td>$\big(\sum\ln X_i,\ \sum X_i\big)$</td></tr>
+      </table></div>
+      <div class="note">指數族（exponential family）≠ 指數分配（exponential distribution）。前者是大家族，連常態、Poisson 都屬之。</div>
+
+      <div class="thm thm1"><div class="thm-head">定理 1.6（指數族與充份統計量）</div><div class="thm-body">
+        <p>（1）單一母數指數族 $f(x;\theta)=a(\theta)b(x)e^{c_1(\theta)t_1(x)}$ 之隨機樣本：$S=\sum_{i=1}^n t_1(X_i)$ 為 $\theta$ 之充份統計量。</p>
+        <p>（2）兩個母數指數族 $f(x;\theta_1,\theta_2)=a(\theta_1,\theta_2)b(x)e^{c_1 t_1(x)+c_2 t_2(x)}$：$S=\big(\sum t_1(X_i),\ \sum t_2(X_i)\big)$ 為 2 維充份統計量。</p>
+      </div></div>
+    </div></div></div>
+  </section>
+  <!-- ===== 1.2 尋找 UMVUE ===== -->
+  <section class="section open" id="s12">
+    <div class="section-head">
+      <span class="sec-num">§1.2</span><h2>尋找 UMVUE</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p>在所有點估計量中，要使 MSE 對<b>任意</b>母數值 $\theta\in\Omega$ 都最小，此種估計量不存在。退而求其次，我們把範圍限縮在<b>不偏估計量</b>（unbiased estimator, UE）中找變異數最小者：</p>
+      <div class="formula"><div class="f-label">UMVUE</div><div class="f-body">$$\text{均勻最小變異不偏估計量 (UMVUE)}=\text{UE 中對任意 }\theta\in\Omega\text{ 變異數最小者}$$<div class="f-note">「均勻（uniformly）」指對整個母數空間皆成立；UMVUE 又稱最佳估計量（best estimator）。</div></div></div>
+      <p>本書提供兩條主要路線：<b>① Rao-Blackwell 定理 + Lehmann-Scheffé 定理</b>（由完備充份統計量調整為不偏）；<b>② Cramér-Rao 下界</b>（CRLB approach）。</p>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 1.2.1 Rao-Blackwell 改進 ===== -->
+  <section class="section open" id="s121">
+    <div class="section-head">
+      <span class="sec-num">§1.2.1</span><h2>Rao-Blackwell 改進</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <div class="thm thm1"><div class="thm-head">定理 1.7（勞–布拉克維爾定理，Rao–Blackwell theorem）</div><div class="thm-body">
+        <p>設 $\tilde{T}$ 為 $\theta$ 之任意不偏估計量且 $\mathrm{Var}(\tilde{T})&lt;\infty$，$S$ 為 $\theta$ 之充份統計量。令 $T^*=E(\tilde{T}\mid S)=h(S)$，則對任意 $\theta\in\Omega$：</p>
+        <div class="formula"><div class="f-label">改進</div><div class="f-body">$$E(T^*)=\theta \quad \text{且}\quad \mathrm{Var}(T^*)\le \mathrm{Var}(\tilde{T})$$</div></div>
+        <p class="proof">$E(T^*)=E\big[E(\tilde{T}\mid S)\big]=E(\tilde{T})=\theta$；又 $\mathrm{Var}(\tilde{T})=E\big[\mathrm{Var}(\tilde{T}\mid S)\big]+\mathrm{Var}\big(E(\tilde{T}\mid S)\big)\ge \mathrm{Var}(T^*)$（因 $E[\mathrm{Var}(\tilde{T}\mid S)]\ge0$）。</p>
+      </div></div>
+      <p>重點：充份統計量 $S$ 才是主角——因為 $S$ 充份時 $f_{\tilde{T}\mid S}(t\mid s)$ 與 $\theta$ 無關，$T^*=E(\tilde{T}\mid S)$ 才不會含 $\theta$，才是一個合法的統計量。改進後的 $T^*=h(S)$ 是 $S$ 的函數轉換，仍不偏且變異數更小。理論上可以無限改進下去（$T^{**}=E(T^*\mid S)$），但若「改進一次就到位」，即 $T^{**}=T^*$，則 $T^*$ 就是 UMVUE。</p>
+      <p>「一次到位」的關鍵在<b>完備性</b>（completeness）：</p>
+      <div class="thm def"><div class="thm-head">定義 1.8（完備性，completeness）</div><div class="thm-body">
+        <p>設 $S$ 為 $\theta$ 之統計量，若 $E_\theta\big[g(S)\big]=0,\ \forall\theta\in\Omega$ 成立時，唯有 $P\big(g(S)=0\big)=1,\ \forall\theta\in\Omega$，則稱 $S$ 為<b>完備統計量</b>（complete statistic）。</p>
+        <p class="proof">直觀：「對 $S$ 而言，不存在非 0 的函數轉換 $g$，使 $E[g(S)]$ 恆為 0」。反證：若 $h_1(S),h_2(S)$ 皆為不偏，令 $g(S)=h_1(S)-h_2(S)$，則 $E[g(S)]=0$，由完備性 $g(S)=0$ 恆成立，故 $h_1=h_2$——能調整為不偏的函數轉換唯一。</p>
+      </div></div>
+      <div class="thm thm1"><div class="thm-head">定理 1.9（列門–薛費定理，Lehmann–Scheffé theorem）</div><div class="thm-body">
+        <p>設 $S$ 為 $\theta$ 之<b>完備充份統計量</b>，若 $T^*=h(S)$ 滿足 $E(T^*)=\theta$，則 $T^*$ 為 $\theta$ 之 UMVUE。</p>
+        <p class="proof">任何不偏估計量 $\tilde{T}$ 經 Rao-Blackwell 化都改進到同一個 $h(S)$（因可調整為不偏的函數轉換唯一），故 $T^*$ 無法再被改進，即為 UMVUE。</p>
+      </div></div>
+      <p>驗證完備性通常不易，但指數族有捷徑：</p>
+      <div class="thm thm1"><div class="thm-head">定理 1.10（指數族與完備充份統計量）</div><div class="thm-body">
+        <p>（1）單一母數指數族：若 $\{c_1(\theta)\mid\theta\in\Omega\}$ 之值域為 1 維開區間，則 $S=\sum_{i=1}^n t_1(X_i)$ 為 $\theta$ 之完備充份統計量。</p>
+        <p>（2）兩個母數指數族：若 $\{(c_1(\theta_1,\theta_2),c_2(\theta_1,\theta_2))\mid\theta\in\Omega\}$ 之值域為 2 維開區間，則 $S=\big(\sum t_1(X_i),\ \sum t_2(X_i)\big)$ 為 2 維完備充份統計量。</p>
+      </div></div>
+      <div class="note">範例 1.15 的分配皆可用定理 1.10：如 Poi$(\lambda)$ 之 $c_1(\lambda)=\ln\lambda$ 值域為 $(-\infty,\infty)$（1 維開區間）→ $\sum X_i$ 為完備充份統計量；$N(\mu,\sigma^2)$ 之 $\big(\tfrac{\mu}{\sigma^2},-\tfrac1{2\sigma^2}\big)$ 值域為整個第 2、3 象限（2 維開區間）→ $\big(\sum X_i,\sum X_i^2\big)$ 為完備充份統計量。</div>
+
+      <h4>範例 1.16　Poisson 五連問：參數空間、充份、MLE、UMVUE、有效性（台大財金）</h4>
+      <p>設 $\{X_i\}_{i=1}^n$ 來自 Poisson$(\lambda)$，$\lambda$ 未知。（1）寫出參數空間 $\Omega$ 並說明 $\lambda$ 之意含；（2）求充份統計量 $S$ 並驗證；（3）求 MLE；（4）求 UMVUE；（5）MLE 是否為最有效估計量？</p>
+      <p><b>解：</b>（1）$\Omega=\{\lambda\mid\lambda&gt;0\}$，$\lambda$ 為單位時間內發生偶發事件的期望次數。</p>
+      <p>（2）</p>
+      <div class="formula"><div class="f-label">分解</div><div class="f-body">$$f(x_1,\ldots,x_n;\lambda)=\frac{e^{-n\lambda}\lambda^{\sum x_i}}{\prod x_i!}=\underbrace{e^{-n\lambda}\lambda^{s}}_{g(s;\lambda)}\cdot\underbrace{\frac{1}{\prod x_i!}}_{h}\ \Rightarrow\ S=\sum X_i\ \text{為充份統計量}$$</div></div>
+      <p>（3）$\ell(\lambda)=-n+\tfrac{s}{\lambda}=0\Rightarrow\hat\lambda_{MLE}=s/n=\bar{X}$。（4）由指數族拆解，$\sum X_i$ 為完備充份統計量，且 $E(\bar{X})=\lambda$，由 Lehmann-Scheffé 定理：$\bar{X}$ 為 $\lambda$ 之 UMVUE。（5）$\ln f_X(x;\lambda)=-1+\tfrac{x}{\lambda}$，$-\partial^2\ln f/\partial\lambda^2=x/\lambda^2$，故 $I(\lambda)=\lambda/\lambda^2=1/\lambda$，CRLB$=\lambda/n$；$\mathrm{Var}(\bar{X})=\lambda/n=$ CRLB，故 $\bar{X}$ 亦為<b>最有效估計量</b>（$e(\bar{X})=1$）。</p>
+
+      <h4>範例 1.17　$N(0,\sigma^2)$：$\sigma^2$ 之 MME、MLE、充份統計量與 UMVUE（台大財金）</h4>
+      <p>設 $\{X_i\}_{i=1}^n \sim N(0,\sigma^2)$，$\sigma^2$ 未知。（1）寫出 $\sigma^2$ 之參數空間並求 MME 與 MLE；（2）求充份統計量並驗證；（3）求 $\sigma^2$ 之 UMVUE。</p>
+      <p><b>解：</b>（1）$\Omega=\{\sigma^2\mid\sigma^2&gt;0\}$；因 $E(X^2)=\sigma^2$，MME 與 MLE 皆為 $\hat\sigma^2_{MLE}=\frac1n\sum X_i^2$（$E[\sum X_i^2/n]=\sigma^2$，不偏）。（2）</p>
+      <div class="formula"><div class="f-label">分解</div><div class="f-body">$$f(x_1,\ldots,x_n;\sigma^2)=(2\pi\sigma^2)^{-n/2}e^{-\sum x_i^2/(2\sigma^2)}=\underbrace{(2\pi\sigma^2)^{-n/2}e^{-s/(2\sigma^2)}}_{g(s;\sigma^2)}\cdot 1\ \Rightarrow\ S=\sum X_i^2\ \text{為充份統計量}$$</div></div>
+      <p>（3）由指數族拆解，$\sum X_i^2$ 為完備充份統計量，$E(\sum X_i^2/n)=\sigma^2$，故 $\frac1n\sum X_i^2$ 為 $\sigma^2$ 之 UMVUE。</p>
+
+      <h4>範例 1.18　Exp（期望值 $1/\lambda$）：$\lambda$ 之 UMVUE $=(n-1)/\sum X_i$</h4>
+      <p>設 $X_1,\ldots,X_n$ 抽自指數分配，母體期望值為 $1/\lambda$。驗證 $\sum X_i$ 為 $\lambda$ 之完備充份統計量，並求 $\lambda$ 之 UMVUE。</p>
+      <p><b>解：</b>指數族拆解知 $\sum X_i$ 為完備充份統計量；$\sum X_i\sim\text{Gamma}(n,1/\lambda)$，$E\big[\tfrac1{\sum X_i}\big]=\tfrac{\lambda}{n-1}$，故</p>
+      <div class="formula"><div class="f-label">UMVUE</div><div class="f-body">$$E\Big(\frac{n-1}{\sum X_i}\Big)=\lambda \;\Rightarrow\; \hat\lambda_{UMVUE}=\frac{n-1}{\sum_{i=1}^n X_i}$$</div></div>
+
+      <h4>範例 1.19　Weibull：MLE、充份統計量、UMVUE（政大金融）</h4>
+      <p>Let $X_1,\ldots,X_n$ be a random sample from the Weibull density $f(x;\theta)=\dfrac{2x}{\theta}e^{-x^2/\theta}$，$x&gt;0$.（1）MLE for $\theta$；（2）sufficient statistic；（3）UMVUE for $\theta$.</p>
+      <p><b>解：</b>（1）</p>
+      <div class="formula"><div class="f-label">MLE</div><div class="f-body">$$\ell(\theta)=n\ln2-n\ln\theta+\ln\Big(\prod x_i\Big)-\frac{\sum x_i^2}{\theta},\qquad \ell'(\theta)=-\frac{n}{\theta}+\frac{\sum x_i^2}{\theta^2}=0 \;\Rightarrow\; \hat\theta_{MLE}=\frac{1}{n}\sum_{i=1}^n X_i^2$$<div class="f-note">s.o.c.：$\ell''(\theta)=\frac{n}{\theta^2}-\frac{2\sum x_i^2}{\theta^3}<0$ 在 $\hat\theta$ 處成立（因 $\hat\theta=\sum x_i^2/n$）。</div></div></div>
+      <p>（2）</p>
+      <div class="formula"><div class="f-label">分解</div><div class="f-body">$$f(x_1,\ldots,x_n;\theta)=\Big(\frac{2}{\theta}\Big)^n\Big(\prod x_i\Big)e^{-\sum x_i^2/\theta} \;\Rightarrow\; S=\sum X_i^2\ \text{為充份統計量}$$</div></div>
+      <p>（3）$\sum X_i^2$ 為完備充份統計量，且 $E\big[\tfrac1n\sum X_i^2\big]=\theta$，故 UMVUE 亦為 $\frac1n\sum X_i^2$。</p>
+
+      <h4>範例 1.20　$f(x;\theta)=\theta x^{\theta-1}$：$Y=-\ln X$ 轉換與兩個 UMVUE（雲科大財金）</h4>
+      <p>Suppose $f(x;\theta)=\theta x^{\theta-1}$，$0&lt;x&lt;1$，$n$ 個樣本。（1）令 $Y=-\ln X$，導 $Y$ 之 pdf；（2）證明 $\sum\ln X_i$ 為 $\theta$ 之充份統計量；（3）求 $\theta$ 之 UMVUE；（4）求 $1/\theta$ 之 UMVUE。</p>
+      <p><b>解：</b>（1）$Y=-\ln X\Rightarrow X=e^{-Y}$，</p>
+      <div class="formula"><div class="f-label">pdf</div><div class="f-body">$$f_Y(y)=f_X(e^{-y})\cdot|e^{-y}|=\theta e^{-\theta y},\quad 0&lt;y&lt;\infty \;\Rightarrow\; Y=-\ln X\sim\text{Exp}(\lambda=\theta)$$</div></div>
+      <p>（2）$f(x_1,\ldots,x_n;\theta)=\theta^n\big(\prod x_i\big)^{\theta-1}=\theta^n e^{(\theta-1)\sum\ln x_i}$ → 取 $g=\theta^n e^{(\theta-1)s}$，$h=1$，$\sum\ln X_i$ 為充份統計量（且為完備充份統計量）。（3）令 $W=\sum Y_i=-\sum\ln X_i\sim\text{Gamma}(n,\theta)$，$E\big[\tfrac1W\big]=\tfrac{\theta}{n-1}$，故 $\hat\theta_{UMVUE}=\dfrac{n-1}{-\sum\ln X_i}$。（4）$E\big[\tfrac{W}{n}\big]=\tfrac1\theta$，故 $\widehat{1/\theta}_{UMVUE}=\dfrac{-\sum\ln X_i}{n}$。</p>
+
+      <h4>範例 1.21　$N(\mu,\sigma^2)$、$\sigma^2$ 已知：$\mu$ 與 $\mu^2$ 之 UMVUE（Bain &amp; Engelhardt 習題）</h4>
+      <p>$X_1,\ldots,X_n \sim N(\mu,\sigma^2)$，$\mu$ 未知、$\sigma^2$ 已知。（1）find UMVUE for $\mu$；（2）find UMVUE for $\mu^2$.</p>
+      <p><b>解：</b>（1）$\sum X_i$ 為完備充份統計量，$E(\bar{X})=\mu$，故 $\bar{X}$ 為 $\mu$ 之 UMVUE。（2）$E(\bar{X}^2)=\mu^2+\tfrac{\sigma^2}{n}$，故 $\bar{X}^2-\dfrac{\sigma^2}{n}$ 為 $\mu^2$ 之 UMVUE。</p>
+
+      <h4>範例 1.22　$N(\theta,1)$：$\theta^2$ 之最佳估計量（政大風管・管理組）</h4>
+      <p>$X_1,\ldots,X_n \sim N(\theta,1)$，找出 $\theta^2$ 之最佳估計量（UMVUE）。</p>
+      <p><b>解：</b>$\bar{X}$ 為 $\theta$ 之完備充份統計量；$E(\bar{X}^2)=\theta^2+\tfrac1n$，故 $\bar{X}^2-\dfrac1n$ 為 $\theta^2$ 之 UMVUE。</p>
+
+      <h4>範例 1.23　Ber$(p)$：$E(X)$、$\mathrm{Var}(X)$、$p^2$ 之 UMVUE（葉小蓁習題）</h4>
+      <p>設 $X_1,\ldots,X_n$ 來自 Ber$(p)$，求（1）$E(X)$；（2）$\mathrm{Var}(X)$；（3）$p^2$ 之 UMVUE。</p>
+      <p><b>解：</b>（1）$\bar{X}$ 為 $p$ 之 UMVUE（完備充份統計量、不偏）。（2）$\mathrm{Var}(X)=p(1-p)$：因 $E\big[\bar{X}(1-\bar{X})\big]=\tfrac{n-1}{n}p(1-p)$，故 UMVUE $=\dfrac{n}{n-1}\bar{X}(1-\bar{X})$。（3）$p^2$：$E\big[\bar{X}^2-\tfrac{\bar{X}(1-\bar{X})}{n-1}\big]=p^2$，故 UMVUE $=\bar{X}^2-\dfrac{\bar{X}(1-\bar{X})}{n-1}$。</p>
+
+      <h4>範例 1.24　$N(\mu,\sigma^2)$ 雙母數：$(\sum X_i,\sum X_i^2)$ 完備充份，$(\mu,\sigma^2)$ 之 UMVUE</h4>
+      <p>設 $X_1,\ldots,X_n\sim N(\mu,\sigma^2)$，驗證 $\big(\sum X_i,\sum X_i^2\big)$ 為 $\boldsymbol{\theta}=(\mu,\sigma^2)$ 之完備充份統計量，並求 $(\mu,\sigma^2)$ 之 UMVUE。</p>
+      <p><b>解：</b>由定理 1.10（2），$(\sum X_i,\sum X_i^2)$ 為 2 維完備充份統計量；$E(\bar{X})=\mu$、$E\big[\tfrac{1}{n-1}\sum(X_i-\bar{X})^2\big]=\sigma^2$，故 $(\mu,\sigma^2)$ 之 UMVUE 為 $\big(\bar{X},\ S^2\big)$。</p>
+
+      <h4>範例 1.25　$U(0,\theta)$（非指數族）：MLE 與 UMVUE（高大經管）</h4>
+      <p>Let $X_1,\ldots,X_n$ be i.i.d. from $U(0,\theta)$.（1）MLE of $\theta$；（2）UMVUE of $\theta$.</p>
+      <p><b>解：</b>（1）$\hat\theta_{MLE}=X_{(n)}$（見範例 1.11）。（2）$X_{(n)}$ 為完備充份統計量（非指數族，須由完備性定義驗證：$E_\theta[g(X_{(n)})]=0\ \forall\theta$ 時，因 $f_{X_{(n)}}(y)=ny^{n-1}/\theta^n$ 為指數族之完備族，可得 $g\equiv0$）。而 $E(X_{(n)})=\tfrac{n}{n+1}\theta$，故</p>
+      <div class="formula"><div class="f-label">UMVUE</div><div class="f-body">$$\hat\theta_{UMVUE}=\frac{n+1}{n}X_{(n)}, \qquad \mathrm{Var}\Big(\frac{n+1}{n}X_{(n)}\Big)=\frac{\theta^2}{n(n+2)}$$</div></div>
+      <div class="warn">$U(0,\theta)$ 不屬於指數族（值域與 $\theta$ 有關），找完備充份統計量只能靠完備性「定義」著手，此為經典考法。</div>
+    </div></div></div>
+  </section>
+  <!-- ===== 1.2.2 Cramér-Rao 下界 ===== -->
+  <section class="section open" id="s122">
+    <div class="section-head">
+      <span class="sec-num">§1.2.2</span><h2>Cramér-Rao 下界</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p>這一小節的定理，讓我們能找到 $\theta$ 之<b>所有</b>不偏估計量變異數的理論下界；若某不偏估計量的變異數恰貼在此下界上，它必為 UMVUE。</p>
+      <div class="thm thm1"><div class="thm-head">定理 1.11（克拉瑪–勞下界，Cramér–Rao lower bound, CRLB）</div><div class="thm-body">
+        <p>設 $X_1,\ldots,X_n$ 抽自母體 $f_X(x;\theta)$，滿足<b>正規條件</b>（regularity conditions），對 $g(\theta)$ 之任意不偏估計量 $\tilde{T}$：</p>
+        <div class="formula"><div class="f-label">CRLB</div><div class="f-body">$$\mathrm{Var}(\tilde{T})\ge\frac{\big[g'(\theta)\big]^2}{I_n(\theta)}=\frac{\big[g'(\theta)\big]^2}{n\,I(\theta)}, \qquad I_n(\theta)=n\,I(\theta)$$<div class="f-note">$I_n(\theta)=E\Big[\big(\frac{\partial\ln L}{\partial\theta}\big)^2\Big]$ 為整組樣本之<b>費雪訊息</b>（Fisher information）；$I(\theta)$ 為單一隨機變數之費雪訊息。稱 $\dfrac{[g'(\theta)]^2}{nI(\theta)}$ 為 CRLB for the variance of UE of $g(\theta)$，不等式稱 Cramér–Rao 不等式。</div></div></div>
+      </div></div>
+      <p>計算上常用第二式（指數族必滿足）：</p>
+      <div class="formula"><div class="f-label">費雪訊息</div><div class="f-body">$$I(\theta)=E\Big[\Big(\frac{\partial\ln f(X;\theta)}{\partial\theta}\Big)^2\Big]=-E\Big[\frac{\partial^2\ln f(X;\theta)}{\partial\theta^2}\Big], \qquad I_n(\theta)=\sum_{i=1}^n I_i(\theta)=nI(\theta)$$<div class="f-note">iid 樣本下各 $X_i$ 帶的訊息相同。若求 $\theta$ 本身之 CRLB：$g(\theta)=\theta\Rightarrow g'(\theta)=1$，CRLB$=\dfrac{1}{nI(\theta)}$。</div></div></div>
+      <div class="warn">正規條件中最重要的：母體分配之值域（support）$R_X$ 必須與待估母數 $\theta$ <b>無關</b>。指數族皆滿足；但 $U(0,\theta)$ 之類不滿足，CRLB 不適用——甚至可能出現不偏估計量變異數「小於」形式上算出的 CRLB。</div>
+      <ul>
+        <li><b>若 $\mathrm{Var}(T^*)=$ CRLB</b>：$T^*$ 必為 UMVUE（例：$N(\mu,\sigma^2)$ 中 $\mu$ 未知時，$\sigma^2$ 之 UMVUE 變異數可達 CRLB）。</li>
+        <li><b>不保證存在估計量達 CRLB</b>：此時 UMVUE 的變異數大於 CRLB，不能用 CRLB 法（例：$\mu$ 未知時 $N(\mu,\sigma^2)$ 的 $\sigma^2$，UMVUE 變異數 $2\sigma^4/(n-1)&gt;2\sigma^4/n=$ CRLB）。</li>
+      </ul>
+
+      <h4>範例 1.26　Poisson 之費雪訊息（中山經研）</h4>
+      <p>Suppose $X\sim\text{Poi}(\theta)$，$\theta&gt;0$ unknown. Find the Fisher information $I(\theta)$.</p>
+      <p><b>解：</b>$\ln f_X(x;\theta)=-\theta+x\ln\theta-\ln x!$，$\dfrac{\partial^2\ln f}{\partial\theta^2}=-\dfrac{x}{\theta^2}$，故 $I(\theta)=E[X]/\theta^2=\theta/\theta^2=\dfrac{1}{\theta}$。</p>
+
+      <h4>範例 1.27　$N(\mu,\sigma^2)$：$\mu$ 之不偏估計量 CRLB（中山經研）</h4>
+      <p>Given a random sample of size $n$ from $N(\mu,\sigma^2)$. Find the CRLB for the variance of unbiased estimators of $\mu$.</p>
+      <p><b>解：</b>$\ln f=-\tfrac12\ln(2\pi\sigma^2)-\tfrac{(x-\mu)^2}{2\sigma^2}$，$\partial^2\ln f/\partial\mu^2=-\tfrac1{\sigma^2}$，故 $I(\mu)=\tfrac1{\sigma^2}$，CRLB$=\dfrac{\sigma^2}{n}$（$\bar{X}$ 達到此下界）。</p>
+
+      <h4>範例 1.28　Exp$(\lambda)$：CRLB 與「UMVUE 但變異數大於 CRLB」</h4>
+      <p>設 $X_1,\ldots,X_n\sim\text{Exp}(\lambda)$，求 $\lambda$ 之 CRLB，並證明 $\dfrac{n-1}{\sum X_i}$ 雖為 $\lambda$ 之 UMVUE，其變異數仍大於 CRLB。</p>
+      <p><b>解：</b>$\ln f=\ln\lambda-\lambda x$，$\partial^2\ln f/\partial\lambda^2=-1/\lambda^2$，$I(\lambda)=1/\lambda^2$，CRLB$=\lambda^2/n$。而 $\sum X_i\sim\text{Gamma}(n,\lambda)$，$\mathrm{Var}\big(\tfrac{n-1}{\sum X_i}\big)=\tfrac{\lambda^2}{n-2}&gt;\tfrac{\lambda^2}{n}$——UMVUE 存在但 CRLB 不可達（此族無估計量可達 CRLB）。</p>
+
+      <h4>範例 1.29　$N(0,\sigma^2)$ 之三問（政大金融）</h4>
+      <p>Construct a random sample of size $n$ from $N(0,\sigma^2)$.（1）Find $I(\sigma)$；（2）CRLB for UE of $\sigma$；（3）CRLB for UE of $\sigma^2$.</p>
+      <p><b>解：</b>$\ln f=-\tfrac12\ln(2\pi\sigma^2)-\tfrac{x^2}{2\sigma^2}$。（1）$\partial\ln f/\partial\sigma=-\tfrac1\sigma+\tfrac{x^2}{\sigma^3}$，$I(\sigma)=E\big[\big(-\tfrac1\sigma+\tfrac{X^2}{\sigma^3}\big)^2\big]=\tfrac{2}{\sigma^2}$。（2）$g(\sigma)=\sigma$，$g'=1$：CRLB$=\sigma^2/(2n)$。（3）$g(\sigma)=\sigma^2$，$g'=2\sigma$：CRLB$=4\sigma^2\cdot\tfrac{\sigma^2}{2n}=\dfrac{2\sigma^4}{n}$。</p>
+
+      <h4>範例 1.30　Exp 系統的 CRLB 與 UMVUE</h4>
+      <p>（1）$X_1,\ldots,X_n\sim\text{Exp}(\beta)$：求 $\beta$ 之 CRLB 並證明 $\bar{X}$ 為 $\beta$ 之 UMVUE；（2）$X_1,\ldots,X_n\sim\text{Exp}(\lambda)$：求 $1/\lambda$ 之 CRLB 並證明 $\bar{X}$ 為 $1/\lambda$ 之 UMVUE。</p>
+      <p><b>解：</b>（1）$I(\beta)=1/\beta^2$，CRLB$=\beta^2/n=\mathrm{Var}(\bar{X})$，故 $\bar{X}$ 為 $\beta$ 之 UMVUE。（2）$g(\lambda)=1/\lambda$，$g'=-1/\lambda^2$：CRLB$=\tfrac{1}{\lambda^4}\cdot\lambda^2/n=\tfrac{1}{n\lambda^2}=\mathrm{Var}(\bar{X})$，故 $\bar{X}$ 為 $1/\lambda$ 之 UMVUE（$E[\bar{X}]=1/\lambda$）。</p>
+
+      <h4>範例 1.31　$f(x;\theta)=\theta^2 x e^{-\theta x}$：MLE、CRLB、MME（中央產經）</h4>
+      <p>$g(x;\theta)=\theta^2 x e^{-\theta x}$，$x\ge0,\theta\ge0$。（1）MLE of $\theta$；（2）CRLB for UE of $\lambda(\theta)=\theta^2$；（3）MME.</p>
+      <p><b>解：</b>（1）$\ell=2n\ln\theta+\sum\ln x_i-\theta\sum x_i$，$\ell'=\tfrac{2n}{\theta}-\sum x_i=0$，$\hat\theta_{MLE}=\dfrac{2n}{\sum X_i}=\dfrac{2}{\bar{X}}$。（2）此為 Gamma$(\alpha=2,\ \text{scale }1/\theta)$：$\ln f=2\ln\theta+\ln x-\theta x$，$\partial^2\ln f/\partial\theta^2=-2/\theta^2$，$I(\theta)=2/\theta^2$；$g'(\theta)=2\theta$，CRLB$=\dfrac{(2\theta)^2}{n\cdot 2/\theta^2}=\dfrac{2\theta^4}{n}$。（3）$E(X)=2/\theta$，$\hat\theta_{MME}=\dfrac{2}{\bar{X}}$。</p>
+
+      <h4>範例 1.32　非 iid：$X_i\sim\text{Poi}(i\theta)$ 之資訊下界（中山經研）</h4>
+      <p>Suppose $X_i,\ i=1,\ldots,n$ independent with $X_i\sim\text{Poi}(i\theta)$. Find the information bound for the variance of unbiased estimators of $\theta$.</p>
+      <p><b>解：</b>$\ln f_{X_i}=-i\theta+x_i\ln(i\theta)-\ln x_i!$，$\partial^2\ln f/\partial\theta^2=-x_i/\theta^2$，$I_i(\theta)=i/\theta$，</p>
+      <div class="formula"><div class="f-label">資訊下界</div><div class="f-body">$$I_n(\theta)=\sum_{i=1}^n\frac{i}{\theta}=\frac{n(n+1)}{2\theta} \;\Rightarrow\; \text{CRLB for UE of }\theta=\frac{1}{I_n(\theta)}=\frac{2\theta}{n(n+1)}$$<div class="f-note">非 iid 時不能直接乘 $n$，須逐項加總。</div></div></div>
+
+      <h4>範例 1.33　$N(\mu,\sigma^2)$：CRLB 矩陣</h4>
+      <p>Given a random sample of size $n$ from $N(\mu,\sigma^2)$. Find the Cramér–Rao lower bound matrix for the unbiased estimators of $\mu$ and $\sigma^2$.</p>
+      <p><b>解：</b>費雪訊息矩陣為對角矩陣：$I(\mu)=\tfrac1{\sigma^2}$、$I(\sigma^2)=\tfrac1{2\sigma^4}$（交錯項 $=0$），故</p>
+      <div class="formula"><div class="f-label">CRLB 矩陣</div><div class="f-body">$$\mathrm{Var}(\hat\mu)\ge\frac{\sigma^2}{n},\qquad \mathrm{Var}(\hat{\sigma^2})\ge\frac{2\sigma^4}{n}$$</div></div>
+
+      <h4>範例 1.34　$U(0,\theta)$：CRLB 失效的經典例（政大風管・精算組）</h4>
+      <p>Given $f(x;\theta)=1/\theta$，$0&lt;x&lt;\theta$，formally compute the reciprocal of $nI(\theta)$; compare with the variance of $(n+1)Y_n/n$（$Y_n$ = largest item）.</p>
+      <p><b>解：</b>形式上 $\ln f=-\ln\theta$，$\partial\ln f/\partial\theta=-1/\theta$（與 $x$ 無關，其實正規條件不成立），$I(\theta)=1/\theta^2$，「CRLB」$=\theta^2/n$。但 $Y_n$ 之 pdf 為 $ny^{n-1}/\theta^n$，$\mathrm{Var}\big(\tfrac{n+1}{n}Y_n\big)=\dfrac{\theta^2}{n(n+2)}&lt;\dfrac{\theta^2}{n}$——<b>小於形式上的 CRLB</b>，證明 CRLB 在此不適用。</p>
+
+      <h4>範例 1.35　$f(y;\theta_0)=c\,y^{\theta_0}$ 六問（政大經研）</h4>
+      <p>A random sample $Y_1,\ldots,Y_n$ from $f_Y(y;\theta_0)=cy^{\theta_0}$，$0\le y\le1$（$c$ 為常數、$\theta_0$ 未知）。令 $\hat\theta_{mm}$ 為 MME、$\hat\theta_{ml}$ 為 MLE。（1）求 $\hat\theta_{mm}$、$\hat\theta_{ml}$；（2）$\hat\theta_{ml}$ 是否不偏？（3）求 CRLB；（4）是否存在不偏估計量變異數小於 (3) 之 CRLB？（5）$\hat\theta_{mm}$ 是否為充份估計量？（6）$\hat\theta_{ml}$ 是否一致？</p>
+      <p><b>解：</b>$c=\theta_0+1$（由 $\int_0^1 f=1$）。（1）$E(Y)=\tfrac{\theta_0+1}{\theta_0+2}$：$\hat\theta_{mm}=\dfrac{2\bar{Y}-1}{1-\bar{Y}}$；$\ell=n\ln(\theta+1)+\theta\sum\ln y$，$\hat\theta_{ml}=-\dfrac{n}{\sum\ln Y_i}-1$。（2）$-\sum\ln Y_i\sim\text{Gamma}(n,1/(\theta+1))$，$E[\hat\theta_{ml}]=\theta+1$：<b>不偏</b>。（3）$I(\theta)=\tfrac{1}{(\theta+1)^2}$，CRLB$=\tfrac{(\theta+1)^2}{n}$。（4）此分配屬指數族、值域與 $\theta$ 無關，正規條件成立：不可能有小於 CRLB 者。（5）$\hat\theta_{mm}$ 是 $\bar{Y}$ 之函數，非 $\sum\ln Y_i$ 之函數，<b>不是</b>充份統計量。（6）$\hat\theta_{ml}$ 為充份統計量之函數且不偏，由 Lehmann-Scheffé 即 UMVUE，故一致。</p>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 1.3 貝氏統計方法 ===== -->
+  <section class="section open" id="s13">
+    <div class="section-head">
+      <span class="sec-num">§1.3</span><h2>貝氏統計方法</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p><b>古典統計學派</b>視母數 $\theta$ 為未知但固定的常數，以樣本資訊推論 $\theta$；<b>貝氏統計學派</b>則視 $\theta$ 為<b>隨機變數</b>：抽樣前研究者對 $\theta$ 有一<b>事前信念</b>（prior distribution），經樣本資訊修正後得到<b>事後分配</b>（posterior distribution），再據以估計推論。</p>
+      <div class="formula"><div class="f-label">貝氏定理</div><div class="f-body">$$f_{\theta\mid X}(\theta\mid x)=\frac{f_{X\mid\theta}(x\mid\theta)\,f_\theta(\theta)}{f_X(x)}\ \propto\ f_{X\mid\theta}(x\mid\theta)\cdot f_\theta(\theta)=\text{概似函數}\times\text{事前分配}$$<div class="f-note">分母 $f_X(x)$ 是與 $\theta$ 無關的正規化常數，故事後分配 ∝ 概似 × 事前。流程：事前分配 → 樣本（概似函數）→ 貝氏定理 → 事後分配 → 貝氏估計。</div></div></div>
+      <ul>
+        <li><b>平方損失</b> $L(\theta,w)=(\theta-w)^2$：貝氏解＝事後分配的<b>理論平均數</b>（posterior mean）。</li>
+        <li><b>絕對損失</b> $L(\theta,w)=|\theta-w|$：貝氏解＝事後分配的<b>理論中位數</b>。</li>
+        <li><b>MAP（最大後驗）</b>：貝氏估計量＝事後分配的<b>理論眾數</b>。</li>
+      </ul>
+
+      <h4>範例 1.36　離散事前分配之貝氏定理練習</h4>
+      <p>設 $P$ 的可能性有三種 $0.1,0.5,0.8$，事前 $f_P(p):\ 0.3/0.2/0.5$；已知 $X\mid P=p\sim B(n=10,p)$。（1）$X$ 與 $P$ 的聯合機率分配？（2）$E(X)$？（3）$P\mid X=3$ 之條件分配？</p>
+      <p><b>解：</b>（1）$f_{X,P}(x,p)=f_{X\mid P}(x\mid p)f_P(p)=\binom{10}{x}p^x(1-p)^{10-x}f_P(p)$。（2）$E(X)=E\big[E(X\mid P)\big]=E(10P)=10(0.1\cdot0.3+0.5\cdot0.2+0.8\cdot0.5)=10\times0.53=5.3$。（3）</p>
+      <div class="formula"><div class="f-label">事後</div><div class="f-body">$$f_{P\mid X}(p\mid 3)=\frac{\binom{10}{3}p^3(1-p)^7f_P(p)}{\sum_p \binom{10}{3}p^3(1-p)^7f_P(p)}=\begin{cases}0.4195, & p=0.1\\[2pt]0.5710, & p=0.5\\[2pt]0.0096, & p=0.8\end{cases}$$<div class="f-note">分子 $=\binom{10}{3}p^3(1-p)^7 f_P(p)$，分母 $=f_X(3)=0.04105$。</div></div></div>
+
+      <h4>範例 1.37　硬幣：事後機率、預測機率與 p-value（台大國企）</h4>
+      <p>A coin lands heads 25%, 50%, or 75% of the time; prior 等可能。擲 10 次得 7 次正面。（1）$P(p=0.5\mid \text{data})$？（2）下一次出現正面的預測機率？（3）檢定 $H_0:p=0.5$ vs $H_1:p&gt;0.5$ 之觀察 p-value？</p>
+      <p><b>解：</b>（1）$f_{P\mid X}(0.5\mid7)=\tfrac{\binom{10}{7}0.5^{10}/3}{\text{total}}$，其中 total $=\tfrac13\big[\binom{10}{7}(0.25^7 0.75^3+0.5^{10}+0.75^7 0.25^3)\big]$。（2）$P(\text{head next})=\sum_p p\cdot f_{P\mid X}(p\mid7)$（事後加權平均）。（3）p-value $=P(X\ge7\mid p=0.5)=\sum_{x=7}^{10}\binom{10}{x}0.5^{10}$（古典檢定觀點）。</p>
+
+      <h4>範例 1.38　Poi$(\theta)$ + Gamma 事前：共軛與加權平均（中央工管、政大金融）</h4>
+      <p>Let $Y=\sum_{i=1}^n X_i$，$X_i\sim\text{Poi}(\theta)$；事前 $\theta\sim\text{Gamma}(\alpha,\beta)$。（1）Given $Y=y$，find the posterior pdf of $\theta$；（2）平方損失下求貝氏估計量 $\hat\theta_B$；（3）證明 $\hat\theta_B$ 是 MLE $Y/n$ 與事前平均 $\alpha\beta$ 的加權平均，權重 $n/(n+1/\beta)$ 與 $(1/\beta)/(n+1/\beta)$；（4）證明 $n\to\infty$ 時收斂至 MLE。</p>
+      <p><b>解：</b>（1）</p>
+      <div class="formula"><div class="f-label">事後</div><div class="f-body">$$f_{\theta\mid Y}(\theta\mid y)\propto e^{-n\theta}\theta^{y}\cdot\theta^{\alpha-1}e^{-\theta/\beta}=\theta^{\alpha+y-1}e^{-\theta(n+1/\beta)} \;\Rightarrow\; \theta\mid Y=y\sim\text{Gamma}\Big(\alpha+y,\ \frac{1}{n+1/\beta}\Big)$$<div class="f-note">共軛：Poi 的共軛事前為 Gamma，事後仍為 Gamma。分母 $1/\beta$ 是事前精確度、$n$ 是樣本精確度——精確度相加。</div></div></div>
+      <p>（2）平方損失下貝氏解＝事後平均：</p>
+      <div class="formula"><div class="f-label">貝氏估計量</div><div class="f-body">$$\hat\theta_B=E(\theta\mid y)=\frac{\alpha+y}{n+1/\beta}=\underbrace{\frac{n}{n+1/\beta}}_{\text{MLE 權重}}\cdot\frac{y}{n}+\underbrace{\frac{1/\beta}{n+1/\beta}}_{\text{事前權重}}\cdot\alpha\beta$$</div></div>
+      <p>（4）$\lim_{n\to\infty}\hat\theta_B=\lim_{n\to\infty}\frac{\alpha+y}{n+1/\beta}=\frac{y}{n}=\hat\theta_{MLE}$。</p>
+
+      <h4>範例 1.39　Bin$(n,\theta)$ + Beta 事前（交大財金）</h4>
+      <p>Let $Y$ be binomial with pdf $P(Y=y\mid\theta)=\binom{n}{y}\theta^y(1-\theta)^{n-y}$。（1）MLE 及其不偏性？（2）事前 $\theta\sim\text{Beta}(\alpha,\beta)$ 下，貝氏估計量（posterior mean）？</p>
+      <p><b>解：</b>（1）$\hat\theta_{MLE}=Y/n$，$E(Y/n)=\theta$：不偏。（2）</p>
+      <div class="formula"><div class="f-label">事後</div><div class="f-body">$$f_{\theta\mid Y}(\theta\mid y)\propto\theta^{y}(1-\theta)^{n-y}\cdot\theta^{\alpha-1}(1-\theta)^{\beta-1}=\theta^{\alpha+y-1}(1-\theta)^{\beta+n-y-1} \;\Rightarrow\; \theta\mid Y=y\sim\text{Beta}(\alpha+y,\ \beta+n-y)$$<div class="f-note">貝氏估計量（posterior mean）$\hat\theta_B=\dfrac{\alpha+y}{\alpha+\beta+n}=\dfrac{n}{\alpha+\beta+n}\cdot\dfrac{y}{n}+\dfrac{\alpha+\beta}{\alpha+\beta+n}\cdot\dfrac{\alpha}{\alpha+\beta}$：MLE 與事前平均的加權平均。</div></div></div>
+
+      <h4>範例 1.40　Ber$(\theta)$ + Beta$(\alpha,\beta)$ + 平方損失（交大經管）</h4>
+      <p>$X_1,\ldots,X_n$ i.i.d. Ber$(\theta)$，$Y=\sum X_i$；事前 $\theta\sim\text{Beta}(\alpha,\beta)$，損失 $[\theta-w(y)]^2$。（1）求 $\theta$ 之事後分配；（2）求 Bayes solution。</p>
+      <p><b>解：</b>（1）$\theta\mid Y=y\sim\text{Beta}(\alpha+y,\ \beta+n-y)$（推導同範例 1.39）。（2）平方損失之貝氏解＝事後平均：$w(y)=\dfrac{\alpha+y}{\alpha+\beta+n}$。</p>
+
+      <h4>範例 1.41　Poi$(\lambda)$ + Exp$(1)$ 事前（政大風管・精算組）</h4>
+      <p>Let $X_1,\ldots,X_n\sim\text{Poi}(\lambda)$，quadratic loss，事前 $\pi(\lambda)=e^{-\lambda}$（$\lambda\ge0$）。Find the Bayes estimator for $\lambda$.</p>
+      <p><b>解：</b>事前即 Gamma$(1,1)$，</p>
+      <div class="formula"><div class="f-label">事後</div><div class="f-body">$$\lambda\mid x\sim\text{Gamma}\Big(1+\sum x_i,\ \frac{1}{n+1}\Big) \;\Rightarrow\; \hat\lambda_B=E(\lambda\mid x)=\frac{1+\sum x_i}{n+1}$$</div></div>
+
+      <h4>範例 1.42　$N(\mu,1)$ + $N(0,1)$ 事前：事後與 MAP（政大金融・財工組）</h4>
+      <p>Let $X\mid\mu\sim N(\mu,1)$，prior $\mu\sim N(0,1)$，observe $X=r$. Derive the posterior of $\mu$ and the MAP estimate.</p>
+      <p><b>解：</b></p>
+      <div class="formula"><div class="f-label">事後</div><div class="f-body">$$f_{\mu\mid X}(\mu\mid r)\propto e^{-(r-\mu)^2/2}\cdot e^{-\mu^2/2}\propto e^{-(\mu-r/2)^2} \;\Rightarrow\; \mu\mid X=r\sim N\Big(\frac{r}{2},\ \frac{1}{2}\Big)$$<div class="f-note">MAP＝事後眾數＝事後平均（常態對稱）：$\hat\mu_{MAP}=\dfrac{r}{2}$。</div></div></div>
+
+      <h4>範例 1.43　$N(\theta,\sigma^2)$ + $N(\mu,\tau^2)$ 事前 + 絕對損失（政大風管・精算組）</h4>
+      <p>$X_1,\ldots,X_n\sim N(\theta,\sigma^2)$，$\bar{X}=y$；事前 $\theta\sim N(\mu,\tau^2)$，損失 $L[\theta,w(y)]=|\theta-w(y)|$。（1）定義貝氏統計學與 Bayes solution；（2）求 Bayes solution $w(y)$。</p>
+      <p><b>解：</b>（1）兼採事前信念與樣本資訊的統計推論稱貝氏統計學；損失為 $|\theta-w|$ 時，Bayes solution＝事後分配之理論<b>中位數</b>。（2）</p>
+      <div class="formula"><div class="f-label">事後</div><div class="f-body">$$\theta\mid y\sim N\Big(\frac{\tau^2 y+\sigma^2\mu/n}{\tau^2+\sigma^2/n},\ \frac{\tau^2\sigma^2/n}{\tau^2+\sigma^2/n}\Big) \;\Rightarrow\; w(y)=\frac{\tau^2 y+\tfrac{\sigma^2}{n}\mu}{\tau^2+\tfrac{\sigma^2}{n}}$$<div class="f-note">常態事後之下中位數＝平均數：權重 $\tau^2$（事前精確度）配 $y$、$\sigma^2/n$（樣本精確度）配事前平均 $\mu$。</div></div></div>
+      <div class="note">貝氏估計量的三種面貌：平方損失 → 事後平均；絕對損失 → 事後中位數；MAP → 事後眾數。常態事後三者相同；本書範例 1.38–1.43 依序示範。</div>
+    </div></div></div>
+  </section>
+  <!-- ===== 第1章 例題演練 ===== -->
+  <section class="section open" id="s14">
+    <div class="section-head">
+      <span class="sec-num">§1.4</span><h2>例題演練</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <h4>練 1　充份統計量與 MLE（整合）</h4>
+      <p>$X_1,\ldots,X_n \overset{\text{iid}}{\sim} U(\theta,\theta+1)$。求 $\theta$ 之 MLE 與充份統計量。</p>
+      <p><b>解：</b>$f(x;\theta)=I_{[\theta,\theta+1]}(x)$，$L(\theta)=I_{[\theta,\theta+1]}(x_{(1)})I_{[\theta,\theta+1]}(x_{(n)})$ 需 $\theta\le x_{(1)}$ 且 $\theta+1\ge x_{(n)}$：$\theta\in[x_{(n)}-1,\ x_{(1)}]$。概似值恆為 1，故此區間內任意 $\theta$ 皆為 MLE（不唯一）；充份統計量為 $(X_{(1)},X_{(n)})$。</p>
+      <h4>練 2　完備充份統計量與 UMVUE</h4>
+      <p>$X_1,\ldots,X_n \overset{\text{iid}}{\sim} \text{Exp}(\lambda)$。求 $\lambda$ 與 $1/\lambda$ 之 UMVUE。</p>
+      <p><b>解：</b>$\sum X_i$ 為完備充份統計量，$\sum X_i\sim\text{Gamma}(n,\tfrac1\lambda)$：$E\big[\tfrac{n-1}{\sum X_i}\big]=\lambda$、$E\big[\tfrac{\sum X_i}{n}\big]=\tfrac1\lambda$，故 $\lambda$ 之 UMVUE $=\dfrac{n-1}{\sum X_i}$，$1/\lambda$ 之 UMVUE $=\dfrac{\sum X_i}{n}=\bar{X}$。</p>
+      <h4>練 3　貝氏估計（MAP）</h4>
+      <p>$X\mid\theta\sim N(\theta,4)$（單一觀察值），事前 $\theta\sim N(2,1)$。求 MAP 估計量。</p>
+      <p><b>解：</b>事後 $\theta\mid x\sim N\Big(\tfrac{1\cdot x+4\cdot2}{1+4},\ \tfrac{4}{5}\Big)=N\big(\tfrac{x+8}{5},\tfrac45\big)$，MAP＝事後眾數＝事後平均 $=\dfrac{x+8}{5}$。</p>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 第 2 章 ===== -->
+  <div class="chapter-head" id="ch2">
+    <div class="kicker">研究所複習 · 數理統計 · 第 2 章</div>
+    <h1>第2章 大樣本理論<span class="en-sub">LARGE SAMPLE THEORY · 書頁 61–104</span></h1>
+    <p>母體分配未知時，我們無法精確推導小樣本下統計量的分配；本章透過「加大樣本數 $n$」，以統計量的<b>大樣本性質</b>進行推論——它與母體分配無關，代價是需要較高的抽樣成本。核心工具：分配收斂、機率收斂、Slutsky 定理與 Delta 法。</p>
+    <ul class="key-points">
+      <li>四種收斂概念：分配收斂、機率收斂、均方收斂、幾乎確信收斂</li>
+      <li>分配收斂：定義、mgf 收斂、CLT 四種形式、極限分配 vs 漸近分配</li>
+      <li>機率收斂：WLLN、Chebyshev、連續映射定理、Slutsky 定理</li>
+      <li>Delta 法：統計量函數轉換的大樣本分配</li>
+      <li>MLE 五大漸近性質：唯一性、漸近不偏、一致、漸近有效、漸近常態</li>
+    </ul>
+  </div>
+
+  <!-- ===== 2.1 大樣本理論 ===== -->
+  <section class="section open" id="s21">
+    <div class="section-head">
+      <span class="sec-num">§2.1</span><h2>大樣本理論</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p>很多時候母體分配形態根本無法掌握，無法精確推導統計量 $\hat\theta$ 的機率性質。統計學家於是思考：能不能透過加大樣本數 $n$，以統計量的<b>大樣本性質</b>（$n\to\infty$ 之下的極限性質）進行推論？</p>
+      <ul>
+        <li><b>好處</b>：大樣本性質對任意母體分配都成立，與母體分配無關。</li>
+        <li><b>代價</b>：需花費較多抽樣成本取得較大樣本。</li>
+        <li>「樣本數多大才叫夠大？」——韓信點兵，多多益善（見管中閔《統計學——觀念與方法》）。</li>
+      </ul>
+      <p>大樣本下我們想知道「統計量會不會收斂？如何收斂？」數學上有四種常用收斂概念：</p>
+      <div class="formula"><div class="f-label">四種收斂</div><div class="f-body">$$\text{分配收斂 (in distribution)} \quad \text{機率收斂 (in probability)} \quad \text{均方收斂 (in mean square)} \quad \text{幾乎確信收斂 (almost sure)}$$</div></div>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 2.1.1 分配收斂 ===== -->
+  <section class="section open" id="s211">
+    <div class="section-head">
+      <span class="sec-num">§2.1.1</span><h2>分配收斂</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <div class="thm def"><div class="thm-head">定義 2.1（分配收斂，convergence in distribution）</div><div class="thm-body">
+        <p>設 $T_n=T_n(X_1,\ldots,X_n)$ 為一統計量，當 $n\to\infty$ 時，若 $T_n$ 之機率分配收斂至隨機變數 $Y$ 的分配：</p>
+        <div class="formula"><div class="f-label">分配收斂</div><div class="f-body">$$F_{T_n}(x)\to F_Y(x), \quad \text{在 } F_Y \text{ 之每個連續點 } x \text{ 上} \qquad \text{記為 } T_n \xrightarrow{d} Y$$<div class="f-note">$F_{T_n}$ 與 $F_Y$ 分別為 $T_n$ 與 $Y$ 的累積分配函數（cdf）；$Y$ 之分配稱為 $T_n$ 之<b>極限分配</b>（limiting distribution）。注意：分配收斂的對象是「一個隨機變數」，而非「一個分配」。</div></div></div>
+      </div></div>
+
+      <h4>範例 2.1　$Z_n=n[1-F(Y_n)]$ 之極限分配（政大風管・精算組）</h4>
+      <p>Let $Y_n$ denote the $n$-th order statistic ($X_{(n)}$) of a random sample from a continuous distribution with cdf $F(x)$. Find the limiting distribution of $Z_n=n\big[1-F(Y_n)\big]$.</p>
+      <p><b>解：</b>對 $z&gt;0$（且 $z&lt;n$）：</p>
+      <div class="formula"><div class="f-label">極限分配</div><div class="f-body">$$F_{Z_n}(z)=P\Big(n\big[1-F(Y_n)\big]\le z\Big)=P\Big(Y_n\ge F^{-1}\big(1-\tfrac zn\big)\Big)=1-\Big[F\big(F^{-1}\big(1-\tfrac zn\big)\big)\Big]^n=1-\Big(1-\frac zn\Big)^n\to 1-e^{-z}$$<div class="f-note">故 $Z_n\xrightarrow{d}W\sim\text{Exp}(1)$。</div></div></div>
+
+      <h4>範例 2.2　$X_{(n)}-\ln n$ 的極端值分配（彰師商教）</h4>
+      <p>設 $X_i\overset{\text{iid}}{\sim}\text{Exp}(1)$，$X_{(n)}=\max\{X_1,\ldots,X_n\}$，$Y_n=X_{(n)}-\ln n$。（1）求 $F_{X_{(n)}}(x)$；（2）求 $F_{Y_n}(y)$；（3）求 $\lim_{n\to\infty}F_{Y_n}(y)$。</p>
+      <p><b>解：</b>（1）$F_{X_{(n)}}(x)=\big[P(X_i\le x)\big]^n=(1-e^{-x})^n$，$x\ge0$。（2）</p>
+      <div class="formula"><div class="f-label">分配</div><div class="f-body">$$F_{Y_n}(y)=P\big(X_{(n)}\le y+\ln n\big)=\big(1-e^{-(y+\ln n)}\big)^n=\Big(1-\frac{e^{-y}}{n}\Big)^n$$<div class="f-note">（3）$\lim_{n\to\infty}F_{Y_n}(y)=\lim\big(1-\tfrac{e^{-y}}{n}\big)^n=e^{-e^{-y}}$，$-\infty&lt;y&lt;\infty$：<b>極端值分配</b>（Gumbel 型），與 $n$ 無關的極限。</div></div></div>
+
+      <h4>範例 2.3　$U(0,\theta)$ 的極大值與極小值（政大風管・精算組）</h4>
+      <p>Let $X_1,\ldots,X_n \overset{\text{iid}}{\sim} U(0,\theta)$；$Y_1=\min\{X_i\}$，$Y_n=\max\{X_i\}$。（1）$Y_n$ 之極限分配？（2）$Z_n=nY_1$ 之極限分配？（3）$W_n=\sqrt{Y_n}$ 之極限分配？</p>
+      <p><b>解：</b>（1）$F_{Y_n}(y)=(y/\theta)^n\to\begin{cases}0,&y&lt;\theta\\1,&y\ge\theta\end{cases}$：$Y_n\xrightarrow{d}\theta$（<b>退化隨機變數</b>）。（2）</p>
+      <div class="formula"><div class="f-label">極小值</div><div class="f-body">$$F_{Z_n}(z)=P(nY_1\le z)=1-P\Big(Y_1&gt;\frac{z}{n}\Big)=1-\Big(1-\frac{z}{n\theta}\Big)^n\to 1-e^{-z/\theta}, \quad z&gt;0 \;\Rightarrow\; Z_n\xrightarrow{d}\text{Exp}(\theta)$$<div class="f-note">（3）$W_n=\sqrt{Y_n}\xrightarrow{d}\sqrt{\theta}$（退化；因 $\sqrt{\cdot}$ 連續，連續映射）。</div></div></div>
+
+      <h4>範例 2.4　mgf 收斂：二項收斂至 Poisson（by mgf uniqueness）</h4>
+      <p>Let $X_1,\ldots,X_n$ be a random sample from Bernoulli, $Y_n=\sum X_i\sim B(n,p)$。設 $n\to\infty$ 且 $np=\lambda$（固定）。Show that the limiting distribution of $Y_n$ is $\text{Poi}(\lambda)$.</p>
+      <p><b>解：</b></p>
+      <div class="formula"><div class="f-label">mgf</div><div class="f-body">$$M_{Y_n}(t)=(pe^t+1-p)^n=\Big(1+\frac{\lambda(e^t-1)}{n}\Big)^n\to e^{\lambda(e^t-1)}=M_{\text{Poi}(\lambda)}(t)$$<div class="f-note">由 mgf 唯一性定理：$Y_n\xrightarrow{d}\text{Poi}(\lambda)$。</div></div></div>
+
+      <h4>中央極限定理（CLT）的四種形式</h4>
+      <div class="formula"><div class="f-label">CLT</div><div class="f-body">$$\frac{\sum X_i-n\mu}{\sigma\sqrt{n}}\xrightarrow{d} N(0,1)\qquad \frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}\xrightarrow{d} N(0,1)$$<div class="f-note">樣本平均版本；分子分母同乘 $n$ 得樣本和版本。Bernoulli 特例：$\dfrac{\sqrt{n}(\hat p-p)}{\sqrt{p(1-p)}}\xrightarrow{d}N(0,1)$，即 $\sqrt{n}(\hat p-p)\xrightarrow{d}N\big(0,p(1-p)\big)$。</div></div></div>
+      <p><b>範例 2.5</b>（證明 CLT，via mgf）：令 $Z_i=\dfrac{X_i-\mu}{\sigma}$，$W_n=\dfrac{\sum Z_i}{\sqrt{n}}$。則</p>
+      <div class="formula"><div class="f-label">證明</div><div class="f-body">$$M_{W_n}(t)=\Big[M_Z\Big(\frac{t}{\sqrt n}\Big)\Big]^n=\Big[1+\frac{t^2}{2n}+o\Big(\frac1n\Big)\Big]^n\to e^{t^2/2}$$<div class="f-note">其中 $E(Z)=0,\ \mathrm{Var}(Z)=1$ 展開 $M_Z$ 之 Taylor 級數；$e^{t^2/2}$ 為 $N(0,1)$ 之 mgf。</div></div></div>
+      <p><b>極限分配 vs 漸近分配</b>：$N(0,1)$ 是 $\dfrac{\sqrt{n}(\bar X-\mu)}{\sigma}$ 的<b>極限分配</b>（$n\to\infty$ 的數學理論）；而實務上 $n$ 只是「夠大」，$\bar X$ 尚未收斂成單點，我們稱 $\bar X\ \dot{\sim}\ N\big(\mu,\tfrac{\sigma^2}{n}\big)$ 為 $\bar X$ 的<b>漸近分配</b>（asymptotic distribution）。統計實務使用的是漸近分配。</p>
+      <div class="formula"><div class="f-label">常態漸近法則</div><div class="f-body">$$B(n,p)\ \dot{\sim}\ N(np,npq),\quad NB(r,p)\ \dot{\sim}\ N\Big(\frac{rq}{p},\frac{rq}{p^2}\Big),\quad \text{Poi}(\lambda)\ \dot{\sim}\ N(\lambda,\lambda),\quad \text{Gamma}(a,\beta)\ \dot{\sim}\ N(a\beta,a\beta^2)$$<div class="f-note">皆為樣本和版本 CLT 之應用。</div></div></div>
+
+      <h4>範例 2.6　$\chi^2(1)$ 之和：$\big(Y/\sqrt n-\sqrt n\big)$ 的極限分配（交大財金）</h4>
+      <p>Suppose $X_1,\ldots,X_n$ independent with $\chi^2(\nu=1)$，$Y=\sum_{i=1}^n X_i$. Find the limiting distribution of $Z=Y/\sqrt n-\sqrt n$.</p>
+      <p><b>解：</b>$\mu=E(X_i)=1$，$\sigma^2=\mathrm{Var}(X_i)=2$。由 CLT：$\dfrac{Y-n}{\sqrt{2n}}\xrightarrow{d}N(0,1)$，故</p>
+      <div class="formula"><div class="f-label">極限</div><div class="f-body">$$Z=\frac{Y}{\sqrt n}-\sqrt n=\frac{Y-n}{\sqrt n}=\sqrt2\cdot\frac{Y-n}{\sqrt{2n}}\xrightarrow{d}N(0,2)$$</div></div>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 2.1.2 機率收斂 ===== -->
+  <section class="section open" id="s212">
+    <div class="section-head">
+      <span class="sec-num">§2.1.2</span><h2>機率收斂</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <div class="thm def"><div class="thm-head">定義 2.2（機率收斂，convergence in probability）</div><div class="thm-body">
+        <p>設 $T_n$ 為一統計量，若 $n\to\infty$ 時 $T_n$ 收斂至隨機變數 $Y$（或常數 $c$）的機率為 1：</p>
+        <div class="formula"><div class="f-label">機率收斂</div><div class="f-body">$$\lim_{n\to\infty}P\big(|T_n-Y|&lt;\varepsilon\big)=1,\ \forall\varepsilon&gt;0 \qquad \text{記為 } T_n\xrightarrow{p}Y \ \text{或}\ \mathrm{plim}\,T_n=Y$$<div class="f-note">白話：$n\to\infty$ 時 $T_n$ 與 $Y$ 「要多接近就有多接近」的機率為 1。常數 $c$ 可視為退化的隨機變數：$f(c)=1$，故 $T_n\xrightarrow{p}c$。</div></div></div>
+      </div></div>
+      <p><b>弱大數法則</b>（WLLN）與估計量的<b>一致性</b>（consistency）都建立在機率收斂之上。</p>
+
+      <h4>範例 2.7　證明 WLLN（政大金融）</h4>
+      <p>（1）State the meaning of laws of large numbers.（2）Let $X_1,X_2,\ldots$ independent with $E(X_i)=\mu$，$\mathrm{Var}(X_i)=\sigma^2$，show $\bar X_n$ converges weakly to $\mu$.</p>
+      <p><b>解：</b>（1）無論母體分配為何，$n\to\infty$ 時 $\bar X_n$ 要多接近 $\mu$ 就有多接近的機率為 1。（2）由 Chebyshev 不等式：</p>
+      <div class="formula"><div class="f-label">Chebyshev</div><div class="f-body">$$P\big(|\bar X_n-\mu|&lt;\varepsilon\big)\ge 1-\frac{\mathrm{Var}(\bar X_n)}{\varepsilon^2}=1-\frac{\sigma^2}{n\varepsilon^2}\to 1 \;\Rightarrow\; \bar X_n\xrightarrow{p}\mu$$</div></div>
+
+      <h4>範例 2.8　$(1/n)\sum X_i^2$ 之機率極限（政大經研）</h4>
+      <p>$\{X_1,\ldots,X_n\}$ i.i.d. with mean 3 and variance 2. Find the probability limit of $(1/n)\sum_{i=1}^n X_i^2$.</p>
+      <p><b>解：</b>令 $Y_i=X_i^2$，則 $E(Y_i)=\sigma^2+\mu^2=2+3^2=11$。由 WLLN：$\dfrac1n\sum X_i^2\xrightarrow{p}E(X^2)=\sigma^2+\mu^2=11$。</p>
+
+      <h4>範例 2.9　經驗分配函數 $\hat F_n(x)$（台大經研）</h4>
+      <p>Define the empirical distribution $\hat F_n(x)=\frac1n\sum_{i=1}^n I_{\{X_i\le x\}}$。（1）plain meaning？（2）unbiased？（3）consistent？（4）asymptotic distribution？</p>
+      <p><b>解：</b>（1）樣本中數值 $\le x$ 的比例。（2）令 $Y_i=I_{\{X_i\le x\}}\sim\text{Ber}\big(p=F_X(x)\big)$，$E[\hat F_n]=F_X(x)$：不偏。（3）由 WLLN：$\hat F_n\xrightarrow{p}F_X(x)$：一致。（4）由 CLT：</p>
+      <div class="formula"><div class="f-label">漸近分配</div><div class="f-body">$$\sqrt n\big(\hat F_n(x)-F(x)\big)\xrightarrow{d}N\big(0,\ F(x)(1-F(x))\big)$$</div></div>
+
+      <div class="thm thm1"><div class="thm-head">定理 2.3（機率收斂的相關定理）</div><div class="thm-body">
+        <p>設 $X_n\xrightarrow{p}c$、$Y_n\xrightarrow{p}d$（$a,b,c,d$ 為常數），則：</p>
+        <div class="formula"><div class="f-label">代數</div><div class="f-body">$$aX_n+bY_n\xrightarrow{p}ac+bd,\qquad X_nY_n\xrightarrow{p}cd,\qquad X_n^2\xrightarrow{p}c^2,\qquad \sqrt{X_n}\xrightarrow{p}\sqrt{c}\ (X_n\ge0),\qquad \frac{X_n}{Y_n}\xrightarrow{p}\frac{c}{d}\ (d\neq0)$$</div></div>
+        <p>由 WLLN：$\bar X\xrightarrow{p}\mu$ 且 $\tfrac1n\sum X_i^2\xrightarrow{p}\sigma^2+\mu^2$，搭配本定理可得 $S^2\xrightarrow{p}\sigma^2$（$S^2=\tfrac{1}{n-1}\big[\sum X_i^2-n\bar X^2\big]$）。</p>
+      </div></div>
+      <p><b>連續映射定理</b>（continuous mapping theorem）：$\hat\theta\xrightarrow{p}\theta\Rightarrow g(\hat\theta)\xrightarrow{p}g(\theta)$（$g$ 連續）。例：$\bar X\xrightarrow{p}\mu\Rightarrow\bar X^2\xrightarrow{p}\mu^2$；$S^2\xrightarrow{p}\sigma^2\Rightarrow S\xrightarrow{p}\sigma$。</p>
+
+      <h4>範例 2.10　機率收斂的算術（中山經研）</h4>
+      <p>Suppose $X_n\xrightarrow{p}3$ and $Y_n\xrightarrow{p}6$. To what do the following converge?（1）$n(X_n+Y_n)/(n+1)^2$；（2）$n(X_n+Y_n)/(n^2+n-3)$；（3）$n^2(X_n+Y_n)/(4n^2+7)$.</p>
+      <p><b>解：</b>分子 $X_n+Y_n\xrightarrow{p}9$。分母化為主導項：</p>
+      <div class="formula"><div class="f-label">極限</div><div class="f-body">$$\text{(1) } \frac{9n}{n^2}\to 0,\qquad \text{(2) } \frac{9n}{n^2}\to 0,\qquad \text{(3) } \frac{9n^2}{4n^2}\to\frac94$$</div></div>
+
+      <h4>範例 2.11　Exp$(\theta)$：MLE 之一致性（台大經研）</h4>
+      <p>$X_1,\ldots,X_n$ from $f(x)=\theta e^{-\theta x}$，$\theta\ge0$. 證明 MLE $\hat\theta_{ML}$ 具一致性。</p>
+      <p><b>解：</b>$\hat\theta_{ML}=n/\sum X_i=1/\bar X$。由 WLLN $\bar X\xrightarrow{p}1/\theta$，由連續映射定理 $\hat\theta_{ML}=1/\bar X\xrightarrow{p}\theta$。</p>
+
+      <h4>範例 2.12　Poisson 差分平方估計（政大經研）</h4>
+      <p>$Y_1,\ldots,Y_{2k}\sim\text{Poi}(\lambda)$，$\hat\lambda=\dfrac{1}{2k}\sum_{i=1}^k\big(Y_{2i}-Y_{2i-1}\big)^2$。（1）unbiased？（2）consistent？</p>
+      <p><b>解：</b>（1）</p>
+      <div class="formula"><div class="f-label">不偏</div><div class="f-body">$$E\big[(Y_2-Y_1)^2\big]=E(Y_2^2)-2E(Y_2)E(Y_1)+E(Y_1^2)=(\lambda+\lambda^2)-2\lambda^2+(\lambda+\lambda^2)=2\lambda \;\Rightarrow\; E(\hat\lambda)=\lambda$$<div class="f-note">（2）$(Y_{2i}-Y_{2i-1})^2,\ i=1,\ldots,k$ 為 iid 序列（平均 $2\lambda$），由 WLLN：$\hat\lambda\xrightarrow{p}\lambda$：一致。</div></div></div>
+
+      <h4>範例 2.13　$N(\mu,\sigma^2)$ 之 $\sigma^2$ 估計（清大計財）</h4>
+      <p>Let $X_1,\ldots,X_n\sim N(\mu,\sigma^2)$. Consider $S^2=\tfrac{1}{n-1}\sum(X_i-\bar X)^2$ 與 $\hat\sigma^2_{MLE}=\tfrac1n\sum(X_i-\bar X)^2$。（1）Which are unbiased？（2）Which are consistent？</p>
+      <p><b>解：</b>（1）$S^2$ 不偏（$E=\sigma^2$）；$\hat\sigma^2_{MLE}$ 偏誤（$E=\tfrac{n-1}{n}\sigma^2$）。（2）兩者皆一致：由 $S^2\xrightarrow{p}\sigma^2$（定理 2.3 後之推導）且 $\hat\sigma^2_{MLE}=\tfrac{n-1}{n}S^2\xrightarrow{p}\sigma^2$。</p>
+
+      <div class="thm thm1"><div class="thm-head">定理 2.4（史拉斯基定理，Slutsky's theorem）</div><div class="thm-body">
+        <p>設 $X_n\xrightarrow{p}c$（常數）且 $Y_n\xrightarrow{d}W$（隨機變數），則：</p>
+        <div class="formula"><div class="f-label">Slutsky</div><div class="f-body">$$X_n+Y_n\xrightarrow{d}c+W,\qquad X_nY_n\xrightarrow{d}cW,\qquad \frac{X_n}{Y_n}\xrightarrow{d}\frac{c}{W}\ (c\neq0)$$</div></div>
+      </div></div>
+      <p><b>牛刀小試</b>：證明 $t$ 檢定的大樣本版本 $\dfrac{\sqrt n(\bar X-\mu)}{S}\xrightarrow{d}N(0,1)$。</p>
+      <p>證：由 CLT $\dfrac{\sqrt n(\bar X-\mu)}{\sigma}\xrightarrow{d}Z\sim N(0,1)$；由 WLLN $S^2\xrightarrow{p}\sigma^2$，故 $\dfrac{\sigma}{S}\xrightarrow{p}1$。由 Slutsky：</p>
+      <div class="formula"><div class="f-label">證明</div><div class="f-body">$$\frac{\sqrt n(\bar X-\mu)}{S}=\frac{\sqrt n(\bar X-\mu)}{\sigma}\cdot\frac{\sigma}{S}\xrightarrow{d}Z\cdot 1\sim N(0,1)$$</div></div>
+
+      <h4>範例 2.14　$U(0,1)$ 與未知分配組合（台大經研）</h4>
+      <p>$\{X_i\}_{i=1}^n\sim U(0,1)$；$\{Y_i\}$ 未知分配、$E(Y)=0,\ \mathrm{Var}(Y)=1$。令 $Z_n=\dfrac{\sum X_i}{\sum X_i^2}$、$W_n=\dfrac{\sqrt n\,\bar Y}{\frac1n\sum X_i^2}$。（1）$Z_n$ 之機率極限 $c$？（2）$W_n$ 之漸近分配？</p>
+      <p><b>解：</b>（1）由 WLLN：$\tfrac1n\sum X_i\xrightarrow{p}\tfrac12$、$\tfrac1n\sum X_i^2\xrightarrow{p}E(X^2)=\tfrac13$，由定理 2.3：$Z_n=\dfrac{\frac1n\sum X_i}{\frac1n\sum X_i^2}\xrightarrow{p}\dfrac{1/2}{1/3}=\dfrac32$。（2）CLT：$\sqrt n\,\bar Y\xrightarrow{d}N(0,1)$；又 $\frac1n\sum X_i^2\xrightarrow{p}\frac13$，由 Slutsky：$W_n=3\cdot\sqrt n\,\bar Y\xrightarrow{d}N(0,9)$。</p>
+
+      <h4>範例 2.15　常態樣本之機率極限與極限分配（中正國經）</h4>
+      <p>$\{X_i\}\sim N(\mu,\sigma^2)$，$\bar X_n$ 為樣本平均。（1）$\mathrm{plim}\ \frac1n\sum(X_i+X_i^2)$？（2）$\sqrt{2n}(\bar X_n-\mu)$ 之極限分配？</p>
+      <p><b>解：</b>（1）$\frac1n\sum X_i\xrightarrow{p}\mu$、$\frac1n\sum X_i^2\xrightarrow{p}\sigma^2+\mu^2$，故 $\mathrm{plim}=\mu+\sigma^2+\mu^2$。（2）$\sqrt n(\bar X-\mu)\xrightarrow{d}N(0,\sigma^2)$，乘以 $\sqrt2$：$\sqrt{2n}(\bar X_n-\mu)\xrightarrow{d}N(0,2\sigma^2)$。</p>
+
+      <h4>範例 2.16　$\chi^2(n)$ 與 $t(n)$ 的極限（台大經研）</h4>
+      <p>（1）$W\sim\chi^2(n)$：以 Chebyshev 求 $X_n=W/n$ 之機率極限。（2）證明 $U_n\sim t(n)$ 收斂至 $N(0,1)$。</p>
+      <p><b>解：</b>（1）$E(W/n)=1$，$\mathrm{Var}(W/n)=2/n$：$P(|X_n-1|&lt;\varepsilon)\ge 1-\tfrac{2}{n\varepsilon^2}\to1$，$X_n\xrightarrow{p}1$。（2）$t(n)=Z/\sqrt{W/n}$（$Z\sim N(0,1)$ 獨立）：$\sqrt{W/n}\xrightarrow{p}1$，由 Slutsky：$U_n\xrightarrow{d}Z\sim N(0,1)$。</p>
+
+      <h4>範例 2.17　Gamma 樣本之 Slutsky 應用（政大風管）</h4>
+      <p>Let $\bar X$ denote the mean of a random sample of size $n$ from Gamma$(\alpha&gt;0,\ \beta=1)$. Find the limiting distribution of $\sqrt n(\bar X-\mu)/\sqrt{\bar X}$.</p>
+      <p><b>解：</b>$\mu=E(X)=\alpha$、$\mathrm{Var}(X)=\alpha$。CLT：$\sqrt n(\bar X-\alpha)\xrightarrow{d}N(0,\alpha)$；$\bar X\xrightarrow{p}\alpha\Rightarrow\sqrt{\bar X}\xrightarrow{p}\sqrt\alpha$。由 Slutsky：$\dfrac{\sqrt n(\bar X-\alpha)}{\sqrt{\bar X}}\xrightarrow{d}\dfrac{N(0,\alpha)}{\sqrt\alpha}\sim N(0,1)$。</p>
+
+      <h4>範例 2.18　Slutsky 混合應用（中山經研）</h4>
+      <p>Let $X_n\xrightarrow{d}Z\sim N(0,1)$ and $Y_n\xrightarrow{p}4$. To what do the following converge?（1）$X_n+Y_n$；（2）$X_n/Y_n$.</p>
+      <p><b>解：</b>（1）由 Slutsky：$X_n+Y_n\xrightarrow{d}4+Z\sim N(4,1)$。（2）$c=4\neq0$：$X_n/Y_n\xrightarrow{d}Z/4\sim N\big(0,\tfrac1{16}\big)$。</p>
+
+      <p><b>兩種收斂之關係</b>：$T_n\xrightarrow{p}W\Rightarrow T_n\xrightarrow{d}W$（機率收斂較強，逆不真）；但若收斂目標為常數 $c$，兩者等價。</p>
+      <h4>範例 2.19　Gamma$(n,1/n)$：分配收斂與機率收斂（政大統研）</h4>
+      <p>Let $X_n\sim\text{Gamma}(\alpha=n,\ \beta=1/n)$，pdf $f_n(x)=\dfrac{x^{n-1}e^{-nx}}{\Gamma(n)/n^n}$，$x\ge0$.（1）Does $X_n$ converge in distribution? To what?（2）converge in probability?</p>
+      <p><b>解：</b>（1）mgf $M_{X_n}(t)=\big(1-\tfrac tn\big)^{-n}\to e^{t}$，即退化於 1 之 mgf：$X_n\xrightarrow{d}1$（$F(x)=0\ (x&lt;1),\ 1\ (x\ge1)$）。（2）由「收斂目標為常數時分配收斂⇔機率收斂」：$X_n\xrightarrow{p}1$（亦可 Chebyshev：$E=1,\ \mathrm{Var}=1/n$）。</p>
+
+      <h4>範例 2.20　退化與否：$E$、$\mathrm{Var}$、極限分配（中山經研）</h4>
+      <p>Let $X_n$ be discrete with $P(X_n=0)=1-\tfrac1n$，$P(X_n=n)=\tfrac1n$. Find（1）$\lim E(X_n)$、$\lim\mathrm{Var}(X_n)$；（2）limiting distribution of $X_n$；（3）$\mathrm{plim}\,X_n$.</p>
+      <p><b>解：</b>（1）$E(X_n)=0\cdot(1-\tfrac1n)+n\cdot\tfrac1n=1$，$\lim E=1$；$\mathrm{Var}(X_n)=E(X_n^2)-1=n-1\to\infty$（<b>不收斂</b>）。（2）</p>
+      <div class="formula"><div class="f-label">極限分配</div><div class="f-body">$$F_n(x)=\begin{cases}0, & x&lt;0\\ 1-\tfrac1n, & 0\le x&lt;n\\ 1, & x\ge n\end{cases}\ \to\ \begin{cases}0, & x&lt;0\\ 1, & x\ge0\end{cases} \;\Rightarrow\; X_n\xrightarrow{d}0\ \text{（退化）}$$<div class="f-note">（3）因目標為常數 0：$X_n\xrightarrow{p}0$（直接驗證：$P(|X_n-0|\ge\varepsilon)=P(X_n=n)=1/n\to0$）。</div></div></div>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 2.1.3 極限分配進階 ===== -->
+  <section class="section open" id="s213">
+    <div class="section-head">
+      <span class="sec-num">§2.1.3</span><h2>極限分配進階</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <div class="thm thm1"><div class="thm-head">定理 2.5（Delta 法，Delta method）</div><div class="thm-body">
+        <p>若 $\sqrt n(T_n-\theta)\xrightarrow{d}N(0,\sigma^2)$，且 $g(\cdot)$ 連續、$g'(\theta)$ 存在，則</p>
+        <div class="formula"><div class="f-label">Delta 法</div><div class="f-body">$$\sqrt n\big(g(T_n)-g(\theta)\big)\xrightarrow{d}N\big(0,\ [g'(\theta)]^2\sigma^2\big) \qquad\text{即}\qquad g(T_n)\ \dot{\sim}\ N\Big(g(\theta),\ \frac{[g'(\theta)]^2\sigma^2}{n}\Big)$$<div class="f-note">反標準化即得漸近分配形式。</div></div></div>
+      </div></div>
+
+      <h4>範例 2.21　$\bar X^2$ 之漸近分配（成大統研）</h4>
+      <p>Let $\bar X_n$ be the sample mean from a distribution with mean $\mu$ and variance $\sigma^2$. What is the asymptotic distribution of $n^{1/2}(\bar X_n^2-\mu^2)$?</p>
+      <p><b>解：</b>CLT：$\sqrt n(\bar X-\mu)\xrightarrow{d}N(0,\sigma^2)$；取 $g(x)=x^2$，$g'(\mu)=2\mu$：$\sqrt n(\bar X^2-\mu^2)\xrightarrow{d}N(0,\ 4\mu^2\sigma^2)$。</p>
+
+      <h4>範例 2.22　Exp$(1)$ 之兩問（政大金融・金管組）</h4>
+      <p>Random sample of size $n$ from $f(x)=e^{-x}$，$x&gt;0$；$\bar X$ 為樣本平均。（1）$Y=\sqrt n(\bar X-1)$ 之漸近分配？（2）$Z=\sqrt n(\sqrt{\bar X}-1)$ 之漸近分配？</p>
+      <p><b>解：</b>（1）$\mu=\sigma^2=1$：$Y\xrightarrow{d}N(0,1)$。（2）$g(x)=\sqrt x$，$g'(1)=\tfrac12$：$Z\xrightarrow{d}N\big(0,\tfrac14\big)$。</p>
+
+      <h4>範例 2.23　離散分配之漸近分配（台大經研）</h4>
+      <p>令 $X$ 之分配：$f(2)=0.5,\ f(3)=0.3,\ f(9)=0.2$。$\{X_i\}$ 為抽自 $f$ 的隨機樣本。（1）用 CLT 找 $\bar X$（$n=10$）之漸近分配；（2）令 $Y=\bar X^2$，找 $Y$ 之漸近分配。</p>
+      <p><b>解：</b>（1）$\mu=2(0.5)+3(0.3)+9(0.2)=3.7$；$E(X^2)=4(0.5)+9(0.3)+81(0.2)=20.9$，$\sigma^2=20.9-3.7^2=7.21$：$\bar X\ \dot{\sim}\ N\big(3.7,\ \tfrac{7.21}{10}\big)$。（2）Delta 法：$g'(3.7)=7.4$：$Y=\bar X^2\ \dot{\sim}\ N\big(3.7^2,\ \tfrac{7.4^2\cdot7.21}{10}\big)=N(13.69,\ 39.49)$。</p>
+
+      <h4>範例 2.24　MLE 不動性 + Delta：$q=P(W&gt;k)$ 之估計（台大經研）</h4>
+      <p>$W_1,\ldots,W_n\sim N(\mu,1)$；$q=P(W_i&gt;k)=1-\Phi(k-\mu)$，$k$ 已知。（1）求 $q$ 之 MLE $\hat q$；（2）找 $\sqrt n(\hat q-q)$ 之漸近分配。</p>
+      <p><b>解：</b>（1）MLE 不動性（invariance）：$\hat\mu_{MLE}=\bar W$，故 $\hat q=1-\Phi(k-\bar W)$。（2）$g(\mu)=1-\Phi(k-\mu)$，$g'(\mu)=\phi(k-\mu)$（標準常態 pdf）：$\sqrt n(\hat q-q)\xrightarrow{d}N\big(0,\ \phi(k-\mu)^2\big)$。</p>
+
+      <h4>MLE 的五大漸近性質（正規條件下）</h4>
+      <div class="formula"><div class="f-label">MLE</div><div class="f-body">$$\text{(1) 存在且唯一}\quad \text{(2) 漸近不偏：}\lim E(\hat\theta_{MLE})=\theta\quad \text{(3) 一致：}\lim E=\theta,\ \lim\mathrm{Var}=0$$<div class="f-note">（4）漸近有效：$\lim\dfrac{\text{CRLB}}{\mathrm{Var}(\hat\theta_{MLE})}=1$；（5）漸近常態：$\dfrac{\hat\theta_{MLE}-\theta}{\sqrt{\text{CRLB}}}\xrightarrow{d}N(0,1)$，即 $\hat\theta_{MLE}\ \dot{\sim}\ N\big(\theta,\ \tfrac{1}{nI(\theta)}\big)$。</div></div></div>
+
+      <h4>範例 2.25　Exp 密度：MLE 與漸近分配</h4>
+      <p>$X_1,\ldots,X_n$ from $f(x;\theta)=\theta e^{-\theta x}$，$x&gt;0$。（1）MLE？（2）asymptotic distribution?</p>
+      <p><b>解：</b>（1）$\hat\theta_{MLE}=1/\bar X$。（2）$I(\theta)=1/\theta^2$，CRLB$=\theta^2/n$：$\hat\theta_{MLE}\ \dot{\sim}\ N\big(\theta,\ \tfrac{\theta^2}{n}\big)$。</p>
+
+      <h4>範例 2.26　Ber$(p)$ 三問（台大財金）</h4>
+      <p>$\{X_i\}\sim\text{Ber}(p)$。（1）參數空間與 MME/MLE？（2）UMVUE？（3）$\mathrm{Var}(X_i)$ 之 MLE 與漸近分配（$n&gt;30$ 固定）？</p>
+      <p><b>解：</b>（1）$\Omega=(0,1)$；$\hat p_{MME}=\hat p_{MLE}=\bar X$。（2）$\bar X$ 為完備充份統計量且不偏：UMVUE $=\bar X$。（3）$\widehat{\mathrm{Var}(X_i)}_{MLE}=\bar X(1-\bar X)$；Delta 法 $g(p)=p(1-p)$，$g'=1-2p$：$\sqrt n\big[\bar X(1-\bar X)-p(1-p)\big]\xrightarrow{d}N\big(0,\ (1-2p)^2p(1-p)\big)$。</p>
+
+      <h4>範例 2.27　$N(0,\sigma^2)$ 之 $\hat\sigma^2_{MLE}$（台大財金）</h4>
+      <p>$\{X_i\}\sim N(0,\sigma^2)$，$\hat\sigma^2$ 為 MLE。（1）驗證 MSE 一致性；（2）$n&lt;30$ 固定：抽樣分配？（3）$n\ge30$：漸近分配？</p>
+      <p><b>解：</b>$\hat\sigma^2=\tfrac1n\sum X_i^2$。（1）$E=\sigma^2$（不偏）、$\mathrm{Var}=\tfrac{2\sigma^4}{n}\to0$：MSE$=\mathrm{Var}\to0$，均方一致。（2）$n\hat\sigma^2/\sigma^2=\sum X_i^2/\sigma^2\sim\chi^2(n)$，故 $\hat\sigma^2\sim\dfrac{\sigma^2}{n}\chi^2(n)$。（3）$\hat\sigma^2\ \dot{\sim}\ N\big(\sigma^2,\ \tfrac{2\sigma^4}{n}\big)$。</p>
+
+      <h4>範例 2.28　Geo$(p)$ 三問（台大財金）</h4>
+      <p>$\{X_i\}\sim\text{Geo}(p)$：$P_X(x)=p(1-p)^{x-1}$，$x=1,2,\ldots$。（1）參數空間與 MME/MLE？（2）$P(X&gt;3)$ 之 MLE？（3）$n\ge30$ 時 $\hat p_{MLE}$ 之漸近分配？</p>
+      <p><b>解：</b>（1）$\Omega=(0,1)$；$E(X)=1/p$：$\hat p_{MME}=1/\bar X$；$\ell=n\ln p+( \sum x_i-n)\ln(1-p)$：$\hat p_{MLE}=1/\bar X$。（2）$P(X&gt;3)=(1-p)^3$，MLE 不動性：$\widehat{P(X&gt;3)}=(1-1/\bar X)^3$。（3）$I(p)=\tfrac{1}{p^2(1-p)}$：$\hat p_{MLE}\ \dot{\sim}\ N\big(p,\ \tfrac{p^2(1-p)}{n}\big)$。</p>
+
+      <h4>範例 2.29　$f(x;\theta)=\theta(1-\theta)^x$ 之 MME（台大經研）</h4>
+      <p>Let $f(x;\theta)=\theta(1-\theta)^x$，$x=0,1,2,\ldots$。（1）Using MOM to find estimator $\hat\theta_n$；（2）asymptotic distribution of $\hat\theta_n$.</p>
+      <p><b>解：</b>（1）$E(X)=\tfrac{1-\theta}{\theta}=\bar X$，$\hat\theta_n=\dfrac{1}{1+\bar X}$。（2）$\mathrm{Var}(X)=\tfrac{1-\theta}{\theta^2}$；Delta 法 $g(\mu)=\tfrac1{1+\mu}$，$\mu=\tfrac{1-\theta}{\theta}$，$g'=-\tfrac{1}{(1+\mu)^2}=-\theta^2$：$\sqrt n(\hat\theta_n-\theta)\xrightarrow{d}N\big(0,\ \theta^2(1-\theta)\big)$。</p>
+
+      <h4>範例 2.30　Pareto 四問（政大金融）</h4>
+      <p>$f(x;x_0,\theta)=\theta x_0^\theta x^{-\theta-1}$，$x\ge x_0$，$\theta\ge1$；$x_0&gt;0$ 已知。（1）MME；（2）MLE；（3）MLE 之漸近變異數；（4）充份統計量。</p>
+      <p><b>解：</b>（1）$E(X)=\tfrac{\theta x_0}{\theta-1}$：$\hat\theta_{MME}=\dfrac{\bar X}{\bar X-x_0}$。（2）$\ell=n\ln\theta+n\theta\ln x_0-(\theta+1)\sum\ln x_i$，$\ell'=\tfrac n\theta+n\ln x_0-\sum\ln x_i=0$：</p>
+      <div class="formula"><div class="f-label">MLE</div><div class="f-body">$$\hat\theta_{MLE}=\frac{n}{\sum\ln X_i-n\ln x_0}$$<div class="f-note">（3）$\ln f=\ln\theta+\theta\ln x_0-(\theta+1)\ln x$，$\dfrac{\partial^2\ln f}{\partial\theta^2}=-\dfrac1{\theta^2}$，$I(\theta)=\dfrac1{\theta^2}$：$\mathrm{Var}(\hat\theta_{MLE})\ \dot{\sim}\ \text{CRLB}=\dfrac{\theta^2}{n}$。（4）$f(x_1,\ldots,x_n;\theta)=\theta^n x_0^{n\theta}\big(\prod x_i\big)^{-\theta-1}$：取 $g=\theta^n x_0^{n\theta}(\prod x_i)^{-\theta}$、$h=(\prod x_i)^{-1}$，由分解定理 $\prod X_i$ 為 $\theta$ 之充份統計量。</div></div></div>
+
+      <h4>實務重點　$t$ 檢定的大樣本版本</h4>
+      <p>實務上 $\sigma$ 未知時以 $S$ 代換：$\dfrac{\sqrt n(\bar X-\mu)}{S}\xrightarrow{d}N(0,1)$（見 Slutsky 定理後之證明），這是大樣本 $t$ 檢定與信賴區間的理論基礎。</p>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 第2章 例題演練 ===== -->
+  <section class="section open" id="s22">
+    <div class="section-head">
+      <span class="sec-num">§2.2</span><h2>例題演練</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <h4>練 1　CLT 與 Delta 綜合</h4>
+      <p>$X_1,\ldots,X_n\overset{\text{iid}}{\sim}\text{Poi}(\lambda)$。求 $\sqrt n(\ln\bar X-\ln\lambda)$ 之漸近分配。</p>
+      <p><b>解：</b>$\sqrt n(\bar X-\lambda)\xrightarrow{d}N(0,\lambda)$；$g(x)=\ln x$，$g'(\lambda)=1/\lambda$：$\sqrt n(\ln\bar X-\ln\lambda)\xrightarrow{d}N\big(0,\ \tfrac1\lambda\big)$。</p>
+      <h4>練 2　Slutsky 組合</h4>
+      <p>$X_1,\ldots,X_n\overset{\text{iid}}{\sim}$ 任意分配，$E(X)=\mu$、$\mathrm{Var}(X)=\sigma^2&lt;\infty$。求 $\dfrac{\sqrt n(\bar X-\mu)}{S}$ 之極限分配。</p>
+      <p><b>解：</b>$\sqrt n(\bar X-\mu)\xrightarrow{d}N(0,\sigma^2)$、$S\xrightarrow{p}\sigma$，Slutsky：$\dfrac{\sqrt n(\bar X-\mu)}{S}\xrightarrow{d}N(0,1)$。</p>
+      <h4>練 3　極限分配判斷</h4>
+      <p>$X_n\sim\text{Exp}(n)$（rate $n$，即 mean $1/n$）。求 $X_n$ 之極限分配與機率極限。</p>
+      <p><b>解：</b>$E(X_n)=1/n\to0$、$\mathrm{Var}(X_n)=1/n^2\to0$：$X_n\xrightarrow{p}0$（Chebyshev），故亦 $X_n\xrightarrow{d}0$（退化於 0）。</p>
+    </div></div></div>
+  </section>
+  <!-- ===== 第 3 章 ===== -->
+  <div class="chapter-head" id="ch3">
+    <div class="kicker">研究所複習 · 數理統計 · 第 3 章</div>
+    <h1>第3章 假說檢定理論<span class="en-sub">THEORY OF HYPOTHESIS TESTING · 書頁 105–158</span></h1>
+    <p>在樣本大小不變下，$\alpha$ 與 $\beta$ 彼此消長；本章探討如何在相同顯著水準下使檢定力 $1-\beta$ 極大化。從 Neyman–Pearson 引理找出最強力檢定（MPT），推廣到均勻最強力檢定（UMPT），再以廣義概似比檢定（GLRT）處理雙尾與複合假說。</p>
+    <ul class="key-points">
+      <li>MPT：Neyman–Pearson 引理（簡單對簡單），拒絕域由概似比 $\lambda\le k$ 決定</li>
+      <li>UMPT：單調概似比（MLR）、指數族自動滿足，單尾檢定幾乎都是 UMPT</li>
+      <li>雙尾檢定不存在 UMPT，改用 GLRT</li>
+      <li>GLRT 大樣本性質：$-2\ln\lambda\xrightarrow{d}\chi^2(r)$</li>
+    </ul>
+  </div>
+
+  <!-- ===== 3.1 最強力檢定 ===== -->
+  <section class="section open" id="s31">
+    <div class="section-head">
+      <span class="sec-num">§3.1</span><h2>最強力檢定</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p>樣本大小不變下，$\alpha$（型一錯誤）與 $\beta$（型二錯誤）一般而言彼此消長；但在同樣的假說設定與顯著水準下，確實存在使檢定力 $1-\beta$ 極大化的檢定。本節先處理<b>簡單假說對簡單假說</b>，定義<b>最強力檢定</b>（most powerful test, MPT），再介紹 Neyman–Pearson 引理；之後推廣至<b>簡單對複合</b>的<b>均勻最強力檢定</b>（uniformly most powerful test, UMPT）。</p>
+      <div class="note">名詞複習：<b>簡單假說</b>（simple hypothesis）＝對 $f(x;\theta)$ 有精確設定（如 $H_a:\theta=\theta_a$）；<b>複合假說</b>（composite hypothesis）＝參數設定為範圍（如 $H_a:\theta&gt;10$）。</div>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 3.1.1 Neyman-Pearson 引理 ===== -->
+  <section class="section open" id="s311">
+    <div class="section-head">
+      <span class="sec-num">§3.1.1</span><h2>Neyman-Pearson 引理</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <div class="thm def"><div class="thm-head">定義 3.1（最強力檢定，most powerful test, MPT）</div><div class="thm-body">
+        <p>在顯著水準 $\alpha$ 下檢定 $H_0:\theta=\theta_0$ 對 $H_a:\theta=\theta_a$。若拒絕域 $RR^*$ 滿足</p>
+        <div class="formula"><div class="f-label">MPT</div><div class="f-body">$$\text{(1)}\ P\big(RR^*\mid\theta_0\big)=\alpha, \qquad \text{(2)}\ P\big(RR^*\mid\theta\big)\ge P\big(RR\mid\theta\big),\ \forall\text{ 其他拒絕域 } RR$$<div class="f-note">則稱 $RR^*$ 為最佳拒絕域，對應之決策法則為最強力檢定；$PF(\theta)=P(\text{reject }H_0\mid\theta)$ 為<b>檢定力函數</b>（power function）。$PF(\theta_0)=\alpha$；$\theta\in H_a$ 時 $PF(\theta)=1-\beta$。</div></div></div>
+      </div></div>
+
+      <div class="thm thm1"><div class="thm-head">定理 3.2（尼曼–皮爾森引理，Neyman–Pearson lemma）</div><div class="thm-body">
+        <p>$X_1,\ldots,X_n$ 為隨機樣本，抽自 $f(x;\theta)$，$\theta\in\{\theta_0,\theta_1\}$。檢定 $H_0:\theta=\theta_0$ 對 $H_a:\theta=\theta_1$，定義<b>概似比</b>（likelihood ratio）</p>
+        <div class="formula"><div class="f-label">概似比</div><div class="f-body">$$\lambda=\frac{L(\theta_0;\boldsymbol{x})}{L(\theta_1;\boldsymbol{x})}=\frac{\prod f(x_i;\theta_0)}{\prod f(x_i;\theta_1)}$$<div class="f-note">在顯著水準 $\alpha$ 下，最強力檢定之最佳拒絕域必為 $RR^*=\{\lambda\le k\}$，且滿足 $P(\lambda\le k\mid\theta_0)=\alpha$。</div></div></div>
+        <p class="proof">直覺：$H_a$ 的參數應帶來更大的概似函數值（概似＝可能性）；$\lambda\le k$ 表示 $H_a$ 相對 $H_0$ 可信度夠高。臨界值 $k$ 由 $P(\lambda\le k\mid\theta_0)=\alpha$ 決定。拒絕域亦稱臨界域（critical region, $C$），其餘集合稱接受域（acceptance region, $AR$）。部分教科書定義 $\lambda$ 為倒數，形式變為 $\lambda\ge k$，本質相同。</p>
+      </div></div>
+      <div class="note">本書記 $\boldsymbol{x}=\{x_1,\ldots,x_n\}$ 為整組樣本觀察值。</div>
+
+      <h4>範例 3.1　常態平均數之 MPT（交大財金）</h4>
+      <p>Let $\bar X$ be the mean of a random sample of size $n=2$ from $N(\mu_0,\sigma^2=1)$. Consider the test with rejection region $\bar X&gt;\mu_0+1$. Find its size and its power against $\mu_0+3$.</p>
+      <p><b>解：</b>$\bar X\sim N(\mu_0,\tfrac1n)$，$\bar X-\mu_0\sim N(0,\tfrac12)$：</p>
+      <div class="formula"><div class="f-label">size/power</div><div class="f-body">$$\text{size}=\alpha=P(\bar X&gt;\mu_0+1\mid\mu_0)=P(Z&gt;\sqrt2)=0.0793; \qquad \text{power}=P\big(Z&gt;\tfrac{-2}{1/\sqrt2}\big)=P(Z&gt;-2.83)=0.9977$$</div></div>
+
+      <h4>範例 3.2　$U(0,\theta)$ 之檢定力函數</h4>
+      <p>$Y_4=X_{(4)}$ 為 $n=4$、$U(0,\theta)$ 樣本之極大值，拒絕域 $RR=\{Y_4\le\tfrac12\ \text{或}\ Y_4\ge1\}$。求檢定力函數 $K(\theta)$。</p>
+      <p><b>解：</b>$F_{Y_4}(y)=(y/\theta)^4$、$f_{Y_4}(y)=4y^3/\theta^4$。分段：</p>
+      <div class="formula"><div class="f-label">檢定力函數</div><div class="f-body">$$K(\theta)=P(Y_4\ge1)+P(Y_4\le\tfrac12)=\begin{cases}1, & 0&lt;\theta&lt;\tfrac12\\[4pt] \dfrac{1}{16\theta^4}, & \tfrac12\le\theta&lt;1\\[6pt] 1-\dfrac{15}{16\theta^4}, & \theta\ge1\end{cases}$$<div class="f-note">$\theta\ge1$：$P(Y_4\ge1)=1-\tfrac1{\theta^4}$、$P(Y_4\le\tfrac12)=\tfrac{1}{16\theta^4}$。</div></div></div>
+
+      <h4>範例 3.3　$f(y;\theta)=\theta y^{\theta-1}$ 的 MPT（交大財金）</h4>
+      <p>$Y\sim f(y;\theta)=\theta y^{\theta-1}$，$0\le y\le1$。（1）$RR=\{Y&lt;0.5\}$ 之 power function？（2）以單一觀察值 $Y$ 求 size $0.05$ 之 MPT 檢定 $H_0:\theta=2$ vs $H_1:\theta=1$。</p>
+      <p><b>解：</b>（1）$PF(\theta)=P(Y&lt;0.5\mid\theta)=\int_0^{0.5}\theta y^{\theta-1}dy=0.5^\theta$。（2）</p>
+      <div class="formula"><div class="f-label">NP 引理</div><div class="f-body">$$\lambda=\frac{L(\theta=2\mid y)}{L(\theta=1\mid y)}=\frac{2y^{2-1}}{1\cdot y^0}=2y\le k \;\Rightarrow\; RR^*=\{Y\le k^*\},\quad \alpha=P(Y\le k^*\mid\theta=2)=k^{*2}=0.05 \;\Rightarrow\; k^*=\sqrt{0.05}=0.2236$$</div></div>
+
+      <h4>範例 3.4　$N(\mu,1)$：$H_0:\mu=\mu_0$ vs $H_1:\mu=\mu_1&lt;\mu_0$（政大經研）</h4>
+      <p>Find the most powerful test with significance level $\alpha$.</p>
+      <p><b>解：</b>$\lambda=\exp\big\{-\tfrac12\sum(x_i-\mu_0)^2+\tfrac12\sum(x_i-\mu_1)^2\big\}=\exp\big\{n(\mu_1-\mu_0)\bar x+\tfrac n2(\mu_0^2-\mu_1^2)\big\}$。$\mu_1&lt;\mu_0$ 時 $\lambda\le k\iff\bar X\ge k'$（注意不等號方向）：</p>
+      <div class="formula"><div class="f-label">MPT</div><div class="f-body">$$RR^*=\Big\{\bar X\ge k^*\Big\},\qquad k^*=\mu_0-z_\alpha\cdot\frac{1}{\sqrt n}\ \Rightarrow\ RR^*=\Big\{\frac{\bar X-\mu_0}{1/\sqrt n}\le -z_\alpha\Big\}\ \text{（左尾）}$$<div class="f-note">驗證了「左尾檢定左尾拒絕、右尾檢定右尾拒絕」的直觀做法必為 MPT。</div></div></div>
+
+      <h4>範例 3.5　$N(\theta,1)$：$H_0:\theta=0$ vs $H_1:\theta=1$（交大財金）</h4>
+      <p>（1）Find the best critical region of size $\alpha$；（2）State the theorem used.</p>
+      <p><b>解：</b>（1）$\lambda=e^{-\tfrac12\sum(x_i-0)^2+\tfrac12\sum(x_i-1)^2}=e^{\sum x_i-\tfrac n2}$；$\lambda\le k\iff\sum X_i\le k''\iff\bar X\le k'$——等一下，$\theta_1=1&gt;0$ 應為右尾：$\lambda\le k\iff e^{\sum x_i-\tfrac n2}\le k\iff\sum x_i\le \ln k+\tfrac n2$ 左尾？<br>重新檢查：$\sum(x_i-0)^2-\sum(x_i-1)^2=2\sum x_i-n$，$\lambda=e^{-\tfrac12(2\sum x_i-n)}=e^{-\sum x_i+n/2}\le k\iff\sum x_i\ge \tfrac n2-\ln k$：<b>右尾</b>。</p>
+      <div class="formula"><div class="f-label">MPT</div><div class="f-body">$$RR^*=\Big\{\bar X\ge k^*\Big\},\qquad \alpha=P(\bar X\ge k^*\mid\theta=0)=P\Big(Z\ge \sqrt n\,k^*\Big) \;\Rightarrow\; k^*=\frac{z_\alpha}{\sqrt n}$$<div class="f-note">（2）所引用之定理為 Neyman–Pearson lemma。</div></div></div>
+
+      <h4>範例 3.6　$N(1,\sigma^2)$：$H_0:\sigma^2=2$ vs $H_1:\sigma^2=3$（政大統研）</h4>
+      <p>（1）Argue that among all tests with type I error $\le.05$，the type II error is minimized by rejecting $H_0$ when $\sum_{i=1}^n(X_i-1)^2\ge c$.（2）Describe how to find $c$.</p>
+      <p><b>解：</b>（1）</p>
+      <div class="formula"><div class="f-label">NP 引理</div><div class="f-body">$$\lambda=\frac{(2\pi\cdot2)^{-n/2}e^{-\sum(x_i-1)^2/4}}{(2\pi\cdot3)^{-n/2}e^{-\sum(x_i-1)^2/6}}=\Big(\frac32\Big)^{n/2}\exp\Big\{-\frac{\sum(x_i-1)^2}{12}\Big\}\le k \iff \sum(x_i-1)^2\ge k'$$<div class="f-note">（2）$H_0$ 下 $\dfrac{\sum(X_i-1)^2}{2}\sim\chi^2(n)$，故 $0.05=P\big(\sum(X_i-1)^2\ge c\mid\sigma^2=2\big)$：$c=2\chi^2_{0.05}(n)$。</div></div></div>
+
+      <h4>範例 3.7　Exp$(\beta)$ 三問（高大經管）</h4>
+      <p>$f(x;\beta)=\tfrac1\beta e^{-x/\beta}$，$x&gt;0$。（1）MLE？（2）一致？（3）$H_0:\beta=\beta_0$ vs $H_a:\beta=\beta_a&lt;\beta_0$ 之 MPT？</p>
+      <p><b>解：</b>（1）$\hat\beta_{MLE}=\bar X$。（2）$\mathrm{Var}(\bar X)=\beta^2/n\to0$：一致。（3）</p>
+      <div class="formula"><div class="f-label">MPT</div><div class="f-body">$$\lambda=\Big(\frac{\beta_0}{\beta_1}\Big)^n\exp\Big\{-\Big(\frac1{\beta_0}-\frac1{\beta_1}\Big)\sum x_i\Big\}\le k \iff \sum x_i\ge k'\ \Rightarrow\ RR^*=\Big\{\frac{2\sum X_i}{\beta_0}\ge\chi^2_\alpha(2n)\Big\}$$<div class="f-note">$H_0$ 下 $\dfrac{2\sum X_i}{\beta_0}\sim\chi^2(2n)$（Gamma 比例性質：$X\sim\text{Gamma}(\alpha,\beta)\Rightarrow cX\sim\text{Gamma}(\alpha,c\beta)$，取 $c=2/\beta_0$ 使 $\beta=2$ 即 $\chi^2(2n)$）。</div></div></div>
+
+      <h4>範例 3.8　Bin$(n=5)$：離散型 NP 檢定（中央產經）</h4>
+      <p>$X\sim B(5,\theta)$，$H_0:\theta=\tfrac12$ vs $H_1:\theta=\tfrac34$，$\alpha=\tfrac1{32}$。Determine the best critical region.</p>
+      <p><b>解：</b>$\lambda=\dfrac{(\tfrac12)^5}{(\tfrac34)^x(\tfrac14)^{5-x}}=\dfrac{(\tfrac12)^5}{(\tfrac34)^x(\tfrac14)^{5-x}}$；$\lambda\le k\iff x\ge k^*$（右尾）。$P(X\ge5\mid\theta=\tfrac12)=(\tfrac12)^5=\tfrac1{32}=\alpha$，故 $RR^*=\{X\ge5\}$。</p>
+
+      <h4>範例 3.9　Ber$(p)$：$n=5,\ p_0=\tfrac12,\ p_1=\tfrac34,\ \alpha=0.05$（政大風管）</h4>
+      <p>Find the most powerful test of size $\alpha$（$P(X\ge5\mid p=\tfrac12)=0.03125$）。</p>
+      <p><b>解：</b>同型推導得 $RR^*=\{\sum X_i\ge5\}$；$\alpha=0.03125\le0.05$——因為顯著水準 $\alpha$ 是「型一錯誤發生的<b>最大</b>機率」，小於 $\alpha$ 亦可。</p>
+      <div class="note">離散分配下常無法剛好湊出 $\alpha$，可「不超過 $\alpha$」；更進階可考慮隨機化檢定（randomized test）使 $E_{\theta_0}(\delta(X))=\alpha$ 精確成立。</div>
+
+      <h4>範例 3.10　跨分配族：$U(0,2)$ vs Exp$(1)$（中山財管）</h4>
+      <p>$H_0:X_i\sim U(0,2)$、$H_1:X_i\sim\text{Exp}(1)$，$\alpha=5\%$。經推導拒絕域為 $\sum X_i&lt;h(n)$，$h(n)$ 為何？</p>
+      <p><b>解：</b></p>
+      <div class="formula"><div class="f-label">跨族 NP</div><div class="f-body">$$\lambda=\frac{\prod \tfrac12}{\prod e^{-x_i}}=\frac{e^{\sum x_i}}{2^n}\le k \iff \sum x_i\le k'$$<div class="f-note">$H_0$ 下 $X_i\sim U(0,2)$：$E=1,\ \mathrm{Var}=\tfrac13$，$n$ 大時 $\sum X_i\ \dot{\sim}\ N(n,\tfrac n3)$。$\alpha=P(\sum X_i\le k^*)=0.05$：$k^*=n-1.645\sqrt{n/3}$，故 $h(n)=n-1.645\sqrt{\dfrac n3}$。</div></div></div>
+
+      <h4>範例 3.11　離散五值：拒絕優先順序（交大財金）</h4>
+      <p>樣本空間 $\{1,2,3,4,5\}$，$H_0:X\sim f_0$ vs $H_1:X\sim f_1$（$f_0,f_1$ 如下表）。（1）$RR=\{2,3\}$ 之 $\alpha$、$\beta$？（2）$\alpha=0.3$ 之 MPT？</p>
+      <div class="tbl-wrap"><table class="tbl"><colgroup><col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:40%"></colgroup>
+        <tr><th>$x$</th><th>$f_0(x)$</th><th>$f_1(x)$</th><th>$\lambda=f_0/f_1$（拒絕順序由小到大）</th></tr>
+        <tr><td>1</td><td>0</td><td>0.3</td><td>$0$（最先）</td></tr>
+        <tr><td>2</td><td>0.1</td><td>0</td><td>$\infty$</td></tr>
+        <tr><td>3</td><td>0.2</td><td>0.2</td><td>$1$</td></tr>
+        <tr><td>4</td><td>0.3</td><td>0.4</td><td>$0.75$</td></tr>
+        <tr><td>5</td><td>0.4</td><td>0.1</td><td>$4$</td></tr>
+      </table></div>
+      <p><b>解：</b>（1）$\alpha=f_0(2)+f_0(3)=0.3$；$\beta=P(\text{不拒絕}\mid H_1)=f_1(1)+f_1(4)+f_1(5)=0.8$。（2）依 $\lambda$ 由小到大累積至 $\alpha=0.3$：$RR=\{1\}$（$\alpha=0$，power $0.3$）→ $RR=\{1,4\}$（$\alpha=0.3$，power $=f_1(1)+f_1(4)=0.7$），合於 $\alpha$ 限制。故 $RR^*=\{1,4\}$。</p>
+
+      <h4>範例 3.12　Bin$(5,\theta)$ 之最佳拒絕域（淡江管科）</h4>
+      <p>$X\sim B(5,\theta)$（pmf 如書表），$H_0:\theta=\tfrac12$ vs $H_1:\theta=\tfrac34$，$\alpha=\tfrac6{32}$。寫出所有可能拒絕域並找最佳者。</p>
+      <p><b>解：</b>由概似比排序，優先拒絕域為 $RR=\{5\}$（$\alpha=\tfrac1{32}$）、$RR=\{4,5\}$（$\alpha=\tfrac6{32}$），後者合於 $\alpha$ 限制。power：$P(X=5\mid\tfrac34)=\tfrac{243}{1024}$；$P(X\ge4\mid\tfrac34)=\tfrac{405+243}{1024}=\tfrac{648}{1024}$。故 $RR^*=\{X\ge4\}$。</p>
+
+      <h4>範例 3.13　三項分配（兩參數）之 MPT（政大金融）</h4>
+      <p>$(X,Y)$ 三項分配 $n=2$，$H_0:(\theta_1,\theta_2)=(0.4,0.4)$ vs $H_1:(0.2,0.6)$，size $0.16$。</p>
+      <div class="tbl-wrap"><table class="tbl"><colgroup><col style="width:24%"><col style="width:20%"><col style="width:28%"><col style="width:28%"></colgroup>
+        <tr><th>$(x,y)$</th><th>$f_{H_0}$</th><th>$f_{H_1}$</th><th>$\lambda$</th></tr>
+        <tr><td>$(0,0)$</td><td>0.04</td><td>0.04</td><td>1</td></tr>
+        <tr><td>$(0,1)$</td><td>0.16</td><td>0.24</td><td>2/3</td></tr>
+        <tr><td>$(0,2)$</td><td>0.16</td><td>0.36</td><td>4/9（最小）</td></tr>
+        <tr><td>$(1,0)$</td><td>0.16</td><td>0.08</td><td>2</td></tr>
+        <tr><td>$(1,1)$</td><td>0.32</td><td>0.24</td><td>3/2</td></tr>
+        <tr><td>$(2,0)$</td><td>0.16</td><td>0.04</td><td>4</td></tr>
+      </table></div>
+      <p><b>解：</b>$\lambda$ 最小者為 $(0,2)$：$RR^*=\{(X,Y)=(0,2)\}$，$\alpha=f_{H_0}(0,2)=0.16$，合於 $\alpha$ 限制；power $=f_{H_1}(0,2)=0.36$。</p>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 3.1.2 均勻最強力檢定 ===== -->
+  <section class="section open" id="s312">
+    <div class="section-head">
+      <span class="sec-num">§3.1.2</span><h2>均勻最強力檢定</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <div class="thm def"><div class="thm-head">定義 3.3（均勻最強力檢定，uniformly most powerful test, UMPT）</div><div class="thm-body">
+        <p>樣本抽自 $f(x;\theta)$，$\theta\in\Theta$（<b>母數空間</b>，parameter space）。顯著水準 $\alpha$ 下檢定 $H_0:\theta=\theta_0$ 對 $H_a:\theta\in\Theta-\{\theta_0\}$。若對<b>任意</b> $\theta\in\Theta-\{\theta_0\}$，$RR^*$ 均為最佳拒絕域，則稱 $RR^*$ 之決策法則為均勻最強力檢定。</p>
+        <p class="proof">白話：複合對立假說有很多可能母數值（如 $H_a:\mu&gt;100$），UMPT 要求同一個 $RR^*$ 對 $\mu=100.3,101,112,\ldots$ 全都是 MPT。</p>
+      </div></div>
+      <p>只要概似函數具<b>單調概似比</b>（monotone likelihood ratio, MLR）性質，NP 引理結果即可推廣至左尾/右尾複合檢定而成為 UMPT；<b>單一參數指數族必滿足 MLR</b>（配 Karlin–Rubin 定理即證商用統計的單尾檢定皆 UMPT）。</p>
+      <p><b>尋找策略</b>（以 $H_0:\theta=\theta_0$ vs $H_a:\theta&gt;\theta_0$ 為例）：先用 NP 引理對某定值 $\theta_1&gt;\theta_0$ 求 MPT；再說明此決策法則對任意 $\theta_1&gt;\theta_0$ 皆相同，即為 UMPT。</p>
+
+      <h4>範例 3.14　Exp$(\theta)$ 三問（高應大金融）</h4>
+      <p>$f(x\mid\theta)=\theta e^{-\theta x}$，$x\ge0$。（1）MLE？是否不偏？（2）$H_0:\theta=\theta_0$ vs $H_1:\theta=\theta_1&lt;\theta_0$ 之最佳臨界域？（3）對 $H_1:\theta&lt;\theta_0$ 是否為 UMPT？</p>
+      <p><b>解：</b>（1）$\ell=n\ln\theta-\theta\sum x$，$\hat\theta_{MLE}=1/\bar X$；$E[1/\bar X]=\tfrac{n\theta}{n-1}\neq\theta$：<b>偏誤</b>。（2）</p>
+      <div class="formula"><div class="f-label">NP</div><div class="f-body">$$\lambda=\Big(\frac{\theta_0}{\theta_1}\Big)^n e^{-(\theta_0-\theta_1)\sum x_i}\le k \iff \sum x_i\ge k' \iff \bar X\ge k^*,\qquad \alpha=P(\bar X\ge k^*\mid\theta_0)$$<div class="f-note">（3）此形式對任意 $\theta_1&lt;\theta_0$ 皆同，故為檢定 $H_1:\theta&lt;\theta_0$ 之 UMPT。</div></div></div>
+
+      <h4>範例 3.15　Ber$(p)$：UMPT 與樣本數（交大經管）</h4>
+      <p>$P(x\mid p)=p^x(1-p)^{1-x}$，$H_0:p=0.05$ vs $H_1:p&gt;0.05$。（1）Find the UMPT；（2）用 CLT 求 $n$ 使 $g(0.05)=0.05$ 且 $g(0.10)=0.95$。</p>
+      <p><b>解：</b>（1）NP 引理得 $RR^*=\{\hat p\ge k^*\}$（對任意 $p_1&gt;0.05$ 皆 MPT → UMPT），</p>
+      <div class="formula"><div class="f-label">UMPT</div><div class="f-body">$$k^*=0.05+z_\alpha\sqrt{\frac{0.05\times0.95}{n}}, \qquad \hat p=\frac{\sum X_i}{n}$$<div class="f-note">（2）$\alpha=0.05,\ \beta=0.05$：$n=\Big(\dfrac{z_\alpha\sqrt{p_0q_0}+z_\beta\sqrt{p_1q_1}}{p_1-p_0}\Big)^2=\Big(\dfrac{1.645\sqrt{0.0475}+1.645\sqrt{0.09}}{0.05}\Big)^2\approx291$。</div></div></div>
+
+      <h4>範例 3.16　$N(75,100)$、$n=25$：UMPT（高第一金融）</h4>
+      <p>檢定 $H_0:\theta=75$ vs $H_1:\theta&gt;75$，$\alpha=0.05$ 之一致最強力檢定拒絕區？</p>
+      <p><b>解：</b>NP 引理（$\theta_1&gt;75$）：$\lambda\le k\iff\bar X\ge k^*$，</p>
+      <div class="formula"><div class="f-label">UMPT</div><div class="f-body">$$\alpha=P(\bar X\ge k^*\mid\theta=75)=P\Big(Z\ge\frac{k^*-75}{10/\sqrt{25}}\Big)=0.05 \;\Rightarrow\; k^*=75+1.645\cdot2=78.29 \;\Rightarrow\; RR^*=\{\bar X\ge78.29\}$$<div class="f-note">對任意 $\theta_1&gt;75$ 皆為 MPT，故為 UMPT——即應用統計學中的右尾 $z$ 檢定。</div></div></div>
+
+      <h4>範例 3.17　Poi$(\lambda)$：$H_0:\lambda=\lambda_0$ vs $H_1:\lambda&gt;\lambda_0$（台大財金）</h4>
+      <p>推導 UMPT 並說明性質。</p>
+      <p><b>解：</b>$\lambda_{LR}=\dfrac{e^{-n\lambda_0}\lambda_0^{\sum x}}{e^{-n\lambda_1}\lambda_1^{\sum x}}=\Big(\dfrac{\lambda_0}{\lambda_1}\Big)^{\sum x}e^{n(\lambda_1-\lambda_0)}\le k\iff\sum X_i\ge k'$（因 $\ln\lambda_0-\ln\lambda_1&lt;0$）。</p>
+      <div class="formula"><div class="f-label">UMPT</div><div class="f-body">$$RR^*=\Big\{\sum X_i\ge k^*\Big\},\qquad \text{大樣本：}\ k^*\approx n\lambda_0+z_\alpha\sqrt{n\lambda_0}\quad\Big(\sum X_i\ \dot{\sim}\ N(n\lambda_0,n\lambda_0)\Big)$$</div></div>
+
+      <h4>範例 3.18　$N(0,\sigma^2)$：$H_0:\sigma^2=\sigma_0^2$ vs $H_1:\sigma^2&lt;\sigma_0^2$（台大財金）</h4>
+      <p>推導 UMPT。</p>
+      <p><b>解：</b>$\lambda=\Big(\dfrac{\sigma_0}{\sigma_1}\Big)^n e^{-\tfrac12(\tfrac1{\sigma_0^2}-\tfrac1{\sigma_1^2})\sum x_i^2}\le k\iff\sum X_i^2\le k'$（因 $\sigma_1&lt;\sigma_0\Rightarrow\tfrac1{\sigma_0^2}-\tfrac1{\sigma_1^2}&lt;0$ 且係數負）。$H_0$ 下 $\dfrac{\sum X_i^2}{\sigma_0^2}\sim\chi^2(n)$：</p>
+      <div class="formula"><div class="f-label">UMPT</div><div class="f-body">$$RR^*=\Big\{\frac{\sum X_i^2}{\sigma_0^2}\le\chi^2_{1-\alpha}(n)\Big\} \iff \Big\{\frac{nS'^2}{\sigma_0^2}\le\chi^2_{1-\alpha}(n)\Big\}\ \text{（左尾、UMPT）}$$</div></div>
+
+      <h4>範例 3.19　$N(\theta,1)$：雙尾檢定無 UMPT（交大財金）</h4>
+      <p>Test $H_0:\theta=\theta_0$ vs $H_1:\theta\neq\theta_0$. Show there is no uniformly most powerful test.</p>
+      <p><b>解：</b>Case I：$\theta_1&gt;\theta_0$ → MPT 為右尾 $RR=\{Z\ge z_\alpha\}$；Case II：$\theta_1&lt;\theta_0$ → MPT 為左尾 $RR=\{Z\le -z_\alpha\}$。兩種情況的 MPT 形式不同，故不存在對所有 $\theta\neq\theta_0$ 皆為 MPT 的單一檢定——<b>UMPT 不存在</b>。</p>
+      <div class="warn">雙尾檢定 $H_0:\theta=\theta_0$ vs $H_1:\theta\neq\theta_0$ 一般<b>不存在 UMPT</b>：雙尾拒絕需左右兩邊，沒有單一拒絕域能同時對左右兩邊母數空間皆最強力。此時改用 §3.2 的 GLRT。</div>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 3.2 廣義概似比 ===== -->
+  <section class="section open" id="s32">
+    <div class="section-head">
+      <span class="sec-num">§3.2</span><h2>廣義概似比</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p>簡單對簡單的概似比為 $\lambda=\dfrac{L(\theta_0;\boldsymbol x)}{L(\theta_1;\boldsymbol x)}$。本節推廣至簡單對複合（$H_0:\theta=\theta_0$ vs $H_a:\theta\neq\theta_0$ 或 $\theta&gt;\theta_0$），甚至複合對複合（$H_0:\theta\ge\theta_0$ vs $H_a:\theta&lt;\theta_0$）：</p>
+      <div class="thm def"><div class="thm-head">定義 3.4（廣義概似比檢定，Generalized Likelihood Ratio Test, GLRT）</div><div class="thm-body">
+        <p>檢定 $H_0:\theta\in\Theta_0$ 對 $H_a:\theta\in\Theta_a$（$\Theta=\Theta_0\cup\Theta_a$），定義<b>廣義概似比</b></p>
+        <div class="formula"><div class="f-label">GLRT</div><div class="f-body">$$\lambda=\frac{\max_{\theta\in\Theta_0}L(\theta;\boldsymbol x)}{\max_{\theta\in\Theta}L(\theta;\boldsymbol x)}=\frac{L(\hat\theta_0;\boldsymbol x)}{L(\hat\theta_{MLE};\boldsymbol x)}, \qquad RR^*=\{\lambda\le k\}\ \text{且}\ P(\lambda\le k\mid\theta_0)\le\alpha$$<div class="f-note">$\hat\theta_{MLE}$ 為無限制 MLE；$\hat\theta_0$ 為限制在 $\Theta_0$ 下之 MLE。$H_0$ 為簡單假說時 $\hat\theta_0=\theta_0$。直覺：分母（無限制）明顯大於分子（限制 $H_0$）時，樣本不支持 $H_0$ → 拒絕。</div></div></div>
+      </div></div>
+      <ul>
+        <li>GLRT 應用於簡單對簡單時等價於 NP 引理，即為 MPT。</li>
+        <li>簡單對複合（尤其雙尾）時 GLRT 未必最適，但最適檢定不存在時 GLRT 表現良好。</li>
+        <li>$\lambda\le k$ 之 $k$ 必介於 0 與 1 之間（分母 ≥ 分子），故 $-\ln\lambda\ge0$。</li>
+        <li>解 GLRT 的關鍵：把 $\lambda\le k$ 轉化為最終拒絕方向（常是 $\bar X$ 或 $\sum X_i^2$ 的雙尾/單尾）。</li>
+      </ul>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 3.2.1 GLRT ===== -->
+  <section class="section open" id="s321">
+    <div class="section-head">
+      <span class="sec-num">§3.2.1</span><h2>GLRT 拒絕域</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <h4>範例 3.20　$N(\mu,\sigma^2=8)$ 已知：$\mu$ 雙尾 GLRT（$H_0:\mu=10$）</h4>
+      <p>$X_1,\ldots,X_n\sim N(\mu,8)$，$\alpha=0.05$，檢定 $H_0:\mu=10$ vs $H_1:\mu\neq10$ 之 GLRT？</p>
+      <p><b>解：</b>$\hat\mu_{MLE}=\bar X$，$\hat\mu_0=10$：</p>
+      <div class="formula"><div class="f-label">GLRT</div><div class="f-body">$$\lambda=\exp\Big\{-\frac{1}{16}\sum(x_i-10)^2+\frac{1}{16}\sum(x_i-\bar x)^2\Big\}=\exp\Big\{-\frac{n(\bar x-10)^2}{16}\Big\}\le k \iff \Big|\frac{\bar X-10}{\sqrt{8/n}}\Big|\ge k^*$$<div class="f-note">$H_0$ 下 $Z=\dfrac{\bar X-10}{\sqrt{8/n}}\sim N(0,1)$：$k^*=z_{0.025}=1.96$。拒絕域 $RR^*=\{|Z|\ge1.96\}$＝應用統計的雙尾 $z$ 檢定。</div></div></div>
+      <div class="note">常用恆等式：$\sum(x_i-\mu_0)^2=\sum(x_i-\bar x)^2+n(\bar x-\mu_0)^2$（本書第 1 章註腳 2 證明過，務必記熟）。</div>
+
+      <h4>範例 3.21　$N(\mu,\sigma^2)$ 皆未知：$\mu$ 雙尾 GLRT → $t$ 檢定（中正統研）</h4>
+      <p>Derive the LRT for $H_0:\mu=\mu_0$ vs $H_1:\mu\neq\mu_0$（$\sigma^2$ unknown）. Specify an $\alpha$-level critical region.</p>
+      <p><b>解：</b>無限制：$\hat\mu=\bar X$、$\hat\sigma^2_{MLE}=\tfrac1n\sum(x_i-\bar x)^2$；限制下：$\hat\mu_0=\mu_0$、$\hat\sigma^2_0=\tfrac1n\sum(x_i-\mu_0)^2$。</p>
+      <div class="formula"><div class="f-label">GLRT</div><div class="f-body">$$\lambda=\Big(\frac{\hat\sigma^2_{MLE}}{\hat\sigma^2_0}\Big)^{n/2}=\Big[1+\frac{n(\bar x-\mu_0)^2}{(n-1)S^2}\Big]^{-n/2}\le k \iff |T|\ge k^*, \qquad T=\frac{\bar X-\mu_0}{S/\sqrt n}\sim t(n-1)\ \text{（$H_0$ 下）}$$<div class="f-note">拒絕域 $RR^*=\{|T|\ge t_{\alpha/2}(n-1)\}$＝雙尾 $t$ 檢定。</div></div></div>
+
+      <h4>範例 3.22　Exp$(\beta)$：$\beta$ 雙尾 GLRT（交大財金）</h4>
+      <p>Find the LRT for $H_0:\beta=\beta_0$ vs $H_1:\beta\neq\beta_0$.</p>
+      <p><b>解：</b>$\hat\beta_{MLE}=\bar X$；限制下 $\hat\beta_0=\beta_0$。$\lambda=\Big(\dfrac{\beta_0}{\bar x}\Big)^n e^{n-n\bar x/\beta_0}$。令 $W=\dfrac{n\bar X}{\beta_0}$，則 $\lambda=e^n\big(\tfrac nW\big)^n e^{-W}$ 只透過 $W e^{-W}$ 型 kernel：</p>
+      <div class="formula"><div class="f-label">Gamma kernel</div><div class="f-body">$$\lambda\le k \iff W e^{-W}\le c \iff W\le c_1\ \text{或}\ W\ge c_2 \;\Rightarrow\; RR^*=\Big\{\frac{2n\bar X}{\beta_0}\le\chi^2_{1-\alpha/2}(2n)\ \text{或}\ \ge\chi^2_{\alpha/2}(2n)\Big\}$$<div class="f-note">$H_0$ 下 $\dfrac{2n\bar X}{\beta_0}\sim\chi^2(2n)$。技巧：遇到 Gamma kernel（$w^{a-1}e^{-w}$）時，$\lambda\le k$ 對應的範圍必然分裂為兩邊（水平線與鐘形曲線相交兩點）。</div></div></div>
+
+      <h4>範例 3.23　$N(\mu,\sigma^2)$：$\sigma^2$ 雙尾 GLRT（中山經研）</h4>
+      <p>To test $H_0:\sigma^2=\sigma_0^2$ vs $H_1:\sigma^2\neq\sigma_0^2$ at level $\alpha$, find the rejection region.</p>
+      <p><b>解：</b>$\lambda=\Big(\dfrac{\hat\sigma^2_0}{\hat\sigma^2_{MLE}}\Big)^{n/2}$，$\hat\sigma^2_0=\tfrac1n\sum(y_i-\bar y)^2$。$\lambda\le k\iff\dfrac{n\hat\sigma^2_{MLE}}{\sigma_0^2}\le c_1\ \text{或}\ \ge c_2$：</p>
+      <div class="formula"><div class="f-label">GLRT</div><div class="f-body">$$RR^*=\Big\{\frac{(n-1)S^2}{\sigma_0^2}\le\chi^2_{1-\alpha/2}(n-1)\ \text{或}\ \ge\chi^2_{\alpha/2}(n-1)\Big\}\qquad \Big(\frac{(n-1)S^2}{\sigma_0^2}\sim\chi^2(n-1)\Big)$$<div class="f-note">$\mu$ 已知時改用 $n\hat\sigma^2_{MLE}/\sigma_0^2=\sum(Y_i-\mu)^2/\sigma_0^2\sim\chi^2(n)$。變異數雙尾檢定：樣本變異過大或過小都拒絕 $H_0$。</div></div></div>
+
+      <h4>範例 3.24　Ber$(p)$：$p$ 雙尾 GLRT（政大金融）</h4>
+      <p>Let $X_1,\ldots,X_n$ be independent Bernoulli with unknown $p$. Find the LRT for $H_0:p=p_0$ vs $H_1:p\neq p_0$.</p>
+      <p><b>解：</b>$\hat p_{MLE}=\bar X$；$\hat p_0=p_0$。$\lambda=\Big(\dfrac{p_0}{\bar x}\Big)^{\sum x}\Big(\dfrac{1-p_0}{1-\bar x}\Big)^{n-\sum x}$。$\ln\lambda$ 為以 $p_0$ 為極大點的凹函數（f.o.c. 得 $\bar x=p_0$、s.o.c. 為負），故 $\lambda\le k\iff\bar p\le c_1\ \text{或}\ \bar p\ge c_2$：</p>
+      <div class="formula"><div class="f-label">GLRT</div><div class="f-body">$$RR^*=\Big\{|Z|\ge z_{\alpha/2}\Big\},\qquad Z=\frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}$$<div class="f-note">等價於標準化形式 $\Big|\dfrac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}\Big|\ge z_{\alpha/2}$。</div></div></div>
+
+      <h4>範例 3.25　Bin$(n,p)$：$H_0:p=0.5$ vs $H_1:p\neq0.5$（交大管科）</h4>
+      <p>（1）Find the MLE of $p$；（2）Find the critical region of the LRT.</p>
+      <p><b>解：</b>（1）$\hat p_{MLE}=X/n$（f.o.c. $n/x$ 形式，s.o.c. $&lt;0$）。（2）$\lambda\le k\iff X\le c_1\ \text{或}\ X\ge c_2$，</p>
+      <div class="formula"><div class="f-label">GLRT</div><div class="f-body">$$RR^*=\Big\{X\le 0.5n-z_{\alpha/2}\sqrt{0.25n}\ \text{或}\ X\ge0.5n+z_{\alpha/2}\sqrt{0.25n}\Big\}$$</div></div>
+
+      <h4>範例 3.26　兩常態樣本（等變異數 1）：$\mu_1$ vs $\mu_2$（交大管科）</h4>
+      <p>$X_1,\ldots,X_m\sim N(\mu_1=\alpha+\beta,1)$，$Y_1,\ldots,Y_n\sim N(\mu_2=\alpha-\beta,1)$。（1）MLE of $\alpha,\beta$？（2）LRT of $H_0:\mu_1=\mu_2$ vs $H_1:\mu_1\neq\mu_2$.</p>
+      <p><b>解：</b>（1）$\ell(\alpha,\beta)$ 之 f.o.c. 得 $\hat\alpha=\tfrac{\bar X+\bar Y}{2}$、$\hat\beta=\tfrac{\bar X-\bar Y}{2}$（s.o.c. Hessian 負定）。（2）$H_0:\mu_1=\mu_2$ 下共同平均之 MLE 為 $\tfrac{m\bar X+n\bar Y}{m+n}$；LRT 化簡得</p>
+      <div class="formula"><div class="f-label">GLRT</div><div class="f-body">$$RR^*=\Big\{|\bar X-\bar Y|\ge z_{\alpha/2}\sqrt{\frac1m+\frac1n}\Big\}, \qquad \bar X-\bar Y\ \dot{\sim}\ N\Big(0,\ \frac1m+\frac1n\Big)\ \text{（$H_0$ 下）}$$</div></div>
+
+      <h4>範例 3.27　兩常態樣本（共同 $\sigma^2$ 未知）：兩樣本 $t$ 檢定（交大財金）</h4>
+      <p>$X_1,\ldots,X_n\sim N(\mu_1,\sigma^2)$，$Y_1,\ldots,Y_m\sim N(\mu_2,\sigma^2)$。（1）$\sigma^2$ 已知：$\mu_1-\mu_2$ 之 $100(1-\alpha)\%$ CI？（2）$\sigma^2$ 未知：LRT of $H_0:\mu_1=\mu_2$ vs $H_1:\mu_1\neq\mu_2$.</p>
+      <p><b>解：</b>（1）樞紐量 $Z=\dfrac{(\bar X-\bar Y)-(\mu_1-\mu_2)}{\sigma\sqrt{\tfrac1n+\tfrac1m}}\sim N(0,1)$：CI$=\bar X-\bar Y\pm z_{\alpha/2}\sigma\sqrt{\tfrac1n+\tfrac1m}$。（2）共同變異數之 MLE 修正為混合樣本變異數 $S_p^2=\dfrac{(n-1)S_X^2+(m-1)S_Y^2}{n+m-2}$，LRT 得</p>
+      <div class="formula"><div class="f-label">GLRT</div><div class="f-body">$$RR^*=\Big\{|T|\ge t_{\alpha/2}(n+m-2)\Big\},\qquad T=\frac{\bar X-\bar Y}{S_p\sqrt{\tfrac1n+\tfrac1m}}\sim t(n+m-2)$$</div></div>
+
+      <h4>範例 3.28　迴歸斜率：$H_0:\beta=\beta_0$（政大經研）</h4>
+      <p>Regression $Y_i=\beta x_i+\varepsilon_i$，$\varepsilon_i\sim N(0,\sigma^2)$ iid。Find the LRT for $\beta=\beta_0$ vs $\beta\neq\beta_0$.</p>
+      <p><b>解：</b>$\hat\beta_{MLE}$ 即最小平方斜率，$\hat\beta\sim N\big(\beta,\ \tfrac{\sigma^2}{\sum x_i^2}\big)$；LRT 化簡：</p>
+      <div class="formula"><div class="f-label">GLRT</div><div class="f-body">$$RR^*=\Big\{|Z|\ge z_{\alpha/2}\Big\},\qquad Z=\frac{\hat\beta-\beta_0}{\sigma/\sqrt{\sum x_i^2}}$$</div></div>
+
+      <h4>範例 3.30　$N(75,100)$、$n=25$：單尾 GLRT 與 UMPT 相同（$H_0:\mu=75$ vs $\mu&gt;75$）</h4>
+      <p>母數空間 $\Theta=\{\mu\mid\mu\ge75\}$。$\bar X\le75$ 時 $\max_{\mu\ge75}L(\mu)=L(75)$，$\lambda=1$（不拒絕）；$\bar X&gt;75$ 時 $\max_{\mu\ge75}L(\mu)=L(\bar X)$（單峰對稱）→ $\lambda\le k\iff\bar X\ge k^*$：</p>
+      <div class="formula"><div class="f-label">GLRT</div><div class="f-body">$$RR^*=\Big\{\bar X\ge75+1.645\cdot\frac{10}{\sqrt{25}}\Big\}=\{\bar X\ge78.29\}\ \text{與範例 3.16 之 UMPT 完全相同}$$<div class="f-note">技巧：常態概似函數對稱於 $\bar X$，故 $H_a$ 單尾時，限制下之最大值發生在 $\bar X$（若 $\bar X$ 在 $H_a$ 側）或邊界點。</div></div></div>
+
+      <h4>範例 3.31　限制條件下之 MLE（清大經研）</h4>
+      <p>$X_1,\ldots,X_n\sim f(x;\theta)$，求限制 $\theta\in(0,\tfrac12]$ 下之 MLE。</p>
+      <p><b>解：</b>無限制 MLE 為 $\hat\theta=\bar X$（$\ell'=0$、s.o.c. 負）。限制下：$\hat\theta_{restricted}=\min\{\bar X,\ \tfrac12\}$（若 $\bar X$ 超出限制區間，最大值發生在邊界點 $\tfrac12$）。</p>
+
+      <h4>範例 3.32　$H_0:\mu\le75$ vs $\mu&gt;75$：GLRT 相同（$H_0$ 為複合假說）</h4>
+      <p>母數空間 $\Theta=\{\mu\mid-\infty&lt;\mu&lt;\infty\}$；$H_0$ 下 $\Theta_0=\{\mu\mid\mu\le75\}$。$\bar X&gt;75$ 時 $\max_{\Theta_0}L=L(75)$、$\bar X\le75$ 時 $\max_{\Theta_0}L=L(\bar X)\Rightarrow\lambda=1$（不拒絕）。後續與範例 3.30 完全相同：$RR^*=\{\bar X\ge78.29\}$。</p>
+      <div class="note">範例 3.30 與 3.32 的 GLRT 決策法則相同——這正是應用統計把 $H_0:\mu=75$ 與 $H_0:\mu\le75$ 視為同一檢定的原因；但兩者「限制下 MLE」的意義不同（單點 vs 截斷空間）。</div>
+
+      <h4>範例 3.33　$N(\mu,\sigma^2)$：$H_0:\sigma^2=\sigma_0^2$ vs $\sigma^2&gt;\sigma_0^2$（交大財金）</h4>
+      <p>（1）Derive the LRT；（2）Construct the power function（設真值 $\sigma^2=9&gt;8$）。</p>
+      <p><b>解：</b>（1）單尾版本：$RR^*=\Big\{\dfrac{(n-1)S^2}{\sigma_0^2}\ge\chi^2_\alpha(n-1)\Big\}$（右尾）。（2）power$=P\Big(\dfrac{(n-1)S^2}{\sigma_0^2}\ge\chi^2_\alpha(n-1)\ \Big|\ \sigma^2=9\Big)=P\Big(\chi^2(n-1)\ge\tfrac{\sigma_0^2}{9}\chi^2_\alpha(n-1)\Big)$。</p>
+
+      <h4>範例 3.34　$N(\mu,1)$：大樣本 GLRT（台大財金）</h4>
+      <p>（1）寫出 $\mu$ 之參數空間、MLE $\hat\mu$、驗證充份性；（2）$\alpha=0.05$ 檢定 $H_0:\mu=0$ vs $H_1:\mu=1$ 之最佳拒絕域；（3）$n$ 很大時以 GLRT 檢定 $H_0:\mu=0$ vs $H_1:\mu\neq0$。</p>
+      <p><b>解：</b>（1）$\Theta=\{\mu\mid-\infty&lt;\mu&lt;\infty\}$，$\hat\mu=\bar X$（充份統計量）。（2）見範例 3.5（右尾 $z$ 檢定）。（3）</p>
+      <div class="formula"><div class="f-label">大樣本 GLRT</div><div class="f-body">$$\lambda=\frac{L(0)}{L(\bar x)}=e^{-n\bar x^2/2}, \qquad -2\ln\lambda=n\bar X^2\ \overset{H_0}{\sim}\ \chi^2(1)\ \text{（漸近）}$$<div class="f-note">$\alpha=0.05$：$-2\ln k=\chi^2_{0.05}(1)=3.841$，即 $RR^*=\{\sqrt n|\bar X|\ge1.96\}$——與精確雙尾 $z$ 檢定一致（此題恰巧合，因本就在 $H_0$ 下為 $\chi^2(1)$）。</div></div></div>
+
+      <h4>範例 3.35　兩組 Exp：$\lambda_1$ vs $\lambda_2$ 之 GLR（台大財金）</h4>
+      <p>$\{X_i\}_{i=1}^m\sim\text{Exp}(\lambda_1)$，$\{Y_j\}_{j=1}^n\sim\text{Exp}(\lambda_2)$，獨立，$m,n$ 大。檢定 $H_0:\lambda_1=\lambda_2$ vs $H_1:\lambda_1\neq\lambda_2$ 之 GLR 拒絕域。</p>
+      <p><b>解：</b>無限制：$\hat\lambda_1=1/\bar X$、$\hat\lambda_2=1/\bar Y$（MLE 不動性）；限制下共同 $\hat\lambda_0=\dfrac{m+n}{m\bar X+n\bar Y}$。代入化簡：</p>
+      <div class="formula"><div class="f-label">GLR</div><div class="f-body">$$\lambda=\Big(\frac{m\bar X}{m\bar X+n\bar Y}\Big)^m\Big(\frac{n\bar Y}{m\bar X+n\bar Y}\Big)^n, \qquad -2\ln\lambda\ \overset{H_0}{\xrightarrow{d}}\ \chi^2(1)$$<div class="f-note">$\alpha=0.05$：$-2\ln k=3.841$；$RR^*=\{-2\ln\lambda\ge3.841\}$。</div></div></div>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 3.2.2 GLRT 大樣本性質 ===== -->
+  <section class="section open" id="s322">
+    <div class="section-head">
+      <span class="sec-num">§3.2.2</span><h2>GLRT 大樣本性質</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p>母體分配滿足正規條件（regularity conditions）下，廣義概似比 $\lambda$ 有大樣本抽樣分配性質：</p>
+      <div class="formula"><div class="f-label">大樣本性質</div><div class="f-body">$$-2\ln\lambda\ \xrightarrow{H_0,\ d}\ \chi^2(r)$$<div class="f-note">其中 $r$ 為 $H_0$ 中限制式（restrictions）的個數。證明見 Bickel &amp; Doksum (2001), <i>Mathematical Statistics</i>, pp. 392–395。</div></div></div>
+      <ul>
+        <li>單一參數的雙尾檢定（$H_0:\theta=\theta_0$）：$r=1$，$-2\ln\lambda\ \dot{\sim}\ \chi^2(1)$，臨界值 $\chi^2_\alpha(1)=z_{\alpha/2}^2$。</li>
+        <li>這使 GLRT 可以繞過繁瑣的拒絕域化簡：直接算 $-2\ln\lambda$ 並與 $\chi^2(r)$ 臨界值比較（範例 3.34、3.35）。</li>
+        <li>例：$H_0:\mu_1=\mu_2$（兩組常態）時 $r=1$；$H_0:\alpha=2,\ \beta=0$（迴歸）時 $r=2$。</li>
+      </ul>
+      <div class="note">單尾檢定幾乎都是 UMPT；雙尾檢定幾乎都符合 GLRT——這是本章的總收束（見範例 3.27 後的歸納）。</div>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 第3章 例題演練 ===== -->
+  <section class="section open" id="s33">
+    <div class="section-head">
+      <span class="sec-num">§3.3</span><h2>例題演練</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <h4>練 1　NP 引理速算</h4>
+      <p>$X\sim\text{Poi}(\theta)$（單一觀察值）。$H_0:\theta=1$ vs $H_1:\theta=3$，$\alpha=0.05$ 之 MPT？</p>
+      <p><b>解：</b>$\lambda=\dfrac{e^{-1}1^x/x!}{e^{-3}3^x/x!}=e^2(1/3)^x\le k\iff x\ge k^*$。$P(X\ge k^*\mid\theta=1)\le0.05$：$P(X\ge4\mid1)=1-e^{-1}(1+1+\tfrac12+\tfrac16)=0.019&lt;0.05$；$P(X\ge3\mid1)=0.0803&gt;0.05$。故 $RR^*=\{X\ge4\}$。</p>
+      <h4>練 2　UMPT 判斷</h4>
+      <p>$X_1,\ldots,X_n\overset{\text{iid}}{\sim}\text{Exp}(\lambda)$。$H_0:\lambda=\lambda_0$ vs $H_1:\lambda&gt;\lambda_0$ 是否存在 UMPT？</p>
+      <p><b>解：</b>存在。NP 引理得 $RR^*=\{\bar X\le k^*\}$（$\lambda$ 越大 $\bar X$ 越小），形式與 $\lambda_1$ 無關 → UMPT；臨界值由 $\dfrac{2n\bar X}{\lambda_0}\sim\chi^2(2n)$ 決定。</p>
+      <h4>練 3　GLRT 大樣本</h4>
+      <p>$X_1,\ldots,X_n\overset{\text{iid}}{\sim}N(\mu,1)$，$H_0:\mu=0$ vs $H_1:\mu\neq0$。以 $-2\ln\lambda\ \dot{\sim}\ \chi^2(1)$ 求 $\alpha=0.05$ 之拒絕域。</p>
+      <p><b>解：</b>$\lambda=e^{-n\bar x^2/2}$，$-2\ln\lambda=n\bar X^2\ge\chi^2_{0.05}(1)=3.841$，即 $RR^*=\{\sqrt n|\bar X|\ge1.96\}$。</p>
+    </div></div></div>
+  </section>
+  <!-- ===== 術語表 ===== -->
+  <section class="section open" id="gloss">
+    <div class="section-head">
+      <span class="sec-num">GLOSS</span><h2>術語表複習</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p>前三章核心名詞，中英對照＋一句定義。可依章節篩選、勾選記憶進度（自動儲存），或隨機抽考。</p>
+      <div class="gloss-toolbar">
+        <div class="gloss-progress" id="glossBar"><span></span></div>
+        <span class="gloss-progress-txt" id="glossPct">0 / 0 已記憶</span>
+        <button class="ans-btn gloss-random" id="glossRandom">隨機抽考</button>
+      </div>
+      <div class="gloss-cats" id="glossCats"></div>
+      <div class="gloss-list" id="glossList"></div>
+    </div></div></div>
+  </section>
+
+  <!-- ===== 路線圖 ===== -->
+  <section class="section open" id="roadmap">
+    <div class="section-head">
+      <span class="sec-num">ROADMAP</span><h2>複習路線圖</h2>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="section-body"><div><div class="section-inner">
+      <p>本頁涵蓋前三章；第四章「財務工程數學」（書頁 159–205）為後續進度。</p>
+      <div class="roadmap-grid">
+        <div class="roadmap-card done"><div class="r-t">第 1 章 點估計理論<span class="r-badge">已完成</span></div><div class="r-s">充份統計量、分解定理、指數族、UMVUE（Rao-Blackwell / Lehmann-Scheffé）、CRLB、貝氏估計</div></div>
+        <div class="roadmap-card done"><div class="r-t">第 2 章 大樣本理論<span class="r-badge">已完成</span></div><div class="r-s">分配收斂、機率收斂、WLLN、Slutsky 定理、Delta 法、MLE 漸近性質</div></div>
+        <div class="roadmap-card done"><div class="r-t">第 3 章 假說檢定理論<span class="r-badge">已完成</span></div><div class="r-s">MPT、Neyman-Pearson 引理、UMPT（MLR）、GLRT 與大樣本 $\chi^2$ 性質</div></div>
+        <div class="roadmap-card pending"><div class="r-t">第 4 章 財務工程數學<span class="r-badge">待建</span></div><div class="r-s">書頁 159–205：隨機過程與財務數學應用</div></div>
+      </div>
+    </div></div></div>
+  </section>
+
+  <footer class="page-footer">
+    依據張翔《統計學～數理統計》整理，PDF 212 頁 OCR（書內頁碼 = PDF 頁碼 − 4）。<br>
+    例題編號與來源學校依原書；公式以 KaTeX 排版。深色模式、側欄導覽、搜尋、術語表皆可離線使用。
+  </footer>
+</main>
+<!-- @JS -->
+
+<script>
+// ===== 工具函數 =====
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+// ===== 側欄：行動裝置開關 =====
+const sidebar = $('#sidebar'), mask = $('#mask');
+function closeSidebar(){ sidebar.classList.remove('open'); mask.classList.remove('show'); }
+$('#menuBtn').addEventListener('click', ()=>{ sidebar.classList.add('open'); mask.classList.add('show'); });
+$('#sidebarClose').addEventListener('click', closeSidebar);
+mask.addEventListener('click', closeSidebar);
+// ===== 捲動到錨點（含側欄開闔） =====
+function jumpTo(id, btn){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.scrollIntoView({behavior:'smooth'});
+  closeSidebar();
+  $$('.nav-chapter').forEach(b=>b.classList.remove('active'));
+  $$('.nav-sub').forEach(b=>b.classList.remove('active'));
+  if(btn){ btn.classList.add('active'); }
+}
+$$('[data-jump]').forEach(btn=>{
+  btn.addEventListener('click', ()=>jumpTo(btn.dataset.jump, btn));
+});
+// ===== 小節開合 =====
+$$('.section-head').forEach(head=>{
+  head.addEventListener('click', ()=>{
+    head.parentElement.classList.toggle('open');
+  });
+});
+// ===== 深色模式 =====
+const darkBtn = $('#darkBtn');
+function setDark(on){
+  document.body.classList.toggle('dark', on);
+  localStorage.setItem('ms-dark', on ? '1' : '0');
+}
+if(localStorage.getItem('ms-dark') === '1') setDark(true);
+darkBtn.addEventListener('click', ()=> setDark(!document.body.classList.contains('dark')));
+// ===== 搜尋 =====
+const searchInput = $('#searchInput');
+const mainEl = $('main');
+const allSections = $$('main .section');
+function doSearch(q){
+  q = q.trim().toLowerCase();
+  document.body.classList.toggle('searching', q.length > 0);
+  if(!q){ allSections.forEach(s=>s.classList.remove('search-hit','search-hide')); return; }
+  let hits = 0;
+  allSections.forEach(sec=>{
+    const txt = sec.textContent.toLowerCase();
+    const hit = txt.includes(q);
+    sec.classList.toggle('search-hit', hit);
+    sec.classList.toggle('search-hide', !hit);
+    if(hit) hits++;
+  });
+}
+searchInput.addEventListener('input', e=>doSearch(e.target.value));
+// ===== 術語表 =====
+const GLOSS_CATS = [
+  {id:'g1', name:'第1章 充份性', color:'var(--teal)'},
+  {id:'g2', name:'第1章 UMVUE', color:'var(--accent)'},
+  {id:'g3', name:'第1章 CRLB', color:'var(--orange)'},
+  {id:'g4', name:'第1章 貝氏', color:'var(--purple)'},
+  {id:'g5', name:'第2章 收斂', color:'var(--green2)'},
+  {id:'g6', name:'第2章 大樣本工具', color:'var(--brown)'},
+  {id:'g7', name:'第3章 檢定基本', color:'var(--blue)'},
+  {id:'g8', name:'第3章 GLRT', color:'var(--green)'}
+];
+const TERMS = [
+  {t:'充份統計量', d:'Sufficient statistic：含 θ 全部資訊之統計量；Eθ[g(S)|θ] 與 θ 無關可分解', c:'g1'},
+  {t:'完備統計量', d:'Complete statistic：Eθ[g(S)]=0 ∀θ ⇒ g(S)=0 a.s.', c:'g1'},
+  {t:'分解定理', d:'Factorization theorem：f(x;θ)=g(s;θ)·h(x) ⇔ S 充份', c:'g1'},
+  {t:'指標函數', d:'Indicator：記載值域（support），值域與 θ 有關時 MLE 常落在樣本極值', c:'g1'},
+  {t:'指數族', d:'Exponential family：f=a(θ)b(x)exp{Σcⱼ(θ)tⱼ(x)}；單參數/雙參數皆有完備充份統計量', c:'g1'},
+  {t:'動差法 MME', d:'Method of moments：E(Xᵏ)=mₖ 解 θ；大樣本一致、不保證充份', c:'g2'},
+  {t:'最大概似法 MLE', d:'Maximum likelihood：最大化 L(θ)；具不動性（invariance），漸近最有效', c:'g2'},
+  {t:'不偏估計量 UE', d:'Unbiased：E(T)=θ；bias=E(T)−θ', c:'g2'},
+  {t:'UMVUE', d:'均勻最小變異不偏估計量：UE 中對所有 θ 變異數最小者', c:'g2'},
+  {t:'Rao-Blackwell 定理', d:'E(UE|S) 不偏且變異數不增大；S 充份時條件期望才是合法統計量', c:'g2'},
+  {t:'Lehmann-Scheffé 定理', d:'S 完備充份 ⇒ 可調整為不偏的函數轉換唯一 ⇒ 即 UMVUE', c:'g2'},
+  {t:'一致性', d:'Consistent：E(T)→θ 且 Var(T)→0（或 T→ᵖ θ）', c:'g2'},
+  {t:'費雪訊息 I(θ)', d:'Fisher information：E[(∂lnf/∂θ)²]=−E[∂²lnf/∂θ²]；In(θ)=nI(θ)', c:'g3'},
+  {t:'CRLB', d:'Cramér-Rao lower bound：Var(T)≥[g′(θ)]²/(nI(θ))；值域與 θ 無關才適用', c:'g3'},
+  {t:'有效估計量', d:'Efficient：Var(T)=CRLB，即 e(T)=CRLB/Var(T)=1', c:'g3'},
+  {t:'事前分配', d:'Prior：抽樣前對 θ 的信念 π(θ)', c:'g4'},
+  {t:'事後分配', d:'Posterior：∝ 概似×事前，含樣本與事前全部資訊', c:'g4'},
+  {t:'MAP 估計', d:'Maximum a posteriori：事後分配眾數', c:'g4'},
+  {t:'共軛事前', d:'Conjugate prior：事後與事前同族（如 Beta↔Bin、Gamma↔Poi）', c:'g4'},
+  {t:'貝氏估計（平方損失）', d:'事後平均：加權平均 MLE 與事前平均，n→∞ 趨近 MLE', c:'g4'},
+  {t:'分配收斂', d:'Convergence in distribution：F_Tn(x)→F_Y(x) 於連續點；記為 Tₙ→ᵈY', c:'g5'},
+  {t:'機率收斂', d:'Convergence in probability：P(|Tₙ−Y|<ε)→1；記為 Tₙ→ᵖY', c:'g5'},
+  {t:'退化隨機變數', d:'Degenerate：單點分配（如 X₍ₙ₎→ᵈθ）；收斂目標為常數時分配收斂⇔機率收斂', c:'g5'},
+  {t:'弱大數法則 WLLN', d:'X̄→ᵖμ；以 Chebyshev 證明（Var→0）', c:'g6'},
+  {t:'CLT', d:'中央極限定理：√n(X̄−μ)/σ→ᵈN(0,1)；四種形式（平均/和/Bernoulli）', c:'g6'},
+  {t:'Slutsky 定理', d:'Xₙ→ᵖc、Yₙ→ᵈW ⇒ Xₙ+Yₙ→ᵈc+W、XₙYₙ→ᵈcW、Xₙ/Yₙ→ᵈc/W', c:'g6'},
+  {t:'Delta 法', d:'√n(g(Tₙ)−g(θ))→ᵈN(0,[g′(θ)]²σ²)；函數轉換的漸近分配', c:'g6'},
+  {t:'連續映射定理', d:'Tₙ→ᵖθ 且 g 連續 ⇒ g(Tₙ)→ᵖg(θ)', c:'g6'},
+  {t:'漸近分配', d:'Asymptotic：n 夠大時的近似分配（如 X̄ ˙∼N(μ,σ²/n)）', c:'g6'},
+  {t:'簡單假說 / 複合假說', d:'Simple：θ 精確指定；Composite：θ 為範圍', c:'g7'},
+  {t:'型一、型二錯誤', d:'α=P(拒絕|H₀ 真)、β=P(不拒絕|H₀ 假)；檢定力 1−β', c:'g7'},
+  {t:'檢定力函數', d:'Power function：PF(θ)=P(reject|θ)；PF(θ₀)=α', c:'g7'},
+  {t:'MPT', d:'最強力檢定：同 α 下檢定力最大（簡單對簡單）', c:'g7'},
+  {t:'Neyman-Pearson 引理', d:'最佳拒絕域 RR*={λ≤k}，P(λ≤k|θ₀)=α；λ=L(θ₀)/L(θ₁)', c:'g7'},
+  {t:'UMPT', d:'均勻最強力檢定：對複合 Hₐ 之所有 θ 皆 MPT；單尾指數族恆有', c:'g7'},
+  {t:'MLR', d:'Monotone likelihood ratio：λ 隨 T 單調 ⇒ UMPT 存在；單參數指數族滿足', c:'g7'},
+  {t:'雙尾無 UMPT', d:'H₀:θ=θ₀ vs Hₐ:θ≠θ₀ 無單一最強力檢定 → 改用 GLRT', c:'g7'},
+  {t:'GLRT', d:'廣義概似比：λ=L(θ̂₀)/L(θ̂_MLE)，RR={λ≤k}；涵蓋雙尾與複合假說', c:'g8'},
+  {t:'GLRT 大樣本性質', d:'−2lnλ →ᵈ χ²(r)，r=H₀ 限制式個數；繞過拒絕域化簡直接檢定', c:'g8'}
+];
+const glossList = $('#glossList'), glossCats = $('#glossCats'), glossBar = $('#glossBar'), glossPct = $('#glossPct');
+let glossFilter = 'all';
+const KEY = 'ms-gloss-done';
+const doneSet = new Set(JSON.parse(localStorage.getItem(KEY) || '[]'));
+function renderGloss(){
+  glossCats.innerHTML = '<button class="gloss-cat active" data-c="all">全部</button>' +
+    GLOSS_CATS.map(c=>`<button class="gloss-cat" data-c="${c.id}">${c.name}</button>`).join('');
+  $$('.gloss-cat').forEach(b=>b.addEventListener('click', ()=>{
+    glossFilter = b.dataset.c;
+    $$('.gloss-cat').forEach(x=>x.classList.toggle('active', x===b));
+    renderGloss();
+  }));
+  const items = TERMS.filter(x=>glossFilter==='all' || x.c===glossFilter);
+  glossList.innerHTML = items.map(x=>`
+    <label class="gloss-item ${doneSet.has(x.t)?'done':''}">
+      <input type="checkbox" ${doneSet.has(x.t)?'checked':''} data-term="${x.t}">
+      <span><span class="g-cat">${GLOSS_CATS.find(c=>c.id===x.c).name.replace('第1章 ','').replace('第2章 ','').replace('第3章 ','')}</span>
+      <div class="g-t">${x.t}</div><div class="g-d">${x.d}</div></span>
+    </label>`).join('');
+  $$('#glossList input').forEach(inp=>inp.addEventListener('change', ()=>{
+    const t = inp.dataset.term;
+    doneSet.has(t) ? doneSet.delete(t) : doneSet.add(t);
+    localStorage.setItem(KEY, JSON.stringify([...doneSet]));
+    inp.closest('.gloss-item').classList.toggle('done', inp.checked);
+    updateGlossProgress();
+  }));
+  updateGlossProgress();
+}
+function updateGlossProgress(){
+  const pct = Math.round(doneSet.size / TERMS.length * 100);
+  glossBar.querySelector('span').style.width = pct + '%';
+  glossPct.textContent = `${doneSet.size} / ${TERMS.length} 已記憶（${pct}%）`;
+}
+$('#glossRandom').addEventListener('click', ()=>{
+  const pool = TERMS.filter(x=>glossFilter==='all' || x.c===glossFilter);
+  if(!pool.length) return;
+  const x = pool[Math.floor(Math.random()*pool.length)];
+  const item = [...glossList.querySelectorAll('.gloss-item')].find(el=>el.textContent.includes(x.t));
+  if(item){ item.scrollIntoView({behavior:'smooth', block:'center'}); item.style.outline='2px solid var(--accent)'; setTimeout(()=>item.style.outline='',1600); }
+});
+renderGloss();
+// ===== KaTeX 渲染 =====
+function renderKatex(){
+  if(!window.renderMathInElement) return;
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left:'$$', right:'$$', display:true},
+      {left:'$', right:'$', display:false}
+    ],
+    throwOnError:false,
+    strict:'ignore'
+  });
+}
+if(window.katex){
+  renderKatex();
+}else{
+  const ks = document.createElement('script');
+  ks.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js';
+  ks.onload = ()=>{
+    const ar = document.createElement('script');
+    ar.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js';
+    ar.onload = renderKatex;
+    document.head.appendChild(ar);
+  };
+  document.head.appendChild(ks);
+}
+</script>
+</body>
+</html>
