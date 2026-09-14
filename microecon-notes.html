@@ -107,9 +107,9 @@ font-weight:600;}
 .callout.key .clabel{position:relative;}
 .callout.key{background:linear-gradient(0deg,rgba(200,150,50,.14),rgba(200,150,50,.14)),#f8f2e2;}
 /* 重要經濟學名詞（墨綠粗體） */
-.term{color:#1e7d32;font-weight:800;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;}
+.term{color:#1e7d32;font-weight:800;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;cursor:pointer;border-bottom:1.5px dashed rgba(30,125,50,.5);border-radius:3px;padding:0 2px;transition:all .15s;}.term:hover{background:#1e7d32;color:#fff;border-bottom:none;}
 /* 人物／事件／專有名詞（深紫粗體） */
-.proper{color:#7b2cbf;font-weight:800;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;}
+.proper{color:#7b2cbf;font-weight:800;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;cursor:pointer;border-bottom:1.5px dashed rgba(123,44,191,.5);border-radius:3px;padding:0 2px;transition:all .15s;}.proper:hover{background:#7b2cbf;color:#fff;border-bottom:none;}
 /* 回到頂部 */
 #topBtn{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;
 background:#1f3a5f;color:#fff;border:none;cursor:pointer;display:none;align-items:center;justify-content:center;
@@ -189,6 +189,14 @@ box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:999;}
 .favbtn.on{background:#c9a227;border-color:#c9a227;color:#fff;}
 .pqhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
 .pqhead .favbtn{margin-left:auto;}
+
+/* 名詞懸浮字義 */
+.gtip{position:fixed;display:none;z-index:9999;max-width:340px;min-width:180px;
+  background:#fff;border:1px solid #ddd;border-radius:10px;padding:9px 14px;
+  font-size:13px;line-height:1.6;box-shadow:0 8px 24px rgba(0,0,0,.14);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;pointer-events:none;}
+.gtip .gt-en{font-weight:800;font-size:13.5px;}
+.gtip .gt-def{margin-top:2px;color:#444;}
 </style>
 <style>
 /* ===== 總經複習頁風格覆蓋（疊加，後載入） ===== */
@@ -4521,6 +4529,52 @@ function exportGloss(ch){const data={learned:GLS(ch+'-learned',[]),star:GLS(ch+'
     strong.parentNode.insertBefore(hd,strong);
     hd.appendChild(strong);
     hd.appendChild(btn);
+  });
+})();
+</script>
+
+<script>
+/* ===== 名詞懸浮字義（查 GLOSS_DATA 詞典） ===== */
+(function(){
+  var dict={};
+  if(typeof GLOSS_DATA!=='undefined'){
+    Object.keys(GLOSS_DATA).forEach(function(ch){
+      (GLOSS_DATA[ch]||[]).forEach(function(e){
+        if(e&&e[2])dict[e[2]]=dict[e[2]]||{en:e[1]||'',def:e[3]||''};
+      });
+    });
+  }
+  var tip=document.createElement('div');
+  tip.className='gtip';
+  tip.innerHTML='<div class="gt-en"></div><div class="gt-def"></div>';
+  document.body.appendChild(tip);
+  var enEl=tip.querySelector('.gt-en'), defEl=tip.querySelector('.gt-def');
+  function lookup(key){
+    var k=key.replace(/[（(].*?[)）]/g,'').trim();
+    if(dict[k])return dict[k];
+    var hit=null;
+    for(var kk in dict){ if(dict.hasOwnProperty(kk)&&kk.length>=2&&(k.indexOf(kk)>-1||kk.indexOf(k)>-1)){hit=dict[kk];break;} }
+    return hit;
+  }
+  document.querySelectorAll('.term,.proper').forEach(function(el){
+    var key=el.textContent.trim();
+    var hit=lookup(key);
+    if(!hit)return;
+    var isProper=el.classList.contains('proper');
+    var col=isProper?'#7b2cbf':'#1e7d32';
+    el.addEventListener('mouseenter',function(){
+      enEl.textContent=key+(hit.en?'  '+hit.en:'');
+      enEl.style.color=col;
+      defEl.textContent=hit.def||'';
+      tip.style.display='block';
+      var r=el.getBoundingClientRect();
+      var x=Math.min(Math.max(8,r.left),window.innerWidth-350);
+      var y=r.bottom+8;
+      tip.style.left=x+'px';tip.style.top=y+'px';
+      var tr=tip.getBoundingClientRect();
+      if(tr.bottom>window.innerHeight-8){tip.style.top=(r.top-tr.height-8)+'px';}
+    });
+    el.addEventListener('mouseleave',function(){tip.style.display='none';});
   });
 })();
 </script>
