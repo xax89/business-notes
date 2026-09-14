@@ -374,7 +374,8 @@ const BOOK = [
   {n:2, title:"代理問題與公司治理", subs:["2.1 訊息經濟學簡介","2.1.1 訊息不對稱","2.1.2 諾貝爾經濟學獎得主","2.2 公司理財中的代理問題","2.2.1 權益代理問題","2.2.2 負債代理問題","2.2.3 代理成本","2.3 公司治理與管制政策"], done:true, points:["市場失靈四類：公共財、外部性、市場力量、訊息不對稱","逆選擇（契約前、隱藏資訊）vs 道德危險（契約後、隱藏行動）","緩解：訊號發射 signaling、篩選 screening、誘因契約、監督","權益代理問題五樣態：怠惰、特權消費、MBO、過度投資、次佳投資","緩解權益代理：薪資連結、解僱／接管威脅、外部經理人市場、降低 FCF","負債代理四樣態：資產替換、債務積壓、榨取資產、債權稀釋","代理成本四部份：報償機制、監控、約束、剩餘損失","公司治理：OECD 五原則；沙賓法案 SOX"]},
   {n:3, title:"貨幣時間價值", subs:["3.1 基本概念與運算法則","3.2 現值與終值","3.3 年金","3.4 貸款種類"], done:true, points:["單利 vs 複利；時間旅行三法則（同時點才能合併、複利往未來、折現往過去）","PV = CFₙ/(1+r)ⁿ；FV = CF₀(1+r)ⁿ；PVIF 與 FVIF 互為倒數","普通年金期末發生、期初年金乘 (1+r)；成長年金 PVo = CF/(r-g)","永續年金 PVo = CF/r；成長永續 PVo = CF/(r−g)（r>g）","三種貸款：純折價、純付息、本息分期攤還"]},
   {n:4, title:"利率決定理論", subs:["4.1 利率基本概念","4.1.2 債券與殖利率","4.2 利率的決定","4.3 利率期間結構"], done:true, points:["APR（報價）vs EAR（有效）：EAR = (1+APR/q)^q − 1；q>1 時 EAR>APR","現金流要以「有效期間利率」折現；解題若沒說複利頻率就假設與現金流頻率相同","美國公債：T-bills（≤1年零息）/T-notes（2-10年）/T-bonds（30年）/TIPS（抗通膨）","YTM＝買進持有到期的 IRR；零息債券折價發行、附息債券半年付息","費雪方程式：1+r = (1+r*)(1+πᵉ)；名目利率＝實質無風險利率＋通膨溢酬＋風險溢酬","風險溢酬四項：MRP（到期）、DRP（違約）、LP（流動性）、ERP（匯兌）","殖利率曲線＝YTM 對到期期間；即期利率 vs 隱含遠期利率（無套利幾何平均）"]},
-  {n:5, title:"財務報表與現金流量", subs:["5.1 財務報表","5.2 財務管理學的現金流量概念"], done:true, points:["四大報表：資產負債表、綜合損益表、現金流量表、權益變動表","會計方程式：資產＝負債＋股東權益；應計基礎 vs 現金基礎","NWC（淨營運資金）＝流動資產 − 流動負債","OCF＝NOPAT＋折舊＝EBIT(1−T)＋折舊","NOPAT＝EBIT(1−T)（假想利息也要扣稅，稅盾留待 WACC 處理）","財務決策重現金流而非會計利潤"]}
+  {n:5, title:"財務報表與現金流量", subs:["5.1 財務報表","5.2 財務管理學的現金流量概念"], done:true, points:["四大報表：資產負債表、綜合損益表、現金流量表、權益變動表","會計方程式：資產＝負債＋股東權益；應計基礎 vs 現金基礎","NWC（淨營運資金）＝流動資產 − 流動負債","OCF＝NOPAT＋折舊＝EBIT(1−T)＋折舊","NOPAT＝EBIT(1−T)（假想利息也要扣稅，稅盾留待 WACC 處理）","財務決策重現金流而非會計利潤"]},
+  {n:6, title:"財務報表分析", subs:["6.1 共同比分析","6.2 財務比率分析"], done:true, points:["共同比（垂直）分析：資產負債表除以總資產、損益表除以銷貨","資產管理：存貨周轉率=COGS/存貨、應收周轉率=銷貨/A/R、總資產周轉率","現金轉換循環 CCC = DSI + DSO − DPO","流動性：流動比率、速動比率（酸性測試）、現金比率","獲利性：毛利率、營業利益率、ROA、ROE","投資價值：EPS、P/E、P/B、股利殖利率","杜邦：ROE＝净利率×总资产周轉率×權益乘數"]}
 ];
 
 
@@ -491,7 +492,16 @@ const TERMS = {
   "IFRS":["IFRS","國際財務報導準則","國際會計準則理事會制定；台灣上市櫃公司 2013 起採用，利跨國比較。"],
   "Balance sheet":["Balance Sheet","資產負債表","特定時點靜態財務狀況；資產＝負債＋權益。"],
   "NWC":["Net Working Capital (NWC)","淨營運資金","流動資產 − 流動負債；衡量短期償債緩衝。"],
-  "OCF":["Operating Cash Flow (OCF)","營運現金流量","OCF＝NOPAT＋折舊＝EBIT(1−T)＋折舊。"]
+  "OCF":["Operating Cash Flow (OCF)","營運現金流量","OCF＝NOPAT＋折舊＝EBIT(1−T)＋折舊。"],
+  /* 第6章：財報分析 */
+  "Common size":["Common-Size Analysis","共同比分析","各科目除以總資產或銷貨，供跨公司比較。"],
+  "Activity ratio":["Activity Ratio","資產管理比率","衡量資產使用效率；如存貨／應收／總資產周轉率。"],
+  "Liquidity ratio":["Liquidity Ratio","流動性比率","流動、速動、現金比率，衡量短期償債能力。"],
+  "Leverage ratio":["Leverage Ratio","負債管理比率","負債比率、權益乘數、利息保障倍數。"],
+  "Profitability":["Profitability Ratio","獲利性比率","毛利率、營業利益率、淨利率、ROA、ROE。"],
+  "Market ratio":["Market Ratio","投資價值比率","EPS、P/E、P/B、股利殖利率。"],
+  "CCC":["Cash Conversion Cycle","現金轉換循環","存貨天數＋應收天數−應付天數。"],
+  "DuPont":["DuPont Analysis","杜邦分析","ROE＝淨利率×總資產周轉率×權益乘數。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1116,7 +1126,34 @@ const CH5_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS};
+
+/* ===== 第六章：財務報表分析 ===== */
+const CH6_SECTIONS = [
+{
+  id:"6.1", title:"共同比分析",
+  body:`
+  <p>規模或幣別不同的公司不能直接比金額。<span class="term" data-term="Common size">共同比分析</span>（垂直分析）把報表數字標準化成百分比：</p>
+  <div class="note"><b>共同比資產負債表：</b>每個科目 ÷ 總資產。<br><b>共同比損益表：</b>每個科目 ÷ 銷貨收入。<br>用途：觀察存貨佔總資產比、淨利佔銷貨比，跨公司比較存貨管理與獲利能力。</div>
+  `
+},
+{
+  id:"6.2", title:"財務比率分析",
+  body:`
+  <div class="tblwrap"><table><caption>五大類財務比率</caption><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th>類別</th><th>常用比率與公式</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Activity ratio">資產管理（活動）</span></b></td><td>存貨周轉率＝<b>銷貨成本 COGS</b>／平均存貨；應收帳款周轉率＝銷貨／平均 A/R；固定資產周轉率＝銷貨／淨固定資產；總資產周轉率＝銷貨／總資產。</td></tr>
+  <tr><td><b><span class="term" data-term="Liquidity ratio">流動性</span></b></td><td>流動比率＝流動資產／流動負債；<b>速動比率（酸性測試）＝(流動資產−存貨−預付費用)／流動負債</b>；現金比率＝(現金＋有價證券)／流動負債。</td></tr>
+  <tr><td><b><span class="term" data-term="Leverage ratio">負債管理</span></b></td><td>負債比率＝總負債／總資產；權益乘數＝總資產／股東權益；利息保障倍數＝EBIT／利息費用。</td></tr>
+  <tr><td><b><span class="term" data-term="Profitability">獲利性</span></b></td><td>毛利率＝毛利／銷貨；營業利益率＝EBIT／銷貨；淨利率＝淨利／銷貨；ROA＝淨利／總資產；<b>ROE＝淨利／股東權益</b>。</td></tr>
+  <tr><td><b><span class="term" data-term="Market ratio">投資價值</span></b></td><td>EPS＝歸屬股東淨利／在外股數；P/E＝股價／EPS；P/B＝股價／每股淨值；股利殖利率＝每股股利／股價。</td></tr>
+  </tbody></table></div>
+  <div class="formula"><span class="f-label"><span class="term" data-term="CCC">現金轉換循環 CCC</span></span>CCC ＝ 存貨天數 DSI ＋ 應收天數 DSO − 應付天數 DPO<span class="f-note">衡量從付現進貨到收現銷貨的天數。</span></div>
+  <div class="formula"><span class="f-label"><span class="term" data-term="DuPont">杜邦分析</span></span>ROE ＝ 淨利率 × 總資產周轉率 × 權益乘數<span class="f-note">獲利能力 × 資產效率 × 財務槓桿，拆解 ROE 來源。</span></div>
+  <div class="note"><b>EVA／MVA：</b>EVA（經濟附加價值）＝稅後營業淨利 − 資金成本；MVA（市場附加價值）＝公司市值 − 投入資本，衡量為股東創造的超額價值。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1174,7 +1211,20 @@ const CH5_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS};
+const CH6_PROBLEMS = [
+{
+  q:"<b>範例 6.2（台北大）</b>　A 公司存貨轉換期 75 天、應收帳款收現期 38 天、應付帳款展延期 30 天（一年 365 天）。(1) 現金轉換循環多長？(2) 若年銷貨 $3,421,875 全為賒銷，應收帳款投資多少？(3) 每年存貨周轉幾次？",
+  opts:[],
+  ans:"(1) CCC = 75 + 38 − 30 = <b>83 天</b>。<br>(2) DSO = A/R ÷ (銷貨/365) → A/R = 38 × 3,421,875/365 ≈ <b>$356,250</b>。<br>(3) 存貨周轉次數 = 365/75 ≈ <b>4.87 次</b>。"
+},
+{
+  q:"某公司流動比率高但速動比率很低，最可能代表？",
+  opts:["(A) 現金过多","(B) 存貨積壓","(C) 應收帳款過多","(D) 長期負債過多"],
+  ans:"<b>(B) 存貨積壓。</b>速動比率把存貨與預付費用剔除；流動比率高、速動比率低，代表流動資產多為變現力差的存貨。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1191,7 +1241,8 @@ const GLOSS_CATS = [
   {name:"代理成本與治理", keys:["Structuring","Monitoring","Bonding","Residual loss","Corporate governance","Stakeholder"]},
   {name:"貨幣時間價值", keys:["Simple interest","Compound interest","Discount rate","Risk premium","PV","FV","PVIF","FVIF","Annuity","Ordinary annuity","Annuity due","Growing annuity","Perpetuity","Growing perpetuity","Pure discount","Interest-only","Amortized"]},
   {name:"利率與債券", keys:["APR","EAR","Bond","ZCB","Coupon bond","YTM","Fisher","MRP","DRP","LP","ERP","Yield curve","Spot rate"]},
-  {name:"財報與現金流", keys:["GAAP","IFRS","Balance sheet","NWC","OCF"]}
+  {name:"財報與現金流", keys:["GAAP","IFRS","Balance sheet","NWC","OCF"]},
+  {name:"財報分析", keys:["Common size","Activity ratio","Liquidity ratio","Leverage ratio","Profitability","Market ratio","CCC","DuPont"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1203,7 +1254,8 @@ const CH_TERMS_CATS = {
   2:["市場失靈","訊息經濟","權益代理","負債代理","代理成本與治理"],
   3:["貨幣時間價值"],
   4:["利率與債券"],
-  5:["財報與現金流"]
+  5:["財報與現金流"],
+  6:["財報分析"]
 };
 let glossMode="full", glossChapter=1;
 
