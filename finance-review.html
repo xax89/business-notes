@@ -390,7 +390,9 @@ const BOOK = [
   {n:18, title:"交換契約", subs:["18.1 利率交換","18.2 貨幣交換"], done:true, points:["利率交換：同幣別固定利率換浮動利率","貨幣交換：不同幣別本金與利息互換","交換本質為一系列遠期契約的組合"]},
   {n:19, title:"資本預算", subs:["19.1 評估指標","19.2 NPV 與 IRR 的取捨"], done:true, points:["NPV＝ΣCFₜ/(1+r)^t − I₀；NPV&gt;0 接受","IRR＝使 NPV=0 的折現率；IRR&gt;必要報酬率接受","回收期法、獲利指數 PI 為輔助指標","互斥方案 NPV 與 IRR 衝突時，以 NPV 為準"]},
   {n:20, title:"資本預算現金流量", subs:["20.1 相關現金流量","20.2 現金流構成"], done:true, points:["只認增量現金流量；沉沒成本不計、機會成本要計","外部性：侵蝕效果負、綜效正","三段：初始投資、營業 OCF、終結現金流（殘值+回收NWC）"]},
-  {n:21, title:"風險調整與實質選擇權", subs:["21.1 風險調整","21.2 實質選擇權"], done:true, points:["高風險計畫用較高折現率（RADR）","實質選擇權：延遲、擴張、放棄選擇權可增加專案價值"]}
+  {n:21, title:"風險調整與實質選擇權", subs:["21.1 風險調整","21.2 實質選擇權"], done:true, points:["高風險計畫用較高折現率（RADR）","實質選擇權：延遲、擴張、放棄選擇權可增加專案價值"]},
+  {n:22, title:"長期融資", subs:["22.1 權益與負債融資"], done:true, points:["普通股、特別股、公司債、可轉換公司債","租賃：營業租賃 vs 資本租賃"]},
+  {n:23, title:"槓桿與資本結構", subs:["23.1 財務槓桿","23.2 MM 定理與權衡理論"], done:true, points:["財務槓桿放大 EPS 對 EBIT 的敏感度","MM 無稅：資本結構與公司價值無關","MM 有稅：V_L＝V_U＋T×D（負債稅盾）","考慮財務困境成本後最適資本結構＝權衡理論","WACC 加權權益與稅後負債成本"]}
 ];
 
 
@@ -568,7 +570,12 @@ const TERMS = {
   "NPV":["Net Present Value (NPV)","淨現值","未來現金流折現減初始投資；NPV&gt;0 接受。"],
   "IRR":["Internal Rate of Return (IRR)","內部報酬率","使 NPV=0 的折現率；IRR&gt;必要報酬率接受。"],
   /* 第20、21章 */
-  "Real option":["Real Option","實質選擇權","管理當局隨資訊調整策略的彈性，如延遲、擴張、放棄。"]
+  "Real option":["Real Option","實質選擇權","管理當局隨資訊調整策略的彈性，如延遲、擴張、放棄。"],
+  /* 第23章 */
+  "DOL":["Degree of Operating Leverage (DOL)","營運槓桿","固定營運成本使 EBIT 變動放大。"],
+  "DFL":["Degree of Financial Leverage (DFL)","財務槓桿","固定利息使 EPS 對 EBIT 變動放大。"],
+  "MM":["Modigliani-Miller Theorem","MM 定理","完美市場下資本結構與價值無關；含稅時 V_L=V_U+T×D。"],
+  "Tradeoff":["Trade-off Theory","權衡理論","平衡負債稅盾利益與財務困境成本，決定最適負債比。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Gordon","Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1569,7 +1576,37 @@ const CH21_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS,17:CH17_SECTIONS,18:CH18_SECTIONS,19:CH19_SECTIONS,20:CH20_SECTIONS,21:CH21_SECTIONS};
+
+/* ===== 第二十二章 ===== */
+const CH22_SECTIONS = [
+{
+  id:"22.1", title:"長期融資工具",
+  body:`
+  <div class="note"><b>權益：</b>普通股（剩餘請求、有限責任）、特別股（固定股利、無投票權、優先求償）。<br><b>負債：</b>公司債、可轉換公司債（同時具債性與股性）。<br><b>租賃：</b>營業租賃（短期、可取消）vs 資本（融資）租賃（長期、不可取消、視同取得資產）。</div>
+  `
+}
+];
+
+/* ===== 第二十三章 ===== */
+const CH23_SECTIONS = [
+{
+  id:"23.1", title:"財務槓桿",
+  body:`<p>財務槓桿（舉債）會放大 EBIT 變動對 EPS 的影響：EBIT 上升時 EPS 上升更快，反之下跌更劇。<span class="term" data-term="DOL">營運槓桿</span>來自固定營運成本，<span class="term" data-term="DFL">財務槓桿</span>來自固定利息。</p>`
+},
+{
+  id:"23.2", title:"MM 定理與權衡理論",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>理論</th><th>結論</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="MM">MM 無稅（命題一）</span></b></td><td>完美市場無稅下，公司價值與資本結構<b>無關</b>（自行槓桿可複製）。</td></tr>
+  <tr><td><b>MM 有稅</b></td><td>因利息可抵稅，V_L ＝ V_U ＋ T×D；負債越多價值越高，最適 100% 負債。</td></tr>
+  <tr><td><b><span class="term" data-term="Tradeoff">權衡理論</span></b></td><td>平衡「負債稅盾利益」與「財務困境成本」，存在內部最適負債比。</td></tr>
+  </tbody></table></div>
+  <div class="formula"><span class="f-label">WACC</span>WACC ＝ w_D × k_D(1−T) ＋ w_E × k_E<span class="f-note">負債成本因稅盾需乘以 (1−T)。</span></div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS,17:CH17_SECTIONS,18:CH18_SECTIONS,19:CH19_SECTIONS,20:CH20_SECTIONS,21:CH21_SECTIONS,22:CH22_SECTIONS,23:CH23_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1758,7 +1795,22 @@ const CH21_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS,17:CH17_PROBLEMS,18:CH18_PROBLEMS,19:CH19_PROBLEMS,20:CH20_PROBLEMS,21:CH21_PROBLEMS};
+const CH22_PROBLEMS = [
+{
+  q:"特別股相對於普通股的主要特徵是？",
+  opts:["(A) 有表決權","(B) 固定股利且盈餘分配優先","(C) 參與經營","(D) 風險更高"],
+  ans:"<b>(B) 固定股利且盈餘分配優先。</b>特別股通常無表決權，股利固定且優先於普通股分配。"
+}
+];
+const CH23_PROBLEMS = [
+{
+  q:"依 MM 有公司稅模型，提高負債比率對公司價值的影響？",
+  opts:["(A) 下降","(B) 上升","(C) 不變","(D) 不一定"],
+  ans:"<b>(B) 上升。</b>V_L＝V_U＋T×D，利息抵稅的稅盾使公司價值隨負債增加。（現實中受財務困境成本抵銷。）"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS,17:CH17_PROBLEMS,18:CH18_PROBLEMS,19:CH19_PROBLEMS,20:CH20_PROBLEMS,21:CH21_PROBLEMS,22:CH22_PROBLEMS,23:CH23_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1787,7 +1839,8 @@ const GLOSS_CATS = [
   {name:"債券", keys:["Indenture","Duration","Convexity"]},
   {name:"選擇權", keys:["Call","Put","Put-call parity","BSM"]},
   {name:"衍生性", keys:["Forward","Futures","Swap"]},
-  {name:"資本預算", keys:["NPV","IRR","Real option"]}
+  {name:"資本預算", keys:["NPV","IRR","Real option"]},
+  {name:"資本結構", keys:["DOL","DFL","MM","Tradeoff"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1815,7 +1868,9 @@ const CH_TERMS_CATS = {
   18:["交換"],
   19:["資本預算"],
   20:["資本預算現金流"],
-  21:["風險調整與實質選擇權"]
+  21:["風險調整與實質選擇權"],
+  22:["長期融資"],
+  23:["資本結構"]
 };
 let glossMode="full", glossChapter=1;
 
