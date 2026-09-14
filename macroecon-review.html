@@ -148,6 +148,14 @@ body.dark .search-panel{background:#26221a;border-color:#4a4234}
 .proper:hover{background:#7b2cbf;color:#fff;border-bottom:none}
 body.dark .proper{color:#b39ddb}
 body.dark .proper:hover{background:#b39ddb;color:#1a1420}
+/* 術語列表與知識卡：人物/書名類紫色粗體 */
+#termModalEn{color:var(--green)}
+#termModalEn.proper,#termModalZh.proper{color:#7b2cbf}
+body.dark #termModalEn.proper,body.dark #termModalZh.proper{color:#b39ddb}
+#termModalDef .proper{color:#7b2cbf;font-weight:700;border-bottom:1.5px dashed color-mix(in srgb,#7b2cbf 50%,transparent)}
+body.dark #termModalDef .proper{color:#b39ddb}
+.gloss-en.proper,.gloss-zh.proper{color:#7b2cbf}
+body.dark .gloss-en.proper,body.dark .gloss-zh.proper{color:#b39ddb}
 /* 例題 */
 .problem{background:#eae6da;border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:14px 0}
 .problem .p-head{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14.5px;color:var(--teal);margin-bottom:8px}
@@ -375,8 +383,8 @@ body.dark .formula .f-label{color:#d8b36a}
 <div id="termModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)closeTerm()">
   <div style="background:var(--panel);border-radius:16px;max-width:480px;width:100%;padding:26px 28px;position:relative">
     <button onclick="closeTerm()" style="position:absolute;top:14px;right:16px;border:none;background:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button>
-    <div id="termModalEn" style="font-size:22px;font-weight:700;color:var(--teal);font-family:Georgia,serif"></div>
-    <div id="termModalZh" style="font-size:15px;font-weight:600;margin:4px 0 12px"></div>
+    <div id="termModalEn" style="font-size:22px;font-weight:700;font-family:Georgia,serif"></div>
+    <div id="termModalZh" style="font-size:15px;font-weight:700;margin:4px 0 12px;color:var(--green)"></div>
     <div id="termModalDef" style="font-size:14.5px;line-height:1.9;color:var(--ink)"></div>
   </div>
 </div>
@@ -596,7 +604,10 @@ const TERMS = {
   "Endogenous growth":["Endogenous Growth","內生成長理論","1980 年代末 Romer、Lucas 發展：技術進步源於內生（知識、人力資本累積）；AK 模型資本邊際產量不遞減。"],
   "Rule of 70":["Rule of 70","70 法則","估計變數加倍所需年數：70 ÷ 年成長率。例：成長率 7% → 約 10 年加倍。"],
   "Malthus":["Thomas Malthus","馬爾薩斯","古典成長理論代表：人口呈幾何級數、糧食呈算術級數成長 → 對經濟成長持悲觀看法。"],
-  "Barro":["Robert Barro","巴羅","提出 AK 內生成長模型（1990）：資本與人力資本可互相替代 → 資本邊際產量不遞減。"]
+  "Barro":["Robert Barro","巴羅","提出 AK 內生成長模型（1990）：資本與人力資本可互相替代 → 資本邊際產量不遞減。"],
+  "Wealth of Nations":["The Wealth of Nations","國富論","亞當斯密 1776 年著作，提出看不見的手、分工理論與自由放任主張，經濟學奠基之作。"],
+  "Principles of Economics":["Principles of Economics","經濟學原理","馬歇爾 1890 年著作，確立部分均衡分析與供需分析框架，現代個體經濟學的奠基之作。"],
+  "General Theory":["The General Theory of Employment, Interest and Money","就業、利息與貨幣一般理論","凱因斯 1936 年著作，主張有效需求不足、價格與工資僵固，現代總體經濟學誕生的標誌。"]
 };
 
 /* ===== 第一章內容 ===== */
@@ -874,8 +885,8 @@ const CH2_SECTIONS = [
   <p>總體經濟學的發展，主要分為兩大陣營：主張<b>政府放任、減少干預</b>的<span class="proper" data-term="Adam Smith">古典學派</span>（及其後繼：新古典、貨幣學派、新興古典），以及認為政府應採取<b>擴張政策</b>提振景氣、降低失業的<span class="proper">凱因斯學派</span>。本章介紹古典學派的主要理論。</p>
   <div class="note"><b>學派演進時間軸：</b>
     <ul style="margin:6px 0 2px 20px">
-      <li>1776 <span class="proper" data-term="Adam Smith">亞當斯密</span>《國富論》→ 1890 <span class="proper" data-term="Marshall">馬歇爾</span>《經濟學原理》：以個體經濟理論為主</li>
-      <li>1930 經濟大蕭條 → 1936 <span class="proper">凱因斯</span>《就業、利息與貨幣一般理論》：現代總體經濟學誕生</li>
+      <li>1776 <span class="proper" data-term="Adam Smith">亞當斯密</span><span class="proper" data-term="Wealth of Nations">《國富論》</span>→ 1890 <span class="proper" data-term="Marshall">馬歇爾</span><span class="proper" data-term="Principles of Economics">《經濟學原理》</span>：以個體經濟理論為主</li>
+      <li>1930 經濟大蕭條 → 1936 <span class="proper">凱因斯</span><span class="proper" data-term="General Theory">《就業、利息與貨幣一般理論》</span>：現代總體經濟學誕生</li>
       <li>1970 石油危機導致停滯性物價膨脹 → 貨幣學派、理性預期、供給面學派百家爭鳴</li>
     </ul></div>
   <p><b>古典經濟學思想的先驅：</b></p>
@@ -887,7 +898,7 @@ const CH2_SECTIONS = [
     <label class="mc-check" title="已學會"><input type="checkbox" data-mc="smith"><span class="mc-lbl">學會</span></label>
     <div class="mc-left"><span class="proper" data-term="Adam Smith">亞當斯密</span></div>
     <div class="mc-body">
-      <div class="mc-formula">經濟學之父 ·《國富論》（1776）</div>
+      <div class="mc-formula">經濟學之父 ·<span class="proper" data-term="Wealth of Nations">《國富論》</span>（1776）</div>
       <div class="mc-detail">提出 <span class="term" data-term="Invisible hand">看不見的手</span>（自利動機引導資源配置）、分工提高生產力、<span class="term" data-term="Absolute advantage">絕對利益</span>、鑽石—水矛盾（價值矛盾）。</div>
       <div class="mc-ex"><b>例子：</b>麵包師傅為了自己的利益烤麵包，卻無意間滿足了社會的需求——「看不見的手」。</div>
     </div>
@@ -2503,7 +2514,7 @@ const CH3_SECTIONS = [
 {
   id:"3.1", title:"凱因斯革命",
   body:`
-  <p>古典學派認為價格調整可使市場隨時結清；但 1930 年<span class="proper">經濟大蕭條</span>造成大量失業與企業存貨滯銷，古典理論難以解釋。1936 年<span class="proper" data-term="Keynes">凱因斯</span>發表《就業、利息與貨幣一般理論》，主張<b>價格與工資具有僵固性</b>，無法靠調整回到充分就業。凱因斯名言：「長期而言，我們都死了。」（In the long run we are all dead.）</p>
+  <p>古典學派認為價格調整可使市場隨時結清；但 1930 年<span class="proper">經濟大蕭條</span>造成大量失業與企業存貨滯銷，古典理論難以解釋。1936 年<span class="proper" data-term="Keynes">凱因斯</span>發表<span class="proper" data-term="General Theory">《就業、利息與貨幣一般理論》</span>，主張<b>價格與工資具有僵固性</b>，無法靠調整回到充分就業。凱因斯名言：「長期而言，我們都死了。」（In the long run we are all dead.）</p>
   <div class="tblwrap"><table><caption>古典 vs 凱因斯</caption><colgroup><col style="width:22%"><col style="width:39%"><col style="width:39%"></colgroup><thead><tr><th>比較項目</th><th>古典學派</th><th>凱因斯學派</th></tr></thead><tbody>
   <tr><td><strong>價格與工資</strong></td><td>完全彈性</td><td>僵固（工會、選單成本）</td></tr>
   <tr><td><strong>失業原因</strong></td><td>充分就業是常態</td><td><span class="term" data-term="Effective demand">有效需求</span>不足</td></tr>
@@ -2839,12 +2850,25 @@ function toggleAns(btn){
 }
 
 /* ===== 術語模態 ===== */
+const PROPER_TERMS=new Set(["Adam Smith","David Ricardo","Say","Marshall","Fisher","Walras","Malthus","Milton Friedman","Friedman","Keynes","Samuelson","Hicks","Hansen","Modigliani","Dusenberry","Schumpeter","Kydland","Prescott","Mundell","Jorgenson","Lucas","Barro","Wealth of Nations","Principles of Economics","General Theory","Fisher equation","Fisher effect","Say's law","Walras law","Cambridge cash balance","Baumol-Tobin model","Gresham's law","Harrod-Domar","Lorenz curve","Gini coefficient","Okun's law","Taylor rule","Pigou effect","Lucas critique","Ricardian equivalence","Laffer curve","Marshall-Lerner condition","Monetarist school"]);
+const PROPER_ZH=["亞當斯密","李嘉圖","賽伊","馬歇爾","費雪","瓦拉斯","馬爾薩斯","弗利曼","傅利曼","凱因斯","薩繆森","希克斯","漢森","莫迪利亞尼","杜森貝利","熊彼得","基德蘭","普雷斯科特","孟岱爾","裘根森","盧卡斯","巴羅","《國富論》","《經濟學原理》","《就業、利息與貨幣一般理論》","劍橋現金餘額說","劍橋學派","貨幣學派","新凱因斯學派"];
+function decorateDef(text){
+  let h=esc(text);
+  PROPER_ZH.forEach(n=>{if(n)h=h.split(n).join('<span class="proper">'+n+'</span>');});
+  return h;
+}
 function openTerm(key){
   const t=TERMS[key];
   if(!t){toast("暫無此術語資料");return;}
-  document.getElementById("termModalEn").textContent=t[0];
-  document.getElementById("termModalZh").textContent=t[1];
-  document.getElementById("termModalDef").textContent=t[2];
+  const enEl=document.getElementById("termModalEn");
+  const zhEl=document.getElementById("termModalZh");
+  const defEl=document.getElementById("termModalDef");
+  const proper=PROPER_TERMS.has(key);
+  enEl.textContent=t[0];
+  enEl.classList.toggle("proper",proper);
+  zhEl.textContent=t[1];
+  zhEl.classList.toggle("proper",proper);
+  defEl.innerHTML=decorateDef(t[2]);
   const m=document.getElementById("termModal");
   m.style.display="flex";
 }
@@ -2869,7 +2893,7 @@ const GLOSS_CATS = [
   {name:"貨幣理論", keys:["High-powered money", "Money multiplier", "Required reserve ratio", "Open market operation", "Discount rate", "Quasi money", "Gresham's law", "Fiat money", "Baumol-Tobin model", "Modern quantity theory"]},
   {name:"消費理論", keys:["Absolute income hypothesis", "Life-cycle hypothesis", "Relative income hypothesis", "Demonstration effect", "Ratchet effect", "Permanent income", "Modigliani", "Dusenberry"]},
   {name:"投資理論", keys:["Net present value", "Marginal efficiency of investment", "Tobin's q", "User's cost", "Investment tax credit", "Jorgenson"]},
-  {name:"學派與人物", keys:["Adam Smith", "David Ricardo", "Say", "Marshall", "Fisher", "Walras", "Malthus", "Milton Friedman", "Invisible hand", "Absolute advantage", "Comparative advantage", "Friedman", "Monetarist school", "Permanent income hypothesis", "Money supply rule", "Inside lag", "Lucas critique", "Ricardian equivalence", "Laffer curve", "Efficiency wage", "New Keynesian"]},
+  {name:"學派與人物", keys:["Adam Smith", "David Ricardo", "Say", "Marshall", "Fisher", "Walras", "Malthus", "Milton Friedman", "Invisible hand", "Absolute advantage", "Comparative advantage", "Friedman", "Monetarist school", "Permanent income hypothesis", "Money supply rule", "Inside lag", "Lucas critique", "Ricardian equivalence", "Laffer curve", "Efficiency wage", "New Keynesian", "Wealth of Nations", "Principles of Economics", "General Theory"]},
   {name:"菲利普曲線", keys:["Phillips curve", "Misery index", "Sacrifice ratio", "Natural-rate hypothesis", "Accelerationist hypothesis", "Okun's law", "Taylor rule"]},
   {name:"物價膨脹與預期", keys:["Inflation", "Demand-pull inflation", "Cost-push inflation", "Stagflation", "Imported inflation", "Shoeleather cost", "Menu cost", "Adaptive expectations", "Rational expectations", "Lucas", "Expectations-augmented AS", "Menu cost theory"]},
   {name:"開放經濟", keys:["Exchange rate", "Foreign exchange reserve", "Purchasing power parity", "Interest rate parity", "Balance of payments", "Marshall-Lerner condition", "J-curve", "Sterilization", "Impossible trinity", "Mundell"]},
@@ -2972,12 +2996,13 @@ function renderGlossary(){
         const isLearned=learned.includes(k), isStarred=starred.includes(k);
         const note=notes[k]||"";
         if(glossOnlyUnlearned&&isLearned)return "";
+        const isProper=PROPER_TERMS.has(k);
         return `<div class="gloss-item ${isLearned?"done":""} ${isStarred?"starred":""}" data-key="${esc(k)}">
           <button class="gloss-check ${isLearned?"done":""}" onclick="toggleLearn(&quot;${escA(k)}&quot;)" title="標記已學會">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
           </button>
           <div class="gloss-main">
-            <div class="gloss-en">${esc(en)}<span class="gloss-zh">${esc(zh)}</span></div>
+            <div class="gloss-en${isProper?" proper":""}">${esc(en)}<span class="gloss-zh${isProper?" proper":""}">${esc(zh)}</span></div>
             <div class="gloss-def">${esc(def)}</div>
             <div class="gloss-note ${note?"show":""}" data-note="wrap-${esc(k)}">
               <textarea placeholder="寫下你自己的重點…" onchange="saveNote('${esc(k)}',this.value)">${esc(note)}</textarea>
