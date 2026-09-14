@@ -392,7 +392,7 @@ const BOOK = [
   {n:20, title:"投資計畫評估", subs:["20.1 評估指標","20.2 NPV 與 IRR 取捨","20.3 現金流量評估"], done:true, points:["回收期、折現回收期、ARR、NPV、IRR、MIRR、PI","NPV>0 接受；IRR>必要報酬率接受","互斥方案 NPV 與 IRR 衝突時以 NPV 為準；IRR 多重解","沉沒成本不計、機會成本要計、外部性（侵蝕/綜效）","現金流三段：初始投資、營業 OCF、終結（殘值+回收NWC）"]},
   {n:21, title:"投資風險分析與實質選擇權", subs:["21.1 風險調整","21.2 實質選擇權"], done:true, points:["高風險計畫用 RADR 或確定等值法","實質選擇權：延遲、擴張、放棄，提升專案價值"]},
   {n:22, title:"長期融資", subs:["22.1 權益與負債融資"], done:true, points:["普通股、特別股、公司債、可轉換公司債","租賃：營業租賃 vs 資本租賃"]},
-  {n:23, title:"槓桿與資本結構", subs:["23.1 財務槓桿","23.2 MM 定理與權衡理論"], done:true, points:["財務槓桿放大 EPS 對 EBIT 的敏感度","MM 無稅：資本結構與公司價值無關","MM 有稅：V_L＝V_U＋T×D（負債稅盾）","考慮財務困境成本後最適資本結構＝權衡理論","WACC 加權權益與稅後負債成本"]},
+  {n:23, title:"資本結構理論", subs:["23.1 槓桿分析","23.2 資本結構理論"], done:true, points:["DOL/DFL/DTL 槓桿衡量","損益兩平：會計/現金/財務損益兩平","傳統理論：最適資本結構存在","MM 無稅：V 與資本結構無關","MM 有稅：V_L=V_U+T×D","權衡理論：稅盾利益 vs 財務困境成本","融資順位理論：內部盈餘→負債→特別股→普通股","Miller 1977：考慮個人所得稅"]},
   {n:24, title:"股利政策", subs:["24.1 股利無關論與實務"], done:true, points:["MM 股利無關：完美市場股利政策不影響價值","股利方式：現金股利、股票股利、股票分割、庫藏股、股票回購","信號效果：增加股利被視為利多；客戶效果"]},
   {n:25, title:"短期融資", subs:["25.1 短期融資工具"], done:true, points:["商業本票、銀行短期借款、應收帳款融通","信用條件如 2/10, net 30：折扣成本年化很高"]},
   {n:26, title:"營運資金管理", subs:["26.1 現金／應收／存貨"], done:true, points:["現金管理： Baumol/BAT、Miller-Orr","應收帳款授信政策；存貨 EOQ","NWC＝CA−CL；兼顧流動性與獲利性"]},
@@ -594,6 +594,7 @@ const TERMS = {
   "DFL":["Degree of Financial Leverage (DFL)","財務槓桿","固定利息使 EPS 對 EBIT 變動放大。"],
   "MM":["Modigliani-Miller Theorem","MM 定理","完美市場下資本結構與價值無關；含稅時 V_L=V_U+T×D。"],
   "Tradeoff":["Trade-off Theory","權衡理論","平衡負債稅盾利益與財務困境成本，決定最適負債比。"],
+  "Pecking order":["Pecking Order Theory","融資順位理論","Myers & Majluf：內部盈餘→負債→特別股→普通股。"],
   /* 第24-28章 */
   "Dividend irrelevance":["Dividend Irrelevance (MM)","股利無關論","完美市場下股利政策不影響公司價值。"],
   "EOQ":["Economic Order Quantity (EOQ)","經濟訂購量","平衡訂購成本與持有成本的最適訂購量 √(2DS/H)。"],
@@ -1740,22 +1741,28 @@ const CH22_SECTIONS = [
 /* ===== 第二十三章 ===== */
 const CH23_SECTIONS = [
 {
-  id:"23.1", title:"財務槓桿",
-  body:`<p>財務槓桿（舉債）會放大 EBIT 變動對 EPS 的影響：EBIT 上升時 EPS 上升更快，反之下跌更劇。<span class="term" data-term="DOL">營運槓桿</span>來自固定營運成本，<span class="term" data-term="DFL">財務槓桿</span>來自固定利息。</p>`
+  id:"23.1", title:"槓桿分析",
+  body:`
+  <div class="formula"><span class="f-label"><span class="term" data-term="DOL">營業槓桿 DOL</span></span>DOL ＝ ΔEBIT/EBIT ÷ ΔS/S ＝ (S−VC) ÷ EBIT<span class="f-note">來自固定營業成本；DOL 越大營業風險越高。</span></div>
+  <div class="formula"><span class="f-label"><span class="term" data-term="DFL">財務槓桿 DFL</span></span>DFL ＝ ΔEPS/EPS ÷ ΔEBIT/EBIT ＝ EBIT ÷ (EBIT−I)<span class="f-note">來自固定利息費用；DFL 越大財務風險越高。</span></div>
+  <div class="formula"><span class="f-label">總槓桿 DTL</span>DTL ＝ DOL × DFL ＝ ΔEPS/EPS ÷ ΔS/S</div>
+  <div class="note"><b>損益兩平：</b><br>• <b>會計損益兩平（EACF 損益兩平）</b>：使淨利＝0 之銷售量 Q_BE ＝ (F＋I) ÷ (P−v)。<br>• <b>現金損益兩平</b>：使營業現金流量＝0 之銷售量。<br>• <b>財務損益兩平（EBIT*）</b>：使 EPS＝0 之 EBIT；EPS＝(EBIT−I)(1−T) ÷ N。</div>
+  `
 },
 {
-  id:"23.2", title:"MM 定理與權衡理論",
+  id:"23.2", title:"資本結構理論",
   body:`
   <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:74%"></colgroup><thead><tr><th>理論</th><th>結論</th></tr></thead><tbody>
-  <tr><td><b><span class="term" data-term="MM">MM 無稅（命題一）</span></b></td><td>完美市場無稅下，公司價值與資本結構<b>無關</b>（自行槓桿可複製）。</td></tr>
-  <tr><td><b>MM 有稅</b></td><td>因利息可抵稅，V_L ＝ V_U ＋ T×D；負債越多價值越高，最適 100% 負債。</td></tr>
+  <tr><td><b>傳統理論</b></td><td>負債比率增加，WACC 先下降後上升，存在<b>最適資本結構</b>（早期折衷觀點）。</td></tr>
+  <tr><td><b><span class="term" data-term="MM">MM 無稅（1958）</span></b></td><td>完美市場無稅下，公司價值與資本結構<b>無關</b>（自行槓桿 homemade leverage 可複製）；WACC 不隨負債改變。</td></tr>
+  <tr><td><b>MM 有公司稅（1963）</b></td><td>因利息可抵稅，V_L ＝ V_U ＋ T×D；負債越多價值越高，最適 100% 負債。</td></tr>
   <tr><td><b><span class="term" data-term="Tradeoff">權衡理論</span></b></td><td>平衡「負債稅盾利益」與「財務困境成本」，存在內部最適負債比。</td></tr>
+  <tr><td><b><span class="term" data-term="Pecking order">融資順位理論</span></b></td><td>資訊不對稱下，公司融資優先順序：<b>內部保留盈餘 → 負債 → 特別股 → 普通股</b>（新股發行被市場視為利空）。</td></tr>
+  <tr><td><b>Miller（1977）</b></td><td>同時考慮公司稅與個人稅，抵稅利益會被個人稅部分抵消。</td></tr>
   </tbody></table></div>
-  <div class="formula"><span class="f-label">WACC</span>WACC ＝ w_D × k_D(1−T) ＋ w_E × k_E<span class="f-note">負債成本因稅盾需乘以 (1−T)。</span></div>
   `
 }
 ];
-
 
 /* ===== 第二十四章 ===== */
 const CH24_SECTIONS = [
@@ -2082,7 +2089,7 @@ const GLOSS_CATS = [
   {name:"選擇權", keys:["Call","Put","Put-call parity","BSM"]},
   {name:"衍生性", keys:["Forward","Futures","Swap","CDS","Warrant","Convertible bond","Basis","Cost of carry"]},
   {name:"資本預算", keys:["NPV","IRR","Real option"]},
-  {name:"資本結構", keys:["DOL","DFL","MM","Tradeoff"]},
+  {name:"資本結構", keys:["DOL","DFL","MM","Tradeoff","Pecking order"]},
   {name:"資金成本與資本預算", keys:["Cost of capital","Cost of debt","Cost of equity","WACC","NPV","IRR","MIRR","Real option"]},
   {name:"股利與營運資金", keys:["Dividend irrelevance","EOQ"]},
   {name:"國際財務", keys:["PPP","IRP"]}
