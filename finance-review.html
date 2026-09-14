@@ -395,8 +395,8 @@ const BOOK = [
   {n:23, title:"資本結構理論", subs:["23.1 槓桿分析","23.2 資本結構理論"], done:true, points:["DOL/DFL/DTL 槓桿衡量","損益兩平：會計/現金/財務損益兩平","傳統理論：最適資本結構存在","MM 無稅：V 與資本結構無關","MM 有稅：V_L=V_U+T×D","權衡理論：稅盾利益 vs 財務困境成本","融資順位理論：內部盈餘→負債→特別股→普通股","Miller 1977：考慮個人所得稅"]},
   {n:24, title:"支付政策與股利政策", subs:["24.1 支付政策簡介","24.2 股票股利與股票分割","24.3 股利支付相關理論","24.4 股利支付實務","24.5 股票回購"], done:true, points:["股利種類：現金股利、股票股利、股票分割、庫藏股","MM 無關論：完美市場下保留或發放不影響股東財富","一鳥在手論：投資人偏好確定的股利","稅差理論：資本利得稅率低，股東偏好低股利","信號效果、客戶效果","剩餘股利政策：先滿足投資需求再發股利","股票回購可替代現金股利"]},
   {n:25, title:"短期融資", subs:["25.1 短期融資工具"], done:true, points:["商業本票、銀行短期借款、應收帳款融通","信用條件如 2/10, net 30：折扣成本年化很高"]},
-  {n:26, title:"營運資金管理", subs:["26.1 現金／應收／存貨"], done:true, points:["現金管理： Baumol/BAT、Miller-Orr","應收帳款授信政策；存貨 EOQ","NWC＝CA−CL；兼顧流動性與獲利性"]},
-  {n:27, title:"併購", subs:["27.1 併購動機與評價"], done:true, points:["動機：綜效、規模經濟、多角化","綜效＝合併後價值−個別價值和；注意 EPS 稀釋"]},
+  {n:26, title:"營運資金管理", subs:["26.1 現金管理","26.2 應收帳款","26.3 存貨"], done:true, points:["NWC=流動資產−流動負債；流動性 vs 獲利性平衡","Baumol 模型：最適現金餘額=(2bT/i)^0.5","Miller-Orr：隨機現金流量下設上下限","應收帳款：授信標準/信用條件/收帳政策","EOQ=(2DS/H)^0.5"]},
+  {n:27, title:"併購與公司控制權", subs:["27.1 併購","27.2 防禦手段","27.3 價值評估"], done:true, points:["併購類型：水平/垂直/綜合","綜效=合併價值−個別價值和","防禦手段：金降落傘、毒藥丸、白衣騎士、皇冠之珠","贏者詛咒；股票交換可能稀釋EPS"]},
   {n:28, title:"國際財務", subs:["28.1 匯率與平價"], done:true, points:["直接/間接匯率；買入賣出價","購買力平價 PPP；利率平價 IRP","國際投資的匯率風險與政治風險"]}
 ];
 
@@ -598,6 +598,7 @@ const TERMS = {
   /* 第24-28章 */
   "Dividend irrelevance":["Dividend Irrelevance (MM)","股利無關論","完美市場下股利政策不影響公司價值。"],
   "EOQ":["Economic Order Quantity (EOQ)","經濟訂購量","平衡訂購成本與持有成本的最適訂購量 √(2DS/H)。"],
+  "Baumol":["Baumol Model","最適現金餘額模型","類比 EOQ；C*=√(2bT/i)。"],
   "PPP":["Purchasing Power Parity (PPP)","購買力平價","匯率變動率≈兩國通膨率差。"],
   "IRP":["Interest Rate Parity (IRP)","利率平價","遠期與即期匯率差≈兩國利率差；消除套利。"]
 };
@@ -1810,22 +1811,45 @@ const CH25_SECTIONS = [
 /* ===== 第二十六章 ===== */
 const CH26_SECTIONS = [
 {
-  id:"26.1", title:"營運資金管理",
+  id:"26.1", title:"現金管理",
   body:`
-  <p>NWC＝流動資產−流動負債。管理目標：在流動性與獲利性間取平衡。</p>
-  <div class="note"><b>現金管理：</b>Baumol（存貨模型）、Miller-Orr（隨機模型）決定最適現金餘額。<br><b>應收帳款：</b>授信標準、信用條件、收帳政策。<br><b>存貨：</b><span class="term" data-term="EOQ">經濟訂購量 EOQ</span>＝√(2DS/H)。</div>
+  <p>NWC ＝ 流動資產 － 流動負債。管理目標：在<b>流動性</b>（還得起短期債）與<b>獲利性</b>（閒置現金不生息）間取平衡。</p>
+  <div class="formula"><span class="f-label"><span class="term" data-term="Baumol">Baumol 模型</span></span>最適現金餘額 C* ＝ √(2bT/i)<span class="f-note">b=每次交易成本；T=期間現金總需求量；i=持有現金的機會成本。類比 EOQ。</span></div>
+  <div class="note"><b>Miller-Orr 模型：</b>現金流量隨機波動時，設現金餘額<b>上限</b>與<b>下限</b>；超上限則買入有價證券回到目標水準，低於下限則賣出證券補足。</div>
+  `
+},
+{
+  id:"26.2", title:"應收帳款與存貨",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:24%"><col style="width:76%"></colgroup><thead><tr><th>項目</th><th>管理重點</th></tr></thead><tbody>
+  <tr><td><b>應收帳款</b></td><td>授信標準（誰可以賒帳）、信用條件（如 2/10, net 30）、收帳政策（逾期催收）。</td></tr>
+  <tr><td><b><span class="term" data-term="EOQ">存貨 EOQ</span></b></td><td>最適訂購量 Q* ＝ √(2DS/H)；D=年需求量、S=每次訂購成本、H=單位持有成本。</td></tr>
+  </tbody></table></div>
   `
 }
 ];
+
 /* ===== 第二十七章 ===== */
 const CH27_SECTIONS = [
 {
-  id:"27.1", title:"併購",
+  id:"27.1", title:"併購的類型與動機",
   body:`
-  <div class="note"><b>動機：</b>綜效（synergy，1+1&gt;2）、規模經濟、垂直整合、多角化、稅盾。<br><b>綜效</b>＝合併後公司價值 − 雙方個別價值之和。<br><b>注意：</b>以股票換股時可能稀釋 EPS；併購溢價常侵蝕購併方股東利益。</div>
+  <div class="tblwrap"><table><colgroup><col style="width:24%"><col style="width:76%"></colgroup><thead><tr><th>類型</th><th>說明</th></tr></thead><tbody>
+  <tr><td><b>水平併購</b></td><td>同產業、同階段廠商（競爭者合併）。</td></tr>
+  <tr><td><b>垂直併購</b></td><td>上下游廠商合併。</td></tr>
+  <tr><td><b>綜合併購</b></td><td>不同產業廠商合併（多角化）。</td></tr>
+  </tbody></table></div>
+  <div class="note"><b>綜效 synergy</b> ＝ V_AB － (V_A＋V_B)；來自規模經濟、垂直整合互補、稅盾、管理效率。<br><b>贏者詛咒：</b>競標時出價最高者常高估標的價值，買方股東反而受害。</div>
+  `
+},
+{
+  id:"27.2", title:"對抗敵意併購的防禦手段",
+  body:`
+  <div class="note"><b>常見防禦手段：</b><br>• <b>金降落傘（golden parachute）</b>：管理階層被併購後的優渥遣散金。<br>• <b>毒藥丸（poison pill）</b>：現有股東可低價增購新股，使敵方取得控制權成本大增。<br>• <b>白衣騎士（white knight）</b>：找友善的第三方來收購。<br>• <b>皇冠之珠（crown jewels）</b>：賣掉最有價值的部門使自己不再具吸引力。<br>• <b>綠色郵包（greenmail）</b>：溢價買回敵方手中股票。</div>
   `
 }
 ];
+
 /* ===== 第二十八章 ===== */
 const CH28_SECTIONS = [
 {
