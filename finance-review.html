@@ -377,7 +377,8 @@ const BOOK = [
   {n:5, title:"財務報表與現金流量", subs:["5.1 財務報表","5.2 財務管理學的現金流量概念"], done:true, points:["四大報表：資產負債表、綜合損益表、現金流量表、權益變動表","會計方程式：資產＝負債＋股東權益；應計基礎 vs 現金基礎","NWC（淨營運資金）＝流動資產 − 流動負債","OCF＝NOPAT＋折舊＝EBIT(1−T)＋折舊","NOPAT＝EBIT(1−T)（假想利息也要扣稅，稅盾留待 WACC 處理）","財務決策重現金流而非會計利潤"]},
   {n:6, title:"財務報表分析", subs:["6.1 共同比分析","6.2 財務比率分析"], done:true, points:["共同比（垂直）分析：資產負債表除以總資產、損益表除以銷貨","資產管理：存貨周轉率=COGS/存貨、應收周轉率=銷貨/A/R、總資產周轉率","現金轉換循環 CCC = DSI + DSO − DPO","流動性：流動比率、速動比率（酸性測試）、現金比率","獲利性：毛利率、營業利益率、ROA、ROE","投資價值：EPS、P/E、P/B、股利殖利率","杜邦：ROE＝净利率×总资产周轉率×權益乘數"]},
   {n:7, title:"財務預測與規劃", subs:["7.1 財務預測","7.2 財務政策與成長率"], done:true, points:["銷售百分比法：資產隨銷售成長","EFN/AFN＝資產增加 − 自發性負債增加 − 保留盈餘增加","內部成長率 gᵢ＝ROE×b／(1−ROE×b)（不對外融資）","維持成長率 gₛ＝ROE×b／(1−ROE×b)（維持 D/E 不變、不發新股）","b＝盈餘保留率＝1−股利支付率 d"]},
-  {n:8, title:"報酬與風險的衡量", subs:["8.1 衡量報酬的指標","8.2 歷史報酬與風險","8.3 預期報酬與風險"], done:true, points:["HPR＝(期末價+股利−買價)/買價；APR vs EAR","時間加權 vs 金額加權（IRR）報酬率","算術平均 vs 幾何平均；E(R)=ΣpᵢRᵢ","變異數/標準差衡量絕對風險；CV＝σ/E(R) 為相對風險","半變異數只衡量低於期望值的下方風險","Knight：風險（機率可知）vs 不確定性（機率不可知）"]}
+  {n:8, title:"報酬與風險的衡量", subs:["8.1 衡量報酬的指標","8.2 歷史報酬與風險","8.3 預期報酬與風險"], done:true, points:["HPR＝(期末價+股利−買價)/買價；APR vs EAR","時間加權 vs 金額加權（IRR）報酬率","算術平均 vs 幾何平均；E(R)=ΣpᵢRᵢ","變異數/標準差衡量絕對風險；CV＝σ/E(R) 為相對風險","半變異數只衡量低於期望值的下方風險","Knight：風險（機率可知）vs 不確定性（機率不可知）"]},
+  {n:9, title:"現代資產組合理論", subs:["9.1 組合報酬與風險","9.2 馬可維茲理論與效率前緣","9.3 加入無風險資產"], done:true, points:["Markowitz 1952 MPT、1990 諾獎；平均數-變異數架構","E(Rp)=ΣwᵢE(Rᵢ)；σp²=ΣΣwᵢwⱼσᵢⱼ（n²項）","MVP 最小變異數組合；效率前緣＝MVP 以上段","加入 Rf 後效率邊界為自 Rf 切效率前緣的直線＝CML","兩基金分離：所有人都持有「無風險資產＋市場組合 M」"]}
 ];
 
 
@@ -512,10 +513,16 @@ const TERMS = {
   "HPR":["Holding Period Return (HPR)","持有期報酬率","(期末價+股利−買價)/買價，含資本利得與股利。"],
   "State of nature":["State of Nature","自然狀態模型","未來 m 個互斥情境各附機率，用以計算期望報酬與風險。"],
   "Knight":["Frank H. Knight","奈特","經濟學家；區分風險（機率可知）與不確定性（機率不可知）。"],
-  "CV":["Coefficient of Variation (CV)","變異係數","CV＝σ/E(R)；每單位期望報酬承擔的相對風險。"]
+  "CV":["Coefficient of Variation (CV)","變異係數","CV＝σ/E(R)；每單位期望報酬承擔的相對風險。"],
+  /* 第9章 */
+  "Markowitz":["Harry Markowitz","馬可維茲","1952 提出 MPT、1990 諾貝爾獎；平均數-變異數架構。"],
+  "Efficient frontier":["Efficient Frontier","效率前緣","給定風險報酬最大、給定報酬風險最小的組合集合。"],
+  "MVP":["Minimum Variance Portfolio (MVP)","最小變異數組合","整個投資機會集合中風險最低的組合。"],
+  "CML":["Capital Market Line (CML)","資本市場線","自 Rf 切效率前緣的直線，描述最適組合風險報酬。"],
+  "Separation theorem":["Separation Theorem","兩基金分離定理","投資人僅持有無風險資產＋市場組合 M，決策與風險偏好分離。"]
 };
 /* 人名類術語卡，標題用紫色 */
-const PERSON_TERMS=new Set(["Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
+const PERSON_TERMS=new Set(["Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
 
 const CH1_SECTIONS = [
 {
@@ -1214,7 +1221,33 @@ const CH8_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS};
+
+/* ===== 第九章 ===== */
+const CH9_SECTIONS = [
+{
+  id:"9.1", title:"投資組合的報酬率與風險",
+  body:`
+  <div class="formula"><span class="f-label">組合期望報酬</span>E(Rp) ＝ Σ wᵢ E(Rᵢ)<span class="f-note">權數加總為 1。</span></div>
+  <div class="formula"><span class="f-label">組合變異數</span>σp² ＝ Σᵢ Σⱼ wᵢ wⱼ σᵢⱼ<span class="f-note">共 n² 項：n 個變異數 + n(n−1) 個共變異數。相關係數越低，分散效果越好。</span></div>
+  `
+},
+{
+  id:"9.2", title:"馬可維茲資產組合理論",
+  body:`
+  <p><b><span class="term" data-term="Markowitz">Harry Markowitz</span></b>（1952）提出 MPT，1990 諾貝爾獎。假設：理性風險趨避者、以報酬變異數衡量風險、報酬聯合常態分佈 → 平均數-變異數架構。</p>
+  <div class="note"><b><span class="term" data-term="Efficient frontier">效率前緣</span>：</b>給定相同風險有最大報酬、給定相同報酬有最小風險的組合集合。<br><b><span class="term" data-term="MVP">最小變異數組合 MVP</span></b>：整個投資機會集合中風險最低者；MVP 以下段全被支配、無效率。</div>
+  `
+},
+{
+  id:"9.3", title:"加入無風險資產",
+  body:`
+  <p>當存在可無風險借貸的資本市場（Rf），效率邊界不再是曲線，而是自 Rf 出發、與風險資產效率前緣相切於 M 點的直線——<b><span class="term" data-term="CML">資本市場線 CML</span></b>。</p>
+  <div class="note"><b><span class="term" data-term="Separation theorem">兩基金分離定理</span>：</b>所有投資人都只持有「無風險資產 + 市場組合 M」這一最切點組合，差別只在於兩者權重；投資決策與風險偏好分離。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1301,7 +1334,15 @@ const CH8_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS};
+const CH9_PROBLEMS = [
+{
+  q:"為何相關係數越低，組合分散化效果越好？",
+  opts:[],
+  ans:"組合變異數 σp² 含兩兩共變異數 wᵢwⱼσᵢⱼ＝wᵢwⱼρσᵢσⱼ。ρ 越小（尤其 ρ=−1），標的間報酬互補，加總後變異數下降越多；ρ=1 則無分散效果。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1321,7 +1362,8 @@ const GLOSS_CATS = [
   {name:"財報與現金流", keys:["GAAP","IFRS","Balance sheet","NWC","OCF"]},
   {name:"財報分析", keys:["Common size","Activity ratio","Liquidity ratio","Leverage ratio","Profitability","Market ratio","CCC","DuPont"]},
   {name:"預測與成長", keys:["EFN","IGR","SGR"]},
-  {name:"報酬與風險", keys:["HPR","State of nature","Knight","CV"]}
+  {name:"報酬與風險", keys:["HPR","State of nature","Knight","CV"]},
+  {name:"投資組合理論", keys:["Markowitz","Efficient frontier","MVP","CML","Separation theorem"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1336,7 +1378,8 @@ const CH_TERMS_CATS = {
   5:["財報與現金流"],
   6:["財報分析"],
   7:["預測與成長"],
-  8:["報酬與風險"]
+  8:["報酬與風險"],
+  9:["投資組合理論"]
 };
 let glossMode="full", glossChapter=1;
 
