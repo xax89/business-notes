@@ -385,7 +385,9 @@ const BOOK = [
   {n:13, title:"普通股與評價", subs:["13.1 普通股特徵","13.2 普通股評價"], done:true, points:["累積投票制：小股東可集中票數爭取席次","新股優先認購權（rights offering）防股權稀釋","DDM：零成長 P₀=D/k；Gordon P₀=D₁/(k−g)","g＝ROE×b；P₀ 為除息後價格","相對評價：forward P/E＝d/(k−g)＝P₀/EPS₁"]},
   {n:14, title:"債券", subs:["14.1 債券種類與風險","14.2 評價與殖利率","14.3 利率風險"], done:true, points:["P₀＝Σ票息/(1+r)^t＋面額/(1+r)^n","YTM＝IRR；YTM＝當期收益率 CY＋資本利得收益率 CGY","溢價 CR&gt;CY&gt;YTM；平價 CR=CY=YTM；折價 CR&lt;CY&lt;YTM","利率↑→價格↓；期限越長、票息越低→價格波動越大","存續期間 duration 衡量利率敏感度；凸性修正大利率變動"]},
   {n:15, title:"選擇權導論", subs:["15.1 選擇權基本","15.2 交易策略"], done:true, points:["買權 call：有權以履約價 K 買入；賣權 put：有權以 K 賣出","期權買方付權利金、最大損失即權利金；賣方履約義務","歐式僅到期可行權；美式到期前皆可行權","買權賣權平價：C + K/(1+r)^t = P + S₀","常見策略：covered call、protective put、價差"]},
-  {n:16, title:"選擇權評價", subs:["16.1 二項式與 BSM","16.2 價值因子與希臘字母"], done:true, points:["BSM：C＝S₀N(d₁)−Ke^(−rt)N(d₂)","五因子：股價、履約價、時間、利率、波動率","波動率↑→call/put 權利金皆↑；時間↑→call/put 皆↑","Δ＝股價變動一元期權價值變動，用於避險"]}
+  {n:16, title:"選擇權評價", subs:["16.1 二項式與 BSM","16.2 價值因子與希臘字母"], done:true, points:["BSM：C＝S₀N(d₁)−Ke^(−rt)N(d₂)","五因子：股價、履約價、時間、利率、波動率","波動率↑→call/put 權利金皆↑；時間↑→call/put 皆↑","Δ＝股價變動一元期權價值變動，用於避險"]},
+  {n:17, title:"遠期與期貨", subs:["17.1 遠期契約","17.2 期貨與避險"], done:true, points:["遠期：客制、場外；期貨：標準化、交易所、逐日結算","期貨價格 F₀＝S₀(1+r)^T","避險：持有現貨者空頭期貨避險；未來要買者多頭避險"]},
+  {n:18, title:"交換契約", subs:["18.1 利率交換","18.2 貨幣交換"], done:true, points:["利率交換：同幣別固定利率換浮動利率","貨幣交換：不同幣別本金與利息互換","交換本質為一系列遠期契約的組合"]}
 ];
 
 
@@ -554,7 +556,11 @@ const TERMS = {
   "Put":["Put Option","賣權","付權利金，有權以履約價 K 賣出標的。"],
   "Put-call parity":["Put-Call Parity","買權賣權平價","C＋K/(1+r)ᵗ＝P＋S₀；連結買賣權與現貨的無套利關係。"],
   /* 第16章 */
-  "BSM":["Black-Scholes-Merton (BSM)","布萊克-休斯模型","C＝S₀N(d₁)−Ke^(−rt)N(d₂)；欧式选择权评价标准模型。"]
+  "BSM":["Black-Scholes-Merton (BSM)","布萊克-休斯模型","C＝S₀N(d₁)−Ke^(−rt)N(d₂)；欧式选择权评价标准模型。"],
+  /* 第17、18章 */
+  "Forward":["Forward Contract","遠期契約","客製化、場外交易的未來交割約定。"],
+  "Futures":["Futures Contract","期貨契約","標準化、交易所交易、逐日結算。"],
+  "Swap":["Swap","交換契約","一系列未來現金流互換；如利率交換、貨幣交換。"]
 };
 /* 人名類術語卡，標題用紫色 */
 const PERSON_TERMS=new Set(["Gordon","Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
@@ -1464,7 +1470,39 @@ const CH16_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS};
+
+/* ===== 第十七章 ===== */
+const CH17_SECTIONS = [
+{
+  id:"17.1", title:"遠期契約",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:78%"></colgroup><thead><tr><th></th><th>遠期 vs 期貨</th></tr></thead><tbody>
+  <tr><td><b><span class="term" data-term="Forward">遠期 forward</span></b></td><td>客製化契約，場外 OTC 交易，無逐日結算，有違約風險。</td></tr>
+  <tr><td><b><span class="term" data-term="Futures">期貨 futures</span></b></td><td>標準化，交易所交易，繳保證金、<b>逐日結算（mark-to-market）</b>，違約風險低。</td></tr>
+  </tbody></table></div>
+  <div class="formula"><span class="f-label">持有成本定價</span>F₀ ＝ S₀ (1+r)ᵀ<span class="f-note">無套利下，期貨價格＝現貨價格以無風險利率复利到交割日。</span></div>
+  `
+},
+{
+  id:"17.2", title:"期貨避險",
+  body:`
+  <div class="note"><b>空頭避險：</b>已持有現貨（或未來有現貨要賣）→ 放空期貨，價格下跌期貨獲利補償現貨損失。<br><b>多頭避險：</b>未來要買進現貨 → 買進期貨，避免價格上漲。</div>
+  `
+}
+];
+
+/* ===== 第十八章 ===== */
+const CH18_SECTIONS = [
+{
+  id:"18.1", title:"交換契約",
+  body:`
+  <p><span class="term" data-term="Swap">交換（swap）</span>：交易雙方約定在一段期間內交換一連串現金流量，本質是一系列遠期契約的組合。</p>
+  <div class="note"><b>利率交換：</b>同幣別下，一方支付固定利率、另一方支付浮動利率（如 LIBOR），僅交換淨額利息、不換本金。<br><b>貨幣交換：</b>不同幣別間互換本金與利息，用以規避匯率風險。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS,17:CH17_SECTIONS,18:CH18_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1615,7 +1653,22 @@ const CH16_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS};
+const CH17_PROBLEMS = [
+{
+  q:"農夫預計三個月後收成小麥要賣，為避免價格下跌，應如何利用期貨避險？",
+  opts:["(A) 現在買進小麥期貨","(B) 現在賣出小麥期貨","(C) 買進小麥買權","(D) 不動"],
+  ans:"<b>(B) 現在賣出小麥期貨（空頭避險）。</b>三個月後小麥價格下跌時，期貨空頭獲利補償現貨賣價的損失。"
+}
+];
+const CH18_PROBLEMS = [
+{
+  q:"利率交換中，雙方交換的是？",
+  opts:["(A) 不同幣別本金","(B) 同幣別的固定與浮動利息","(C) 股票與債券","(D) 選擇權權利金"],
+  ans:"<b>(B) 同幣別的固定與浮動利息。</b>通常僅結算淨額利息、不互換本金。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS,17:CH17_PROBLEMS,18:CH18_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1642,7 +1695,8 @@ const GLOSS_CATS = [
   {name:"金融市場", keys:["Direct finance","Indirect finance"]},
   {name:"股票評價", keys:["DDM","Gordon"]},
   {name:"債券", keys:["Indenture","Duration","Convexity"]},
-  {name:"選擇權", keys:["Call","Put","Put-call parity","BSM"]}
+  {name:"選擇權", keys:["Call","Put","Put-call parity","BSM"]},
+  {name:"衍生性", keys:["Forward","Futures","Swap"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1665,7 +1719,9 @@ const CH_TERMS_CATS = {
   13:["股票評價"],
   14:["債券"],
   15:["選擇權"],
-  16:["選擇權評價"]
+  16:["選擇權評價"],
+  17:["期貨"],
+  18:["交換"]
 };
 let glossMode="full", glossChapter=1;
 
