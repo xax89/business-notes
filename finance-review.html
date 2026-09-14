@@ -381,7 +381,8 @@ const BOOK = [
   {n:9, title:"現代資產組合理論", subs:["9.1 組合報酬與風險","9.2 馬可維茲理論與效率前緣","9.3 加入無風險資產"], done:true, points:["Markowitz 1952 MPT、1990 諾獎；平均數-變異數架構","E(Rp)=ΣwᵢE(Rᵢ)；σp²=ΣΣwᵢwⱼσᵢⱼ（n²項）","MVP 最小變異數組合；效率前緣＝MVP 以上段","加入 Rf 後效率邊界為自 Rf 切效率前緣的直線＝CML","兩基金分離：所有人都持有「無風險資產＋市場組合 M」"]},
   {n:10, title:"資本資產定價模式 CAPM", subs:["10.1 CAPM","10.2 特徵線與實證","10.3 風險調整績效指標"], done:true, points:["βi=Cov(Ri,Rm)/σm²，衡量系統風險","CAPM/SML：E(Ri)=Rf+βi[E(Rm)−Rf]","CML 用總風險 σp；SML 用系統風險 β","特徵線：Ri−Rf=α+β(Rm−Rf)+ε；殘差＝個別風險","績效指標：Sharpe（σ分母）、Treynor（β分母）、Jensen α、IR、M²","單一資產 β 不穩，組合 β 較穩；APT 為多因子延伸"]},
   {n:11, title:"效率市場與行為財務", subs:["11.1 效率市場假說","11.2 行為財務學"], done:true, points:["EMH 三形式：弱式／半強式／強式","弱式→技術分析無用；半強式→基本分析無用","異常：反應過度／反應不足；Grossman-Stiglitz 詭論","行為財務：過度自信、易取性、錨定、確認偏誤、框架效應、心理帳戶、後悔趨避"]},
-  {n:12, title:"金融市場與機構", subs:["12.1 金融市場功能","12.2 市場分類與機構"], done:true, points:["資金由盈餘單位流向赤字單位","直接金融（發股發債）vs 間接金融（銀行存貸）","一級市場（IPO/增資）vs 二級市場（流通交易）","貨幣市場（≤1年）vs 資本市場（>1年）","交易所 vs OTC；商銀／投行／券商／基金／央行"]}
+  {n:12, title:"金融市場與機構", subs:["12.1 金融市場功能","12.2 市場分類與機構"], done:true, points:["資金由盈餘單位流向赤字單位","直接金融（發股發債）vs 間接金融（銀行存貸）","一級市場（IPO/增資）vs 二級市場（流通交易）","貨幣市場（≤1年）vs 資本市場（>1年）","交易所 vs OTC；商銀／投行／券商／基金／央行"]},
+  {n:13, title:"普通股與評價", subs:["13.1 普通股特徵","13.2 普通股評價"], done:true, points:["累積投票制：小股東可集中票數爭取席次","新股優先認購權（rights offering）防股權稀釋","DDM：零成長 P₀=D/k；Gordon P₀=D₁/(k−g)","g＝ROE×b；P₀ 為除息後價格","相對評價：forward P/E＝d/(k−g)＝P₀/EPS₁"]}
 ];
 
 
@@ -537,10 +538,13 @@ const TERMS = {
   "Grossman-Stiglitz":["Grossman-Stiglitz Paradox","效率市場詭論","取得資訊有成本，故完全效率市場不可能存在。"],
   /* 第12章 */
   "Direct finance":["Direct Finance","直接金融","赤字單位直接對大眾發行股債籌資，仲介僅撮合。"],
-  "Indirect finance":["Indirect Finance","間接金融","透過銀行等仲介存貸，仲介承擔信用風險。"]
+  "Indirect finance":["Indirect Finance","間接金融","透過銀行等仲介存貸，仲介承擔信用風險。"],
+  /* 第13章 */
+  "DDM":["Dividend Discount Model (DDM)","股利折現模式","股票價值＝未來股利折現至今日。"],
+  "Gordon":["Myron J. Gordon","戈登","1959 提出固定成長股利折現模型 P₀=D₁/(k−g)。"]
 };
 /* 人名類術語卡，標題用紫色 */
-const PERSON_TERMS=new Set(["Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
+const PERSON_TERMS=new Set(["Gordon","Markowitz","Knight","Graham","Davis","Akerlof","Spence","Stiglitz","Fisher"]);
 
 const CH1_SECTIONS = [
 {
@@ -1350,7 +1354,27 @@ const CH12_SECTIONS = [
 }
 ];
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS};
+
+/* ===== 第十三章 ===== */
+const CH13_SECTIONS = [
+{
+  id:"13.1", title:"普通股的特徵",
+  body:`
+  <div class="note"><b>普通股股東權利：</b><br>• <b>投票權</b>：累積投票制下，穩定當選所需股數 ＝ (應選席次+1) 分之 (擬當選席次×流通股數) ＋1，<b>小股東可集中票數爭取席次</b>。<br>• <b>新股優先認購權（preemptive right）</b>：現金增資時原股東按比例優先認購，維持控制權、防股權稀釋；認購權可單獨轉讓。<br>• <b>股利分配權</b>：稅後淨利扣除特別股股利後歸普通股。</div>
+  `
+},
+{
+  id:"13.2", title:"普通股評價",
+  body:`
+  <p>股票內含價值＝未來股利的現值（<span class="term" data-term="DDM">股利折現模式 DDM</span>）。</p>
+  <div class="formula"><span class="f-label">零成長</span>P₀ ＝ D／k<span class="f-note">固定股利的永續年金。</span></div>
+  <div class="formula"><span class="f-label"><span class="term" data-term="Gordon">Gordon 固定成長模式</span></span>P₀ ＝ D₁／(k − g) ＝ D₀(1+g)／(k − g)<span class="f-note">g ＝ ROE×b（再投資率）；P₀ 為除息後價格，不含 D₀。k 必須 &gt; g。</span></div>
+  <div class="note"><b>股價上漲情境：</b>D₁↑、g↑、必要報酬率 k↓。<br><b>相對評價：</b>P₀ ＝ 預期 P/E × EPS₁；在 Gordon 下 forward P/E ＝ P₀/EPS₁ ＝ d/(k−g)（d＝股利支付率）。k↑→P/E↓；g↑→P/E↑。</div>
+  `
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS};
 const CH2_PROBLEMS = [
 {
   q:"<b>範例 2.1（台大財金）</b>　Nevada Nuggets 明年僅做一個互斥專案，對債權人有 $700 給付義務。兩專案結果如下：<br>Project A：0.5 機率公司值 $3,000（股 $2,300／債 $700）；0.5 機率 $4,500（股 $3,800／債 $700）。<br>Project B：0.5 機率 $100（股 $0／債 $100）；0.5 機率 $6,900（股 $6,200／債 $700）。<br>(1) 有負債時公司選哪一專案？(2) 若為全權益公司呢？",
@@ -1469,7 +1493,15 @@ const CH12_PROBLEMS = [
 }
 ];
 
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS};
+const CH13_PROBLEMS = [
+{
+  q:"某公司剛發放每股股利 $2（D₀=2），股利固定成長 g=5%，必要報酬率 k=15%。求合理股價 P₀。",
+  opts:[],
+  ans:"D₁ = D₀(1+g) = 2×1.05 = 2.1。<br>P₀ = D₁/(k−g) = 2.1/(0.15−0.05) = <b>$21</b>。"
+}
+];
+
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS};
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
@@ -1493,7 +1525,8 @@ const GLOSS_CATS = [
   {name:"投資組合理論", keys:["Markowitz","Efficient frontier","MVP","CML","Separation theorem"]},
   {name:"CAPM", keys:["Beta","SML","APT","Sharpe","Treynor","Jensen alpha","Information ratio"]},
   {name:"效率與行為財務", keys:["EMH","Grossman-Stiglitz"]},
-  {name:"金融市場", keys:["Direct finance","Indirect finance"]}
+  {name:"金融市場", keys:["Direct finance","Indirect finance"]},
+  {name:"股票評價", keys:["DDM","Gordon"]}
 ];
 const GLS = {
   get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
@@ -1512,7 +1545,8 @@ const CH_TERMS_CATS = {
   9:["投資組合理論"],
   10:["CAPM"],
   11:["效率與行為財務"],
-  12:["金融市場"]
+  12:["金融市場"],
+  13:["股票評價"]
 };
 let glossMode="full", glossChapter=1;
 
