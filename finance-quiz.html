@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>財務管理實戰 題庫 · 張翔</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>財</text></svg>">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+<style>
+:root{
+  --paper:#f5efe2; --card:#fffdf6; --ink:#2b2a26; --ink-soft:#55524a;
+  --line:#ddd2ba; --accent:#9a3b2e; --accent-soft:#f0e2dc;
+  --teal:#2f5d62; --teal-soft:#e2ecec; --gold:#b8860b;
+  --sidebar:280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Serif TC",serif;background:var(--paper);color:var(--ink);line-height:1.8;font-size:16px}
+#progressbar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:100;transition:width .2s}
+
+/* 標頭 */
+header.mast{background:#2b2a26;color:#f5efe2;padding:34px 24px 26px;border-bottom:4px solid var(--accent)}
+.mast-inner{max-width:1180px;margin:0 auto}
+.mast .kicker{font-family:"Noto Sans TC";font-size:12.5px;letter-spacing:.22em;opacity:.7;text-transform:uppercase}
+.mast h1{font-size:28px;font-weight:900;margin:6px 0 4px;letter-spacing:.03em}
+.mast .sub{font-family:"Noto Sans TC";font-size:14px;opacity:.78}
+.mast .meta{margin-top:10px;font-family:"Noto Sans TC";font-size:12.5px;opacity:.6}
+
+/* 版面 */
+.layout{max-width:1180px;margin:0 auto;display:flex;gap:30px;padding:24px 24px 90px}
+nav.toc{width:var(--sidebar);flex-shrink:0;position:sticky;top:18px;align-self:flex-start;max-height:calc(100vh - 36px);overflow:auto;font-family:"Noto Sans TC";font-size:13.5px}
+nav.toc h4{font-size:11.5px;letter-spacing:.15em;color:var(--ink-soft);margin:14px 0 5px;text-transform:uppercase}
+nav.toc a{display:block;color:var(--ink);text-decoration:none;padding:4px 10px;border-left:2px solid transparent;border-radius:0 4px 4px 0;cursor:pointer}
+nav.toc a:hover{background:var(--accent-soft)}
+nav.toc a.active{background:var(--accent-soft);border-left-color:var(--accent);font-weight:500}
+nav.toc a.lvl2{padding-left:22px;font-size:12.5px;color:var(--ink-soft)}
+nav.toc .cnt{float:right;font-size:11px;color:var(--ink-soft)}
+
+main{flex:1;min-width:0}
+
+/* 工具列 */
+.toolbar{position:sticky;top:0;z-index:20;background:var(--paper);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.toolbar .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:"Noto Sans TC";font-size:12.5px;border:1px solid var(--line);background:var(--card);border-radius:20px;padding:4px 13px;cursor:pointer;color:var(--ink-soft)}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.tf.on{background:var(--teal);border-color:var(--teal)}
+.chip.mc.on{background:var(--accent);border-color:var(--accent)}
+.chip.essay.on{background:#6b4f7a;border-color:#6b4f7a}
+.chip.calc.on{background:var(--gold);border-color:var(--gold)}
+.search{flex:1;min-width:150px;font-family:"Noto Sans TC";font-size:13px;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+.search:focus{outline:2px solid var(--accent-soft)}
+
+h2.sec{font-size:24px;font-weight:900;margin:8px 0 4px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+h2.sec .en{display:block;font-size:12.5px;font-family:"Noto Sans TC";font-weight:400;color:var(--ink-soft);letter-spacing:.12em;margin-top:3px}
+.lead{font-size:14.5px;color:var(--ink-soft);margin:6px 0 16px}
+
+/* 題卡 */
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:14px 0;overflow:hidden;transition:border-color .15s}
+.qcard.done{border-color:var(--teal)}
+.qcard .head{padding:14px 18px 8px;display:flex;align-items:baseline;gap:10px}
+.qcard .num{font-family:"Noto Sans TC";font-weight:700;color:var(--accent);flex-shrink:0}
+.tag{font-family:"Noto Sans TC";font-size:11px;padding:2px 9px;border-radius:4px;color:#fff;flex-shrink:0}
+.tag.tf{background:var(--teal)} .tag.mc{background:var(--accent)} .tag.essay{background:#6b4f7a} .tag.calc{background:var(--gold)}
+.src{margin-left:auto;font-family:"Noto Sans TC";font-size:11.5px;color:var(--ink-soft);flex-shrink:0}
+.qcard .body{padding:0 18px;font-size:15px}
+.qcard .body p{margin:6px 0}
+.opts{font-family:"Noto Sans TC";font-size:14px;color:var(--ink-soft);margin:8px 0 4px}
+.opts div{padding:2px 0}
+.toggle{font-family:"Noto Sans TC";font-size:13px;cursor:pointer;background:var(--ink);color:var(--paper);border:none;padding:9px 18px;width:100%;text-align:left;margin-top:10px}
+.toggle:hover{background:#44413a}
+.ans{display:none;padding:14px 18px;border-top:1px solid var(--line);font-size:14.5px;background:#fbf7ee}
+.ans.show{display:block}
+.ans .anskey{color:var(--accent);font-weight:700}
+.ans p{margin:6px 0}
+.mark{font-family:"Noto Sans TC";font-size:12px;float:right;cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:16px;padding:3px 11px;color:var(--ink-soft);margin:2px 0}
+.qcard.done .mark{background:var(--teal);color:#fff;border-color:var(--teal)}
+.empty{padding:40px;text-align:center;color:var(--ink-soft);font-family:"Noto Sans TC"}
+.upcoming{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:28px;text-align:center;color:var(--ink-soft);font-family:"Noto Sans TC";font-size:14px}
+
+.progress-wrap{position:fixed;bottom:0;left:0;right:0;background:var(--paper);border-top:2px solid var(--line);padding:9px 24px;font-family:"Noto Sans TC";font-size:12.5px;z-index:50}
+.progress-wrap .bar{height:7px;background:#e5dcc6;border-radius:4px;overflow:hidden;margin-top:5px}
+.progress-wrap .bar i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+footer{max-width:1180px;margin:0 auto;padding:18px 24px;font-family:"Noto Sans TC";font-size:12px;color:var(--ink-soft)}
+@media(max-width:860px){
+  .layout{flex-direction:column}
+  nav.toc{width:100%;position:static;max-height:none}
+  .mast h1{font-size:22px}
+}
+</style>
+</head>
+<body>
+<div id="progressbar"></div>
+<header class="mast">
+  <div class="mast-inner">
+    <div class="kicker">研究所刷題 · Solved Problems in Financial Management</div>
+    <h1>財務管理實戰 題庫</h1>
+    <div class="sub">張翔 編《財務管理學實戰 BOOK》上、下冊 · 是非／選擇／問答／計算</div>
+    <div class="meta">點「顯示解答」核對、點「已熟」標記，進度存於本機瀏覽器。首版完成重點 1，其餘重點陸續填入。</div>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="toc" id="toc"></nav>
+<main>
+  <div class="toolbar">
+    <div class="row">
+      <div class="chips" id="typeChips">
+        <button class="chip on" data-t="all">全部</button>
+        <button class="chip tf" data-t="tf">是非</button>
+        <button class="chip mc" data-t="mc">選擇</button>
+        <button class="chip essay" data-t="essay">問答</button>
+        <button class="chip calc" data-t="calc">計算</button>
+      </div>
+      <input class="search" id="search" placeholder="搜尋關鍵字／學校…">
+      <label style="font-family:'Noto Sans TC';font-size:12.5px;color:var(--ink-soft)"><input type="checkbox" id="onlyUndone"> 只看未熟</label>
+    </div>
+  </div>
+  <div id="quizArea"></div>
+</main>
+</div>
+
+<div class="progress-wrap">
+  <div>已熟 <b id="pc">0</b> / <b id="pct">0</b> 題　<span id="pctxt"></span></div>
+  <div class="bar"><i id="pcbar"></i></div>
+</div>
+
+<footer>
+  內容依《財務管理學實戰 BOOK（上）》OCR 整理 · 題目與解答數字請對照原書頁 · 進度存於 localStorage
+</footer>
+
+<script>
+/* ============ 章節目錄（上冊重點1-31；下冊重點32+ 後續接入） ============ */
+const CHAPTERS=[
+ {p:'第一篇　緒論與先備知識',items:[
+   {id:1, ch:'重點 1 · 企業組織', en:'Business Organization', done:true},
+   {id:2, ch:'重點 2 · 公司理財概論', en:'Overview of Corporate Finance', done:true},
+   {id:3, ch:'重點 3 · 權益代理問題', en:'Equity Agency Problem', done:true},
+   {id:4, ch:'重點 4 · 負債代理問題', en:'Debt Agency Problem', done:true},
+   {id:5, ch:'重點 5 · 代理成本與公司治理', en:'Agency Cost & Governance', done:true},
+   {id:6, ch:'重點 6 · 現值與終值', en:'PV & FV', done:true},
+   {id:7, ch:'重點 7 · 年金', en:'Annuity', done:true},
+   {id:8, ch:'重點 8 · 各種貸款種類', en:'Loan Types', done:true},
+   {id:9, ch:'重點 9 · 有效年利率', en:'EAR', done:false},
+   {id:10,ch:'重點 10 · 利率的決定', en:'Interest Rate Determination', done:false},
+   {id:11,ch:'重點 11 · 利率期限結構', en:'Term Structure', done:false},
+ ]},
+ {p:'第二篇　財務分析與預測',items:[
+   {id:12,ch:'重點 12 · 四大財務報表', en:'Financial Statements', done:false},
+   {id:13,ch:'重點 13 · 現金流量概念', en:'Cash Flow', done:false},
+   {id:14,ch:'重點 14 · 財務比率分析', en:'Ratio Analysis', done:false},
+   {id:15,ch:'重點 15 · 投資價值比率與杜邦分析', en:'Valuation & DuPont', done:false},
+   {id:16,ch:'重點 16 · 財務預測與成長率', en:'Forecasting & Growth', done:false},
+ ]},
+ {p:'第三篇　報酬與風險',items:[
+   {id:17,ch:'重點 17 · 報酬與風險的衡量', en:'Return & Risk', done:false},
+   {id:18,ch:'重點 18 · 投資組合理論', en:'Portfolio Theory', done:false},
+   {id:19,ch:'重點 19 · 多角化效果', en:'Diversification', done:false},
+   {id:20,ch:'重點 20 · CAPM 理論', en:'CAPM Theory', done:false},
+   {id:21,ch:'重點 21 · CAPM 實證與延伸', en:'CAPM Evidence', done:false},
+   {id:22,ch:'重點 22 · 多因子定價模型', en:'Multifactor Models', done:false},
+   {id:23,ch:'重點 23 · 效率市場', en:'Efficient Market', done:false},
+   {id:24,ch:'重點 24 · 行為財務學派', en:'Behavioral Finance', done:false},
+ ]},
+ {p:'第四篇　金融市場與證券評價',items:[
+   {id:25,ch:'重點 25 · 金融市場與機構', en:'Financial Markets', done:false},
+   {id:26,ch:'重點 26 · 普通股與特別股概論', en:'Common & Preferred Stock', done:false},
+   {id:27,ch:'重點 27 · 股利折現模式與 NPVGO', en:'DDM & NPVGO', done:false},
+   {id:28,ch:'重點 28 · 其他普通股評價模式', en:'Other Stock Models', done:false},
+   {id:29,ch:'重點 29 · 債券概論', en:'Bond Basics', done:false},
+   {id:30,ch:'重點 30 · 債券評價與殖利率', en:'Bond Valuation & YTM', done:false},
+   {id:31,ch:'重點 31 · 存續期間、凸性與免疫', en:'Duration & Immunization', done:false},
+ ]},
+ {p:'第五篇起（下冊）',items:[
+   {id:32,ch:'重點 32 · 選擇權概述', en:'Options Overview', done:false},
+   {id:33,ch:'重點 33 · 賣買權評價式', en:'Put-Call Parity', done:false},
+   {id:34,ch:'重點 34 · 選擇權定價模式', en:'Option Pricing', done:false},
+   {id:35,ch:'重點 35 · 敏感度分析（Greeks）', en:'Greeks', done:false},
+ ]},
+];
+
+/* ============ 題庫資料 ============
+ type: tf 是非 / mc 選擇 / essay 問答 / calc 計算
+ q: 題幹（可含 <p>）；opts: 選項陣列；ans: 答案；exp: 解析
+*/
+const Q=[
+/* ---- 重點1 企業組織 ---- */
+{ch:1,type:'tf',src:'東海財金',q:'上市公司必然是公開發行公司。',ans:'True（O）',exp:'公開發行公司可再分為興櫃、上櫃與上市三種；上市必為公開發行，但公開發行不一定上市。'},
+{ch:1,type:'tf',src:'台大財金',q:'股票在店頭市場掛牌買賣謂之「上市」。',ans:'False（X）',exp:'店頭市場掛牌謂之「上櫃」；集中市場掛牌才是「上市」。'},
+{ch:1,type:'mc',src:'東吳國貿',q:'Limited liability may be a characteristic of each of the following forms of organization EXCEPT a(n)',opts:['sole proprietorship','limited partnership','C corporation','S corporation','limited liability company'],ans:'(A)',exp:'獨資與一般合夥（general partnership）負無限清償責任。有限合夥中的 LP 以出資額為限；S corporation 在美國稅法下可避免雙重課稅。'},
+{ch:1,type:'mc',src:'東華財金',q:'In a limited partnership',opts:["each limited partner's liability is limited to his net worth","each limited partner's liability is limited to the amount he put into the partnership","each limited partner's liability is limited to his annual salary","there is no limitation on liability; only a limitation on what the partner can earn","none of the above"],ans:'(B)',exp:'有限合夥人對企業債務的清償責任，僅限於其所出資（投入）的部分，且不具經營決策權。'},
+{ch:1,type:'mc',src:'元智財金',q:'A corporation\'s board of directors（單複選）',opts:['is selected by and can be removed by management','can be voted out of power by the shareholders','has a lifetime appointment to the board','should support top management in all cash-dividend decisions','supports management only when confident in its actions'],ans:'(B)(E)',exp:'(A) 董事會由股東選出、反由董事會遴選經理人；(C) 董事為任期制非終身制；(D) 董事會非無條件支持經理人每個決策。'},
+{ch:1,type:'mc',src:'BMA 習題',q:'The treasurer usually oversees all of the following EXCEPT：I. Preparation of financial statements；II. Investor relationships；III. Cash management；IV. Raising new capital',opts:['I only','I and II only','II, III and IV only','III only'],ans:'(A)',exp:'財務長（treasurer）掌現金、信用、資本支出、財務規劃與籌資；編製財務報表是主計長（controller）的職責。'},
+{ch:1,type:'mc',src:'BMA 習題',q:'The controller is usually responsible for all of the following EXCEPT：I. Preparation of financial statements；II. Internal accounting；III. Cash management；IV. Taxes',opts:['I only','III only','I and II only','IV only'],ans:'(B)',exp:'主計長掌財務會計、成本會計、稅務、會計資訊系統；現金管理是財務長的職責。'},
+{ch:1,type:'mc',src:'BMA 習題',q:'As a legal entity a corporation can perform all of the following EXCEPT：I. borrow money；II. lend money；III. sue and be sued；IV. vote',opts:['I and II only','I, II and III only','IV only','I, II, III and IV'],ans:'(C)',exp:'公司為法人，擁有借貸、訴訟等與自然人相同的法律權利，但對公職選舉無投票權。'},
+{ch:1,type:'mc',src:'中央財金',q:'The bylaws（公司組織細則）',opts:['establish the name of the corporation','are rules which apply only to limited liability companies','set forth the purpose of the firm','mandate the procedure for electing corporate directors','set forth the procedure for electing senior managers'],ans:'(D)',exp:'名稱於申請設立時選定；股份有限公司亦有 bylaws；公司以營利創造股東財富為目的。選舉董事的方式程序應載明於組織細則；高階經理人由董事會選任，非股東大會直接選任。'},
+{ch:1,type:'mc',src:'中正財金',q:'下列有關企業組織型態的敘述，何者「不正確」？',opts:['「有限公司」可僅由一個股東出資成立，但須負無限清償責任','在「兩合公司」中至少有一個股東須負無限清償責任','一般合夥人可參與經營，但須負無限清償責任','有限合夥人只須負有限清償責任'],ans:'(A)',exp:'有限公司股東僅負有限責任，以出資額為限，對公司額外債務無須負責。'},
+{ch:1,type:'mc',src:'高大金融',q:'Which statement concerning a partnership is CORRECT？',opts:['A partnership is designed to protect owners\' personal assets','The profits of a partnership are taxed twice','In a general partnership all partners have limited liability','In a limited partnership all partners run the business with unlimited liability','The advantages and disadvantages of a partnership are similar to those of a proprietorship'],ans:'(E)',exp:'合夥非以保護業主個人財產為目的、無雙重課稅；一般合夥人均負無限責任；有限合夥中至少一人負無限責任。其優劣與獨資大致相同。'},
+{ch:1,type:'mc',src:'102 中正財金',q:'Ethical behavior by management is most consistent with the goal of shareholder value maximization through：',opts:['Improved capital structure','Enhanced reputation value','Increased managerial benefits','Higher dividend payments'],ans:'(B)',exp:'符合社會道德與 CSR 的行為看似增加成本，但可提升企業聲譽、增加消費者好感與銷售，長期與極大化股東價值一致。'},
+{ch:1,type:'mc',src:'106 成大財金',q:'Which of the following statements is CORRECT？',opts:['In most corporations the CFO ranks above the CEO','By law the chairman of the board must also be the CEO','The board is the highest-ranking body; the CEO works under the board and can be removed by it, but cannot remove the board. One person may hold both CEO and chairman','The CFO generally reports to the controller','The CFO is not responsible for the validity of financial statements'],ans:'(C)',exp:'CFO 位階在 CEO 之下；CEO 與董事長未必要同一人；主計長（controller）是 CFO 的下屬，故財會業務也是 CFO 應負責的項目。'},
+
+/* ---- 重點1 問答 ---- */
+{ch:1,type:'essay',src:'淡江財金',q:'What are the alternative forms of business organization？What are their advantages and disadvantages？',ans:'三種主要型態：獨資、合夥、公司。',exp:'<p><b>(1) 獨資 sole proprietorship：</b>一人出資，盈虧自負。<br>優：組織成本低、成立易、管制少、利益獨享、只課綜所稅、權責單純。<br>缺：企業生命有限、不易籌大資金、負無限清償責任、所有權移轉困難。</p><p><b>(2) 合夥 partnership：</b>二人以上合資。<br>優：成本低、成立易、只課綜所稅、可聚集較多人才。<br>缺：生命有限、負無限責任、所有權移轉難、不易籌大資金。</p><p><b>(3) 公司 corporation：</b>依公司法成立的法人，所有權與經營權分離。<br>優：資源多、所有權易轉移、永續存在、股東有限責任、易募大資金。<br>缺：法令限制多、發行成本高、設立程序複雜、存在代理問題。</p>'},
+{ch:1,type:'essay',src:'東華財金',q:'朋友在花經營室內高爾夫練習場五年、現為獨資，欲跨區擴張需要增資。(1) 是否建議變更組織型態？應採何種？(2) 相對於獨資的優點？(3) 缺點？(4) 若維持獨資的優缺點？(5) 緩和公司代理衝突的機制？',ans:'建議改採「公司（corporation）」。',exp:'<p>(2) 公司優點：有限責任降低股東風險、所有權易轉換、永續存在、易募大資金。</p><p>(3) 公司缺點：受較嚴格法令規範、設立程序複雜、有代理問題與控制權議題、證券發行成本較高。</p><p>(4) 維持獨資：優點是保有經營主導權、不被其他股東分利或竊取技術、管制少；缺點是資金有限難擴張、企業生命繫於業主、負無限清償責任。</p><p>(5) 緩和代理問題的機制詳見第 2 章（重點 3–5）。</p>'},
+{ch:1,type:'essay',src:'普考',q:'許多公司想上市募集資金擴充，對未上市前之股東有利嗎？為何政府一方面鼓勵上市、一方面又嚴格把關上市與監督市場？',ans:'有利有弊；政府把關為解決資訊不對稱。',exp:'<p><b>對原始股東：</b>有利——上市提高能見度與股票流動性、降低原始股東流動性風險，且利於募集資金、降低融資成本、提升公司價值。不利——引入外部資金帶來經營權外流、營運須聽新股東意見，且公開發行須受嚴格資訊揭露規範、增加經營成本。</p><p><b>政府把關：</b>原始股東與投資大眾間存在資訊不對稱（information asymmetry），外部人難知真實營運、內部人有隱瞞資訊的誘因；政府嚴格審核與監督即在防止此弊端。</p>'},
+{ch:1,type:'essay',src:'101 台北大金融',q:'公司營運狀況大好時，哪一類資金供給者受益最大？（特別股股東／普通股股東／長期債權人／短期債權人）',ans:'普通股股東。',exp:'<p>債權人與特別股股東握有「優先求償權」，利息與特別股股利相對固定；普通股股東是「剩餘求償權」。公司營運大好時，扣除固定利息、稅與特別股股利後，剩餘全歸普通股股東（普通股股利、保留盈餘），故受益最大。</p><p>普通股股東權利：公司控制權、優先認股權、盈餘分配權、剩餘財產分配權（清算時須先償債與特別股股東）。</p>'},
+
+/* ---- 重點1 計算 ---- */
+{ch:1,type:'calc',src:'101 台大財金',q:'A 公司一年後結束營業清算，資產僅有一不動產：景氣好（機率 60%）時價值 110 億，不好（機率 40%）時 80 億。負債只有一年後到期、面額 100 億之貼現債券。無風險中立、無稅與交易成本，年化無風險利率 5%。求：(1) 企業價值；(2) 貼現債券價值；(3) 股東權益價值。',ans:'(1) 93.33 億　(2) 87.62 億　(3) 5.71 億',exp:'<p>(1) 企業價值 V₀ = (110×0.6 + 80×0.4) / (1+5%) = 98 / 1.05 ≈ <b>93.33 億</b>。</p><p>(2) 公司債有違約風險：好景氣時還 100，不好時只還 80。V<sub>bond</sub> = (100×0.6 + 80×0.4) / 1.05 = 92 / 1.05 ≈ <b>87.62 億</b>。</p><p>(3) 股東有限責任、有剩餘求償權：好景氣時股東得 110−100=10，不好時得 0。V<sub>equity</sub> = (10×0.6 + 0×0.4) / 1.05 = 6 / 1.05 ≈ <b>5.71 億</b>。</p><p>觀念：V₀ = V<sub>debt</sub> + V<sub>equity</sub>（93.33 ≈ 87.62 + 5.71）。</p>'},
+
+/* ---- 重點2 公司理財概論 ---- */
+{ch:2,type:'tf',src:'政大財管',q:'「公司價值極大化」「股東權益帳面價值極大化」與「股價極大化」三個目標是相通的。',ans:'False',exp:'公司價值=內含價值（FCF 折現）；帳面價值=淨值（股本+資本公積+保留盈餘），二者不同。效率市場下「股價極大化」才≈內含價值極大化。'},
+{ch:2,type:'tf',src:'台大財金',q:'財務管理主要目的在追求企業收入、稅後淨利及 EPS 極大化。',ans:'False',exp:'主要目的應在追求「目前每股股價」極大化；收入、淨利、EPS 極大化皆非適當目標。'},
+{ch:2,type:'mc',src:'成大財金',q:'The primary goal of financial management is to',opts:['maximize current dividends per share','maximize current value per share of existing stock','avoid financial distress','minimize operational costs','maintain steady growth in sales'],ans:'(B)',exp:'財管主要目的＝極大現有股東目前每股價值（股價）。'},
+{ch:2,type:'mc',src:'中央財金',q:'Shareholders\' wealth maximization is better than profit maximization because it',opts:['increases future cash flows without risk','is not better','considers both time value of money and risk','keeps the firm from going bankrupt'],ans:'(C)',exp:'股東財富極大化考量了貨幣時間價值與現金流量的風險；利潤極大化未考慮這兩者。'},
+{ch:2,type:'mc',src:'東吳國貿',q:'The primary emphasis of the financial manager is the use of',opts:['accrued earnings','cash flow','organization charts','profit incentives'],ans:'(B)',exp:'因貨幣有時間價值，財務決策應注重現金流量的大小與時點。'},
+{ch:2,type:'mc',src:'東華財金',q:'Managers should be concerned with cash flows rather than profits because cash flows recognize',opts:['more revenue than profits','the risk of and when cash flows occur','the risk and size of profit','less variability than accounting profit'],ans:'(B)',exp:'企業價值取決於現金流折現，折現同時考慮時間點（貨幣時間價值）與風險（風險調整折現率）。'},
+{ch:2,type:'mc',src:'105 政大財管',q:'Which best represents the objective of a publicly listed company？',opts:['Maximize earnings','Maximize market shares','Maximize stock price','Maximize shares outstanding'],ans:'(C)',exp:'上市櫃公司目標＝極大化股價。'},
+{ch:2,type:'mc',src:'107 清大計財',q:'Which regarding cost-benefit analysis is NOT correct？',opts:['第一步是辨認成本與效益','無競爭市場時，可用單向（one-sided）價格決定確切現金價值','競爭價格讓我們不必考慮決策者偏好就能算價值','多數商品與金融資產有競爭市場'],ans:'(B)',exp:'單向（片面）價格只能以此價買入、無法以此賣出，不能用來算準確現金價值。'},
+{ch:2,type:'mc',src:'107 清大計財',q:'麥當勞：大麥克 $2.68、大杯可樂 $1.45、大薯 $1.13；滿餐（三者組合）售 $4.59。有無套利機會？',opts:['有：買滿餐再拆售三樣，賺 $0.67','無套利機會','有：買三樣再賣滿餐，賺 $1.34','有：買三樣再賣滿餐，賺 $0.67'],ans:'(A)',exp:'單買三樣 $2.68+1.45+1.13=$5.26 > 滿餐 $4.59，故「買滿餐、拆賣三樣」套利，利潤 $5.26−$4.59=$0.67。'},
+{ch:2,type:'mc',src:'107 中正財金',q:'Which is false？',opts:['負債、權益等有價證券的相對比例構成資本結構','最常見是全權益或負債+權益融資','專案 NPV 代表新投資者因該專案創造的價值','公司對外籌資時須選擇發行哪種證券'],ans:'(C)',exp:'專案 NPV 由全體股東（原股東＋新加入股東）共享，非僅新投資者。'},
+{ch:2,type:'mc',src:'107 中央財金',q:'下列哪個陳述正確？',opts:['財管終極目標是極大化市場占有率','流動性管理在最佳化長期資產','資本預算（如 NPV）用於評估投資決策','債權人承擔資訊不對稱的最終成本'],ans:'(C)',exp:'(A)目標為公司價值極大化；(B)流動性管理是短期資產管理；(D)股東承擔資訊不對稱最終成本。'},
+{ch:2,type:'essay',src:'淡江財金',q:'(1) 財務管理追求的目標是什麼？(2) 為何追求利潤極大化是錯誤目標？',ans:'(1) 公司價值極大化＝股東財富極大化＝效率市場下股價極大化。',exp:'<p>(1) 由 V=D+E，負債求償權固定下，公司價值極大化＝股東財富極大化；效率市場下＝股價極大化。</p><p>(2) 利潤極大化之誤：①可窗飾（window dressing），如刪減投資短期增利但傷及未來股價；②未考慮貨幣時間價值；③未考量風險（風險↑→折現率↑→公司價值↓）。</p>'},
+{ch:2,type:'essay',src:'中央財金',q:'「只要 EPS 上升，公司價值就上升。」請評論。（Comment）',ans:'不必然。',exp:'<p>EPS 依應計基礎（accrual）計算，與真實現金流不同；公司價值由未來 FCF 以 WACC 折現決定。EPS 升若伴隨更高風險（要求報酬 ka↑），價值未必升。EPS 也可由減少流通股數而人為灌水；又 ROE<k 時，高 EPS 股反而股價可能更低（NPVGO<0）。</p>'},
+{ch:2,type:'essay',src:'RWJJ 習題',q:'極大化股價的目標會與企業倫理、顧客員工安全、環境、社會公益衝突嗎？',ans:'長期不衝突。',exp:'<p>提升員工安全、產品品質、環保公益短期增成本，但長期建立聲譽（reputation）與消費者信心，反而提升股價。不道德/違法拉抬股價僅能短期欺瞞，長期必傷股價。正確目標是「股價基本價值（內含價值）」極大化，市價短期會偏離、長期回歸。</p>'},
+
+/* ---- 重點3 權益代理問題 ---- */
+{ch:3,type:'tf',src:'100 清大財金',q:'The problem of asymmetric information occurs when investors know more about the firm than the managers do.',ans:'False',exp:'訊息不對稱是經理人（內部人 insider）比外部投資人（outsider）知道更多。'},
+{ch:3,type:'mc',src:'中山財管',q:'何者最符合代理問題的精髓？',opts:['管理者以個人私利取捨，只要不觸法便無可規範','財務管理人最適目標是極大化預期現金流量','股東與經理人間有代理問題，股東與債權人間也同樣存在','以上皆非'],ans:'(C)',exp:'股東-經理人（權益代理）與股東-債權人（負債代理）皆有代理問題。'},
+{ch:3,type:'mc',src:'中原國貿',q:'Which situation is most apt to create an agency problem？',opts:['員工因卓越貢獻加薪','加班完成專案給雙倍薪','部門一年無事故給經理人獎金','經理人因去年雇用最多新人而領紅利'],ans:'(D)',exp:'單純因「雇用最多員工」給紅利，經理人可能雇用不合宜員工、無法創造價值，造成代理問題。'},
+{ch:3,type:'mc',src:'東吳國貿',q:'The conflict between owners and non-owner managers is',opts:['the agency problem','incompatibility','serious only when profits decline','little importance in large U.S. firms'],ans:'(A)',exp:'所有人與非所有人經理人目標衝突＝代理問題。'},
+{ch:3,type:'mc',src:'中央財金',q:'Managers are encouraged to act in shareholders\' interests by',opts:['股東選出董事會再選任經理人','被他公司接管的威脅','薪資與公司績效連結的酬勞契約','以上皆是'],ans:'(E)',exp:'解權益代理：解僱威脅、接管威脅、薪資報償制度，皆有效。'},
+{ch:3,type:'mc',src:'中正財金',q:'何者讓股東與管理者的潛在代理問題較嚴重？',opts:['董事會有相當比例外部獨立董事','持股分散、小股東眾多','持股集中、大股東持股近九成','完善的公司治理制度'],ans:'(B)',exp:'持股分散時，較少持股即可取得經營權，經營者與多數小股東利益衝突更嚴重（搭便車）。'},
+{ch:3,type:'mc',src:'成大財金',q:'Which help convince managers to work for stockholders？I. 股價連結的酬勞；II. 員工認股選擇權；III. 被接管威脅；IV. 委託書戰爭威脅',opts:['I、II only','III、IV only','I、II、III only','I、III、IV only','I、II、III、IV'],ans:'(E)',exp:'四者皆是：酬勞制度、ESO、接管威脅、委託書戰爭（proxy fight）都能誘使經理人為股東服務。'},
+{ch:3,type:'mc',src:'銘傳財金',q:'(a) 經理人用垃圾債與貸款買下公司、槓桿極高；(b) 外部人徵求股東在年會投票同意。各稱為？',opts:['(a) LBO；(b) 公開收購 tender offer','(a) 毒藥丸；(b) 委託書戰爭','(a) 綠郵 greenmail；(b) 經理人認股權','(a) LBO；(b) 委託書戰爭 proxy fight'],ans:'(D)',exp:'高舉債買下公司＝融資買下（LBO/MBO）；外部股東徵求委託席次撤換經營階層＝委託書戰爭。'},
+{ch:3,type:'mc',src:'100 政大財管',q:'An agency problem can be alleviated by',opts:['要求所有組織都是獨資','讓經理人利益與股東利益一致的酬勞設計','要求經理人承擔超過其偏好的風險','(A)(B)'],ans:'(B)',exp:'好的激勵契約讓經理人在追求自身利益時同時成就股東財富。（完全消除靠獨資，但不實際）'},
+{ch:3,type:'mc',src:'100 政大財管',q:'小股東認為經營階層未追求價值極大化，最適反應是？',opts:['參加年會投票反對','提出議案表決','發起委託書戰爭撤換經營階層','賣掉持股'],ans:'(D)',exp:'小股東持股太少、無力影響決策，最理性反應是「用腳投票」賣出持股。'},
+{ch:3,type:'mc',src:'100 師大管研',q:'以每季獲利成長給財務誘因的酬勞計畫，可能造成代理問題，因為',opts:['經理人不受私利驅使','董事會居功','短期而非長期利潤成為焦點','投資人要求穩定利潤'],ans:'(C)',exp:'以「每季」獲利為誘因，經理人會短視近利、做出犧牲長期的決策。'},
+{ch:3,type:'mc',src:'101 台大財金',q:'何者為解決企業代理問題之道？',opts:['不計代價消弭一切經理人私利行為','設計鼓勵與監督制度應考量成本效益','為消弭私利，高階主管應由大股東親自擔任','因無法完全消弭，公司不該花任何成本遏止'],ans:'(B)',exp:'監督與激勵應衡平成本效益，以免傷及股東價值；大股東未必有管理專才；適度監控仍值得做。'},
+{ch:3,type:'mc',src:'103 政大財管',q:'所有權與經營權分離下，代理成本由高至低排序：I.獨資；II.公司；III.一般合夥',opts:['I,II,III','II,I,III','III,II,I','II,III,I'],ans:'(D)',exp:'公司所有權經營權最分離→代理成本最高；獨資不分離→最低；一般合夥居中（仍可能傷及其他合夥人）。'},
+{ch:3,type:'mc',src:'105 交大財金',q:'The free cash flow hypothesis states',opts:['FCF 多的公司應多發股利以降低財務危機風險','FCF 多的公司應發新股逼經理人認真工作','發債須按期還本付息，減少經理人浪費資源的空間','以上皆是'],ans:'(C)',exp:'Jensen：發債需固定付息，壓縮自由現金流量，減少經理人亂投資/特權消費的空間，降低權益代理成本。'},
+{ch:3,type:'mc',src:'106 台大財金',q:'給經理人 ESO 時，履約價通常訂為？',opts:['給予日當天的股價','給予日一年後預期股價','到期日預期股價','經理人受雇日股價'],ans:'(A)',exp:'ESO 履約價一般訂為「授予日當天」的股價（backdating 即把履約價偷偷訂在更早更低的股價，已遭沙賓法案禁止）。'},
+{ch:3,type:'mc',src:'106 中正財金',q:'Which motivates managers to act in shareholders\' interest？',opts:['債券限制條款','被接管威脅','董事會施壓','(B)(C)'],ans:'(D)',exp:'接管威脅與解雇威脅緩解權益代理；債券條款是緩解負債代理。'},
+{ch:3,type:'mc',src:'107 中央財金',q:'皇統科技案：董事會股票質押比 40%、董事長 43.83%。股票質押指的是＿於銀行貸款時以＿持股作為抵押。',opts:['公司，董事個人','董事，董事個人','董事，公司','公司，公司'],ans:'(B)',exp:'董事質押＝董事以「自己持有」的股權為標的、為自己的債務設質押（非公司持股）。'},
+{ch:3,type:'mc',src:'107 中山財管',q:'下列何者「不屬於」資本預算相關的代理問題？I. 減少努力；II. 特權消費；III. 打造帝國；IV. 鞏固職位的投資；V. 規避風險',opts:['I、II only','I、II、IV only','I、II、III、IV only','I、II、III、IV、V'],ans:'(A)',exp:'工作怠惰、特權消費是「日常」代理問題，與特定資本預算案無直接關聯；後三者（打造帝國、鞏固職位投資、規避風險）才是投資決策上的扭曲。'},
+{ch:3,type:'essay',src:'政大財管',q:'(1) 何謂股東與經理人間的代理問題？有哪些型態？(2) 政府與財務面如何解決？',ans:'型態：怠惰、特權消費、MBO、過度投資、次佳投資；對策：酬勞/解雇/接管/勞動市場/降 FCF。',exp:'<p>(1) 型態：①工作怠惰 shirking；②特權消費 perquisites；③管理買下 MBO（打壓股價圖利）；④過度投資 empire building；⑤次佳投資（為保工作放棄高風險高報酬案）。</p><p>(2) 對策：酬勞制度（ESO、紅利、績效配股）、解雇威脅、接管威脅、外部經理人勞動市場、降低 FCF（多舉債、多發股利/庫藏股）。政府可透過稅法獎勵、降低併購門檻協助。</p>'},
+{ch:3,type:'essay',src:'政大金融',q:'以代理問題觀點，解釋為何經理人偏好的舉債水準低於最適水準。',ans:'舉債少→每期利息壓力小、留存更多 FCF 供經理人自由運用。',exp:'<p>經理人少舉債，每期固定利息支出少、償債壓力輕，且留下更多自由現金流量供其掌控資源；同時降低公司倒閉、自己丟飯碗的風險。故其偏好槓桿低於股東最適水準。</p>'},
+{ch:3,type:'essay',src:'台北大金融',q:'解釋：(1) 逆選擇 adverse selection；(2) 道德危險 moral hazard；(3) 員工認股選擇權 ESO；(4) 代理問題。',ans:'契約前隱藏資訊 vs 契約後隱藏行動。',exp:'<p>(1) 逆選擇（Akerlof 1970）：契約「發生前」，資訊優勢方握有隱藏資訊，導致市場充斥劣品、良品無法交易。</p><p>(2) 道德危險：契約「簽訂後」，資訊優勢方採取對方無法觀察的隱藏行動，損及對方。</p><p>(3) ESO：員工可於特定期間以特定價格買進股票的權利；股價上漲享資本利得、下跌可不行使，使員工利益與公司績效連動。</p><p>(4) 代理問題：主理人與代理人目標不一致、在資訊不對稱下無法完全監控，代理人因而做出損及主理人的行為。</p>'},
+
+/* ---- 重點4 負債代理問題 ---- */
+{ch:4,type:'mc',src:'元智財企',q:'（單複選）何者可能是代理問題？(A) 交際費浮濫；(B) 高級套房豪華裝修；(C) 過度投資於特定（為鞏固職位/安全）計畫；(D) 高階誘因酬勞契約；(E) 資產替代。',ans:'(A)(B)(C)(E)',exp:'(D) 誘因契約是解決代理問題的機制本身、非問題本身。(A)(B) 特權消費、(C) 過度/鞏固職位投資、(E) 資產替代皆屬代理問題。'},
+{ch:4,type:'mc',src:'銘傳財金',q:'銘傳公司淨值 5000 萬、負債 5000 萬、年利率 20%。A 案：好 8000/壞 14000；B 案：好 2000/壞 20000（好壞機率各 0.5）。股東極大化下選哪案？債權人期望報酬率？',opts:['投資 B，報酬率 20%','投資 B，報酬率 −20%','投資 A，報酬率 15%','投資 A，報酬率 −15%'],ans:'(B)',exp:'一年後應還本息 5000×1.2=6000。股東：A 案 E=(2000+8000)/2=5000；B 案 E=(0+14000)/2=7000→選 B。債權人：B 案 E(V)=(2000+6000)/2=4000，報酬率=(4000−5000)/5000=−20%。'},
+{ch:4,type:'mc',src:'高大金融/清大計財',q:'Which is most correct？',opts:['公司比獨資稅負有利','公司股東負無限責任','大公司因規大而管制較少','降低被接管威脅會提高經理人為股東服務的意願','債券限制條款旨在降低股東與債權人潛在衝突'],ans:'(E)',exp:'債券條款（covenants）用來降低負債代理問題。其餘：公司有雙重課稅、股東有限責任、大公司管制更多、降低接管威脅反而使經理人更不顧股東。'},
+{ch:4,type:'mc',src:'成大/中正財金',q:'高槓桿公司的股東可能願意接受 NPV 為負的計畫，若',opts:['提高公司資產報酬的標準差','降低資產報酬變異數','降低公司風險','使現金流多樣化','降低違約風險'],ans:'(A)',exp:'資產替代（asset substitution）：股東視股權為買權，提高資產波動度雖 NPV<0 仍可使股權價值上升，由債權人承擔下行風險。'},
+{ch:4,type:'mc',src:'101 中正財金',q:'＿問題使新 NPV>0 計畫難以融資，因新增利益歸舊債權人而非出資的股東。',opts:['agency cost','financial slack','asset substitution','debt overhang'],ans:'(D)',exp:'債務積壓（debt overhang）：新投資增加的價值只夠償債、股東分不到，故放棄 NPV>0 計畫。'},
+{ch:4,type:'mc',src:'101 中山財管',q:'何種情況下「極大化公司價值」≠「極大化股東財富」？',opts:['發行新債影響舊債價值','發債提高倒閉機率','公司首次發債','改變資本結構時股權 β 改變'],ans:'(A)',exp:'新債提高財務風險、稀釋舊債權（claim dilution），傷及舊債價值；公司價值一增一減未必提升，故不等於股東財富極大化。'},
+{ch:4,type:'mc',src:'102 中正財金',q:'Which is incorrect about covenants？',opts:['加入更多條款會提高借款成本','一旦發債，股東有誘因以舉債人利益換取多發股利','條款可限制再舉債水準與最低營運資金','若條款降低負 NPV 行為，其減省的借款成本可超過彈性損失'],ans:'(A)',exp:'加入更多限制條款可降低債權人疑慮，反而「壓低」借款成本，不是提高。'},
+{ch:4,type:'mc',src:'108 交大/中正財金',q:'破產間接成本之一是經理人愛冒大風險。此策略下：',opts:['公司會選使公司期望價值最大的案','債權人選高風險案將價值移轉給股東','股東選高風險案將債權人價值移轉給自己','公司永遠選低風險案'],ans:'(C)',exp:'股東選擇高風險計畫，成功獨享高報酬、失敗由債權人與股東共同承擔，此即資產替代、將債權人價值移轉給股東。'},
+{ch:4,type:'calc',src:'中原國貿',q:'Alice 公司一年後清算，須付債權人 $500。低波動案：壞 $500/好 $700；高波動案：壞 $100/好 $800（好壞各 0.5）。(1) 兩案下公司期望價值？(2) 兩案下股東期望價值？(3) 股東偏好哪案？(4) 若債權人加契約：選高波動案時須多付 Y，求使股東兩案無異的 Y。',ans:'(1) 低 600、高 450；(2) 低 100、高 150；(3) 高波動；(4) Y=600',exp:'<p>(1) 低：(500+700)/2=600；高：(100+800)/2=450 → 低波動極大化公司價值。</p><p>(2) 股東對 $500 求償權以上有剩餘：低案 E=(0+200)/2=100；高案 E=(0+300)/2=150。</p><p>(3) 股東選高波動案（股東期望 150>100），此為資產替代。</p><p>(4) 高波動案須付 Y，好時股東得 800−Y：令 100=(800−Y)/2 → Y=600。</p>'},
+{ch:4,type:'essay',src:'中山財管',q:'說明股東-經理人、債權人-股東兩種代理問題，並各提解決方法。',ans:'權益代理 vs 負債代理。',exp:'<p><b>權益代理（股東-經理人）：</b>怠惰、特權消費、過度投資、次佳投資。解法：酬勞連結績效（ESO）、解雇/接管威脅、降低 FCF（多舉債、多發股利）。</p><p><b>負債代理（股東-債權人）：</b>①資產替代（投資高風險案）；②投資不足/debt overhang（NPV>0 但利益只夠還債，股東拒絕）；③榨取資產（舉債發股利）；④債權稀釋（發同順位新債）。解法：限制條款、提高借款利率、發可轉債/附認股權公司債。</p>'},
+
+/* ---- 重點5 代理成本與公司治理 ---- */
+{ch:5,type:'mc',src:'台大財金',q:'有關代理成本，何者為誤？',opts:['股東-經理人間權益代理成本可藉發給認股權降低','股東-債權人間債權代理成本與舉債比率呈反向關係','一邊發股利一邊發新股，可藉承銷監督經理人並降低代理成本','管理人力市場運作也能降低代理問題'],ans:'(B)',exp:'債權代理成本與舉債比率應呈「正向」關係（舉債越多、負債代理越嚴重），非反向。'},
+{ch:5,type:'mc',src:'102 台大財金',q:'有關代理成本，何者為誤？',opts:['為減少代理成本，管理階層最好由大股東親自擔任','與經理人簽黃金降落傘可減少其抗拒併購的代理成本','一邊發股利一邊發新股可藉承銷監督經理人','自由現金流量假說：以股利減少經理人錯誤投資的代理成本'],ans:'(B)',exp:'依經理人鞏固假說，黃金降落傘等反併購條款會降低經理人被取代的威脅，反而使代理問題更嚴重。'},
+{ch:5,type:'mc',src:'東吳國貿',q:'何者可歸類為企業的「代理成本」？(A) 監督稽核重大投資的費用；(B) 設計合宜組織架構的費用；(C) 因架構限制而無法及時反應市場的機會成本；(D) 總經理固定薪外的認股權。',opts:['(A)(B)','(A)(B)(C)','(C)(D)','以上皆是'],ans:'(D)',exp:'(A)(B) 監控成本、(C) 機會成本（剩餘損失）、(D) 報償機制成本，皆屬代理成本。'},
+{ch:5,type:'mc',src:'清大計財',q:'Although dividends reduce funds available to pay bondholders, they can reduce agency costs by',opts:['定期發放','與債權人共享股利','降低自由現金流以減少特權消費','確定只有登記股東領股利'],ans:'(C)',exp:'多發股利降低 FCF，避免經理人拿閒置資金從事特權消費，降低權益代理成本。'},
+{ch:5,type:'mc',src:'成大財金',q:'Agency costs refer to',opts:['一輩子發給股東的股利總額','違約與破產的成本','被雙重課稅的所得','股東與管理階層利益衝突所生的成本','付給債權人的利息總額'],ans:'(D)',exp:'代理成本＝為解決股東與管理階層（或關係人間）利益衝突所生的直接＋間接成本。'},
+{ch:5,type:'mc',src:'朝陽財金',q:'Jensen & Meckling 的代理成本不含下列何者？',opts:['主理人的監督支出','代理人的保證（ bonding ）支出','剩餘損失','風險溢酬'],ans:'(D)',exp:'J&M 代理成本＝監督成本＋保證成本＋剩餘損失；風險溢酬不是。'},
+{ch:5,type:'mc',src:'政大/成大財金',q:'何者為代理成本？I. 放棄會增加股東權益市值的投資機會；II. 對現有股東發股利；III. 購買提高每股價值的新設備；IV. 聘外部查帳員驗證財報',opts:['II、III','I、III','I、IV','II、IV','I、II、IV'],ans:'(C)',exp:'I 經理人為保工作放棄 NPV>0 案（間接代理成本）；IV 外部審計是直接監督成本。II、III 為正常財務行為。'},
+{ch:5,type:'mc',src:'中正財金',q:'Shareholder agency costs include',opts:['監督管理行動的支出','經理人薪資','管理限制所生的機會成本','(A)(C)','以上皆是'],ans:'(D)',exp:'監督支出與機會成本皆屬；一般薪資（非績效紅利）不算代理成本。'},
+{ch:5,type:'mc',src:'政大金融',q:'關於代理成本，何者正確？I. 經理人為降低公司風險而放棄股東希望的投資，為間接成本；II. 經理人擔心飯碗仍採有利股價的風險投資，為間接成本；III. 經理人購買業主認為必要的資產，為直接成本；IV. 股東花錢監督經理人，為直接成本',opts:['I only','I、IV','IV only','I、III'],ans:'(B)',exp:'I（次佳投資）與 IV（主理人監督）正確；II、III 是經理人為股東利益的正常作為，無代理成本。'},
+{ch:5,type:'mc',src:'政大金融',q:'Corporate securities are contingent claims because',opts:['不直接對公司求償','公司可能被收購','其價值導自公司總價值','帳面價值可能為負'],ans:'(C)',exp:'股票與債券都是或有求償權（contingent claims），價值取決於公司總價值。'},
+{ch:5,type:'mc',src:'中正/清大/成大財金',q:'股東採取大風險、過度發股利等自利策略，會導致',opts:['債權人不聞不問','正的代理成本：債權人加諸各種限制與契約，損及公司價值','投資同風險等級計畫','從事規模擴張計畫','代理成本下降'],ans:'(B)',exp:'股東自利→債權人提高監督與限制條款、提高利率→代理成本上升、公司價值受損。'},
+{ch:5,type:'mc',src:'100 中正財金',q:'A risk-averse manager would',opts:['採極大股東財富的案','持續接受高於公司風險等級的案','持續接受遠低於公司期望風險的案','只接高風險案'],ans:'(C)',exp:'風險趨避的經理人為保工作，傾向低風險、低報酬的次佳投資決策。'},
+{ch:5,type:'mc',src:'102 清大計財',q:'（單複選）沙賓法案 Sarbanes-Oxley 的關鍵要求？',opts:['高階經理人須審閱簽署年報','經理人須持有 5% 以上股份','查帳會計師獨立性','限制內線交易','避免併購活動'],ans:'(A)(C)',exp:'SOX 後為加強公司治理：要求高階經理人簽屬財報、落實查帳會計師獨立。'},
+{ch:5,type:'mc',src:'104 成大財金',q:'公司破產時的絕對清償優先順序？',opts:['行政費用、薪資、政府稅款、債權人、股東','行政費用、薪資、政府稅款、股東、債權人','薪資、行政費用、債權人、政府稅款、股東','薪資、行政費用、債權人、股東、政府稅款'],ans:'(A)',exp:'絕對優先順序：破產行政費用 → 員工薪資 → 政府稅款 → 債權人 → 股東。'},
+{ch:5,type:'mc',src:'104 成大財金',q:'公司發更多債時：負債稅盾＿、負債代理成本（財務危機成本）＿、股權代理成本＿。',opts:['增；增；增','減；減；減','增；增；減','減；減；增','增；減；減'],ans:'(C)',exp:'發債↑→利息稅盾↑、財務危機（負債代理）成本↑、但 FCF 被壓縮使股權代理成本↓。'},
+
+/* ---- 重點6 現值與終值 ---- */
+{ch:6,type:'mc',src:'淡江財金',q:'1626 年 Peter Minuit 以 $24 買下曼哈頓，折現率 8%，到 2008 年值多少？',opts:['$666.345 兆','$140.633 兆','$103.368 億','$0.058 百萬'],ans:'(B)',exp:'FV=24×(1.08)^(2008−1626)=24×1.08^382≈$140.6 兆。'},
+{ch:6,type:'mc',src:'東吳國貿',q:'第 1/2/3 年初分別收 $100/$200/$300，年利 12%，第三年底的複合終值為？',opts:['$1,536','$672','$727','$1,245'],ans:'(C)',exp:'FV=100×1.12³+200×1.12²+300×1.12=140.496+250.88+336≈$727.37。'},
+{ch:6,type:'mc',src:'清大計財',q:'Mr. Crow 今年收入 $100、明年 0，利率 10%。今可投資 $50 明年回收 $70。今年消費 $20，明年可消費多少？',opts:['$88','$103','$80','$100'],ans:'(B)',exp:'今年剩餘 100−20−50=30，再借貸市場殖息：30×1.1+70=33+70=$103。'},
+{ch:6,type:'mc',src:'成大財金',q:'簽約金：現在 $1,000,000，或三年後 $1,250,000，可賺 7%。如何選？',opts:['選現在（PV 較低）','選現在（FV 較高）','選三年後（PV 較高）','選三年後（FV 較低）','無異'],ans:'(C)',exp:'$1,250,000 的 PV=1,250,000/1.07³≈$1,020,732>$1,000,000，故選三年後整筆（PV 較高）。'},
+{ch:6,type:'mc',src:'成大財金',q:'兩銀行都報 10% 三年，一單利、一複利。應？',opts:['選單利（利率相同）','選複利（報酬較高）','只有按月複利才選複利','只有一年複利多次才選單利','投資小於 $5000 才選複利'],ans:'(B)',exp:'其他條件不變，複利本利和一定高於單利。'},
+{ch:6,type:'tf',src:'台大財金',q:'年利率相同下，三個月複利一次比半年複利一次利息多。',ans:'True',exp:'複利頻率愈高，有效年利率（EAR）愈高、利息愈多。'},
+{ch:6,type:'mc',src:'朝陽財金',q:'計算現值所用的折現報酬率又稱？',opts:['機會成本','門檻率 hurdle rate','折現率','以上皆是'],ans:'(D)',exp:'折現率＝資金機會成本＝門檻率＝資本化率，名異實同。'},
+{ch:6,type:'mc',src:'中正財金',q:'十年後 $1,000,000，年利 6%，現值約？',opts:['625,484','601,941','558,395','578,457','以上皆非'],ans:'(C)',exp:'PV=1,000,000/(1.06)^10≈$558,395。'},
+{ch:6,type:'mc',src:'中正財金',q:'一年期現值因子 PVIF=0.75，機會成本為？',opts:['25%','33%','75%'],ans:'(B)',exp:'PVIF=1/(1+r)=0.75 → r=1/0.75−1=33.33%。'},
+{ch:6,type:'mc',src:'東吳國貿',q:'All else equal：I. 折現率↑則 PV↑；II. 時間愈遠 PV 愈大；III. 利率與年數皆正時 PV 恆小於 FV。',opts:['I','I、II','II','III','II、III'],ans:'(D)',exp:'I 錯（折現率↑PV↓）；II 錯（愈遠 PV 愈小）；III 對。'},
+{ch:6,type:'mc',src:'東吳國貿',q:'四年後收 $100，折現率 5% 年複利，請問「兩年後」這筆 $100 的現值？',opts:['$67.68','$68.30','$82.27','$82.64','$90.70'],ans:'(E)',exp:'從兩年後看，現值=100/(1.05)^2=$90.70。'},
+{ch:6,type:'mc',src:'高考',q:'退休金：甲現在一次領 200 萬；乙現在 100 萬＋一年後 105 萬；丙每年領 19 萬終身（一年後起）。折現率 10%，選？',opts:['甲','乙','丙','都一樣'],ans:'(A)',exp:'甲=200；乙=100+105/1.1=195.45；丙（永續）=19/0.1=190。甲最高。'},
+{ch:6,type:'mc',src:'高大金管',q:'模型飛機現值 $1,500、年漲 7%。等 5 年賣比 3 年賣多賺多少？',opts:['$266.26','$258.14','$271.29','$264.50','$238.95'],ans:'(A)',exp:'1500×1.07⁵−1500×1.07³=1500×(1.4026−1.2250)≈$266.26。'},
+{ch:6,type:'mc',src:'高第一財管',q:'幼兒園學費現 $12,000/年（學年初付），預期每年漲 6%、利率 6%，讀到高中共 13 年，現值約？',opts:['$106,230','$156,000','$137,900','無法求解'],ans:'(B)',exp:'成長率＝折現率＝6%，各年學費現值皆為 $12,000，故總 PV=12,000×13=$156,000。'},
+{ch:6,type:'mc',src:'暨南財金',q:'Katie 三年後收 $1000、Wilt 五年後收 $1000，折現率皆 5%。何者正確？',opts:['兩人現值相等','六年後 Wilt 價值較大','今天 Wilt 較值錢','五年後兩者相等','今天 Katie 較值錢'],ans:'(E)',exp:'Katie 先收到錢，任何時點折算都比 Wilt 大，今天 Katie 較值錢。'},
+{ch:6,type:'mc',src:'暨南財金',q:'本金與前期再投資利息都計息，稱為＿利息。',opts:['free','annual','simple','interest on','compound'],ans:'(E)',exp:'此即複利（compound interest）。'},
+{ch:6,type:'mc',src:'103 中正財金',q:'現在要存多少（年利 6%），一年後才能付一輛 $20,000、通膨 4% 車的 20% 頭期款？',opts:['$3,774','$3,782','$3,925','$4,080'],ans:'(C)',exp:'一年後車價=20,000×1.04=20,800，頭期款=20,800×0.2=4,160；今存=4,160/1.06≈$3,925。'},
+{ch:6,type:'mc',src:'100 雲科大財金',q:'$1,000 投資股票 20 年，名目 11%、實質 4%。屆時組合價值約？',opts:['實質 $1,800','實質 $3,679','名目 $3,870','名目 $8,062'],ans:'(D)',exp:'名目=1000×1.11^20≈$8,062；實質=1000×1.04^20≈$2,191。'},
+{ch:6,type:'mc',src:'成大財金',q:'銷售額從 $100 萬以年複利 9% 成長，幾年變 $200 萬？',opts:['8','7','10','10.1'],ans:'(A)',exp:'72 法則：72/9=8 年（精確 ln2/ln1.09≈8.04 年）。'},
+{ch:6,type:'mc',src:'107 清大計財',q:'成長永續年金 X、Y 初值皆 $100、利率 r 相同。X 的 PV=$5000、Y 的 PV=$4000。何者正確？',opts:['X 成長率較高','X 成長率較低','不知 r 無法判斷','初值與 r 相同則 PV 必相同'],ans:'(A)',exp:'成長永續 PV=CF₁/(r−g)；CF、r 相同時，PV 愈高表示 g 愈大，故 X 成長率較高。'},
+
+/* ---- 重點7 年金 ---- */
+{ch:7,type:'mc',src:'政大財管',q:'$150,000 房貸、年利 6%、20 年等額月付，每月繳多少？',opts:['$1,074.65','$1,254.70','$1,263.06','$1,375.00'],ans:'(C)',exp:'月利率 0.5%、240 期：PMT=150000/PVIFA(0.5%,240)≈$1,263.06。'},
+{ch:7,type:'mc',src:'政大財管',q:'N 期「期初年金（annuity due）」價值＝普通年金價值×＿期＿因子。',opts:['N、終值','N、現值','N+1、終值','1、終值'],ans:'(D)',exp:'期初年金＝普通年金×(1+期利率)，即乘上「1 期終值因子」。'},
+{ch:7,type:'mc',src:'元智財金',q:'從今天起兩年後開始、為期 4 年、每年 $200 的年金，折現率 9%，現值？',opts:['$594.44','$647.94','$706.26','$713.70','$545.36'],ans:'(C)',exp:'第 2 年初（=第 1 年底）起算：先算普通年金 PV 再折回，≈$706.26。'},
+{ch:7,type:'mc',src:'東吳財工',q:'何者為所有永續年金（perpetuity）的特性？I. PV=首期÷年有效利率；II. 永遠支付；III. 每期付款＝本金所生利息',opts:['I only','II only','III only','I、II、III'],ans:'(D)',exp:'三者皆為永續年金特性：PV=PMT/r、無限期支付、每期金額＝本金生息。'},
+{ch:7,type:'mc',src:'東吳國貿',q:'$20,000 永續年金、折現率 7%，現值？',opts:['$186,915','$285,714','$140,000','$325,000'],ans:'(B)',exp:'PV=20,000/0.07≈$285,714。'},
+{ch:7,type:'mc',src:'元智財金',q:'40 年期證券：前 3 年每年底付 $25，接續 20 年每年 $30；名目利率 8%，現價 $360.39。第 24–40 年（17 年）每年等額付多少？',opts:['$35','$38','$40','$45','$50'],ans:'(C)',exp:'以 $360.39 減去前段現值，反推後段年金≈$40。'},
+{ch:7,type:'mc',src:'高大金管',q:'普通年金與期初年金（期數、利率、票面相同）的關係？',opts:['普通年金終值＝期初年金終值×(1+期利率)','普通年金終值＝期初年金終值÷(1+期利率)','普通年金現值＝期初年金現值×(1+期利率)','普通年金現值＝期初年金現值÷期利率'],ans:'(B)',exp:'期初年金＝普通年金×(1+r)，故普通年金＝期初年金÷(1+r)。'},
+{ch:7,type:'mc',src:'清大計財',q:'30 年期、年付房貸、利率 6%、年付 $1,200。已住 12 年、在第 12 期「到期前」一次償清，應還多少？',opts:['$13,390','$12,993','$14,193','$8,832','$12,573'],ans:'(A)',exp:'「第 12 期到期前」表示尚有 18 期未付（第 13–30 期），應還＝剩餘 18 期 $1,200 的現值≈$13,390。'},
+{ch:7,type:'mc',src:'東吳國貿',q:'何者「不是」年金？',opts:['固定利率房貸攤還','車貸月付','每年 1/2 領 $50,000 樂透','每月初扣 $100 定存','每月領 $1,200 但每年元月隨物價調整的退休金'],ans:'(E)',exp:'年金須為「固定金額、固定期間」的現金流；隨物價調整者金額變動，非年金。'},
+{ch:7,type:'mc',src:'東吳國貿',q:'每期現金流量發生在「期初」的年金稱為？',opts:['perpetuity','deferred annuity','annuity due','以上皆非'],ans:'(C)',exp:'期初年金＝annuity due（相對於期末 ordinary annuity）。'},
+{ch:7,type:'mc',src:'高考',q:'五年期年金、每期 $1,000、利率 10%、第一次付款在今天，總現值約？',opts:['$3,169.87','$3,790.79','$4,169.87','$4,790.79'],ans:'(C)',exp:'期初年金：PV=1000×PVIFA(10%,5)×1.1≈$4,169.87。'},
+{ch:7,type:'mc',src:'東海財金',q:'四年後創業，何者四年後錢最多？(A) 今存 10 萬、利率 8%；(B) 四年後給 12.5 萬；(C) 今起四年每年底存 3 萬、利率 8%；(D) 今起四年每年初存 2.8 萬、利率 8%',opts:['A','B','C','D'],ans:'(C)',exp:'分別算終值：A=10萬×1.08⁴≈13.6 萬；B=12.5 萬；C=3萬×FVIFA(8%,4)≈13.5 萬（再計息後最高）；D=2.8萬×(1.08⁴−1)/0.08×1.08。C 最高。'},
+
+/* ---- 重點8 各種貸款種類 ---- */
+{ch:8,type:'mc',src:'政大財管',q:'林先生 10 年期、每年底還 20 萬、年利率 10%。改為 15 年後，每年底應還多少？',opts:['158,220','160,660','161,570','162,340'],ans:'(C)',exp:'貸款本金=20萬×PVIFA(10%,10)；新 PMT=本金/PVIFA(10%,15)=161,569.89 元。'},
+{ch:8,type:'mc',src:'成大財金',q:'$1.2M 買屋、自備 20%、15 年月付、APR 7.75% 月複利，每月房貸攤還額？',opts:['$7,440.01','$8,978.26','$9,036.25','$9,399.18','$9,413.67'],ans:'(C)',exp:'貸款額=1.2M×0.8=$960,000；月利率 7.75%/12、180 期，PMT≈$9,036.25。'},
+{ch:8,type:'mc',src:'成大財金',q:'借 $5,600 購車、4 年按月攤還、利率 5.9%，每月付多少？',opts:['$103.22','$103.73','$130.62','$131.26','$133.04'],ans:'(D)',exp:'月利率 5.9%/12、48 期，PMT≈$131.26。'},
+{ch:8,type:'mc',src:'中原國貿',q:'借 80,000 元、25 年每年還 7,494.3 元，利率約？',opts:['6%','8%','10%','7%'],ans:'(B)',exp:'以 PVIFA 反推 r≈8%。'},
+{ch:8,type:'mc',src:'元智財金',q:'$10,000 五年年付攤還。何者最正確？',opts:['利率越低年付越大','10 年攤還比 5 年的首期利息多','最後一期利息比例比首期高','每期利息/本金比例相同','利率越高，每期付款中利息占比越高'],ans:'(E)',exp:'利率越高、每期付款裡利息占比越高。首期利息＝本金×利率（與年限無關）；隨期數推移利息占比遞減、本金占比遞增。'},
+{ch:8,type:'mc',src:'成大財金',q:'借 $10,000、5 年年付、利率 9%。四年後貸款餘額？',opts:['2,230.48','2,000.00','2,358.64','2,498.45','以上皆非'],ans:'(C)',exp:'PMT=10000/PVIFA(9%,5)≈2,570.92；第 4 年底尚欠＝再還 1 期的現值=2570.92/1.09≈$2,358.65。'},
+{ch:8,type:'mc',src:'輔大金融',q:'甲貸 1000 萬、利率 9%、月繳 9 萬。距到期還有 10 年的今天，已還多少本金？',opts:['289.5 萬','410.2 萬','834.1 萬','554.2 萬','以上皆非'],ans:'(A)',exp:'先算剩餘 120 期月繳的現值（尚欠餘額）≈710.5 萬；已還本金=1000−710.5≈289.5 萬。'},
+{ch:8,type:'mc',src:'100 師大管研',q:'30 年（360 期）$100,000 固定利率房貸。何者最正確？',opts:['三年後餘額=100,000 減前 36 月已付利息總額','每月付款中「還本金」的比例 10 年後比今年高','月付款額隨時間遞減','以上皆對','以上皆錯'],ans:'(B)',exp:'攤還貸款每期定額付款，「還本金」比例隨時間逐期提高、利息比例遞減。餘額應減「已還本金」而非已付利息。'},
+{ch:8,type:'mc',src:'108 成大財金',q:'30 年按月攤還、名目利率 10% 的房貸，何者正確？',opts:['月付款額隨時間增加','首期付款中利息占比高於末期','愈近到期，每月償還的利息總額愈多','名目利率 7% 的首期利息比 10% 高','首期付款正好有 10% 是利息'],ans:'(B)',exp:'首期絕大多數是利息、末期絕大多數是本金；愈近到期每月償還利息愈少。'},
+];
+
+/* ============ 狀態與渲染 ============ */
+const KEY='fm-quiz-v1';
+let state=JSON.parse(localStorage.getItem(KEY)||'{}');
+function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+const typeName={tf:'是非',mc:'選擇',essay:'問答',calc:'計算'};
+let curCh=1, curType='all', curQ='', onlyUndone=false;
+
+function renderTOC(){
+  const toc=document.getElementById('toc');
+  let h='';
+  CHAPTERS.forEach(sec=>{
+    h+=`<h4>${sec.p}</h4>`;
+    sec.items.forEach(it=>{
+      const n=Q.filter(q=>q.ch===it.id).length;
+      h+=`<a data-ch="${it.id}" class="${curCh===it.id?'active':''}">${it.ch}${n?`<span class="cnt">${n}</span>`:' <span class="cnt" style="opacity:.5">規劃中</span>'}</a>`;
+    });
+  });
+  toc.innerHTML=h;
+  toc.querySelectorAll('a').forEach(a=>a.onclick=()=>{curCh=+a.dataset.ch;renderAll();window.scrollTo({top:0});});
+}
+
+function qcardHTML(q,i){
+  const id='q'+i;
+  const done=!!state[id];
+  let opts='';
+  if(q.opts) opts='<div class="opts">'+q.opts.map((o,j)=>`<div>(${String.fromCharCode(65+j)}) ${o}</div>`).join('')+'</div>';
+  return `<div class="qcard ${done?'done':''}" data-id="${id}">
+    <div class="head">
+      <span class="num">${i+1}</span>
+      <span class="tag ${q.type}">${typeName[q.type]}</span>
+      <span class="src">${q.src}</span>
+    </div>
+    <div class="body">
+      <p>${q.q}</p>
+      ${opts}
+      <button class="toggle" onclick="var a=document.getElementById('a${id}');a.classList.toggle('show');this.textContent=a.classList.contains('show')?'▲ 隱藏解答':'▶ 顯示解答'">▶ 顯示解答</button>
+      <div class="ans" id="a${id}">
+        <p><span class="anskey">答案：${q.ans}</span></p>
+        ${q.exp||''}
+      </div>
+    </div>
+    <div style="padding:0 18px 14px">
+      <span class="mark" onclick="mark('${id}')">${done?'✓ 已熟':'○ 標為已熟'}</span>
+    </div>
+  </div>`;
+}
+
+function renderQuiz(){
+  const area=document.getElementById('quizArea');
+  const list=Q.filter((q,i)=>q.ch===curCh);
+  const chInfo=CHAPTERS.flatMap(s=>s.items).find(x=>x.id===curCh);
+  if(!chInfo||!chInfo.done){
+    area.innerHTML=`<h2 class="sec">${chInfo?chInfo.ch:''}<span class="en">${chInfo?chInfo.en:''}</span></h2><div class="upcoming">此重點題目製作中。<br>目前已完成 <b>重點 1 · 企業組織</b>，點左側前往。</div>`;
+    updateProg();
+    return;
+  }
+  const filt=list.filter((q,i)=>{
+    const gi=Q.indexOf(q);
+    if(curType!=='all'&&q.type!==curType) return false;
+    if(onlyUndone&&state['q'+gi]) return false;
+    if(curQ){const hay=(q.q+(q.opts||[]).join(' ')+q.ans+q.src).toLowerCase();if(!hay.includes(curQ.toLowerCase()))return false;}
+    return true;
+  });
+  let h=`<h2 class="sec">${chInfo.ch}<span class="en">${chInfo.en}</span></h2><p class="lead">本重點共 ${list.length} 題（是非 ${list.filter(x=>x.type==='tf').length}、選擇 ${list.filter(x=>x.type==='mc').length}、問答 ${list.filter(x=>x.type==='essay').length}、計算 ${list.filter(x=>x.type==='calc').length}）。先自己作答，再點「顯示解答」。</p>`;
+  h+=filt.length?filt.map(q=>qcardHTML(q,Q.indexOf(q))).join(''):'<div class="empty">此條件下沒有題目。</div>';
+  area.innerHTML=h;
+}
+function mark(id){state[id]=!state[id];save();renderQuiz();updateProg();}
+function updateProg(){
+  const total=Q.length;
+  const done=Q.filter((q,i)=>state['q'+i]).length;
+  document.getElementById('pc').textContent=done;
+  document.getElementById('pct').textContent=total;
+  document.getElementById('pctxt').textContent=total?Math.round(done/total*100)+'%':'';
+  document.getElementById('pcbar').style.width=(total?done/total*100:0)+'%';
+}
+function renderAll(){renderTOC();renderQuiz();updateProg();}
+
+/* 工具列事件 */
+document.getElementById('typeChips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  document.querySelectorAll('#typeChips .chip').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');curType=b.dataset.t;renderQuiz();
+});
+document.getElementById('search').addEventListener('input',e=>{curQ=e.target.value;renderQuiz();});
+document.getElementById('onlyUndone').addEventListener('change',e=>{onlyUndone=e.target.checked;renderQuiz();});
+/* 頂部滾動進度 */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100;
+  document.getElementById('progressbar').style.width=p+'%';
+});
+renderAll();
+</script>
+</body>
+</html>
