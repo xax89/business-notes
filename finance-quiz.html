@@ -73,10 +73,14 @@ h2.sec .en{display:block;font-size:12.5px;font-family:"Noto Sans TC";font-weight
 .ans.show{display:block}
 .ans .anskey{color:var(--accent);font-weight:700}
 .ans p{margin:6px 0}
-.qactions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;padding:0 18px 14px}
-.mark{font-family:"Noto Sans TC";font-size:15px;line-height:1;cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:50%;width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink-soft);user-select:none}
-.mark.done.on{background:var(--teal);color:#fff;border-color:var(--teal)}
-.mark.fav.on{background:var(--gold);color:#fff;border-color:var(--gold)}
+.qactions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;padding:0 18px 16px}
+.mark{font-family:"Noto Serif TC",serif;font-size:16px;line-height:1;cursor:pointer;border:1.5px solid var(--line);background:#fbf7ee;border-radius:10px;width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink-soft);user-select:none;transition:all .18s ease;box-shadow:0 1px 0 rgba(120,80,40,.06)}
+.mark:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(120,80,40,.12)}
+.mark:active{transform:translateY(0);box-shadow:0 1px 0 rgba(120,80,40,.06)}
+.mark.done{border-color:#c8b89a;color:#9a8a6a}
+.mark.done.on{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:0 3px 10px rgba(47,93,98,.35)}
+.mark.fav{border-color:#c8b89a;color:#9a8a6a}
+.mark.fav.on{background:var(--gold);color:#fff;border-color:var(--gold);box-shadow:0 3px 10px rgba(180,130,40,.35)}
 .empty{padding:40px;text-align:center;color:var(--ink-soft);font-family:"Noto Sans TC"}
 .upcoming{background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:28px;text-align:center;color:var(--ink-soft);font-family:"Noto Sans TC";font-size:14px}
 
@@ -98,7 +102,7 @@ footer{max-width:1180px;margin:0 auto;padding:18px 24px;font-family:"Noto Sans T
     <div class="kicker">研究所刷題 · Solved Problems in Financial Management</div>
     <h1>財務管理實戰 題庫</h1>
     <div class="sub">張翔 編《財務管理學實戰 BOOK》上、下冊 · 是非／選擇／問答／計算</div>
-    <div class="meta">點「顯示解答」核對、點「已熟」標記，進度存於本機瀏覽器。首版完成重點 1，其餘重點陸續填入。</div>
+    <div class="meta">點「顯示解答」核對、點 ✓ 標為做過、點 ☆ 收藏，進度存於本機瀏覽器。</div>
   </div>
 </header>
 
@@ -123,7 +127,7 @@ footer{max-width:1180px;margin:0 auto;padding:18px 24px;font-family:"Noto Sans T
 </div>
 
 <div class="progress-wrap">
-  <div>已熟 <b id="pc">0</b> / <b id="pct">0</b> 題　<span id="pctxt"></span></div>
+  <div>做過 <b id="pc">0</b> / <b id="pct">0</b> 題　<span id="pctxt"></span></div>
   <div class="bar"><i id="pcbar"></i></div>
 </div>
 
@@ -1278,8 +1282,8 @@ function qcardHTML(q,i){
       </div>
     </div>
     <div class="qactions">
-      <span class="mark fav ${fav?'on':''}" title="${fav?'取消收藏':'收藏'}" onclick="toggleFav('${id}')">${fav?'⭐':'☆'}</span>
-      <span class="mark done ${done?'on':''}" title="${done?'取消已熟':'標為已熟'}" onclick="mark('${id}')">${done?'☑️':'☐'}</span>
+      <span class="mark fav ${fav?'on':''}" title="${fav?'取消收藏':'收藏'}" onclick="toggleFav('${id}')">${fav?'★':'☆'}</span>
+      <span class="mark done ${done?'on':''}" title="${done?'取消做過':'標為做過'}" onclick="mark('${id}')">${done?'✓':'○'}</span>
     </div>
   </div>`;
 }
