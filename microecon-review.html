@@ -403,7 +403,7 @@ const BOOK = [
   {n:2, title:"需求", subs:["2.1 需求函數與市場需求","2.2 需求價格彈性","2.3 需求價格彈性對消費者支出的影響","2.4 交叉彈性","2.5 需求量與所得的關係","2.6 影響需求價格彈性的因素"], done:true, points:["需求的成立：願意＋能夠，且其他情況不變（流量變數）","需求法則：價格與需求量反向變動；需求量變動＝線上點移動，需求變動＝整條線移動","市場需求＝個別需求水平加總；違反需求法則：炫耀性財貨與季芬財","需求價格彈性：點彈性、弧彈性（中點法）、幾何彈性（直線五區段）","總支出與彈性：|ε|>1 反向、=1 不變、<1 同向","交叉彈性：>0 替代、<0 互補、=0 無關；所得彈性：>0 正常（必需/地位/奢侈）、<0 劣等、=0 中性","恩格爾法則與加總定理；影響彈性六因素"]},
   {n:3, title:"供給", subs:["3.1 供給函數與市場供給","3.2 供給價格彈性與其他相關彈性"], done:true, points:["供給定義：特定期間＋其他情況不變＋願意且能夠；供給法則：價格與供給量同向","供給量變動＝線上點移動；供給變動＝整條線移動（技術、要素價格、預期、相關財價格、人數）","生產上互補品（聯產品）與替代品（要素搶奪）區分","供給價格彈性：點／弧彈性；直線五型（縱軸&gt;1、橫軸&lt;1、原點=1、垂直=0、水平=∞）","影響供給彈性：投入用途、成本敏感度、技術、規模、時間、保存容易度、定義範圍"]},
   {n:4, title:"市場均衡分析", subs:["4.1 市場均衡","4.2 消費者與生產者剩餘及社會福利分析","4.3 政府介入對社會福利的影響","4.4 政府介入市場的其他手段","4.5 羅西法則與租稅轉嫁"], done:true, points:["市場均衡＝供給量＝需求量（市場結清）；ED/ES 由價格機能調整回均衡","比較靜態：需求右移P↑Q↑、供給右移P↓Q↑；供需同移→數量確定價格看幅度","CS=需求線下價格線上、PS=價格線下供給線上；SW=CS+PS","從量稅：對消費者課稅需求線下移、對生產者課稅供給線上移；課稅補貼都會造成DWL","價格上限→超額需求、價格下限→超額供給；管制對象剩餘一增一減不確定","羅西法則：彈性大課低稅、彈性小課高稅；租稅轉嫁＝彈性小的一方負擔多"]},
-  {n:5, title:"數列效用分析", subs:["5.1 前言","5.2 總效用與邊際效用","5.3 消費者均衡","5.4 需求曲線的求導","5.5 鑽石與水的矛盾"], done:false, points:[]},
+  {n:5, title:"數列效用分析", subs:["5.1 前言","5.2 總效用與邊際效用","5.3 消費者均衡","5.4 需求曲線的求導","5.5 鑽石與水的矛盾"], done:true, points:["數列效用可度量可比較；序列效用只排序（無異曲線分析）","TU 上升後下降、MU 遞減；MU>0 喜好品、=0 中性品、<0 厭惡品","消費者均衡＝邊際效用均等法則：MUx/Px = MUy/Py = MUm","需求曲線由 P = MU/MUm 導出；MU 遞減越快需求彈性越小","鑽石與水：價格由邊際效用決定、價值由總效用決定"]},
   {n:6, title:"消費者行為理論", subs:["6.1 消費者偏好基本公理","6.2 效用函數","6.3 常用偏好結構與預算線","6.4 消費者均衡與計算","6.5 對偶性理論","6.6 全章考試總複習清單"], done:false, points:[]},
   {n:7, title:"比較靜態與需求函數", subs:["7.1 替代效果與所得效果","7.2 普通與受補償需求曲線","7.3 所得與價格消費曲線","7.4 史勒斯基方程式"], done:false, points:[]},
   {n:8, title:"消費者行為理論的應用", subs:["8.1 補貼或課稅對消費者之影響","8.2 勞動與休閒的選擇","8.3 跨期消費理論","8.4 顯示性偏好理論","8.5 皮氏與拉氏指數"], done:false, points:[]},
@@ -523,6 +523,15 @@ const TERMS = {
 "Rent-seeking":["Rent-seeking","尋租行為","經濟個體為了賺取經濟租，利用既有利益或不正當行為取得特權。"],
 "Ramsey rule":["Ramsey rule","羅西法則（倒需求彈性法則）","使各財貨課稅後無謂損失相同：需求彈性大的商品課低稅率、彈性小的課高稅率。"],
 "Tax incidence":["Tax incidence","租稅歸宿","租稅經市場均衡後最終形成的實際負擔；法定歸宿≠經濟歸宿。"],
+"Utility":["Utility","效用","消費某項商品時的滿足程度；數列效用視為可度量，序列效用僅能排序。"],
+"Total utility":["Total utility","總效用 (TU)","其他情況不變，特定數量財貨消費帶來的滿足程度總和。"],
+"Marginal utility":["Marginal utility","邊際效用 (MU)","其他情況不變，額外增加一單位財貨消費帶來的滿足程度增加額；MU = dTU/dQ。"],
+"Law of diminishing marginal utility":["Law of diminishing marginal utility","邊際效用遞減法則","消費持續增加使邊際效用隨之遞減；總效用曲線為斜率遞減的曲線。"],
+"Consumer equilibrium":["Consumer equilibrium","消費者均衡","預算限制下效用最大的條件：MU<sub>x</sub>/P<sub>x</sub> = MU<sub>y</sub>/P<sub>y</sub> = MU<sub>m</sub>（邊際效用均等法則）。"],
+"Marginal utility of money":["Marginal utility of money","貨幣的邊際效用 (MU<sub>m</sub>)","增加一單位貨幣持有量使總效用增加的幅度；扮演將貨幣轉換為效用的角色。"],
+"Paradox of value":["Paradox of value","價值的矛盾（鑽石與水的矛盾）","亞當斯密提出：水總效用高但價格低、鑽石總效用低但價格高；價格由邊際效用決定、價值由總效用決定。"],
+"Cardinal utility":["Cardinal utility","數列效用分析","效用可以衡量運算、數字有意義、跨人可比較；使用邊際效用分析法。"],
+"Ordinal utility":["Ordinal utility","序列效用分析","效用為主觀只能排序、值本身無意義；使用無異曲線分析法。"],
 };
 
 
@@ -1417,8 +1426,154 @@ const CH4_PROBLEMS = [
 },
 ];
 
-const CH5_SECTIONS = [];
-const CH5_PROBLEMS = [];
+const CH5_SECTIONS = [
+{
+  id:"5.1", title:"前言",
+  body:`
+  <p>消費者為什麼消費？因為消費帶來滿足感。經濟學家以<b><span class="term" data-term="Utility">效用（Utility）</span></b>度量滿足程度；商品組合稱為<b>商品籃（A basket of commodities）</b>，如 X = (2, 3)。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
+    <thead><tr><th></th><th>數列效用分析（Cardinal）</th><th>序列效用分析（Ordinal）</th></tr></thead>
+    <tbody>
+      <tr><td>效用度量</td><td>可以衡量運算、數字有意義、跨人可比較</td><td>只能排序、值本身無意義、不可跨人比較</td></tr>
+      <tr><td>分析方法</td><td>邊際效用分析法（第 5 章）</td><td>無異曲線分析法（第 6–8 章）</td></tr>
+      <tr><td>前提</td><td>效用客觀可測（過分天馬行空）</td><td>效用主觀，靠偏好公理找對應效用函數</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：序列效用下效用值只在「同一個消費者」內排序，不同消費者的效用不能加總。</div>`
+},
+{
+  id:"5.2", title:"總效用與邊際效用",
+  body:`
+  <p><b><span class="term" data-term="Total utility">總效用（Total Utility, TU）</span></b>：其他情況不變，特定數量財貨消費帶來的滿足程度總和。TU = f(Q)（一項商品）或 U(x, y)（兩項以上）。</p>
+  <p><b><span class="term" data-term="Marginal utility">邊際效用（Marginal utility, MU）</span></b>：其他情況不變，額外增加一單位財貨消費帶來的滿足程度增加額。</p>
+  <div class="mc-formula">離散型：MU = ΔTU/ΔQ；連續型：MU = dTU/dQ（＝總效用曲線切線斜率）</div>
+  <p><b><span class="term" data-term="Law of diminishing marginal utility">邊際效用遞減法則</span></b>：消費持續增加，邊際效用隨之遞減（MU′ &lt; 0）→ 總效用曲線為斜率遞減的曲線。</p>
+  <div class="svgfig">
+  <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+    <line x1="40" y1="230" x2="400" y2="230" stroke="#3a3126" stroke-width="1.6"/>
+    <line x1="40" y1="230" x2="40" y2="20" stroke="#3a3126" stroke-width="1.6"/>
+    <text x="385" y="222" font-size="13">Q</text><text x="18" y="28" font-size="13">TU</text>
+    <path d="M60 220 Q 200 60 350 55" fill="none" stroke="#2f5d62" stroke-width="2.4"/>
+    <text x="330" y="48" font-size="13" fill="#2f5d62">TU</text>
+    <line x1="200" y1="230" x2="200" y2="62" stroke="#b45309" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="205" y="245" font-size="12" fill="#b45309">Q₀（MU=0，TU 最大）</text>
+    <text x="60" y="215" font-size="12" fill="#8a7f6d">MU&gt;0 喜好品</text>
+    <text x="280" y="110" font-size="12" fill="#8a7f6d">MU&lt;0 厭惡品</text>
+  </svg>
+  </div>
+  <p>MU &gt; 0（TU 上升）→ <b>喜好品（Goods）</b>；MU = 0（TU 最大）→ <b>中性品（Neutrals）</b>；MU &lt; 0（TU 下降）→ <b>厭惡品（Bads）</b>。理性消費者消費到 MU = 0 為止。</p>
+  <div class="warn">考試重點：邊際效用遞減法則的含義＝總效用的「變化率」遞減（rate of change of total utility is diminishing），不是總效用本身遞減。</div>`
+},
+{
+  id:"5.3", title:"消費者均衡",
+  body:`
+  <p><b>消費者均衡</b>：消費者在預算限制下達到效用最大的條件——花最後一塊錢在每個財貨上的邊際效用都相同，稱<b>邊際效用均等法則</b>（Equimarginal principle）。</p>
+  <div class="method-card mc-title" data-mc="consumer-equilibrium">
+    <div class="mc-check"><input type="checkbox" id="mc-ch5-1" data-mc="consumer-equilibrium"><label for="mc-ch5-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">消費者均衡</div>
+    <div class="mc-body">
+      <div class="mc-formula">MU<sub>x</sub>/P<sub>x</sub> = MU<sub>y</sub>/P<sub>y</sub> = … = MU<sub>m</sub>（貨幣的邊際效用）且 P<sub>x</sub>·x + P<sub>y</sub>·y = M</div>
+      <div class="mc-detail">MU<sub>m</sub>＝增加一單位貨幣持有使總效用增加的幅度，扮演將貨幣轉換為效用的角色。若 MU<sub>x</sub>/P<sub>x</sub> &gt; MU<sub>y</sub>/P<sub>y</sub> → 多消費 x、少消費 y。</div>
+      <div class="mc-ex">例子：MU<sub>草莓</sub>/P<sub>草莓</sub> = 200/1 = 200 &gt; MU<sub>奶油</sub>/P<sub>奶油</sub> = 200/2 = 100 → 應多買草莓、少買奶油。</div>
+    </div>
+  </div>
+  <p><b>不均衡的調整</b>：MU<sub>x</sub>/P<sub>x</sub> &gt; MU<sub>y</sub>/P<sub>y</sub> → 多消費 x（利得 &gt; 代價）；反之少消費 x。</p>
+  <div class="warn">考試重點：消費者均衡時，每塊錢的邊際效用（MU per dollar）在各商品間相同——不是各商品邊際效用相同（例題 5.4）。</div>`
+},
+{
+  id:"5.4", title:"需求曲線的求導",
+  body:`
+  <p>由邊際效用均等法則可導出需求曲線（需求表）：</p>
+  <div class="method-card mc-title" data-mc="demand-derive">
+    <div class="mc-check"><input type="checkbox" id="mc-ch5-2" data-mc="demand-derive"><label for="mc-ch5-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">需求曲線求導</div>
+    <div class="mc-body">
+      <div class="mc-formula">MU<sub>x</sub>/P<sub>x</sub> = MU<sub>m</sub> → P<sub>x</sub> = MU<sub>x</sub>/MU<sub>m</sub>（假設 MU<sub>m</sub> 為常數）</div>
+      <div class="mc-detail">各數量下的最高願付價格（需求價格）＝邊際效用除以貨幣邊際效用；連接各點即為需求曲線。MU 遞減 → 願付價格等比下降 → 需求曲線負斜率。需求線上每一點皆滿足消費者均衡。</div>
+      <div class="mc-ex">例子：MU<sub>m</sub> = 2，第 3 單位 MU = 3 → 最高願付 P = 3/2 = 1.5 元。</div>
+    </div>
+  </div>
+  <p><b>結論</b>：</p>
+  <ul>
+    <li>邊際效用遞減越快 → 需求曲線越陡 → 需求彈性越小（例題 5.9）</li>
+    <li>需求曲線是負斜率，並不保證邊際效用遞減（需求曲線可由其他原因呈負斜率）</li>
+    <li>若 MU<sub>m</sub> = 1，需求曲線與邊際效用曲線重合</li>
+  </ul>`
+},
+{
+  id:"5.5", title:"鑽石與水的矛盾",
+  body:`
+  <p><b>鑽石與水的矛盾</b>（又稱價值的矛盾 Paradox of value），由<span class="proper">亞當斯密（Adam Smith）</span>提出：水是人類必需品但價格低、鑽石非必需卻昂貴。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:26%"><col style="width:26%"><col style="width:26%"></colgroup>
+    <thead><tr><th></th><th>數量</th><th>總效用（價值）</th><th>邊際效用（價格）</th></tr></thead>
+    <tbody>
+      <tr><td>水</td><td>多</td><td>高</td><td>低</td></tr>
+      <tr><td>鑽石</td><td>少</td><td>低</td><td>高</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>核心結論</b>：價格高低取決於<b>邊際效用</b>；價值（使用價值）高低取決於<b>總效用</b>。水數量多 → 邊際效用低 → 價格低，但總效用高 → 使用價值高。</p>
+  <div class="warn">考試重點：價格由邊際效用決定，而非總效用（例題 5.10、5.11）。</div>`
+},
+];
+
+const CH5_PROBLEMS = [
+{
+  q:"Mary notices that the marginal utility of working with a tutor seems to fall with each hour the tutor helps her study. If Mary keeps the tutor until her grade actually begins to fall, her marginal utility will be （書本例題 5.1）",
+  opts:["(A) positive, but rising more slowly","(B) zero","(C) negative","(D) immeasurable"],
+  ans:"<b>(C) negative。</b><ul><li>成績開始下降 → 再多一小時的效用為負（邊際效用 &lt; 0）</li></ul>"
+},
+{
+  q:"The law of diminishing marginal utility implies that （書本例題 5.2）",
+  opts:["(A) the marginal utility of a product is negative","(B) the total utility from a product is also diminishing","(C) the rate of change of total utility is diminishing","(D) the rate of change of marginal utility is diminishing"],
+  ans:"<b>(C) the rate of change of total utility is diminishing。</b><ul><li>邊際效用＝總效用的變化率；遞減法則＝總效用的變化率遞減（總效用本身仍可能上升）</li></ul>"
+},
+{
+  q:"Sarah consumes only strawberries and cream, spending all her income. MU of last dish of strawberries = 200, MU of last pint of cream = 200. Price of strawberries = $1, cream = $2. To maximize utility, Sarah should （書本例題 5.3）",
+  opts:["(A) buy more strawberries and less cream","(B) buy less strawberries and more cream","(C) not change her purchases","(D) definitely buy no cream at her consumer equilibrium"],
+  ans:"<b>(A) buy more strawberries and less cream。</b><ul><li>MU/P：草莓 200/1 = 200 &gt; 奶油 200/2 = 100 → 多買草莓、少買奶油</li></ul>"
+},
+{
+  q:"Keesha consumes only boba tea and burgers. At her consumer equilibrium, which of the following is true? （書本例題 5.4）",
+  opts:["(A) The marginal utility will be the same for each good","(B) The marginal utility per dollar will be the same for each good","(C) The MU per dollar from a burger will exceed that from boba tea if she likes burgers more","(D) The MU per dollar from boba tea will exceed that from burgers if she likes burgers more"],
+  ans:"<b>(B) The marginal utility per dollar will be the same for each good。</b><ul><li>均衡條件是「每塊錢的邊際效用」相等（MU/P），不是邊際效用相等</li></ul>"
+},
+{
+  q:"Ben is buying shirts and shoes such that MU of shirts = 12 and MU of shoes = 3. Shirts and shoes priced at $8 and $2 respectively. Can we conclude Ben is spending too much on shirts and not enough on shoes? （書本例題 5.5）",
+  opts:["(A) 是：12/8 = 1.5 &gt; 3/2 = 1.5？不，兩者相等已達均衡","(B) 是：應多買襯衫少買鞋","(C) 否：兩者相等已達均衡","(D) 無法判斷"],
+  ans:"<b>(C) 否：兩者相等已達均衡。</b><ul><li>MU<sub>s</sub>/P<sub>s</sub> = 12/8 = 1.5 = MU<sub>sh</sub>/P<sub>sh</sub> = 3/2 = 1.5 → 已滿足消費者均衡，不需調整</li></ul>"
+},
+{
+  q:"Sally derives utility from apples ($2 each) and bananas ($1 each), income = $9。(1) 最大效用消費組合？(2) 若貨幣邊際效用 = 3.5 呢？ （書本例題 5.6）",
+  opts:["(A) (1) 依 MU/P 排序消費；(2) 均衡加 MU<sub>m</sub>=3.5 條件","(B) (1) 只買蘋果；(2) 只買香蕉","(C) (1) 蘋果香蕉各一半；(2) 相同","(D) 無法計算"],
+  ans:"<b>(A) (1) 依 MU/P 排序消費；(2) 均衡加 MU<sub>m</sub>=3.5 條件。</b><ul><li>(1) 忽略貨幣效用：依每塊錢邊際效用從高到低依序購買到所得用完</li><li>(2) 加 MU<sub>m</sub> = 3.5 條件：買到 MU/P = 3.5 為止</li></ul>"
+},
+{
+  q:"消費者面對 A、B、C 三種財貨，價格 3、2、1 元，貨幣所得 26 元，各單位邊際效用如下表，最適消費組合之總效用為？ （書本例題 5.7）",
+  opts:["(A) 251","(B) 262","(C) 274","(D) 283","(E) 以上皆非"],
+  ans:"<b>(C) 274。</b><ul><li>依 MU/P 均等原則：A 每元、B 每元、C 每元邊際效用相同處購買，配到所得 26 元用完</li><li>計算各商品 MU/P：A(3元)、B(2元)、C(1元)，選 MU/P 最高的單位依序購買至預算用完</li></ul>"
+},
+{
+  q:"給定貨幣邊際效用為 2，某甲對 X 財貨的邊際效用如下表（MU：1→8、2→6、3→4、4→2），請繪製需求曲線。 （書本例題 5.8）",
+  opts:["(A) P = MU/2：4、3、2、1；需求曲線負斜率","(B) P = MU：8、6、4、2","(C) P = 2/MU：0.25、0.33、0.5、1","(D) 需求曲線水平"],
+  ans:"<b>(A) P = MU/2：4、3、2、1；需求曲線負斜率。</b><ul><li>P = MU/MU<sub>m</sub> = MU/2 → 各數量對應最高願付價格 4、3、2、1</li></ul>"
+},
+{
+  q:"If the marginal utility of the good changes sharply as consumption increases, the （書本例題 5.9）",
+  opts:["(A) demand for the good is inelastic","(B) supply of the good is inelastic","(C) supply of the good is elastic","(D) demand for the good is elastic"],
+  ans:"<b>(A) demand for the good is inelastic。</b><ul><li>邊際效用遞減速度快 → 願付價格快速下降 → 需求曲線陡 → 需求彈性小</li></ul>"
+},
+{
+  q:"以經濟學的觀點，水的價格何以較鑽石低？ （書本例題 5.10）",
+  opts:["(A) 水的總效用低於鑽石的總效用","(B) 水的生產成本低於鑽石的生產成本","(C) 水的邊際效用低於鑽石的邊際效用","(D) 水的邊際成本低於鑽石的邊際成本","(E) 水的平均成本低於鑽石的邊際成本"],
+  ans:"<b>(C) 水的邊際效用低於鑽石的邊際效用。</b><ul><li>價格由邊際效用決定；水數量多 → 邊際效用低 → 價格低</li></ul>"
+},
+{
+  q:"水的價格很便宜、鑽石價格很貴，是因為水的總效用小而鑽石的總效用大？（是非題） （書本例題 5.11）",
+  opts:["(A) 正確","(B) 錯誤——水的總效用大、鑽石總效用小；價格由邊際效用決定"],
+  ans:"<b>(B) 錯誤——水的總效用大、鑽石總效用小；價格由邊際效用決定。</b><ul><li>水的使用價值（總效用）高但邊際效用低 → 價格低</li></ul>"
+},
+];
+
 const CH6_SECTIONS = [];
 const CH6_PROBLEMS = [];
 const CH7_SECTIONS = [];
@@ -1696,6 +1851,8 @@ const GLOSS_CATS = [
   {name:"供給彈性", keys:["Supply elasticity","Cross elasticity of supply","Cost elasticity of supply"]},
   {name:"市場均衡", keys:["Equilibrium","Market clearing","Excess demand","Excess supply","Price mechanism","Stable equilibrium","Comparative static","Dynamic analysis","Correspondence principle","Partial equilibrium","General equilibrium"]},
   {name:"福利與政府介入", keys:["Consumer surplus","Producer surplus","Social welfare","Deadweight loss","Lump sum tax","Excise tax","Ad valorem tax","Price ceiling","Price floor","Rent-seeking","Ramsey rule","Tax incidence"]},
+  {name:"效用理論", keys:["Utility","Total utility","Marginal utility","Law of diminishing marginal utility","Cardinal utility","Ordinal utility"]},
+  {name:"消費者均衡", keys:["Consumer equilibrium","Marginal utility of money","Paradox of value"]},
 ];
 
 const GLS = {
@@ -1707,7 +1864,8 @@ const CH_TERMS_CATS = {
   1:["基本概念","經濟學分類","模型建構","邏輯謬誤","循環流轉"],
   2:["需求基礎","財貨分類","網路外部性","彈性","所得與恩格爾"],
   3:["供給基礎","供給彈性"],
-  4:["市場均衡","福利與政府介入"]
+  4:["市場均衡","福利與政府介入"],
+  5:["效用理論","消費者均衡"]
 };
 let glossMode="full", glossChapter=1;
 
