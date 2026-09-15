@@ -406,7 +406,7 @@ const BOOK = [
   {n:5, title:"數列效用分析", subs:["5.1 前言","5.2 總效用與邊際效用","5.3 消費者均衡","5.4 需求曲線的求導","5.5 鑽石與水的矛盾"], done:true, points:["數列效用可度量可比較；序列效用只排序（無異曲線分析）","TU 上升後下降、MU 遞減；MU>0 喜好品、=0 中性品、<0 厭惡品","消費者均衡＝邊際效用均等法則：MUx/Px = MUy/Py = MUm","需求曲線由 P = MU/MUm 導出；MU 遞減越快需求彈性越小","鑽石與水：價格由邊際效用決定、價值由總效用決定"]},
   {n:6, title:"消費者行為理論", subs:["6.1 消費者偏好基本公理","6.2 效用函數","6.3 常用偏好結構與預算線","6.4 消費者均衡與計算","6.5 對偶性理論","6.6 全章考試總複習清單"], done:true, points:["六大公理：完整、反射、遞移（公理）＋連續、單調、凸（假設）","良好偏好→無異曲線凸向原點、內部解唯一；MRS = MUx/MUy","四大效用函數：Cobb-Douglas、Leontief、Linear、Quasi-linear","預算線斜率 −Px/Py；均衡 MRS = Px/Py（相切）；角隅解比較 MRS 與價格比","對偶：效用極大↔支出極小；Roy 恆等式 ↔ Shephard 定理"]},
   {n:7, title:"比較靜態與需求函數", subs:["7.1 替代效果與所得效果","7.2 普通與受補償需求曲線","7.3 所得與價格消費曲線","7.4 史勒斯基方程式"], done:true, points:["價格效果 = 替代效果 + 所得效果；Hicks（維持效用/CV）vs Slutsky（維持原購買組合/CD）","受補償需求曲線只含 SE 永遠負斜率；馬歇爾需求含 SE＋IE","正常財 IE 與價格反向；劣等財反向抵銷；季芬財 IE &gt; SE（需求線正斜率）","ICC 只含 IE、PCC 含 SE＋IE；PCC 垂直 ⟺ 劣等財","史勒斯基方程式：∂x/∂P = ∂xh/∂P − x·∂x/∂M"]},
-  {n:8, title:"消費者行為理論的應用", subs:["8.1 補貼或課稅對消費者之影響","8.2 勞動與休閒的選擇","8.3 跨期消費理論","8.4 顯示性偏好理論","8.5 皮氏與拉氏指數"], done:false, points:[]},
+  {n:8, title:"消費者行為理論的應用", subs:["8.1 補貼或課稅對消費者之影響","8.2 勞動與休閒的選擇","8.3 跨期消費理論","8.4 顯示性偏好理論","8.5 皮氏與拉氏指數"], done:true, points:["相同補貼金額下消費者偏好所得補貼、政策面偏好從量補貼","休閒的價格＝工資率；後彎勞動供給需休閒為正常財且 IE &gt; SE","跨期預算線 c₁+c₂/(1+r)=y₁+y₂/(1+r)；均衡 MRS=1+r；Euler 方程式","顯示性偏好由選擇反推偏好；WARP 一致性、SARP 加遞移性","拉氏指數高估、皮氏低估生活成本；支出指數比較判斷福利"]},
   {n:9, title:"不確定狀況下的選擇行為", subs:["9.1 賭局與期望效用","9.2 面對風險下之決策"], done:false, points:[]},
   {n:10, title:"生產理論與成本結構", subs:["10.1 前言","10.2 生產函數","10.3 短期生產結構","10.4 長期生產結構","10.5 擴張線","10.6 替代彈性","10.7 成本結構理論","10.8 短期成本結構","10.9 長期成本結構","10.10 規模經濟","10.11 要素價格與成本結構","10.12 附錄 廠商行為"], done:false, points:[]},
   {n:11, title:"完全競爭市場", subs:["11.1 市場分類","11.2 完全競爭廠商的特色","11.3 完全競爭廠商的短期均衡","11.4 完全競爭廠商的長期均衡","11.5 長期供給曲線與產業供給曲線","11.6 政府對完全競爭廠商的管制"], done:false, points:[]},
@@ -577,6 +577,25 @@ const TERMS = {
 "Price consumption curve":["Price consumption curve","價格消費曲線 (PCC)","各相對價格下消費者均衡點移動的軌跡；含替代與所得效果。"],
 "Engel curve":["Engel curve","恩格爾曲線","所得與特定商品消費量的關係；由 ICC 對應導出。"],
 "Engel aggregation":["Engel aggregation","恩格爾加總定理","加權所得彈性總和 = 1；若一財貨為劣等財，另一必為奢侈品。"],
+"Price subsidy":["Price subsidy","從價補貼","補貼單位價格比例 s，消費者支付 (1−s)P。"],
+"Quantity subsidy":["Quantity subsidy","數量補貼","政府直接給予一定數量財貨；無法轉售時預算線有水平線段。"],
+"Lump-sum tax":["Lump-sum tax","定額稅/所得稅","直接扣所得，不改變相對價格。"],
+"Time endowment":["Time endowment","時間稟賦","消費者擁有的全部時間 T；休閒與工作之總和。"],
+"Full income":["Full income","全額所得","時間稟賦價值 wT 加非勞動所得 M；又稱內含所得。"],
+"Backward bending labor supply":["Backward bending labor supply","後彎勞動供給曲線","工資上升工作反而減少；條件：休閒為正常財且 IE &gt; SE。"],
+"Time preference":["Time preference","時間偏好","消費者偏好現在消費甚於未來消費；時間偏好率 ρ 為主觀利率。"],
+"Discount factor":["Discount factor","折現因子","β = 1/(1+ρ) ∈ (0,1)；未來效用折現至現在的乘數。"],
+"Intertemporal budget constraint":["Intertemporal budget constraint","跨期預算線","c₁ + c₂/(1+r) = y₁ + y₂/(1+r)；斜率 −(1+r)。"],
+"Euler equation":["Euler equation","歐勒方程式","u'(c₁) = β(1+r)·u'(c₂)；跨期消費均衡條件。"],
+"Consumption smoothing":["Consumption smoothing","消費平滑","ρ=r 時各期消費相等，效用最適化下的消費均化。"],
+"Direct revealed preference":["Direct revealed preference","直接顯示性偏好","買得起 B 卻選 A → A 直接顯示性偏好於 B。"],
+"Indirect revealed preference":["Indirect revealed preference","間接顯示性偏好","A 直接偏好於 B、B 直接偏好於 C → A 間接偏好於 C。"],
+"WARP":["WARP","顯示性偏好弱公理","A 直接偏好於 B 則不可能 B 直接偏好於 A（一致性）。"],
+"SARP":["SARP","顯示性偏好強公理","直接或間接偏好不可逆；滿足 ⟺ 可由良好偏好導出。"],
+"True price index":["True price index","真實物價指數 (TPI)","維持固定生活標準下當期與基期最小支出之比。"],
+"Laspeyres index":["Laspeyres index","拉氏指數","以基期數量為權重，高估生活成本。"],
+"Paasche index":["Paasche index","皮氏指數","以當期數量為權重，低估生活成本。"],
+"Expenditure index":["Expenditure index","支出指數","當期實際總支出與基期總支出之比；反映所得變化。"],
 "Slutsky equation":["Slutsky equation","史勒斯基方程式","∂x/∂P<sub>x</sub> = ∂x<sup>h</sup>/∂P<sub>x</sub> − x·∂x/∂M；分解價格效果為替代與所得效果。"],
 };
 
@@ -1993,8 +2012,182 @@ const CH7_PROBLEMS = [
 },
 ];
 
-const CH8_SECTIONS = [];
-const CH8_PROBLEMS = [];
+const CH8_SECTIONS = [
+{
+  id:"8.1", title:"補貼或課稅對消費者之影響",
+  body:`
+  <p>政府介入消費決策的兩種工具：<b>補貼</b>（降價或給所得）與<b>課稅</b>（加價或扣所得），操作上數學與幾何相反。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:40%"><col style="width:38%"></colgroup>
+    <thead><tr><th>方式</th><th>作法</th><th>預算線效果</th></tr></thead>
+    <tbody>
+      <tr><td><b>從量補貼</b></td><td>每單位補貼 S 元 → 實際支付價 (P−S)</td><td>價格下降 → 預算線變平坦外移</td></tr>
+      <tr><td><b>從價補貼</b></td><td>補貼單位價格的 s 比例 → 支付價 (1−s)P</td><td>價格下降 → 預算線變平坦外移</td></tr>
+      <tr><td><b>所得補貼</b></td><td>直接補貼 M 元所得</td><td>預算線平行外移</td></tr>
+      <tr><td><b>數量補貼</b></td><td>直接給予一定數量的 x 財</td><td>無法轉售：預算線有水平線段；可轉售＝所得補貼</td></tr>
+      <tr><td><b>從量稅</b></td><td>每單位課 t 元 → 支付價 (P+t)</td><td>價格上升 → 預算線變陡內移</td></tr>
+      <tr><td><b>所得稅</b></td><td>直接扣所得</td><td>預算線平行內移</td></tr>
+    </tbody>
+  </table></div>
+  <div class="method-card mc-title" data-mc="subsidy">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-1" data-mc="subsidy"><label for="mc-ch8-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">補貼比較</div>
+    <div class="mc-body">
+      <div class="mc-formula">相同補貼金額下：消費者偏好 所得補貼 &gt; 從量補貼；政策制定者偏好 從量補貼（目標財消費增加多）</div>
+      <div class="mc-detail">所得補貼不改變相對價格，效用提升較大；從量補貼直接壓低目標財價格，能保證該財消費量增加。</div>
+      <div class="mc-ex">例子：牛肉補貼 100 元——從量補貼：牛肉變便宜、多買牛肉；所得補貼：預算線外移、效用更高但可能拿去買別的。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：消費者自身偏好所得補貼（效用較高）；若政策目的是增加特定財貨消費，從量補貼較有效。補貼金額＝(P 前 − P 後)×消費量。</div>`
+},
+{
+  id:"8.2", title:"勞動與休閒的選擇",
+  body:`
+  <p>家戶在商品市場是消費者、在要素市場是供給者。效用取決於<b>消費 C</b> 與<b>休閒 l</b>：U = U(C, l)。時間稟賦為 T，工作時間 N，故 l + N = T。</p>
+  <div class="method-card mc-title" data-mc="labor">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-2" data-mc="labor"><label for="mc-ch8-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">勞動供給</div>
+    <div class="mc-body">
+      <div class="mc-formula">MRS<sub>lC</sub> = w/P（休閒的價格＝工資率）；預算線：M + wT = PC + wl</div>
+      <div class="mc-detail">全額所得（full income）＝時間稟賦價值 wT＋非勞動所得 M。工資上升：替代效果使工作增加、休閒減少；所得效果（休閒為正常財）使休閒增加、工作減少。<b>後彎勞動供給曲線</b>需兩個條件：休閒為正常財＋SE 幅度小於 IE。</div>
+      <div class="mc-ex">例子：低薪時加薪 → SE&gt;IE → 多工作（正斜率）；高薪時再加薪 → IE&gt;SE → 少工作（後彎）。</div>
+    </div>
+  </div>
+  <p><b>對勞動課比例稅</b>：稅後工資 (1−t)w → 預算線變平坦；休閒為正常財時工作減少。</p>
+  <div class="warn">考試重點：勞動供給曲線後彎 = 工資上升但工作時間下降（違反供給法則），條件是休閒為正常財且 IE&gt;SE；若休閒為劣等財則勞動供給曲線必正斜率。</div>`
+},
+{
+  id:"8.3", title:"跨期消費理論",
+  body:`
+  <p>兩期模型：第 1、2 期所得 (y₁,y₂)、消費 (c₁,c₂)。消費者選擇儲蓄或借款以極大化跨期效用。</p>
+  <div class="method-card mc-title" data-mc="intertemporal">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-3" data-mc="intertemporal"><label for="mc-ch8-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">跨期決策</div>
+    <div class="mc-body">
+      <div class="mc-formula">實質跨期預算線：c₁ + c₂/(1+r) = y₁ + y₂/(1+r)；均衡：MRS = 1+r；Euler 方程式：u'(c₁) = (1+r)/(1+ρ)·u'(c₂)</div>
+      <div class="mc-detail">斜率 −(1+r)：多消費 1 單位現在，須犧牲 (1+r) 單位未來。時間偏好率 ρ 為未來效用的折現率（主觀利率）。利率上升：借款者第一期消費下降、儲蓄增加（可能轉為存款者）；存款者效果依 SE 與 IE 相對力道而定。</div>
+      <div class="mc-ex">例子：ρ=r → u'(c₁)=u'(c₂) → c₁=c₂（消費平滑）；ρ&lt;r → 第一期消費少、多儲蓄。</div>
+    </div>
+  </div>
+  <p><b>時間可分型</b>：U = u(c₁) + βu(c₂)，β=1/(1+ρ) 為折現因子，時間偏好率為外生常數。<b>消費平滑（Consumption smoothing）</b>：ρ=r 時各期消費相等。</p>
+  <div class="warn">考試重點：借款者利率上升必減少第一期消費（SE＋IE 同向）；存款者利率上升的效果不確定（SE 與 IE 反向）。時間偏好率高 → 偏好現在消費。</div>`
+},
+{
+  id:"8.4", title:"顯示性偏好理論",
+  body:`
+  <p><b>顯示性偏好</b>（<span class="proper">Paul Samuelson</span>，1938）：由市場上消費者的實際選擇反推偏好，不需探討效用函數。若在既定價格所得下買得起 B 卻選擇 A，則 A 顯示性偏好於 B。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:74%"></colgroup>
+    <thead><tr><th>公理</th><th>內容</th></tr></thead>
+    <tbody>
+      <tr><td><b>直接顯示性偏好</b></td><td>P·A ≥ P·B 且選擇 A → A 直接顯示性偏好於 B</td></tr>
+      <tr><td><b>間接顯示性偏好</b></td><td>A 直接偏好於 B、B 直接偏好於 C → A 間接偏好於 C（遞移性）</td></tr>
+      <tr><td><b>WARP 弱公理</b></td><td>若 A 直接顯示性偏好於 B（A≠B），則不可能 B 也直接顯示性偏好於 A（偏好一致性）</td></tr>
+      <tr><td><b>SARP 強公理</b></td><td>（<span class="proper">Hendrik Houthakker</span>，1950）若 A 直接或間接顯示性偏好於 B，則不可能 B 直接或間接顯示性偏好於 A；滿足 SARP ⟺ 行為可由良好偏好導出</td></tr>
+    </tbody>
+  </table></div>
+  <div class="method-card mc-title" data-mc="sarp">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-4" data-mc="sarp"><label for="mc-ch8-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">SARP 驗證</div>
+    <div class="mc-body">
+      <div class="mc-formula">支出矩陣：列＝不同價格、行＝不同消費組合；對角線為真正選擇的支出</div>
+      <div class="mc-detail">每列比較各支出與對角線，較低或相等者標 ※（直接顯示性偏好），再檢查間接顯示性標 (※)。若第 i 行第 j 列有 ※ 而第 j 行第 i 列也有 ※ → 違反 SARP。</div>
+      <div class="mc-ex">例子：兩期兩組合若互為「買得起卻沒選」→ 偏好不一致，違反 WARP。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：選擇≠偏好（可能只是比較便宜）；WARP 檢驗直接偏好一致性，SARP 加上遞移性檢驗間接偏好。</div>`
+},
+{
+  id:"8.5", title:"皮氏與拉氏指數",
+  body:`
+  <p><b>生活標準</b>＝任意選定的一個效用水準；<b>生活成本</b>＝維持該生活水準所需的最低貨幣支出。</p>
+  <div class="method-card mc-title" data-mc="index">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-5" data-mc="index"><label for="mc-ch8-5" class="mc-lbl">學會</label></div>
+    <div class="mc-left">物價指數</div>
+    <div class="mc-body">
+      <div class="mc-formula">真實物價指數 TPI = E(P₁, U₀)/E(P₀, U₀)；拉氏 L = P₁·x₀/P₀·x₀；皮氏 Pa = P₁·x₁/P₀·x₁</div>
+      <div class="mc-detail">拉氏指數用基期數量為權重 → <b>高估</b>生活成本；皮氏指數用當期數量為權重 → <b>低估</b>生活成本。支出指數 EI = 當期總支出/基期總支出。</div>
+      <div class="mc-ex">例子：若 EI &gt; TPI → 所得上升幅度大於生活成本 → 福利提高；L &gt; EI → 生活水準上升。</div>
+    </div>
+  </div>
+  <div class="tblwrap"><table><colgroup><col style="width:30%"><col style="width:35%"><col style="width:35%"></colgroup>
+    <thead><tr><th>指數</th><th>權重</th><th>特性</th></tr></thead>
+    <tbody>
+      <tr><td><b>拉氏指數（Laspeyres）</b></td><td>基期數量 x₀</td><td>高估生活成本（L ≥ TPI 維持 U₀）</td></tr>
+      <tr><td><b>皮氏指數（Paasche）</b></td><td>當期數量 x₁</td><td>低估生活成本（Pa ≤ TPI 維持 U₁）</td></tr>
+      <tr><td><b>支出指數（EI）</b></td><td>當期實際支出/基期實際支出</td><td>反映所得變化；EI&gt;TPI → 福利上升</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：拉氏高估、皮氏低估；L &gt; EI 表示生活水準上升（消費得起基期組合），Pa &lt; EI 表示生活水準下降。</div>`
+},
+];
+
+const CH8_PROBLEMS = [
+{
+  q:"The labor supply curve could have a backward bending portion because at higher wages the （書本例題 8.2）",
+  opts:["(A) income effect is greater than the substitution effect","(B) income effect is smaller than the substitution effect","(C) income effect is equal to the substitution effect","(D) none of above"],
+  ans:"<b>(A) income effect is greater than the substitution effect。</b><ul><li>後彎條件：休閒為正常財且 IE &gt; SE → 工資上升工作減少</li></ul>"
+},
+{
+  q:"When Josh's wage rises and he decides to work more hours, we know that the ___ effect has dominated the ___ effect. （書本例題 8.3）",
+  opts:["(A) substitution; income","(B) labor; leisure","(C) income; substitution","(D) leisure; labor","(E) substitution; leisure"],
+  ans:"<b>(A) substitution; income。</b><ul><li>工資上升仍多工作 → SE（多工作）壓過 IE（少工作）</li></ul>"
+},
+{
+  q:"王老五月入數百萬，過去逃稅，被查獲後誠實納稅，從此一週只工作五天而非七天，最可能解釋為？ （書本例題 8.4）",
+  opts:["(A) 賭氣不想工作","(B) 所得效果使得王老五減少工作","(C) 休閒的機會成本增加了","(D) 替代效果使得王老五減少工作"],
+  ans:"<b>(D) 替代效果使得王老五減少工作。</b><ul><li>誠實納稅 → 淨工資率下降 → 休閒的機會成本下降 → 替代效果使休閒增加、工作減少</li></ul>"
+},
+{
+  q:"James earns $15/hour, has $720 non-labor income/week, 72 hours/week for labor or leisure, U = C·L（C 為商品價值、L 為休閒時數）。每週工作幾小時？ （書本例題 8.5）",
+  opts:["(A) 12 小時","(B) 24 小時","(C) 36 小時","(D) 48 小時"],
+  ans:"<b>(A) 12 小時。</b><ul><li>全額所得 = 15×72 + 720 = 1800；U=CL 等權重 → 休閒支出佔一半：L·w = 900 → L = 60 → 工作 = 72−60 = 12</li></ul>"
+},
+{
+  q:"考慮兩期消費模型 U(C₁,C₂) = C₁^α·C₂^(1−α)，α=0.4，原賦 y₁=150、y₂=140，定額稅 T₁=50、T₂=20。市場實質利率 r=20%：兩期最適消費為何？此消費者為 lender 或 borrower？ （書本例題 8.6）",
+  opts:["(A) C₁≈64、C₂≈75，lender","(B) C₁≈73、C₂≈80，borrower","(C) C₁≈80、C₂≈96，borrower","(D) C₁≈56、C₂≈70，lender"],
+  ans:"<b>（依計算）C₁ = 80、C₂ = 144，為 lender。</b><ul><li>終身財富現值 W = (150−50) + (140−20)/1.2 = 200 → C₁ = αW = 0.4×200 = 80 &lt; 第一期可支配所得 100 → 儲蓄 20（lender）</li><li>C₂ = (1−α)W(1+r) = 0.6×200×1.2 = 144 = 120 + 20×1.2 ✓</li></ul>"
+},
+{
+  q:"依照傳統理論，當時間偏好率小於利率，消費者會願意？ （書本例題 8.7）",
+  opts:["(A) 維持目前消費和儲蓄","(B) 多消費","(C) 多儲蓄","(D) 降低目前消費和儲蓄水準"],
+  ans:"<b>(C) 多儲蓄。</b><ul><li>ρ&lt;r → 未來消費相對便宜 → 減少現在消費、增加儲蓄</li></ul>"
+},
+{
+  q:"下列有關兩期消費模型何者正確？ （書本例題 8.8）",
+  opts:["(A) 對借入者而言，當期利率上升則當期儲蓄將增加","(B) 對借入者而言，利率上升可能轉為淨借入者","(C) 以信用卡借錢者利率下降時負儲蓄增加","(D) 今朝有酒今朝醉者其 MRS&lt;1+r","(E) 若信耶穌得永生成立，則 MRS = 1"],
+  ans:"<b>(C) 對以信用卡借錢者而言，利率下降時其負儲蓄增加。</b><ul><li>借款者利率下降 → 現在消費的機會成本下降 → 多消費（負儲蓄增加）</li><li>(A) 金主利率上升效果不確定（SE 與 IE 反向）；(B) 書中證明存款者不會因利率上升轉為借款者；(E) 永生 → ρ=0 → MRS = 1+r 非 1</li></ul>"
+},
+{
+  q:"Two-period model with U(c₁,c₂) = log c₁ + β·log c₂，β∈(0,1)，可借貸利率 r，初始債券為零。(1) 求 Euler equation (2) 最適 c₁ (3) 最適 c₂ （書本例題 8.9）",
+  opts:["(A) c₂/c₁ = β(1+r)；c₁ = [y₁ + y₂/(1+r)]/(1+β)；c₂ = β(1+r)c₁","(B) c₁/c₂ = β(1+r)","(C) c₁ = (1+β)W","(D) 無法求解"],
+  ans:"<b>(A) c₂/c₁ = β(1+r)；c₁ = W/(1+β)、c₂ = β(1+r)·W/(1+β)。</b><ul><li>Euler：u'(c₁) = β(1+r)u'(c₂) → 1/c₁ = β(1+r)/c₂ → c₂/c₁ = β(1+r)；代回預算線得 c₁ = W/(1+β)</li></ul>"
+},
+{
+  q:"考慮兩期稟賦經濟，家戶稟賦 y₁、y₂ 單位商品，期初持有 B₀ 單位實質債券，效用 U(c₁,c₂) = u(c₁) + βu(c₂)。(1) 各期預算限制 (2) 跨期預算限制 (3) 一階條件 （書本例題 8.10）",
+  opts:["(A) c₁+B₁ = y₁+(1+r)B₀；c₂ = y₂+(1+r)B₁；跨期 c₁+c₂/(1+r) = y₁+y₂/(1+r)+(1+r)B₀","(B) 兩期各自獨立","(C) c₁ = y₁ 必成立","(D) 以上皆非"],
+  ans:"<b>(A) c₁+B₁ = y₁+(1+r)B₀；c₂ = y₂+(1+r)B₁；合併得跨期預算線。</b><ul><li>一階條件：u'(c₁) = β(1+r)u'(c₂)（Euler 方程式）</li></ul>"
+},
+{
+  q:"John 兩期所得 y₁、y₂，效用 U(c₁,c₂) = u(c₁) + βu(c₂)，利率 5%，u'&gt;0、u''&lt;0。(1) 寫下極大化問題 (2) 第一期或第二期消費較多？ （書本例題 8.11）",
+  opts:["(A) 依 β 與 r 而定","(B) 一定第一期多","(C) 一定第二期多","(D) 兩期相同"],
+  ans:"<b>(A) 依 β 與 r 而定。</b><ul><li>ρ 對應 β：若 β(1+r) &gt; 1（ρ&lt;r）→ 第二期消費多；β(1+r)&lt;1 → 第一期多</li></ul>"
+},
+{
+  q:"消費者第 0 期以 (p₀,q₀)=(1,1) 的價格選擇 (x₀,y₀)=(4,20)；第 1 期以 (p₁,q₁)=(1,2) 選擇 (x₁,y₁)=(10,10)。是否滿足 WARP？ （書本例題 8.12）",
+  opts:["(A) 滿足","(B) 不滿足","(C) 無法判斷","(D) 需更多資料"],
+  ans:"<b>(A) 滿足。</b><ul><li>第 0 期組合成本：期 0 價格下 (4,20)=4+20=24 vs (10,10)=10+20=30 → 買得起 (10,10) 卻選 (4,20) → A 偏好於 B；期 1 價格下 (10,10)=10+20=30 vs (4,20)=4+40=44 → 買不起 (4,20) → 無矛盾 → 滿足 WARP</li></ul>"
+},
+{
+  q:"Which of the following represents the strong axiom of revealed preference? （書本例題 8.14）",
+  opts:["(A) If x is revealed directly preferred to y, then y cannot be revealed directly to x","(B) If x is revealed directly to y, y can still be revealed directly to x","(C) If x is indirectly revealed preferred to y, then y cannot be indirectly revealed to x","(D) If x is directly or indirectly revealed preferred to y, then y cannot be directly or indirectly revealed preferred to x"],
+  ans:"<b>(D) If x is directly or indirectly revealed preferred to y, then y cannot be directly or indirectly revealed preferred to x。</b><ul><li>(A) 是 WARP 的敘述；(D) 包含間接（遞移性）才是 SARP</li></ul>"
+},
+{
+  q:"第 0 期為基期：p₀=(1,1)、x₀=(4,20)；當期 p₁=(1,2)、x₁=(10,10)。求皮氏與拉氏指數。 （書本例題 8.15）",
+  opts:["(A) L = 44/24 ≈ 1.83；Pa = 30/14 ≈ 2.14","(B) L = 30/24 ≈ 1.25；Pa = 30/44 ≈ 0.68","(C) L = 44/24 ≈ 1.83；Pa = 30/20 = 1.5","(D) L = 1.25；Pa = 2.14"],
+  ans:"<b>(C) L = 44/24 ≈ 1.83；Pa = 30/20 = 1.5。</b><ul><li>L = p₁·x₀/p₀·x₀ = (1×4+2×20)/(1×4+1×20) = 44/24 ≈ 1.83（基期數量為權重）</li><li>Pa = p₁·x₁/p₀·x₁ = (1×10+2×10)/(1×10+1×10) = 30/20 = 1.5（當期數量為權重）</li></ul>"
+},
+];
+
 const CH9_SECTIONS = [];
 const CH9_PROBLEMS = [];
 const CH10_SECTIONS = [];
@@ -2276,6 +2469,11 @@ const GLOSS_CATS = [
   {name:"替代與所得效果", keys:["Substitution effect","Income effect","Price effect","Compensated variation","Cost difference","Equivalent variation","Consumer surplus"]},
   {name:"需求曲線", keys:["Ordinary demand curve","Compensated demand curve","Giffen paradox"]},
   {name:"消費曲線與方程式", keys:["Income consumption curve","Price consumption curve","Engel curve","Engel aggregation","Slutsky equation"]},
+  {name:"政府介入與補貼", keys:["Price subsidy","Quantity subsidy","Lump-sum tax"]},
+  {name:"勞動供給", keys:["Time endowment","Full income","Backward bending labor supply"]},
+  {name:"跨期消費", keys:["Time preference","Discount factor","Intertemporal budget constraint","Euler equation","Consumption smoothing"]},
+  {name:"顯示性偏好", keys:["Direct revealed preference","Indirect revealed preference","WARP","SARP"]},
+  {name:"物價指數", keys:["True price index","Laspeyres index","Paasche index","Expenditure index"]},
 ];
 
 const GLS = {
@@ -2290,7 +2488,8 @@ const CH_TERMS_CATS = {
   4:["市場均衡","福利與政府介入"],
   5:["效用理論","消費者均衡"],
   6:["偏好與公理","效用函數與無異曲線","預算限制","消費者均衡","對偶性理論"],
-  7:["替代與所得效果","需求曲線","消費曲線與方程式"]
+  7:["替代與所得效果","需求曲線","消費曲線與方程式"],
+  8:["政府介入與補貼","勞動供給","跨期消費","顯示性偏好","物價指數"]
 };
 let glossMode="full", glossChapter=1;
 
