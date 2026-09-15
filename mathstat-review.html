@@ -43,27 +43,17 @@ button{font-family:inherit;cursor:pointer}
 }
 .sidebar .brand{font-weight:700;font-size:15px;letter-spacing:.02em;line-height:1.4;margin-bottom:4px;color:var(--ink)}
 .sidebar .brand .t2{font-size:12px;color:var(--muted);font-weight:400;margin-top:2px}
-.nav-chapter{
-  display:flex;align-items:center;gap:8px;width:100%;padding:4px 10px;border-radius:6px;
-  cursor:pointer;font-size:13.5px;font-weight:700;color:var(--ink);
-  border:none;background:none;text-align:left;margin-top:8px;line-height:1.45;
-}
-.nav-chapter:hover{background:var(--nav-hover)}
-.nav-chapter.active{background:var(--nav-active);color:#fff}
-.nav-chapter .num{font-size:11px;font-weight:600;opacity:.65;width:26px;flex-shrink:0}
-.nav-chapter.active .num{opacity:.9}
-.nav-chapter .tag{margin-left:auto;font-size:10px;opacity:.55;letter-spacing:.05em;font-weight:400;white-space:nowrap}
-.nav-chapter .tag.done{color:var(--green2);opacity:1}
-.nav-chapter.active .tag{color:#fff;opacity:.85}
 
 .nav-subhead{
-  margin:14px 0 4px;padding:0 10px 6px;font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--muted);
+  margin:16px 0 6px;padding:8px 10px;font-size:14.5px;font-weight:800;letter-spacing:.06em;color:var(--ink);
   display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;
-  border-bottom:1px dashed color-mix(in srgb,var(--line) 60%,transparent);
+  border-radius:6px;transition:background .15s;
 }
-.nav-subhead::after{content:'▾';font-size:10px;transition:transform .2s;color:var(--muted);flex-shrink:0}
+.nav-subhead:hover{background:var(--nav-hover)}
+.nav-subhead::after{content:'▾';font-size:11px;transition:transform .2s;color:var(--accent);flex-shrink:0;font-weight:700}
 .nav-subhead.collapsed::after{transform:rotate(-90deg)}
-.nav-subs{display:block}
+.nav-subhead .ch-num{font-size:11px;font-weight:800;color:var(--accent);letter-spacing:.12em;margin-right:8px;flex-shrink:0}
+.nav-subs{display:block;margin-left:6px;border-left:1px dashed color-mix(in srgb,var(--line) 70%,transparent)}
 .nav-subs.collapsed{display:none}
 .nav-sub{
   display:block;width:100%;padding:3px 10px 3px 34px;border-radius:6px;
@@ -257,7 +247,7 @@ mark{background:var(--hl);color:var(--ink);padding:0 2px;border-radius:3px}
   .section-body>div,.section-inner,.tbl-wrap{min-width:0}
   .menu-btn{display:block;min-width:44px;min-height:40px}
   .searchbox input{font-size:16px}
-  .nav-chapter,.nav-sub{font-size:14px;padding:9px 12px}
+  .nav-sub{font-size:14px;padding:9px 12px}
   .tbl-wrap table.tbl{min-width:560px}
   .chapter-head h1{font-size:24px}
 }
@@ -309,13 +299,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
   <div class="brand">數理統計
     <div class="t2">研究所複習 · 第 1–4 章 · <b class="proper" data-proper="張翔">張翔</b>老師主講</div>
   </div>
-  <nav id="navChapters">
-    <button class="nav-chapter active" data-jump="ch1"><span class="num">CH1</span>點估計理論<span class="tag done">已完成</span></button>
-    <button class="nav-chapter" data-jump="ch2"><span class="num">CH2</span>大樣本理論<span class="tag done">已完成</span></button>
-    <button class="nav-chapter" data-jump="ch3"><span class="num">CH3</span>假說檢定理論<span class="tag done">已完成</span></button>
-    <button class="nav-chapter" data-jump="ch4"><span class="num">CH4</span>財務工程數學<span class="tag done">已完成</span></button>
-  </nav>
-  <div class="nav-subhead">第1章 點估計理論</div>
+  <div class="nav-subhead"><span class="ch-num">第1章</span>點估計理論</div>
   <nav class="nav-subs">
     <button class="nav-sub" data-jump="s11">1.1 充份性</button>
     <button class="nav-sub" data-jump="s111">1.1.1 充份統計量之定義</button>
@@ -327,13 +311,13 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
     <button class="nav-sub" data-jump="s122">1.2.2 Cramér-Rao 下界</button>
     <button class="nav-sub" data-jump="s13">1.3 貝氏統計方法</button>
   </nav>
-  <div class="nav-subhead collapsed">第2章 大樣本理論</div><nav class="nav-subs collapsed">
+  <div class="nav-subhead collapsed"><span class="ch-num">第2章</span>大樣本理論</div><nav class="nav-subs collapsed">
     <button class="nav-sub" data-jump="s21">2.1 大樣本理論</button>
     <button class="nav-sub" data-jump="s211">2.1.1 分配收斂</button>
     <button class="nav-sub" data-jump="s212">2.1.2 機率收斂</button>
     <button class="nav-sub" data-jump="s213">2.1.3 極限分配進階</button>
   </nav>
-  <div class="nav-subhead collapsed">第3章 假說檢定理論</div><nav class="nav-subs collapsed">
+  <div class="nav-subhead collapsed"><span class="ch-num">第3章</span>假說檢定理論</div><nav class="nav-subs collapsed">
     <button class="nav-sub" data-jump="s31">3.1 最強力檢定</button>
     <button class="nav-sub" data-jump="s311">3.1.1 Neyman-Pearson 引理</button>
     <button class="nav-sub" data-jump="s312">3.1.2 均勻最強力檢定</button>
@@ -341,7 +325,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
     <button class="nav-sub" data-jump="s321">3.2.1 GLRT</button>
     <button class="nav-sub" data-jump="s322">3.2.2 GLRT 大樣本性質</button>
   </nav>
-  <div class="nav-subhead collapsed">第4章 財務工程數學</div><nav class="nav-subs collapsed">
+  <div class="nav-subhead collapsed"><span class="ch-num">第4章</span>財務工程數學</div><nav class="nav-subs collapsed">
     <button class="nav-sub" data-jump="s41">4.1 應用機率模型</button>
     <button class="nav-sub" data-jump="s411">4.1.1 截尾常態與摺疊常態</button>
     <button class="nav-sub" data-jump="s412">4.1.2 對數常態分配</button>
@@ -1823,16 +1807,6 @@ $$('.nav-subhead').forEach(hd=>{
     subs.classList.toggle('collapsed'); hd.classList.toggle('collapsed');
   });
 });
-// 點章節卡片時自動展開該章小節
-const _subheads = $$('.nav-subhead'), _subsList = $$('.nav-subs');
-$$('.nav-chapter').forEach((btn,i)=>{
-  btn.addEventListener('click', ()=>{
-    if(_subheads[i] && _subsList[i]){
-      _subsList[i].classList.remove('collapsed'); _subheads[i].classList.remove('collapsed');
-    }
-  });
-});
-
 $('#menuBtn').addEventListener('click', ()=>{ sidebar.classList.add('open'); mask.classList.add('show'); });
 $('#sidebarClose').addEventListener('click', closeSidebar);
 mask.addEventListener('click', closeSidebar);
@@ -1842,7 +1816,6 @@ function jumpTo(id, btn){
   if(!el) return;
   el.scrollIntoView({behavior:'smooth'});
   closeSidebar();
-  $$('.nav-chapter').forEach(b=>b.classList.remove('active'));
   $$('.nav-sub').forEach(b=>b.classList.remove('active'));
   if(btn){ btn.classList.add('active'); }
 }
