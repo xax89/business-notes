@@ -55,6 +55,16 @@ button{font-family:inherit;cursor:pointer}
 .nav-chapter .tag{margin-left:auto;font-size:10px;opacity:.55;letter-spacing:.05em;font-weight:400;white-space:nowrap}
 .nav-chapter .tag.done{color:var(--green2);opacity:1}
 .nav-chapter.active .tag{color:#fff;opacity:.85}
+
+.nav-subhead{
+  margin:14px 0 4px;padding:0 10px 6px;font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--muted);
+  display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;
+  border-bottom:1px dashed color-mix(in srgb,var(--line) 60%,transparent);
+}
+.nav-subhead::after{content:'▾';font-size:10px;transition:transform .2s;color:var(--muted);flex-shrink:0}
+.nav-subhead.collapsed::after{transform:rotate(-90deg)}
+.nav-subs{display:block}
+.nav-subs.collapsed{display:none}
 .nav-sub{
   display:block;width:100%;padding:3px 10px 3px 34px;border-radius:6px;
   cursor:pointer;font-size:12.5px;color:var(--muted);border:none;background:none;text-align:left;line-height:1.45;
@@ -238,7 +248,7 @@ mark{background:var(--hl);color:var(--ink);padding:0 2px;border-radius:3px}
 .mask{display:none;position:fixed;inset:0;background:rgba(20,15,8,.4);z-index:55}
 @media (max-width:960px){
   html,body{overflow-x:hidden}
-  .sidebar{display:none;position:fixed;left:0;top:0;box-shadow:20px 0 50px rgba(20,15,8,.25)}
+  .sidebar{display:none;position:fixed;left:0;top:0;height:100dvh;max-height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;box-shadow:20px 0 50px rgba(20,15,8,.25)}
   .sidebar.open{display:block;animation:drawerIn .25s ease}
   @keyframes drawerIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}
   .sidebar-close{display:block}
@@ -317,15 +327,13 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
     <button class="nav-sub" data-jump="s122">1.2.2 Cramér-Rao 下界</button>
     <button class="nav-sub" data-jump="s13">1.3 貝氏統計方法</button>
   </nav>
-  <div class="nav-subhead">第2章 大樣本理論</div>
-  <nav class="nav-subs">
+  <div class="nav-subhead collapsed">第2章 大樣本理論</div><nav class="nav-subs collapsed">
     <button class="nav-sub" data-jump="s21">2.1 大樣本理論</button>
     <button class="nav-sub" data-jump="s211">2.1.1 分配收斂</button>
     <button class="nav-sub" data-jump="s212">2.1.2 機率收斂</button>
     <button class="nav-sub" data-jump="s213">2.1.3 極限分配進階</button>
   </nav>
-  <div class="nav-subhead">第3章 假說檢定理論</div>
-  <nav class="nav-subs">
+  <div class="nav-subhead collapsed">第3章 假說檢定理論</div><nav class="nav-subs collapsed">
     <button class="nav-sub" data-jump="s31">3.1 最強力檢定</button>
     <button class="nav-sub" data-jump="s311">3.1.1 Neyman-Pearson 引理</button>
     <button class="nav-sub" data-jump="s312">3.1.2 均勻最強力檢定</button>
@@ -333,8 +341,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
     <button class="nav-sub" data-jump="s321">3.2.1 GLRT</button>
     <button class="nav-sub" data-jump="s322">3.2.2 GLRT 大樣本性質</button>
   </nav>
-  <div class="nav-subhead">第4章 財務工程數學</div>
-  <nav class="nav-subs">
+  <div class="nav-subhead collapsed">第4章 財務工程數學</div><nav class="nav-subs collapsed">
     <button class="nav-sub" data-jump="s41">4.1 應用機率模型</button>
     <button class="nav-sub" data-jump="s411">4.1.1 截尾常態與摺疊常態</button>
     <button class="nav-sub" data-jump="s412">4.1.2 對數常態分配</button>
@@ -349,7 +356,6 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
 <!-- ===== 主內容 ===== -->
 <main class="main" id="main">
   <div class="topbar">
-    <a class="toolbtn home-btn" href="index.html" title="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 10.5 9-7.5 9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span>首頁</span></a>
     <button class="menu-btn" id="menuBtn" aria-label="開啟目錄"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
     <div class="searchbox">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -1809,6 +1815,24 @@ const $$ = s => Array.from(document.querySelectorAll(s));
 // ===== 側欄：行動裝置開關 =====
 const sidebar = $('#sidebar'), mask = $('#mask');
 function closeSidebar(){ sidebar.classList.remove('open'); mask.classList.remove('show'); }
+// ===== 側欄小節收合：點章節標題展開/收起對應小節 =====
+$$('.nav-subhead').forEach(hd=>{
+  const subs = hd.nextElementSibling;
+  if(!subs || !subs.classList.contains('nav-subs')) return;
+  hd.addEventListener('click', ()=>{
+    subs.classList.toggle('collapsed'); hd.classList.toggle('collapsed');
+  });
+});
+// 點章節卡片時自動展開該章小節
+const _subheads = $$('.nav-subhead'), _subsList = $$('.nav-subs');
+$$('.nav-chapter').forEach((btn,i)=>{
+  btn.addEventListener('click', ()=>{
+    if(_subheads[i] && _subsList[i]){
+      _subsList[i].classList.remove('collapsed'); _subheads[i].classList.remove('collapsed');
+    }
+  });
+});
+
 $('#menuBtn').addEventListener('click', ()=>{ sidebar.classList.add('open'); mask.classList.add('show'); });
 $('#sidebarClose').addEventListener('click', closeSidebar);
 mask.addEventListener('click', closeSidebar);
