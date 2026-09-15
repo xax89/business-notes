@@ -150,10 +150,12 @@ body.dark .nav-gloss{color:#d9b84a;border-color:#8a6d1a;background:#201c14}
 /* ===== 名詞強調：重點名詞（綠）／專有名詞（紫） ===== */
 .term{color:var(--green);font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,var(--green) 55%,transparent);border-radius:3px;padding:0 2px;transition:all .15s}
 .term:hover{background:var(--green);color:#fff;border-bottom:none}
-.proper{color:var(--purple);font-weight:700;border-bottom:1.5px dashed color-mix(in srgb,var(--purple) 50%,transparent);border-radius:3px;padding:0 2px}
+.proper{color:var(--purple);font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,var(--purple) 50%,transparent);border-radius:3px;padding:0 2px;transition:all .15s}
+.proper:hover{background:var(--purple);color:#fff;border-bottom:none}
 body.dark .term{color:var(--green2);border-bottom-color:color-mix(in srgb,var(--green2) 55%,transparent)}
 body.dark .term:hover{background:var(--green2);color:#1a1420}
 body.dark .proper{color:var(--purple);border-bottom-color:color-mix(in srgb,var(--purple) 50%,transparent)}
+body.dark .proper:hover{background:var(--purple);color:#1a1420}
 /* ===== 名詞定義彈窗 ===== */
 .term-modal{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px 26px;max-width:460px;width:100%;box-shadow:0 18px 50px rgba(0,0,0,.22)}
 .term-modal .tm-en{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.02em;margin-bottom:4px}
@@ -295,7 +297,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
 <aside class="sidebar" id="sidebar">
   <button class="sidebar-close" id="sidebarClose" aria-label="關閉目錄"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <div class="brand">數理統計
-    <div class="t2">研究所複習 · 第 1–4 章 · <b class="proper">張翔</b>老師主講</div>
+    <div class="t2">研究所複習 · 第 1–4 章 · <b class="proper" data-proper="張翔">張翔</b>老師主講</div>
   </div>
   <nav id="navChapters">
     <button class="nav-chapter active" data-jump="ch1"><span class="num">CH1</span>點估計理論<span class="tag done">已完成</span></button>
@@ -362,12 +364,12 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
   <div class="chapter-head" id="ch1">
     <div class="kicker">研究所複習 · 數理統計 · 第 1 章</div>
     <h1>第1章 點估計理論<span class="en-sub">THEORY OF POINT ESTIMATION · 書頁 5–72</span></h1>
-    <p>本章是《統計學～數理統計》的開場：先從「統計量如何濃縮樣本資訊」出發，建立充份統計量與分解定理；接著介紹指數族與完備充份統計量，用 <b class="proper">Rao-Blackwell</b>、<b class="proper">Lehmann-Scheffé</b> 定理與 <b class="proper">Cramér-Rao</b> 下界這三條路線尋找 UMVUE；最後進入貝氏統計方法，以事前分配與樣本資訊共同修正對母數的看法。</p>
+    <p>本章是《統計學～數理統計》的開場：先從「統計量如何濃縮樣本資訊」出發，建立充份統計量與分解定理；接著介紹指數族與完備充份統計量，用 <b class="proper" data-proper="Rao-Blackwell">Rao-Blackwell</b>、<b class="proper" data-proper="Lehmann–Scheffé">Lehmann-Scheffé</b> 定理與 <b class="proper" data-proper="Cramér–Rao">Cramér-Rao</b> 下界這三條路線尋找 UMVUE；最後進入貝氏統計方法，以事前分配與樣本資訊共同修正對母數的看法。</p>
     <ul class="key-points">
-      <li>充份統計量：定義、分解定理（<b class="proper">Fisher</b>–<b class="proper">Neyman</b>）、最小充份統計量</li>
+      <li>充份統計量：定義、分解定理（<b class="proper" data-proper="費雪">Fisher</b>–<b class="proper" data-proper="尼曼">Neyman</b>）、最小充份統計量</li>
       <li>指標函數：值域與母數有關時，如何嚴謹地寫出 pdf</li>
       <li>指數族：涵蓋常態、Poisson、Gamma 等常用分配，是找完備充份統計量的利器</li>
-      <li>UMVUE 三路線：<b class="proper">Rao-Blackwell</b> 改進、<b class="proper">Lehmann-Scheffé</b> 定理、<b class="proper">Cramér-Rao</b> 下界</li>
+      <li>UMVUE 三路線：<b class="proper" data-proper="Rao-Blackwell">Rao-Blackwell</b> 改進、<b class="proper" data-proper="Lehmann–Scheffé">Lehmann-Scheffé</b> 定理、<b class="proper" data-proper="Cramér–Rao">Cramér-Rao</b> 下界</li>
       <li>貝氏估計：事前分配 → 事後分配 → 貝氏估計量</li>
     </ul>
   </div>
@@ -382,7 +384,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
       <div class="formula"><div class="f-label">統計量</div><div class="f-body">$$T = T(X_1, X_2, \ldots, X_n)$$<div class="f-note">隨機樣本的函數組合，但<b>不能含有未知母數 $\theta$</b>；是整套樣本的「資訊縮減」（information reduction）。</div></div></div>
       <p>隨機樣本中，對推論 $\theta$ 而言，有些資訊「有用」、有些「無用」。理想的統計量應該做到<b>去蕪存菁</b>——只縮減掉垃圾資訊，保留所有有用資訊，這就是<b class="term" data-term="充份統計量">充份統計量（sufficient statistic）</b>的核心精神。</p>
       <div class="note">直覺類比：充份統計量就像「雞精」——它已經包含雞的全部營養精華，有了雞精，就不需要再回去啃整隻雞了（好不好吃是另一回事）。</div>
-      <p>推論 $\theta$ 時可用的統計量千千百百種，先從滿足充份性的下手，正是現代統計學奠基者之一<b class="proper">羅納德·費雪（Ronald Fisher）</b>所揭櫫的<b class="term" data-term="充份性原則">充份性原則（sufficiency principle，1922）</b>：不滿足充份性的統計量已有資訊遺漏，幾乎不必考慮。</p>
+      <p>推論 $\theta$ 時可用的統計量千千百百種，先從滿足充份性的下手，正是現代統計學奠基者之一<b class="proper" data-proper="費雪">羅納德·費雪（Ronald Fisher）</b>所揭櫫的<b class="term" data-term="充份性原則">充份性原則（sufficiency principle，1922）</b>：不滿足充份性的統計量已有資訊遺漏，幾乎不必考慮。</p>
       <ul>
         <li>充份統計量<b>不是唯一</b>的：找到一個，通常就能找到無限多個（一對一函數轉換）。</li>
         <li>只要做到「存菁」即可為充份統計量，未必要做到「去蕪」。</li>
@@ -450,10 +452,10 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
     </div>
     <div class="section-body"><div><div class="section-inner">
       <p>用定義 1.1 找充份統計量很麻煩，好在我们有<b class="term" data-term="分解定理">分解定理（factorization theorem）</b>，把「條件分配與 $\theta$ 無關」轉化為「聯合 pdf 可以拆成兩部分相乘」。</p>
-      <div class="thm thm1"><div class="thm-head">定理 1.2（分解定理，<b class="proper">Fisher</b>–<b class="proper">Neyman</b> factorization theorem）</div><div class="thm-body">
+      <div class="thm thm1"><div class="thm-head">定理 1.2（分解定理，<b class="proper" data-proper="費雪">Fisher</b>–<b class="proper" data-proper="尼曼">Neyman</b> factorization theorem）</div><div class="thm-body">
         <p>設 $X_1,\ldots,X_n$ 抽自母體 $f(x;\theta)$。則 $S$ 為 $\theta$ 之充份統計量的<b>充要條件</b>為：聯合機率函數可拆解為</p>
-        <div class="formula"><div class="f-label">分解</div><div class="f-body">$$f(x_1,\ldots,x_n;\theta)=g(s;\theta)\cdot h(x_1,\ldots,x_n)$$<div class="f-note">$g$ 可含 $\theta$ 與 $s$（且只透過 $s$ 依賴樣本）；$h$ 不含 $\theta$。證：見 <b class="proper">Casella &amp; Berger</b>, <i>Statistical Inference</i>, pp. 276–277。</div></div></div>
-        <p>亦稱<b class="proper">費雪</b>–<b class="proper">尼曼</b>分解定理，或 <b class="proper">Halmos–Savage</b> 分解定理。</p>
+        <div class="formula"><div class="f-label">分解</div><div class="f-body">$$f(x_1,\ldots,x_n;\theta)=g(s;\theta)\cdot h(x_1,\ldots,x_n)$$<div class="f-note">$g$ 可含 $\theta$ 與 $s$（且只透過 $s$ 依賴樣本）；$h$ 不含 $\theta$。證：見 <b class="proper" data-proper="Casella & Berger">Casella &amp; Berger</b>, <i>Statistical Inference</i>, pp. 276–277。</div></div></div>
+        <p>亦稱<b class="proper" data-proper="費雪">費雪</b>–<b class="proper" data-proper="尼曼">尼曼</b>分解定理，或 <b class="proper" data-proper="Halmos–Savage">Halmos–Savage</b> 分解定理。</p>
       </div></div>
 
       <div class="problem"><div class="p-head"><span>範例 1.3（續）　用分解定理重驗</span></div><div class="p-body">
@@ -480,7 +482,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
 
       <div class="thm thm1"><div class="thm-head">定理 1.3（MLE 與充份統計量的關係）</div><div class="thm-body">
         <p>若最大概似估計量 $\hat{\theta}_{MLE}$ 存在且唯一，則 $\hat{\theta}_{MLE}$ 必為某充份統計量 $S$ 的函數轉換。</p>
-        <p class="proof">證：見葉小蓁（2006）《高等統計學》頁 269–270；或 <b class="proper">Bain &amp; Engelhardt</b> (1992) p. 342。反例：MLE 不唯一時（如 U(θ−1,θ+1)），MLE 可能不是充份統計量的函數轉換。</p>
+        <p class="proof">證：見葉小蓁（2006）《高等統計學》頁 269–270；或 <b class="proper" data-proper="Bain & Engelhardt">Bain &amp; Engelhardt</b> (1992) p. 342。反例：MLE 不唯一時（如 U(θ−1,θ+1)），MLE 可能不是充份統計量的函數轉換。</p>
       </div></div>
       <p>多數情況下 MLE 也因此滿足充份性，但存在例外（後續範例 1.13 給出反例：MLE 是充份統計量的函數轉換，但本身不是充份統計量）。</p>
 
@@ -594,18 +596,18 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
     <div class="section-body"><div><div class="section-inner">
       <p>在所有點估計量中，要使 MSE 對<b>任意</b>母數值 $\theta\in\Omega$ 都最小，此種估計量不存在。退而求其次，我們把範圍限縮在<b class="term" data-term="不偏估計量">不偏估計量（unbiased estimator, UE）</b>中找變異數最小者：</p>
       <div class="formula"><div class="f-label">UMVUE</div><div class="f-body">$$\text{均勻最小變異不偏估計量 (UMVUE)}=\text{UE 中對任意 }\theta\in\Omega\text{ 變異數最小者}$$<div class="f-note">「均勻（uniformly）」指對整個母數空間皆成立；UMVUE 又稱最佳估計量（best estimator）。</div></div></div>
-      <p>本書提供兩條主要路線：<b class="proper">① Rao-Blackwell 定理 + Lehmann-Scheffé 定理</b>（由完備充份統計量調整為不偏）；<b class="proper">② Cramér-Rao 下界</b>（CRLB approach）。</p>
+      <p>本書提供兩條主要路線：<b class="proper" data-proper="Rao-Blackwell 定理 + Lehmann-Scheffé 定理">① Rao-Blackwell 定理 + Lehmann-Scheffé 定理</b>（由完備充份統計量調整為不偏）；<b class="proper" data-proper="Cramér-Rao 下界">② Cramér-Rao 下界</b>（CRLB approach）。</p>
     </div></div></div>
   </section>
 
-  <!-- ===== 1.2.1 <b class="proper">Rao-Blackwell</b> 改進 ===== -->
+  <!-- ===== 1.2.1 <b class="proper" data-proper="Rao-Blackwell">Rao-Blackwell</b> 改進 ===== -->
   <section class="section open" id="s121">
     <div class="section-head">
-      <span class="sec-num">§1.2.1</span><h2><b class="proper">Rao-Blackwell</b> 改進</h2>
+      <span class="sec-num">§1.2.1</span><h2><b class="proper" data-proper="Rao-Blackwell">Rao-Blackwell</b> 改進</h2>
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
     </div>
     <div class="section-body"><div><div class="section-inner">
-      <div class="thm thm1"><div class="thm-head">定理 1.7（勞–布拉克維爾定理，<b class="proper">Rao–Blackwell</b> theorem）</div><div class="thm-body">
+      <div class="thm thm1"><div class="thm-head">定理 1.7（勞–布拉克維爾定理，<b class="proper" data-proper="Rao-Blackwell">Rao–Blackwell</b> theorem）</div><div class="thm-body">
         <p>設 $\tilde{T}$ 為 $\theta$ 之任意不偏估計量且 $\mathrm{Var}(\tilde{T})&lt;\infty$，$S$ 為 $\theta$ 之充份統計量。令 $T^*=E(\tilde{T}\mid S)=h(S)$，則對任意 $\theta\in\Omega$：</p>
         <div class="formula"><div class="f-label">改進</div><div class="f-body">$$E(T^*)=\theta \quad \text{且}\quad \mathrm{Var}(T^*)\le \mathrm{Var}(\tilde{T})$$</div></div>
         <p class="proof">$E(T^*)=E\big[E(\tilde{T}\mid S)\big]=E(\tilde{T})=\theta$；又 $\mathrm{Var}(\tilde{T})=E\big[\mathrm{Var}(\tilde{T}\mid S)\big]+\mathrm{Var}\big(E(\tilde{T}\mid S)\big)\ge \mathrm{Var}(T^*)$（因 $E[\mathrm{Var}(\tilde{T}\mid S)]\ge0$）。</p>
@@ -618,7 +620,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
       </div></div>
       <div class="thm thm1"><div class="thm-head">定理 1.9（列門–薛費定理，Lehmann–Scheffé theorem）</div><div class="thm-body">
         <p>設 $S$ 為 $\theta$ 之<b class="term" data-term="完備充份統計量">完備充份統計量</b>，若 $T^*=h(S)$ 滿足 $E(T^*)=\theta$，則 $T^*$ 為 $\theta$ 之 UMVUE。</p>
-        <p class="proof">任何不偏估計量 $\tilde{T}$ 經 <b class="proper">Rao-Blackwell</b> 化都改進到同一個 $h(S)$（因可調整為不偏的函數轉換唯一），故 $T^*$ 無法再被改進，即為 UMVUE。</p>
+        <p class="proof">任何不偏估計量 $\tilde{T}$ 經 <b class="proper" data-proper="Rao-Blackwell">Rao-Blackwell</b> 化都改進到同一個 $h(S)$（因可調整為不偏的函數轉換唯一），故 $T^*$ 無法再被改進，即為 UMVUE。</p>
       </div></div>
       <p>驗證完備性通常不易，但指數族有捷徑：</p>
       <div class="thm thm1"><div class="thm-head">定理 1.10（指數族與完備充份統計量）</div><div class="thm-body">
@@ -632,7 +634,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
       <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>（1）$\Omega=\{\lambda\mid\lambda&gt;0\}$，$\lambda$ 為單位時間內發生偶發事件的期望次數。</p>
       <p>（2）</p>
       <div class="formula"><div class="f-label">分解</div><div class="f-body">$$f(x_1,\ldots,x_n;\lambda)=\frac{e^{-n\lambda}\lambda^{\sum x_i}}{\prod x_i!}=\underbrace{e^{-n\lambda}\lambda^{s}}_{g(s;\lambda)}\cdot\underbrace{\frac{1}{\prod x_i!}}_{h}\ \Rightarrow\ S=\sum X_i\ \text{為充份統計量}$$</div></div>
-      <p>（3）$\ell(\lambda)=-n+\tfrac{s}{\lambda}=0\Rightarrow\hat\lambda_{MLE}=s/n=\bar{X}$。（4）由指數族拆解，$\sum X_i$ 為完備充份統計量，且 $E(\bar{X})=\lambda$，由 <b class="proper">Lehmann-Scheffé</b> 定理：$\bar{X}$ 為 $\lambda$ 之 UMVUE。（5）$\ln f_X(x;\lambda)=-1+\tfrac{x}{\lambda}$，$-\partial^2\ln f/\partial\lambda^2=x/\lambda^2$，故 $I(\lambda)=\lambda/\lambda^2=1/\lambda$，CRLB$=\lambda/n$；$\mathrm{Var}(\bar{X})=\lambda/n=$ CRLB，故 $\bar{X}$ 亦為<b class="term" data-term="最有效估計量">最有效估計量</b>=1$）。</p>
+      <p>（3）$\ell(\lambda)=-n+\tfrac{s}{\lambda}=0\Rightarrow\hat\lambda_{MLE}=s/n=\bar{X}$。（4）由指數族拆解，$\sum X_i$ 為完備充份統計量，且 $E(\bar{X})=\lambda$，由 <b class="proper" data-proper="Lehmann–Scheffé">Lehmann-Scheffé</b> 定理：$\bar{X}$ 為 $\lambda$ 之 UMVUE。（5）$\ln f_X(x;\lambda)=-1+\tfrac{x}{\lambda}$，$-\partial^2\ln f/\partial\lambda^2=x/\lambda^2$，故 $I(\lambda)=\lambda/\lambda^2=1/\lambda$，CRLB$=\lambda/n$；$\mathrm{Var}(\bar{X})=\lambda/n=$ CRLB，故 $\bar{X}$ 亦為<b class="term" data-term="最有效估計量">最有效估計量</b>=1$）。</p>
 
       </div></div></div><div class="problem"><div class="p-head"><span>範例 1.17　$N(0,\sigma^2)$：$\sigma^2$ 之 MME、MLE、充份統計量與 UMVUE（台大財金）</span></div><div class="p-body">
       <p>設 $\{X_i\}_{i=1}^n \sim N(0,\sigma^2)$，$\sigma^2$ 未知。（1）寫出 $\sigma^2$ 之參數空間並求 MME 與 MLE；（2）求充份統計量並驗證；（3）求 $\sigma^2$ 之 UMVUE。</p>
@@ -659,7 +661,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
       <div class="formula"><div class="f-label">pdf</div><div class="f-body">$$f_Y(y)=f_X(e^{-y})\cdot|e^{-y}|=\theta e^{-\theta y},\quad 0&lt;y&lt;\infty \;\Rightarrow\; Y=-\ln X\sim\text{Exp}(\lambda=\theta)$$</div></div>
       <p>（2）$f(x_1,\ldots,x_n;\theta)=\theta^n\big(\prod x_i\big)^{\theta-1}=\theta^n e^{(\theta-1)\sum\ln x_i}$ → 取 $g=\theta^n e^{(\theta-1)s}$，$h=1$，$\sum\ln X_i$ 為充份統計量（且為完備充份統計量）。（3）令 $W=\sum Y_i=-\sum\ln X_i\sim\text{Gamma}(n,\theta)$，$E\big[\tfrac1W\big]=\tfrac{\theta}{n-1}$，故 $\hat\theta_{UMVUE}=\dfrac{n-1}{-\sum\ln X_i}$。（4）$E\big[\tfrac{W}{n}\big]=\tfrac1\theta$，故 $\widehat{1/\theta}_{UMVUE}=\dfrac{-\sum\ln X_i}{n}$。</p>
 
-      </div></div></div><div class="problem"><div class="p-head"><span>範例 1.21　$N(\mu,\sigma^2)$、$\sigma^2$ 已知：$\mu$ 與 $\mu^2$ 之 UMVUE（<b class="proper">Bain &amp; Engelhardt</b> 習題）</span></div><div class="p-body">
+      </div></div></div><div class="problem"><div class="p-head"><span>範例 1.21　$N(\mu,\sigma^2)$、$\sigma^2$ 已知：$\mu$ 與 $\mu^2$ 之 UMVUE（<b class="proper" data-proper="Bain & Engelhardt">Bain &amp; Engelhardt</b> 習題）</span></div><div class="p-body">
       <p>$X_1,\ldots,X_n \sim N(\mu,\sigma^2)$，$\mu$ 未知、$\sigma^2$ 已知。（1）find UMVUE for $\mu$；（2）find UMVUE for $\mu^2$.</p>
       <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>（1）$\sum X_i$ 為完備充份統計量，$E(\bar{X})=\mu$，故 $\bar{X}$ 為 $\mu$ 之 UMVUE。（2）$E(\bar{X}^2)=\mu^2+\tfrac{\sigma^2}{n}$，故 $\bar{X}^2-\dfrac{\sigma^2}{n}$ 為 $\mu^2$ 之 UMVUE。</p>
 
@@ -682,28 +684,28 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
       <div class="warn">$U(0,\theta)$ 不屬於指數族（值域與 $\theta$ 有關），找完備充份統計量只能靠完備性「定義」著手，此為經典考法。</div>
     </div></div></div>
   </div></div></div></section>
-  <!-- ===== 1.2.2 <b class="proper">Cramér-Rao</b> 下界 ===== -->
+  <!-- ===== 1.2.2 <b class="proper" data-proper="Cramér–Rao">Cramér-Rao</b> 下界 ===== -->
   <section class="section open" id="s122">
     <div class="section-head">
-      <span class="sec-num">§1.2.2</span><h2><b class="proper">Cramér-Rao</b> 下界</h2>
+      <span class="sec-num">§1.2.2</span><h2><b class="proper" data-proper="Cramér–Rao">Cramér-Rao</b> 下界</h2>
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
     </div>
     <div class="section-body"><div><div class="section-inner">
       <p>這一小節的定理，讓我們能找到 $\theta$ 之<b>所有</b>不偏估計量變異數的理論下界；若某不偏估計量的變異數恰貼在此下界上，它必為 UMVUE。</p>
-      <div class="thm thm1"><div class="thm-head">定理 1.11（克拉瑪–勞下界，<b class="proper">Cramér–Rao</b> lower bound, CRLB）</div><div class="thm-body">
+      <div class="thm thm1"><div class="thm-head">定理 1.11（克拉瑪–勞下界，<b class="proper" data-proper="Cramér–Rao">Cramér–Rao</b> lower bound, CRLB）</div><div class="thm-body">
         <p>設 $X_1,\ldots,X_n$ 抽自母體 $f_X(x;\theta)$，滿足<b class="term" data-term="正規條件">正規條件（regularity conditions）</b>，對 $g(\theta)$ 之任意不偏估計量 $\tilde{T}$：</p>
-        <div class="formula"><div class="f-label">CRLB</div><div class="f-body">$$\mathrm{Var}(\tilde{T})\ge\frac{\big[g'(\theta)\big]^2}{I_n(\theta)}=\frac{\big[g'(\theta)\big]^2}{n\,I(\theta)}, \qquad I_n(\theta)=n\,I(\theta)$$<div class="f-note">$I_n(\theta)=E\Big[\big(\frac{\partial\ln L}{\partial\theta}\big)^2\Big]$ 為整組樣本之<b class="proper">費雪訊息</b>（<b class="proper">Fisher</b> information）；$I(\theta)$ 為單一隨機變數之<b class="proper">費雪</b>訊息。稱 $\dfrac{[g'(\theta)]^2}{nI(\theta)}$ 為 CRLB for the variance of UE of $g(\theta)$，不等式稱 <b class="proper">Cramér–Rao</b> 不等式。</div></div></div>
+        <div class="formula"><div class="f-label">CRLB</div><div class="f-body">$$\mathrm{Var}(\tilde{T})\ge\frac{\big[g'(\theta)\big]^2}{I_n(\theta)}=\frac{\big[g'(\theta)\big]^2}{n\,I(\theta)}, \qquad I_n(\theta)=n\,I(\theta)$$<div class="f-note">$I_n(\theta)=E\Big[\big(\frac{\partial\ln L}{\partial\theta}\big)^2\Big]$ 為整組樣本之<b class="proper" data-proper="費雪訊息">費雪訊息</b>（<b class="proper" data-proper="費雪">Fisher</b> information）；$I(\theta)$ 為單一隨機變數之<b class="proper" data-proper="費雪">費雪</b>訊息。稱 $\dfrac{[g'(\theta)]^2}{nI(\theta)}$ 為 CRLB for the variance of UE of $g(\theta)$，不等式稱 <b class="proper" data-proper="Cramér–Rao">Cramér–Rao</b> 不等式。</div></div></div>
       </div></div>
       <p>計算上常用第二式（指數族必滿足）：</p>
-      <div class="formula"><div class="f-label"><b class="proper">費雪</b>訊息</div><div class="f-body">$$I(\theta)=E\Big[\Big(\frac{\partial\ln f(X;\theta)}{\partial\theta}\Big)^2\Big]=-E\Big[\frac{\partial^2\ln f(X;\theta)}{\partial\theta^2}\Big], \qquad I_n(\theta)=\sum_{i=1}^n I_i(\theta)=nI(\theta)$$<div class="f-note">iid 樣本下各 $X_i$ 帶的訊息相同。若求 $\theta$ 本身之 CRLB：$g(\theta)=\theta\Rightarrow g'(\theta)=1$，CRLB$=\dfrac{1}{nI(\theta)}$。</div></div></div>
+      <div class="formula"><div class="f-label"><b class="proper" data-proper="費雪">費雪</b>訊息</div><div class="f-body">$$I(\theta)=E\Big[\Big(\frac{\partial\ln f(X;\theta)}{\partial\theta}\Big)^2\Big]=-E\Big[\frac{\partial^2\ln f(X;\theta)}{\partial\theta^2}\Big], \qquad I_n(\theta)=\sum_{i=1}^n I_i(\theta)=nI(\theta)$$<div class="f-note">iid 樣本下各 $X_i$ 帶的訊息相同。若求 $\theta$ 本身之 CRLB：$g(\theta)=\theta\Rightarrow g'(\theta)=1$，CRLB$=\dfrac{1}{nI(\theta)}$。</div></div></div>
       <div class="warn">正規條件中最重要的：母體分配之值域（support）$R_X$ 必須與待估母數 $\theta$ <b>無關</b>。指數族皆滿足；但 $U(0,\theta)$ 之類不滿足，CRLB 不適用——甚至可能出現不偏估計量變異數「小於」形式上算出的 CRLB。</div>
       <ul>
         <li><b>若 $\mathrm{Var}(T^*)=$ CRLB</b>：$T^*$ 必為 UMVUE（例：$N(\mu,\sigma^2)$ 中 $\mu$ 未知時，$\sigma^2$ 之 UMVUE 變異數可達 CRLB）。</li>
         <li><b>不保證存在估計量達 CRLB</b>：此時 UMVUE 的變異數大於 CRLB，不能用 CRLB 法（例：$\mu$ 未知時 $N(\mu,\sigma^2)$ 的 $\sigma^2$，UMVUE 變異數 $2\sigma^4/(n-1)&gt;2\sigma^4/n=$ CRLB）。</li>
       </ul>
 
-      <div class="problem"><div class="p-head"><span>範例 1.26　Poisson 之<b class="proper">費雪</b>訊息（中山經研）</span></div><div class="p-body">
-      <p>Suppose $X\sim\text{Poi}(\theta)$，$\theta&gt;0$ unknown. Find the <b class="proper">Fisher</b> information $I(\theta)$.</p>
+      <div class="problem"><div class="p-head"><span>範例 1.26　Poisson 之<b class="proper" data-proper="費雪">費雪</b>訊息（中山經研）</span></div><div class="p-body">
+      <p>Suppose $X\sim\text{Poi}(\theta)$，$\theta&gt;0$ unknown. Find the <b class="proper" data-proper="費雪">Fisher</b> information $I(\theta)$.</p>
       <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>$\ln f_X(x;\theta)=-\theta+x\ln\theta-\ln x!$，$\dfrac{\partial^2\ln f}{\partial\theta^2}=-\dfrac{x}{\theta^2}$，故 $I(\theta)=E[X]/\theta^2=\theta/\theta^2=\dfrac{1}{\theta}$。</p>
 
       </div></div></div><div class="problem"><div class="p-head"><span>範例 1.27　$N(\mu,\sigma^2)$：$\mu$ 之不偏估計量 CRLB（中山經研）</span></div><div class="p-body">
@@ -732,8 +734,8 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
       <div class="formula"><div class="f-label">資訊下界</div><div class="f-body">$$I_n(\theta)=\sum_{i=1}^n\frac{i}{\theta}=\frac{n(n+1)}{2\theta} \;\Rightarrow\; \text{CRLB for UE of }\theta=\frac{1}{I_n(\theta)}=\frac{2\theta}{n(n+1)}$$<div class="f-note">非 iid 時不能直接乘 $n$，須逐項加總。</div></div></div>
 
       </div></div></div><div class="problem"><div class="p-head"><span>範例 1.33　$N(\mu,\sigma^2)$：CRLB 矩陣</span></div><div class="p-body">
-      <p>Given a random sample of size $n$ from $N(\mu,\sigma^2)$. Find the <b class="proper">Cramér–Rao</b> lower bound matrix for the unbiased estimators of $\mu$ and $\sigma^2$.</p>
-      <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p><b class="proper">費雪</b>訊息矩陣為對角矩陣：$I(\mu)=\tfrac1{\sigma^2}$、$I(\sigma^2)=\tfrac1{2\sigma^4}$（交錯項 $=0$），故</p>
+      <p>Given a random sample of size $n$ from $N(\mu,\sigma^2)$. Find the <b class="proper" data-proper="Cramér–Rao">Cramér–Rao</b> lower bound matrix for the unbiased estimators of $\mu$ and $\sigma^2$.</p>
+      <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p><b class="proper" data-proper="費雪">費雪</b>訊息矩陣為對角矩陣：$I(\mu)=\tfrac1{\sigma^2}$、$I(\sigma^2)=\tfrac1{2\sigma^4}$（交錯項 $=0$），故</p>
       <div class="formula"><div class="f-label">CRLB 矩陣</div><div class="f-body">$$\mathrm{Var}(\hat\mu)\ge\frac{\sigma^2}{n},\qquad \mathrm{Var}(\hat{\sigma^2})\ge\frac{2\sigma^4}{n}$$</div></div>
 
       </div></div></div><div class="problem"><div class="p-head"><span>範例 1.34　$U(0,\theta)$：CRLB 失效的經典例（政大風管・精算組）</span></div><div class="p-body">
@@ -742,7 +744,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
 
       </div></div></div><div class="problem"><div class="p-head"><span>範例 1.35　$f(y;\theta_0)=c\,y^{\theta_0}$ 六問（政大經研）</span></div><div class="p-body">
       <p>A random sample $Y_1,\ldots,Y_n$ from $f_Y(y;\theta_0)=cy^{\theta_0}$，$0\le y\le1$（$c$ 為常數、$\theta_0$ 未知）。令 $\hat\theta_{mm}$ 為 MME、$\hat\theta_{ml}$ 為 MLE。（1）求 $\hat\theta_{mm}$、$\hat\theta_{ml}$；（2）$\hat\theta_{ml}$ 是否不偏？（3）求 CRLB；（4）是否存在不偏估計量變異數小於 (3) 之 CRLB？（5）$\hat\theta_{mm}$ 是否為充份估計量？（6）$\hat\theta_{ml}$ 是否一致？</p>
-      <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>$c=\theta_0+1$（由 $\int_0^1 f=1$）。（1）$E(Y)=\tfrac{\theta_0+1}{\theta_0+2}$：$\hat\theta_{mm}=\dfrac{2\bar{Y}-1}{1-\bar{Y}}$；$\ell=n\ln(\theta+1)+\theta\sum\ln y$，$\hat\theta_{ml}=-\dfrac{n}{\sum\ln Y_i}-1$。（2）$-\sum\ln Y_i\sim\text{Gamma}(n,1/(\theta+1))$，$E[\hat\theta_{ml}]=\theta+1$：<b>不偏</b>。（3）$I(\theta)=\tfrac{1}{(\theta+1)^2}$，CRLB$=\tfrac{(\theta+1)^2}{n}$。（4）此分配屬指數族、值域與 $\theta$ 無關，正規條件成立：不可能有小於 CRLB 者。（5）$\hat\theta_{mm}$ 是 $\bar{Y}$ 之函數，非 $\sum\ln Y_i$ 之函數，<b>不是</b>充份統計量。（6）$\hat\theta_{ml}$ 為充份統計量之函數且不偏，由 <b class="proper">Lehmann-Scheffé</b> 即 UMVUE，故一致。</p>
+      <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>$c=\theta_0+1$（由 $\int_0^1 f=1$）。（1）$E(Y)=\tfrac{\theta_0+1}{\theta_0+2}$：$\hat\theta_{mm}=\dfrac{2\bar{Y}-1}{1-\bar{Y}}$；$\ell=n\ln(\theta+1)+\theta\sum\ln y$，$\hat\theta_{ml}=-\dfrac{n}{\sum\ln Y_i}-1$。（2）$-\sum\ln Y_i\sim\text{Gamma}(n,1/(\theta+1))$，$E[\hat\theta_{ml}]=\theta+1$：<b>不偏</b>。（3）$I(\theta)=\tfrac{1}{(\theta+1)^2}$，CRLB$=\tfrac{(\theta+1)^2}{n}$。（4）此分配屬指數族、值域與 $\theta$ 無關，正規條件成立：不可能有小於 CRLB 者。（5）$\hat\theta_{mm}$ 是 $\bar{Y}$ 之函數，非 $\sum\ln Y_i$ 之函數，<b>不是</b>充份統計量。（6）$\hat\theta_{ml}$ 為充份統計量之函數且不偏，由 <b class="proper" data-proper="Lehmann–Scheffé">Lehmann-Scheffé</b> 即 UMVUE，故一致。</p>
     </div></div></div>
   </div></div></div></section>
 
@@ -842,11 +844,11 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
   <div class="chapter-head" id="ch2">
     <div class="kicker">研究所複習 · 數理統計 · 第 2 章</div>
     <h1>第2章 大樣本理論<span class="en-sub">LARGE SAMPLE THEORY · 書頁 61–104</span></h1>
-    <p>母體分配未知時，我們無法精確推導小樣本下統計量的分配；本章透過「加大樣本數 $n$」，以統計量的<b class="term" data-term="大樣本性質">大樣本性質</b>進行推論——它與母體分配無關，代價是需要較高的抽樣成本。核心工具：分配收斂、機率收斂、<b class="proper">Slutsky</b> 定理與 Delta 法。</p>
+    <p>母體分配未知時，我們無法精確推導小樣本下統計量的分配；本章透過「加大樣本數 $n$」，以統計量的<b class="term" data-term="大樣本性質">大樣本性質</b>進行推論——它與母體分配無關，代價是需要較高的抽樣成本。核心工具：分配收斂、機率收斂、<b class="proper" data-proper="史拉斯基">Slutsky</b> 定理與 Delta 法。</p>
     <ul class="key-points">
       <li>四種收斂概念：分配收斂、機率收斂、均方收斂、幾乎確信收斂</li>
       <li>分配收斂：定義、mgf 收斂、CLT 四種形式、極限分配 vs 漸近分配</li>
-      <li>機率收斂：WLLN、Chebyshev、連續映射定理、<b class="proper">Slutsky</b> 定理</li>
+      <li>機率收斂：WLLN、Chebyshev、連續映射定理、<b class="proper" data-proper="史拉斯基">Slutsky</b> 定理</li>
       <li>Delta 法：統計量函數轉換的大樣本分配</li>
       <li>MLE 五大漸近性質：唯一性、漸近不偏、一致、漸近有效、漸近常態</li>
     </ul>
@@ -968,17 +970,17 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
       <p>Let $X_1,\ldots,X_n\sim N(\mu,\sigma^2)$. Consider $S^2=\tfrac{1}{n-1}\sum(X_i-\bar X)^2$ 與 $\hat\sigma^2_{MLE}=\tfrac1n\sum(X_i-\bar X)^2$。（1）Which are unbiased？（2）Which are consistent？</p>
       <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>（1）$S^2$ 不偏（$E=\sigma^2$）；$\hat\sigma^2_{MLE}$ 偏誤（$E=\tfrac{n-1}{n}\sigma^2$）。（2）兩者皆一致：由 $S^2\xrightarrow{p}\sigma^2$（定理 2.3 後之推導）且 $\hat\sigma^2_{MLE}=\tfrac{n-1}{n}S^2\xrightarrow{p}\sigma^2$。</p>
 
-      <div class="thm thm1"><div class="thm-head">定理 2.4（<b class="proper">史拉斯基</b>定理，<b class="proper">Slutsky</b>'s theorem）</div><div class="thm-body">
+      <div class="thm thm1"><div class="thm-head">定理 2.4（<b class="proper" data-proper="史拉斯基">史拉斯基</b>定理，<b class="proper" data-proper="史拉斯基">Slutsky</b>'s theorem）</div><div class="thm-body">
         <p>設 $X_n\xrightarrow{p}c$（常數）且 $Y_n\xrightarrow{d}W$（隨機變數），則：</p>
-        <div class="formula"><div class="f-label"><b class="proper">Slutsky</b></div><div class="f-body">$$X_n+Y_n\xrightarrow{d}c+W,\qquad X_nY_n\xrightarrow{d}cW,\qquad \frac{X_n}{Y_n}\xrightarrow{d}\frac{c}{W}\ (c\neq0)$$</div></div>
+        <div class="formula"><div class="f-label"><b class="proper" data-proper="史拉斯基">Slutsky</b></div><div class="f-body">$$X_n+Y_n\xrightarrow{d}c+W,\qquad X_nY_n\xrightarrow{d}cW,\qquad \frac{X_n}{Y_n}\xrightarrow{d}\frac{c}{W}\ (c\neq0)$$</div></div>
       </div></div>
       <p><b>牛刀小試</b>：證明 $t$ 檢定的大樣本版本 $\dfrac{\sqrt n(\bar X-\mu)}{S}\xrightarrow{d}N(0,1)$。</p>
-      <p>證：由 CLT $\dfrac{\sqrt n(\bar X-\mu)}{\sigma}\xrightarrow{d}Z\sim N(0,1)$；由 WLLN $S^2\xrightarrow{p}\sigma^2$，故 $\dfrac{\sigma}{S}\xrightarrow{p}1$。由 <b class="proper">Slutsky</b>：</p>
+      <p>證：由 CLT $\dfrac{\sqrt n(\bar X-\mu)}{\sigma}\xrightarrow{d}Z\sim N(0,1)$；由 WLLN $S^2\xrightarrow{p}\sigma^2$，故 $\dfrac{\sigma}{S}\xrightarrow{p}1$。由 <b class="proper" data-proper="史拉斯基">Slutsky</b>：</p>
       <div class="formula"><div class="f-label">證明</div><div class="f-body">$$\frac{\sqrt n(\bar X-\mu)}{S}=\frac{\sqrt n(\bar X-\mu)}{\sigma}\cdot\frac{\sigma}{S}\xrightarrow{d}Z\cdot 1\sim N(0,1)$$</div></div>
 
       </div></div></div><div class="problem"><div class="p-head"><span>範例 2.14　$U(0,1)$ 與未知分配組合（台大經研）</span></div><div class="p-body">
       <p>$\{X_i\}_{i=1}^n\sim U(0,1)$；$\{Y_i\}$ 未知分配、$E(Y)=0,\ \mathrm{Var}(Y)=1$。令 $Z_n=\dfrac{\sum X_i}{\sum X_i^2}$、$W_n=\dfrac{\sqrt n\,\bar Y}{\frac1n\sum X_i^2}$。（1）$Z_n$ 之機率極限 $c$？（2）$W_n$ 之漸近分配？</p>
-      <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>（1）由 WLLN：$\tfrac1n\sum X_i\xrightarrow{p}\tfrac12$、$\tfrac1n\sum X_i^2\xrightarrow{p}E(X^2)=\tfrac13$，由定理 2.3：$Z_n=\dfrac{\frac1n\sum X_i}{\frac1n\sum X_i^2}\xrightarrow{p}\dfrac{1/2}{1/3}=\dfrac32$。（2）CLT：$\sqrt n\,\bar Y\xrightarrow{d}N(0,1)$；又 $\frac1n\sum X_i^2\xrightarrow{p}\frac13$，由 <b class="proper">Slutsky</b>：$W_n=3\cdot\sqrt n\,\bar Y\xrightarrow{d}N(0,9)$。</p>
+      <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>（1）由 WLLN：$\tfrac1n\sum X_i\xrightarrow{p}\tfrac12$、$\tfrac1n\sum X_i^2\xrightarrow{p}E(X^2)=\tfrac13$，由定理 2.3：$Z_n=\dfrac{\frac1n\sum X_i}{\frac1n\sum X_i^2}\xrightarrow{p}\dfrac{1/2}{1/3}=\dfrac32$。（2）CLT：$\sqrt n\,\bar Y\xrightarrow{d}N(0,1)$；又 $\frac1n\sum X_i^2\xrightarrow{p}\frac13$，由 <b class="proper" data-proper="史拉斯基">Slutsky</b>：$W_n=3\cdot\sqrt n\,\bar Y\xrightarrow{d}N(0,9)$。</p>
 
       </div></div></div><div class="problem"><div class="p-head"><span>範例 2.15　常態樣本之機率極限與極限分配（中正國經）</span></div><div class="p-body">
       <p>$\{X_i\}\sim N(\mu,\sigma^2)$，$\bar X_n$ 為樣本平均。（1）$\mathrm{plim}\ \frac1n\sum(X_i+X_i^2)$？（2）$\sqrt{2n}(\bar X_n-\mu)$ 之極限分配？</p>
@@ -986,15 +988,15 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
 
       </div></div></div><div class="problem"><div class="p-head"><span>範例 2.16　$\chi^2(n)$ 與 $t(n)$ 的極限（台大經研）</span></div><div class="p-body">
       <p>（1）$W\sim\chi^2(n)$：以 Chebyshev 求 $X_n=W/n$ 之機率極限。（2）證明 $U_n\sim t(n)$ 收斂至 $N(0,1)$。</p>
-      <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>（1）$E(W/n)=1$，$\mathrm{Var}(W/n)=2/n$：$P(|X_n-1|&lt;\varepsilon)\ge 1-\tfrac{2}{n\varepsilon^2}\to1$，$X_n\xrightarrow{p}1$。（2）$t(n)=Z/\sqrt{W/n}$（$Z\sim N(0,1)$ 獨立）：$\sqrt{W/n}\xrightarrow{p}1$，由 <b class="proper">Slutsky</b>：$U_n\xrightarrow{d}Z\sim N(0,1)$。</p>
+      <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>（1）$E(W/n)=1$，$\mathrm{Var}(W/n)=2/n$：$P(|X_n-1|&lt;\varepsilon)\ge 1-\tfrac{2}{n\varepsilon^2}\to1$，$X_n\xrightarrow{p}1$。（2）$t(n)=Z/\sqrt{W/n}$（$Z\sim N(0,1)$ 獨立）：$\sqrt{W/n}\xrightarrow{p}1$，由 <b class="proper" data-proper="史拉斯基">Slutsky</b>：$U_n\xrightarrow{d}Z\sim N(0,1)$。</p>
 
-      </div></div></div><div class="problem"><div class="p-head"><span>範例 2.17　Gamma 樣本之 <b class="proper">Slutsky</b> 應用（政大風管）</span></div><div class="p-body">
+      </div></div></div><div class="problem"><div class="p-head"><span>範例 2.17　Gamma 樣本之 <b class="proper" data-proper="史拉斯基">Slutsky</b> 應用（政大風管）</span></div><div class="p-body">
       <p>Let $\bar X$ denote the mean of a random sample of size $n$ from Gamma$(\alpha&gt;0,\ \beta=1)$. Find the limiting distribution of $\sqrt n(\bar X-\mu)/\sqrt{\bar X}$.</p>
-      <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>$\mu=E(X)=\alpha$、$\mathrm{Var}(X)=\alpha$。CLT：$\sqrt n(\bar X-\alpha)\xrightarrow{d}N(0,\alpha)$；$\bar X\xrightarrow{p}\alpha\Rightarrow\sqrt{\bar X}\xrightarrow{p}\sqrt\alpha$。由 <b class="proper">Slutsky</b>：$\dfrac{\sqrt n(\bar X-\alpha)}{\sqrt{\bar X}}\xrightarrow{d}\dfrac{N(0,\alpha)}{\sqrt\alpha}\sim N(0,1)$。</p>
+      <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>$\mu=E(X)=\alpha$、$\mathrm{Var}(X)=\alpha$。CLT：$\sqrt n(\bar X-\alpha)\xrightarrow{d}N(0,\alpha)$；$\bar X\xrightarrow{p}\alpha\Rightarrow\sqrt{\bar X}\xrightarrow{p}\sqrt\alpha$。由 <b class="proper" data-proper="史拉斯基">Slutsky</b>：$\dfrac{\sqrt n(\bar X-\alpha)}{\sqrt{\bar X}}\xrightarrow{d}\dfrac{N(0,\alpha)}{\sqrt\alpha}\sim N(0,1)$。</p>
 
-      </div></div></div><div class="problem"><div class="p-head"><span>範例 2.18　<b class="proper">Slutsky</b> 混合應用（中山經研）</span></div><div class="p-body">
+      </div></div></div><div class="problem"><div class="p-head"><span>範例 2.18　<b class="proper" data-proper="史拉斯基">Slutsky</b> 混合應用（中山經研）</span></div><div class="p-body">
       <p>Let $X_n\xrightarrow{d}Z\sim N(0,1)$ and $Y_n\xrightarrow{p}4$. To what do the following converge?（1）$X_n+Y_n$；（2）$X_n/Y_n$.</p>
-      <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>（1）由 <b class="proper">Slutsky</b>：$X_n+Y_n\xrightarrow{d}4+Z\sim N(4,1)$。（2）$c=4\neq0$：$X_n/Y_n\xrightarrow{d}Z/4\sim N\big(0,\tfrac1{16}\big)$。</p>
+      <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>（1）由 <b class="proper" data-proper="史拉斯基">Slutsky</b>：$X_n+Y_n\xrightarrow{d}4+Z\sim N(4,1)$。（2）$c=4\neq0$：$X_n/Y_n\xrightarrow{d}Z/4\sim N\big(0,\tfrac1{16}\big)$。</p>
 
       <p><b class="term" data-term="兩種收斂之關係">兩種收斂之關係</b>：$T_n\xrightarrow{p}W\Rightarrow T_n\xrightarrow{d}W$（機率收斂較強，逆不真）；但若收斂目標為常數 $c$，兩者等價。</p>
       </div></div></div><div class="problem"><div class="p-head"><span>範例 2.19　Gamma$(n,1/n)$：分配收斂與機率收斂（政大統研）</span></div><div class="p-body">
@@ -1065,7 +1067,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
       <div class="formula"><div class="f-label">MLE</div><div class="f-body">$$\hat\theta_{MLE}=\frac{n}{\sum\ln X_i-n\ln x_0}$$<div class="f-note">（3）$\ln f=\ln\theta+\theta\ln x_0-(\theta+1)\ln x$，$\dfrac{\partial^2\ln f}{\partial\theta^2}=-\dfrac1{\theta^2}$，$I(\theta)=\dfrac1{\theta^2}$：$\mathrm{Var}(\hat\theta_{MLE})\ \dot{\sim}\ \text{CRLB}=\dfrac{\theta^2}{n}$。（4）$f(x_1,\ldots,x_n;\theta)=\theta^n x_0^{n\theta}\big(\prod x_i\big)^{-\theta-1}$：取 $g=\theta^n x_0^{n\theta}(\prod x_i)^{-\theta}$、$h=(\prod x_i)^{-1}$，由分解定理 $\prod X_i$ 為 $\theta$ 之充份統計量。</div></div></div>
 
       </div></div></div><h4>實務重點　$t$ 檢定的大樣本版本</h4>
-      <p>實務上 $\sigma$ 未知時以 $S$ 代換：$\dfrac{\sqrt n(\bar X-\mu)}{S}\xrightarrow{d}N(0,1)$（見 <b class="proper">Slutsky</b> 定理後之證明），這是大樣本 $t$ 檢定與信賴區間的理論基礎。</p>
+      <p>實務上 $\sigma$ 未知時以 $S$ 代換：$\dfrac{\sqrt n(\bar X-\mu)}{S}\xrightarrow{d}N(0,1)$（見 <b class="proper" data-proper="史拉斯基">Slutsky</b> 定理後之證明），這是大樣本 $t$ 檢定與信賴區間的理論基礎。</p>
     </div></div></div>
   </section>
 
@@ -1085,11 +1087,11 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
         </div>
       </div>
       <div class="problem">
-        <div class="p-head"><span>練 2　<b class="proper">Slutsky</b> 組合</span></div>
+        <div class="p-head"><span>練 2　<b class="proper" data-proper="史拉斯基">Slutsky</b> 組合</span></div>
         <div class="p-body">
           <p>$X_1,\ldots,X_n\overset{\text{iid}}{\sim}$ 任意分配，$E(X)=\mu$、$\mathrm{Var}(X)=\sigma^2&lt;\infty$。求 $\dfrac{\sqrt n(\bar X-\mu)}{S}$ 之極限分配。</p>
           <button class="ans-btn">顯示答案</button>
-          <div class="ans"><span class="a-label">解答</span>：$\sqrt n(\bar X-\mu)\xrightarrow{d}N(0,\sigma^2)$、$S\xrightarrow{p}\sigma$，<b class="proper">Slutsky</b>：$\dfrac{\sqrt n(\bar X-\mu)}{S}\xrightarrow{d}N(0,1)$。</div>
+          <div class="ans"><span class="a-label">解答</span>：$\sqrt n(\bar X-\mu)\xrightarrow{d}N(0,\sigma^2)$、$S\xrightarrow{p}\sigma$，<b class="proper" data-proper="史拉斯基">Slutsky</b>：$\dfrac{\sqrt n(\bar X-\mu)}{S}\xrightarrow{d}N(0,1)$。</div>
         </div>
       </div>
       <div class="problem">
@@ -1106,9 +1108,9 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
   <div class="chapter-head" id="ch3">
     <div class="kicker">研究所複習 · 數理統計 · 第 3 章</div>
     <h1>第3章 假說檢定理論<span class="en-sub">THEORY OF HYPOTHESIS TESTING · 書頁 105–158</span></h1>
-    <p>在樣本大小不變下，$\alpha$ 與 $\beta$ 彼此消長；本章探討如何在相同顯著水準下使檢定力 $1-\beta$ 極大化。從 <b class="proper">Neyman</b>–<b class="proper">Pearson</b> 引理找出最強力檢定（MPT），推廣到均勻最強力檢定（UMPT），再以廣義概似比檢定（GLRT）處理雙尾與複合假說。</p>
+    <p>在樣本大小不變下，$\alpha$ 與 $\beta$ 彼此消長；本章探討如何在相同顯著水準下使檢定力 $1-\beta$ 極大化。從 <b class="proper" data-proper="尼曼">Neyman</b>–<b class="proper" data-proper="皮爾森">Pearson</b> 引理找出最強力檢定（MPT），推廣到均勻最強力檢定（UMPT），再以廣義概似比檢定（GLRT）處理雙尾與複合假說。</p>
     <ul class="key-points">
-      <li>MPT：<b class="proper">Neyman</b>–<b class="proper">Pearson</b> 引理（簡單對簡單），拒絕域由概似比 $\lambda\le k$ 決定</li>
+      <li>MPT：<b class="proper" data-proper="尼曼">Neyman</b>–<b class="proper" data-proper="皮爾森">Pearson</b> 引理（簡單對簡單），拒絕域由概似比 $\lambda\le k$ 決定</li>
       <li>UMPT：單調概似比（MLR）、指數族自動滿足，單尾檢定幾乎都是 UMPT</li>
       <li>雙尾檢定不存在 UMPT，改用 GLRT</li>
       <li>GLRT 大樣本性質：$-2\ln\lambda\xrightarrow{d}\chi^2(r)$</li>
@@ -1122,15 +1124,15 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
     </div>
     <div class="section-body"><div><div class="section-inner">
-      <p>樣本大小不變下，$\alpha$（型一錯誤）與 $\beta$（型二錯誤）一般而言彼此消長；但在同樣的假說設定與顯著水準下，確實存在使檢定力 $1-\beta$ 極大化的檢定。本節先處理<b class="term" data-term="簡單假說對簡單假說">簡單假說對簡單假說</b>，定義<b class="term" data-term="最強力檢定">最強力檢定（most powerful test, MPT）</b>，再介紹 <b class="proper">Neyman</b>–<b class="proper">Pearson</b> 引理；之後推廣至<b class="term" data-term="簡單對複合">簡單對複合</b>的<b class="term" data-term="均勻最強力檢定">均勻最強力檢定（uniformly most powerful test, UMPT）</b>。</p>
+      <p>樣本大小不變下，$\alpha$（型一錯誤）與 $\beta$（型二錯誤）一般而言彼此消長；但在同樣的假說設定與顯著水準下，確實存在使檢定力 $1-\beta$ 極大化的檢定。本節先處理<b class="term" data-term="簡單假說對簡單假說">簡單假說對簡單假說</b>，定義<b class="term" data-term="最強力檢定">最強力檢定（most powerful test, MPT）</b>，再介紹 <b class="proper" data-proper="尼曼">Neyman</b>–<b class="proper" data-proper="皮爾森">Pearson</b> 引理；之後推廣至<b class="term" data-term="簡單對複合">簡單對複合</b>的<b class="term" data-term="均勻最強力檢定">均勻最強力檢定（uniformly most powerful test, UMPT）</b>。</p>
       <div class="note">名詞複習：<b class="term" data-term="簡單假說">簡單假說（simple hypothesis）</b>＝對 $f(x;\theta)$ 有精確設定（如 $H_a:\theta=\theta_a$）；<b class="term" data-term="複合假說">複合假說（composite hypothesis）</b>＝參數設定為範圍（如 $H_a:\theta&gt;10$）。</div>
     </div></div></div>
   </section>
 
-  <!-- ===== 3.1.1 <b class="proper">Neyman</b>-<b class="proper">Pearson</b> 引理 ===== -->
+  <!-- ===== 3.1.1 <b class="proper" data-proper="尼曼">Neyman</b>-<b class="proper" data-proper="皮爾森">Pearson</b> 引理 ===== -->
   <section class="section open" id="s311">
     <div class="section-head">
-      <span class="sec-num">§3.1.1</span><h2><b class="proper">Neyman</b>-<b class="proper">Pearson</b> 引理</h2>
+      <span class="sec-num">§3.1.1</span><h2><b class="proper" data-proper="尼曼">Neyman</b>-<b class="proper" data-proper="皮爾森">Pearson</b> 引理</h2>
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
     </div>
     <div class="section-body"><div><div class="section-inner">
@@ -1139,7 +1141,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
         <div class="formula"><div class="f-label">MPT</div><div class="f-body">$$\text{(1)}\ P\big(RR^*\mid\theta_0\big)=\alpha, \qquad \text{(2)}\ P\big(RR^*\mid\theta\big)\ge P\big(RR\mid\theta\big),\ \forall\text{ 其他拒絕域 } RR$$<div class="f-note">則稱 $RR^*$ 為最佳拒絕域，對應之決策法則為最強力檢定；$PF(\theta)=P(\text{reject }H_0\mid\theta)$ 為<b class="term" data-term="檢定力函數">檢定力函數（power function）</b>。$PF(\theta_0)=\alpha$；$\theta\in H_a$ 時 $PF(\theta)=1-\beta$。</div></div></div>
       </div></div>
 
-      <div class="thm thm1"><div class="thm-head">定理 3.2（<b class="proper">尼曼</b>–<b class="proper">皮爾森</b>引理，<b class="proper">Neyman</b>–<b class="proper">Pearson</b> lemma）</div><div class="thm-body">
+      <div class="thm thm1"><div class="thm-head">定理 3.2（<b class="proper" data-proper="尼曼">尼曼</b>–<b class="proper" data-proper="皮爾森">皮爾森</b>引理，<b class="proper" data-proper="尼曼">Neyman</b>–<b class="proper" data-proper="皮爾森">Pearson</b> lemma）</div><div class="thm-body">
         <p>$X_1,\ldots,X_n$ 為隨機樣本，抽自 $f(x;\theta)$，$\theta\in\{\theta_0,\theta_1\}$。檢定 $H_0:\theta=\theta_0$ 對 $H_a:\theta=\theta_1$，定義<b class="term" data-term="概似比">概似比（likelihood ratio）</b></p>
         <div class="formula"><div class="f-label">概似比</div><div class="f-body">$$\lambda=\frac{L(\theta_0;\boldsymbol{x})}{L(\theta_1;\boldsymbol{x})}=\frac{\prod f(x_i;\theta_0)}{\prod f(x_i;\theta_1)}$$<div class="f-note">在顯著水準 $\alpha$ 下，最強力檢定之最佳拒絕域必為 $RR^*=\{\lambda\le k\}$，且滿足 $P(\lambda\le k\mid\theta_0)=\alpha$。</div></div></div>
         <p class="proof">直覺：$H_a$ 的參數應帶來更大的概似函數值（概似＝可能性）；$\lambda\le k$ 表示 $H_a$ 相對 $H_0$ 可信度夠高。臨界值 $k$ 由 $P(\lambda\le k\mid\theta_0)=\alpha$ 決定。拒絕域亦稱臨界域（critical region, $C$），其餘集合稱接受域（acceptance region, $AR$）。部分教科書定義 $\lambda$ 為倒數，形式變為 $\lambda\ge k$，本質相同。</p>
@@ -1169,7 +1171,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
       </div></div></div><div class="problem"><div class="p-head"><span>範例 3.5　$N(\theta,1)$：$H_0:\theta=0$ vs $H_1:\theta=1$（交大財金）</span></div><div class="p-body">
       <p>（1）Find the best critical region of size $\alpha$；（2）State the theorem used.</p>
       <button class="ans-btn">顯示答案</button><div class="ans"><span class="a-label">解答</span><p>（1）$\lambda=e^{-\tfrac12\sum(x_i-0)^2+\tfrac12\sum(x_i-1)^2}=e^{\sum x_i-\tfrac n2}$；$\lambda\le k\iff\sum X_i\le k''\iff\bar X\le k'$——等一下，$\theta_1=1&gt;0$ 應為右尾：$\lambda\le k\iff e^{\sum x_i-\tfrac n2}\le k\iff\sum x_i\le \ln k+\tfrac n2$ 左尾？<br>重新檢查：$\sum(x_i-0)^2-\sum(x_i-1)^2=2\sum x_i-n$，$\lambda=e^{-\tfrac12(2\sum x_i-n)}=e^{-\sum x_i+n/2}\le k\iff\sum x_i\ge \tfrac n2-\ln k$：<b>右尾</b>。</p>
-      <div class="formula"><div class="f-label">MPT</div><div class="f-body">$$RR^*=\Big\{\bar X\ge k^*\Big\},\qquad \alpha=P(\bar X\ge k^*\mid\theta=0)=P\Big(Z\ge \sqrt n\,k^*\Big) \;\Rightarrow\; k^*=\frac{z_\alpha}{\sqrt n}$$<div class="f-note">（2）所引用之定理為 <b class="proper">Neyman</b>–<b class="proper">Pearson</b> lemma。</div></div></div>
+      <div class="formula"><div class="f-label">MPT</div><div class="f-body">$$RR^*=\Big\{\bar X\ge k^*\Big\},\qquad \alpha=P(\bar X\ge k^*\mid\theta=0)=P\Big(Z\ge \sqrt n\,k^*\Big) \;\Rightarrow\; k^*=\frac{z_\alpha}{\sqrt n}$$<div class="f-note">（2）所引用之定理為 <b class="proper" data-proper="尼曼">Neyman</b>–<b class="proper" data-proper="皮爾森">Pearson</b> lemma。</div></div></div>
 
       </div></div></div><div class="problem"><div class="p-head"><span>範例 3.6　$N(1,\sigma^2)$：$H_0:\sigma^2=2$ vs $H_1:\sigma^2=3$（政大統研）</span></div><div class="p-body">
       <p>（1）Argue that among all tests with type I error $\le.05$，the type II error is minimized by rejecting $H_0$ when $\sum_{i=1}^n(X_i-1)^2\ge c$.（2）Describe how to find $c$.</p>
@@ -1237,7 +1239,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
         <p>樣本抽自 $f(x;\theta)$，$\theta\in\Theta$（<b class="term" data-term="母數空間">母數空間</b>，parameter space）。顯著水準 $\alpha$ 下檢定 $H_0:\theta=\theta_0$ 對 $H_a:\theta\in\Theta-\{\theta_0\}$。若對<b>任意</b> $\theta\in\Theta-\{\theta_0\}$，$RR^*$ 均為最佳拒絕域，則稱 $RR^*$ 之決策法則為均勻最強力檢定。</p>
         <p class="proof">白話：複合對立假說有很多可能母數值（如 $H_a:\mu&gt;100$），UMPT 要求同一個 $RR^*$ 對 $\mu=100.3,101,112,\ldots$ 全都是 MPT。</p>
       </div></div>
-      <p>只要概似函數具<b class="term" data-term="單調概似比">單調概似比（monotone likelihood ratio, MLR）</b>性質，NP 引理結果即可推廣至左尾/右尾複合檢定而成為 UMPT；<b>單一參數指數族必滿足 MLR</b>（配 <b class="proper">Karlin–Rubin</b> 定理即證商用統計的單尾檢定皆 UMPT）。</p>
+      <p>只要概似函數具<b class="term" data-term="單調概似比">單調概似比（monotone likelihood ratio, MLR）</b>性質，NP 引理結果即可推廣至左尾/右尾複合檢定而成為 UMPT；<b>單一參數指數族必滿足 MLR</b>（配 <b class="proper" data-proper="Karlin–Rubin">Karlin–Rubin</b> 定理即證商用統計的單尾檢定皆 UMPT）。</p>
       <p><b>尋找策略</b>（以 $H_0:\theta=\theta_0$ vs $H_a:\theta&gt;\theta_0$ 為例）：先用 NP 引理對某定值 $\theta_1&gt;\theta_0$ 求 MPT；再說明此決策法則對任意 $\theta_1&gt;\theta_0$ 皆相同，即為 UMPT。</p>
 
       <div class="problem"><div class="p-head"><span>範例 3.14　Exp$(\theta)$ 三問（高應大金融）</span></div><div class="p-body">
@@ -1382,7 +1384,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
     </div>
     <div class="section-body"><div><div class="section-inner">
       <p>母體分配滿足正規條件（regularity conditions）下，廣義概似比 $\lambda$ 有大樣本抽樣分配性質：</p>
-      <div class="formula"><div class="f-label">大樣本性質</div><div class="f-body">$$-2\ln\lambda\ \xrightarrow{H_0,\ d}\ \chi^2(r)$$<div class="f-note">其中 $r$ 為 $H_0$ 中限制式（restrictions）的個數。證明見 <b class="proper">Bickel &amp; Doksum</b> (2001), <i>Mathematical Statistics</i>, pp. 392–395。</div></div></div>
+      <div class="formula"><div class="f-label">大樣本性質</div><div class="f-body">$$-2\ln\lambda\ \xrightarrow{H_0,\ d}\ \chi^2(r)$$<div class="f-note">其中 $r$ 為 $H_0$ 中限制式（restrictions）的個數。證明見 <b class="proper" data-proper="Bickel & Doksum">Bickel &amp; Doksum</b> (2001), <i>Mathematical Statistics</i>, pp. 392–395。</div></div></div>
       <ul>
         <li>單一參數的雙尾檢定（$H_0:\theta=\theta_0$）：$r=1$，$-2\ln\lambda\ \dot{\sim}\ \chi^2(1)$，臨界值 $\chi^2_\alpha(1)=z_{\alpha/2}^2$。</li>
         <li>這使 GLRT 可以繞過繁瑣的拒絕域化簡：直接算 $-2\ln\lambda$ 並與 $\chi^2(r)$ 臨界值比較（範例 3.34、3.35）。</li>
@@ -1429,13 +1431,13 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
   <div class="chapter-head" id="ch4">
     <div class="kicker">研究所複習 · 數理統計 · 第 4 章</div>
     <h1>第4章 財務工程數學<span class="en-sub">THE MATHEMATICS OF FINANCIAL ENGINEERING · 書頁 159–172</span></h1>
-    <p>本章把前三章的機率工具應用到財務金融：先以<b class="term" data-term="常態分配">常態分配</b>與<b class="term" data-term="對數常態分配">對數常態分配</b>處理「截尾、摺疊、報酬率相乘」等財務建模問題；再進入選擇權定價：從<b class="term" data-term="隨機過程">隨機過程</b>與<b class="term" data-term="馬可夫性質">馬可夫性質</b>出發，假設股價服從<b class="term" data-term="幾何布朗運動">幾何布朗運動</b>，以「配方法」技巧推導出 <b class="proper">Black-Scholes</b> 定價公式的核心期望值。</p>
+    <p>本章把前三章的機率工具應用到財務金融：先以<b class="term" data-term="常態分配">常態分配</b>與<b class="term" data-term="對數常態分配">對數常態分配</b>處理「截尾、摺疊、報酬率相乘」等財務建模問題；再進入選擇權定價：從<b class="term" data-term="隨機過程">隨機過程</b>與<b class="term" data-term="馬可夫性質">馬可夫性質</b>出發，假設股價服從<b class="term" data-term="幾何布朗運動">幾何布朗運動</b>，以「配方法」技巧推導出 <b class="proper" data-proper="Black–Scholes">Black-Scholes</b> 定價公式的核心期望值。</p>
     <ul class="key-points">
       <li>截尾常態：$E(X\mid A\lt X\lt B)=\mu+\sigma\cdot\dfrac{\varphi(z_A)-\varphi(z_B)}{\Phi(z_B)-\Phi(z_A)}$</li>
       <li>摺疊常態：$Y=|X|$ 的期望值與 pdf（$f_Y(y)=f_X(y)+f_X(-y)$）</li>
       <li>對數常態：$Y=e^X\sim\text{LogN}(\mu,\sigma^2)$，乘除對應常態的加減</li>
       <li>馬可夫性質、弱式效率市場、幾何布朗運動</li>
-      <li><b class="proper">Black-Scholes</b>：$e^{-rT}E\big[\max\{S_T-K,0\}\big]=S_0N(d_1)-Ke^{-rT}N(d_2)$</li>
+      <li><b class="proper" data-proper="Black–Scholes">Black-Scholes</b>：$e^{-rT}E\big[\max\{S_T-K,0\}\big]=S_0N(d_1)-Ke^{-rT}N(d_2)$</li>
     </ul>
   </div>
 
@@ -1509,7 +1511,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
           <button class="ans-btn">顯示答案</button>
           <div class="ans"><span class="a-label">解答</span><p>注意 $S_t\sim\text{LogN}\big(\ln S_0+(r-\tfrac{\sigma^2}{2})t,\ \sigma^2 t\big)$：</p>
           <div class="formula"><div class="f-label">違約機率</div><div class="f-body">$$\mathrm{Prob}(S_t\le X)=P\big(\ln S_t\le\ln X\big)=N\!\Big(-\frac{\ln(S_0/X)+(r-\frac{\sigma^2}{2})t}{\sigma\sqrt{t}}\Big)=N(-d_2)$$</div></div>
-          <p>延伸：$P(S_t>X)=1-N(-d_2)=N(d_2)$——這正是 <b class="proper">Black-Scholes</b> 選擇權定價理論中 $N(d_2)$ 的意義：到期時標的資產價格 $S_t$ 高於履約價 $X$ 的（風險中立）機率。</p></div>
+          <p>延伸：$P(S_t>X)=1-N(-d_2)=N(d_2)$——這正是 <b class="proper" data-proper="Black–Scholes">Black-Scholes</b> 選擇權定價理論中 $N(d_2)$ 的意義：到期時標的資產價格 $S_t$ 高於履約價 $X$ 的（風險中立）機率。</p></div>
         </div>
       </div>
       <div class="problem">
@@ -1535,7 +1537,7 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
     </div>
     <div class="section-body"><div><div class="section-inner">
-      <p><b class="term" data-term="選擇權">選擇權（option）</b>的價值來自到期時「標的價格對履約價的超越幅度」，因此定價問題本質上是「計算 $\max\{S_T-K,0\}$ 的期望值」。本節先建立股價的<b class="term" data-term="隨機過程">隨機過程</b>模型，再以「配方法」逐一推導 <b class="proper">Black-Scholes</b> 公式。</p>
+      <p><b class="term" data-term="選擇權">選擇權（option）</b>的價值來自到期時「標的價格對履約價的超越幅度」，因此定價問題本質上是「計算 $\max\{S_T-K,0\}$ 的期望值」。本節先建立股價的<b class="term" data-term="隨機過程">隨機過程</b>模型，再以「配方法」逐一推導 <b class="proper" data-proper="Black–Scholes">Black-Scholes</b> 公式。</p>
       <div class="formula"><div class="f-label">核心目標</div><div class="f-body">$$\text{買權價值}=e^{-rT}\,E\big[\max\{S_T-K,0\}\big]=S_0N(d_1)-Ke^{-rT}N(d_2)$$</div></div>
     </div></div></div>
   </section>
@@ -1689,16 +1691,16 @@ mark{background:var(--hl);padding:0 2px;border-radius:3px}
     <div class="section-body"><div><div class="section-inner">
       <p>本頁涵蓋全書四章，書頁 1–172（後 33 頁為各章習題詳解，另行整理）。</p>
       <div class="roadmap-grid">
-        <div class="roadmap-card done"><div class="r-t">第 1 章 點估計理論<span class="r-badge">已完成</span></div><div class="r-s">充份統計量、分解定理、指數族、UMVUE（<b class="proper">Rao-Blackwell</b> / <b class="proper">Lehmann-Scheffé</b>）、CRLB、貝氏估計</div></div>
-        <div class="roadmap-card done"><div class="r-t">第 2 章 大樣本理論<span class="r-badge">已完成</span></div><div class="r-s">分配收斂、機率收斂、WLLN、<b class="proper">Slutsky</b> 定理、Delta 法、MLE 漸近性質</div></div>
-        <div class="roadmap-card done"><div class="r-t">第 3 章 假說檢定理論<span class="r-badge">已完成</span></div><div class="r-s">MPT、<b class="proper">Neyman</b>-<b class="proper">Pearson</b> 引理、UMPT（MLR）、GLRT 與大樣本 $\chi^2$ 性質</div></div>
-        <div class="roadmap-card done"><div class="r-t">第 4 章 財務工程數學<span class="r-badge">已完成</span></div><div class="r-s">截尾/摺疊常態、對數常態、馬可夫性質、<b class="proper">Black-Scholes</b> 定價公式推導</div></div>
+        <div class="roadmap-card done"><div class="r-t">第 1 章 點估計理論<span class="r-badge">已完成</span></div><div class="r-s">充份統計量、分解定理、指數族、UMVUE（<b class="proper" data-proper="Rao-Blackwell">Rao-Blackwell</b> / <b class="proper" data-proper="Lehmann–Scheffé">Lehmann-Scheffé</b>）、CRLB、貝氏估計</div></div>
+        <div class="roadmap-card done"><div class="r-t">第 2 章 大樣本理論<span class="r-badge">已完成</span></div><div class="r-s">分配收斂、機率收斂、WLLN、<b class="proper" data-proper="史拉斯基">Slutsky</b> 定理、Delta 法、MLE 漸近性質</div></div>
+        <div class="roadmap-card done"><div class="r-t">第 3 章 假說檢定理論<span class="r-badge">已完成</span></div><div class="r-s">MPT、<b class="proper" data-proper="尼曼">Neyman</b>-<b class="proper" data-proper="皮爾森">Pearson</b> 引理、UMPT（MLR）、GLRT 與大樣本 $\chi^2$ 性質</div></div>
+        <div class="roadmap-card done"><div class="r-t">第 4 章 財務工程數學<span class="r-badge">已完成</span></div><div class="r-s">截尾/摺疊常態、對數常態、馬可夫性質、<b class="proper" data-proper="Black–Scholes">Black-Scholes</b> 定價公式推導</div></div>
       </div>
     </div></div></div>
   </section>
 
   <footer class="page-footer">
-    依據 <b class="proper">張翔</b>《<b class="proper">統計學～數理統計</b>》整理，PDF 212 頁 OCR（書內頁碼 = PDF 頁碼 − 4）。<br>
+    依據 <b class="proper" data-proper="張翔">張翔</b>《<b class="proper" data-proper="統計學～數理統計">統計學～數理統計</b>》整理，PDF 212 頁 OCR（書內頁碼 = PDF 頁碼 − 4）。<br>
     例題編號與來源學校依原書；公式以 KaTeX 排版。深色模式、側欄導覽、搜尋、術語表皆可離線使用。
   </footer>
 </main>
@@ -1780,6 +1782,26 @@ const TERM_DEFS = {
   '弱式效率':{en:'Weak-form market efficiency',zh:'弱式效率',def:'過去價格歷史無助預測未來股價；股價序列具馬可夫性質',cat:'g9'},
 };
 
+
+const PROPER_DEFS = {
+  '費雪':{en:'Ronald Aylmer Fisher (1890–1962)',zh:'費雪',def:'英國統計學家與演化生物學家，現代統計學奠基者：提出最大概似估計（MLE）、充份統計量概念、實驗設計與變異數分析（ANOVA），並建立「費雪訊息」；本頁充份性原則即其思想。',cat:'人物'},
+  '尼曼':{en:'Jerzy Neyman (1894–1981)',zh:'尼曼',def:'波蘭裔美籍統計學家：與 Egon Pearson 共同提出 Neyman–Pearson 引理（最強力檢定理論），並開創信賴區間的現代詮釋。',cat:'人物'},
+  '皮爾森':{en:'Karl Pearson (1857–1936)',zh:'皮爾森',def:'英國數學家，現代統計學奠基者之一：提出皮爾森相關係數、卡方（χ²）檢定與「標準差」等詞彙，並創辦期刊《Biometrika》。',cat:'人物'},
+  '史拉斯基':{en:'Eugen Slutsky (1880–1948)',zh:'史拉斯基',def:'俄羅斯裔數學家與經濟學家：Slutsky 定理說明在分配收斂與機率收斂的組合下，統計量的和、積之極限可分別合成；經濟學中的 Slutsky 方程式亦以其命名。',cat:'人物'},
+  'Rao-Blackwell':{en:'C. R. Rao (1920–2023) & David Blackwell (1919–2010)',zh:'Rao–Blackwell',def:'Rao–Blackwell 定理（Rao 1945、Blackwell 1947 獨立提出）：對任一不偏估計量取充份統計量的條件期望，得到變異數不變大的不偏估計量——改善不偏估計量的標準工具。',cat:'人物'},
+  'Lehmann–Scheffé':{en:'Erich L. Lehmann (1917–2009) & Henry Scheffé (1907–1977)',zh:'Lehmann–Scheffé',def:'Lehmann–Scheffé 定理：若 T 為完備充份統計量，則 T 的可測函數中唯一的無偏估計量即為 UMVUE——把找 UMVUE 化為「找完備充份統計量的函數」。',cat:'人物'},
+  'Cramér–Rao':{en:'Harald Cramér (1893–1985) & C. R. Rao (1920–2023)',zh:'Cramér–Rao',def:'Cramér–Rao 不等式（CRLB）：在正規條件下，不偏估計量的變異數有下界 1/I(θ)，其中 I(θ) 為費雪訊息；達成者稱為有效估計量。',cat:'人物'},
+  'Black–Scholes':{en:'Fischer Black (1938–1995) & Myron Scholes (1941–)',zh:'Black–Scholes',def:'Black–Scholes 選擇權定價公式（1973）：在幾何布朗運動與無套利假設下，以封閉形式給出歐式買權價格；Scholes 與 Merton 因此獲 1997 年諾貝爾經濟學獎（Black 已歿未授）。',cat:'人物'},
+  '張翔':{en:'本名廖崇智，PhD',zh:'張翔',def:'本書作者，台灣補習班名師（TKB 大碩）：中山大學生物系、政治大學經濟所碩士、臺灣大學國企所財務組博士；教授統計學、計量經濟學、投資學與財務管理。',cat:'人物'},
+  'Halmos–Savage':{en:'Paul Halmos (1916–2006) & Leonard J. Savage (1917–1971)',zh:'Halmos–Savage',def:'Halmos–Savage 定理（1949）：將 Radon–Nikodym 定理應用於充份統計量理論，證明指數族存在完備充份統計量的關鍵結果。',cat:'人物'},
+  'Karlin–Rubin':{en:'Samuel Karlin (1924–2007) & Herman Rubin (1926–2018)',zh:'Karlin–Rubin',def:'Karlin–Rubin 定理（1956）：若充份統計量 T 的分配族具單調概似比（MLR），則單邊假說檢定存在均勻最強力檢定（UMPT）。',cat:'人物'},
+  'Bain & Engelhardt':{en:'L. J. Bain & M. Engelhardt，1992 二版，Duxbury',zh:'Bain & Engelhardt',def:'《Introduction to Probability and Mathematical Statistics》：經典數理統計教科書，本書部分例題引自其中。',cat:'參考書'},
+  'Casella & Berger':{en:'George Casella (1946–2012) & Roger L. Berger，2002 二版，Duxbury',zh:'Casella & Berger',def:'《Statistical Inference》：數理統計研究生最經典教科書之一，涵蓋充份性、估計、檢定與貝氏推論。',cat:'參考書'},
+  'Bickel & Doksum':{en:'Peter J. Bickel (1940–) & Kjell A. Doksum (1940–)，2001 二版，Prentice Hall',zh:'Bickel & Doksum',def:'《Mathematical Statistics: Basic Ideas and Selected Topics》：高階數理統計經典，深入漸近理論與效率理論。',cat:'參考書'},
+  '費雪訊息':{en:'Fisher information',zh:'費雪訊息',def:'I(θ)=E[(∂lnL/∂θ)²]=−E[∂²lnL/∂θ²]；衡量樣本關於 θ 的訊息量，也是 CRLB 的分母。',cat:'g3'},
+  'Rao-Blackwell 定理 + Lehmann-Scheffé 定理':{en:'Two routes to UMVUE',zh:'Rao–Blackwell 定理 + Lehmann–Scheffé 定理',def:'找 UMVUE 的標準兩步：Rao–Blackwell 定理把不偏估計量改進（取充份統計量的條件期望），Lehmann–Scheffé 定理在完備充份統計量下證明唯一性。',cat:'g2'},
+  '統計學～數理統計':{en:'張翔',zh:'統計學～數理統計',def:'本書：張翔老師主講的研究所統計學教材，本複習頁依其 212 頁 PDF OCR 整理（書內頁碼 = PDF 頁碼 − 4）。',cat:'本書'},
+};
 // ===== 工具函數 =====
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
@@ -1803,8 +1825,8 @@ $$('[data-jump]').forEach(btn=>{
   btn.addEventListener('click', ()=>jumpTo(btn.dataset.jump, btn));
 });
 // ===== 名詞定義彈窗 =====
-function openTerm(key){
-  let d = TERM_DEFS[key];
+function openTerm(key, kind){
+  let d = TERM_DEFS[key] || PROPER_DEFS[key];
   if(!d){
     const hit = TERMS.find(x=>x.t===key || x.t.includes(key) || key.includes(x.t));
     if(hit) d = {en:'', zh:hit.t, def:hit.d, cat:hit.c};
@@ -1812,15 +1834,19 @@ function openTerm(key){
   if(!d) d = {en:'', zh:key, def:'（此名詞暫未收錄詳細定義，可至術語表瀏覽相關條目）', cat:''};
   $('#termModalEn').textContent = d.en || '';
   $('#termModalZh').textContent = d.zh;
+  $('#termModalZh').style.color = kind==='proper' ? 'var(--purple)' : '';
   $('#termModalDef').textContent = d.def;
   const cat = GLOSS_CATS.find(c=>c.id===d.cat);
-  $('#termModalCat').textContent = cat ? cat.name : '';
+  $('#termModalCat').textContent = cat ? cat.name : (d.cat || '');
   $('#termModal').style.display='flex';
   document.body.style.overflow='hidden';
 }
 function closeTerm(){ $('#termModal').style.display='none'; document.body.style.overflow=''; }
 $$('.term').forEach(t=>{
   t.addEventListener('click', e=>{ e.stopPropagation(); if(!t.dataset.term) return; openTerm(t.dataset.term); });
+});
+$$('.proper').forEach(t=>{
+  t.addEventListener('click', e=>{ e.stopPropagation(); if(!t.dataset.proper) return; openTerm(t.dataset.proper, 'proper'); });
 });
 $('#termModalGo').addEventListener('click', ()=>{ closeTerm(); jumpTo('gloss', null); });
 $('#termModal').addEventListener('click', e=>{ if(e.target.id==='termModal') closeTerm(); });
