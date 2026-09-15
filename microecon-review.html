@@ -405,7 +405,7 @@ const BOOK = [
   {n:4, title:"市場均衡分析", subs:["4.1 市場均衡","4.2 消費者與生產者剩餘及社會福利分析","4.3 政府介入對社會福利的影響","4.4 政府介入市場的其他手段","4.5 羅西法則與租稅轉嫁"], done:true, points:["市場均衡＝供給量＝需求量（市場結清）；ED/ES 由價格機能調整回均衡","比較靜態：需求右移P↑Q↑、供給右移P↓Q↑；供需同移→數量確定價格看幅度","CS=需求線下價格線上、PS=價格線下供給線上；SW=CS+PS","從量稅：對消費者課稅需求線下移、對生產者課稅供給線上移；課稅補貼都會造成DWL","價格上限→超額需求、價格下限→超額供給；管制對象剩餘一增一減不確定","羅西法則：彈性大課低稅、彈性小課高稅；租稅轉嫁＝彈性小的一方負擔多"]},
   {n:5, title:"數列效用分析", subs:["5.1 前言","5.2 總效用與邊際效用","5.3 消費者均衡","5.4 需求曲線的求導","5.5 鑽石與水的矛盾"], done:true, points:["數列效用可度量可比較；序列效用只排序（無異曲線分析）","TU 上升後下降、MU 遞減；MU>0 喜好品、=0 中性品、<0 厭惡品","消費者均衡＝邊際效用均等法則：MUx/Px = MUy/Py = MUm","需求曲線由 P = MU/MUm 導出；MU 遞減越快需求彈性越小","鑽石與水：價格由邊際效用決定、價值由總效用決定"]},
   {n:6, title:"消費者行為理論", subs:["6.1 消費者偏好基本公理","6.2 效用函數","6.3 常用偏好結構與預算線","6.4 消費者均衡與計算","6.5 對偶性理論","6.6 全章考試總複習清單"], done:true, points:["六大公理：完整、反射、遞移（公理）＋連續、單調、凸（假設）","良好偏好→無異曲線凸向原點、內部解唯一；MRS = MUx/MUy","四大效用函數：Cobb-Douglas、Leontief、Linear、Quasi-linear","預算線斜率 −Px/Py；均衡 MRS = Px/Py（相切）；角隅解比較 MRS 與價格比","對偶：效用極大↔支出極小；Roy 恆等式 ↔ Shephard 定理"]},
-  {n:7, title:"比較靜態與需求函數", subs:["7.1 替代效果與所得效果","7.2 普通與受補償需求曲線","7.3 所得與價格消費曲線","7.4 史勒斯基方程式"], done:false, points:[]},
+  {n:7, title:"比較靜態與需求函數", subs:["7.1 替代效果與所得效果","7.2 普通與受補償需求曲線","7.3 所得與價格消費曲線","7.4 史勒斯基方程式"], done:true, points:["價格效果 = 替代效果 + 所得效果；Hicks（維持效用/CV）vs Slutsky（維持原購買組合/CD）","受補償需求曲線只含 SE 永遠負斜率；馬歇爾需求含 SE＋IE","正常財 IE 與價格反向；劣等財反向抵銷；季芬財 IE &gt; SE（需求線正斜率）","ICC 只含 IE、PCC 含 SE＋IE；PCC 垂直 ⟺ 劣等財","史勒斯基方程式：∂x/∂P = ∂xh/∂P − x·∂x/∂M"]},
   {n:8, title:"消費者行為理論的應用", subs:["8.1 補貼或課稅對消費者之影響","8.2 勞動與休閒的選擇","8.3 跨期消費理論","8.4 顯示性偏好理論","8.5 皮氏與拉氏指數"], done:false, points:[]},
   {n:9, title:"不確定狀況下的選擇行為", subs:["9.1 賭局與期望效用","9.2 面對風險下之決策"], done:false, points:[]},
   {n:10, title:"生產理論與成本結構", subs:["10.1 前言","10.2 生產函數","10.3 短期生產結構","10.4 長期生產結構","10.5 擴張線","10.6 替代彈性","10.7 成本結構理論","10.8 短期成本結構","10.9 長期成本結構","10.10 規模經濟","10.11 要素價格與成本結構","10.12 附錄 廠商行為"], done:false, points:[]},
@@ -563,6 +563,21 @@ const TERMS = {
 "Expenditure function":["Expenditure function","支出函數 (E(P,Ū))","給定價格與效用水準的最小支出；價格凹且非遞減、一階齊次。"],
 "Roy's identity":["Roy's identity","Roy 恆等式","由間接效用函數還原馬歇爾需求：x = −(∂V/∂P<sub>x</sub>)/(∂V/∂M)。"],
 "Shephard's lemma":["Shephard's lemma","Shephard 定理","由支出函數還原希克斯需求：x = ∂E/∂P<sub>x</sub>。"],
+"Substitution effect":["Substitution effect","替代效果 (SE)","相對價格改變後，扣除實質所得變動部分，純由相對價格引起的消費量變動（實質所得不變）。"],
+"Income effect":["Income effect","所得效果 (IE)","相對價格不變下，實質所得（購買力）改變引起的消費量變動。"],
+"Price effect":["Price effect","價格效果","替代效果＋所得效果（總效果）。"],
+"Compensated variation":["Compensated variation","補償變量 (CV)","Hicks 定義：新價格下維持原效用水準所需增減的名目所得。"],
+"Cost difference":["Cost difference","成本差額 (CD)","Slutsky 定義：維持原購買組合所需增減的名目所得。"],
+"Equivalent variation":["Equivalent variation","相等變量 (EV)","舊價格下達到價格改變後新效用水準所需增減的名目所得。"],
+"Consumer surplus":["Consumer surplus","消費者剩餘 (CS)","最高願付價格與實際支付價格差額的總和；福利變動衡量工具。"],
+"Ordinary demand curve":["Ordinary demand curve","普通需求曲線","馬歇爾需求線：其他價格與所得固定下導出，包含替代與所得效果。"],
+"Compensated demand curve":["Compensated demand curve","受補償需求曲線","希克斯需求線：效用（實質所得）不變下導出，只有替代效果、永遠負斜率。"],
+"Giffen paradox":["Giffen paradox","季芬矛盾","所得效果力道大到使總需求量與價格同向變動；季芬財必為劣等財。"],
+"Income consumption curve":["Income consumption curve","所得消費曲線 (ICC)","各所得水準下消費者均衡點移動的軌跡（所得擴張線）；只含所得效果。"],
+"Price consumption curve":["Price consumption curve","價格消費曲線 (PCC)","各相對價格下消費者均衡點移動的軌跡；含替代與所得效果。"],
+"Engel curve":["Engel curve","恩格爾曲線","所得與特定商品消費量的關係；由 ICC 對應導出。"],
+"Engel aggregation":["Engel aggregation","恩格爾加總定理","加權所得彈性總和 = 1；若一財貨為劣等財，另一必為奢侈品。"],
+"Slutsky equation":["Slutsky equation","史勒斯基方程式","∂x/∂P<sub>x</sub> = ∂x<sup>h</sup>/∂P<sub>x</sub> − x·∂x/∂M；分解價格效果為替代與所得效果。"],
 };
 
 
@@ -1837,8 +1852,147 @@ const CH6_PROBLEMS = [
 },
 ];
 
-const CH7_SECTIONS = [];
-const CH7_PROBLEMS = [];
+const CH7_SECTIONS = [
+{
+  id:"7.1", title:"替代效果與所得效果",
+  body:`
+  <p><b>價格效果（Price effect）</b>＝替代效果＋所得效果（總效果）。</p>
+  <div class="method-card mc-title" data-mc="se-ie">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-1" data-mc="se-ie"><label for="mc-ch7-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">替代與所得效果</div>
+    <div class="mc-body">
+      <div class="mc-formula">價格效果 = 替代效果（SE）＋ 所得效果（IE）</div>
+      <div class="mc-detail"><b>替代效果</b>：相對價格改變後，扣除實質所得變動部分，純由相對價格引起的消費量變動（維持實質所得不變）。<b>所得效果</b>：相對價格不變下，實質所得（購買力）改變引起的消費量變動。</div>
+      <div class="mc-ex">例子：牛肉價格上漲 → 替代效果：改買雞肉（相對變便宜）；所得效果：變窮、所有消費減少。</div>
+    </div>
+  </div>
+  <div class="tblwrap"><table><colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+    <thead><tr><th>實質所得不變的定義</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr><td><b>Hicks 替代效果</b></td><td>維持在原效用水準；所需增減的名目所得＝<b>補償變量（Compensated variation, CV）</b></td></tr>
+      <tr><td><b>Slutsky 替代效果</b></td><td>維持在原購買組合；所需增減的名目所得＝<b>成本差額（Cost difference, CD）</b></td></tr>
+      <tr><td><b>相等變量（EV）</b></td><td>價格改變前價格水準下，讓消費者感受與價格改變後相同滿足感所需增減的所得</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>福利衡量</b>：序列效用下效用值僅能排序，故用貨幣變化量（CV、EV、消費者剩餘）衡量福利變動。消費者剩餘（CS）＝最高願付價格與實際支付價格差額的總和；價格由 P₀ 降至 P₁ 時 ΔCS 為梯形面積。</p>
+  <div class="warn">考試重點：單純名目所得改變不產生替代效果；CV 是「新價格下維持舊效用」需增減的所得，EV 是「舊價格下達到新效用」需增減的所得。</div>`
+},
+{
+  id:"7.2", title:"普通與受補償需求曲線",
+  body:`
+  <p><b>普通需求曲線（馬歇爾需求線）</b>：其他財貨價格與所得固定下導出——包含替代效果與所得效果；又稱未受補償需求曲線。</p>
+  <p><b>受補償需求曲線（希克斯需求線）</b>：其他財貨價格不變且實質所得（效用）不變下導出——只有替代效果；又稱補償需求曲線。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
+    <thead><tr><th>財貨性質</th><th>替代效果（SE）</th><th>所得效果（IE）</th></tr></thead>
+    <tbody>
+      <tr><td><b>正常財</b></td><td>與價格反向</td><td>與價格反向（同向加強）</td></tr>
+      <tr><td><b>劣等財</b></td><td>與價格反向</td><td>與價格同向（反向抵銷）</td></tr>
+      <tr><td><b>季芬財（Giffen）</b></td><td>與價格反向</td><td>與價格同向且幅度大於 SE → 需求曲線正斜率</td></tr>
+      <tr><td><b>所得中性財</b></td><td>與價格反向</td><td>無所得效果 → 需求曲線必負斜率</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>季芬矛盾（Giffen paradox）</b>：所得效果力道大到使總需求量與價格同向變動。季芬財必為劣等財，但劣等財未必是季芬財。</p>
+  <div class="warn">考試重點：受補償需求曲線永遠負斜率；馬歇爾需求曲線只有在商品非劣等財時才保證負斜率。正常財價格下降時，普通需求曲線的增加量 &gt; 受補償需求曲線（例題 7.13）。</div>`
+},
+{
+  id:"7.3", title:"所得與價格消費曲線",
+  body:`
+  <p><b>所得消費曲線（ICC）</b>（又稱所得擴張線）：其他情況不變，各所得水準下消費者均衡點移動的軌跡；僅反應所得效果。</p>
+  <p><b>價格消費曲線（PCC）</b>：其他情況不變，財貨相對價格改變時消費者均衡移動的軌跡；反應替代與所得效果。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:24%"><col style="width:38%"><col style="width:38%"></colgroup>
+    <thead><tr><th>曲線形狀</th><th>ICC 含義</th><th>PCC 含義</th></tr></thead>
+    <tbody>
+      <tr><td>正斜率</td><td>兩財貨皆正常財</td><td>兩財貨互補且 X 需求彈性 &lt; 1</td></tr>
+      <tr><td>水平線</td><td>—</td><td>兩財貨無關且 X 需求彈性 = 1</td></tr>
+      <tr><td>負斜率</td><td>其中一財貨為劣等財（另一必為奢侈品，恩格爾加總定理）</td><td>兩財貨替代且 X 需求彈性 &gt; 1</td></tr>
+      <tr><td>垂直線</td><td>—</td><td>X 必為劣等財（需求曲線垂直、彈性 = 0）</td></tr>
+      <tr><td>原點射出射線</td><td>兩財貨所得彈性 = 1（如 Cobb-Douglas）</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Engel 曲線</b>：ICC 上每點對應所得與 X 消費量的關係（將馬歇爾需求整理成 M = f(x)）。</p>
+  <div class="warn">考試重點：ICC/PCC 上每一點皆滿足消費者均衡；PCC 垂直 ⟺ X 為劣等財且需求曲線垂直。</div>`
+},
+{
+  id:"7.4", title:"史勒斯基方程式",
+  body:`
+  <p><b>史勒斯基方程式（Slutsky equation）</b>：把價格效果分解為替代效果與所得效果。</p>
+  <div class="method-card mc-title" data-mc="slutsky">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-2" data-mc="slutsky"><label for="mc-ch7-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">史勒斯基方程式</div>
+    <div class="mc-body">
+      <div class="mc-formula">∂x/∂P<sub>x</sub> = ∂x<sup>h</sup>/∂P<sub>x</sub> − x·(∂x/∂M)（總效果 = 替代效果 − x·所得效果）</div>
+      <div class="mc-detail">受補償需求線斜率永遠為負；只要商品非劣等財，普通需求線必為負斜率。季芬財＝劣等財且所得效果力道超過替代效果；但所得效果要強，該商品消費量必須大（乘上 x），而消費量大的商品（如房屋）通常不會是劣等財，故現實中季芬財罕見。</div>
+      <div class="mc-ex">例子：價格上升 1 元（dP &gt; 0）→ 維持購買原數量 x₀ 需多花 x₀·dP，實質所得下降 x₀·dP（故所得項帶負號）。</div>
+    </div>
+  </div>
+  <p><b>總效果與淨效果</b>：毛（總）效果包含替代與所得效果；淨效果只含替代效果（受補償需求線部分）。</p>
+  <div class="warn">考試重點：替代效果必與價格反向；正常財的所得效果與價格反向（加強 SE），劣等財與價格同向（抵銷 SE），季芬財的 IE 大於 SE。</div>`
+},
+];
+
+const CH7_PROBLEMS = [
+{
+  q:"A consumer consumes two normal goods, coffee and chocolate. The price of coffee rises. The income effect, by itself, suggests the consumer will consume （書本例題 7.4）",
+  opts:["(A) more coffee and less chocolate","(B) less coffee and less chocolate","(C) more coffee and more chocolate","(D) less coffee and more chocolate"],
+  ans:"<b>(B) less coffee and less chocolate。</b><ul><li>咖啡漲價 → 實質所得下降 → 兩種正常財消費皆減少</li></ul>"
+},
+{
+  q:"The substitution effect is the change in the consumption of a good associated with a change in （書本例題 7.5）",
+  opts:["(A) the good's nominal price, holding the consumer's level of utility constant","(B) the good's relative price, holding the consumer's level of utility constant","(C) the consumer's real income, holding relative prices constant","(D) the consumer's real income, holding nominal prices constant"],
+  ans:"<b>(B) the good's relative price, holding the consumer's level of utility constant。</b><ul><li>替代效果＝相對價格變動（實質所得/效用不變）引起的消費變動</li></ul>"
+},
+{
+  q:"Suppose two goods coffee and creamer provide utility only if consumed in fixed proportions. An increase in the price of coffee will yield （書本例題 7.6）",
+  opts:["(A) a substitution effect and an income effect in opposite directions","(B) an income effect but no substitution effect","(C) a substitution effect but no income effect","(D) a substitution effect and an income effect in the same directions"],
+  ans:"<b>(B) an income effect but no substitution effect。</b><ul><li>完全互補（Leontief）：無替代可能 → 只有所得效果</li></ul>"
+},
+{
+  q:"Suppose the price of a good rises. The income effect （書本例題 7.9）",
+  opts:["(A) shows the change in consumption that results from the change in relative price while staying on the same indifference curve","(B) shows the change in consumption that results from the change in relative price while keeping income constant","(C) is shown by decreasing income at the new relative price in order to move from the old indifference curve to the new one after the price change","(D) is shown by increasing income at the new relative price"],
+  ans:"<b>(C) is shown by decreasing income at the new relative price in order to move from the old indifference curve to the new one。</b><ul><li>所得效果＝在新相對價格下移動預算線（調整所得）使消費者由舊無異曲線移到新無異曲線</li></ul>"
+},
+{
+  q:"If Ramen noodles are an inferior good and textbooks are normal, the substitution effect of a decrease in the price of Ramen, by itself, will result in （書本例題 7.10）",
+  opts:["(A) a decrease in both textbooks and Ramen","(B) a decrease in textbooks and an increase in Ramen","(C) an increase in both textbooks and Ramen","(D) an increase in textbooks and a decrease in Ramen"],
+  ans:"<b>(B) a decrease in textbooks and an increase in Ramen。</b><ul><li>泡麵降價 → 替代效果：泡麵相對便宜 → 多買泡麵、少買教科書</li></ul>"
+},
+{
+  q:"The following can be said about the income and substitution effects of a price increase on the demand for a good whose price rose （書本例題 7.11）",
+  opts:["(A) The former is always positive and the latter is always non-positive","(B) Both can be either positive or negative","(C) While the latter is always non-positive, the former can be either positive or negative","(D) While the former is always negative, the latter can be either positive or negative","(E) The former can at times be negative, but it will never overwhelm the latter"],
+  ans:"<b>(C) While the latter is always non-positive, the former can be either positive or negative。</b><ul><li>替代效果必為非正；所得效果依正常財（負）或劣等財（正）而定</li></ul>"
+},
+{
+  q:"Consider the ordinary and compensated demand curves for a normal good. If the price falls, then （書本例題 7.13）",
+  opts:["(A) the ordinary demand curve will show the larger increase in quantity demanded","(B) the compensated demand curve will show the larger increase","(C) the increase will be the same for both","(D) we cannot predict"],
+  ans:"<b>(A) the ordinary demand curve will show the larger increase。</b><ul><li>正常財：價格下降 → SE＋IE 同向；普通需求含所得效果 → 增加量更大</li></ul>"
+},
+{
+  q:"Jack is initially in equilibrium for x and y. x is normal, y is inferior. The price of x falls. For Jack to move to a new equilibrium point （書本例題 7.14）",
+  opts:["(A) the consumption of both x and y must decrease","(B) the consumption of x must decrease","(C) the consumption of x must increase","(D) the consumption of both x and y must increase"],
+  ans:"<b>(C) the consumption of x must increase。</b><ul><li>x 為正常財且降價：SE＋IE 皆使 x 增加；y 為劣等財但 x 降價使實質所得上升 → y 減少</li></ul>"
+},
+{
+  q:"Which of the following property is false for a Giffen good when its price increases? （書本例題 7.15）",
+  opts:["(A) The substitution effect is negative","(B) The income effect is positive","(C) The substitution effect dominates the income effect","(D) The income effect dominates the substitution effect"],
+  ans:"<b>(C) false——季芬財是所得效果壓過替代效果。</b><ul><li>季芬財：IE（正）&gt; SE（負）→ 總效果與價格同向（需求曲線正斜率）</li></ul>"
+},
+{
+  q:"下列何者關於季芬財的描述為正確？ （書本例題 7.16）",
+  opts:["(A) 必定為正常財","(B) 符合需求法則","(C) 所得效果大於替代效果","(D) 支出占所得比重低","(E) 以上皆非"],
+  ans:"<b>(C) 所得效果大於替代效果。</b><ul><li>季芬財必為劣等財（非正常財）、違反需求法則；所得效果力道大於替代效果</li></ul>"
+},
+{
+  q:"是非題：(1) 替代效果與所得效果反方向 → 正斜率需求曲線？(2) 某商品價格消費曲線為垂直線 → 該物品為劣等財？ （書本例題 7.17）",
+  opts:["(A) (1) 錯誤；(2) 正確","(B) (1) 正確；(2) 錯誤","(C) 兩者皆正確","(D) 兩者皆錯誤"],
+  ans:"<b>(A) (1) 錯誤；(2) 正確。</b><ul><li>(1) 須所得效果（反方向）力道大於替代效果才會正斜率（季芬財），反方向本身不夠</li><li>(2) PCC 垂直 → IE 與 SE 等量反向 → 必為劣等財</li></ul>"
+},
+{
+  q:"John's MRS = −3（x 對 y），市場價格 P<sub>x</sub>=3、P<sub>y</sub>=1。求所得擴張路徑與 x 的 Engel 曲線方程式。 （書本例題 7.20）",
+  opts:["(A) y = 3x（ICC）；M = 3x + 3x = 6x → Engel: M = 6x","(B) y = x；M = 4x","(C) x = 3y","(D) 無法決定"],
+  ans:"<b>(A) y = 3x（ICC）；M = 6x。</b><ul><li>均衡 MRS = P<sub>x</sub>/P<sub>y</sub> = 3 → y/x = 3 → y = 3x；代回預算線 M = 3x + y = 6x</li></ul>"
+},
+];
+
 const CH8_SECTIONS = [];
 const CH8_PROBLEMS = [];
 const CH9_SECTIONS = [];
@@ -2119,6 +2273,9 @@ const GLOSS_CATS = [
   {name:"預算限制", keys:["Budget constraint line","Consumption possibility set","Relative price","Numeraire","Endowment"]},
   {name:"消費者均衡", keys:["Marshallian demand","Hicksian demand","Interior solution","Corner solution"]},
   {name:"對偶性理論", keys:["Indirect utility function","Expenditure function","Roy's identity","Shephard's lemma"]},
+  {name:"替代與所得效果", keys:["Substitution effect","Income effect","Price effect","Compensated variation","Cost difference","Equivalent variation","Consumer surplus"]},
+  {name:"需求曲線", keys:["Ordinary demand curve","Compensated demand curve","Giffen paradox"]},
+  {name:"消費曲線與方程式", keys:["Income consumption curve","Price consumption curve","Engel curve","Engel aggregation","Slutsky equation"]},
 ];
 
 const GLS = {
@@ -2132,7 +2289,8 @@ const CH_TERMS_CATS = {
   3:["供給基礎","供給彈性"],
   4:["市場均衡","福利與政府介入"],
   5:["效用理論","消費者均衡"],
-  6:["偏好與公理","效用函數與無異曲線","預算限制","消費者均衡","對偶性理論"]
+  6:["偏好與公理","效用函數與無異曲線","預算限制","消費者均衡","對偶性理論"],
+  7:["替代與所得效果","需求曲線","消費曲線與方程式"]
 };
 let glossMode="full", glossChapter=1;
 
