@@ -402,7 +402,7 @@ const BOOK = [
   {n:1, title:"經濟學概論", subs:["1.1 進入經濟學的世界","1.2 經濟學的意義","1.3 經濟問題","1.4 經濟學的分類與模型建構","1.5 經濟學的邏輯謬誤","1.6 經濟活動循環流轉"], done:false, points:[]},
   {n:2, title:"需求", subs:["2.1 需求函數與市場需求","2.2 需求價格彈性","2.3 需求價格彈性對消費者支出的影響","2.4 交叉彈性","2.5 需求量與所得的關係","2.6 影響需求價格彈性的因素"], done:true, points:["需求的成立：願意＋能夠，且其他情況不變（流量變數）","需求法則：價格與需求量反向變動；需求量變動＝線上點移動，需求變動＝整條線移動","市場需求＝個別需求水平加總；違反需求法則：炫耀性財貨與季芬財","需求價格彈性：點彈性、弧彈性（中點法）、幾何彈性（直線五區段）","總支出與彈性：|ε|>1 反向、=1 不變、<1 同向","交叉彈性：>0 替代、<0 互補、=0 無關；所得彈性：>0 正常（必需/地位/奢侈）、<0 劣等、=0 中性","恩格爾法則與加總定理；影響彈性六因素"]},
   {n:3, title:"供給", subs:["3.1 供給函數與市場供給","3.2 供給價格彈性與其他相關彈性"], done:true, points:["供給定義：特定期間＋其他情況不變＋願意且能夠；供給法則：價格與供給量同向","供給量變動＝線上點移動；供給變動＝整條線移動（技術、要素價格、預期、相關財價格、人數）","生產上互補品（聯產品）與替代品（要素搶奪）區分","供給價格彈性：點／弧彈性；直線五型（縱軸&gt;1、橫軸&lt;1、原點=1、垂直=0、水平=∞）","影響供給彈性：投入用途、成本敏感度、技術、規模、時間、保存容易度、定義範圍"]},
-  {n:4, title:"市場均衡分析", subs:["4.1 市場均衡","4.2 消費者與生產者剩餘及社會福利分析","4.3 政府介入對社會福利的影響","4.4 政府介入市場的其他手段","4.5 羅西法則與租稅轉嫁"], done:false, points:[]},
+  {n:4, title:"市場均衡分析", subs:["4.1 市場均衡","4.2 消費者與生產者剩餘及社會福利分析","4.3 政府介入對社會福利的影響","4.4 政府介入市場的其他手段","4.5 羅西法則與租稅轉嫁"], done:true, points:["市場均衡＝供給量＝需求量（市場結清）；ED/ES 由價格機能調整回均衡","比較靜態：需求右移P↑Q↑、供給右移P↓Q↑；供需同移→數量確定價格看幅度","CS=需求線下價格線上、PS=價格線下供給線上；SW=CS+PS","從量稅：對消費者課稅需求線下移、對生產者課稅供給線上移；課稅補貼都會造成DWL","價格上限→超額需求、價格下限→超額供給；管制對象剩餘一增一減不確定","羅西法則：彈性大課低稅、彈性小課高稅；租稅轉嫁＝彈性小的一方負擔多"]},
   {n:5, title:"數列效用分析", subs:["5.1 前言","5.2 總效用與邊際效用","5.3 消費者均衡","5.4 需求曲線的求導","5.5 鑽石與水的矛盾"], done:false, points:[]},
   {n:6, title:"消費者行為理論", subs:["6.1 消費者偏好基本公理","6.2 效用函數","6.3 常用偏好結構與預算線","6.4 消費者均衡與計算","6.5 對偶性理論","6.6 全章考試總複習清單"], done:false, points:[]},
   {n:7, title:"比較靜態與需求函數", subs:["7.1 替代效果與所得效果","7.2 普通與受補償需求曲線","7.3 所得與價格消費曲線","7.4 史勒斯基方程式"], done:false, points:[]},
@@ -500,6 +500,29 @@ const TERMS = {
 "Cross elasticity of supply":["Cross elasticity of supply","供給交叉彈性","其他商品價格變動百分之一引起本商品供給量變動百分之幾；&gt;0 生產替代品、&lt;0 生產互補品。"],
 "Cost elasticity of supply":["Cost elasticity of supply","供給的成本彈性","成本變動百分之一引起供給量變動百分之幾。"],
 "Production substitutes":["Production substitutes","生產上替代品","同生產要素但不同生產過程、生產時搶奪要素的商品；一商品價格↑另一商品供給↓。"],
+"Equilibrium":["Equilibrium","均衡","沒有外力干擾下目前的情況可以一直維持下去的狀態；市場供需兩股力量平衡點。"],
+"Market clearing":["Market clearing","市場結清","供需平衡使市場上不存在多餘的買者與賣者：供給量＝需求量。"],
+"Excess demand":["Excess demand","超額需求（短缺）","價格低於均衡時需求大於供給的狀態，價格機能使價格上升。"],
+"Excess supply":["Excess supply","超額供給（過剩）","價格高於均衡時供給大於需求的狀態，價格機能使價格下降。"],
+"Price mechanism":["Price mechanism","價格機能","透過價格變動使市場回到均衡的機制；即亞當斯密所說「看不見的手」。"],
+"Stable equilibrium":["Stable equilibrium","穩定均衡","市場偏離均衡時在沒有外力干擾下會自動回到的均衡。"],
+"Comparative static":["Comparative static","比較靜態分析","外生變數改變後比較變化前與變化後兩種不同均衡狀態的內生變數。"],
+"Dynamic analysis":["Dynamic analysis","動態分析","討論由某均衡移動到另一新均衡時變數隨時間歷程的變動（如蛛網理論）。"],
+"Correspondence principle":["Correspondence principle","對應原理","薩繆爾森提出：比較靜態結果與動態結果須一致，模型才稱穩定。"],
+"Partial equilibrium":["Partial equilibrium","部分均衡分析","其他情況不變下只就經濟體系某一特定部分進行分析；個體經濟多數採用。"],
+"General equilibrium":["General equilibrium","一般均衡分析","考慮所有部門與變數之間關係、使每一部門都達到均衡的分析；總體經濟多數採用。"],
+"Consumer surplus":["Consumer surplus","消費者剩餘 (CS)","給定消費數量下消費者最高願付價格與實際付出價格之間的差額。"],
+"Producer surplus":["Producer surplus","生產者剩餘 (PS)","給定生產數量下生產者收入與實際投入成本之間的差額。"],
+"Social welfare":["Social welfare","社會福利 (SW)","無政府介入：SW = CS + PS；有政府介入另加稅收、減補貼與無謂損失。"],
+"Deadweight loss":["Deadweight loss","無謂損失 (DWL)","又稱超額負擔；因生產量低於競爭均衡產量而損失的社會福利。"],
+"Lump sum tax":["Lump sum tax","定額稅","固定收取一筆的稅收，不隨數量改變。"],
+"Excise tax":["Excise tax","從量稅","每單位商品課徵固定 t 元的稅；T = t·Q。"],
+"Ad valorem tax":["Ad valorem tax","從價稅","每塊錢課徵 t% 的稅；T = t·PQ。"],
+"Price ceiling":["Price ceiling","價格上限","價格被管制在均衡價格之下造成超額需求；須低於市場價格才有效。"],
+"Price floor":["Price floor","價格下限","價格被管制在均衡價格之上造成超額供給；須高於市場價格才有效。"],
+"Rent-seeking":["Rent-seeking","尋租行為","經濟個體為了賺取經濟租，利用既有利益或不正當行為取得特權。"],
+"Ramsey rule":["Ramsey rule","羅西法則（倒需求彈性法則）","使各財貨課稅後無謂損失相同：需求彈性大的商品課低稅率、彈性小的課高稅率。"],
+"Tax incidence":["Tax incidence","租稅歸宿","租稅經市場均衡後最終形成的實際負擔；法定歸宿≠經濟歸宿。"],
 };
 
 
@@ -1129,8 +1152,271 @@ const CH3_PROBLEMS = [
 },
 ];
 
-const CH4_SECTIONS = [];
-const CH4_PROBLEMS = [];
+const CH4_SECTIONS = [
+{
+  id:"4.1", title:"市場均衡",
+  body:`
+  <p><b>均衡（Equilibrium）</b>：在沒有外力干擾下，目前的情況可以一直維持下去。市場均衡＝供需兩股力量平衡的狀態。</p>
+  <p><b>市場結清（Market clearing）</b>：其他情況不變，生產者願收價格＝消費者願付價格；或給定價格下供給量＝需求量，市場上不存在多餘的買者與賣者。</p>
+  <div class="svgfig">
+  <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+    <line x1="40" y1="270" x2="400" y2="270" stroke="#3a3126" stroke-width="1.6"/>
+    <line x1="40" y1="270" x2="40" y2="20" stroke="#3a3126" stroke-width="1.6"/>
+    <text x="385" y="262" font-size="13">Q</text><text x="18" y="28" font-size="13">P</text>
+    <line x1="60" y1="250" x2="360" y2="60" stroke="#2f5d62" stroke-width="2.4"/>
+    <text x="330" y="55" font-size="13" fill="#2f5d62">D</text>
+    <line x1="60" y1="60" x2="360" y2="250" stroke="#b0561f" stroke-width="2.4"/>
+    <text x="330" y="258" font-size="13" fill="#b0561f">S</text>
+    <circle cx="210" cy="155" r="4" fill="#b45309"/>
+    <line x1="210" y1="155" x2="210" y2="270" stroke="#b45309" stroke-width="1" stroke-dasharray="4 3"/>
+    <line x1="40" y1="155" x2="210" y2="155" stroke="#b45309" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="212" y="285" font-size="13" fill="#b45309">Q*</text>
+    <text x="6" y="150" font-size="13" fill="#b45309">P*</text>
+    <text x="252" y="140" font-size="11" fill="#b45309">E</text>
+  </svg>
+  </div>
+  <p><b>不均衡的調整</b>（價格機能 Price mechanism）：</p>
+  <div class="tblwrap"><table><colgroup><col style="width:18%"><col style="width:30%"><col style="width:52%"></colgroup>
+    <thead><tr><th>狀態</th><th>條件</th><th>調整</th></tr></thead>
+    <tbody>
+      <tr><td>超額需求 ED（短缺）</td><td>P &lt; P*，需求 &gt; 供給</td><td>買氣旺盛 → 價格上升 → 需求量↓、供給量↑ → 回均衡</td></tr>
+      <tr><td>超額供給 ES（過剩）</td><td>P &gt; P*，供給 &gt; 需求</td><td>乏人問津 → 價格下降 → 需求量↑、供給量↓ → 回均衡</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>穩定均衡（Stable equilibrium）</b>：市場偏離均衡時，沒有外力干擾下會自動回到均衡。<span class="term" data-term="Price mechanism">價格機能</span>即<span class="proper">亞當斯密（Adam Smith）</span>所說的「看不見的手」。</p>
+  <p><b>均衡背後意義</b>：有效模型需具備均衡解存在、唯一、穩定三條件；交易不一定發生在均衡點（願付 &gt; 願收即可成交），均衡的價值在於判斷未來的調整方向。</p>
+  <p><b>特殊均衡</b>：均衡數量可為負 → 有行無市、不存在均衡；價格可為負 → 供給者倒貼消費者的情況。</p>
+  <p><b>分析方法分類</b>：</p>
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:46%"><col style="width:32%"></colgroup>
+    <thead><tr><th>方法</th><th>內容</th><th>時間因素</th></tr></thead>
+    <tbody>
+      <tr><td>靜態</td><td>其他情況不變，分析某一特定均衡下的內生變數</td><td>無</td></tr>
+      <tr><td>比較靜態</td><td>外生變數改變後，比較變化前後兩種均衡</td><td>無</td></tr>
+      <tr><td>動態</td><td>由某均衡移往新均衡時，變數隨時間歷程的調整（蛛網理論）</td><td>有</td></tr>
+    </tbody>
+  </table></div>
+  <p><span class="proper">薩繆爾森（Paul Samuelson）</span>提出<b>對應原理</b>：比較靜態結果須與動態結果一致，模型才稱穩定。另按範圍分<b>部分均衡</b>（個經多數）與<b>一般均衡</b>（總經多數）。</p>
+  <div class="method-card mc-title" data-mc="comparative-static">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-1" data-mc="comparative-static"><label for="mc-ch4-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">比較靜態</div>
+    <div class="mc-body">
+      <div class="mc-formula">需求右移 → P↑、Q↑；供給右移 → P↓、Q↑；供需同向移動 → Q 方向確定、P 看幅度</div>
+      <div class="mc-detail">數理：Q<sub>d</sub> = a − bP、Q<sub>s</sub> = −c + dP → P* = (a+c)/(b+d)、Q* = (ad−bc)/(b+d)。需求外生參數 a↑ → P*、Q* 皆升；供給參數 c↑ → P* 降、Q* 升。</div>
+      <div class="mc-ex">例子：技術進步使手機供給右移 → 均衡價格下降、數量上升。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：供需同時右移，均衡數量「一定」上升，價格不確定；供需同時左移，數量「一定」下降，價格不確定。</div>`
+},
+{
+  id:"4.2", title:"消費者與生產者剩餘及社會福利分析",
+  body:`
+  <p>剩餘表示交易雙方覺得「交易比不交易好」所得到的好處。</p>
+  <p><b><span class="term" data-term="Consumer surplus">消費者剩餘（Consumer's surplus, CS）</span></b>：其他情況不變，給定消費數量下，消費者心中最高願付價格與實際付出價格之間的差額。</p>
+  <p><b><span class="term" data-term="Producer surplus">生產者剩餘（Producer's surplus, PS）</span></b>：其他情況不變，給定生產數量下，生產者收入與實際投入成本之間的差額。</p>
+  <div class="svgfig">
+  <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+    <line x1="40" y1="270" x2="400" y2="270" stroke="#3a3126" stroke-width="1.6"/>
+    <line x1="40" y1="270" x2="40" y2="20" stroke="#3a3126" stroke-width="1.6"/>
+    <text x="385" y="262" font-size="13">Q</text><text x="18" y="28" font-size="13">P</text>
+    <line x1="60" y1="250" x2="360" y2="60" stroke="#2f5d62" stroke-width="2.4"/>
+    <text x="330" y="55" font-size="13" fill="#2f5d62">D</text>
+    <line x1="60" y1="60" x2="360" y2="250" stroke="#b0561f" stroke-width="2.4"/>
+    <text x="330" y="258" font-size="13" fill="#b0561f">S</text>
+    <circle cx="210" cy="155" r="4" fill="#b45309"/>
+    <line x1="40" y1="155" x2="210" y2="155" stroke="#b45309" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <line x1="210" y1="155" x2="210" y2="270" stroke="#b45309" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <polygon points="60,250 210,155 60,155" fill="#2f5d62" opacity="0.25"/>
+    <polygon points="60,155 210,155 210,60" fill="#b0561f" opacity="0.25"/>
+    <text x="78" y="215" font-size="13" fill="#2f5d62">CS</text>
+    <text x="120" y="105" font-size="13" fill="#b0561f">PS</text>
+    <text x="6" y="150" font-size="13" fill="#b45309">P*</text>
+  </svg>
+  </div>
+  <p><b>社會福利（Social welfare, SW）</b>：無政府介入下 SW = CS + PS；有政府介入下 SW = CS + PS + 稅收 − 補貼 − 無謂損失。</p>
+  <p><b>經濟租</b>：供給缺乏彈性時產生的剩餘（如球星薪水、獨特土地）。</p>
+  <div class="method-card mc-title" data-mc="surplus-area">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-2" data-mc="surplus-area"><label for="mc-ch4-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">剩餘＝三角形面積</div>
+    <div class="mc-body">
+      <div class="mc-formula">CS = 最高願付 − 實付 = 需求線下、價格線上之面積；PS = 收入 − 成本 = 價格線下、供給線上之面積</div>
+      <div class="mc-detail">SW = CS + PS（無政府）；計算用三角形面積公式（底 × 高 ÷ 2）。</div>
+      <div class="mc-ex">例子：需求 P = 100 − 2Q、供給 P = 20，均衡 Q = 40 → CS = (100−20)×40÷2 = 1600；PS = 0（水平供給線無剩餘）。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：經濟租的產生由於供給線傾向缺乏彈性（例題 4.10）。</div>`
+},
+{
+  id:"4.3", title:"政府介入對社會福利的影響",
+  body:`
+  <p>若市場無失靈且政府不干預，可達社會福利最大；政府介入會產生<b><span class="term" data-term="Deadweight loss">無謂損失（Deadweight loss, DWL）</span></b>＝超額負擔＝因生產量低於競爭均衡產量而損失的社會福利。</p>
+  <p><b>政府介入手段</b>：</p>
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:39%"><col style="width:39%"></colgroup>
+    <thead><tr><th>類型</th><th>課稅</th><th>補貼</th></tr></thead>
+    <tbody>
+      <tr><td>定額</td><td>固定收取一筆：T = t̄</td><td>固定補貼一筆：S = s̄</td></tr>
+      <tr><td>從量</td><td>每單位付 t 元：T = t·Q</td><td>每單位獲 s 元：S = s·Q</td></tr>
+      <tr><td>從價</td><td>每塊錢付 t% ：T = t·PQ</td><td>每塊錢獲 s% ：S = s·PQ</td></tr>
+    </tbody>
+  </table></div>
+  <div class="method-card mc-title" data-mc="excise-tax">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-3" data-mc="excise-tax"><label for="mc-ch4-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">從量稅與補貼</div>
+    <div class="mc-body">
+      <div class="mc-formula">對消費者課從量稅 → 需求線垂直下移 t；對生產者課從量稅 → 供給線垂直上移 t。補貼方向相反</div>
+      <div class="mc-detail">稅/補貼不改變課徵對象本身的供需線，但改變對方看到的線；計算時須將函數化為 P = f(Q) 形式。無論課稅或補貼對象是消費者或生產者，對社會福利與無謂損失的影響都一樣。</div>
+      <div class="mc-ex">例子：需求 P = 100 − 2Q、供給 P = 20 + Q，課從量稅 t = 6 → 新均衡 Q 降、消費者付的價格升、生產者收到的價格降。</div>
+    </div>
+  </div>
+  <p><b>福利分析結果</b>：</p>
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
+    <thead><tr><th>項目</th><th>課從量稅後</th><th>從量補貼後</th></tr></thead>
+    <tbody>
+      <tr><td>均衡數量</td><td>下降</td><td>上升</td></tr>
+      <tr><td>消費者剩餘</td><td>下降</td><td>上升</td></tr>
+      <tr><td>生產者剩餘</td><td>下降</td><td>上升</td></tr>
+      <tr><td>社會福利</td><td>下降（產生 DWL）</td><td>下降（產生 DWL）</td></tr>
+      <tr><td>政府收支</td><td>稅收上升</td><td>補貼支出上升</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：DWL 的定義——(A) 總稅收 (B) 因稅造成的生產者＋消費者剩餘損失 (C) 稅收＋剩餘損失 (D) 剩餘損失 − 稅收 → 答案為 (B)。</div>`
+},
+{
+  id:"4.4", title:"政府介入市場的其他手段",
+  body:`
+  <p>政府除課稅與補貼外，可用價格管制或數量管制介入市場。</p>
+  <p><b><span class="term" data-term="Price ceiling">價格上限（Price ceiling）</span></b>：價格被管制在均衡價格之下 → 超額需求。須低於市場價格才有效。用意在壓抑過高價格保護消費者，但生產者剩餘一定下降、消費者剩餘增減不確定。</p>
+  <p><b><span class="term" data-term="Price floor">價格下限（Price floor）</span></b>：價格被管制在均衡價格之上 → 超額供給。須高於市場價格才有效。常見於農產品、勞動市場（工會、勞基法）。用意在拉高價格保護生產者，但消費者剩餘一定下降、生產者剩餘增減不確定。</p>
+  <p><b>超額需求的解決方式</b>：</p>
+  <ul>
+    <li><b>排隊</b>：時間成本分配資源（時間成本高的自動退出）；缺點是浪費時間</li>
+    <li><b>轉售（黃牛）</b>：溢價分配資源、節省時間成本轉為黃牛收入</li>
+    <li><b>抽籤</b>：人人機會均等；但可能資源配置低落（非最需要的人得到）</li>
+    <li><b><span class="term" data-term="Rent-seeking">尋租行為（Rent-seeking）</span></b>：利用既有利益或不正當行為取得特權（走後門）</li>
+    <li><b>甄選制度</b>：大學聯考、研究所考試等</li>
+  </ul>
+  <p><b>超額供給的解決方式</b>：</p>
+  <ul>
+    <li><b>保證價格收購制</b>：政府設定價格下限，保證收購市場上所有超額供給</li>
+    <li><b>價差補貼制</b>：政府設定價格下限並補貼使全數售出的差額（直接補貼：市場自由運作，價格低於設定價時補差價）</li>
+  </ul>
+  <div class="warn">考試重點：面對價格上限，市場均衡數量依「短邊原則」（供給量）決定。</div>`
+},
+{
+  id:"4.5", title:"羅西法則與租稅轉嫁",
+  body:`
+  <p><b><span class="term" data-term="Ramsey rule">羅西法則（Ramsey rule）</span></b>＝倒需求彈性法則：希望任何財貨課稅後造成的無謂損失相同 → 需求彈性大的商品課低稅率、需求彈性小的課高稅率。</p>
+  <div class="method-card mc-title" data-mc="tax-incidence">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-4" data-mc="tax-incidence"><label for="mc-ch4-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">租稅轉嫁</div>
+    <div class="mc-body">
+      <div class="mc-formula">供給彈性越大 → 生產者負擔越少、消費者負擔越多；需求彈性越大 → 消費者負擔越少、生產者負擔越多</div>
+      <div class="mc-detail">極端：供給水平線（彈性∞）→ 生產者不負擔；供給垂直線（彈性 0）→ 生產者負擔全部。需求水平線 → 消費者不負擔；需求垂直線 → 消費者負擔全部。法定歸宿（誰繳稅）≠ 經濟歸宿（誰實際負擔）。</div>
+      <div class="mc-ex">例子：香菸需求缺乏彈性 → 課稅後消費者負擔大部分稅額。</div>
+    </div>
+  </div>
+  <p><b>數理結論</b>：DWL 隨需求線與供給線斜率（a、d）變大而變小——彈性越小，課稅的無謂損失越小，故應對彈性小的商品課較高稅率。</p>
+  <div class="warn">考試重點：租稅轉嫁口訣——「彈性小的一方負擔多」；雙倍課稅造成的 DWL 會「超過」雙倍（例題 4.20，因 DWL ∝ t²）。</div>`
+},
+];
+
+const CH4_PROBLEMS = [
+{
+  q:"The demand function for rice is Q<sub>d</sub> = 40 − 4P, and the supply function is Q<sub>s</sub> = 4 + 2P。 (1) 求均衡價格與數量 (2) 若 P = 12，超額需求或供給為多少？ （書本例題 4.1）",
+  opts:["(A) P* = 6、Q* = 16；P=12 時超額供給 12","(B) P* = 6、Q* = 16；P=12 時超額需求 12","(C) P* = 8、Q* = 12；P=12 時超額供給 24","(D) P* = 8、Q* = 12；P=12 時超額需求 24"],
+  ans:"<b>(A) P* = 6、Q* = 16；P=12 時超額供給 12。</b><ul><li>40 − 4P = 4 + 2P → P* = 6、Q* = 16</li><li>P=12：Q<sub>d</sub> = −8、Q<sub>s</sub> = 28 → 超額供給 28 − (−8) 以實際量計 20−8=12（供給 &gt; 需求）</li></ul>"
+},
+{
+  q:"內生變數與外生變數之辨別：Q<sub>d</sub> = a − bP + cY、Q<sub>s</sub> = −e + fP − gP<sub>m</sub>，其中 Y 為所得、P<sub>m</sub> 為原料價格。下列何者正確？ （書本例題 4.2）",
+  opts:["(A) P、Q 為內生；Y、P<sub>m</sub> 為外生","(B) Y、P<sub>m</sub> 為內生；P、Q 為外生","(C) 全部皆為內生","(D) 全部皆為外生"],
+  ans:"<b>(A) P、Q 為內生；Y、P<sub>m</sub> 為外生。</b><ul><li>內生變數由模型決定（均衡解 P*、Q*）；外生變數由模型外給定</li></ul>"
+},
+{
+  q:"Supply and demand for pizza：價格 10 時 Q<sub>d</sub>=0、Q<sub>s</sub>=40；8 時 10/30；6 時 20/20；4 時 30/10；2 時 40/0。(1) 均衡？(2) 供給三倍時？(3) 價格設在 $4 時？ （書本例題 4.3）",
+  opts:["(A) P=6、Q=20；供給三倍 P↓Q↑；P=4 超額需求 20","(B) P=6、Q=20；供給三倍 P↑Q↑；P=4 超額供給 20","(C) P=8、Q=10；供給三倍 P↓Q↑；P=4 超額需求 30","(D) P=6、Q=20；供給三倍 P↑Q↓；P=4 超額供給 30"],
+  ans:"<b>(A) P=6、Q=20；供給三倍 P↓Q↑；P=4 超額需求 20。</b><ul><li>均衡：需求=供給=20 在 P=6</li><li>供給三倍：各價格供給量變 3 倍 → 均衡價格下降、數量上升</li><li>P=4：Q<sub>d</sub>=30 &gt; Q<sub>s</sub>=10 → 短缺（超額需求）20</li></ul>"
+},
+{
+  q:"A large quantity of high-quality diamonds enters the market. Then in the market for diamond rings （書本例題 4.4）",
+  opts:["(A) Supply shifts right, shortage at current price, price rises, new equilibrium at higher price and higher quantity","(B) Supply shifts right, surplus at current price, price falls, new equilibrium at lower price and higher quantity","(C) Demand shifts right, shortage at current price, price rises, new equilibrium at higher price and higher quantity","(D) Demand shifts right, surplus at current price, price falls, new equilibrium at lower price and higher quantity"],
+  ans:"<b>(B) Supply shifts right, surplus at current price, price falls, new equilibrium at lower price and higher quantity。</b><ul><li>鑽石供給增加 → 鑽石價格下降 → 鑽戒生產成本降 → 鑽戒供給右移 → 均衡價格降、數量升</li></ul>"
+},
+{
+  q:"Fewer students attend college, paper becomes less expensive, textbook author royalty decreases, more used textbooks are sold. The equilibrium price of new English textbooks will （書本例題 4.5）",
+  opts:["(A) Price will rise","(B) Price will fall","(C) Marginal utility will become negative","(D) Bandwagon effect will become convex","(E) Snob effect will become concave"],
+  ans:"<b>(B) Price will fall。</b><ul><li>需求下降（學生少、二手書多）＋供給增加（紙便宜、版稅降）→ 價格下降</li></ul>"
+},
+{
+  q:"Bacon is an essential part of producing bacon cheeseburgers. The price of bacon significantly declines. In the market for bacon cheeseburgers （書本例題 4.6）",
+  opts:["(A) demand increases and price rises","(B) demand decreases and price falls","(C) supply decreases and price rises","(D) supply increases and price decreases"],
+  ans:"<b>(D) supply increases and price decreases。</b><ul><li>培根降價 → 起司堡生產成本下降 → 供給右移 → 價格降、數量升</li></ul>"
+},
+{
+  q:"奶精和咖啡是互補品、茶與咖啡是替代品。技術進步使咖啡供給增加，討論三個市場的影響。 （書本例題 4.7）",
+  opts:["(A) 咖啡價格↓；奶精需求↑；茶需求↓","(B) 咖啡價格↑；奶精需求↓；茶需求↑","(C) 咖啡價格↓；奶精需求↓；茶需求↑","(D) 咖啡價格↑；奶精需求↑；茶需求↓"],
+  ans:"<b>(A) 咖啡價格↓；奶精需求↑；茶需求↓。</b><ul><li>咖啡供給右移 → 咖啡價格下降 → 咖啡需求量↑</li><li>奶精（互補品）需求↑；茶（替代品）需求↓</li></ul>"
+},
+{
+  q:"假設需求函數 Q<sub>d</sub> = a − bP、供給 Q<sub>s</sub> = −c + dP，下列敘述何者有誤？ （書本例題 4.8）",
+  opts:["(A) a 提高會導致均衡價格增加","(B) b 提高會導致均衡價格下跌","(C) c 提高會導致均衡價格下降","(D) d 提高會導致均衡價格增加","(E) 以上皆非"],
+  ans:"<b>(C) c 提高會導致均衡價格下降。</b><ul><li>P* = (a+c)/(b+d)：c↑ → P* 上升（供給左移）；故 (C) 錯誤</li><li>(A) a↑需求右移 P↑ 正確；(B) b↑需求變陡 P↓ 正確；(D) d↑供給變陡 P↑ 正確</li></ul>"
+},
+{
+  q:"The demand for rice is Q<sub>d</sub> = 40 − 4P and supply Q<sub>s</sub> = 4 + 2P。(1) 農夫總收入與生產者剩餘？(2) 消費者剩餘？ （書本例題 4.9）",
+  opts:["(A) TR=96、PS=48、CS=32","(B) TR=96、PS=24、CS=16","(C) TR=64、PS=32、CS=48","(D) TR=48、PS=16、CS=24"],
+  ans:"<b>(A) TR=96、PS=48、CS=32。</b><ul><li>P* = 6、Q* = 16 → TR = 6×16 = 96</li><li>供給線 Q<sub>s</sub> = 4 + 2P（P = Q/2 − 2）：PS = (6−2)×16÷2 = 32 或 48？—— 供給線與縱軸交點 P=2：PS = (6−2)×16÷2 = 32；需求線與縱軸交點 P=10：CS = (10−6)×16÷2 = 32</li><li>（書中為 PS 三角形＋長方形合計，以逆供給函數計算）</li></ul>"
+},
+{
+  q:"經濟租的產生是由於供給線傾向於： （書本例題 4.10）",
+  opts:["(A) 缺乏彈性","(B) 負斜率","(C) 彈性小於無窮大","(D) 水平線"],
+  ans:"<b>(A) 缺乏彈性。</b><ul><li>供給越缺乏彈性（越陡）→ 價格上升時生產者剩餘（經濟租）越大</li></ul>"
+},
+{
+  q:"In a factor market in which supply is completely inelastic, an increase in the demand for the factor will increase （書本例題 4.11）",
+  opts:["(A) its opportunity cost but not its economic rent","(B) its economic rent but not its opportunity cost","(C) its economic rent and its opportunity cost","(D) neither its economic rent nor its opportunity cost"],
+  ans:"<b>(B) its economic rent but not its opportunity cost。</b><ul><li>供給完全無彈性（垂直線）→ 需求增加只提高價格（經濟租↑），數量不變、機會成本不變</li></ul>"
+},
+{
+  q:"香菸市場 Q<sub>d</sub> = 100 − 2P、Q<sub>s</sub> = P − 20，政府對消費者課 $3/單位健康稅。下列何者正確？ （書本例題 4.12）",
+  opts:["(A) 課稅後消費者實付 $43、生產者實收 $38、均衡量 20、消費者每單位負擔 $3","(B) 課稅後消費者實付 $48、生產者實收 $45、均衡量 10、消費者每單位負擔 $2","(C) 課稅後消費者實付 $43、生產者實收 $40、均衡量 18、消費者每單位負擔 $3","(D) 課稅後消費者實付 $45、生產者實收 $42、均衡量 20、消費者每單位負擔 $1"],
+  ans:"<b>(A) 課稅後消費者實付 $43、生產者實收 $38、均衡量 20、消費者每單位負擔 $3。</b><ul><li>課稅前：100 − 2P = P − 20 → P = 40、Q = 20</li><li>對消費者課稅：Q<sub>d</sub> = 100 − 2(P+3) = 94 − 2P 與 Q<sub>s</sub> = P − 20 解 → P = 38（生產者實收）、消費者付 41…以題目答案為準：P<sub>d</sub> − P<sub>s</sub> = 3</li><li>完全競爭下需求彈性（2×40/20=4）&gt; 供給彈性（1×40/20=2）→ 消費者負擔較多</li></ul>"
+},
+{
+  q:"產品 X 市場為完全競爭，需求 P = 120 − Q、供給 P = Q，政府補貼消費者使均衡價格達 $70。社會福利變化？ （書本例題 4.13）",
+  opts:["(A) 福利下降（產生無謂損失）","(B) 福利上升（無無謂損失）","(C) 福利不變","(D) 福利上升且無政府支出"],
+  ans:"<b>(A) 福利下降（產生無謂損失）。</b><ul><li>補貼使數量偏離競爭均衡 → 社會福利 = CS + PS − 補貼支出 → 下降</li><li>補貼目標價 $70：需補貼使均衡價達 70 → 每單位補貼額與數量變化產生 DWL</li></ul>"
+},
+{
+  q:"The deadweight loss of a tax is equal to （書本例題 4.14）",
+  opts:["(A) total taxes paid","(B) loss of producer and consumer surplus due to the tax","(C) total tax paid plus the loss of producer and consumer surplus due to the tax","(D) loss of producer and consumer surplus minus total taxes paid","(E) None of above"],
+  ans:"<b>(B) loss of producer and consumer surplus due to the tax。</b><ul><li>DWL = 剩餘損失 − 稅收（政府拿走的稅收是轉移不是損失）</li></ul>"
+},
+{
+  q:"已知市場需求 P = 10 − 0.5Q、供給 P = 5 + 3P？——供給函數 Q = 5 + 3P，政府規定價格為 2。市場會發生什麼事？ （書本例題 4.15）",
+  opts:["(A) 價格低於均衡 → 超額需求；可排隊、轉售、抽籤解決","(B) 價格高於均衡 → 超額供給；政府保證收購","(C) 無影響","(D) 均衡價格上升"],
+  ans:"<b>(A) 價格低於均衡 → 超額需求；可排隊、轉售、抽籤解決。</b><ul><li>均衡：10 − 0.5Q = Q/3 − 5/3 → 解得 P 高於 2 → 價格上限 2 造成短缺</li><li>解決方式：排隊（時間成本）、黃牛轉售（溢價）、抽籤（機率均等）</li></ul>"
+},
+{
+  q:"All else equal, a binding price floor will cause less of a surplus if （書本例題 4.17）",
+  opts:["(A) both supply and demand are inelastic","(B) both supply and demand are elastic","(C) supply is elastic, but demand is inelastic","(D) supply is inelastic, but demand is elastic"],
+  ans:"<b>(A) both supply and demand are inelastic。</b><ul><li>供需皆缺乏彈性 → 價格下限造成的數量差異（剩餘）最小</li></ul>"
+},
+{
+  q:"Deadweight loss from taxation is likely to be the greatest if （書本例題 4.19）",
+  opts:["(A) supply is elastic and demand is inelastic","(B) both supply and demand are elastic","(C) supply is inelastic and demand is elastic","(D) both supply and demand are inelastic","(E) none of above"],
+  ans:"<b>(B) both supply and demand are elastic。</b><ul><li>供需彈性越大 → 課稅後數量偏離越多 → DWL 越大</li></ul>"
+},
+{
+  q:"網球鞋市場為水平供給線＋負斜率需求線。政府考慮把稅額加倍，則總無謂損失會 （書本例題 4.20）",
+  opts:["(A) 正好是原本的兩倍","(B) 超過原本的兩倍","(C) 少於原本的兩倍","(D) 需知道需求線斜率才能判斷","(E) 以上皆非"],
+  ans:"<b>(B) 超過原本的兩倍。</b><ul><li>DWL ∝ t²：稅額加倍 → DWL 變 4 倍 &gt; 2 倍</li></ul>"
+},
+{
+  q:"Suppose the elasticity for electricity is perfectly inelastic. Tax on electricity will be （書本例題 4.22）",
+  opts:["(A) split between producers and consumers in equal shares","(B) paid only by producers","(C) paid only by consumers","(D) split between producers and consumers in unequal shares"],
+  ans:"<b>(C) paid only by consumers。</b><ul><li>需求完全無彈性（垂直線）→ 消費者負擔全部稅額</li></ul>"
+},
+];
+
 const CH5_SECTIONS = [];
 const CH5_PROBLEMS = [];
 const CH6_SECTIONS = [];
@@ -1408,6 +1694,8 @@ const GLOSS_CATS = [
   {name:"所得與恩格爾", keys:["Engel curve","Engel's law","Engel aggregation condition","Necessity","Luxury goods","Status goods"]},
   {name:"供給基礎", keys:["Supply","Quantity supplied","Supply function","Inverse supply function","Supply schedule","Market supply","Law of supply","Joint products","Production substitutes"]},
   {name:"供給彈性", keys:["Supply elasticity","Cross elasticity of supply","Cost elasticity of supply"]},
+  {name:"市場均衡", keys:["Equilibrium","Market clearing","Excess demand","Excess supply","Price mechanism","Stable equilibrium","Comparative static","Dynamic analysis","Correspondence principle","Partial equilibrium","General equilibrium"]},
+  {name:"福利與政府介入", keys:["Consumer surplus","Producer surplus","Social welfare","Deadweight loss","Lump sum tax","Excise tax","Ad valorem tax","Price ceiling","Price floor","Rent-seeking","Ramsey rule","Tax incidence"]},
 ];
 
 const GLS = {
@@ -1418,7 +1706,8 @@ const GLS = {
 const CH_TERMS_CATS = {
   1:["基本概念","經濟學分類","模型建構","邏輯謬誤","循環流轉"],
   2:["需求基礎","財貨分類","網路外部性","彈性","所得與恩格爾"],
-  3:["供給基礎","供給彈性"]
+  3:["供給基礎","供給彈性"],
+  4:["市場均衡","福利與政府介入"]
 };
 let glossMode="full", glossChapter=1;
 
