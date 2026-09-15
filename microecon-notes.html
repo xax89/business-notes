@@ -67,6 +67,14 @@ body.dark{
   display:block;width:100%;padding:3px 10px 3px 34px;border-radius:6px;
   cursor:pointer;font-size:12.5px;color:var(--muted);border:none;background:none;text-align:left;font-family:inherit;line-height:1.45;
 }
+
+.nav-ch{position:relative}
+.nav-ch.open .nav-subs{display:block}
+.nav-ch.open .nav-chapter .chev{transform:rotate(90deg);opacity:.9}
+.nav-subs{display:none;padding:2px 0 6px}
+.nav-sub.lv2{padding-left:56px;font-size:12px;color:color-mix(in srgb,var(--muted) 80%,transparent)}
+.chev{width:13px;height:13px;margin-left:6px;flex-shrink:0;opacity:.5;transition:transform .2s}
+
 .nav-sub:hover{background:var(--nav-hover);color:var(--ink)}
 .nav-sub.active{color:var(--nav-active);font-weight:700}
 .nav-gloss{
@@ -2609,6 +2617,7 @@ function refreshProgress(n){
   if(tag){const pct=chapterProgress(n).pct;tag.textContent=pct>=100?"✓ 100%":pct+"%";}
 }
 
+let openChapter=1;
 function renderSidebar(){
   const sb=document.getElementById("sidebar");
   let html=`<div class="brand">微觀天地 學個經<div class="t2">研究所複習 · 第 1–20 章</div></div>
@@ -2616,17 +2625,24 @@ function renderSidebar(){
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>術語複習表
   </button>`;
   BOOK.forEach(ch=>{
-    html+=`<button class="nav-chapter ${ch.n===currentChapter?'active':''}" data-ch="${ch.n}">
+    const isOpen=ch.n===openChapter?' open':'';
+    html+=`<div class="nav-ch${isOpen}" data-ch="${ch.n}">
+    <button class="nav-chapter ${ch.n===currentChapter?'active':''}" data-ch="${ch.n}" title="點擊展開/收合小節">
       <span class="num">${ch.n}</span><span>${esc(ch.title)}</span>
       ${ch.done?`<span class="tag done">${chapterProgress(ch.n).pct>=100?"✓ 100%":chapterProgress(ch.n).pct+"%"}</span>`:'<span class="tag">待建</span>'}
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg>
     </button>`;
     if(ch.subs&&ch.subs.length){
+      html+=`<div class="nav-subs">`;
       ch.subs.forEach(sub=>{
         const id=(typeof sub==="string")?sub.slice(0,3):sub.id;
         const title=(typeof sub==="string")?sub:sub.title;
-        html+=`<button class="nav-sub" data-ch="${ch.n}" data-sec="${id}">${esc(title)}</button>`;
+        const lv=/^\d+\.\d+\.\d+/.test(title)?' lv2':'';
+        html+=`<button class="nav-sub${lv}" data-ch="${ch.n}" data-sec="${id}">${esc(title)}</button>`;
       });
+      html+=`</div>`;
     }
+    html+=`</div>`;
   });
   sb.innerHTML=html;
   const navGloss=sb.querySelector("#navGloss");
@@ -2634,8 +2650,14 @@ function renderSidebar(){
   sb.querySelectorAll(".nav-chapter").forEach(b=>{
     b.addEventListener("click",()=>{
       const ch=BOOK[+b.dataset.ch-1];
-      if(ch.done){renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});closeNav();}
-      else{toast("第 "+ch.n+" 章尚未建置");}
+      if(!ch.done){toast("第 "+ch.n+" 章尚未建置");return;}
+      if(openChapter===ch.n){
+        openChapter=0;
+        const w=b.closest(".nav-ch"); if(w)w.classList.remove("open");
+        return;
+      }
+      openChapter=ch.n;
+      renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});closeNav();
     });
   });
   sb.querySelectorAll(".nav-sub").forEach(b=>{
