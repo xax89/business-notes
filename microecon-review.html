@@ -404,7 +404,7 @@ const BOOK = [
   {n:3, title:"供給", subs:["3.1 供給函數與市場供給","3.2 供給價格彈性與其他相關彈性"], done:true, points:["供給定義：特定期間＋其他情況不變＋願意且能夠；供給法則：價格與供給量同向","供給量變動＝線上點移動；供給變動＝整條線移動（技術、要素價格、預期、相關財價格、人數）","生產上互補品（聯產品）與替代品（要素搶奪）區分","供給價格彈性：點／弧彈性；直線五型（縱軸&gt;1、橫軸&lt;1、原點=1、垂直=0、水平=∞）","影響供給彈性：投入用途、成本敏感度、技術、規模、時間、保存容易度、定義範圍"]},
   {n:4, title:"市場均衡分析", subs:["4.1 市場均衡","4.2 消費者與生產者剩餘及社會福利分析","4.3 政府介入對社會福利的影響","4.4 政府介入市場的其他手段","4.5 羅西法則與租稅轉嫁"], done:true, points:["市場均衡＝供給量＝需求量（市場結清）；ED/ES 由價格機能調整回均衡","比較靜態：需求右移P↑Q↑、供給右移P↓Q↑；供需同移→數量確定價格看幅度","CS=需求線下價格線上、PS=價格線下供給線上；SW=CS+PS","從量稅：對消費者課稅需求線下移、對生產者課稅供給線上移；課稅補貼都會造成DWL","價格上限→超額需求、價格下限→超額供給；管制對象剩餘一增一減不確定","羅西法則：彈性大課低稅、彈性小課高稅；租稅轉嫁＝彈性小的一方負擔多"]},
   {n:5, title:"數列效用分析", subs:["5.1 前言","5.2 總效用與邊際效用","5.3 消費者均衡","5.4 需求曲線的求導","5.5 鑽石與水的矛盾"], done:true, points:["數列效用可度量可比較；序列效用只排序（無異曲線分析）","TU 上升後下降、MU 遞減；MU>0 喜好品、=0 中性品、<0 厭惡品","消費者均衡＝邊際效用均等法則：MUx/Px = MUy/Py = MUm","需求曲線由 P = MU/MUm 導出；MU 遞減越快需求彈性越小","鑽石與水：價格由邊際效用決定、價值由總效用決定"]},
-  {n:6, title:"消費者行為理論", subs:["6.1 消費者偏好基本公理","6.2 效用函數","6.3 常用偏好結構與預算線","6.4 消費者均衡與計算","6.5 對偶性理論","6.6 全章考試總複習清單"], done:false, points:[]},
+  {n:6, title:"消費者行為理論", subs:["6.1 消費者偏好基本公理","6.2 效用函數","6.3 常用偏好結構與預算線","6.4 消費者均衡與計算","6.5 對偶性理論","6.6 全章考試總複習清單"], done:true, points:["六大公理：完整、反射、遞移（公理）＋連續、單調、凸（假設）","良好偏好→無異曲線凸向原點、內部解唯一；MRS = MUx/MUy","四大效用函數：Cobb-Douglas、Leontief、Linear、Quasi-linear","預算線斜率 −Px/Py；均衡 MRS = Px/Py（相切）；角隅解比較 MRS 與價格比","對偶：效用極大↔支出極小；Roy 恆等式 ↔ Shephard 定理"]},
   {n:7, title:"比較靜態與需求函數", subs:["7.1 替代效果與所得效果","7.2 普通與受補償需求曲線","7.3 所得與價格消費曲線","7.4 史勒斯基方程式"], done:false, points:[]},
   {n:8, title:"消費者行為理論的應用", subs:["8.1 補貼或課稅對消費者之影響","8.2 勞動與休閒的選擇","8.3 跨期消費理論","8.4 顯示性偏好理論","8.5 皮氏與拉氏指數"], done:false, points:[]},
   {n:9, title:"不確定狀況下的選擇行為", subs:["9.1 賭局與期望效用","9.2 面對風險下之決策"], done:false, points:[]},
@@ -532,6 +532,37 @@ const TERMS = {
 "Paradox of value":["Paradox of value","價值的矛盾（鑽石與水的矛盾）","亞當斯密提出：水總效用高但價格低、鑽石總效用低但價格高；價格由邊際效用決定、價值由總效用決定。"],
 "Cardinal utility":["Cardinal utility","數列效用分析","效用可以衡量運算、數字有意義、跨人可比較；使用邊際效用分析法。"],
 "Ordinal utility":["Ordinal utility","序列效用分析","效用為主觀只能排序、值本身無意義；使用無異曲線分析法。"],
+"Preference":["Preference","偏好","消費者對任意兩組商品的主觀二元排列；符號 ≻、≽、∼。"],
+"Completeness":["Completeness","完整性","任意兩組商品皆可比較，不會出現無法抉擇的情況。"],
+"Reflexivity":["Reflexivity","反射性","任一商品組合與它本身無異：A∼A。"],
+"Transitivity":["Transitivity","遞移性","A≽B 且 B≽C → A≽C。"],
+"Continuity":["Continuity","連續性","A≻B 則可找到夠接近 A 的 C 使 C≻B；商品可無限細分。字典性偏好違反之。"],
+"Monotonicity":["Monotonicity","單調性","多一點東西至少一樣好（MU ≥ 0）；無飽和點。"],
+"Convexity":["Convexity","凸性","兩商品線性組合至少不劣於原組合；嚴格凸＝平均優於極端。"],
+"Lexicographic preference":["Lexicographic preference","字典性偏好","先比 x 數量、x 相同才比 y；違反連續性，每個點效用值皆不同。"],
+"Utility function":["Utility function","效用函數","刻劃偏好結構的函數；A≻B ⟺ U(A) &gt; U(B)。"],
+"Well-behaved preferences":["Well-behaved preferences","良好偏好","滿足六大基本公理（嚴格凸＋單調）的偏好；可用嚴格擬凹函數描述。"],
+"Indifference curve":["Indifference curve","無異曲線","效用相同之商品組合的軌跡；負斜率、凸向原點、越東北效用越高、不相交。"],
+"Marginal rate of substitution":["Marginal rate of substitution","邊際替代率 (MRS)","給定效用水準下願意犧牲 Y 換取一單位 X 的主觀比例；MRS<sub>xy</sub> = MU<sub>x</sub>/MU<sub>y</sub>。"],
+"Positive monotonic transformation":["Positive monotonic transformation","單調遞增轉換","V = f(U) 且 f′&gt;0：偏好排序、無異曲線形狀、MRS、均衡消費量不變，僅效用值改變。"],
+"Cobb-Douglas":["Cobb-Douglas","柯布-道格拉斯 (U = X<sup>α</sup>Y<sup>β</sup>)","良好偏好、位似偏好；MRS = αY/βX；支出比例固定。"],
+"Leontief":["Leontief","里昂鐵夫（完全互補）(U = min(aX, bY))","固定比例消費、L 型無異曲線；MRS 無法定義；不滿足嚴格凸。"],
+"Perfect substitutes":["Perfect substitutes","完全替代（Linear 型）(U = aX + bY)","直線無異曲線、MRS 固定；均衡為角隅解。"],
+"Quasi-linear":["Quasi-linear","準線型 (U = v(X) + Y)","非線性＋線性部分；非線性財貨為所得中性財。"],
+"Homothetic preferences":["Homothetic preferences","位似偏好","原點射出線與無異曲線所有交點的 MRS 相同；Cobb-Douglas 屬之。"],
+"Budget constraint line":["Budget constraint line","預算限制線","P<sub>x</sub>x + P<sub>y</sub>y = M；斜率 −P<sub>x</sub>/P<sub>y</sub>＝消費 X 的機會成本。"],
+"Consumption possibility set":["Consumption possibility set","消費可能集合","預算線下方三角形內消費者負擔得起的組合。"],
+"Relative price":["Relative price","相對價格","某商品可換取其他商品數量的比例；如 P<sub>x</sub>/P<sub>y</sub>。"],
+"Numeraire":["Numeraire","標準化商品","以某商品為標準（價格設為 1）衡量其他商品；常用於簡化分析。"],
+"Endowment":["Endowment","原賦","消費者持有的一定數量商品 (x₀, y₀)；賣出原賦形成預算線（過原賦點）。"],
+"Marshallian demand":["Marshallian demand","馬歇爾需求（普通需求）","效用極大化解出的需求函數 x(P,M)；未受補償需求。"],
+"Hicksian demand":["Hicksian demand","希克斯需求（受補償需求）","支出極小化解出的需求函數 x(P,Ū)。"],
+"Interior solution":["Interior solution","內部解","均衡時同時消費兩種商品（良好偏好下）。"],
+"Corner solution":["Corner solution","角隅解","均衡時只消費單一商品；比較 MRS 與價格比決定。"],
+"Indirect utility function":["Indirect utility function","間接效用函數 (V(P,M))","將馬歇爾需求代入效用函數；價格非遞增、所得非遞減、零階齊次。"],
+"Expenditure function":["Expenditure function","支出函數 (E(P,Ū))","給定價格與效用水準的最小支出；價格凹且非遞減、一階齊次。"],
+"Roy's identity":["Roy's identity","Roy 恆等式","由間接效用函數還原馬歇爾需求：x = −(∂V/∂P<sub>x</sub>)/(∂V/∂M)。"],
+"Shephard's lemma":["Shephard's lemma","Shephard 定理","由支出函數還原希克斯需求：x = ∂E/∂P<sub>x</sub>。"],
 };
 
 
@@ -1467,7 +1498,7 @@ const CH5_SECTIONS = [
 {
   id:"5.3", title:"消費者均衡",
   body:`
-  <p><b>消費者均衡</b>：消費者在預算限制下達到效用最大的條件——花最後一塊錢在每個財貨上的邊際效用都相同，稱<b>邊際效用均等法則</b>（Equimarginal principle）。</p>
+  <p><b><span class="term" data-term="Consumer equilibrium">消費者均衡</span></b>：消費者在預算限制下達到效用最大的條件——花最後一塊錢在每個財貨上的邊際效用都相同，稱<b>邊際效用均等法則</b>（Equimarginal principle）。</p>
   <div class="method-card mc-title" data-mc="consumer-equilibrium">
     <div class="mc-check"><input type="checkbox" id="mc-ch5-1" data-mc="consumer-equilibrium"><label for="mc-ch5-1" class="mc-lbl">學會</label></div>
     <div class="mc-left">消費者均衡</div>
@@ -1574,8 +1605,238 @@ const CH5_PROBLEMS = [
 },
 ];
 
-const CH6_SECTIONS = [];
-const CH6_PROBLEMS = [];
+const CH6_SECTIONS = [
+{
+  id:"6.1", title:"消費者偏好基本公理",
+  body:`
+  <p>面對資源稀少，消費者如何選擇？理性消費者依「偏好」排序商品組合。偏好（Preference）＝消費者對任意兩組商品的主觀二元排列（每次只比兩組，選出較喜歡的）。符號：≻ 嚴格優於、≽ 弱優於、∼ 無異於。</p>
+  <div class="method-card mc-title" data-mc="six-axioms">
+    <div class="mc-check"><input type="checkbox" id="mc-ch6-1" data-mc="six-axioms"><label for="mc-ch6-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">六大公理</div>
+    <div class="mc-body">
+      <div class="mc-formula">理性消費者須符合：完整性、反射性、遞移性（公理）＋連續性、單調性、凸性（假設）</div>
+      <div class="mc-detail"><b>完整</b>：任意兩組可比（A≻B、A∼B 或 A≺B）；<b>反射</b>：A∼A；<b>遞移</b>：A≽B 且 B≽C → A≽C。前三者保證存在效用函數；加連續性可找到連續可微分函數。</div>
+      <div class="mc-ex">例子：字典性偏好（先比 x 數量、x 相同才比 y）違反連續性 → 無法用連續效用函數描述。</div>
+    </div>
+  </div>
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:44%"><col style="width:34%"></colgroup>
+    <thead><tr><th>假設</th><th>內容</th><th>意義</th></tr></thead>
+    <tbody>
+      <tr><td><b>連續性</b></td><td>A≻B 則必可找到夠接近 A 的 C 使 C≻B</td><td>商品可無限細分；字典性偏好違反之</td></tr>
+      <tr><td><b>單調性</b></td><td>多一點東西至少一樣好（MU ≥ 0）</td><td>無飽和點；東北方為較優區</td></tr>
+      <tr><td><b>凸性</b></td><td>兩組商品的加權平均至少不劣於原組合</td><td>嚴格凸＝平均優於極端（喜愛多樣化）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：滿足前四項可找到連續可微分的效用函數；滿足全部六大公理稱「良好偏好」（Well-behaved preferences），可用嚴格擬凹函數描述。</div>`
+},
+{
+  id:"6.2", title:"效用函數",
+  body:`
+  <p><b><span class="term" data-term="Utility function">效用函數（Utility function）</span></b>：刻劃消費者偏好結構的函數形式。A≻B ⟺ U(A) &gt; U(B)；A∼B ⟺ U(A) = U(B)。</p>
+  <p><b><span class="term" data-term="Indifference curve">無異曲線（Indifference curve）</span></b>：效用相同的所有商品組合之集合（效用函數投影至 xy 平面）；又稱無差異曲線、等效用曲線。</p>
+  <div class="svgfig">
+  <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+    <line x1="40" y1="270" x2="400" y2="270" stroke="#3a3126" stroke-width="1.6"/>
+    <line x1="40" y1="270" x2="40" y2="20" stroke="#3a3126" stroke-width="1.6"/>
+    <text x="385" y="262" font-size="13">X</text><text x="16" y="28" font-size="13">Y</text>
+    <path d="M80 230 Q 170 90 340 60" fill="none" stroke="#2f5d62" stroke-width="2.4"/>
+    <path d="M110 200 Q 200 70 380 45" fill="none" stroke="#2f5d62" stroke-width="2.4" stroke-dasharray="5 4"/>
+    <text x="300" y="52" font-size="13" fill="#2f5d62">U₂（較高）</text>
+    <text x="240" y="95" font-size="13" fill="#2f5d62">U₁</text>
+    <text x="60" y="240" font-size="12" fill="#b45309">較優區（東北方）</text>
+    <text x="330" y="120" font-size="12" fill="#8a7f6d">負斜率、凸向原點</text>
+  </svg>
+  </div>
+  <div class="tblwrap"><table><colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+    <thead><tr><th>無異曲線特性</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr><td>負斜率</td><td>喜好品下，多消費 X 須少消費 Y（存在主觀交換）</td></tr>
+      <tr><td>凸向原點</td><td>嚴格凸＋單調性 → 隨 X 增加 MRS 遞減</td></tr>
+      <tr><td>越向東北效用越高</td><td>X、Y 數量越多（單調性）</td></tr>
+      <tr><td>同一時期不相交</td><td>若相交，遞移性＋單調性矛盾</td></tr>
+    </tbody>
+  </table></div>
+  <p><b><span class="term" data-term="Marginal rate of substitution">邊際替代率（Marginal rate of substitution, MRS）</span></b>：給定效用水準下，消費者願意犧牲多少 Y 換取一單位 X。MRS<sub>xy</sub> = MU<sub>x</sub>/MU<sub>y</sub>＝無異曲線切線斜率絕對值。</p>
+  <div class="warn">考試重點：邊際效用遞減既不是邊際替代率遞減的充分條件、也不是必要條件——兩者無必然因果關係（例題 6.1）。</div>
+  <p><b>單調遞增轉換</b>：效用函數經單調遞增轉換（V = f(U)，f′ &gt; 0）後，偏好排序不變——無異曲線形狀、MRS、均衡消費量皆相同，僅效用值不同。一個偏好結構可有無窮多個效用函數描述。</p>`
+},
+{
+  id:"6.3", title:"常用偏好結構與預算線",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:33%"><col style="width:45%"></colgroup>
+    <thead><tr><th>類型</th><th>效用函數</th><th>特性</th></tr></thead>
+    <tbody>
+      <tr><td><b>Cobb-Douglas</b><br>柯布-道格拉斯</td><td>U = X<sup>α</sup>Y<sup>β</sup></td><td>良好偏好（嚴格凸）；MRS = αY/βX；位似偏好（Homothetic）——原點射出線與無異曲線交點 MRS 相同</td></tr>
+      <tr><td><b>Leontief</b><br>里昂鐵夫（完全互補）</td><td>U = min(aX, bY)</td><td>固定比例消費、L 型無異曲線；MRS 無法定義；不滿足嚴格凸</td></tr>
+      <tr><td><b>Linear</b><br>直線（完全替代）</td><td>U = aX + bY</td><td>直線無異曲線、MRS 固定；不滿足嚴格凸</td></tr>
+      <tr><td><b>Quasi-linear</b><br>準線型</td><td>U = v(X) + Y</td><td>非線性＋線性部分；MRS 僅受非線性財貨影響；非線性部分為所得中性財</td></tr>
+    </tbody>
+  </table></div>
+  <p><b><span class="term" data-term="Budget constraint line">預算限制線（Budget constraint line）</span></b>：所得與價格給定下可消費的財貨組合軌跡。</p>
+  <div class="method-card mc-title" data-mc="budget-line">
+    <div class="mc-check"><input type="checkbox" id="mc-ch6-2" data-mc="budget-line"><label for="mc-ch6-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">預算線</div>
+    <div class="mc-body">
+      <div class="mc-formula">P<sub>x</sub>·x + P<sub>y</sub>·y = M　斜率 = −P<sub>x</sub>/P<sub>y</sub>（＝消費 X 的機會成本）</div>
+      <div class="mc-detail">預算線下方三角形為消費可能集合。P<sub>x</sub> 上升 → 預算線變陡且內移；P<sub>y</sub> 上升 → 變平坦且內移；M 上升 → 平行外移。</div>
+      <div class="mc-ex">例子：蘋果 2 元、香蕉 1 元、所得 12 元 → 預算線 2x + y = 12，斜率 −2：多買 1 顆蘋果須放棄 2 根香蕉。</div>
+    </div>
+  </div>
+  <p><b>特殊預算線</b>：</p>
+  <ul>
+    <li><b>打折型</b>：溯及既往（超過某數量後全數降價）＝折點後斜率變緩；不溯及既往（僅超過部分降價）</li>
+    <li><b>限制消費量（配給）</b>：x 受限於 x̄ → 預算線在 x̄ 處垂直切斷</li>
+    <li><b>時間限制</b>：t<sub>x</sub>·x + t<sub>y</sub>·y = T，與所得預算線合併取交集</li>
+    <li><b>標準化商品（Numeraire）</b>：以 y 為標準，預算線化為 x·(P<sub>x</sub>/P<sub>y</sub>) + y = M/P<sub>y</sub></li>
+    <li><b>原賦型（Endowment）</b>：消費者持有 (x₀, y₀)，賣出原賦形成預算線——預算線必過原賦點，價格變動時繞原賦點旋轉</li>
+  </ul>`
+},
+{
+  id:"6.4", title:"消費者均衡與計算",
+  body:`
+  <p><b>消費者均衡</b>：給定預算限制、價格與偏好下，效用水準最高的財貨組合。在良好偏好下：</p>
+  <div class="method-card mc-title" data-mc="consumer-optimum">
+    <div class="mc-check"><input type="checkbox" id="mc-ch6-3" data-mc="consumer-optimum"><label for="mc-ch6-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">消費者均衡</div>
+    <div class="mc-body">
+      <div class="mc-formula">MRS<sub>xy</sub> = MU<sub>x</sub>/MU<sub>y</sub> = P<sub>x</sub>/P<sub>y</sub>，且 P<sub>x</sub>x + P<sub>y</sub>y = M</div>
+      <div class="mc-detail">幾何：無異曲線與預算線相切。用拉格朗日法求解：L = U(x,y) + λ(M − P<sub>x</sub>x − P<sub>y</sub>y)，一階條件即 MRS = 價格比；二階條件（良好偏好）保證為極大值。解得的需求函數稱馬歇爾需求（普通需求、未受補償需求）。</div>
+      <div class="mc-ex">例子：U = XY，P<sub>x</sub>=5、P<sub>y</sub>=10、M=500 → MRS = Y/X = 5/10 → Y = X/2，代入 5X + 10Y = 500 → X = 50、Y = 25。</div>
+    </div>
+  </div>
+  <div class="svgfig">
+  <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+    <line x1="40" y1="270" x2="400" y2="270" stroke="#3a3126" stroke-width="1.6"/>
+    <line x1="40" y1="270" x2="40" y2="20" stroke="#3a3126" stroke-width="1.6"/>
+    <text x="385" y="262" font-size="13">X</text><text x="16" y="28" font-size="13">Y</text>
+    <line x1="60" y1="245" x2="360" y2="45" stroke="#b45309" stroke-width="2.2"/>
+    <text x="330" y="70" font-size="13" fill="#b45309">預算線</text>
+    <path d="M110 235 Q 200 110 330 70" fill="none" stroke="#2f5d62" stroke-width="2.4"/>
+    <path d="M90 255 Q 200 150 350 100" fill="none" stroke="#2f5d62" stroke-width="1.6" stroke-dasharray="5 4"/>
+    <circle cx="212" cy="118" r="5" fill="#c0392b"/>
+    <text x="220" y="112" font-size="13" fill="#c0392b">E（相切）</text>
+    <text x="180" y="235" font-size="12" fill="#8a7f6d">MRS = Px/Py</text>
+  </svg>
+  </div>
+  <p><b>不均衡調整</b>：若 MRS<sub>xy</sub> &gt; P<sub>x</sub>/P<sub>y</sub>（主觀願放棄的 Y 多於客觀必須放棄的）→ 多消費 X；反之少消費 X。</p>
+  <p><b><span class="term" data-term="Corner solution">角隅解（Corner solution）</span></b>：偏好不滿足良好偏好時，均衡可能只在消費單一商品（如嚴格凹偏好、Linear 型）；Linear 型須比較 MRS 與價格比：MRS &gt; P<sub>x</sub>/P<sub>y</sub> → 全消費 X；MRS &lt; → 全消費 Y；相等 → 複數均衡。Leontief 型均衡在轉折點（固定比例）。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:24%"><col style="width:76%"></colgroup>
+    <thead><tr><th>效用函數</th><th>均衡解（馬歇爾需求）</th></tr></thead>
+    <tbody>
+      <tr><td>Cobb-Douglas<br>U = X<sup>α</sup>Y<sup>β</sup></td><td>x* = αM/[(α+β)P<sub>x</sub>]、y* = βM/[(α+β)P<sub>y</sub>]（支出比例固定：α/(α+β)）；零階齊次——價格與所得同比例變動需求量不變</td></tr>
+      <tr><td>Leontief<br>U = min(aX, bY)</td><td>沿 aX = bY 固定比例；x* = M/(P<sub>x</sub> + (a/b)P<sub>y</sub>)</td></tr>
+      <tr><td>Linear<br>U = aX + bY</td><td>比較 MRS = a/b 與 P<sub>x</sub>/P<sub>y</sub>，全數消費相對便宜者</td></tr>
+      <tr><td>Quasi-linear<br>U = v(X) + Y</td><td>由 v′(X) = P<sub>x</sub>/P<sub>y</sub> 直接解出 x*（不受所得影響）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：Cobb-Douglas 需求函數零階齊次；x 自身價格彈性 = −1、所得彈性 = 1、交叉彈性 = 0（與 y 需求上無關）。</div>`
+},
+{
+  id:"6.5", title:"對偶性理論",
+  body:`
+  <p><b>對偶性（Duality）</b>：同一個問題從兩個不同角度看，結果相同。消費者問題＝效用極大化 vs 支出極小化。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+    <thead><tr><th>效用極大化</th><th>支出極小化</th></tr></thead>
+    <tbody>
+      <tr><td>max U(x,y)　s.t. P<sub>x</sub>x + P<sub>y</sub>y = M</td><td>min P<sub>x</sub>x + P<sub>y</sub>y　s.t. U(x,y) = Ū</td></tr>
+      <tr><td>解出馬歇爾需求 x(P,M)、y(P,M)</td><td>解出希克斯需求 x(P,Ū)、y(P,Ū)</td></tr>
+      <tr><td>代入目標 → <b><span class="term" data-term="Indirect utility function">間接效用函數</span></b> V(P,M)</td><td>代入目標 → <b><span class="term" data-term="Expenditure function">支出函數</span></b> E(P,Ū)</td></tr>
+      <tr><td>Roy 恆等式：x = −(∂V/∂P<sub>x</sub>)/(∂V/∂M)</td><td>Shephard 定理：x = ∂E/∂P<sub>x</sub></td></tr>
+    </tbody>
+  </table></div>
+  <div class="method-card mc-title" data-mc="duality">
+    <div class="mc-check"><input type="checkbox" id="mc-ch6-4" data-mc="duality"><label for="mc-ch6-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">對偶性</div>
+    <div class="mc-body">
+      <div class="mc-formula">V(P,M) 與 E(P,Ū) 互為反函數；x(P, E(P,Ū)) = x<sup>h</sup>(P,Ū)；x<sup>h</sup>(P, V(P,M)) = x(P,M)</div>
+      <div class="mc-detail">間接效用函數性質：價格非遞增、所得非遞減、零階齊次、價格準凸；支出函數性質：價格凹且非遞減、一階齊次。λ（拉格朗日乘數）＝所得邊際效用。</div>
+      <div class="mc-ex">例子：U = min(g/2, v)（兩份琴酒配一份苦艾酒）→ 需求 g = 2M/(2P<sub>g</sub>+P<sub>v</sub>)、v = M/(2P<sub>g</sub>+P<sub>v</sub>)；支出函數 E = Ū(2P<sub>g</sub>+P<sub>v</sub>)。</div>
+    </div>
+  </div>`
+},
+{
+  id:"6.6", title:"全章考試總複習清單",
+  body:`
+  <ul>
+    <li>六大公理：完整、反射、遞移、連續、單調、凸（前三個是公理、後三個是假設）</li>
+    <li>良好偏好＝嚴格凸＋單調性 → 無異曲線凸向原點、內部解唯一</li>
+    <li>MRS = MU<sub>x</sub>/MU<sub>y</sub>；MRS 遞減與邊際效用遞減無必然關係</li>
+    <li>四大效用函數：Cobb-Douglas（位似）、Leontief（互補）、Linear（替代）、Quasi-linear（所得中性財）</li>
+    <li>預算線斜率 = −P<sub>x</sub>/P<sub>y</sub>；價格變動轉動、所得變動平移</li>
+    <li>均衡：MRS = P<sub>x</sub>/P<sub>y</sub>；角隅解比較 MRS 與價格比</li>
+    <li>對偶：效用極大 ↔ 支出極小；Roy 恆等式 ↔ Shephard 定理</li>
+  </ul>`
+},
+];
+
+const CH6_PROBLEMS = [
+{
+  q:"下列有關邊際替代率之敘述何者正確？ （書本例題 6.1）",
+  opts:["(A) 邊際效用遞減表示邊際替代率遞減","(B) 刻劃消費者對商品的主觀取捨兌換比例","(C) 邊際替代率遞減表示邊際效用遞減","(D) 邊際替代率遞減隱含著無異曲線凹向原點"],
+  ans:"<b>(B) 刻劃消費者對商品的主觀取捨兌換比例。</b><ul><li>MRS＝消費者願意以 Y 換取一單位 X 的主觀比例；與邊際效用遞減無必然因果關係</li></ul>"
+},
+{
+  q:"Which of the following statements is false? （書本例題 6.2）",
+  opts:["(A) When indifference curves are negative sloped, they are convex to the origin","(B) When a consumer prefers more to less of a good, the indifference curves are negatively sloped","(C) When the marginal utilities of good X and Y are positive, the indifference curves are negatively sloped","(D) When a consumer has diminishing marginal utility, the indifference curves are convex to the origin"],
+  ans:"<b>(D) false——邊際效用遞減不保證無異曲線凸向原點。</b><ul><li>MRS 遞減（凸向原點）與 MU 遞減無因果關係；需嚴格凸＋單調性才保證</li></ul>"
+},
+{
+  q:"Baskets A and B are on the same indifference curve which exhibits diminishing MRS。C 呢？ （書本例題 6.3）",
+  opts:["(A) C is preferred to both A and B","(B) A and B are both preferred to C","(C) C is on the same indifference curve as A and B","(D) Either (A) or (B) is correct, but not (C)"],
+  ans:"<b>(D) Either (A) or (B) is correct, but not (C)。</b><ul><li>同一無異曲線上的 A、B 效用相同；C 不在該曲線上 → 可能更優或更劣，但不可能同效用水準</li></ul>"
+},
+{
+  q:"Alicia is a vegetarian, so beef provides no additional utility to her. She loves potatoes. Drawing beef on horizontal axis and potatoes on vertical axis, her indifference curves will （書本例題 6.4）",
+  opts:["(A) slope downward","(B) be vertical straight lines","(C) slope upward","(D) be horizontal straight lines"],
+  ans:"<b>(B) be vertical straight lines。</b><ul><li>牛肉效用為零（中性品）→ 牛肉數量不影響效用 → 垂直線；馬鈴薯越多效用越高</li></ul>"
+},
+{
+  q:"下列何者的偏好結構與 U = X<sup>α</sup>Y<sup>β</sup> 相同？（α&gt;0 且 β&gt;0） （書本例題 6.6）",
+  opts:["(A) V = X<sup>α</sup>Y<sup>β</sup> + 1","(B) V = α ln X + β ln Y","(C) 兩者皆是","(D) 兩者皆非"],
+  ans:"<b>(C) 兩者皆是。</b><ul><li>＋常數、取對數都是單調遞增轉換 → 偏好排序不變，MRS 相同</li></ul>"
+},
+{
+  q:"任任帶 12 元買蘋果（2 元）與香蕉（1 元）。(1) 蘋果買超過 3 個全數變 1 元？(2) 超過 3 個的部分變 1 元？(3) 蘋果固定 2 元但限購 3 顆？ （書本例題 6.8）",
+  opts:["(A) 三種情況預算線都相同","(B) (1) 折點後斜率變緩；(2) 折點後斜率更緩；(3) x=3 處垂直切斷","(C) (1)(2) 相同；(3) 平行內移","(D) 無法繪製"],
+  ans:"<b>(B) (1) 折點後斜率變緩；(2) 折點後斜率更緩；(3) x=3 處垂直切斷。</b><ul><li>溯及既往（全數降價）折點後斜率 = −1；不溯及既往折點後斜率 = −0.5；配給在 x=3 切斷</li></ul>"
+},
+{
+  q:"An individual's MRS is 2:1——willing to give up 2 beers for an extra steak. Price of steak $1, beer $0.25. To increase utility, he should （書本例題 6.9）",
+  opts:["(A) buy more steak and less beer","(B) buy more beer and less steak","(C) buy less beer and less steak","(D) buy more steak and more beer"],
+  ans:"<b>(B) buy more beer and less steak。</b><ul><li>MRS = 2 &lt; P<sub>s</sub>/P<sub>b</sub> = 1/0.25 = 4：市場上 1 份牛排值 4 杯啤酒，消費者主觀只願放棄 2 杯 → 牛排相對太貴 → 少買牛排、多買啤酒</li></ul>"
+},
+{
+  q:"Micky has income $30, cheese $2, cookies $1. On a point of the budget line, |MRS| = 3. Should he buy more cheese or more cookies? （書本例題 6.10）",
+  opts:["(A) 多買起司、少買餅乾","(B) 少買起司、多買餅乾","(C) 不變","(D) 無法判斷"],
+  ans:"<b>(A) 多買起司、少買餅乾。</b><ul><li>MRS = 3 &gt; P<sub>c</sub>/P<sub>ck</sub> = 2/1 = 2：主觀願放棄 3 塊餅乾換 1 塊起司，市場只需放棄 2 塊 → 起司相對划算 → 多買起司、少買餅乾</li></ul>"
+},
+{
+  q:"已知 U = 20x − 2x² + 8y − y²，P<sub>x</sub>=P<sub>y</sub>=5。(1) M = 30 最適組合？(2) M = 60 最適組合？ （書本例題 6.11）",
+  opts:["(A) (1) x=4, y=2；(2) x=4, y=8","(B) (1) x=2, y=4；(2) x=2, y=10","(C) (1) x=4, y=4；(2) x=8, y=8","(D) 角隅解"],
+  ans:"<b>(A) (1) x=4, y=2；(2) x=4, y=8。</b><ul><li>MU<sub>x</sub> = 20−4x、MU<sub>y</sub> = 8−2y；MU<sub>x</sub>/5 = MU<sub>y</sub>/5 → 20−4x = 8−2y → y = 2x−6；M=30：5x+5y=30 → x=4, y=2；M=60：x=4, y=8（y 隨所得增加）</li></ul>"
+},
+{
+  q:"已知 X 價格 5 元、Y 價格 10 元、所得 500，效用函數 U = XY。求均衡消費組合與 X 的需求方程式。 （書本例題 6.12）",
+  opts:["(A) X=50, Y=25；X = M/2P<sub>x</sub>","(B) X=25, Y=50；X = M/2P<sub>x</sub>","(C) X=50, Y=50；X = M/P<sub>x</sub>","(D) X=25, Y=25；X = M/2P<sub>y</sub>"],
+  ans:"<b>(A) X=50, Y=25；X = M/2P<sub>x</sub>。</b><ul><li>Cobb-Douglas α=β=1：X = M/2P<sub>x</sub> = 500/10 = 50、Y = M/2P<sub>y</sub> = 500/20 = 25</li></ul>"
+},
+{
+  q:"Suppose two units of X is equivalent to one unit of Y (perfect substitutes). P<sub>x</sub> = $1, P<sub>y</sub> = $3, income $60. How much of each good to maximize utility? （書本例題 6.16）",
+  opts:["(A) X=60, Y=0","(B) X=0, Y=20","(C) X=30, Y=10","(D) X=20, Y=20"],
+  ans:"<b>(A) X=60, Y=0。</b><ul><li>U = 2X + Y：MRS = 2 &gt; P<sub>x</sub>/P<sub>y</sub> = 1/3 → 全數消費 X：60 單位</li></ul>"
+},
+{
+  q:"U = 2X + 10Y，P<sub>x</sub>=5、P<sub>y</sub>=10、M=100。求均衡組合與 X 的需求方程式。 （書本例題 6.17）",
+  opts:["(A) 全消費 X：X=20, Y=0","(B) 全消費 Y：X=0, Y=10","(C) 複數均衡","(D) X=10, Y=5"],
+  ans:"<b>(B) 全消費 Y：X=0, Y=10。</b><ul><li>MRS = 2/10 = 0.2 &lt; P<sub>x</sub>/P<sub>y</sub> = 5/10 = 0.5 → 全消費 Y：Y = 100/10 = 10</li></ul>"
+},
+{
+  q:"Mr.A enjoys martinis made of two parts gin (g) to one part vermouth (v): U = min(g/2, v)。(1) 求 g、v 需求函數（價格 P<sub>g</sub>, P<sub>v</sub>，所得 I）；(2) 求支出函數。 （書本例題 6.19）",
+  opts:["(A) g = 2I/(2P<sub>g</sub>+P<sub>v</sub>), v = I/(2P<sub>g</sub>+P<sub>v</sub>)；E = Ū(2P<sub>g</sub>+P<sub>v</sub>)","(B) g = I/(2P<sub>g</sub>+P<sub>v</sub>), v = 2I/(2P<sub>g</sub>+P<sub>v</sub>)","(C) g = v = I/(P<sub>g</sub>+P<sub>v</sub>)","(D) g = I/2P<sub>g</sub>, v = I/P<sub>v</sub>"],
+  ans:"<b>(A) g = 2I/(2P<sub>g</sub>+P<sub>v</sub>), v = I/(2P<sub>g</sub>+P<sub>v</sub>)；E = Ū(2P<sub>g</sub>+P<sub>v</sub>)。</b><ul><li>Leontief 均衡在轉折點：g/2 = v → g = 2v，代入 P<sub>g</sub>g + P<sub>v</sub>v = I</li></ul>"
+},
+];
+
 const CH7_SECTIONS = [];
 const CH7_PROBLEMS = [];
 const CH8_SECTIONS = [];
@@ -1853,6 +2114,11 @@ const GLOSS_CATS = [
   {name:"福利與政府介入", keys:["Consumer surplus","Producer surplus","Social welfare","Deadweight loss","Lump sum tax","Excise tax","Ad valorem tax","Price ceiling","Price floor","Rent-seeking","Ramsey rule","Tax incidence"]},
   {name:"效用理論", keys:["Utility","Total utility","Marginal utility","Law of diminishing marginal utility","Cardinal utility","Ordinal utility"]},
   {name:"消費者均衡", keys:["Consumer equilibrium","Marginal utility of money","Paradox of value"]},
+  {name:"偏好與公理", keys:["Preference","Completeness","Reflexivity","Transitivity","Continuity","Monotonicity","Convexity","Lexicographic preference","Well-behaved preferences"]},
+  {name:"效用函數與無異曲線", keys:["Utility function","Indifference curve","Marginal rate of substitution","Positive monotonic transformation","Cobb-Douglas","Leontief","Perfect substitutes","Quasi-linear","Homothetic preferences"]},
+  {name:"預算限制", keys:["Budget constraint line","Consumption possibility set","Relative price","Numeraire","Endowment"]},
+  {name:"消費者均衡", keys:["Marshallian demand","Hicksian demand","Interior solution","Corner solution"]},
+  {name:"對偶性理論", keys:["Indirect utility function","Expenditure function","Roy's identity","Shephard's lemma"]},
 ];
 
 const GLS = {
@@ -1865,7 +2131,8 @@ const CH_TERMS_CATS = {
   2:["需求基礎","財貨分類","網路外部性","彈性","所得與恩格爾"],
   3:["供給基礎","供給彈性"],
   4:["市場均衡","福利與政府介入"],
-  5:["效用理論","消費者均衡"]
+  5:["效用理論","消費者均衡"],
+  6:["偏好與公理","效用函數與無異曲線","預算限制","消費者均衡","對偶性理論"]
 };
 let glossMode="full", glossChapter=1;
 
