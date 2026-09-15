@@ -401,7 +401,7 @@ body.dark .formula .f-label{color:#d8b36a}
 const BOOK = [
   {n:1, title:"經濟學概論", subs:["1.1 進入經濟學的世界","1.2 經濟學的意義","1.3 經濟問題","1.4 經濟學的分類與模型建構","1.5 經濟學的邏輯謬誤","1.6 經濟活動循環流轉"], done:false, points:[]},
   {n:2, title:"需求", subs:["2.1 需求函數與市場需求","2.2 需求價格彈性","2.3 需求價格彈性對消費者支出的影響","2.4 交叉彈性","2.5 需求量與所得的關係","2.6 影響需求價格彈性的因素"], done:true, points:["需求的成立：願意＋能夠，且其他情況不變（流量變數）","需求法則：價格與需求量反向變動；需求量變動＝線上點移動，需求變動＝整條線移動","市場需求＝個別需求水平加總；違反需求法則：炫耀性財貨與季芬財","需求價格彈性：點彈性、弧彈性（中點法）、幾何彈性（直線五區段）","總支出與彈性：|ε|>1 反向、=1 不變、<1 同向","交叉彈性：>0 替代、<0 互補、=0 無關；所得彈性：>0 正常（必需/地位/奢侈）、<0 劣等、=0 中性","恩格爾法則與加總定理；影響彈性六因素"]},
-  {n:3, title:"供給", subs:["3.1 供給函數與市場供給","3.2 供給價格彈性與其他相關彈性"], done:false, points:[]},
+  {n:3, title:"供給", subs:["3.1 供給函數與市場供給","3.2 供給價格彈性與其他相關彈性"], done:true, points:["供給定義：特定期間＋其他情況不變＋願意且能夠；供給法則：價格與供給量同向","供給量變動＝線上點移動；供給變動＝整條線移動（技術、要素價格、預期、相關財價格、人數）","生產上互補品（聯產品）與替代品（要素搶奪）區分","供給價格彈性：點／弧彈性；直線五型（縱軸&gt;1、橫軸&lt;1、原點=1、垂直=0、水平=∞）","影響供給彈性：投入用途、成本敏感度、技術、規模、時間、保存容易度、定義範圍"]},
   {n:4, title:"市場均衡分析", subs:["4.1 市場均衡","4.2 消費者與生產者剩餘及社會福利分析","4.3 政府介入對社會福利的影響","4.4 政府介入市場的其他手段","4.5 羅西法則與租稅轉嫁"], done:false, points:[]},
   {n:5, title:"數列效用分析", subs:["5.1 前言","5.2 總效用與邊際效用","5.3 消費者均衡","5.4 需求曲線的求導","5.5 鑽石與水的矛盾"], done:false, points:[]},
   {n:6, title:"消費者行為理論", subs:["6.1 消費者偏好基本公理","6.2 效用函數","6.3 常用偏好結構與預算線","6.4 消費者均衡與計算","6.5 對偶性理論","6.6 全章考試總複習清單"], done:false, points:[]},
@@ -488,6 +488,18 @@ const TERMS = {
 "Luxury goods":["Luxury goods","奢侈品","所得彈性大於 1 的正常財：需求量變動百分比大於所得變動百分比。"],
 "Status goods":["Status goods","地位財","所得彈性等於 1 的正常財：需求量變動百分比等於所得變動百分比。"],
 "Flow":["Flow","流量","兩特定時間點之間衡量的變數（如需求、所得），須定義期間長短。"],
+"Supply":["Supply","供給","生產者在特定期間內、其他情況不變下，對某生產商品在給定不同價格之下，願意且能夠提供的商品數量之關係。"],
+"Quantity supplied":["Quantity supplied","供給量","其他情況不變，給定某價格下生產者願意且能夠供給的數量；為供給曲線上的點。"],
+"Supply function":["Supply function","供給函數","其他情況不變，價格與生產者願意且能供給數量間的關係：Q<sub>s</sub> = f(P；技術、要素價格、預期)。"],
+"Inverse supply function":["Inverse supply function","逆供給函數","給定數量下生產者願收的最低價格：P = g(Q)；又稱供給價格（賣者保留價格）。"],
+"Supply schedule":["Supply schedule","供給表","價格與供給量間不連續關係的表格。"],
+"Market supply":["Market supply","市場供給","特定時期內、各種可能價格下所有生產者願意且能供給的數量；為個別廠商供給之水平加總。"],
+"Law of supply":["Law of supply","供給法則","其他情況不變，價格與供給量呈同向變動：價格↑供給量↑；不會出現違反供給法則的商品。"],
+"Joint products":["Joint products","聯產品（生產上互補品）","同生產要素且同生產過程同時生產出的商品；一商品價格↑另一商品供給↑。"],
+"Supply elasticity":["Supply elasticity","供給價格彈性","商品價格變動百分之一引起供給量變動百分之幾：ε<sub>s</sub> = (ΔQ/Q)/(ΔP/P)。"],
+"Cross elasticity of supply":["Cross elasticity of supply","供給交叉彈性","其他商品價格變動百分之一引起本商品供給量變動百分之幾；&gt;0 生產替代品、&lt;0 生產互補品。"],
+"Cost elasticity of supply":["Cost elasticity of supply","供給的成本彈性","成本變動百分之一引起供給量變動百分之幾。"],
+"Production substitutes":["Production substitutes","生產上替代品","同生產要素但不同生產過程、生產時搶奪要素的商品；一商品價格↑另一商品供給↓。"],
 };
 
 
@@ -973,8 +985,150 @@ const CH2_PROBLEMS = [
 },
 ];
 
-const CH3_SECTIONS = [];
-const CH3_PROBLEMS = [];
+const CH3_SECTIONS = [
+{
+  id:"3.1", title:"供給函數與市場供給",
+  body:`
+  <p><b><span class="term" data-term="Supply">供給（Supply）</span></b>：生產者在特定期間內、其他情況不變下，對某生產商品在給定不同價格之下，願意且能夠提供的商品數量之關係。</p>
+  <p><b>其他情況不變</b>（同一條供給曲線上）：</p>
+  <ul>
+    <li>生產技術不變</li>
+    <li>其他相關財貨價格不變</li>
+    <li>生產者對未來的預期不變</li>
+    <li>要素價格不變</li>
+    <li>若是市場供給：生產者人數不變</li>
+  </ul>
+  <p><b><span class="term" data-term="Quantity supplied">供給量（Quantity supplied）</span></b>：其他情況不變，給定某價格下願意且能供給的數量（供給曲線上的<b>點</b>）。<b>供給</b>＝各價格下供給量之集合（整條<b>線</b>）。</p>
+  <div class="method-card mc-title" data-mc="law-supply">
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-1" data-mc="law-supply"><label for="mc-ch3-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">供給法則</div>
+    <div class="mc-body">
+      <div class="mc-formula">其他情況不變：價格↑ → 供給量↑；價格↓ → 供給量↓（同向變動，dQ/dP &gt; 0）</div>
+      <div class="mc-detail">供給函數：Q<sub>s</sub> = f(P；技術、要素價格、預期)；分號右邊為外生變數。例：Q<sub>s</sub> = −12 + 2P。與需求不同，供給不會出現違反供給法則的商品。</div>
+      <div class="mc-ex">例子：雞蛋每斤 40 元供應 100 箱、60 元供應 180 箱 → 價格越高供給量越多。</div>
+    </div>
+  </div>
+  <p><b><span class="term" data-term="Inverse supply function">供給價格（逆供給函數）</span></b>：給定數量下生產者願收的最低價格＝賣者保留價格（Seller's reservation price）。例：P = 6 + Q/2（數量 6 時最低願收 9 元）。</p>
+  <p><b><span class="term" data-term="Supply schedule">供給表（Supply schedule）</span></b>：價格與數量間的不連續關係表。</p>
+  <div class="method-card mc-title" data-mc="market-supply">
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-2" data-mc="market-supply"><label for="mc-ch3-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">市場供給＝水平加總</div>
+    <div class="mc-body">
+      <div class="mc-formula">市場供給＝個別廠商供給的水平加總：固定縱軸（價格）值，將橫軸（數量）值相加</div>
+      <div class="mc-detail">與市場需求同為水平加總；市場供給曲線在最低願收價格處起折。</div>
+      <div class="mc-ex">例子：100 個廠商供給函數皆 Q<sub>s</sub> = −10 + 2P → 市場供給 Q = 100(−10+2P) = −1000 + 200P。</div>
+    </div>
+  </div>
+  <p><b>供給量變動 vs 供給變動</b>：</p>
+  <div class="tblwrap"><table><colgroup><col style="width:20%"><col style="width:40%"><col style="width:40%"></colgroup>
+    <thead><tr><th></th><th>供給量變動</th><th>供給變動</th></tr></thead>
+    <tbody>
+      <tr><td>原因</td><td>商品本身價格變動（內生變數）</td><td>本身價格以外因素變動（外生變數）</td></tr>
+      <tr><td>圖形</td><td>同一條線上點的移動（Movement）</td><td>整條線移動（Shift）</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>供給變動因素</b>：</p>
+  <ul>
+    <li><b>其他財貨價格</b>：生產上的<b>互補品</b>（<span class="term" data-term="Joint products">聯產品 Joint products</span>：同要素＋同生產過程）價格↑ → 本商品供給↑（右移）；生產上的<b><span class="term" data-term="Production substitutes">替代品</span></b>（同要素但不同過程，生產時搶奪要素）價格↑ → 本商品供給↓（左移）；無關品不變</li>
+    <li><b>技術</b>：進步 → 供給右移；退步 → 左移</li>
+    <li><b>要素價格</b>↑：成本↑ → 最低願收價格↑ → 供給線左移</li>
+    <li><b>預期</b>未來價格↑ → 惜售 → 左移；預期下跌 → 脫售 → 右移</li>
+    <li><b>生產者人數</b>↑ → 市場供給右移</li>
+  </ul>
+  <div class="warn">考試重點：生產上互補品（聯產品）看「同生產過程」；生產上替代品看「同要素、要素搶奪」。生產互補／替代 ≠ 消費互補／替代。</div>`
+},
+{
+  id:"3.2", title:"供給價格彈性與其他相關彈性",
+  body:`
+  <p><b><span class="term" data-term="Supply elasticity">供給價格彈性（Supply elasticity）</span></b>：其他情況不變，商品價格變動 1% 引起供給量變動幾%。</p>
+  <div class="method-card mc-title" data-mc="supply-elasticity">
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-3" data-mc="supply-elasticity"><label for="mc-ch3-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">點彈性＋弧彈性</div>
+    <div class="mc-body">
+      <div class="mc-formula">點彈性：ε<sub>s</sub> = (dQ/dP)·(P/Q)；弧彈性（中點法）：ε<sub>s</sub> = (ΔQ/ΔP)×(中點 P/中點 Q)</div>
+      <div class="mc-detail">與需求彈性同公式結構；供給線正斜率，彈性為正，不需加絕對值。</div>
+      <div class="mc-ex">例子：Q<sub>s</sub> = −12 + 2P，P=10、Q=8 → ε<sub>s</sub> = 2×(10/8) = 2.5。</div>
+    </div>
+  </div>
+  <p><b>供給幾何彈性</b>（直線型供給曲線）：</p>
+  <div class="tblwrap"><table><colgroup><col style="width:30%"><col style="width:20%"><col style="width:50%"></colgroup>
+    <thead><tr><th>直線型態</th><th>彈性值</th><th>特性</th></tr></thead>
+    <tbody>
+      <tr><td>縱軸出發直線</td><td>&gt; 1</td><td>富於彈性；隨供給量增加彈性變小</td></tr>
+      <tr><td>橫軸出發直線</td><td>&lt; 1</td><td>缺乏彈性；隨供給量增加彈性變大</td></tr>
+      <tr><td>原點出發直線</td><td>= 1</td><td>單一彈性；彈性不隨供給量改變</td></tr>
+      <tr><td>垂直線</td><td>= 0</td><td>完全缺乏彈性（零彈性）</td></tr>
+      <tr><td>水平線</td><td>= ∞</td><td>完全彈性（彈性無限大）</td></tr>
+    </tbody>
+  </table></div>
+  <p><b><span class="term" data-term="Cross elasticity of supply">供給交叉彈性</span></b>：其他商品價格變動 1% 引起本商品供給量變動幾%。ε<sub>xy</sub> &gt; 0 → 生產上替代品；&lt; 0 → 生產上互補品；= 0 → 無關品。</p>
+  <div class="method-card mc-title" data-mc="supply-elasticity-factors">
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-4" data-mc="supply-elasticity-factors"><label for="mc-ch3-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">影響供給彈性的因素</div>
+    <div class="mc-body">
+      <div class="mc-formula">投入用途多、成本敏感度低、技術高、規模大、時間長、易保存、定義範圍小 → 供給彈性大</div>
+      <div class="mc-detail">成本隨產量敏感度越大 → 供給線越陡 → 彈性越小；時間越長生產者可調整越多 → 彈性越大。</div>
+      <div class="mc-ex">例子：蔬果不易保存、短期難以增產 → 供給彈性小；工業製品易保存、時間長可擴廠 → 彈性大。</div>
+    </div>
+  </div>
+  <p><b><span class="term" data-term="Cost elasticity of supply">供給的成本彈性</span></b>：成本變動 1% 引起供給量變動幾%。</p>
+  <div class="warn">考試重點：需求與供給彈性共同口訣——替代品越多彈性越大、時間越長彈性越大；供給另記「技術越高、規模越大、越易保存」彈性越大。</div>`
+},
+];
+
+const CH3_PROBLEMS = [
+{
+  q:"The quantity supplied of a good or service is the quantity that a producer （書本例題 3.1）",
+  opts:["(A) needs to sell at a particular price during a given time period","(B) should sell at a particular price during a given time period","(C) actually sells at a particular price during a given time period","(D) is willing to sell at a particular price during a given time period"],
+  ans:"<b>(D) is willing to sell。</b><ul><li>供給量＝生產者「願意且能夠」提供的數量，不是實際賣出的數量</li></ul>"
+},
+{
+  q:"假設某商品市場上有 100 個廠商，供給函數皆相同且為 Q<sub>s</sub> = −10 + 2P，求市場供給函數。 （書本例題 3.2）",
+  opts:["(A) Q = −1000 + 200P","(B) Q = −10 + 200P","(C) Q = −1000 + 2P","(D) Q = 1000 − 200P"],
+  ans:"<b>(A) Q = −1000 + 200P。</b><ul><li>市場供給＝個別供給水平加總：100 × (−10 + 2P) = −1000 + 200P</li></ul>"
+},
+{
+  q:"勞動的供給曲線右移表示： （書本例題 3.3）",
+  opts:["(A) 家計部門在給定工資水準下想要減少勞動供給量","(B) 雇主在給定工資水準下想要減少勞動雇用量","(C) 雇主在給定工資水準下想要增加勞動雇用量","(D) 家計部門在給定工資水準下想要增加勞動供給量","(E) 家計部門在給定勞動量下想要要求更多的工資"],
+  ans:"<b>(D) 家計部門在給定工資水準下想要增加勞動供給量。</b><ul><li>供給曲線右移＝各價格（工資）下供給量都增加</li></ul>"
+},
+{
+  q:"若市場預期北大股份有限公司股票價格未來會大漲，則市場對北大股票的供給與需求有何影響？ （書本例題 3.4）",
+  opts:["(A) 供給增加、需求增加","(B) 供給減少、需求增加","(C) 供給減少、需求減少","(D) 供給增加、需求減少","(E) 以上皆非"],
+  ans:"<b>(B) 供給減少、需求增加。</b><ul><li>預期未來漲價：持有者惜售 → 供給左移；買方搶進 → 需求右移</li></ul>"
+},
+{
+  q:"Which of the following variables cannot cause the supply curve to shift? （書本例題 3.5）",
+  opts:["(A) A technological improvement","(B) A change in the cost of production","(C) The expectation of a future price increase","(D) A change in the price of the good","(E) All of the above except (C)"],
+  ans:"<b>(D) A change in the price of the good。</b><ul><li>商品本身價格變動 → 沿線移動（供給量變動），不會使整條線移動</li><li>(A)(B)(C) 都是外生變數 → 線移動</li></ul>"
+},
+{
+  q:"A more efficient method of production is discovered. The end result will be that （書本例題 3.6）",
+  opts:["(A) the supply curve will shift to the left","(B) there will be an upward movement along an existing supply curve","(C) there will be a change in demand","(D) the supply curve will shift to the right"],
+  ans:"<b>(D) the supply curve will shift to the right。</b><ul><li>技術進步 → 各價格下能生產的數量變多 → 供給右移</li></ul>"
+},
+{
+  q:"Which of the following will cause a shift to the left in the supply curve of gasoline? （書本例題 3.7）",
+  opts:["(A) A decrease in the price of gasoline","(B) An increase in the wage rate of refinery workers","(C) A decrease in the price of crude oil","(D) An improvement in oil refining technology"],
+  ans:"<b>(B) An increase in the wage rate of refinery workers。</b><ul><li>要素（工資）價格上升 → 成本上升 → 供給左移</li><li>(A) 本身價格→沿線移動；(C)(D) 使供給右移</li></ul>"
+},
+{
+  q:"Which of the following best reflects an increase in quantity supplied rather than an increase in supply? （書本例題 3.8）",
+  opts:["(A) Unions negotiate higher wages","(B) More sellers enter the computer market","(C) The producer of cellular phones experiences lower costs of production","(D) The government stops controlling the price of a product, allowing the price to increase"],
+  ans:"<b>(D) The government stops controlling the price ... allowing the price to increase。</b><ul><li>供給量增加＝價格上升引起的沿線移動</li><li>(B)(C) 是供給增加（線右移）；(A) 供給減少</li></ul>"
+},
+{
+  q:"若 Y 產品的生產成本隨產量變動的敏感度越大，則其供給彈性： （書本例題 3.9）",
+  opts:["(A) 完全無彈性","(B) 彈性小","(C) 彈性大"],
+  ans:"<b>(B) 彈性小。</b><ul><li>成本敏感度越大 → 多生產一單位的成本上升越多 → 供給線越陡 → 供給彈性越小</li></ul>"
+},
+{
+  q:"下列有關需求與供給彈性之敘述，何者有誤？ （書本例題 3.10）",
+  opts:["(A) 替代品越多，需求彈性越小","(B) 商品占消費者總支出比例越大，需求彈性越大","(C) 必需品之彈性小於奢侈品","(D) 生產技術變通程度越高，供給彈性越大","(E) 時間越長，供給與需求之彈性皆越大"],
+  ans:"<b>(A) 替代品越多，需求彈性越小。</b><ul><li>替代品越多 → 需求彈性「越大」（選項敘述相反）</li><li>(B)(C)(D)(E) 皆正確</li></ul>"
+},
+];
+
 const CH4_SECTIONS = [];
 const CH4_PROBLEMS = [];
 const CH5_SECTIONS = [];
@@ -1252,6 +1406,8 @@ const GLOSS_CATS = [
   {name:"網路外部性", keys:["Bandwagon effect","Snob effect"]},
   {name:"彈性", keys:["Elasticity","Price elasticity of demand","Point elasticity","Arc elasticity","Unitary elasticity","Elastic","Inelastic","Perfectly elastic","Perfectly inelastic","Total expenditure","Cross elasticity","Income elasticity"]},
   {name:"所得與恩格爾", keys:["Engel curve","Engel's law","Engel aggregation condition","Necessity","Luxury goods","Status goods"]},
+  {name:"供給基礎", keys:["Supply","Quantity supplied","Supply function","Inverse supply function","Supply schedule","Market supply","Law of supply","Joint products","Production substitutes"]},
+  {name:"供給彈性", keys:["Supply elasticity","Cross elasticity of supply","Cost elasticity of supply"]},
 ];
 
 const GLS = {
@@ -1261,7 +1417,8 @@ const GLS = {
 
 const CH_TERMS_CATS = {
   1:["基本概念","經濟學分類","模型建構","邏輯謬誤","循環流轉"],
-  2:["需求基礎","財貨分類","網路外部性","彈性","所得與恩格爾"]
+  2:["需求基礎","財貨分類","網路外部性","彈性","所得與恩格爾"],
+  3:["供給基礎","供給彈性"]
 };
 let glossMode="full", glossChapter=1;
 
