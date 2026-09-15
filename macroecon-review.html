@@ -262,7 +262,7 @@ body.dark .p-head .done-btn.on{background:#1d2b1d}
 .method-card .mc-check .mc-lbl{font-size:11px;color:var(--muted)}
 .method-card .mc-check:has(input:checked){background:#eef7ec}
 .method-card .mc-check:has(input:checked) .mc-lbl{color:var(--green);font-weight:700}
-.method-card .mc-left{width:34px;flex-shrink:0;background:var(--teal-soft);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:8px 2px;font-family:"Noto Sans TC",sans-serif;font-weight:700;color:var(--teal);font-size:13px;text-align:center;line-height:1.4;writing-mode:vertical-rl;letter-spacing:.08em}
+.method-card .mc-left{width:54px;flex-shrink:0;background:var(--teal-soft);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:10px 6px;font-family:"Noto Sans TC",sans-serif;font-weight:700;color:var(--teal);font-size:13.5px;text-align:center;line-height:1.5;writing-mode:vertical-rl;letter-spacing:.18em}
 .method-card .mc-body{flex:1;padding:12px 16px;font-size:14px;min-width:0}
 .method-card .mc-formula{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--ink)}
 .method-card .mc-detail{font-size:13px;color:var(--muted)}
@@ -276,7 +276,7 @@ body.dark .method-card .mc-check:has(input:checked){background:#16241a}
 @media (max-width:900px){
   .method-card{flex-wrap:wrap}
   .method-card .mc-check{width:56px;border-right:1px solid var(--line);border-bottom:none;flex-direction:column;padding:6px}
-  .method-card .mc-left{flex:0 0 auto;width:auto;min-width:88px;border-right:1px solid var(--line);border-bottom:none;padding:8px 14px}
+  .method-card .mc-left{flex:0 0 auto;width:auto;min-width:88px;border-right:1px solid var(--line);border-bottom:none;padding:8px 14px;writing-mode:initial}
   .method-card .mc-body{width:100%}
 }
 /* 左右布局公式卡（左說明＋右公式＋底例子） */
@@ -360,7 +360,6 @@ body.dark .formula .f-label{color:#d8b36a}
 <!-- ===== 主內容 ===== -->
 <main class="main">
   <div class="topbar no-print">
-    <a class="toolbtn home-btn" href="index.html" title="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 10.5 9-7.5 9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span>首頁</span></a>
     <button class="toolbtn nav-toggle" id="navToggle" title="目錄">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
