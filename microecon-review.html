@@ -408,7 +408,7 @@ const BOOK = [
   {n:7, title:"比較靜態與需求函數", subs:["7.1 替代效果與所得效果","7.2 普通與受補償需求曲線","7.3 所得與價格消費曲線","7.4 史勒斯基方程式"], done:true, points:["價格效果 = 替代效果 + 所得效果；Hicks（維持效用/CV）vs Slutsky（維持原購買組合/CD）","受補償需求曲線只含 SE 永遠負斜率；馬歇爾需求含 SE＋IE","正常財 IE 與價格反向；劣等財反向抵銷；季芬財 IE &gt; SE（需求線正斜率）","ICC 只含 IE、PCC 含 SE＋IE；PCC 垂直 ⟺ 劣等財","史勒斯基方程式：∂x/∂P = ∂xh/∂P − x·∂x/∂M"]},
   {n:8, title:"消費者行為理論的應用", subs:["8.1 補貼或課稅對消費者之影響","8.2 勞動與休閒的選擇","8.3 跨期消費理論","8.4 顯示性偏好理論","8.5 皮氏與拉氏指數"], done:true, points:["相同補貼金額下消費者偏好所得補貼、政策面偏好從量補貼","休閒的價格＝工資率；後彎勞動供給需休閒為正常財且 IE &gt; SE","跨期預算線 c₁+c₂/(1+r)=y₁+y₂/(1+r)；均衡 MRS=1+r；Euler 方程式","顯示性偏好由選擇反推偏好；WARP 一致性、SARP 加遞移性","拉氏指數高估、皮氏低估生活成本；支出指數比較判斷福利"]},
   {n:9, title:"不確定狀況下的選擇行為", subs:["9.1 賭局與期望效用","9.2 面對風險下之決策"], done:true, points:["風險=機率已知、不確定=機率未知；決策依期望效用（正仿射轉換）","風險趨避凹/喜好凸/中立線性；CE 與風險溢價 π=EMV−CE","Arrow-Pratt 絕對/相對風險趨避量度","公平保費下保全險；保費率過高保部分險或不保","Friedman-Savage：同一個人可能同時買保險與彩券"]},
-  {n:10, title:"生產理論與成本結構", subs:["10.1 前言","10.2 生產函數","10.3 短期生產結構","10.4 長期生產結構","10.5 擴張線","10.6 替代彈性","10.7 成本結構理論","10.8 短期成本結構","10.9 長期成本結構","10.10 規模經濟","10.11 要素價格與成本結構","10.12 附錄 廠商行為"], done:false, points:[]},
+  {n:10, title:"生產理論與成本結構", subs:["10.1 前言","10.2 生產函數","10.3 短期生產結構","10.4 長期生產結構","10.5 擴張線","10.6 替代彈性","10.7 成本結構理論","10.8 短期成本結構","10.9 長期成本結構","10.10 規模經濟","10.11 要素價格與成本結構","10.12 附錄 廠商行為"], done:true, points:["生產函數 Q=f(L,K)；短期有固定要素、長期全可變；CRS⇔一階齊次","TP/AP/MP：反曲點→MP最大、射線變切線→AP最大、MP=0→TP最大；合理生產階段=第二階段","MP>AP⇔AP遞增、MP<AP⇔AP遞減、MP=AP時AP最大","MRTS=MP_L/MP_K=w/r（邊際生產力均等法則）；CD σ=1、Linear σ=∞、Leontief σ=0、CES σ=1/(1+ρ)","經濟利潤=會計利潤−內含成本；正常利潤=經濟利潤為零；沉沒成本不影響決策","STC=TVC+TFC；SMC通過SAC與AVC最低點；AVC=w/AP、SMC=w/MP","LTC/LAC為STC/SAC之包絡線；CRS⇔LAC固定；IRS→規模經濟","Shephard：∂C/∂w=L、∂C/∂r=K；利潤極大⇒成本極小；正常要素漲價MC上移、劣等要素漲價MC下移"]},
   {n:11, title:"完全競爭市場", subs:["11.1 市場分類","11.2 完全競爭廠商的特色","11.3 完全競爭廠商的短期均衡","11.4 完全競爭廠商的長期均衡","11.5 長期供給曲線與產業供給曲線","11.6 政府對完全競爭廠商的管制"], done:false, points:[]},
   {n:12, title:"獨占市場", subs:["12.1 獨占市場的特色與進入障礙","12.2 獨占廠商的均衡","12.3 差別取價","12.4 壟斷力的測量","12.5 政府對獨占廠商的管制"], done:false, points:[]},
   {n:13, title:"寡占市場", subs:["13.1 寡占廠商的特質","13.2 庫諾（Cournot）模型","13.3 史塔伯克（Stackelberg）模型","13.4 卡特爾（Cartel）模型","13.5 貝銓（Bertrand）模型","13.6 價格領袖模型","13.7 Sweezy 模型（拗折需求曲線模型）","13.8 賽局理論（Game Theory）"], done:false, points:[]},
@@ -658,6 +658,17 @@ const TERMS = {
   "Envelope curve":["Envelope curve","包絡線","LTC/LAC 為所有 STC/SAC 的包絡線（每個產量下最小成本集合）。"],
   "Long-run total cost":["Long-run total cost","長期總成本 (LTC)","所有要素可調整下的最小成本：LTC=wL+rK。"],
   "Long-run average cost":["Long-run average cost","長期平均成本 (LAC)","LAC=LTC/Q；不高於任一 SAC。"],
+  "Economies of scale":["Economies of scale","規模經濟","生產規模擴大使長期平均成本遞減（IRS → LAC 下降）。"],
+  "External economies of scale":["External economies of scale","外部規模經濟","LAC 整條下移：技術進步、要素價格下跌、學習效果。"],
+  "Learning curve":["Learning curve","學習曲線","累積產量提升經驗與效率，使每單位投入時間減少、平均成本下降。"],
+  "Economies of scope":["Economies of scope","範疇經濟","同時生產兩種產品之總成本低於各別生產之和；SC&gt;0。"],
+  "Normal factor":["Normal factor","正常要素","產量增加時要素需求增加；價格上升 MC 上移。"],
+  "Inferior factor":["Inferior factor","劣等要素","產量增加時要素需求下降；價格上升 MC 下移。"],
+  "Neutral factor":["Neutral factor","中性要素","產量增加時要素需求不變；價格上升 MC 不變。"],
+  "Shephard's lemma":["Shephard's lemma","Shephard 引理","∂C/∂w=L、∂C/∂r=K：成本函數對要素價格偏微分等於有條件要素需求。"],
+  "Hotelling lemma":["Hotelling lemma","Hotelling 引理","∂π/∂P=q（供給線）、∂π/∂w=−L：間接利潤函數對價格偏微分。"],
+  "Indirect profit function":["Indirect profit function","間接利潤函數","π(P,w,r)：以價格為變數的最大利潤值。"],
+  "Unconditional factor demand":["Unconditional factor demand","無條件要素需求","利潤極大化下直接解出的要素需求 L(P,w,r)、K(P,w,r)。"],
   "Slutsky equation":["Slutsky equation","史勒斯基方程式","∂x/∂P<sub>x</sub> = ∂x<sup>h</sup>/∂P<sub>x</sub> − x·∂x/∂M；分解價格效果為替代與所得效果。"],
 };
 
@@ -2467,6 +2478,56 @@ const CH10_SECTIONS = [
   </div>
   <div class="warn">考試重點：長期平均成本曲線是短期平均成本曲線的包絡線，且任何產量下 LAC 不高於 SAC。</div>`
 },
+{
+  id:"10.10", title:"規模經濟",
+  body:`
+  <p><b>內部規模經濟（Internal economies of scale）</b>：生產規模擴大、廠商內部有利因素使平均成本降低——產量上升 LAC 下降（沿曲線移動）。</p>
+  <p><b>外部規模經濟（External economies of scale）</b>：LAC 整條往下移動。常見原因：技術進步、要素價格下跌、<b>學習效果（Learning effect）</b>（學習曲線：累積產量提升經驗與效率、每單位投入時間減少、平均成本下降）。<b>外部規模不經濟</b>：LAC 整條上移。</p>
+  <div class="method-card mc-title" data-mc="scope">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-8" data-mc="scope"><label for="mc-ch10-8" class="mc-lbl">學會</label></div>
+    <div class="mc-left">範疇經濟</div>
+    <div class="mc-body">
+      <div class="mc-formula">SC = [C(X)+C(Y)−C(X,Y)] / C(X,Y)；SC&gt;0 範疇經濟、SC&lt;0 範疇不經濟</div>
+      <div class="mc-detail">單一廠商同時生產兩種產品之總成本，低於各別廠商生產之成本總和。衡量多角化的成本優勢。</div>
+      <div class="mc-ex">例子：一家廠商同時生產蘋果派與蘋果醬，成本低於兩家廠商分別生產 → SC&gt;0，存在範疇經濟。</div>
+    </div>
+  </div>
+  <p><b>規模經濟與規模報酬</b>：CRS ⇔ LAC 固定（此時 LAC=LMC）；IRS → LAC 遞減（規模經濟）——反向推論不一定成立；LAC 出現規模不經濟 → 生產函數必為規模報酬遞減。</p>
+  <p><b>齊次函數與規模彈性</b>：k 階齊次之規模彈性 ε=k。ε&gt;1 → LAC 隨產量遞減（規模經濟）；ε=1 → 最小效率規模（LAC 常數）；ε&lt;1 → 規模不經濟（LAC 遞增）。</p>
+  <div class="warn">考試重點：規模經濟看 LAC 走勢（成本面）、規模報酬看生產函數（生產面）；CRS ⇔ LAC 固定為若且唯若，其餘反向不一定。</div>`
+},
+{
+  id:"10.11", title:"要素價格與成本結構",
+  body:`
+  <p><b>生產要素的種類</b>：<span class="term">正常要素</span>（產量增加 → 要素需求增加）、<span class="term">中性要素</span>（需求不變）、<span class="term">劣等要素</span>（需求下降）。</p>
+  <div class="method-card mc-title" data-mc="shephard">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-9" data-mc="shephard"><label for="mc-ch10-9" class="mc-lbl">學會</label></div>
+    <div class="mc-left">要素價格與成本（Shephard）</div>
+    <div class="mc-body">
+      <div class="mc-formula">Shephard's lemma：∂C/∂w = L、∂C/∂r = K；要素價格↑ → LAC 上移</div>
+      <div class="mc-detail">對 MC 之影響（楊氏定理＋Shephard）：正常要素價格↑ → MC 上移；中性要素 → MC 不變；劣等要素 → MC 下移。無論何種要素，價格上升 LAC 必上移。</div>
+      <div class="mc-ex">例子：工資率上升 → 等成本線外移、總成本上升 → LAC 上移；若勞動為正常要素，SMC 也上移。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title" data-mc="profit">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-10" data-mc="profit"><label for="mc-ch10-10" class="mc-lbl">學會</label></div>
+    <div class="mc-left">利潤極大化兩階段</div>
+    <div class="mc-body">
+      <div class="mc-formula">第一階段 Min C=wL+rK s.t. Q=f(L,K) → C(Q)；第二階段 Max π=PQ−C(Q) → P=MC；Hotelling lemma：∂π/∂P = q</div>
+      <div class="mc-detail">利潤極大 ⇒ 成本極小（必滿足 MRTS=w/r），但成本極小不一定利潤極大。合併兩階段可得無條件要素需求 L(P,w,r)、K(P,w,r) 與間接利潤函數 π(P,w,r)。</div>
+      <div class="mc-ex">例子：完全競爭 P=12、w=3、q=ln L → MPL=1/L → P·MPL=12/L=3 → L=4；50 家廠商產業僱用 200 人。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：要素價格上升 LAC 必上移；劣等要素價格上升 MC 反而下移（正常/中性/劣等對 MC 的影響不同）。</div>`
+},
+{
+  id:"10.12", title:"附錄 廠商行為",
+  body:`
+  <p><b>成本極小化</b>：Min C=wL+rK s.t. Q=f(L,K)，拉格朗日求解得條件要素需求 L(Q,w,r)、K(Q,w,r)；帶回目標函數得成本函數 C(Q)。</p>
+  <p><b>Shephard's lemma</b>：∂C/∂w = L(Q,w,r)、∂C/∂r = K(Q,w,r)——成本函數對要素價格偏微分等於該要素的有條件需求。</p>
+  <p><b>利潤極大化</b>：Max π = PQ − C(Q)（或直接對 L、K 求解），一階條件 P·MP<sub>L</sub>=w、P·MP<sub>K</sub>=r；無條件要素需求帶回得間接利潤函數；<b>Hotelling lemma</b>：∂π/∂P = q（供給曲線）、∂π/∂w = −L。</p>
+  <p><b>兩階段合一</b>：利潤極大 ⇒ 成本極小（MRTS=w/r 同時滿足）；反之不成立。</p>`
+},
 ];
 
 const CH10_PROBLEMS = [
@@ -2549,6 +2610,41 @@ const CH10_PROBLEMS = [
   q:"當產量 100 單位時平均總成本與平均變動成本的差額為 2 元，則產量 50 單位時兩者差額為？（書本例題 10.29）",
   opts:["(A) 1 元","(B) 2 元","(C) 4 元","(D) 8 元"],
   ans:"<b>(C) 4 元。</b><ul><li>差額 = AFC = TFC/Q：TFC = 2×100 = 200</li><li>Q=50 時 AFC = 200/50 = 4</li></ul>"
+},
+{
+  q:"關於長期與短期平均成本曲線的敘述，下列何者正確？（書本例題 10.31）",
+  opts:["(A) LAC 為 SMC 的下包絡線，與 SMC 最低點相切","(B) LAC 為 SAC 的下包絡線，通過 SAC 的最低點","(C) LAC 為 SAC 的下包絡線，不一定通過 SAC 的最低點","(D) LAC 為所有 SAC 水平加總而來"],
+  ans:"<b>(C) LAC 為 SAC 的下包絡線，不一定通過 SAC 的最低點。</b><ul><li>僅在 LAC 最低點時與之相切的 SAC 才在其最低點相切</li><li>包絡線性質：LAC ≤ SAC，每個產量對應一個相切的 SAC</li></ul>"
+},
+{
+  q:"How are a firm's short-run and long-run average cost curves related?（書本例題 10.32）",
+  opts:["(A) SRAC &gt; LRAC，迫使 LRAC 上升","(B) 兩者同向升降，但 SRAC 恆較陡","(C) SRAC 切於 LRAC 且位於其上方","(D) LRAC 恰好在 SRAC 最低點與之相切"],
+  ans:"<b>(C) SRAC 與 LRAC 相切且位於其上方（LAC ≤ SAC）。</b><ul><li>長期所有要素可調整 → 成本不高於任何短期成本</li></ul>"
+},
+{
+  q:"若廠商生產函數 Q = min(5L, 10K)，工資率 3、利率 2，求長期成本函數。（書本例題 10.34）",
+  opts:["(A) LTC = 0.8Q","(B) LTC = 1.2Q","(C) LTC = 5Q","(D) LTC = 0.5Q"],
+  ans:"<b>(A) LTC = 0.8Q。</b><ul><li>Leontief：均衡 5L = 10K = Q → L = Q/5、K = Q/10</li><li>LTC = wL + rK = 3·(Q/5) + 2·(Q/10) = 0.6Q + 0.2Q = 0.8Q</li></ul>"
+},
+{
+  q:"假設生產函數 Q = √(LK)，工資率 5、利率 10。(1) 短期資本固定為 4，求 MPL 與短期總成本函數 (2) 求長期總成本函數。（書本例題 10.35）",
+  opts:["(A) (1) MPL=1/√L、STC=1.25Q²+40；(2) LTC=10√2·Q","(B) (1) MPL=√L、STC=5Q²+40；(2) LTC=5√2·Q","(C) (1) MPL=1/√L、STC=5Q²+40；(2) LTC=10Q","(D) (1) MPL=2√L、STC=2.5Q²+20；(2) LTC=20Q"],
+  ans:"<b>(A) (1) MPL = 0.5√(K/L) = 1/√L；STC = 5L + 40 = 5·(Q²/4) + 40 = 1.25Q² + 40。(2) MRTS = K/L = w/r = 0.5 → K = 0.5L；Q = √(0.5L²) → L = √2·Q、K = Q/√2 → LTC = 5√2Q + 10·Q/√2 = 10√2·Q。</b><ul><li>短期 L = Q²/K = Q²/4（K=4）</li></ul>"
+},
+{
+  q:"Economies of scale occur when?（書本例題 10.36）",
+  opts:["(A) LRATC 固定","(B) LRATC 隨產量上升","(C) LRATC 隨產量上升而下降","(D) 以上皆可能"],
+  ans:"<b>(C) LRATC 隨產量上升而下降。</b><ul><li>規模經濟 = 長期平均成本遞減</li></ul>"
+},
+{
+  q:"If there are diseconomies of scale within a given range of output, which is(are) true?（書本例題 10.37）",
+  opts:["(A) 該範圍內 SAC 必上升","(B) 該範圍內 LAC 必上升","(C) 廠商可在短期增加勞動而不改變 ATC","(D) LAC 必等於 SAC","(E) 以上皆是"],
+  ans:"<b>(B) 該範圍內 LAC 必上升。</b><ul><li>規模不經濟定義為 LAC 遞增（長期）</li><li>SAC 可能仍在下降階段，故 (A) 不一定</li></ul>"
+},
+{
+  q:"某一完全競爭產業有 50 家廠商，每家生產函數 q = ln L，工資率 w=3、產品價格 P=12，此產業雇用多少人？（書本例題 10.38）",
+  opts:["(A) 每廠 4 人、產業 200 人","(B) 每廠 3 人、產業 150 人","(C) 每廠 12 人、產業 600 人","(D) 每廠 36 人、產業 1800 人"],
+  ans:"<b>(A) 每廠 4 人、產業 200 人。</b><ul><li>MPL = 1/L；利潤極大：P·MPL = w → 12/L = 3 → L = 4</li><li>50 家 × 4 = 200 人</li></ul>"
 },
 ];
 
@@ -2843,6 +2939,8 @@ const GLOSS_CATS = [
   {name:"長期生產結構", keys:["Isoquant","Marginal rate of technical substitution","Isocost curve","Production equilibrium","Expansion path"]},
   {name:"成本與利潤", keys:["Economic cost","Explicit cost","Implicit cost","Opportunity cost","Economic profit","Accounting profit","Normal profit","Sunk cost","Pure rent"]},
   {name:"短期與長期成本", keys:["Conditional factor demand","Short-run total cost","Total variable cost","Total fixed cost","Quasifixed cost","Short-run average cost","Average variable cost","Average fixed cost","Marginal cost","Envelope curve","Long-run total cost","Long-run average cost"]},
+  {name:"規模經濟與範疇經濟", keys:["Economies of scale","External economies of scale","Learning curve","Economies of scope"]},
+  {name:"要素價格與利潤極大化", keys:["Normal factor","Inferior factor","Neutral factor","Shephard's lemma","Hotelling lemma","Indirect profit function","Unconditional factor demand"]},
 ];
 
 const GLS = {
@@ -2860,7 +2958,7 @@ const CH_TERMS_CATS = {
   7:["替代與所得效果","需求曲線","消費曲線與方程式"],
   8:["政府介入與補貼","勞動供給","跨期消費","顯示性偏好","物價指數"],
   9:["不確定性與風險","風險態度與保險"],
-  10:["生產函數與要素","短期生產結構","長期生產結構","成本與利潤","短期與長期成本"]
+  10:["生產函數與要素","短期生產結構","長期生產結構","成本與利潤","短期與長期成本","規模經濟與範疇經濟","要素價格與利潤極大化"]
 };
 let glossMode="full", glossChapter=1;
 
