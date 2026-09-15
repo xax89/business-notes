@@ -417,7 +417,7 @@ const BOOK = [
   {n:16, title:"一般均衡與福利經濟學", subs:["16.1 前言","16.2 交換經濟","16.3 生產經濟","16.4 全面均衡分析"], done:true, points:["部分均衡 vs 一般均衡：市場關聯緊密時須用一般均衡","交換經濟：契約線 = MRS_A=MRS_B（交換效率）、交易核、互惠區","柏拉圖最適：無法在無人受害下使有人得利；改善＝無人受害有人變好","競爭均衡＝瓦拉斯均衡；瓦拉斯法則：n−1 市場結清→最後一個必結清","福利第一定理：競爭均衡→柏拉圖最適（看不見的手）","福利第二定理：適當重分配→契約線上任何點可成為競爭均衡","生產效率 MRTS_x=MRTS_y；PPC 線上=技術效率、內部=不效率、外部=不可能","MRT=MC_x/MC_y=機會成本；最適產出 MRT=P_x/P_y","全面效率：MRS_A=MRS_B=MRT=P_x/P_y；GUPF 線上每點滿足全面效率","社會福利函數：公平主義、羅氏準則、功利主義（邊沁）、卡洛多、柏克遜-森謬爾森","亞羅不可能定理：無限制＋柏拉圖＋獨立性＋非獨裁不可同時滿足","投票矛盾（孔多塞）：多數決違反遞移性、議程可操作"]},
   {n:17, title:"市場失靈與外部性理論", subs:["17.1 前言","17.2 外部性","17.3 外部性的糾正方式","17.4 公共財","17.5 共有資源理論"], done:true, points:["市場失靈＝不完全競爭＋不完全市場（外部性、資訊不對稱）；政府也可能失靈","外部性：直接影響他人福利、非透過價格機制；金融外部性不造成市場失靈","負外部性→生產過多（MPB=MPC 產量大於 MSB=MSC）；正外部性→生產過少","社會最適：MSB=MSC；個人決策 MPB=MPC","皮古稅＝最適量處之 MEC（皮古提出）；正外部性用皮古補貼","直接管制無誘因機制；可交易排放許可證：政府定總量、市場交易，MB 相等處定價","寇斯定理：交易成本零＋財產權明確→協商達效率；強寇斯需無所得效果","財貨四分類：私有財（敵對+排他）、準公共財、共有財、純公共財（非敵對+非排他）","公共財需求垂直加總（私有財水平加總）；森謬爾遜條件 ΣMRS=MRT","搭便車→私人提供不足→政府提供；林達爾價格、克拉克稅","共有資源：無排他+敵對→過度使用（共有地的悲劇）"]},
   {n:18, title:"資訊經濟學", subs:["18.1 前言","18.2 資訊不對稱之種類與討論"], done:true, points:["資訊不對稱：一方訊息多→剝削另一方→效率損失","隱藏訊息（交易前）→逆向選擇；隱藏行為（交易後）→道德危機","檸檬市場（Akerlof）：平均價格→好商品退出→只剩壞商品","逆向選擇案例：二手車、雇用前生產力、投保前健康","解決逆向選擇：篩選（不足方）、示信（充足方）、強制險、法令","道德危機案例：雇用後偷懶、投保後疏忽、代理人問題","解決道德危機：共保條款、自負額、最低利潤下界","混和均衡 vs 分離均衡"]},
-  {n:19, title:"國際貿易理論", subs:["19.1 前言","19.2 古典貿易理論","19.3 新古典貿易理論"], done:false, points:[]},
+  {n:19, title:"國際貿易理論", subs:["19.1 前言","19.2 古典貿易理論","19.3 新古典貿易理論"], done:true, points:["三大議題：貿易利得、貿易型態、貿易條件（TOT=出口價/進口價）","重商主義：累積貴金屬、零和遊戲；休姆價格-貨幣機制自動平衡","絕對利益（亞當·斯密）：投入較少或產量較多；自由放任正和遊戲","比較利益（李嘉圖）：機會成本相對低；劣勢國仍可出口劣勢較低商品","貿易必要條件：相對成本不同；充分條件：國際相對價格介於兩國成本間","等成本差異：相對價格相同→無貿易","李嘉圖模型：勞動唯一要素、投入係數固定→PPC 直線、完全專業化","均衡貿易條件介於兩國貿易前價格比之間；貿易平衡、貿易三角形","新古典：機會成本遞增→PPC 凹、部分專業化；自給自足 MRS=MRT","貿易後：生產 MRT=Px/Py、消費 MRS=Px/Py","貿易利得拆解：交易利得＋專業化（資源重分配）利得","貿易發生：生產技術差異或需求偏好差異皆可"]},
   {n:20, title:"完全競爭下的部分均衡分析與貿易政策", subs:["20.1 前言","20.2 進口需求與出口供給","20.3 部分均衡的自由貿易模型","20.4 進口關稅","20.5 出口補貼","20.6 進口配額與自動出口設限","20.7 關稅與配額等價分析"], done:false, points:[]},
 ];
 
@@ -826,6 +826,22 @@ const TERMS = {
   "Co-insurance":["Co-insurance","共保條款","保險公司僅賠償部分損害，保戶自行承擔其餘。"],
   "Deductible":["Deductible","自負額","約定金額內由保戶自行負擔之條款。"],
   "Principal-agent problem":["Principal-agent problem","代理人問題","股東（主理人）無法監督經理人（代理人）圖利自己。"],
+  "International trade":["International trade","國際貿易","各國以餘裕商品相互買賣；個體經濟分析方法應用於國與國之間。"],
+  "Gains from trade":["Gains from trade","貿易利得","貿易後福利提高的效果（交易利得＋專業化利得）。"],
+  "Terms of trade":["Terms of trade","貿易條件 (TOT)","出口價格／進口價格；上升＝改善、下降＝惡化。"],
+  "Mercantilism":["Mercantilism","重商主義","16–18 世紀主流：累積貴金屬＝強國；補貼出口管制進口（零和）。"],
+  "Price-Specie-Flow Mechanism":["Price-Specie-Flow Mechanism","價格-貨幣機制","休姆提出：順差→黃金流入→物價漲→出口跌→自動平衡。"],
+  "Absolute advantage":["Absolute advantage","絕對利益","投入相同要素生產更多或相同數量用更少要素（亞當·斯密）。"],
+  "Comparative advantage":["Comparative advantage","比較利益","機會成本相對較低（要素投入係數比較小）；李嘉圖提出。"],
+  "Labor theory of value":["Labor theory of value","勞動價值說","商品價值以勞動投入量衡量（李嘉圖模型基礎）。"],
+  "Input-output coefficient":["Input-output coefficient","要素投入係數","生產一單位商品所需之要素投入量；倒數為勞動平均生產力。"],
+  "Equal cost-difference":["Equal cost-difference","等成本差異","兩國國內相對價格相同→無比較利益→無貿易。"],
+  "Ricardian model":["Ricardian model","李嘉圖模型","兩國兩商品勞動唯一要素；PPC 為直線、完全專業化。"],
+  "Autarky":["Autarky","自給自足","封閉經濟、不與外國貿易之狀態。"],
+  "Gains from exchange":["Gains from exchange","交易利得","生產點不變、消費點沿新貿易條件移動之福利增加。"],
+  "Gains from specialization":["Gains from specialization","專業化生產利得","生產點移至比較利益部門之福利增加（資源重分配利得）。"],
+  "Inter-industry trade":["Inter-industry trade","產業間貿易","兩國分別出口不同商品（傳統理論）。"],
+  "Intra-industry trade":["Intra-industry trade","產業內貿易","相同產業內之貿易（新貿易理論、規模經濟）。"],
   "Slutsky equation":["Slutsky equation","史勒斯基方程式","∂x/∂P<sub>x</sub> = ∂x<sup>h</sup>/∂P<sub>x</sub> − x·∂x/∂M；分解價格效果為替代與所得效果。"],
 };
 
@@ -3939,8 +3955,121 @@ const CH18_PROBLEMS = [
 },
 ];
 
-const CH19_SECTIONS = [];
-const CH19_PROBLEMS = [];
+const CH19_SECTIONS = [
+{
+  id:"19.1", title:"前言",
+  body:`
+  <p><span class="term">國際貿易（International trade）</span>：各國以餘裕商品相互買賣。國際經濟學分國際貿易（個體延伸）與國際金融。三大議題：<b>貿易利得（Gains from trade）</b>（根源與分配）、<b>貿易型態</b>（為何出口不同商品）、<b>貿易條件</b>（一單位出口換多少進口）。</p>
+  <ul>
+    <li>傳統理論：比較利益（技術差異）；新貿易理論：規模經濟；新新貿易理論：廠商異質性（高生產力出口、中生產力內銷、低生產力淘汰）</li>
+    <li><b>產業間貿易</b>（傳統，出口不同商品）vs <b>產業內貿易</b>（新貿易，同產業內互貿）</li>
+    <li><b>貿易條件（Terms of trade）</b>＝出口價格／進口價格；上升＝改善、下降＝惡化</li>
+  </ul>`
+},
+{
+  id:"19.2", title:"古典貿易理論",
+  body:`
+  <p><b>重商主義（Mercantilism）</b>：16–18 世紀歐洲主流，認為累積貴金屬＝強國（黃金存量固定 → 零和遊戲），主張補貼出口、管制進口。<span class="proper">休姆（Hume）</span>之<b>價格-貨幣機制</b>：順差→黃金流入→貨幣供給增→物價工資漲→出口競爭力跌；自動調整使長期無法累積順差。</p>
+  <p><span class="proper">亞當·斯密</span>主張自由放任（Laissez faire）：貿易是正和遊戲。分工＋專業化使各國獲利。</p>
+  <div class="method-card mc-title" data-mc="absc">
+    <div class="mc-check"><input type="checkbox" id="mc-ch19-1" data-mc="absc"><label for="mc-ch19-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">絕對 vs 比較利益</div>
+    <div class="mc-body">
+      <div class="mc-formula">絕對利益：投入相同要素生產更多（或生產相同數量用更少要素）；比較利益：機會成本相對較低（要素投入係數比較小）</div>
+      <div class="mc-detail"><b>絕對利益</b>：<span class="proper">亞當·斯密</span>。缺點：無絕對利益者無法參與貿易（與史實不合）。<b>比較利益</b>：<span class="proper">李嘉圖（David Ricardo）</span>——即使一國所有商品皆劣勢，仍出口劣勢程度較低之商品。<b>貿易必要條件</b>：兩國相對成本不同；<b>充分條件</b>：國際相對價格介於兩國相對成本之間。<b>等成本差異</b>：兩國相對價格相同 → 無比較利益 → 無貿易。</div>
+      <div class="mc-ex">例子：泰國 1 米機會成本 0.5 布、台灣 1 米機會成本 0.75 布 → 泰國米有比較利益、台灣布有比較利益。</div>
+    </div>
+  </div>
+  <div class="method-card mc-title" data-mc="ricardo">
+    <div class="mc-check"><input type="checkbox" id="mc-ch19-2" data-mc="ricardo"><label for="mc-ch19-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">李嘉圖模型</div>
+    <div class="mc-body">
+      <div class="mc-formula">PPC 為直線（固定規模報酬）：L = a<sub>LX</sub>X + a<sub>LY</sub>Y；MRT = a<sub>LX</sub>/a<sub>LY</sub> = MC<sub>x</sub>/MC<sub>y</sub> = 貿易前相對價格</div>
+      <div class="mc-detail">假設：兩國兩商品、勞動唯一要素、投入係數固定（勞動價值說）、完全競爭、充分就業、要素國內可移動國際不可。均衡價格由供給面（技術）決定、均衡產量與消費由需求面決定。<b>均衡貿易條件介於兩國貿易前價格比之間</b>；貿易平衡（出口值=進口值）；貿易三角形。</div>
+      <div class="mc-ex">例子：A 國 X 機會成本 0.5、B 國 X 機會成本 1.33 → 貿易條件 Px/Py ∈ (0.5, 1.33)。</div>
+    </div>
+  </div>`
+},
+{
+  id:"19.3", title:"新古典貿易理論",
+  body:`
+  <p><b>李嘉圖模型缺陷</b>：只有勞動要素（忽略所得重分配）、PPC 直線→極端專業化、比較利益只來自技術差異。新古典引入機會成本遞增的 PPC（凸向原點、部分專業化）與需求面。</p>
+  <div class="method-card mc-title" data-mc="neocl">
+    <div class="mc-check"><input type="checkbox" id="mc-ch19-3" data-mc="neocl"><label for="mc-ch19-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">新古典貿易</div>
+    <div class="mc-body">
+      <div class="mc-formula">自給自足：MRS = MRT（無異曲線與 PPC 相切）；貿易後：生產點 MRT = P<sub>x</sub>/P<sub>y</sub>（等值 GDP 線與 PPC 相切）、消費點 MRS = P<sub>x</sub>/P<sub>y</sub>（預算線上）</div>
+      <div class="mc-detail"><b>貿易利得拆解</b>：<b>交易利得（Gains from exchange）</b>＝生產點不變、消費點沿新貿易條件移動之福利增加；<b>專業化生產利得（Gains from specialization）</b>＝生產點移至比較利益部門之福利增加（又稱資源重分配利得）。貿易發生原因：生產條件（技術）差異或需求條件（偏好）差異，兩者皆可。</div>
+      <div class="mc-ex">例子：PPC 為凹曲線時，本國出口 X（MRT&lt;國際價格）、進口 Y，福利高於自給自足。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：比較利益看機會成本；貿易條件區間＝兩國貿易前相對價格之間；貿易利得＝交易利得＋專業化利得。</div>`
+},
+];
+
+const CH19_PROBLEMS = [
+{
+  q:"A、B 生產一單位 X、Y 所需勞動：A 國 X=12、Y=4；B 國 X=4、Y=6。以絕對利益角度誰該出口什麼？（書本例題 19.1）",
+  opts:["(A) A 出口 X、B 出口 Y","(B) A 出口 Y、B 出口 X","(C) A 出口 X、B 出口 X","(D) 無法貿易"],
+  ans:"<b>(B) A 出口 Y、B 出口 X。</b><ul><li>絕對利益：A 生產 Y 用 4&lt;6（較少要素）；B 生產 X 用 4&lt;12</li></ul>"
+},
+{
+  q:"A、B 生產一單位 X、Y 所需勞動：A 國 X=6、Y=3；B 國 X=9、Y=12。(1) 比較利益角度誰出口什麼？(2) 均衡貿易條件區間？（書本例題 19.2）",
+  opts:["(A) A 出口 X、B 出口 Y；(0.5, 1.33)","(B) A 出口 Y、B 出口 X；(0.5, 1.33)","(C) A 出口 X、B 出口 Y；(0.75, 2)","(D) A 出口 Y、B 出口 X；(0.75, 2)"],
+  ans:"<b>(A) A 出口 X、B 出口 Y；貿易條件 Px/Py ∈ (0.5, 1.33)。</b><ul><li>A 的 X 機會成本 = 3/6 = 0.5；B 的 X 機會成本 = 12/9 ≈ 1.33</li><li>A 在 X 比較利益（0.5&lt;1.33）→ 出口 X；貿易條件介於兩者之間</li></ul>"
+},
+{
+  q:"泰國：1 天產 10 公斤米或 5 公尺布；台灣：1 天產 20 公斤米或 15 公尺布。比較利益與絕對利益？（書本例題 19.3(1)）",
+  opts:["(A) 泰國米、台灣布有比較利益；台灣兩者皆有絕對利益","(B) 台灣米、泰國布有比較利益；泰國兩者皆有絕對利益","(C) 泰國米、台灣布有比較利益；泰國兩者皆有絕對利益","(D) 台灣米、泰國布有比較利益；台灣兩者皆有絕對利益"],
+  ans:"<b>(A) 泰國米、台灣布有比較利益；台灣兩者皆有絕對利益。</b><ul><li>機會成本：泰國 1 米=0.5 布、台灣 1 米=0.75 布 → 泰國米；泰國 1 布=2 米、台灣 1 布=1.33 米 → 台灣布</li><li>絕對利益：台灣米（20&gt;10）與布（15&gt;5）皆優</li></ul>"
+},
+{
+  q:"A、B 一單位勞動可生產：A 國 X=10、Y=20；B 國 X=14、Y=28。比較利益角度誰出口什麼？（書本例題 19.5）",
+  opts:["(A) A 出口 X、B 出口 Y","(B) A 出口 Y、B 出口 X","(C) 無比較利益、不發生貿易","(D) 兩國皆出口 X"],
+  ans:"<b>(C) 無比較利益、不發生貿易。</b><ul><li>兩國 1X 機會成本皆 = 2Y（等成本差異）→ 相對成本相同 → 無貿易</li></ul>"
+},
+{
+  q:"A 國一週可產 20 木材或 8 車；C 國可產 15 木材或 4 車。兩國貿易時 A 國可能的貿易條件（1 車換幾木材）？（書本例題 19.6）",
+  opts:["(A) 4","(B) 4","(C) 0.4","(D) 0.33"],
+  ans:"<b>(D) 0.33（以木材計價之車價介於 0.267~0.4）。</b><ul><li>A：1 車機會成本 2.5 木、1 木=0.4 車；C：1 車機會成本 3.75 木、1 木≈0.267 車</li><li>A 車有比較利益 → 貿易條件 1 木換車數介於 0.267~0.4 → 0.33 落於區間</li></ul>"
+},
+{
+  q:"魯賓遜每時捕 5 魚或摘 2 椰；星期五每時捕 2 魚或摘 5 椰。(1) 誰該捕魚？誰摘椰？(2) 1 條魚可換幾顆椰子？（書本例題 19.7）",
+  opts:["(A) 魯賓遜捕魚、星期五摘椰；1 魚換 0.4~2.5 椰","(B) 魯賓遜摘椰、星期五捕魚；1 魚換 0.4~2.5 椰","(C) 魯賓遜捕魚、星期五摘椰；1 魚換 2~5 椰","(D) 無法分工"],
+  ans:"<b>(A) 魯賓遜捕魚、星期五摘椰；1 魚換 0.4~2.5 椰。</b><ul><li>魯賓遜 1 魚機會成本 0.4 椰（&lt;星期五 2.5 椰）→ 捕魚；星期五 1 椰機會成本 0.4 魚 → 摘椰</li><li>貿易條件介於兩國機會成本之間</li></ul>"
+},
+{
+  q:"國際貿易理論關心的三大議題？（書本例題 19.1 概念）",
+  opts:["(A) 貿易利得、貿易型態、貿易條件","(B) 關稅、配額、補貼","(C) 匯率、利率、物價","(D) 出口、進口、匯兌"],
+  ans:"<b>(A) 貿易利得、貿易型態、貿易條件。</b><ul><li>利得：根源與分配；型態：出口什麼；條件：一單位出口換多少進口</li></ul>"
+},
+{
+  q:"重商主義與休姆價格-貨幣機制的核心主張？（書本例題 19.2 概念）",
+  opts:["(A) 累積貴金屬＝強國；順差自動調整使長期無法累積","(B) 自由貿易使各國雙贏","(C) 比較利益決定貿易","(D) 規模經濟決定貿易"],
+  ans:"<b>(A) 累積貴金屬＝強國；順差自動調整使長期無法累積。</b><ul><li>休姆機制：順差→黃金流入→物價漲→出口跌→自動平衡</li><li>貿易為零和遊戲（重商主義觀點）</li></ul>"
+},
+{
+  q:"「即使一國在所有商品生產皆劣勢，仍可出口劣勢程度較低的商品」是哪一理論？（書本例題 19.3 概念）",
+  opts:["(A) 絕對利益（亞當·斯密）","(B) 比較利益（李嘉圖）","(C) 重商主義","(D) 新貿易理論"],
+  ans:"<b>(B) 比較利益（李嘉圖）。</b><ul><li>比較利益看機會成本（相對優勢）而非絕對生產力</li></ul>"
+},
+{
+  q:"貿易利得可拆解為？（書本例題 19.8 概念）",
+  opts:["(A) 交易利得＋專業化生產利得","(B) 出口利得＋進口利得","(C) 關稅利得＋補貼利得","(D) 消費者剩餘＋生產者剩餘"],
+  ans:"<b>(A) 交易利得（Gains from exchange）＋專業化生產利得（Gains from specialization）。</b><ul><li>交易利得：消費點沿新貿易條件移動（生產點不變）</li><li>專業化利得：生產點移至比較利益部門（又稱資源重分配利得）</li></ul>"
+},
+{
+  q:"李嘉圖模型之生產可能曲線為何是直線？（書本例題 19.4 概念）",
+  opts:["(A) 要素投入係數固定（固定規模報酬）","(B) 機會成本遞增","(C) 需求偏好線性","(D) 完全競爭市場"],
+  ans:"<b>(A) 要素投入係數固定（固定規模報酬）。</b><ul><li>a_LX、a_LY 為常數 → PPC 斜率（MRT）固定 → 直線</li><li>新古典機會成本遞增 → PPC 凹向原點（部分專業化）</li></ul>"
+},
+{
+  q:"新古典貿易理論中，縱使兩國生產可能曲線相同，仍可貿易的原因？（書本例題 19.9 概念）",
+  opts:["(A) 偏好結構不同（需求面差異）","(B) 規模經濟","(C) 勞動生產力不同","(D) 政府補貼"],
+  ans:"<b>(A) 偏好結構不同（需求面差異）。</b><ul><li>需求差異→貿易前均衡機會成本不同→比較利益不同→可貿易</li><li>生產技術不同亦可（供給面差異）</li></ul>"
+},
+];
+
 const CH20_SECTIONS = [];
 const CH20_PROBLEMS = [];
 ;
@@ -4229,6 +4358,7 @@ const GLOSS_CATS = [
   {name:"一般均衡與福利經濟學", keys:["Partial equilibrium analysis","General equilibrium analysis","Exchange economy","Endowment","Contract curve","Pareto optimum","Pareto improvement","Competitive equilibrium","Walrasian equilibrium","Walras' law","Production possibility curve","Marginal rate of transformation","Utility possibility frontier","Grand utility possibility frontier","Rawlsian criterion","Utilitarian","Arrow's impossibility theorem","Voting paradox"]},
   {name:"市場失靈與外部性", keys:["Market failure","Government failure","Externality","Pecuniary externality","Technological externality","Network externality","External cost","External benefit","Marginal social cost","Marginal social benefit","Pigouvian tax","Tradable emission permits","Coase theorem","Property rights","Rival","Nonrival","Excludability","Private good","Quasi-public good","Public good","Common resource","Free rider","Samuelson condition","Lindahl price","Clarke tax","Tragedy of the commons"]},
   {name:"資訊經濟學", keys:["Symmetric information","Asymmetric information","Hidden information","Hidden action","Adverse selection","Moral hazard","Lemon market","Screening","Signaling","Pooling equilibrium","Separating equilibrium","Co-insurance","Deductible","Principal-agent problem"]},
+  {name:"國際貿易理論", keys:["International trade","Gains from trade","Terms of trade","Mercantilism","Price-Specie-Flow Mechanism","Absolute advantage","Comparative advantage","Labor theory of value","Input-output coefficient","Equal cost-difference","Ricardian model","Autarky","Gains from exchange","Gains from specialization","Inter-industry trade","Intra-industry trade"]},
 ];
 
 const GLS = {
@@ -4254,7 +4384,8 @@ const CH_TERMS_CATS = {
   15:["要素市場理論"],
   16:["一般均衡與福利經濟學"],
   17:["市場失靈與外部性"],
-  18:["資訊經濟學"]
+  18:["資訊經濟學"],
+  19:["國際貿易理論"]
 };
 let glossMode="full", glossChapter=1;
 
