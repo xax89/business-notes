@@ -237,6 +237,13 @@ body.marking .section-body p:hover,body.marking .section-body li:hover,body.mark
 .progress-strip{display:flex;gap:6px;margin:14px 0 6px}
 .progress-strip i{flex:1;height:5px;border-radius:3px;background:var(--line)}
 .progress-strip i.done{background:var(--teal)}
+.progress-strip i.na{background:none;border:1px dashed var(--line);height:3px}
+.progress-label{font-size:12px;color:var(--muted);margin-top:4px}
+.p-head .done-btn{border:1px solid var(--line);background:var(--panel);border-radius:7px;padding:3px 10px;font-size:12px;cursor:pointer;color:var(--muted);font-family:inherit;flex-shrink:0;transition:all .15s}
+.p-head .done-btn:hover{border-color:var(--green);color:var(--green)}
+.p-head .done-btn.on{background:#e3f0e3;border-color:var(--green);color:var(--green);font-weight:700}
+body.dark .p-head .done-btn.on{background:#1d2b1d}
+.prob-progress{font-size:13px;font-weight:600;color:var(--muted)}
 .chip{display:inline-flex;align-items:center;gap:5px;background:var(--teal-soft);color:var(--teal);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:500}
 /* 提示條 */
 .banner{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--ink);margin-bottom:18px;display:flex;gap:10px;align-items:flex-start}
@@ -329,7 +336,7 @@ body.dark .formula .f-label{color:#d8b36a}
   body.nav-open .sidebar{transform:translateX(0)}
   .sidebar .brand{width:100%;padding-bottom:8px;margin-bottom:6px}
   .nav-chapter{width:100%;margin:4px 0;padding:6px 10px}
-  .nav-chapter .tag{display:none}
+  .nav-chapter .tag{display:inline-block;margin-left:auto;font-size:11px;flex-shrink:0}
   .nav-sub{width:100%;display:block;padding:5px 10px 5px 32px;margin:2px 0}
   .nav-gloss{width:100%;margin-top:12px}
   .main{padding:18px 14px 60px}
@@ -2717,6 +2724,45 @@ function closeNav(){document.body.classList.remove("nav-open");}
 if(navToggle)navToggle.addEventListener("click",()=>{document.body.classList.toggle("nav-open");});
 if(navMask)navMask.addEventListener("click",closeNav);
 
+function getProgressState(){
+  let mc={};try{mc=JSON.parse(localStorage.getItem("mc_learned_v1")||"{}")}catch(e){}
+  let dn={};try{dn=JSON.parse(localStorage.getItem("macro_done_v1")||"{}")}catch(e){}
+  return {mc,dn};
+}
+function chapterProgress(n){
+  const {mc,dn}=getProgressState();
+  const secs=CH_SECTIONS[n]||[];
+  let total=0,done=0;
+  secs.forEach(sec=>{
+    const keys=[...sec.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]);
+    total+=keys.length;done+=keys.filter(k=>mc[k]).length;
+  });
+  const probs=CH_PROBLEMS[n]||[];
+  total+=probs.length;done+=probs.filter((_,i)=>dn[n+"-"+(i+1)]).length;
+  return {done,total,pct:total?Math.round(done/total*100):0};
+}
+
+function refreshProgress(n){
+  const {mc}=getProgressState();
+  const secs=CH_SECTIONS[n]||[];
+  const strip=document.querySelector(".progress-strip");
+  const label=document.querySelector(".progress-label");
+  if(strip&&label){
+    const secMc=secs.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));
+    strip.innerHTML=secMc.map(a=>`<i class="${a.length?(a.every(k=>mc[k])?'done':''):'na'}"></i>`).join("");
+    const t=secMc.filter(a=>a.length).length,d=secMc.filter(a=>a.length&&a.every(k=>mc[k])).length;
+    label.textContent="本章方法卡小節已完成 "+d+" / "+t+(t?"（"+Math.round(d/t*100)+"%）":"（本章無方法卡）");
+  }
+  const probProg=document.getElementById("probProgress");
+  if(probProg){
+    const {dn}=getProgressState();
+    const probs=CH_PROBLEMS[n]||[];
+    probProg.textContent="（已做 "+probs.filter((_,i)=>dn[n+"-"+(i+1)]).length+" / "+probs.length+"）";
+  }
+  const tag=document.querySelector('.nav-chapter[data-ch="'+n+'"] .tag');
+  if(tag){const pct=chapterProgress(n).pct;tag.textContent=pct>=100?"✓ 100%":pct+"%";}
+}
+
 function renderSidebar(){
   const sb=document.getElementById("sidebar");
   let html=`<div class="brand">宏觀天地 學總經<div class="t2">研究所複習 · 第 1–14 章</div></div>
@@ -2726,7 +2772,7 @@ function renderSidebar(){
   BOOK.forEach(ch=>{
     html+=`<button class="nav-chapter ${ch.n===currentChapter?'active':''}" data-ch="${ch.n}">
       <span class="num">${ch.n}</span><span>${esc(ch.title)}</span>
-      ${ch.done?'<span class="tag done">已上線</span>':'<span class="tag">待建</span>'}
+      ${ch.done?`<span class="tag done">${chapterProgress(ch.n).pct>=100?"✓ 100%":chapterProgress(ch.n).pct+"%"}</span>`:'<span class="tag">待建</span>'}
     </button>`;
     if(ch.subs&&ch.subs.length){
       ch.subs.forEach(sub=>{
@@ -2769,6 +2815,7 @@ function renderChapter(n){
   const c=document.getElementById("chapterContent");
   const favStoreKey="macro_fav_v1";
   let favState={};try{favState=JSON.parse(localStorage.getItem(favStoreKey)||"{}")}catch(e){}
+  let doneState={};try{doneState=JSON.parse(localStorage.getItem("macro_done_v1")||"{}")}catch(e){}
   const favPool={};
   let h=`<div class="chapter-head">
     <span class="kicker">第 ${n} 章</span>
@@ -2777,7 +2824,8 @@ function renderChapter(n){
     <ul class="ch-points">
       ${book.points?book.points.map(p=>`<li>${esc(p)}</li>`).join(""):""}
     </ul>
-    <div class="progress-strip">${book.subs.map((_,i)=>`<i class="${i<book.subs.length?'done':''}"></i>`).join("")}</div>
+    <div class="progress-strip">${(()=>{const{mc}=getProgressState();const secMc=sections.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));return secMc.map(a=>`<i class="${a.length?(a.every(k=>mc[k])?'done':''):'na'}"></i>`).join("")})()}</div>
+    <div class="progress-label">本章小節方法卡已學 ${(()=>{const{mc}=getProgressState();const secMc=sections.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));const t=secMc.filter(a=>a.length).length,d=secMc.filter(a=>a.length&&a.every(k=>mc[k])).length;return "本章方法卡小節已完成 "+d+" / "+t+(t?"（"+Math.round(d/t*100)+"%）":"（本章無方法卡）")})()}</div>
   </div>`;
   sections.forEach((s,i)=>{
     h+=`<section class="section" id="sec-${s.id}">
@@ -2788,13 +2836,14 @@ function renderChapter(n){
       <div class="section-body">${s.body}</div>
     </section>`;
   });
-  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">例題演練</h1><p>先自己作答，再點「顯示答案」核對。</p></div>`;
+  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">例題演練 <span class="prob-progress" id="probProgress"></span></h1><p>先自己作答，再點「顯示答案」核對。</p></div>`;
   problems.forEach((p,i)=>{
     const fk=n+"-"+(i+1);
     favPool[fk]={t:"第 "+n+" 章 · 例題 "+(i+1),q:p.q+(p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""),a:p.ans};
     const isFav=!!favState[fk];
+    const isDone=!!doneState[fk];
     h+=`<div class="problem" id="prob-${n}-${i+1}">
-      <div class="p-head"><span>例題 ${i+1}</span><button class="fav ${isFav?"on":""}" data-fav="${fk}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
+      <div class="p-head"><button class="done-btn ${isDone?"on":""}" data-done="${fk}" title="標記已做過">${isDone?"☑ 做過":"☐ 做過"}</button><span>例題 ${i+1}</span><button class="fav ${isFav?"on":""}" data-fav="${fk}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
       <div class="p-body"><p>${p.q}</p>${p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""}
       <button class="ans-btn" onclick="toggleAns(this)">顯示答案</button>
       <div class="ans"><span class="a-label">解答</span>：${p.ans}</div></div>
@@ -2819,6 +2868,20 @@ function renderChapter(n){
     });
   });
 
+  // 例題做過標記（存 macro_done_v1）
+  refreshProgress(n);
+  c.querySelectorAll(".done-btn").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const k=b.dataset.done;
+      if(doneState[k]){delete doneState[k];}else{doneState[k]=true;}
+      try{localStorage.setItem("macro_done_v1",JSON.stringify(doneState));}catch(e){}
+      const on=!!doneState[k];
+      b.classList.toggle("on",on);
+      b.textContent=on?"☑ 做過":"☐ 做過";
+      refreshProgress(n);
+    });
+  });
+
   // 術語點擊（文內：課文名詞＋專有名詞都可開知識卡）
   c.querySelectorAll(".term,.proper").forEach(t=>{
     if(!t.dataset.term)return;
@@ -2833,7 +2896,7 @@ function renderChapter(n){
     const apply=()=>card.classList.toggle("learned",cb.checked);
     cb.checked=!!mcState[k];
     apply();
-    cb.addEventListener("change",()=>{mcState[k]=cb.checked;localStorage.setItem(mcKey,JSON.stringify(mcState));apply();});
+    cb.addEventListener("change",()=>{mcState[k]=cb.checked;localStorage.setItem(mcKey,JSON.stringify(mcState));apply();refreshProgress(n);});
   });
   // 套用已存高亮
   applyHighlights();
