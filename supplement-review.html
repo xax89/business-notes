@@ -104,6 +104,12 @@ body.dark{
 .problem .opts{margin:10px 0 4px;display:grid;gap:6px}
 .problem .opts div{padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.8px;background:var(--panel)}
 body.dark .problem{background:#26221a}
+
+.p-head .done-btn{border:1px solid var(--line);background:var(--panel);border-radius:7px;padding:3px 10px;font-size:12px;cursor:pointer;color:var(--muted);font-family:inherit;flex-shrink:0;transition:all .15s}
+.p-head .done-btn:hover{border-color:var(--green);color:var(--green)}
+.p-head .done-btn.on{background:#e3f0e3;border-color:var(--green);color:var(--green);font-weight:700}
+body.dark .p-head .done-btn.on{background:#1d2b1d}
+
 .ans-btn{
   margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:none;border:1.5px solid var(--teal);
   color:var(--teal);border-radius:8px;padding:7px 16px;font-size:13.5px;cursor:pointer;font-family:inherit;transition:all .15s;
@@ -253,7 +259,7 @@ function renderChapter(id){
   const problems=CH_PROBLEMS[id]||[];
   const c=document.getElementById("chapterContent");
   const favStoreKey="supp_fav_v1";
-  let favState={};try{favState=JSON.parse(localStorage.getItem(favStoreKey)||"{}")}catch(e){}
+  let favState={};try{favState=JSON.parse(localStorage.getItem(favStoreKey)||"{}")}catch(e){}   const doneStoreKey="supp_done_v1";let doneState={};try{doneState=JSON.parse(localStorage.getItem(doneStoreKey)||"{}")}catch(e){}
   const favPool={};
   let h=`<div class="chapter-head">
     <span class="kicker">${esc(book.part)}</span>
@@ -266,9 +272,9 @@ function renderChapter(id){
     const fk=id+"|"+p.num;
     const partLabel=book.part;
     favPool[fk]={t:partLabel+(book.n?(" 第"+book.n+"章"):"")+" · 例題 "+p.num,q:p.q+(p.opts&&p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${esc(o)}</div>`).join("")}</div>`:""),a:p.ans.join("<br>")};
-    const isFav=!!favState[fk];
+    const isFav=!!favState[fk];const isDone=!!doneState[fk];
     h+=`<div class="problem">
-      <div class="p-head"><span>例題 ${esc(p.num)}</span><button class="fav ${isFav?"on":""}" data-fav="${esc(fk)}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
+      <div class="p-head"><button class="done-btn ${isDone?"on":""}" data-done="${esc(fk)}" title="標記已做過">${isDone?"☑ 做過":"☐ 做過"}</button><span>例題 ${esc(p.num)}</span><button class="fav ${isFav?"on":""}" data-fav="${esc(fk)}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
       <div class="p-body"><p>${lines(p.q)}</p>${optsHtml(p.opts)}
       ${p.note?`<div class="p-note"><span class="n-label">★ 重點</span>${esc(p.note)}</div>`:""}
       <button class="ans-btn" onclick="toggleAns(this)">顯示答案</button>
@@ -285,6 +291,19 @@ function renderChapter(id){
       b.classList.toggle("on",on);
       b.textContent=on?"★ 已收藏":"☆ 收藏";
       toast(on?"已加入收藏（與題庫收藏頁共用）":"已取消收藏");
+    });
+  });
+
+  // 例題做過
+  c.querySelectorAll(".done-btn").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const k=b.dataset.done;
+      if(doneState[k]){delete doneState[k];}else{doneState[k]=true;}
+      try{localStorage.setItem(doneStoreKey,JSON.stringify(doneState));}catch(e){}
+      const on=!!doneState[k];
+      b.classList.toggle("on",on);
+      b.textContent=on?"☑ 做過":"☐ 做過";
+      toast(on?"已標記做過":"已取消做過");
     });
   });
   applyHighlights();

@@ -56,13 +56,16 @@ h1{font-size:28px;margin-top:2px}
   <header>
     <div class="kicker">MY PROBLEM BANK</div>
     <h1>題庫收藏</h1>
-    <p class="sub">在總經複習／微觀筆記／補充例題的例題上點「☆ 收藏」，錯題就會集中在這裡。收藏與取消會即時同步。</p>
+    <p class="sub">在總經／微觀／補充／統計／數理統計／財管的例題上點「☆ 收藏」，錯題就會集中在這裡。收藏與取消會即時同步。</p>
   </header>
-  <div class="note">收藏資料儲存在此瀏覽器的本機（localStorage）——GitHub Pages 網頁版下，總經、微觀與補充各自獨立收藏，與對應的複習頁共用同一份。若清除瀏覽器資料會一併清空。</div>
+  <div class="note">收藏資料儲存在此瀏覽器的本機（localStorage）——GitHub Pages 網頁版下，各書各自獨立收藏，與對應的複習頁共用同一份。若清除瀏覽器資料會一併清空。</div>
   <div class="tabs">
     <button class="tab active" data-tab="macro">總經收藏</button>
     <button class="tab" data-tab="micro">微觀收藏</button>
     <button class="tab" data-tab="supp">補充收藏</button>
+    <button class="tab" data-tab="stat">統計收藏</button>
+    <button class="tab" data-tab="ms">數理統計收藏</button>
+    <button class="tab" data-tab="fin">財管收藏</button>
   </div>
   <div class="tools">
     <button class="tool" id="expandAll">全部展開解答</button>
@@ -79,8 +82,8 @@ h1{font-size:28px;margin-top:2px}
 </div>
 <script>
 (function(){
-  var KEYS={macro:'macro_fav_v1',micro:'micro_fav_v1',supp:'supp_fav_v1'};
-  var LINKS={macro:['macroecon-review.html','總經複習'],micro:['microecon-notes.html','微觀筆記'],supp:['supplement-review.html','補充複習']};
+  var KEYS={macro:'macro_fav_v1',micro:'micro_fav_v1',supp:'supp_fav_v1',stat:'stat_fav_v1',ms:'ms_fav_v1',fin:'fin_fav_v1'};
+  var LINKS={macro:['macroecon-review.html','總經複習'],micro:['microecon-notes.html','微觀筆記'],supp:['supplement-review.html','補充複習'],stat:['statistics-review.html','統計複習'],ms:['mathstat-review.html','數理統計複習'],fin:['finance-review.html','財管複習']};
   var tab='macro';
   var list=document.getElementById('list'),empty=document.getElementById('empty'),countEl=document.getElementById('count');
   var emptyText=document.getElementById('emptyText'),emptyTip=document.getElementById('emptyTip'),emptyLink=document.getElementById('emptyLink');
@@ -122,7 +125,7 @@ h1{font-size:28px;margin-top:2px}
       list.appendChild(card);
     });
   }
-  function tabName(t){return t==='macro'?'總經':(t==='micro'?'微觀':'補充');}
+  function tabName(t){return ({macro:'總經',micro:'微觀',supp:'補充',stat:'統計',ms:'數理統計',fin:'財管'})[t]||t;}
   document.querySelectorAll('.tab').forEach(function(tb){
     tb.addEventListener('click',function(){
       document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});

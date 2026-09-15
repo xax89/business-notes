@@ -174,6 +174,16 @@ body.dark .proper:hover{background:var(--purple);color:#1a1420}
 .term-modal .tm-go:hover{filter:brightness(1.08)}
 body.dark .term-modal{background:var(--panel);border-color:var(--line)}
 /* 例題 */
+
+.p-head .done-btn{border:1px solid var(--line);background:var(--panel);border-radius:7px;padding:3px 10px;font-size:12px;cursor:pointer;color:var(--muted);font-family:inherit;flex-shrink:0;transition:all .15s;white-space:nowrap}
+.p-head .done-btn:hover{border-color:var(--green);color:var(--green)}
+.p-head .done-btn.on{background:#e3f0e3;border-color:var(--green);color:var(--green);font-weight:700}
+body.dark .p-head .done-btn.on{background:#1d2b1d}
+.p-head .fav{margin-left:6px;background:none;border:1.5px solid var(--line);color:var(--muted);border-radius:8px;padding:3px 12px;font-size:12.5px;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.p-head .fav:hover{border-color:#c9a227;color:#c9a227}
+.p-head .fav.on{border-color:#c9a227;background:#fffaf0;color:#c9a227;font-weight:700}
+body.dark .p-head .fav.on{background:#3a3320}
+
 .problem{border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:14px 0;overflow:hidden}
 .problem .p-head{display:flex;align-items:center;gap:8px;padding:9px 16px;background:var(--nav-hover);font-weight:800;font-size:14px}
 .problem .p-head .p-src{margin-left:auto;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.04em;white-space:nowrap}
@@ -2059,6 +2069,55 @@ if(window.katex){
   };
   document.head.appendChild(ks);
 }
+
+// ===== 例題做過＆收藏（本機儲存，與收藏集中頁共用 ms_fav_v1） =====
+(function(){
+  const DKEY='ms_done_v1',FKEY='ms_fav_v1';
+  let ds={},fs={};
+  try{ds=JSON.parse(localStorage.getItem(DKEY)||'{}')}catch(e){}
+  try{fs=JSON.parse(localStorage.getItem(FKEY)||'{}')}catch(e){}
+  const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+  let idx=0;
+  $$('.problem').forEach(pb=>{
+    idx++;
+    const head=pb.querySelector('.p-head');
+    if(!head)return;
+    const titleEl=head.querySelector('span');
+    const title=titleEl?titleEl.textContent.trim():('例題 '+idx);
+    const fk=title||('p'+idx);
+    const pSrc=head.querySelector('.p-src');
+    const body=pb.querySelector('.p-body');
+    const ansEl=pb.querySelector('.ans');
+    let q='';
+    if(body){
+      const tmp=document.createElement('div');
+      tmp.innerHTML=body.innerHTML;
+      const a1=tmp.querySelector('.ans');if(a1)a1.remove();
+      const b1=tmp.querySelector('.ans-btn');if(b1)b1.remove();
+      q=tmp.innerHTML;
+    }
+    const a=ansEl?ansEl.innerHTML:'';
+    const mk=(cls,on,txt,ti)=>{const b=document.createElement('button');b.className=cls+(on?' on':'');b.title=ti;b.textContent=txt;return b;};
+    const done=!!ds[fk], fav=!!fs[fk];
+    const db=mk('done-btn',done,done?'☑ 做過':'☐ 做過','標記已做過');
+    const fb=mk('fav',fav,fav?'★ 已收藏':'☆ 收藏','收藏此題');
+    db.addEventListener('click',()=>{
+      if(ds[fk]){delete ds[fk];}else{ds[fk]=true;}
+      save(DKEY,ds);
+      const on=!!ds[fk];
+      db.classList.toggle('on',on);db.textContent=on?'☑ 做過':'☐ 做過';
+    });
+    fb.addEventListener('click',()=>{
+      if(fs[fk]){delete fs[fk];}else{fs[fk]={t:title,q:q,a:a};}
+      save(FKEY,fs);
+      const on=!!fs[fk];
+      fb.classList.toggle('on',on);fb.textContent=on?'★ 已收藏':'☆ 收藏';
+    });
+    head.insertBefore(db, pSrc||null);
+    head.insertBefore(fb, pSrc||null);
+  });
+})();
+
 </script>
 </body>
 </html>
