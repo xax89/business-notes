@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>微觀天地 學個經｜研究所複習筆記</title>
+<title>個體經濟學 舊版｜研究所複習筆記</title>
 <style>
 
 :root{
@@ -413,7 +413,7 @@ mark.hl{background:var(--hl)}
 
 .method-card .mc-check:has(input:checked) .mc-lbl{color:var(--green);font-weight:700}
 
-.method-card .mc-left{width:34px;flex-shrink:0;background:var(--teal-soft);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:8px 2px;font-family:"Noto Sans TC",sans-serif;font-weight:700;color:var(--teal);font-size:13px;text-align:center;line-height:1.4;writing-mode:vertical-rl;letter-spacing:.08em}
+.method-card .mc-left{width:54px;flex-shrink:0;background:var(--teal-soft);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:10px 6px;font-family:"Noto Sans TC",sans-serif;font-weight:700;color:var(--teal);font-size:13.5px;text-align:center;line-height:1.5;writing-mode:vertical-rl;letter-spacing:.18em}
 
 .method-card .mc-body{flex:1;padding:12px 16px;font-size:14px;min-width:0}
 
@@ -1205,6 +1205,48 @@ body.dark .proper:hover{background:#b39ddb;color:#1a1420}
 
 
 
+#termModalEn.proper,#termModalZh.proper{color:#7b2cbf}
+
+
+
+
+
+
+body.dark #termModalEn.proper,body.dark #termModalZh.proper{color:#b39ddb}
+
+
+
+
+
+
+#termModalDef .proper{color:#7b2cbf;font-weight:700;border-bottom:1.5px dashed color-mix(in srgb,#7b2cbf 50%,transparent)}
+
+
+
+
+
+
+body.dark #termModalDef .proper{color:#b39ddb}
+
+
+
+
+
+
+.gloss-en.proper,.gloss-zh.proper{color:#7b2cbf}
+
+
+
+
+
+
+body.dark .gloss-en.proper,body.dark .gloss-zh.proper{color:#b39ddb}
+
+
+
+
+
+
 .problem .opts{margin:10px 0 4px;display:grid;gap:6px}
 
 
@@ -1356,6 +1398,262 @@ body.dark .formula{background:#2a2418;border-color:#8a7a50}
 
 
 body.dark .formula .f-label{color:#d8b36a}
+
+
+
+
+
+
+
+
+/* 公式卡 */
+.formula{background:#fbf4e6;border:1px dashed #c9b88f;border-radius:8px;padding:14px 18px;margin:12px 0;font-size:15.5px;text-align:center;font-family:"Noto Serif TC",serif}
+
+
+
+
+
+
+
+.formula .f-label{display:block;font-size:11.5px;color:#9a6a1f;letter-spacing:.08em;margin-bottom:4px;font-family:"Noto Sans TC",sans-serif;font-weight:700}
+
+
+
+
+
+
+
+.formula .f-note{display:block;font-size:12px;color:var(--muted);margin-top:4px;font-family:"Noto Sans TC",sans-serif}
+
+
+
+
+
+
+
+/* 術語 */
+.term{color:var(--green);font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,var(--green) 55%,transparent);border-radius:3px;padding:0 2px;transition:all .15s}
+
+
+
+
+
+
+
+.term:hover{background:var(--green);color:#fff;border-bottom:none}
+
+
+
+
+
+
+
+/* 專有名詞（人名／事件）深紫粗體 */
+.proper{color:#7b2cbf;font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,#7b2cbf 50%,transparent);border-radius:3px;padding:0 2px;transition:background .15s}
+
+
+
+
+
+
+
+.proper:hover{background:#7b2cbf;color:#fff;border-bottom:none}
+
+
+
+
+
+
+
+body.dark .proper{color:#b39ddb}
+
+
+
+
+
+
+
+body.dark .proper:hover{background:#b39ddb;color:#1a1420}
+
+
+
+
+
+
+
+.problem .opts{margin:10px 0 4px;display:grid;gap:6px}
+
+
+
+
+
+
+
+.problem .opts div{padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.8px;background:var(--panel)}
+
+
+
+
+
+
+
+.flip-back .def{font-size:13px;line-height:1.6}
+
+
+
+
+
+
+
+mark.hl{background:var(--hl)}
+
+
+
+
+
+
+
+/* 方法學習卡（左打勾＋方法名＋公式說明，底下例子） */
+.method-card{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;margin:12px 0;background:var(--panel);overflow:hidden;transition:opacity .2s}
+
+
+
+
+
+
+
+.method-card .mc-check{width:64px;flex-shrink:0;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;background:var(--panel)}
+
+
+
+
+
+
+
+.method-card .mc-check input{width:19px;height:19px;accent-color:var(--green);cursor:pointer}
+
+
+
+
+
+
+
+.method-card .mc-check .mc-lbl{font-size:11px;color:var(--muted)}
+
+
+
+
+
+
+
+.method-card .mc-check:has(input:checked){background:#eef7ec}
+
+
+
+
+
+
+
+.method-card .mc-check:has(input:checked) .mc-lbl{color:var(--green);font-weight:700}
+
+
+
+
+
+
+
+.method-card .mc-left{width:34px;flex-shrink:0;background:var(--teal-soft);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:8px 2px;font-family:"Noto Sans TC",sans-serif;font-weight:700;color:var(--teal);font-size:13px;text-align:center;line-height:1.4;writing-mode:vertical-rl;letter-spacing:.08em}
+
+
+
+
+
+
+
+.method-card .mc-body{flex:1;padding:12px 16px;font-size:14px;min-width:0}
+
+
+
+
+
+
+
+.method-card .mc-formula{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--ink)}
+
+
+
+
+
+
+
+.method-card .mc-detail{font-size:13px;color:var(--muted)}
+
+
+
+
+
+
+
+.method-card .mc-ex{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:13px}
+
+
+
+
+
+
+
+/* 學會：刪除線＋黯淡 */
+.method-card.learned{opacity:.55}
+
+
+
+
+
+
+
+.method-card.learned .mc-formula,.method-card.learned .mc-detail,.method-card.learned .mc-ex{text-decoration:line-through;text-decoration-thickness:1.5px}
+
+
+
+
+
+
+
+/* 標題式學習卡（標題橫排） */
+.method-card.mc-title .mc-left{writing-mode:initial;width:auto;min-width:96px;padding:10px 8px;font-size:13px}
+
+
+
+
+
+
+
+body.dark .method-card .mc-check:has(input:checked){background:#16241a}
+
+
+
+
+
+
+
+.f-split .fs-right .formula{margin:0;width:100%}
+
+
+
+
+
+
+
+body.dark .formula{background:#2a2418;border-color:#8a7a50}
+
+
+
+
+
+
+
+body.dark .formula .f-label{color:#d8b36a}
+
 
 
 
@@ -1373,7 +1671,9 @@ body.dark .formula .f-label{color:#d8b36a}
 
 
 
+
 .clabel{font-family:system-ui,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;margin-bottom:4px;}
+
 
 
 
@@ -1388,7 +1688,9 @@ body.dark .formula .f-label{color:#d8b36a}
 
 
 
+
  .callout.def .clabel{color:var(--muted);}
+
 
 
 
@@ -1403,7 +1705,9 @@ body.dark .formula .f-label{color:#d8b36a}
 
 
 
+
  .callout.key .clabel{color:#8a6417;}
+
 
 
 
@@ -1418,7 +1722,9 @@ body.dark .formula .f-label{color:#d8b36a}
 
 
 
+
  .callout.formula .clabel{color:#b07f1f;}
+
 
 
 
@@ -1433,7 +1739,9 @@ body.dark .formula .f-label{color:#d8b36a}
 
 
 
+
  .callout.fig .clabel{color:#607d99;}
+
 
 
 
@@ -1448,7 +1756,9 @@ body.dark .formula .f-label{color:#d8b36a}
 
 
 
+
  .callout.eg .clabel{color:#6b4e8e;}
+
 
 
 
@@ -1463,7 +1773,9 @@ body.dark .formula .f-label{color:#d8b36a}
 
 
 
+
  .callout.exam .clabel{color:#b5542e;}
+
 
 
 
@@ -1480,6 +1792,7 @@ body.dark .formula .f-label{color:#d8b36a}
 
 
 
+
 .sublist>li{margin:3px 0;line-height:1.55;}
 
 
@@ -1488,7 +1801,9 @@ body.dark .formula .f-label{color:#d8b36a}
 
 
 
+
 .mc{stroke:var(--red,#b04a3a);stroke-width:2;fill:none;}
+
 
 
 
@@ -1507,7 +1822,9 @@ font-weight:600;}
 
 
 
+
 .callout.key .clabel{position:relative;}
+
 
 
 
@@ -1523,6 +1840,7 @@ font-weight:600;}
 
 
 
+
 /* 重要經濟學名詞（墨綠粗體） */
 .term{color:#1e7d32;font-weight:800;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;cursor:pointer;border-bottom:1.5px dashed rgba(30,125,50,.5);border-radius:3px;padding:0 2px;transition:all .15s;}
 
@@ -1531,7 +1849,9 @@ font-weight:600;}
 
 
 
+
 .term:hover{background:#1e7d32;color:#fff;border-bottom:none;}
+
 
 
 
@@ -1547,7 +1867,9 @@ font-weight:600;}
 
 
 
+
 .proper:hover{background:#7b2cbf;color:#fff;border-bottom:none;}
+
 
 
 
@@ -1565,7 +1887,9 @@ font-weight:600;}
 
 
 
+
 .pq{font-size:14.8px;}
+
 
 
 
@@ -1581,7 +1905,9 @@ font-weight:600;}
 
 
 
+
 .pq .opts div{padding:6px 10px;border:1px solid var(--line);border-radius:6px;font-size:13.8px;background:#f8fafc;line-height:1.6;}
+
 
 
 
@@ -1597,7 +1923,9 @@ font-weight:600;}
 
 
 
+
 .pbtn:hover{background:#6b4e8e;color:#fff;}
+
 
 
 
@@ -1613,7 +1941,9 @@ font-weight:600;}
 
 
 
+
 .pans.show{display:block;}
+
 
 
 
@@ -1629,7 +1959,9 @@ font-weight:600;}
 
 
 
+
 .tblwrap .en,.tblwrap .term{white-space:nowrap;}
+
 
 
 
@@ -1647,7 +1979,9 @@ font-weight:600;}
 
 
 
+
 .favbtn:hover{border-color:#a07814;background:#fdf3d7;}
+
 
 
 
@@ -1663,6 +1997,7 @@ font-weight:600;}
 
 
 
+
 .pqhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
 
 
@@ -1671,7 +2006,9 @@ font-weight:600;}
 
 
 
+
 .pqhead .favbtn{margin-left:auto;}
+
 
 
 
@@ -1692,6 +2029,7 @@ font-weight:600;}
 
 
 
+
 .gtip .gt-en{font-weight:800;font-size:13.5px;}
 
 
@@ -1700,7 +2038,9 @@ font-weight:600;}
 
 
 
+
 .gtip .gt-def{margin-top:2px;color:#444;}
+
 
 
 
@@ -1719,7 +2059,9 @@ font-weight:600;}
 
 
 
+
 .sec-done input{width:15px;height:15px;accent-color:#2c6e9e;cursor:pointer;}
+
 
 
 
@@ -1735,7 +2077,9 @@ font-weight:600;}
 
 
 
+
 .section.done .sec-done{color:#1e7d32;}
+
 
 
 
@@ -1753,7 +2097,9 @@ font-weight:600;}
 
 
 
+
 .callout ul:not(.opts) li{margin:6px 0;}
+
 
 
 
@@ -1770,7 +2116,9 @@ font-weight:600;}
 
 
 
+
 .callout.key{background:#fdf0c2;border-left:4px solid #d9a514;border-radius:0 8px 8px 0;}
+
 
 
 
@@ -1786,7 +2134,9 @@ font-weight:600;}
 
 
 
+
 .callout.exam{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;}
+
 
 
 
@@ -1802,6 +2152,7 @@ font-weight:600;}
 
 
 
+
 .callout.def{background:var(--panel);}
 
 
@@ -1810,7 +2161,9 @@ font-weight:600;}
 
 
 
+
 .callout.fig,.callout.eg{background:var(--panel);}
+
 
 
 
@@ -1827,7 +2180,9 @@ font-weight:600;}
 
 
 
+
 .callout.formula .clabel{color:#9a6a1f;text-align:left;}
+
 
 
 
@@ -1843,7 +2198,9 @@ font-weight:600;}
 
 
 
+
 body.dark .callout.formula{background:#2a2418;border-color:#8a7a50;}
+
 
 
 
@@ -1859,7 +2216,9 @@ body.dark .callout.formula .clabel{color:#d8b36a;}
 
 
 
+
 body.dark .callout.key{background:#332b1b;}
+
 
 
 
@@ -1876,7 +2235,9 @@ body.dark .callout.key{background:#332b1b;}
 
 
 
+
 .probitem{background:#eae6da;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0;list-style:none;}
+
 
 
 
@@ -1892,6 +2253,7 @@ body.dark .probitem{background:#26221a;}
 
 
 
+
 .pq{font-size:14.5px;}
 
 
@@ -1900,7 +2262,9 @@ body.dark .probitem{background:#26221a;}
 
 
 
+
 .pq .opts div{background:var(--panel);border:1px solid var(--line);}
+
 
 
 
@@ -1917,6 +2281,7 @@ body.dark .probitem{background:#26221a;}
 
 
 
+
 .pbtn:hover{background:var(--teal);color:#fff;}
 
 
@@ -1925,7 +2290,9 @@ body.dark .probitem{background:#26221a;}
 
 
 
+
 .pans{background:var(--teal-soft);border-left:4px solid var(--teal);border-radius:8px;padding:12px 16px;}
+
 
 
 
@@ -1942,7 +2309,9 @@ body.dark .callout.def,body.dark .callout.fig,body.dark .callout.eg{background:v
 
 
 
+
 body.dark .callout.key{border-left-color:#d9a514;}
+
 
 
 
@@ -1959,6 +2328,7 @@ body.dark .callout.key{border-left-color:#d9a514;}
 
 
 
+
 .fold-btn:hover{border-color:var(--teal);color:var(--teal);}
 
 
@@ -1967,7 +2337,9 @@ body.dark .callout.key{border-left-color:#d9a514;}
 
 
 
+
 body.dark .fold-tools .fold-btn{background:var(--panel);color:var(--ink);}
+
 
 
 
@@ -1985,7 +2357,9 @@ body.dark .fold-tools .fold-btn{background:var(--panel);color:var(--ink);}
 
 
 
+
 .method-card .mc-check{width:58px;flex-shrink:0;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;background:var(--panel)}
+
 
 
 
@@ -2001,7 +2375,9 @@ body.dark .fold-tools .fold-btn{background:var(--panel);color:var(--ink);}
 
 
 
+
 .method-card .mc-check .mc-lbl{font-size:11px;color:var(--muted)}
+
 
 
 
@@ -2017,7 +2393,9 @@ body.dark .fold-tools .fold-btn{background:var(--panel);color:var(--ink);}
 
 
 
+
 .method-card .mc-check:has(input:checked) .mc-lbl{color:#1e7d32;font-weight:700}
+
 
 
 
@@ -2033,7 +2411,9 @@ body.dark .fold-tools .fold-btn{background:var(--panel);color:var(--ink);}
 
 
 
+
 .method-card .mc-body{flex:1;padding:12px 16px;font-size:14px;min-width:0}
+
 
 
 
@@ -2049,7 +2429,9 @@ body.dark .fold-tools .fold-btn{background:var(--panel);color:var(--ink);}
 
 
 
+
 .method-card .mc-detail{font-size:13.5px;color:var(--muted);line-height:1.75}
+
 
 
 
@@ -2065,7 +2447,9 @@ body.dark .fold-tools .fold-btn{background:var(--panel);color:var(--ink);}
 
 
 
+
 .method-card.learned{opacity:.55}
+
 
 
 
@@ -2082,7 +2466,9 @@ body.dark .fold-tools .fold-btn{background:var(--panel);color:var(--ink);}
 
 
 
+
 .figsvg{width:100%;max-width:560px;height:auto;display:block;margin:8px auto;background:#fff;}
+
 
 
 
@@ -2098,6 +2484,7 @@ body.dark .figsvg{background:var(--panel);}
 
 
 
+
 p.figcap{font-size:12.5px;color:var(--muted);margin:6px 0 0;line-height:1.6;}
 
 
@@ -2106,6 +2493,47 @@ p.figcap{font-size:12.5px;color:var(--muted);margin:6px 0 0;line-height:1.6;}
 
 
 
+
+.fx{font-family:'Noto Sans TC','PingFang TC','Helvetica Neue',sans-serif;font-weight:600;color:#b5542e;letter-spacing:.2px}
+
+
+
+
+
+
+
+.fx sup,.fx sub{font-size:.72em}
+
+
+
+
+
+
+
+.chfig{margin:14px 0 6px;text-align:center}
+
+
+
+
+
+
+
+.chfig .svgfig{max-width:520px;margin:0 auto}
+
+
+
+
+
+
+
+.chfig figcaption{font-size:12.5px;color:#8a7f6f;margin-top:4px}
+
+
+
+
+
+
+
 .fx{font-family:'Noto Sans TC','PingFang TC','Helvetica Neue',sans-serif;font-weight:600;color:#b5542e;letter-spacing:.2px}
 
 
@@ -2135,6 +2563,85 @@ p.figcap{font-size:12.5px;color:var(--muted);margin:6px 0 0;line-height:1.6;}
 
 
 .chfig figcaption{font-size:12.5px;color:#8a7f6f;margin-top:4px}
+
+
+
+
+
+
+.tblwrap .en,.tblwrap .term,.tblwrap th,.tblwrap td{white-space:normal;overflow-wrap:break-word;}
+
+
+
+
+
+
+/* ===== 對齊總經框架：重點/考試盒色調 ===== */
+.callout.key{background:#fdf0c2;border-left-color:#d9a514;}
+
+
+
+
+
+
+.callout.key .clabel{color:#8a6d1a;}
+
+
+
+
+
+
+.callout.formula{background:#fbf7ef;border:1px solid var(--line);border-radius:8px;}
+
+
+
+
+
+
+/* ===== 對齊總經框架：例題卡（等同總經 .problem） ===== */
+.section-body ul:has(> .probitem),.callout.eg ul,.callout.eg ol{list-style:none;padding-left:0;margin:0;}
+
+
+
+
+
+
+.probitem{list-style:none;background:#eae6da;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0;}
+
+
+
+
+
+
+.probitem .pq{font-size:14.5px;}
+
+
+
+
+
+
+.probitem .pq .opts div{background:var(--panel);}
+
+
+
+
+
+
+.pbtn{border-color:var(--teal);color:var(--teal);}
+
+
+
+
+
+
+.pbtn:hover{background:var(--teal);color:#fff;}
+
+
+
+
+
+
+.pans{border-left-color:var(--teal);background:var(--teal-soft);}
 
 
 
@@ -2338,6 +2845,10 @@ p.figcap{font-size:12.5px;color:var(--muted);margin:6px 0 0;line-height:1.6;}
 
 
 .chfig figcaption{font-size:12.5px;color:#8a7f6f;margin-top:4px}
+
+
+
+.tblwrap td .term{white-space:nowrap;}
 
 
 
@@ -2623,7 +3134,7 @@ function refreshProgress(n){
 let openChapter=1;
 function renderSidebar(){
   const sb=document.getElementById("sidebar");
-  let html=`<div class="brand">微觀天地 學個經<div class="t2">研究所複習 · 第 1–20 章</div></div>
+  let html=`<div class="brand">個體經濟學 舊版<div class="t2">研究所複習 · 第 1–20 章</div></div>
   <button class="nav-gloss" id="navGloss" title="統整全書術語，可篩選與打勾複習">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>術語複習表
   </button>`;
