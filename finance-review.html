@@ -458,7 +458,7 @@ const TERMS = {
   "LBO":["Leveraged Buyout (LBO)","槓桿收購","以目標公司資產或現金流為擔保舉債收購；常發行垃圾債券。"],
   "Empire building":["Empire Building","帝國建立","過度投資以擴大公司規模與自身影響力。"],
   "Entrenching":["Entrenching Investment","鞏固地位型投資","選擇讓自己不可或缺的投資案，鞏固經理人地位。"],
-  "FCF hypothesis":["Free Cash Flow Hypothesis","自由現金流量假說","Jensen（1986）：FCF 越多越可能投入 NPV<0 的不當投資或亂花。"],
+  "FCF hypothesis":["Free Cash Flow Hypothesis","自由現金流量假說","Jensen（1986）：FCF 越多越可能投入 NPV&lt;0 的不當投資或亂花。"],
   "Suboptimal":["Suboptimal Investment","次佳投資","經理人為保飯碗放棄高風險高報酬案，改選低風險低報酬的安全牌。"],
   "Compensation":["Compensation Scheme","薪資報償制度","ESO、績效股票、績效紅利，把經理人報償與股價連結。"],
   "Proxy fight":["Proxy Fight","委託書戰爭","不滿股東大量收購委託書以爭奪董事會，威脅撤換管理階層。"],
@@ -912,7 +912,7 @@ function openTerm(key){
   if(!t){toast("暫無此術語資料");return;}
   document.getElementById("termModalEn").textContent=t[0];
   document.getElementById("termModalZh").textContent=t[1];
-  document.getElementById("termModalDef").textContent=t[2];
+  document.getElementById("termModalDef").innerHTML=t[2];
   const m=document.getElementById("termModal");
   m.style.display="flex";
 }
@@ -2278,7 +2278,7 @@ function renderGlossary(){
           </button>
           <div class="gloss-main">
             <div class="gloss-en${PERSON_TERMS.has(k)?" is-person":""}">${esc(en)}<span class="gloss-zh">${esc(zh)}</span></div>
-            <div class="gloss-def">${esc(def)}</div>
+            <div class="gloss-def">${def}</div>
             <div class="gloss-note ${note?"show":""}" data-note="wrap-${esc(k)}">
               <textarea placeholder="寫下你自己的重點…" onchange="saveNote('${esc(k)}',this.value)">${esc(note)}</textarea>
             </div>
