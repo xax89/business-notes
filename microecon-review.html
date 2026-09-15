@@ -609,7 +609,56 @@ const TERMS = {
 "Arrow-Pratt measure":["Arrow-Pratt measure","Arrow-Pratt 風險趨避量度","R<sub>A</sub> = −u''/u'（絕對）；R<sub>R</sub> = −w·u''/u'（相對）。"],
 "Friedman-Savage proposition":["Friedman-Savage proposition","Friedman-Savage 命題","效用函數高低所得為凹、中所得為凸；可同時買保險與彩券。"],
 "Full insurance":["Full insurance","全險","公平保費（費率=機率）下風險趨避者投保全額。"],
-"Slutsky equation":["Slutsky equation","史勒斯基方程式","∂x/∂P<sub>x</sub> = ∂x<sup>h</sup>/∂P<sub>x</sub> − x·∂x/∂M；分解價格效果為替代與所得效果。"],
+  "Production function":["Production function","生產函數","其他情況不變下，要素投入量與最大產量之間的函數關係 Q=f(L,K)。"],
+  "Factors of production":["Factors of production","生產要素","土地、資本、勞動、企業家精神；中間財不算生產要素。"],
+  "Fixed input":["Fixed input","固定投入","市場變化時投入量無法立即改變的要素（短期存在）。"],
+  "Variable input":["Variable input","變動投入","市場變化時投入量可立即改變的要素。"],
+  "Returns to scale":["Returns to scale","規模報酬","所有要素同比變動時產量的變動情形；CRS/IRS/DRS。"],
+  "Homogeneous function":["Homogeneous function","齊次函數","f(λL,λK)=λ<sup>k</sup>Q；k=1 為一階齊次 ⇔ CRS。"],
+  "Cobb-Douglas production function":["Cobb-Douglas production function","柯布—道格拉斯生產函數","Q=AL<sup>α</sup>K<sup>β</sup>；α+β 決定規模報酬，MRTS=αK/βL，σ=1。"],
+  "Total physical product":["Total physical product","總產量 (TP)","短期給定時間內隨變動要素投入所能獲得的最大產量。"],
+  "Average product":["Average product","平均產量 (AP)","每一單位變動要素的產量：AP=TP/L（原點射線斜率）。"],
+  "Marginal product":["Marginal product","邊際產量 (MP)","增加一單位變動要素使總產出增加的量：MP=dTP/dL（切線斜率）。"],
+  "Law of diminishing marginal returns":["Law of diminishing marginal returns","邊際報酬遞減法則","技術固定且短期存在固定要素下，變動要素超過某水準後 MP 遞減（變比法則）。"],
+  "Output elasticity":["Output elasticity","要素產量彈性","要素投入增加 1% 造成產量變動 %；e<sub>L</sub>=MP<sub>L</sub>·L/Q。"],
+  "Disguised unemployment":["Disguised unemployment","隱藏性失業","表面有工作但實際上不增加社會總產出（第三生產階段）。"],
+  "Marginal productivity theory of distribution":["Marginal productivity theory of distribution","邊際生產力分配理論","一階齊次下 Q=MP<sub>L</sub>·L+MP<sub>K</sub>·K，產量完全分配（尤拉定理）。"],
+  "Euler's theorem":["Euler's theorem","尤拉定理","一階齊次函數 f(λL,λK)=λQ 之分配性質。"],
+  "Isoquant":["Isoquant","等產量線","特定產量下所需要素組合的軌跡；凸向原點、不相交、越東北產量越高。"],
+  "Marginal rate of technical substitution":["Marginal rate of technical substitution","邊際技術替代率 (MRTS)","產量不變下增加一單位勞動須減少的資本量；MRTS=MP<sub>L</sub>/MP<sub>K</sub>，遞減。"],
+  "Isocost curve":["Isocost curve","等成本線","給定成本與要素價格下可僱用要素組合的軌跡：C=wL+rK。"],
+  "Production equilibrium":["Production equilibrium","生產者均衡","等產量線與等成本線相切：MRTS=w/r（邊際生產力均等法則）。"],
+  "Leontief production function":["Leontief production function","李昂鐵夫生產函數","Q=min(L/a,K/b)，完全互補，σ=0。"],
+  "Linear production function":["Linear production function","直線型生產函數","Q=aL+bK，完全替代，σ=∞。"],
+  "Stone-Geary production function":["Stone-Geary production function","Stone-Geary 生產函數","Q=(L−L̄)<sup>α</sup>(K−K̄)<sup>β</sup>，滿足良好技術。"],
+  "CES production function":["CES production function","固定替代彈性生產函數","Q=A[δL<sup>−ρ</sup>+(1−δ)K<sup>−ρ</sup>]<sup>−1/ρ</sup>；σ=1/(1+ρ)。"],
+  "Expansion path":["Expansion path","擴張線","生產規模變化時生產者均衡點移動的軌跡；齊序函數為原點射線。"],
+  "Homothetic function":["Homothetic function","齊序函數","齊次函數做單調遞增轉換；齊次必為齊序，反之不一定。"],
+  "Inada condition":["Inada condition","Inada 條件","要素→0 時 MP→∞、要素→∞ 時 MP→0；非必要但簡化分析。"],
+  "Elasticity of substitution":["Elasticity of substitution","替代彈性 (σ)","MRTS 變動 1% 時 K/L 變動 %；衡量要素替代難易度。"],
+  "Elasticity of productivity":["Elasticity of productivity","生產力彈性","所有要素投入變動 1% 使產量變動 %；一階齊次時=1。"],
+  "Economic cost":["Economic cost","經濟成本","機會成本概念＝外顯成本＋內含成本。"],
+  "Explicit cost":["Explicit cost","外顯成本","使用外在要素的成本（會計成本），顯現在會計帳上。"],
+  "Implicit cost":["Implicit cost","內含成本","使用自有要素犧牲其他用途的成本（隱藏成本），不顯現在帳上。"],
+  "Opportunity cost":["Opportunity cost","機會成本","放棄其他用途所能獲取的最大淨利；事前概念、影響決策。"],
+  "Economic profit":["Economic profit","經濟利潤","收入−機會成本＝會計利潤−內含成本。"],
+  "Accounting profit":["Accounting profit","會計利潤","收入−會計成本（外顯成本）。"],
+  "Normal profit":["Normal profit","正常利潤","經濟利潤為零時，會計利潤剛好等於內含成本。"],
+  "Sunk cost":["Sunk cost","沉沒成本","已支付且無論如何無法回收的成本；事後概念、不影響決策。"],
+  "Pure rent":["Pure rent","純粹租","收入等於生產者剩餘、供給曲線垂直的情形。"],
+  "Conditional factor demand":["Conditional factor demand","有條件要素需求","給定產量下成本極小的要素需求量 L(Q,w,r)、K(Q,w,r)。"],
+  "Short-run total cost":["Short-run total cost","短期總成本 (STC)","STC=TVC+TFC；使用變動與固定要素的總費用。"],
+  "Total variable cost":["Total variable cost","總變動成本 (TVC)","使用變動要素產生的成本，隨產量改變。"],
+  "Total fixed cost":["Total fixed cost","總固定成本 (TFC)","使用固定要素的成本，不隨產量改變。"],
+  "Quasifixed cost":["Quasifixed cost","準固定成本","開始生產才必須支付、不隨產量變化的成本（如消防設備）。"],
+  "Short-run average cost":["Short-run average cost","短期平均成本 (SAC)","SAC=STC/Q=AVC+AFC。"],
+  "Average variable cost":["Average variable cost","平均變動成本 (AVC)","AVC=TVC/Q=w/AP<sub>L</sub>；AP 最高時 AVC 最低。"],
+  "Average fixed cost":["Average fixed cost","平均固定成本 (AFC)","AFC=TFC/Q，等軸雙曲線、隨 Q 增加持續遞減。"],
+  "Marginal cost":["Marginal cost","邊際成本 (MC)","每增加一單位產量造成的成本增加：MC=dSTC/dQ=w/MP<sub>L</sub>。"],
+  "Envelope curve":["Envelope curve","包絡線","LTC/LAC 為所有 STC/SAC 的包絡線（每個產量下最小成本集合）。"],
+  "Long-run total cost":["Long-run total cost","長期總成本 (LTC)","所有要素可調整下的最小成本：LTC=wL+rK。"],
+  "Long-run average cost":["Long-run average cost","長期平均成本 (LAC)","LAC=LTC/Q；不高於任一 SAC。"],
+  "Slutsky equation":["Slutsky equation","史勒斯基方程式","∂x/∂P<sub>x</sub> = ∂x<sup>h</sup>/∂P<sub>x</sub> − x·∂x/∂M；分解價格效果為替代與所得效果。"],
 };
 
 
@@ -2272,8 +2321,238 @@ const CH9_PROBLEMS = [
 },
 ];
 
-const CH10_SECTIONS = [];
-const CH10_PROBLEMS = [];
+const CH10_SECTIONS = [
+{
+  id:"10.1", title:"前言",
+  body:`
+  <p>本章由消費者的<b>需求面</b>轉向生產者的<b>供給面</b>：廠商（Firm）的角色是將生產要素轉換為商品，其行為目標為<b>利潤極大化</b>。供給曲線即由廠商生產與成本決策推導而來。</p>`
+},
+{
+  id:"10.2", title:"生產函數",
+  body:`
+  <p><b>生產要素（Factors of production）</b>：<span class="term">固定投入</span>（市場變化時投入量無法立即改變）、<span class="term">變動投入</span>（可立即改變）；四類要素＝土地（自然資源）、資本（實體／金融）、勞動、企業家精神。<b>中間財不算是生產要素</b>（如橡膠、鋼板）。</p>
+  <p><b>短期（Short run）</b>：同時存在固定與變動要素；<b>長期（Long run）</b>：只有變動要素。此與曆法時間無關，視廠商性質而定（飲料店 vs 晶圓廠）。</p>
+  <div class="method-card mc-title" data-mc="pf">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-1" data-mc="pf"><label for="mc-ch10-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">生產函數與規模報酬</div>
+    <div class="mc-body">
+      <div class="mc-formula">Q = f(L, K)；規模報酬：f(λL, λK) 與 λQ 比較</div>
+      <div class="mc-detail">CRS（固定）f(λL,λK)=λQ ⇔ 一階齊次函數；IRS（遞增）&gt; λQ；DRS（遞減）&lt; λQ。Cobb-Douglas Q=AL<sup>α</sup>K<sup>β</sup>：α+β=1→CRS、&gt;1→IRS、&lt;1→DRS。IRS/DRS 不保證齊次；CRS ⇔ 一階齊次。</div>
+      <div class="mc-ex">例子：Q = L<sup>0.5</sup>K<sup>0.5</sup>（指數和=1）→ 固定規模報酬；Q = 4+5L（常數項）→ λ&gt;1 時 f(λL)&lt;λQ → 規模報酬遞減。</div>
+    </div>
+  </div>
+  <p><b>規模報酬（Returns to scale）</b>：所有要素同比變動（長期技術分析）；<b>邊際報酬</b>：單一要素變動（短期必然現象）。兩者為不同期間的概念。</p>
+  <div class="warn">考試重點：CRS 與一階齊次為<b>若且唯若</b>；IRS、DRS 不能保證齊次函數。</div>`
+},
+{
+  id:"10.3", title:"短期生產結構",
+  body:`
+  <p>短期資本固定：Q = f(L, K̄) = TP。三種產量：<span class="term">總產量 TP</span>（最大產量，先凸向橫軸到反曲點、達最高點後負斜率）；<span class="term">平均產量 AP = TP/L</span>（原點射線斜率）；<span class="term">邊際產量 MP = ΔTP/ΔL</span>（切線斜率）。</p>
+  <div class="method-card mc-title" data-mc="tp">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-2" data-mc="tp"><label for="mc-ch10-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">TP / AP / MP</div>
+    <div class="mc-body">
+      <div class="mc-formula">AP = TP/L（射線斜率）；MP = dTP/dL（切線斜率）；MP&gt;AP ⇔ AP 遞增；MP&lt;AP ⇔ AP 遞減；MP=AP 時 AP 最大</div>
+      <div class="mc-detail">反曲點 → MP 最大；射線變切線 → AP 最大；水平切線 → MP=0、TP 最大。邊際量高於平均量時平均量遞增（相交不相切）。</div>
+      <div class="mc-ex">例子：Q = 60L − 10L² → AP = 60 − 10L、MP = 60 − 20L；AP 最大在 L=3（MP=AP）。</div>
+    </div>
+  </div>
+  <p><b>邊際報酬遞減法則（Law of diminishing marginal returns）</b>＝變比法則：技術固定、短期存在固定要素下，變動要素投入超過某一水準後 MP 遞減。</p>
+  <p><b>要素產量彈性（Output elasticity）</b>：要素投入增加 1% 造成產量變動 %；勞動彈性 e<sub>L</sub> = MP<sub>L</sub>·L/Q、資本彈性 e<sub>K</sub> = MP<sub>K</sub>·K/Q。互補／替代／無關要素以 ∂MP<sub>L</sub>/∂K 之正負零判斷。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:16%"><col style="width:28%"><col style="width:28%"><col style="width:28%"></colgroup>
+    <thead><tr><th>生產階段</th><th>MP<sub>L</sub></th><th>MP<sub>K</sub></th><th>廠商行為</th></tr></thead>
+    <tbody>
+      <tr><td>第一階段</td><td>&gt;0（AP 遞增）</td><td>&lt;0</td><td>不會用資本生產</td></tr>
+      <tr><td><b>第二階段（合理）</b></td><td>&gt;0（AP 最高點至 MP=0）</td><td>&gt;0</td><td>勞動資本皆投入</td></tr>
+      <tr><td>第三階段</td><td>&lt;0</td><td>&gt;0</td><td>勞動不投入（隱藏性失業）</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>粗耕</b>（資本密集，地廣人稀，極大化 AP<sub>L</sub> 於 MP=0 處）；<b>精耕</b>（勞動密集，地狹人稠，極大化 AP<sub>K</sub> 於 MP<sub>L</sub>=0 處）。</p>
+  <p><b>邊際生產力付酬法則</b>：完全競爭下 w = P·MP<sub>L</sub>、r = P·MP<sub>K</sub>——要素實質報酬取決於邊際生產力。<b>尤拉定理（Euler's theorem）</b>：一階齊次函數 Q = MP<sub>L</sub>·L + MP<sub>K</sub>·K，產量完全分配給勞動與資本（邊際生產力分配理論）。</p>
+  <div class="warn">考試重點：合理生產階段為第二階段（AP 最高點到 MP=0）；MP=0 時 TP 最大；AP 最大時 MP=AP（其他要素 MP 未必為零）。</div>`
+},
+{
+  id:"10.4", title:"長期生產結構",
+  body:`
+  <p><b>良好技術假設</b>：單調性（增加任一要素投入使產量增加，MP&gt;0）＋凸性（嚴格準凹）。</p>
+  <p><span class="term">等產量線（Isoquant）</span>：其他情況不變下，達到特定產量所需要素組合的軌跡。特性：凸向原點（MRTS 遞減）、任兩條不相交、越向東北產量越高。<b>與無異曲線差異</b>：定義空間不同（要素 vs 商品）、數列 vs 序列（等產量線產量值有意義）。</p>
+  <div class="method-card mc-title" data-mc="iso">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-3" data-mc="iso"><label for="mc-ch10-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">等成本線與生產者均衡</div>
+    <div class="mc-body">
+      <div class="mc-formula">C = wL + rK；均衡：MRTS<sub>LK</sub> = MP<sub>L</sub>/MP<sub>K</sub> = w/r（邊際生產力均等法則）</div>
+      <div class="mc-detail">花在每種要素的最後一塊錢回收的邊際產出相等：MP<sub>L</sub>/w = MP<sub>K</sub>/r。若 MRTS &gt; w/r → 增加勞動、減少資本；反之亦然。等成本線越往外成本越高。</div>
+      <div class="mc-ex">例子：Q = √(KL)，w=2、r=1 → MRTS = K/L = w/r = 2 → K=2L；Q=100 時 L=100/√2≈70.7、K≈141.4。</div>
+    </div>
+  </div>
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:26%"><col style="width:26%"><col style="width:26%"></colgroup>
+    <thead><tr><th>生產函數</th><th>形式</th><th>替代性</th><th>σ（替代彈性）</th></tr></thead>
+    <tbody>
+      <tr><td>Cobb-Douglas</td><td>Q = AL<sup>α</sup>K<sup>β</sup></td><td>不完全替代</td><td>σ = 1</td></tr>
+      <tr><td>Linear（直線）</td><td>Q = aL + bK</td><td>完全替代</td><td>σ = ∞</td></tr>
+      <tr><td>Leontief（李昂鐵夫）</td><td>Q = min(L/a, K/b)</td><td>完全互補</td><td>σ = 0</td></tr>
+      <tr><td>Stone-Geary</td><td>Q = (L−L̄)<sup>α</sup>(K−K̄)<sup>β</sup></td><td>良好技術</td><td>—</td></tr>
+      <tr><td>CES</td><td>Q = A[δL<sup>−ρ</sup> + (1−δ)K<sup>−ρ</sup>]<sup>−1/ρ</sup></td><td>固定替代彈性</td><td>σ = 1/(1+ρ)</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>生產者均衡（Production equilibrium）</b>：給定成本下產量最大、或給定產量下成本最小，發生在等產量線與等成本線相切點。</p>
+  <div class="warn">考試重點：均衡條件 MRTS = w/r（而非 MP<sub>L</sub>=MP<sub>K</sub>）；CES 中 ρ→0 趨近 Cobb-Douglas、ρ→∞ 趨近 Leontief。</div>`
+},
+{
+  id:"10.5", title:"擴張線",
+  body:`
+  <p><span class="term">擴張線（Expansion path）</span>：其他情況不變，生產規模變化時生產者均衡點移動的軌跡（以 K 為 L 的函數）。線上每一點皆符合生產者均衡＝給定產量下最小總成本的要素組合。</p>
+  <div class="method-card mc-title" data-mc="exp">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-4" data-mc="exp"><label for="mc-ch10-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">擴張線</div>
+    <div class="mc-body">
+      <div class="mc-formula">齊序（homothetic）生產函數 → 擴張線為原點出發之射線；Cobb-Douglas：K = (βw/αr)·L</div>
+      <div class="mc-detail">一階齊次函數單調轉換而得的齊序函數，MRTS 只受 K/L 比例影響；原點射線與各等產量線交點之 MRTS 相同。Inada 條件：要素趨近 0 時 MP→∞、趨近 ∞ 時 MP→0（非必要假設但簡化分析）。</div>
+      <div class="mc-ex">例子：Q = L<sup>0.4</sup>K<sup>0.6</sup>（α+β=1）→ 擴張線 K = (0.6w/0.4r)L，為原點射線。</div>
+    </div>
+  </div>`
+},
+{
+  id:"10.6", title:"替代彈性",
+  body:`
+  <p><span class="term">替代彈性（Elasticity of substitution, σ）</span>：給定產量下，MRTS 變動 1% 時要素比例 K/L 變動 %；衡量要素間替代的難易度，σ 越大等產量線越平滑。σ = d ln(K/L) / d ln|MRTS|。</p>
+  <p><b>生產力彈性（Elasticity of productivity）</b>：所有要素投入變動 1% 使產量變動 %。一階齊次函數之生產力彈性 = 1（= 齊次次數）；CES：σ = 1/(1+ρ)。</p>
+  <p><b>Hicks 技術進步</b>：<span class="term">勞動節約型</span>（資本多用型，MP<sub>K</sub> 相對增加、斜率變平，勞動使用量減少）；<span class="term">資本節約型</span>（勞動多用型，MP<sub>L</sub> 相對增加、斜率變陡，資本使用量減少）。技術進步來源：R&amp;D、發明、管理進步、互補要素、制度變革。</p>
+  <div class="warn">考試重點：CD → σ=1；Linear → σ=∞；Leontief → σ=0；CES → σ=1/(1+ρ)。</div>`
+},
+{
+  id:"10.7", title:"成本結構理論",
+  body:`
+  <p>往後所稱成本皆為<b>經濟成本</b>＝機會成本概念，包含：<span class="term">外顯成本（Explicit cost）</span>＝會計成本（使用外在要素、顯現在會計帳上）；<span class="term">內含成本（Implicit cost）</span>＝隱藏成本（使用自有要素、犧牲其他用途，不顯現在帳上）。</p>
+  <div class="method-card mc-title" data-mc="ecost">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-5" data-mc="ecost"><label for="mc-ch10-5" class="mc-lbl">學會</label></div>
+    <div class="mc-left">經濟成本與經濟利潤</div>
+    <div class="mc-body">
+      <div class="mc-formula">經濟利潤 = 收入 − 機會成本 = 會計利潤 − 內含成本；正常利潤：經濟利潤 = 0（會計利潤 = 內含成本）</div>
+      <div class="mc-detail">機會成本 = 外顯成本 + 內含成本；為<b>事前</b>概念（影響決策）。<b>沉沒成本（Sunk cost）</b>：已支付且無論如何無法回收之成本，<b>事後</b>概念、不影響決策。純粹租（Pure rent）：收入 = 生產者剩餘、供給曲線垂直。</div>
+      <div class="mc-ex">例子：放棄月薪 50,000 開麵店，月收入 60,000、支出 33,000 → 會計利潤 27,000、經濟利潤 = 27,000 − 50,000 = −23,000（損失）。</div>
+    </div>
+  </div>
+  <p>機會成本由 <span class="proper">李嘉圖（Ricardo）</span>提出；外顯成本為零時，機會成本 = 內含成本。</p>
+  <div class="warn">考試重點：經濟利潤必定小於會計利潤；會計利潤為負 → 經濟利潤必為負；正常利潤不是利潤為零，而是經濟利潤為零。</div>`
+},
+{
+  id:"10.8", title:"短期成本結構",
+  body:`
+  <p>短期資本固定：<span class="term">STC = TVC + TFC</span>（總變動＋總固定）。TVC 隨產量改變、TFC 為常數；<b>準固定成本（Quasifixed cost）</b>：開始生產才支付（如消防設備）。</p>
+  <div class="method-card mc-title" data-mc="scost">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-6" data-mc="scost"><label for="mc-ch10-6" class="mc-lbl">學會</label></div>
+    <div class="mc-left">短期成本</div>
+    <div class="mc-body">
+      <div class="mc-formula">SAC = AVC + AFC；SMC = dSTC/dQ；AVC = w/AP<sub>L</sub>；SMC = w/MP<sub>L</sub></div>
+      <div class="mc-detail">SMC 通過 SAC 與 AVC 的最低點；SAC 最低點在 AVC 最低點之後（AFC 遞減使差距縮小）。AP 最高 → AVC 最低；MP 最高 → SMC 最低。TVC 為 TP 之鏡像（縱橫軸互換）。</div>
+      <div class="mc-ex">例子：Q = 10√L、K̄=100、w=5、r=10 → L = Q²/100 → STC = 5·Q²/100 + 1000 = Q²/20 + 1000。</div>
+    </div>
+  </div>
+  <p><b>有條件要素需求（Conditional factor demand）</b>：給定產量下成本極小的要素需求量 L(Q, K̄)、K(Q, K̄)；產量上升 → 勞動需求增加；資本增加 → 勞動需求減少。</p>
+  <div class="warn">考試重點：SMC &lt; SAC ⇔ SAC 遞減；SMC = SAC 時 SAC 極小；AVC 水平線時 SMC 必水平；AVC 最低點時 SAC 尚未達最低（AFC 仍遞減）。</div>`
+},
+{
+  id:"10.9", title:"長期成本結構",
+  body:`
+  <p>長期所有要素可調整：LTC(Q) = w·L(Q,w,r) + r·K(Q,w,r)，由長期有條件要素需求導出。</p>
+  <div class="method-card mc-title" data-mc="lcost">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-7" data-mc="lcost"><label for="mc-ch10-7" class="mc-lbl">學會</label></div>
+    <div class="mc-left">長期成本（包絡線）</div>
+    <div class="mc-body">
+      <div class="mc-formula">LTC 為所有 STC 的包絡線；LAC 為所有 SAC 的包絡線；LAC ≤ SAC</div>
+      <div class="mc-detail">長期每個產量可自由選擇要素組合 → 成本不高於任何短期成本。LMC 通過 LAC 最低點。包絡線（Envelope curve）＝每個產量下最小短期成本的集合。</div>
+      <div class="mc-ex">例子：短期資本固定 K₀ 只能選 L₁；長期可自由調整至成本最小的 L* → 長期成本 ≤ 短期成本。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：長期平均成本曲線是短期平均成本曲線的包絡線，且任何產量下 LAC 不高於 SAC。</div>`
+},
+];
+
+const CH10_PROBLEMS = [
+{
+  q:"下列生產函數各存在何種規模報酬？(1) Q = L<sup>0.5</sup>K<sup>0.5</sup> (2) Q = 2L√K (3) Q = 4 + 5L (4) Q = 4√L + 5√K (5) Q = L − K （書本例題 10.1）",
+  opts:["(A) 全為固定規模報酬","(B) (1)固定 (2)遞增 (3)遞減 (4)遞減 (5)固定","(C) (1)固定 (2)遞減 (3)遞增 (4)固定 (5)遞減","(D) (1)遞增 (2)固定 (3)遞減 (4)遞增 (5)固定"],
+  ans:"<b>(B) (1) CRS（指數和=1）(2) IRS（λ<sup>1.5</sup>）(3) DRS（常數項使增量不成比例）(4) DRS（λ<sup>0.5</sup>）(5) CRS（f(λL,λK)=λ(L−K)）。</b><ul><li>判斷法：f(λL, λK) 與 λQ 比較</li></ul>"
+},
+{
+  q:"Under what conditions does a general Cobb-Douglas production function, Q = AL<sup>α</sup>K<sup>β</sup>, exhibit decreasing, constant, or increasing returns to scale? （書本例題 10.2）",
+  opts:["(A) α+β&lt;1 遞減；=1 固定；&gt;1 遞增","(B) α+β&gt;1 遞減；=1 固定；&lt;1 遞增","(C) α+β=1 遞減；&gt;1 固定；&lt;1 遞增","(D) 無法判斷"],
+  ans:"<b>(A) α+β &lt; 1 → DRS；α+β = 1 → CRS；α+β &gt; 1 → IRS。</b><ul><li>f(λL,λK) = λ<sup>α+β</sup>Q</li></ul>"
+},
+{
+  q:"關於總產量（TP）、邊際產量（MP）與平均產量（AP）的關係，哪些說法是錯誤的？（書本例題 10.3）",
+  opts:["(A) 若 MP&gt;0，則 TP 在遞增階段；(B) 若 MP&gt;AP&gt;0，則 AP 在遞減階段","(A) 只有 (B)","(B) (B) 與 (D)","(C) (A) 與 (C)","(D) 全部正確"],
+  ans:"<b>(B) 錯誤的是 (B) 與 (D)。</b><ul><li>(B)：MP&gt;AP 時 AP 應遞增（非遞減）</li><li>(D)：AP 遞減時 TP 仍可能遞增（只要 MP&gt;0）</li><li>(A) MP&gt;0 → TP 遞增 ✓；(C) TP 最大時 MP=0 ✓</li></ul>"
+},
+{
+  q:"The average productivity of labor reaches its maximum (A) at the point of inflection of the total product curve (B) where the slope of the total product curve is steepest (C) where the slope of the total product curve is zero (D) where the marginal and average productivity are equal （書本例題 10.4）",
+  opts:["(A) 反曲點","(B) TP 斜率最陡處","(C) TP 斜率為零處","(D) MP = AP 處"],
+  ans:"<b>(D) 在 MP = AP 處（原點射線變切線的位置）。</b><ul><li>反曲點對應 MP 最大；TP 斜率為零對應 MP=0、TP 最大</li></ul>"
+},
+{
+  q:"When the average product is decreasing, marginal product (A) equals average product (B) is increasing (C) exceeds average product (D) is decreasing (E) is less than average product （書本例題 10.6）",
+  opts:["(A) = AP","(B) 遞增","(C) &gt; AP","(D) 遞減","(E) &lt; AP"],
+  ans:"<b>(E) MP 小於 AP。</b><ul><li>MP&lt;AP ⇔ AP 遞減（邊際量拉低平均量）</li></ul>"
+},
+{
+  q:"下列敘述何者為真？（書本例題 10.8）(A) 從邊際產量最高點到邊際產量為零為廠商之合理生產階段 (B) 邊際產量最高時平均產量也最高 (C) 平均產量最大時，表示其他要素的邊際產量為零 (D) 邊際產量為零時，總產量最大",
+  opts:["(A) (A)","(B) (B)","(C) (C)","(D) (D)"],
+  ans:"<b>(D) MP=0 時 TP 最大。</b><ul><li>合理生產階段＝第二階段：AP 最高點（MP=AP）到 MP=0，非 MP 最高點起算</li><li>AP 最高時其他要素（資本）MP 為正（第二階段）</li></ul>"
+},
+{
+  q:"Suppose every automobile requires exactly one engine (L) and four tires (T). The production function for this process is? （書本例題 10.10）",
+  opts:["(A) Q = L + T","(B) Q = min(L, T/4)","(C) Q = L·T<sup>4</sup>","(D) Q = min(L/4, T)"],
+  ans:"<b>(B) Q = min(L, T/4)（Leontief 完全互補）。</b><ul><li>1 引擎需配 4 輪胎：一單位成品需 1 引擎與 4 輪胎</li><li>產量受最少投入束限制：Q = min(L, T/4)</li></ul>"
+},
+{
+  q:"已知生產函數 Q = √(KL)，勞動價格 w=2、資本價格 r=1。(1) 生產 Q=100 在成本最小下應雇用多少勞動與資本？(2) 若限制成本 100 並極大化產量，應雇用多少資本？（書本例題 10.13）",
+  opts:["(A) (1) L≈70.7、K≈141.4；(2) K=50","(B) (1) L=100、K=50；(2) K=25","(C) (1) L=50、K=100；(2) K=100","(D) (1) L≈141.4、K≈70.7；(2) K=25"],
+  ans:"<b>(A) (1) 均衡 MRTS=K/L=w/r=2 → K=2L；Q=√(2L²)=100 → L≈70.7、K≈141.4。(2) C=wL+rK=2L+K=100 且 K=2L → 4L=100 → L=25、K=50。</b><ul><li>成本最小與產量最大的均衡條件相同：MRTS = w/r</li></ul>"
+},
+{
+  q:"你有三個職位可選：飲料店正職 10,000 元、行銷經理 25,000 元、補習班暑期助教 30,000 元。選擇補習班助教的機會成本為？（書本例題 10.14）",
+  opts:["(A) 10,000 元","(B) 25,000 元","(C) 30,000 元","(D) 65,000 元"],
+  ans:"<b>(B) 25,000 元（放棄的次佳選擇）。</b><ul><li>機會成本＝放棄其他用途中的最大淨利（最高者為 30,000，但那是所選）</li><li>選擇助教 30,000 所放棄的最高其他選擇是行銷經理 25,000</li></ul>"
+},
+{
+  q:"Assume that you have a piece of land which you could either rent for $8,000 per year, or sell for $75,000 and invest the proceeds in a long-term bond yielding 15% annually. The opportunity cost per year of retaining the land and not renting is? （書本例題 10.17）",
+  opts:["(A) $3,250","(B) $8,000","(C) $11,250","(D) $73,000"],
+  ans:"<b>(C) $11,250。</b><ul><li>機會成本 = max(租金 8,000, 債券利息 75,000×15% = 11,250) = 11,250</li><li>保留土地同時放棄租金與利息收入 → 取較高者</li></ul>"
+},
+{
+  q:"老王在學校當老師月薪 50,000，辭職開麵店，一個月總收入 60,000 元、總支出 33,000 元，則老王這個月？（書本例題 10.20）",
+  opts:["(A) 會計利潤 10,000、經濟利潤 60,000","(B) 會計利潤 27,000、經濟利潤 27,000","(C) 會計利潤 27,000、經濟利潤損失 23,000","(D) 會計利潤 10,000、經濟利潤損失 17,000"],
+  ans:"<b>(C) 會計利潤 27,000、經濟利潤損失 23,000。</b><ul><li>會計利潤 = 60,000 − 33,000 = 27,000</li><li>經濟利潤 = 27,000 − 放棄薪資 50,000 = −23,000</li></ul>"
+},
+{
+  q:"A firm has determined that its variable costs are given by TVC = 0.05Q³ − 5Q² + 500Q，固定成本 5,000。求 AVC 極小化與 MC 極小化之產量。（書本例題 10.22）",
+  opts:["(A) AVC 極小 Q=50；MC 極小 Q=100/3","(B) AVC 極小 Q=100；MC 極小 Q=50","(C) AVC 極小 Q=50；MC 極小 Q=25","(D) AVC 極小 Q=100/3；MC 極小 Q=50"],
+  ans:"<b>(A) AVC 極小 Q=50；MC 極小 Q=100/3 ≈ 33.3。</b><ul><li>AVC = 0.05Q² − 5Q + 500 → dAVC/dQ = 0.1Q − 5 = 0 → Q=50</li><li>MC = 0.15Q² − 10Q + 500 → dMC/dQ = 0.3Q − 10 = 0 → Q≈33.3</li></ul>"
+},
+{
+  q:"假設高品質威士忌的生產函數 Q = √(L·100)（K 固定為 100），資本租金每小時 10 元、工資率 5 元，則短期總成本函數為？（書本例題 10.23）",
+  opts:["(A) STC = Q²/20 + 1000","(B) STC = Q²/10 + 500","(C) STC = 10Q² + 1000","(D) STC = Q²/5 + 100"],
+  ans:"<b>(A) STC = Q²/20 + 1000。</b><ul><li>Q = 10√L → L = Q²/100</li><li>STC = wL + rK = 5·(Q²/100) + 10·100 = Q²/20 + 1000</li></ul>"
+},
+{
+  q:"下列敘述何者為正確？（書本例題 10.25）(A) 平均變動成本上升時邊際成本小於平均變動成本 (B) 平均總成本下降時平均總成本小於邊際成本 (C) 若邊際成本下降則平均總成本也下降 (D) 邊際成本等於平均總成本時平均總成本極小 (E) 若邊際成本固定於某一水準則邊際產量遞減",
+  opts:["(A) (A) 與 (C)","(B) 只有 (D)","(C) (D) 與 (E)","(D) 全部正確"],
+  ans:"<b>(B) 只有 (D) 正確。</b><ul><li>MC = AC 時 AC 極小 ✓</li><li>(A) AVC 上升時 MC&gt;AVC；(B) AC 下降時 AC&gt;MC；(C) MC 下降不代表 MC&lt;AC；(E) MC 固定 → MP 固定</li></ul>"
+},
+{
+  q:"Which of the following relationships is not valid?（書本例題 10.27）(A) When marginal cost equals average total cost, ATC is minimum (B) When MC is greater than ATC, MC is falling (C) When MC is greater than AVC, AVC is rising (D) When MC is greater than ATC, ATC is rising",
+  opts:["(A) (A)","(B) (B)","(C) (C)","(D) (D)"],
+  ans:"<b>(B) (B) 不成立。</b><ul><li>MC &gt; ATC 時上升的是 ATC，不是 MC（MC 可能仍在下降）</li></ul>"
+},
+{
+  q:"當產量 100 單位時平均總成本與平均變動成本的差額為 2 元，則產量 50 單位時兩者差額為？（書本例題 10.29）",
+  opts:["(A) 1 元","(B) 2 元","(C) 4 元","(D) 8 元"],
+  ans:"<b>(C) 4 元。</b><ul><li>差額 = AFC = TFC/Q：TFC = 2×100 = 200</li><li>Q=50 時 AFC = 200/50 = 4</li></ul>"
+},
+];
+
+
 const CH11_SECTIONS = [];
 const CH11_PROBLEMS = [];
 const CH12_SECTIONS = [];
@@ -2557,7 +2836,13 @@ const GLOSS_CATS = [
   {name:"顯示性偏好", keys:["Direct revealed preference","Indirect revealed preference","WARP","SARP"]},
   {name:"物價指數", keys:["True price index","Laspeyres index","Paasche index","Expenditure index"]},
   {name:"不確定性與風險", keys:["Risk","Uncertainty","Fair game","St. Petersburg paradox","Expected utility"]},
-  {name:"風險態度與保險", keys:["Risk averse","Risk lover","Risk neutral","Certainty equivalence","Risk premium","Arrow-Pratt measure","Friedman-Savage proposition","Full insurance"]},
+  {name:"物價指數", keys:["True price index","Laspeyres index","Paasche index","Expenditure index"]},
+  {name:"生產函數與要素", keys:["Production function","Factors of production","Fixed input","Variable input","Cobb-Douglas production function","Leontief production function","Linear production function","Stone-Geary production function","CES production function"]},
+  {name:"規模報酬與替代", keys:["Returns to scale","Homogeneous function","Homothetic function","Elasticity of substitution","Elasticity of productivity","Inada condition","Output elasticity"]},
+  {name:"短期生產結構", keys:["Total physical product","Average product","Marginal product","Law of diminishing marginal returns","Disguised unemployment","Marginal productivity theory of distribution","Euler's theorem"]},
+  {name:"長期生產結構", keys:["Isoquant","Marginal rate of technical substitution","Isocost curve","Production equilibrium","Expansion path"]},
+  {name:"成本與利潤", keys:["Economic cost","Explicit cost","Implicit cost","Opportunity cost","Economic profit","Accounting profit","Normal profit","Sunk cost","Pure rent"]},
+  {name:"短期與長期成本", keys:["Conditional factor demand","Short-run total cost","Total variable cost","Total fixed cost","Quasifixed cost","Short-run average cost","Average variable cost","Average fixed cost","Marginal cost","Envelope curve","Long-run total cost","Long-run average cost"]},
 ];
 
 const GLS = {
@@ -2574,7 +2859,8 @@ const CH_TERMS_CATS = {
   6:["偏好與公理","效用函數與無異曲線","預算限制","消費者均衡","對偶性理論"],
   7:["替代與所得效果","需求曲線","消費曲線與方程式"],
   8:["政府介入與補貼","勞動供給","跨期消費","顯示性偏好","物價指數"],
-  9:["不確定性與風險","風險態度與保險"]
+  9:["不確定性與風險","風險態度與保險"],
+  10:["生產函數與要素","短期生產結構","長期生產結構","成本與利潤","短期與長期成本"]
 };
 let glossMode="full", glossChapter=1;
 
