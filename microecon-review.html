@@ -416,7 +416,7 @@ const BOOK = [
   {n:15, title:"要素市場理論", subs:["15.1 前言","15.2 要素市場追求利潤極大化","15.3 要素市場均衡","15.4 成本最小與利潤最大條件式","15.5 最低工資的影響"], done:true, points:["引申需求：要素需求來自商品市場需求（最終需求帶動）","收入面：VMP=P·MP（商品競爭）、MRP=MR·MP（商品獨占、MRP<VMP）","成本面：MFC=w(1+1/η)；要素競爭 MFC=AFC=w、獨買 MFC>w","利潤極大：MRP=MFC（一般式 MR×MP_L=MFC_L）","要素市場競爭時廠商要素需求線=VMP 最高點以下之 VMP（負斜率）","四組合：競爭+競爭 VMP=w；獨買 VMP=MFC>w（專買性剝削）","獨占+競爭 w=MRP、VMP>MRP（專賣性剝削）；雙獨占 MRP=MFC","雙邊獨占：工會與廠商議價，均衡取決於相對議價能力","最低工資：完全競爭→失業；獨買→就業上升","補償性工資差異：工作條件不同造成工資差距"]},
   {n:16, title:"一般均衡與福利經濟學", subs:["16.1 前言","16.2 交換經濟","16.3 生產經濟","16.4 全面均衡分析"], done:true, points:["部分均衡 vs 一般均衡：市場關聯緊密時須用一般均衡","交換經濟：契約線 = MRS_A=MRS_B（交換效率）、交易核、互惠區","柏拉圖最適：無法在無人受害下使有人得利；改善＝無人受害有人變好","競爭均衡＝瓦拉斯均衡；瓦拉斯法則：n−1 市場結清→最後一個必結清","福利第一定理：競爭均衡→柏拉圖最適（看不見的手）","福利第二定理：適當重分配→契約線上任何點可成為競爭均衡","生產效率 MRTS_x=MRTS_y；PPC 線上=技術效率、內部=不效率、外部=不可能","MRT=MC_x/MC_y=機會成本；最適產出 MRT=P_x/P_y","全面效率：MRS_A=MRS_B=MRT=P_x/P_y；GUPF 線上每點滿足全面效率","社會福利函數：公平主義、羅氏準則、功利主義（邊沁）、卡洛多、柏克遜-森謬爾森","亞羅不可能定理：無限制＋柏拉圖＋獨立性＋非獨裁不可同時滿足","投票矛盾（孔多塞）：多數決違反遞移性、議程可操作"]},
   {n:17, title:"市場失靈與外部性理論", subs:["17.1 前言","17.2 外部性","17.3 外部性的糾正方式","17.4 公共財","17.5 共有資源理論"], done:true, points:["市場失靈＝不完全競爭＋不完全市場（外部性、資訊不對稱）；政府也可能失靈","外部性：直接影響他人福利、非透過價格機制；金融外部性不造成市場失靈","負外部性→生產過多（MPB=MPC 產量大於 MSB=MSC）；正外部性→生產過少","社會最適：MSB=MSC；個人決策 MPB=MPC","皮古稅＝最適量處之 MEC（皮古提出）；正外部性用皮古補貼","直接管制無誘因機制；可交易排放許可證：政府定總量、市場交易，MB 相等處定價","寇斯定理：交易成本零＋財產權明確→協商達效率；強寇斯需無所得效果","財貨四分類：私有財（敵對+排他）、準公共財、共有財、純公共財（非敵對+非排他）","公共財需求垂直加總（私有財水平加總）；森謬爾遜條件 ΣMRS=MRT","搭便車→私人提供不足→政府提供；林達爾價格、克拉克稅","共有資源：無排他+敵對→過度使用（共有地的悲劇）"]},
-  {n:18, title:"資訊經濟學", subs:["18.1 前言","18.2 資訊不對稱之種類與討論"], done:false, points:[]},
+  {n:18, title:"資訊經濟學", subs:["18.1 前言","18.2 資訊不對稱之種類與討論"], done:true, points:["資訊不對稱：一方訊息多→剝削另一方→效率損失","隱藏訊息（交易前）→逆向選擇；隱藏行為（交易後）→道德危機","檸檬市場（Akerlof）：平均價格→好商品退出→只剩壞商品","逆向選擇案例：二手車、雇用前生產力、投保前健康","解決逆向選擇：篩選（不足方）、示信（充足方）、強制險、法令","道德危機案例：雇用後偷懶、投保後疏忽、代理人問題","解決道德危機：共保條款、自負額、最低利潤下界","混和均衡 vs 分離均衡"]},
   {n:19, title:"國際貿易理論", subs:["19.1 前言","19.2 古典貿易理論","19.3 新古典貿易理論"], done:false, points:[]},
   {n:20, title:"完全競爭下的部分均衡分析與貿易政策", subs:["20.1 前言","20.2 進口需求與出口供給","20.3 部分均衡的自由貿易模型","20.4 進口關稅","20.5 出口補貼","20.6 進口配額與自動出口設限","20.7 關稅與配額等價分析"], done:false, points:[]},
 ];
@@ -812,6 +812,20 @@ const TERMS = {
   "Lindahl price":["Lindahl price","林達爾價格","個人對公共財的負擔比例（投票決定）。"],
   "Clarke tax":["Clarke tax","克拉克稅","將欺騙成本內部化之稅（關鍵消費者承擔轉折損失；需準線性偏好）。"],
   "Tragedy of the commons":["Tragedy of the commons","共有地的悲劇","共有資源缺乏財產權→過度使用耗竭（過度捕撈、放牧）。"],
+  "Symmetric information":["Symmetric information","對稱資訊","買賣雙方擁有相同資訊（先前章節之假設）。"],
+  "Asymmetric information":["Asymmetric information","資訊不對稱","一方訊息較多並利用優勢剝削另一方。"],
+  "Hidden information":["Hidden information","隱藏訊息","交易當下已存在但一方無法察覺；造成逆向選擇。"],
+  "Hidden action":["Hidden action","隱藏行為","交易後一方採取、對方無法監督之行為；造成道德危機。"],
+  "Adverse selection":["Adverse selection","逆向選擇","交易前隱藏訊息使資訊不足方蒙受損失（檸檬市場）。"],
+  "Moral hazard":["Moral hazard","道德危機","交易後隱藏行為使對方受害（保險、代理人）。"],
+  "Lemon market":["Lemon market","檸檬市場","Akerlof 提出：買方按平均價格判斷品質 → 好商品退出 → 只剩壞商品。"],
+  "Screening":["Screening","篩選","資訊不足方主動篩選對方（學歷證照、健康檢查）。"],
+  "Signaling":["Signaling","示信","資訊充足方傳遞品質訊號（品質保證、商譽、GMP）。"],
+  "Pooling equilibrium":["Pooling equilibrium","混和均衡","高低品質以同一價格出售之均衡。"],
+  "Separating equilibrium":["Separating equilibrium","分離均衡","不同品質以不同價格出售之均衡。"],
+  "Co-insurance":["Co-insurance","共保條款","保險公司僅賠償部分損害，保戶自行承擔其餘。"],
+  "Deductible":["Deductible","自負額","約定金額內由保戶自行負擔之條款。"],
+  "Principal-agent problem":["Principal-agent problem","代理人問題","股東（主理人）無法監督經理人（代理人）圖利自己。"],
   "Slutsky equation":["Slutsky equation","史勒斯基方程式","∂x/∂P<sub>x</sub> = ∂x<sup>h</sup>/∂P<sub>x</sub> − x·∂x/∂M；分解價格效果為替代與所得效果。"],
 };
 
@@ -3851,8 +3865,80 @@ const CH17_PROBLEMS = [
 },
 ];
 
-const CH18_SECTIONS = [];
-const CH18_PROBLEMS = [];
+const CH18_SECTIONS = [
+{
+  id:"18.1", title:"前言",
+  body:`
+  <p>先前章節假設買賣雙方擁有<b>對稱資訊（Symmetric information）</b>；現實中普遍存在<b>資訊不對稱（Asymmetric information）</b>：一方訊息較多、會利用優勢剝削訊息較少的一方，造成效率損失。</p>
+  <div class="warn">考試重點：資訊不對稱＝隱藏訊息（交易前→逆向選擇）＋隱藏行為（交易後→道德危機）。</div>`
+},
+{
+  id:"18.2", title:"資訊不對稱之種類與討論",
+  body:`
+  <p><b>隱藏訊息（Hidden information）</b>：交易當下已存在但一方無法察覺的性質（如二手車品質）；發生於交易前 → <b>逆向選擇（Adverse selection）</b>。</p>
+  <p><b>隱藏行為（Hidden action）</b>：交易後一方基於理性決策採取、對方無法監督的行為；發生於交易後 → <b>道德危機（Moral hazard）</b>。</p>
+  <div class="method-card mc-title" data-mc="lemon">
+    <div class="mc-check"><input type="checkbox" id="mc-ch18-1" data-mc="lemon"><label for="mc-ch18-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">檸檬市場</div>
+    <div class="mc-body">
+      <div class="mc-formula">買方只能按平均價格判斷平均品質 → 好商品退出 → 品質下降 → 只剩壞商品（<span class="proper">Akerlof</span>）</div>
+      <div class="mc-detail"><b>逆向選擇</b>：擁有較多資訊的一方使資訊不足方蒙受損失。案例：二手車市場、雇用前勞工隱藏生產力、投保前隱藏健康狀況。市場可能只剩混和均衡（Pooling equilibrium）或高品質市場消失（市場失靈）。</div>
+      <div class="mc-ex">例子：可靠車 20%＋不可靠車 80%：買方願付 = 0.2×14k+0.8×10k = 10.8k &lt; 賣方願收 13k → 不買、可靠車退出。</div>
+    </div>
+  </div>
+  <p><b>解決逆向選擇</b>：<b>篩選（Screening）</b>＝資訊不足方主動篩選（學歷證照、健康檢查）；<b>示信（Signaling）</b>＝資訊充足方傳遞品質訊號（品質保證、商譽、GMP 認證，須能區隔且不致虧損）；強制保險；法令規範。</p>
+  <div class="method-card mc-title" data-mc="moral">
+    <div class="mc-check"><input type="checkbox" id="mc-ch18-2" data-mc="moral"><label for="mc-ch18-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">道德危機</div>
+    <div class="mc-body">
+      <div class="mc-formula">交易後隱藏行為：雇用後偷懶、投保後疏忽、代理人圖利自己 → 對方受害</div>
+      <div class="mc-detail">案例：勞工雇用後隱藏偷懶行為；保險購買後缺乏謹慎誘因；<b>代理人問題（Principal-Agent）</b>——股東（principal）無法監督經理人（agent）。</div>
+      <div class="mc-ex">例子：車主投保竊盜險後不再鎖車門 → 保險公司承擔更多理賠。</div>
+    </div>
+  </div>
+  <p><b>解決道德危機</b>：<b>共保條款（Co-insurance）</b>（保險公司僅賠部分）；<b>自負額（Deductible）</b>（約定金額內保戶自付）；雇主設定最低利潤下界。</p>
+  <div class="warn">考試重點：逆向選擇＝交易前隱藏訊息（檸檬市場）；道德危機＝交易後隱藏行為（保險、代理人）；篩選 vs 示信方向相反。</div>`
+},
+];
+
+const CH18_PROBLEMS = [
+{
+  q:"高級車二手市場：買方認為優質車值 50 萬、賣方值 40 萬；劣等車雙方皆值 5 萬。品質只有賣方知道。劣等車比例 r 大於某臨界值時發生逆向選擇，臨界值為？（書本例題 18.1）",
+  opts:["(A) 於 [10%, 25%) 區間","(B) 於 [25%, 50%) 區間","(C) 於 [50%, 75%) 區間","(D) 於 [75%, 90%) 區間","(E) 以上皆非"],
+  ans:"<b>(A) 於 [10%, 25%) 區間。</b><ul><li>買方願付 = 50(1−r)+5r = 50−45r；賣方賣優質須 50−45r ≥ 40 → r ≤ 10/45 ≈ 22.2%</li><li>r 超過 22.2% 優質賣方退出 → 逆向選擇</li></ul>"
+},
+{
+  q:"Joe 願以 $13,000 賣可靠的二手 Honda；Lauren 願付可靠 $14,000、不可靠 $10,000，相信市場僅 20% 可靠。下列何者 NOT true？（書本例題 18.2）",
+  opts:["(A) Lauren 不會買 Joe 的車","(B) 長期二手 Honda 市價會上升","(C) 長期市場上二手 Honda 品質會下降","(D) Joe 可提供保固作為 costly-to-fake 訊號","(E) None of the above"],
+  ans:"<b>(B) 長期二手 Honda 市價會上升。</b><ul><li>買方願付 = 0.2×14k+0.8×10k = $10,800 &lt; $13,000 → 不買（A 真）</li><li>逆向選擇：可靠車退出 → 品質與價格皆下降（B 為非）</li></ul>"
+},
+{
+  q:"下列有關解決逆向選擇的作法中，何者最無效？（書本例題 18.3(1)）",
+  opts:["(A) 公司面試參考學歷文憑","(B) 保險公司提高保單保費","(C) 保險公司要求去做體檢","(D) 銀行要求債信良好公務員作連帶保證人"],
+  ans:"<b>(B) 保險公司提高保單保費。</b><ul><li>提高保費使低風險者退出、高風險者留下 → 逆向選擇惡化</li><li>有效作法：篩選（體檢）、示信（學歷）、保證人</li></ul>"
+},
+{
+  q:"Carlos 不懂工程、雇用 Joe 裝潢，兩年後牆壁因 Joe 用劣質材料崩塌。這是？（書本例題 18.3(2)）",
+  opts:["(A) moral hazard","(B) an optimal contract","(C) monitoring","(D) adverse selection"],
+  ans:"<b>(A) 道德危機（moral hazard）。</b><ul><li>交易後隱藏行為：Joe 雇用後偷工減料、Carlos 無法監督</li></ul>"
+},
+{
+  q:"下列何者為逆向選擇（Adverse selection）的典型例子？（書本例題 18.1 概念）",
+  opts:["(A) 投保後開車變魯莽","(B) 二手車市場好車退出只剩壞車","(C) 員工雇用後偷懶","(D) 經理人圖利自己"],
+  ans:"<b>(B) 二手車市場好車退出只剩壞車。</b><ul><li>交易前隱藏訊息 → 逆向選擇（檸檬市場）</li><li>(A)(C)(D) 皆為交易後隱藏行為 → 道德危機</li></ul>"
+},
+{
+  q:"「篩選（Screening）」與「示信（Signaling）」之區別？（書本例題 18.2 概念）",
+  opts:["(A) 篩選由資訊不足方主動；示信由資訊充足方傳遞訊號","(B) 兩者皆由政府執行","(C) 篩選只適用保險市場","(D) 示信需透過法律強制"],
+  ans:"<b>(A) 篩選由資訊不足方主動；示信由資訊充足方傳遞訊號。</b><ul><li>篩選：雇主要求證照、保險公司要求體檢</li><li>示信：品質保證、商譽、GMP 認證（需能區隔且不致虧損）</li></ul>"
+},
+{
+  q:"保險公司以「共保條款」與「自負額」解決的問題是？（書本例題 18.3 概念）",
+  opts:["(A) 逆向選擇","(B) 道德危機","(C) 市場失靈","(D) 資訊壟斷"],
+  ans:"<b>(B) 道德危機。</b><ul><li>投保後缺乏謹慎誘因 → 由保戶分擔部分損失使其有小心誘因</li></ul>"
+},
+];
+
 const CH19_SECTIONS = [];
 const CH19_PROBLEMS = [];
 const CH20_SECTIONS = [];
@@ -4142,6 +4228,7 @@ const GLOSS_CATS = [
   {name:"要素市場理論", keys:["Derived demand","Final demand","Value of average product","Value of marginal product","Marginal revenue product","Average factor cost","Marginal factor cost","Monopsony","Monopsonistic exploitation","Monopolistic exploitation","Bilateral monopoly","Compensation differential","Minimum wage","Involuntary unemployment"]},
   {name:"一般均衡與福利經濟學", keys:["Partial equilibrium analysis","General equilibrium analysis","Exchange economy","Endowment","Contract curve","Pareto optimum","Pareto improvement","Competitive equilibrium","Walrasian equilibrium","Walras' law","Production possibility curve","Marginal rate of transformation","Utility possibility frontier","Grand utility possibility frontier","Rawlsian criterion","Utilitarian","Arrow's impossibility theorem","Voting paradox"]},
   {name:"市場失靈與外部性", keys:["Market failure","Government failure","Externality","Pecuniary externality","Technological externality","Network externality","External cost","External benefit","Marginal social cost","Marginal social benefit","Pigouvian tax","Tradable emission permits","Coase theorem","Property rights","Rival","Nonrival","Excludability","Private good","Quasi-public good","Public good","Common resource","Free rider","Samuelson condition","Lindahl price","Clarke tax","Tragedy of the commons"]},
+  {name:"資訊經濟學", keys:["Symmetric information","Asymmetric information","Hidden information","Hidden action","Adverse selection","Moral hazard","Lemon market","Screening","Signaling","Pooling equilibrium","Separating equilibrium","Co-insurance","Deductible","Principal-agent problem"]},
 ];
 
 const GLS = {
@@ -4166,7 +4253,8 @@ const CH_TERMS_CATS = {
   14:["獨占性競爭市場"],
   15:["要素市場理論"],
   16:["一般均衡與福利經濟學"],
-  17:["市場失靈與外部性"]
+  17:["市場失靈與外部性"],
+  18:["資訊經濟學"]
 };
 let glossMode="full", glossChapter=1;
 
