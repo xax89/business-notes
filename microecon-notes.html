@@ -2519,6 +2519,7 @@ p.figcap{font-size:12.5px;color:var(--muted);margin:6px 0 0;line-height:1.6;}
 <!-- ===== 主內容 ===== -->
 <main class="main">
   <div class="topbar no-print">
+    <a class="toolbtn home-btn" href="index.html" title="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 10.5 9-7.5 9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span>首頁</span></a>
     <button class="toolbtn nav-toggle" id="navToggle" title="目錄">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
@@ -2651,13 +2652,13 @@ function renderSidebar(){
     b.addEventListener("click",()=>{
       const ch=BOOK[+b.dataset.ch-1];
       if(!ch.done){toast("第 "+ch.n+" 章尚未建置");return;}
-      if(openChapter===ch.n){
-        openChapter=0;
-        const w=b.closest(".nav-ch"); if(w)w.classList.remove("open");
-        return;
+      const w=b.closest(".nav-ch");
+      if(openChapter===ch.n&&w.classList.contains("open")){
+        openChapter=0;w.classList.remove("open");return;
       }
       openChapter=ch.n;
-      renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});closeNav();
+      sb.querySelectorAll(".nav-ch.open").forEach(x=>x.classList.remove("open"));
+      if(w)w.classList.add("open");
     });
   });
   sb.querySelectorAll(".nav-sub").forEach(b=>{
