@@ -70,6 +70,8 @@ body.dark{
 .nav-ch.open .nav-subs{display:block}
 .nav-chapter .chev{width:13px;height:13px;margin-left:6px;flex-shrink:0;opacity:.5;transition:transform .2s}
 .nav-ch.open .nav-chapter .chev{transform:rotate(90deg);opacity:.9}
+.nav-sub .sub-num{color:var(--accent);font-weight:700;margin-right:3px}
+.nav-sub:hover .sub-num{color:inherit}
 .nav-sub{
   display:block;width:100%;padding:3px 10px 3px 34px;border-radius:6px;
   cursor:pointer;font-size:12.5px;color:var(--muted);border:none;background:none;text-align:left;font-family:inherit;line-height:1.45;
@@ -422,7 +424,7 @@ function renderSidebar(){
     if(secs.length){
       html+=`<div class="nav-subs">`;
       secs.forEach(s=>{
-        html+=`<button class="nav-sub" data-ch="${ch.n}" data-sec="${s.id}">${esc(s.title)}</button>`;
+        html+=`<button class="nav-sub" data-ch="${ch.n}" data-sec="${s.id}"><span class="sub-num">${s.id}</span>${esc(s.title)}</button>`;
       });
       html+=`</div>`;
     }
