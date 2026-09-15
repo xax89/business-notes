@@ -69,7 +69,9 @@ body.dark{
 }
 
 .nav-ch{position:relative}
-.nav-ch.open .nav-subs{display:block}
+.nav-ch.open .nav-chapter{background:var(--nav-hover)}
+.nav-ch.open .nav-subs{display:block;animation:navSubOpen .2s ease}
+@keyframes navSubOpen{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
 .nav-ch.open .nav-chapter .chev{transform:rotate(90deg);opacity:.9}
 .nav-subs{display:none;padding:2px 0 6px}
 .nav-sub.lv2{padding-left:56px;font-size:12px;color:color-mix(in srgb,var(--muted) 80%,transparent)}
@@ -2638,8 +2640,9 @@ function renderSidebar(){
       ch.subs.forEach(sub=>{
         const id=(typeof sub==="string")?sub.slice(0,3):sub.id;
         const title=(typeof sub==="string")?sub:sub.title;
-        const lv=/^\d+\.\d+\.\d+/.test(title)?' lv2':'';
-        html+=`<button class="nav-sub${lv}" data-ch="${ch.n}" data-sec="${id}">${esc(title)}</button>`;
+        const lv=/^\d+\.\d+\.\d+/.test(id)?' lv2':'';
+        const label=(typeof sub==="object"&&sub.id)?sub.id+' '+sub.title:sub;
+        html+=`<button class="nav-sub${lv}" data-ch="${ch.n}" data-sec="${id}">${esc(label)}</button>`;
       });
       html+=`</div>`;
     }

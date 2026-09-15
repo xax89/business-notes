@@ -67,7 +67,9 @@ body.dark{
 .nav-chapter .tag.done{color:var(--green2);opacity:1}
 .nav-ch{position:relative}
 .nav-ch .nav-subs{display:none;padding:2px 0 6px}
-.nav-ch.open .nav-subs{display:block}
+.nav-ch.open .nav-chapter{background:var(--nav-hover)}
+.nav-ch.open .nav-subs{display:block;animation:navSubOpen .2s ease}
+@keyframes navSubOpen{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
 .nav-chapter .chev{width:13px;height:13px;margin-left:6px;flex-shrink:0;opacity:.5;transition:transform .2s}
 .nav-ch.open .nav-chapter .chev{transform:rotate(90deg);opacity:.9}
 .nav-sub .sub-num{color:var(--accent);font-weight:700;margin-right:3px}
@@ -76,6 +78,7 @@ body.dark{
   display:block;width:100%;padding:3px 10px 3px 34px;border-radius:6px;
   cursor:pointer;font-size:12.5px;color:var(--muted);border:none;background:none;text-align:left;font-family:inherit;line-height:1.45;
 }
+.nav-sub.lv2{padding-left:56px;font-size:12px;color:color-mix(in srgb,var(--muted) 80%,transparent)}
 .nav-sub:hover{background:var(--nav-hover);color:var(--ink)}
 .nav-sub.active{color:var(--nav-active);font-weight:700}
 .nav-gloss{
@@ -425,7 +428,8 @@ function renderSidebar(){
     if(secs.length){
       html+=`<div class="nav-subs">`;
       secs.forEach(s=>{
-        html+=`<button class="nav-sub" data-ch="${ch.n}" data-sec="${s.id}"><span class="sub-num">${s.id}</span>${esc(s.title)}</button>`;
+        const lv=/^\d+\.\d+\.\d+/.test(s.id)?' lv2':'';
+        html+=`<button class="nav-sub${lv}" data-ch="${ch.n}" data-sec="${s.id}"><span class="sub-num">${s.id}</span>${esc(s.title)}</button>`;
       });
       html+=`</div>`;
     }

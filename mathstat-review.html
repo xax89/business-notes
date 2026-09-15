@@ -50,6 +50,10 @@ button{font-family:inherit;cursor:pointer}
   border-radius:6px;transition:background .15s;
 }
 .nav-subhead:hover{background:var(--nav-hover)}
+.nav-subhead:not(.collapsed){background:color-mix(in srgb,var(--nav-hover) 70%,transparent)}
+.nav-subs:not(.collapsed){animation:navSubOpen .2s ease}
+@keyframes navSubOpen{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+
 .nav-subhead::after{content:'▾';font-size:11px;transition:transform .2s;color:var(--accent);flex-shrink:0;font-weight:700}
 .nav-subhead.collapsed::after{transform:rotate(-90deg)}
 .nav-subhead .ch-num{font-size:11px;font-weight:800;color:var(--accent);letter-spacing:.12em;margin-right:8px;flex-shrink:0}
