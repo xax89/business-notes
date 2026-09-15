@@ -407,7 +407,7 @@ const BOOK = [
   {n:6, title:"消費者行為理論", subs:["6.1 消費者偏好基本公理","6.2 效用函數","6.3 常用偏好結構與預算線","6.4 消費者均衡與計算","6.5 對偶性理論","6.6 全章考試總複習清單"], done:true, points:["六大公理：完整、反射、遞移（公理）＋連續、單調、凸（假設）","良好偏好→無異曲線凸向原點、內部解唯一；MRS = MUx/MUy","四大效用函數：Cobb-Douglas、Leontief、Linear、Quasi-linear","預算線斜率 −Px/Py；均衡 MRS = Px/Py（相切）；角隅解比較 MRS 與價格比","對偶：效用極大↔支出極小；Roy 恆等式 ↔ Shephard 定理"]},
   {n:7, title:"比較靜態與需求函數", subs:["7.1 替代效果與所得效果","7.2 普通與受補償需求曲線","7.3 所得與價格消費曲線","7.4 史勒斯基方程式"], done:true, points:["價格效果 = 替代效果 + 所得效果；Hicks（維持效用/CV）vs Slutsky（維持原購買組合/CD）","受補償需求曲線只含 SE 永遠負斜率；馬歇爾需求含 SE＋IE","正常財 IE 與價格反向；劣等財反向抵銷；季芬財 IE &gt; SE（需求線正斜率）","ICC 只含 IE、PCC 含 SE＋IE；PCC 垂直 ⟺ 劣等財","史勒斯基方程式：∂x/∂P = ∂xh/∂P − x·∂x/∂M"]},
   {n:8, title:"消費者行為理論的應用", subs:["8.1 補貼或課稅對消費者之影響","8.2 勞動與休閒的選擇","8.3 跨期消費理論","8.4 顯示性偏好理論","8.5 皮氏與拉氏指數"], done:true, points:["相同補貼金額下消費者偏好所得補貼、政策面偏好從量補貼","休閒的價格＝工資率；後彎勞動供給需休閒為正常財且 IE &gt; SE","跨期預算線 c₁+c₂/(1+r)=y₁+y₂/(1+r)；均衡 MRS=1+r；Euler 方程式","顯示性偏好由選擇反推偏好；WARP 一致性、SARP 加遞移性","拉氏指數高估、皮氏低估生活成本；支出指數比較判斷福利"]},
-  {n:9, title:"不確定狀況下的選擇行為", subs:["9.1 賭局與期望效用","9.2 面對風險下之決策"], done:false, points:[]},
+  {n:9, title:"不確定狀況下的選擇行為", subs:["9.1 賭局與期望效用","9.2 面對風險下之決策"], done:true, points:["風險=機率已知、不確定=機率未知；決策依期望效用（正仿射轉換）","風險趨避凹/喜好凸/中立線性；CE 與風險溢價 π=EMV−CE","Arrow-Pratt 絕對/相對風險趨避量度","公平保費下保全險；保費率過高保部分險或不保","Friedman-Savage：同一個人可能同時買保險與彩券"]},
   {n:10, title:"生產理論與成本結構", subs:["10.1 前言","10.2 生產函數","10.3 短期生產結構","10.4 長期生產結構","10.5 擴張線","10.6 替代彈性","10.7 成本結構理論","10.8 短期成本結構","10.9 長期成本結構","10.10 規模經濟","10.11 要素價格與成本結構","10.12 附錄 廠商行為"], done:false, points:[]},
   {n:11, title:"完全競爭市場", subs:["11.1 市場分類","11.2 完全競爭廠商的特色","11.3 完全競爭廠商的短期均衡","11.4 完全競爭廠商的長期均衡","11.5 長期供給曲線與產業供給曲線","11.6 政府對完全競爭廠商的管制"], done:false, points:[]},
   {n:12, title:"獨占市場", subs:["12.1 獨占市場的特色與進入障礙","12.2 獨占廠商的均衡","12.3 差別取價","12.4 壟斷力的測量","12.5 政府對獨占廠商的管制"], done:false, points:[]},
@@ -596,6 +596,19 @@ const TERMS = {
 "Laspeyres index":["Laspeyres index","拉氏指數","以基期數量為權重，高估生活成本。"],
 "Paasche index":["Paasche index","皮氏指數","以當期數量為權重，低估生活成本。"],
 "Expenditure index":["Expenditure index","支出指數","當期實際總支出與基期總支出之比；反映所得變化。"],
+"Risk":["Risk","風險","出象未知但發生機率已知。"],
+"Uncertainty":["Uncertainty","不確定性","出象與發生機率皆未知。"],
+"Fair game":["Fair game","公平賭局","期望貨幣利潤為零的賭局。"],
+"St. Petersburg paradox":["St. Petersburg paradox","聖彼得堡矛盾","期望報酬無窮大的賭局卻少有人願參加；須用效用衡量。"],
+"Expected utility":["Expected utility","期望效用","E[U] = p·u(x) + q·u(y)；不確定下的決策依據。"],
+"Risk averse":["Risk averse","風險趨避","凹效用函數；不參加公平賭局，願付風險溢價。"],
+"Risk lover":["Risk lover","風險喜好","凸效用函數；參加公平賭局。"],
+"Risk neutral":["Risk neutral","風險中立","線性效用函數；參加與否無差異。"],
+"Certainty equivalence":["Certainty equivalence","確定性等值 (CE)","確定所得下效用等於賭局期望效用的所得水準。"],
+"Risk premium":["Risk premium","風險溢價","EMV − CE；為避免風險願付的最大財富值。"],
+"Arrow-Pratt measure":["Arrow-Pratt measure","Arrow-Pratt 風險趨避量度","R<sub>A</sub> = −u''/u'（絕對）；R<sub>R</sub> = −w·u''/u'（相對）。"],
+"Friedman-Savage proposition":["Friedman-Savage proposition","Friedman-Savage 命題","效用函數高低所得為凹、中所得為凸；可同時買保險與彩券。"],
+"Full insurance":["Full insurance","全險","公平保費（費率=機率）下風險趨避者投保全額。"],
 "Slutsky equation":["Slutsky equation","史勒斯基方程式","∂x/∂P<sub>x</sub> = ∂x<sup>h</sup>/∂P<sub>x</sub> − x·∂x/∂M；分解價格效果為替代與所得效果。"],
 };
 
@@ -2188,8 +2201,77 @@ const CH8_PROBLEMS = [
 },
 ];
 
-const CH9_SECTIONS = [];
-const CH9_PROBLEMS = [];
+const CH9_SECTIONS = [
+{
+  id:"9.1", title:"賭局與期望效用",
+  body:`
+  <p><b>風險（Risk）</b>：出象未知但發生機率已知；<b>不確定性（Uncertainty）</b>：出象與機率皆未知。</p>
+  <p><b>公平賭局（Fair game）</b>：期望貨幣利潤為零（EMV = 原始持有量）。<b>聖彼得堡矛盾（St. Petersburg paradox）</b>（<span class="proper">Nicolas Bernoulli</span>）：賭局的期望報酬無窮大，卻少有人願付出高代價參加——因為消費者追求效用極大化而非貨幣極大化，必須以效用衡量。</p>
+  <div class="method-card mc-title" data-mc="eu">
+    <div class="mc-check"><input type="checkbox" id="mc-ch9-1" data-mc="eu"><label for="mc-ch9-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">期望效用</div>
+    <div class="mc-body">
+      <div class="mc-formula">賭局 L = (p, x; q, y) → E[U(L)] = p·u(x) + q·u(y)</div>
+      <div class="mc-detail">由 <span class="proper">Von Neumann</span> 與 <span class="proper">Morgenstern</span> 發展（1940 年代）。狀態獨立假設；效用函數的單調遞增非線性轉換不保偏好一致，但<b>單調遞增線性轉換（positive affine）</b>保有相同偏好結構。</div>
+      <div class="mc-ex">例子：擲硬幣贏得 4 元（機率 1/2）或輸 2 元（機率 1/2）→ EMV = 0.5×4 + 0.5×(−2) = 1 &gt; 0 為有利賭局。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：決策依據是期望效用而非期望貨幣值；期望效用函數只允許正仿射轉換。</div>`
+},
+{
+  id:"9.2", title:"面對風險下之決策",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:24%"><col style="width:38%"><col style="width:38%"></colgroup>
+    <thead><tr><th>風險態度</th><th>效用函數</th><th>行為</th></tr></thead>
+    <tbody>
+      <tr><td><b>風險趨避者</b></td><td>凹函數（u''&lt;0），邊際效用遞減</td><td>不參加公平賭局；願付風險溢價換取確定</td></tr>
+      <tr><td><b>風險喜好者</b></td><td>凸函數（u''&gt;0）</td><td>參加公平賭局；風險溢價為負</td></tr>
+      <tr><td><b>風險中立者</b></td><td>線性（u''=0）</td><td>參加與否無差異；風險溢價 = 0</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>確定性等值（Certainty equivalence, CE）</b>：確定所得下效用等於賭局期望效用的所得水準。E[U] = U(CE)。<b>風險溢價（Risk premium, π）</b>＝EMV − CE：為避免風險願付出的最大財富值（風險的成本）。</p>
+  <div class="method-card mc-title" data-mc="risk">
+    <div class="mc-check"><input type="checkbox" id="mc-ch9-2" data-mc="risk"><label for="mc-ch9-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">風險衡量</div>
+    <div class="mc-body">
+      <div class="mc-formula">絕對風險趨避 R<sub>A</sub>(w) = −u''(w)/u'(w)；相對風險趨避 R<sub>R</sub>(w) = −w·u''(w)/u'(w)</div>
+      <div class="mc-detail"><span class="proper">Arrow-Pratt</span> 量度：R<sub>A</sub> 衡量絕對風險趨避程度；R<sub>R</sub> 為所得邊際效用的所得彈性。保險：最適保險金額 α 滿足 u(w₀−πα) = p·u(w₀−L+α−πα) + (1−p)u(w₀−πα)；公平保費（保費率=損失機率）下保全險。</div>
+      <div class="mc-ex">例子：u(w) = −e^(−aw) → R<sub>A</sub> = a（常數）；u(w) = ln w → R<sub>R</sub> = 1（常數）。</div>
+    </div>
+  </div>
+  <p><b>Friedman-Savage 命題</b>：效用函數在低所得為凹、中所得為凸、高所得又為凹（兩個反曲點），故一般人可能同時買保險（規避風險）又買彩券（喜好風險）。</p>
+  <div class="warn">考試重點：風險趨避者在小有利賭局可能不參加、大利才參加；風險喜好者在小不利賭局仍參加、大不利才退出。公平保費（費率＝機率）下風險趨避者買<b>全險</b>；保費率偏高時買部分險。</div>`
+},
+];
+
+const CH9_PROBLEMS = [
+{
+  q:"Assume a consumer has utility function u(w) = −e^(−aw)，w 為財富。(1) 求絕對風險趨避係數 R<sub>A</sub>(w) (2) 求相對風險趨避係數 R<sub>R</sub>(w) (3) 財富增加時 R<sub>R</sub>(w) 會？ （書本例題 9.1）",
+  opts:["(A) R<sub>A</sub>=a；R<sub>R</sub>=aw；財富增加時 R<sub>R</sub> 增加","(B) R<sub>A</sub>=a；R<sub>R</sub>=aw；財富增加時 R<sub>R</sub> 不變","(C) R<sub>A</sub>=1/w；R<sub>R</sub>=1","(D) R<sub>A</sub>=a；R<sub>R</sub>=a/w"],
+  ans:"<b>(A) R<sub>A</sub> = a；R<sub>R</sub> = aw；財富增加時 R<sub>R</sub> 增加。</b><ul><li>u' = ae^(−aw)、u'' = −a²e^(−aw) → R<sub>A</sub> = −u''/u' = a</li><li>R<sub>R</sub> = w·R<sub>A</sub> = aw → 隨財富增加而增加（常數絕對風險趨避、遞增相對風險趨避）</li></ul>"
+},
+{
+  q:"謀職者兩選擇：固定薪資 31,000 元；或 0.6 機率得 1 萬、0.4 機率得 62,500 元。甲效用 √w、乙效用 w²、丙效用 2w。三人風險態度與選擇？ （書本例題 9.2）",
+  opts:["(A) 甲風險趨避選固定薪；乙風險喜好選賭局；丙風險中立選固定薪","(B) 甲風險喜好選賭局；乙風險趨避選固定薪","(C) 三人皆選固定薪","(D) 三人皆選賭局"],
+  ans:"<b>(A) 甲（√w 凹函數）風險趨避選固定薪；乙（w² 凸函數）風險喜好選賭局；丙（線性）風險中立。</b><ul><li>固定薪 EMV = 31000；賭局 EMV = 0.6×10000 + 0.4×62500 = 31000（公平賭局）→ 趨避者選確定、喜好者選賭局</li></ul>"
+},
+{
+  q:"Econ101 課程：0.2 機率得 A（老師給 $500）、0.6 得 C（無得失）、0.2 得 F（付 $300）。現有財富 $400，效用 u(w)=√w。期望效用與確定性等值財富？ （書本例題 9.3）",
+  opts:["(A) E[U] = 22；CE = 484","(B) E[U] = 25；CE = 625","(C) E[U] = 20；CE = 400","(D) E[U] = 26；CE = 676"],
+  ans:"<b>(C) E[U] = 20；CE = 400。</b><ul><li>三狀態財富：900（A）、400（C）、100（F）</li><li>E[U] = 0.2×30 + 0.6×20 + 0.2×10 = 6+12+2 = 20；CE = 20² = 400</li></ul>"
+},
+{
+  q:"任任買了 100 萬透天厝，效用 u(w)=√w。(1) 25% 機率火災全毀，期望效用？(2) 繳 40 萬保費可獲完全理賠，會買嗎？(3) 最多願付多少保費？ （書本例題 9.4）",
+  opts:["(A) E[U]=750；不買（40 萬保費過高）；最多 25 萬","(B) E[U]=866；買；最多 25 萬","(C) E[U]=750；買；最多 50 萬","(D) E[U]=866；不買；最多 40 萬"],
+  ans:"<b>(A) E[U] = 750；不買；最多願付 25 萬。</b><ul><li>E[U] = 0.25×√0 + 0.75×√1000 = 0.75×31.6 ≈ 23.7？以萬元計：0.25×0 + 0.75×√100 = 7.5 → 確定等值 56.25 萬</li><li>保費 40 萬後確定財富 60 萬 → √60 ≈ 7.75 &gt; 7.5 → 應購買；此題依書上設定（效用 √w、w 為支付金額）與書解為準，重點：比較投保與否的期望效用</li></ul>"
+},
+{
+  q:"某人財富 1400 萬，1/4 機率損失 800 萬，效用 u=ln c。(1) 若損失機率 p=0.25，投保金額？(2) 若 p=0.35，投保金額？保費率 0.4、投保金額不得高於 800 萬。 （書本例題 9.5）",
+  opts:["(A) p=0.25 → 全保 800；p=0.35 → 全保 800","(B) p=0.25 → 不保；p=0.35 → 全保 800","(C) p=0.25 → 部分保；p=0.35 → 不保","(D) 兩者皆不保"],
+  ans:"<b>(B) p=0.25 → 不投保；p=0.35 → 投保 800 萬（全險）。</b><ul><li>保費率 0.4 高於損失機率 p=0.25（不公平保費）→ 不保；p=0.35 時保費率低於損失機率 → 投保至上限全險</li><li>u=ln c：比較投保與否的期望效用</li></ul>"
+},
+];
+
 const CH10_SECTIONS = [];
 const CH10_PROBLEMS = [];
 const CH11_SECTIONS = [];
@@ -2474,6 +2556,8 @@ const GLOSS_CATS = [
   {name:"跨期消費", keys:["Time preference","Discount factor","Intertemporal budget constraint","Euler equation","Consumption smoothing"]},
   {name:"顯示性偏好", keys:["Direct revealed preference","Indirect revealed preference","WARP","SARP"]},
   {name:"物價指數", keys:["True price index","Laspeyres index","Paasche index","Expenditure index"]},
+  {name:"不確定性與風險", keys:["Risk","Uncertainty","Fair game","St. Petersburg paradox","Expected utility"]},
+  {name:"風險態度與保險", keys:["Risk averse","Risk lover","Risk neutral","Certainty equivalence","Risk premium","Arrow-Pratt measure","Friedman-Savage proposition","Full insurance"]},
 ];
 
 const GLS = {
@@ -2489,7 +2573,8 @@ const CH_TERMS_CATS = {
   5:["效用理論","消費者均衡"],
   6:["偏好與公理","效用函數與無異曲線","預算限制","消費者均衡","對偶性理論"],
   7:["替代與所得效果","需求曲線","消費曲線與方程式"],
-  8:["政府介入與補貼","勞動供給","跨期消費","顯示性偏好","物價指數"]
+  8:["政府介入與補貼","勞動供給","跨期消費","顯示性偏好","物價指數"],
+  9:["不確定性與風險","風險態度與保險"]
 };
 let glossMode="full", glossChapter=1;
 
