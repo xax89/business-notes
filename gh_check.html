@@ -162,15 +162,6 @@ body.dark .gloss-en.proper,body.dark .gloss-zh.proper{color:#b39ddb}
 .problem .p-body{font-size:14.5px}
 .problem .opts{margin:10px 0 4px;display:grid;gap:6px}
 .problem .opts div{padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.8px;background:var(--panel)}
-.opts .opt{cursor:pointer;transition:all .15s}
-.opts .opt:hover{border-color:var(--teal);background:var(--teal-soft)}
-.opts .opt.sel{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal) inset}
-.opts .opt.right{border-color:#1e7d32;background:#e7f3e4;color:#1e7d32;font-weight:700}
-.opts .opt.wrong{border-color:#c0392b;background:#fbeaea;color:#c0392b;font-weight:700}
-.opts[data-locked="1"] .opt{pointer-events:none;cursor:default}
-.prob-fb{margin-top:10px;font-size:14px;font-weight:700}
-.fb-ok{color:#1e7d32}
-.fb-no{color:#c0392b}
 body.dark .problem{background:#26221a}
 .ans-btn{
   margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:none;border:1.5px solid var(--teal);
@@ -321,13 +312,6 @@ body.dark .tblwrap tbody tr:nth-child(even){background:#262119}
 .svgfig svg{width:100%;height:auto;display:block}
 .ax{stroke:#9a8f78;stroke-width:1.2}
 .axl{font-size:11px;fill:#6f6555;font-family:"Noto Sans TC",sans-serif}
-/* 概念圖方框／曲線／點（原缺樣式導致不顯示） */
-.svgfig .box{fill:var(--panel);stroke:#9a8f78;stroke-width:1.4}
-.svgfig .boxl{font-size:13px;font-weight:700;fill:var(--ink);text-anchor:middle;font-family:"Noto Sans TC",sans-serif}
-.svgfig .boxs{font-size:10.5px;fill:var(--muted);text-anchor:middle;font-family:"Noto Sans TC",sans-serif}
-.svgfig .curve{stroke:#2f5d62;stroke-width:2.2;fill:none}
-.svgfig .dot{fill:#b45309}
-.svgfig text .term{fill:var(--green);font-weight:700}
 .lb{font-size:12px;fill:#2b251d;font-family:"Noto Sans TC",sans-serif}
 body.dark .lb{fill:#e6e0d2}
 /* 深色模式的 callout 覆蓋 */
@@ -376,7 +360,6 @@ body.dark .formula .f-label{color:#d8b36a}
 <!-- ===== 主內容 ===== -->
 <main class="main">
   <div class="topbar no-print">
-    <a class="toolbtn home-btn" href="index.html" title="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 10.5 9-7.5 9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span>首頁</span></a>
     <button class="toolbtn nav-toggle" id="navToggle" title="目錄">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
@@ -1013,19 +996,19 @@ const CH1_SECTIONS = [
     <figcaption>兩部門<span class="term" data-term="Circular flow">循環流轉</span>：家戶<span class="term" data-term="Supply">供給</span>要素取得所得 → 在商品市場消費；廠商販售商品取得收入 → 在<span class="term" data-term="Factor market">要素市場</span>購買要素。</figcaption>
     <svg viewBox="0 0 440 260" role="img" aria-label="循環流轉圖">
       <rect x="30" y="90" width="120" height="80" rx="10" class="box"/>
-      <text x="90" y="125" class="boxl"><tspan class="term" data-term="Household">家戶部門</tspan></text>
-      <text x="90" y="145" class="boxs"><tspan class="term" data-term="Household">Household</tspan></text>
+      <text x="90" y="125" class="boxl"><span class="term" data-term="Household">家戶部門</span></text>
+      <text x="90" y="145" class="boxs"><span class="term" data-term="Household">Household</span></text>
       <rect x="290" y="90" width="120" height="80" rx="10" class="box"/>
-      <text x="350" y="125" class="boxl"><tspan class="term" data-term="Firm">廠商部門</tspan></text>
-      <text x="350" y="145" class="boxs"><tspan class="term" data-term="Firm">Firm</tspan></text>
+      <text x="350" y="125" class="boxl"><span class="term" data-term="Firm">廠商部門</span></text>
+      <text x="350" y="145" class="boxs"><span class="term" data-term="Firm">Firm</span></text>
       <rect x="120" y="10" width="200" height="44" rx="8" class="box"/>
       <text x="220" y="37" class="boxl">商品市場</text>
       <rect x="120" y="206" width="200" height="44" rx="8" class="box"/>
-      <text x="220" y="233" class="boxl"><tspan class="term" data-term="Factor market">要素市場</tspan></text>
+      <text x="220" y="233" class="boxl"><span class="term" data-term="Factor market">要素市場</span></text>
       <line x1="90" y1="90" x2="220" y2="32" class="ax"/><text x="130" y="50" class="axl">商品與勞務</text>
       <line x1="350" y1="54" x2="230" y2="90" class="ax"/><text x="240" y="80" class="axl">支出（消費）</text>
       <line x1="350" y1="228" x2="220" y2="228" class="ax"/><text x="250" y="222" class="axl">要素報酬（所得）</text>
-      <line x1="230" y1="228" x2="350" y2="228" class="ax"/><text x="255" y="248" class="axl"><tspan class="term" data-term="Factors of production">生產要素</tspan></text>
+      <line x1="230" y1="228" x2="350" y2="228" class="ax"/><text x="255" y="248" class="axl"><span class="term" data-term="Factors of production">生產要素</span></text>
     </svg>
   </div>
   <div class="method-card mc-title" data-mc="circular-flow">
@@ -1113,7 +1096,7 @@ const CH2_SECTIONS = [
   <div class="svgfig">
     <figcaption><span class="term" data-term="Market demand">市場需求</span>＝個別<span class="term" data-term="Demand">需求</span>水平加總（固定價格下數量相加）。</figcaption>
     <svg viewBox="0 0 460 190" role="img" aria-label="市場需求水平加總">
-      <text x="10" y="20" class="boxl">市場1</text><text x="175" y="20" class="boxl">市場2</text><text x="340" y="20" class="boxl"><tspan class="term" data-term="Market demand">市場需求</tspan></text>
+      <text x="10" y="20" class="boxl">市場1</text><text x="175" y="20" class="boxl">市場2</text><text x="340" y="20" class="boxl"><span class="term" data-term="Market demand">市場需求</span></text>
       <g class="ax"><line x1="30" y1="150" x2="150" y2="150"/><line x1="30" y1="150" x2="30" y2="20"/><line x1="30" y1="150" x2="150" y2="40" class="curve"/></g>
       <g class="ax"><line x1="195" y1="150" x2="315" y2="150"/><line x1="195" y1="150" x2="195" y2="20"/><line x1="195" y1="150" x2="315" y2="60" class="curve"/></g>
       <g class="ax"><line x1="360" y1="150" x2="460" y2="150"/><line x1="360" y1="150" x2="360" y2="20"/><line x1="360" y1="150" x2="460" y2="30" class="curve"/></g>
@@ -1185,7 +1168,7 @@ const CH2_SECTIONS = [
       <line x1="40" y1="30" x2="270" y2="190" class="curve"/>
       <text x="52" y="24" class="boxl">P</text><text x="272" y="206" class="boxl">Q</text>
       <circle cx="155" cy="110" r="4" class="dot"/><text x="163" y="104" class="axl">中點 ε=1</text>
-      <text x="60" y="60" class="axl">ε>1 <tspan class="term" data-term="Elastic">富於彈性</tspan></text><text x="120" y="160" class="axl">ε<1 <tspan class="term" data-term="Inelastic">缺乏彈性</tspan></text>
+      <text x="60" y="60" class="axl">ε>1 <span class="term" data-term="Elastic">富於彈性</span></text><text x="120" y="160" class="axl">ε<1 <span class="term" data-term="Inelastic">缺乏彈性</span></text>
     </svg>
   </div>
   <p><b>個別<span class="term" data-term="Demand">需求</span>與<span class="term" data-term="Market demand">市場需求</span>之關係</b>：<span class="term" data-term="Market demand">市場需求</span>價格<span class="term" data-term="Elasticity">彈性</span>＝個別<span class="term" data-term="Price elasticity of demand">需求價格彈性</span>之加權平均，權重為各別<span class="term" data-term="Quantity demanded">需求量</span>占<span class="term" data-term="Market demand">市場需求</span>之比例。</p>`
@@ -4389,8 +4372,7 @@ function renderChapter(n){
     const isDone=!!doneState[fk];
     h+=`<div class="problem" id="prob-${n}-${i+1}">
       <div class="p-head"><button class="done-btn ${isDone?"on":""}" data-done="${fk}" title="標記已做過">${isDone?"☑ 做過":"☐ 做過"}</button><span>例題 ${i+1}</span><button class="fav ${isFav?"on":""}" data-fav="${fk}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
-      <div class="p-body"><p>${p.q}</p>${p.opts.length?`<div class="opts" data-pid="${fk}" data-correct="${(()=>{const m=p.ans.match(/^<b>\(([A-Da-d])\)/);return m?m[1].toUpperCase():"";})()}">${p.opts.map(o=>{const om=o.match(/^\(([A-Da-d])\)/);return `<div class="opt" data-ans="${om?om[1].toUpperCase():""}">${o}</div>`;}).join("")}</div>`:""}
-      <div class="prob-fb"></div>
+      <div class="p-body"><p>${p.q}</p>${p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""}
       <button class="ans-btn" onclick="toggleAns(this)">顯示答案</button>
       <div class="ans"><span class="a-label">解答</span>：${p.ans}</div></div>
     </div>`;
@@ -4425,36 +4407,6 @@ function renderChapter(n){
       b.classList.toggle("on",on);
       b.textContent=on?"☑ 做過":"☐ 做過";
       refreshProgress(n);
-    });
-  });
-
-  // 例題點按作答：點選項 → 判對錯 → 自動做過、錯題自動收藏
-  c.querySelectorAll(".opts").forEach(box=>{
-    box.addEventListener("click",e=>{
-      const opt=e.target.closest(".opt");
-      if(!opt || box.dataset.locked) return;
-      box.dataset.locked="1";
-      const pid=box.dataset.pid, correct=box.dataset.correct;
-      const picked=opt.dataset.ans;
-      const isRight = !correct || (picked===correct);
-      opt.classList.add("sel");
-      if(isRight){ opt.classList.add("right"); }
-      else{
-        opt.classList.add("wrong");
-        if(correct) box.querySelectorAll(".opt").forEach(o=>{ if(o.dataset.ans===correct) o.classList.add("right"); });
-      }
-      const fb=box.parentElement.querySelector(".prob-fb");
-      if(fb) fb.innerHTML = isRight ? '<span class="fb-ok">✓ 答對了</span>' : `<span class="fb-no">✗ 答錯，正確答案是 ${correct}</span>`;
-      // 自動標記做過
-      if(!doneState[pid]){ doneState[pid]=true; try{localStorage.setItem("micro_done_v1",JSON.stringify(doneState));}catch(err){} refreshProgress(n); }
-      const prob=box.closest(".problem");
-      // 答錯自動進收藏
-      if(!isRight && !favState[pid]){ favState[pid]=favPool[pid]; try{localStorage.setItem(favStoreKey,JSON.stringify(favState));}catch(err){} }
-      // 同步按鈕狀態
-      const db=prob.querySelector(".done-btn"); if(db){ db.classList.add("on"); db.textContent="☑ 做過"; }
-      const favBtn=prob.querySelector(".fav"); if(favBtn && !isRight){ favBtn.classList.add("on"); favBtn.textContent="★ 已收藏"; }
-      // 直接展開解答
-      const ans=prob.querySelector(".ans"); if(ans) ans.style.display="block";
     });
   });
 
