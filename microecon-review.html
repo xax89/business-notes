@@ -409,7 +409,7 @@ const BOOK = [
   {n:8, title:"消費者行為理論的應用", subs:["8.1 補貼或課稅對消費者之影響","8.2 勞動與休閒的選擇","8.3 跨期消費理論","8.4 顯示性偏好理論","8.5 皮氏與拉氏指數"], done:true, points:["相同補貼金額下消費者偏好所得補貼、政策面偏好從量補貼","休閒的價格＝工資率；後彎勞動供給需休閒為正常財且 IE &gt; SE","跨期預算線 c₁+c₂/(1+r)=y₁+y₂/(1+r)；均衡 MRS=1+r；Euler 方程式","顯示性偏好由選擇反推偏好；WARP 一致性、SARP 加遞移性","拉氏指數高估、皮氏低估生活成本；支出指數比較判斷福利"]},
   {n:9, title:"不確定狀況下的選擇行為", subs:["9.1 賭局與期望效用","9.2 面對風險下之決策"], done:true, points:["風險=機率已知、不確定=機率未知；決策依期望效用（正仿射轉換）","風險趨避凹/喜好凸/中立線性；CE 與風險溢價 π=EMV−CE","Arrow-Pratt 絕對/相對風險趨避量度","公平保費下保全險；保費率過高保部分險或不保","Friedman-Savage：同一個人可能同時買保險與彩券"]},
   {n:10, title:"生產理論與成本結構", subs:["10.1 前言","10.2 生產函數","10.3 短期生產結構","10.4 長期生產結構","10.5 擴張線","10.6 替代彈性","10.7 成本結構理論","10.8 短期成本結構","10.9 長期成本結構","10.10 規模經濟","10.11 要素價格與成本結構","10.12 附錄 廠商行為"], done:true, points:["生產函數 Q=f(L,K)；短期有固定要素、長期全可變；CRS⇔一階齊次","TP/AP/MP：反曲點→MP最大、射線變切線→AP最大、MP=0→TP最大；合理生產階段=第二階段","MP>AP⇔AP遞增、MP<AP⇔AP遞減、MP=AP時AP最大","MRTS=MP_L/MP_K=w/r（邊際生產力均等法則）；CD σ=1、Linear σ=∞、Leontief σ=0、CES σ=1/(1+ρ)","經濟利潤=會計利潤−內含成本；正常利潤=經濟利潤為零；沉沒成本不影響決策","STC=TVC+TFC；SMC通過SAC與AVC最低點；AVC=w/AP、SMC=w/MP","LTC/LAC為STC/SAC之包絡線；CRS⇔LAC固定；IRS→規模經濟","Shephard：∂C/∂w=L、∂C/∂r=K；利潤極大⇒成本極小；正常要素漲價MC上移、劣等要素漲價MC下移"]},
-  {n:11, title:"完全競爭市場", subs:["11.1 市場分類","11.2 完全競爭廠商的特色","11.3 完全競爭廠商的短期均衡","11.4 完全競爭廠商的長期均衡","11.5 長期供給曲線與產業供給曲線","11.6 政府對完全競爭廠商的管制"], done:false, points:[]},
+  {n:11, title:"完全競爭市場", subs:["11.1 市場分類","11.2 完全競爭廠商的特色","11.3 完全競爭廠商的短期均衡","11.4 完全競爭廠商的長期均衡","11.5 長期供給曲線與產業供給曲線","11.6 政府對完全競爭廠商的管制"], done:true, points:["市場結構四型：完全競爭/獨占性競爭/寡占/獨占（依家數與商品性質）","完全競爭：P=AR=MR、價格接受者、無進入障礙（長期自由進出）","短期均衡 P=SMC 且 SMC'>0；供給線=AVC 最低點以上之 SMC","歇業點=min AVC；損益兩平點=min SAC；PS=TR−TVC=π+TFC","長期均衡 P=AR=MR=SAC=SMC=LAC=LMC（LAC 最低點、零超額利潤）","P=LMC → 社會福利最大（Pareto 效率）；經濟效率必為技術效率","產業長期供給線：固定成本→水平、遞增成本→正斜率、遞減成本→負斜率","定額稅不變 SMC（短期不轉嫁）；從量稅 SMC 同幅上移；長期皆完全轉嫁"]},
   {n:12, title:"獨占市場", subs:["12.1 獨占市場的特色與進入障礙","12.2 獨占廠商的均衡","12.3 差別取價","12.4 壟斷力的測量","12.5 政府對獨占廠商的管制"], done:false, points:[]},
   {n:13, title:"寡占市場", subs:["13.1 寡占廠商的特質","13.2 庫諾（Cournot）模型","13.3 史塔伯克（Stackelberg）模型","13.4 卡特爾（Cartel）模型","13.5 貝銓（Bertrand）模型","13.6 價格領袖模型","13.7 Sweezy 模型（拗折需求曲線模型）","13.8 賽局理論（Game Theory）"], done:false, points:[]},
   {n:14, title:"獨占性競爭市場", subs:["14.1 獨占性競爭廠商的特質","14.2 獨占競爭廠商的短期均衡","14.3 獨占性競爭廠商的長期均衡"], done:false, points:[]},
@@ -669,6 +669,28 @@ const TERMS = {
   "Hotelling lemma":["Hotelling lemma","Hotelling 引理","∂π/∂P=q（供給線）、∂π/∂w=−L：間接利潤函數對價格偏微分。"],
   "Indirect profit function":["Indirect profit function","間接利潤函數","π(P,w,r)：以價格為變數的最大利潤值。"],
   "Unconditional factor demand":["Unconditional factor demand","無條件要素需求","利潤極大化下直接解出的要素需求 L(P,w,r)、K(P,w,r)。"],
+  "Market structure":["Market structure","市場結構","依廠商家數與商品性質區分的市場型態：完全競爭、獨占性競爭、寡占、獨占。"],
+  "Homogeneous products":["Homogeneous products","同質商品","品質與主觀感受無法分辨差異的商品（價格、形狀、大小感受相同）。"],
+  "Differentiated products":["Differentiated products","異質商品","消費者能分辨品質差異並改變偏好的商品。"],
+  "Perfect competition":["Perfect competition","完全競爭","同質商品、廠商數量眾多、無進入障礙的市場；廠商為價格接受者。"],
+  "Price taker":["Price taker","價格接受者","個別廠商對市場價格無影響力，面對水平需求線。"],
+  "Free entry and exit":["Free entry and exit","自由進出","長期無進入障礙：有利可圖加入、虧損退出。"],
+  "Total revenue":["Total revenue","總收益 (TR)","廠商銷售商品的銷貨收入：TR = P·q；完全競爭下為原點射線。"],
+  "Average revenue":["Average revenue","平均收益 (AR)","每銷售一單位商品所得收入：AR = TR/q = P。"],
+  "Marginal revenue":["Marginal revenue","邊際收益 (MR)","變動一單位銷售量使總收益的變動：MR = dTR/dq = P。"],
+  "Break-even point":["Break-even point","損益兩平點","P = SAC 最低點，利潤為零。"],
+  "Shut-down point":["Shut-down point","歇業點","P = AVC 最低點；低於此點廠商不生產。"],
+  "Short-run supply curve":["Short-run supply curve","短期供給曲線","AVC 最低點以上之 SMC 曲線。"],
+  "Producer surplus":["Producer surplus","生產者剩餘 (PS)","有固定成本 PS = TR − TVC = π + TFC；無固定成本 PS = π。"],
+  "Minimum efficient scale":["Minimum efficient scale","最小效率規模","LAC 最低點對應的產量，長期均衡生產點。"],
+  "Pareto efficiency":["Pareto efficiency","柏拉圖效率","資源配置已達無法在無人受害下讓有人得利的境界（經濟效率）。"],
+  "Technical efficiency":["Technical efficiency","技術效率","以最少要素投入組合生產特定產量；經濟效率必為技術效率。"],
+  "Constant cost industry":["Constant cost industry","固定成本產業","LAC 不隨產業規模變化；長期供給線水平。"],
+  "Increasing cost industry":["Increasing cost industry","遞增成本產業","產業擴大 LAC 上移（外部不經濟）；長期供給線正斜率。"],
+  "Decreasing cost industry":["Decreasing cost industry","遞減成本產業","產業擴大 LAC 下移（外部經濟）；長期供給線負斜率。"],
+  "Lump sum tax":["Lump sum tax","定額稅","固定金額稅；SAC 上移、SMC 不變，短期不轉嫁、長期完全轉嫁。"],
+  "Specific commodity tax":["Specific commodity tax","從量稅","每單位固定稅額 t；SAC 與 SMC 同幅上移，長期完全轉嫁。"],
+  "Ad valorem tax":["Ad valorem tax","從價稅","按價格比例課稅；需求線旋轉下移。"],
   "Slutsky equation":["Slutsky equation","史勒斯基方程式","∂x/∂P<sub>x</sub> = ∂x<sup>h</sup>/∂P<sub>x</sub> − x·∂x/∂M；分解價格效果為替代與所得效果。"],
 };
 
@@ -2649,8 +2671,165 @@ const CH10_PROBLEMS = [
 ];
 
 
-const CH11_SECTIONS = [];
-const CH11_PROBLEMS = [];
+const CH11_SECTIONS = [
+{
+  id:"11.1", title:"市場分類",
+  body:`
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:36%"></colgroup>
+    <thead><tr><th>市場結構</th><th>廠商家數</th><th>商品性質</th><th>價格影響力</th><th>例子</th></tr></thead>
+    <tbody>
+      <tr><td><b>完全競爭</b></td><td>很多</td><td>同質</td><td>無（價格接受者）</td><td>稻米、農產品</td></tr>
+      <tr><td>獨占性競爭</td><td>很多</td><td>異質</td><td>些微</td><td>雜貨店、小餐廳</td></tr>
+      <tr><td>寡占</td><td>少數</td><td>同質或異質</td><td>具有影響力</td><td>運輸公司、包裹業</td></tr>
+      <tr><td>獨占</td><td>一個</td><td>—</td><td>可決定市場價格</td><td>菸酒專賣局</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>同質商品（Homogeneous products）</b>：品質與主觀感受無法分辨差異（價格、形狀、大小感受相同）；<b>異質商品（Differentiated products）</b>：消費者可分辨差異並改變偏好。市場結構依廠商家數（n）與商品性質區分。</p>`
+},
+{
+  id:"11.2", title:"完全競爭廠商的特色",
+  body:`
+  <p><span class="term">完全競爭（Perfect competition）</span>：市場商品同質、個別廠商數量太多以致意識不到彼此競爭、無進入障礙。兩大特色：</p>
+  <p><b>(1) 價格接受者（Price taker）</b>：對價格無影響力，個別廠商面對水平需求線。條件：市場訊息完全、商品與要素自由移動、交易無差別待遇、每個廠商規模相對於產業很小。<b>(2) 不存在進入障礙</b>：長期可自由進出（Free entry and exit）——有利可圖廠商加入、虧損廠商離開；自由進出是<b>長期</b>特色（短期設備無法調整）。</p>
+  <div class="method-card mc-title" data-mc="pc">
+    <div class="mc-check"><input type="checkbox" id="mc-ch11-1" data-mc="pc"><label for="mc-ch11-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">TR / AR / MR</div>
+    <div class="mc-body">
+      <div class="mc-formula">TR = P·q（P 為常數）；AR = TR/q = P；MR = dTR/dq = P → P = AR = MR</div>
+      <div class="mc-detail">完全競爭廠商 TR 為原點出發之射線（斜率 P）；AR 與 MR 皆為水平線等於 P。個別廠商面對之需求彈性受市場需求彈性與其他廠商供給彈性影響：廠商家數越多、個別需求線越平。</div>
+      <div class="mc-ex">例子：稻米市場價格由市場供需決定，個別農夫增產或減產皆不影響價格 → 面對水平需求線 P=AR=MR。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：完全競爭廠商 P = AR = MR 恆成立；個別廠商需求線為水平線，市場需求線仍為負斜率。</div>`
+},
+{
+  id:"11.3", title:"完全競爭廠商的短期均衡",
+  body:`
+  <p>短期廠商家數 n 外生給定（固定要素使廠商無法退出、潛在廠商無法進入）。目標利潤極大化：Max π = TR(Q) − TC(Q)。</p>
+  <div class="method-card mc-title" data-mc="sreq">
+    <div class="mc-check"><input type="checkbox" id="mc-ch11-2" data-mc="sreq"><label for="mc-ch11-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">短期均衡與供給線</div>
+    <div class="mc-body">
+      <div class="mc-formula">一階：P = SMC；二階：SMC'(q) &gt; 0（SMC 正斜率段）；短期供給線 = AVC 最低點以上之 SMC</div>
+      <div class="mc-detail">P &gt; SAC min：利潤&gt;0（生產）；P = SAC min：損益兩平（Break-even）；AVC min &lt; P &lt; SAC min：虧損但繼續生產（生產虧損 &gt; 不生產虧 TFC）；P = AVC min：歇業點（Shut-down，生產與否皆虧 TFC）；P &lt; AVC min：不生產。</div>
+      <div class="mc-ex">例子：C = 50 + 5q + q²，P = 35 → MC = 5 + 2q = 35 → q = 15；TR = 525；利潤 = 525 − 320 = 205。</div>
+    </div>
+  </div>
+  <p><b>生產者剩餘（Producer surplus）</b>：存在固定成本 PS = TR − TVC = π + TFC；無固定成本 PS = TR − VC = π。</p>
+  <p><b>市場短期供給線</b>：固定要素價格不變前提下，個別廠商供給線水平加總（每廠成本結構相同時 = 單廠供給線向右延伸 n 倍）。在歇業點價格時市場供給線為含 0～n·q 的水平段。</p>
+  <div class="warn">考試重點：歇業點 = AVC 最低點（P=min AVC）；損益兩平點 = SAC 最低點。短期供給曲線是 AVC 最低點以上的 SMC 段。固定要素價格改變不影響供給線（只影響 TFC）。</div>`
+},
+{
+  id:"11.4", title:"完全競爭廠商的長期均衡",
+  body:`
+  <p>長期無進入障礙：有利可圖吸引進入、虧損使廠商退出 → 長期均衡利潤為零（正常利潤）。</p>
+  <div class="method-card mc-title" data-mc="lreq">
+    <div class="mc-check"><input type="checkbox" id="mc-ch11-3" data-mc="lreq"><label for="mc-ch11-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">長期均衡條件</div>
+    <div class="mc-body">
+      <div class="mc-formula">P = AR = MR = SAC = SMC = LAC = LMC（LAC 最低點＝最小效率規模）</div>
+      <div class="mc-detail">內涵：價格接受者（P=AR=MR）；零超額利潤（P=LAC）；利潤極大（MR=LMC）；最適規模無超額產能（LAC=LMC）；最佳設備利用率（SAC=SMC）；社會福利最大（P=LMC、Pareto 最適）。</div>
+      <div class="mc-ex">例子：長期均衡價格 75、個別廠商於 LAC 最低點 q=5 生產，若市場需求 Q=1200 → 廠商家數 n=240。</div>
+    </div>
+  </div>
+  <p><b>經濟效率（Economic efficiency）＝柏拉圖效率（Pareto efficiency）</b>：資源配置已達無法在無人受害下讓有人得利的境界。完全競爭均衡滿足 P=LMC → 社會福利最大。<b>技術效率</b>：以最少要素投入組合生產特定產量；經濟效率必定技術效率，反之不一定。</p>
+  <div class="warn">考試重點：長期均衡時 P = LAC = LMC 在 LAC 最低點（最小效率規模）；廠商賺正常利潤、無超額利潤；P=LMC 為社會福利最大條件。</div>`
+},
+{
+  id:"11.5", title:"長期供給曲線與產業供給曲線",
+  body:`
+  <p>產業＝生產同質商品的廠商集合（市場的供給面）；市場＝同質商品的買方與賣方集合。長期產業供給線不能簡單水平加總——需考慮要素價格、技術水準、廠商家數三個層次。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:26%"><col style="width:24%"><col style="width:24%"></colgroup>
+    <thead><tr><th>產業類型</th><th>定義</th><th>長期供給線</th><th>原因</th></tr></thead>
+    <tbody>
+      <tr><td><b>固定成本產業</b></td><td>LAC 不隨產業規模變化</td><td>水平</td><td>要素價格不變</td></tr>
+      <tr><td><b>遞增成本產業</b></td><td>LAC 隨產業規模擴大上移（外部不經濟）</td><td>正斜率</td><td>要素價格上升</td></tr>
+      <tr><td><b>遞減成本產業</b></td><td>LAC 隨產業規模擴大下移（外部經濟）</td><td>負斜率</td><td>要素價格下跌</td></tr>
+    </tbody>
+  </table></div>
+  <p>需求增加 → 短期價格上升、出現超額利潤 → 吸引廠商進入 → 長期回到 LAC 最低點、正常利潤；連結前後長期均衡點即得產業長期供給線。</p>
+  <div class="warn">考試重點：正斜率長期供給線 = 成本遞增產業（外部不經濟）；負斜率 = 成本遞減產業（外部經濟）；水平 = 固定成本產業。</div>`
+},
+{
+  id:"11.6", title:"政府對完全競爭廠商的管制",
+  body:`
+  <p>假設正常要素＋固定成本產業，焦點在課稅。三種稅：<span class="term">定額稅（Lump sum tax）</span>、<span class="term">從量稅（Specific commodity tax）</span>（每單位固定稅額）、<span class="term">從價稅（Ad valorem tax）</span>（按價格比例）。</p>
+  <div class="method-card mc-title" data-mc="tax">
+    <div class="mc-check"><input type="checkbox" id="mc-ch11-4" data-mc="tax"><label for="mc-ch11-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">課稅效果</div>
+    <div class="mc-body">
+      <div class="mc-formula">定額稅：SAC 上移、SMC 不變（短期產量不變、廠商獨自負擔）；長期完全轉嫁。從量稅：SAC 與 SMC 同幅上移（短期價格上升、部分轉嫁）；長期完全轉嫁。從價稅：需求線旋轉下移。</div>
+      <div class="mc-detail">短期：定額稅下市場供給不變、價格不變、廠商虧損 → 廠商退出；從量稅下價格上升、部分稅負依供需彈性分配。長期：廠商退出至零利潤，稅完全轉嫁給消費者（價格上升幅度 = 稅額）。</div>
+      <div class="mc-ex">例子：對廠商課定額稅 T → SAC 上移 T/q、SMC 不變 → 短期 P、Q 不變，廠商虧 T；長期廠商退出、P 上升 T 等幅。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：定額稅不改變 SMC（不影響邊際決策）；從量稅使 SMC 垂直上移稅額；長期均衡稅負完全轉嫁消費者。</div>`
+},
+];
+
+const CH11_PROBLEMS = [
+{
+  q:"Each competitive firm in an industry has the short-run cost function C = 50 + 5q + q²，market price $35。(1) 利潤極大產量？(2) 總收益？(3) 利潤？（書本例題 11.1）",
+  opts:["(A) q=15；TR=525；π=205","(B) q=10；TR=350；π=150","(C) q=15；TR=525；π=175","(D) q=20；TR=700；π=250"],
+  ans:"<b>(A) q=15；TR=525；π=205。</b><ul><li>MC = 5 + 2q = P = 35 → q = 15</li><li>TR = 35×15 = 525；TC = 50 + 75 + 225 = 320 → π = 205</li></ul>"
+},
+{
+  q:"假設直播平台上有 100 家網紅，每家成本 TC = 32.4 + 5q + 0.1q²，市場需求 Q = 7500 − 50P。完全競爭下市場價格與各網紅產量？（書本例題 11.3）",
+  opts:["(A) P≈18.2；q≈65.9","(B) P≈15；q=100","(C) P≈20；q=50","(D) P≈10；q=100"],
+  ans:"<b>(A) P ≈ 18.2；q ≈ 65.9。</b><ul><li>MC = 5 + 0.2q = P；市場 Q = 100q = 7500 − 50P → P = 150 − 2q</li><li>5 + 0.2q = 150 − 2q → 2.2q = 145 → q ≈ 65.9、P ≈ 18.2</li></ul>"
+},
+{
+  q:"The short-run supply curve for a perfectly competitive firm is its?（書本例題 11.4）",
+  opts:["(A) AC 曲線在歇業點以上","(B) MC 曲線在歇業點以上","(C) AC 曲線在橫軸以上","(D) MC 曲線在橫軸以上"],
+  ans:"<b>(B) 邊際成本曲線在歇業點（AVC 最低點）以上的部分。</b><ul><li>P&lt;min AVC 時廠商不生產 → 供給線自 AVC 最低點起算</li></ul>"
+},
+{
+  q:"When a perfectly competitive firm makes a decision to shut down, it is most likely that?（書本例題 11.5）",
+  opts:["(A) MC 高於 AVC","(B) 價格低於 AVC 最低點","(C) 固定成本超過變動成本","(D) AFC 上升中"],
+  ans:"<b>(B) 價格低於 AVC 最低點。</b><ul><li>P &lt; min AVC → 生產的虧損（−TFC＋負值）比不生產（−TFC）更慘 → 歇業</li></ul>"
+},
+{
+  q:"「跳樓價」一定等於廠商短期供給線的最低點，市價更低於此點時廠商寧可關門大吉。你同意嗎？（書本例題 11.6）",
+  opts:["(A) 同意，跳樓價 = SAC 最低點","(B) 同意，跳樓價 = AVC 最低點，低於則歇業","(C) 不同意，跳樓價應低於 AVC 最低點","(D) 不同意，短期供給線最低點是 SMC=0 處"],
+  ans:"<b>(B) 同意，跳樓價 = AVC 最低點（歇業點）。</b><ul><li>短期供給線為 AVC 最低點以上之 SMC；價格低於 min AVC 時生產虧損大於不生產 → 關門</li><li>跳樓價最低只能到歇業點，再低寧可不賣</li></ul>"
+},
+{
+  q:"某完全競爭產業所有廠商長期成本 LTC = q³ − 10q² + 100q，市場總需求 Q = 1200。求解長期均衡價格、均衡交易量與廠商家數。（書本例題 11.8）",
+  opts:["(A) P=75；q=5；n=240","(B) P=100；q=10；n=120","(C) P=50；q=10；n=120","(D) P=75；q=10；n=120"],
+  ans:"<b>(A) P = 75；q = 5；n = 240。</b><ul><li>LAC = q² − 10q + 100；dLAC/dq = 2q − 10 = 0 → q = 5；LAC = 25 − 50 + 100 = 75 → P = 75</li><li>市場 Q = 1200 → n = 1200/5 = 240</li></ul>"
+},
+{
+  q:"When a firm operates at efficient scale?（書本例題 11.9）",
+  opts:["(A) AR 必須超過 ATC 最低點","(B) AR 等於 ATC 最低點","(C) AC 曲線必須下降","(D) AC 曲線必須上升"],
+  ans:"<b>(B) AR 等於 ATC 最低點。</b><ul><li>效率規模 = 平均成本最低點，完全競爭長期均衡 P = min ATC</li></ul>"
+},
+{
+  q:"If an economist states that not enough of a good is being produced, she usually means that?（書本例題 11.10）",
+  opts:["(A) 並非人人都買得起","(B) 價格超過邊際成本","(C) 消費者剩餘為零","(D) 均衡時有人想買卻找不到賣家"],
+  ans:"<b>(B) 價格超過邊際成本。</b><ul><li>P &gt; MC 表示擴產可增加社會福利（P=LMC 才達福利最大）</li></ul>"
+},
+{
+  q:"下列四種市場結構，何者均衡產出水準可滿足社會福利最大化條件？（書本例題 11.11）",
+  opts:["(A) 完全競爭市場","(B) 獨占市場","(C) 寡占市場","(D) 獨占性競爭市場"],
+  ans:"<b>(A) 完全競爭市場。</b><ul><li>完全競爭長期均衡 P = LMC → 社會福利最大（Pareto 最適）</li></ul>"
+},
+{
+  q:"產出組合最有效率的條件，在於達成每一項產品的？（書本例題 11.12）",
+  opts:["(A) P = TC","(B) P = MC","(C) P = VC","(D) MR = AC"],
+  ans:"<b>(B) P = MC。</b><ul><li>每一商品 P=MC 時資源配置達 Pareto 效率</li></ul>"
+},
+{
+  q:"完全競爭產業的長期供給曲線若為正斜率，是因為？（書本例題 11.14）",
+  opts:["(A) 外部不經濟","(B) 外部經濟","(C) 外部規模經濟","(D) 內部不經濟"],
+  ans:"<b>(A) 外部不經濟（成本遞增產業）。</b><ul><li>產業擴大 → 要素價格上升 → LAC 上移 → 長期供給線正斜率</li></ul>"
+},
+{
+  q:"在一個成本遞增產業，若其需求增加，則？（書本例題 11.16）",
+  opts:["(A) 短期出現較高價格，長期下降到高於原市場價格水準","(B) 短期有利潤，但長期會有損失","(C) 長期而言利潤會增加","(D) 引起產業擴充使要素價格提高、廠商 AC 向下移動"],
+  ans:"<b>(A) 短期較高價格，長期下降到高於原價格的水準。</b><ul><li>需求增加 → 短期價格上升、超額利潤 → 廠商進入 → 要素價格上升 → LAC 上移</li><li>長期回到零利潤但價格高於原均衡（正斜率長期供給線）</li></ul>"
+},
+];
+
 const CH12_SECTIONS = [];
 const CH12_PROBLEMS = [];
 const CH13_SECTIONS = [];
@@ -2941,6 +3120,9 @@ const GLOSS_CATS = [
   {name:"短期與長期成本", keys:["Conditional factor demand","Short-run total cost","Total variable cost","Total fixed cost","Quasifixed cost","Short-run average cost","Average variable cost","Average fixed cost","Marginal cost","Envelope curve","Long-run total cost","Long-run average cost"]},
   {name:"規模經濟與範疇經濟", keys:["Economies of scale","External economies of scale","Learning curve","Economies of scope"]},
   {name:"要素價格與利潤極大化", keys:["Normal factor","Inferior factor","Neutral factor","Shephard's lemma","Hotelling lemma","Indirect profit function","Unconditional factor demand"]},
+  {name:"市場結構與完全競爭", keys:["Market structure","Homogeneous products","Differentiated products","Perfect competition","Price taker","Free entry and exit","Total revenue","Average revenue","Marginal revenue"]},
+  {name:"短期與長期均衡", keys:["Break-even point","Shut-down point","Short-run supply curve","Producer surplus","Minimum efficient scale","Pareto efficiency","Technical efficiency"]},
+  {name:"產業供給與政府課稅", keys:["Constant cost industry","Increasing cost industry","Decreasing cost industry","Lump sum tax","Specific commodity tax","Ad valorem tax"]},
 ];
 
 const GLS = {
@@ -2958,7 +3140,8 @@ const CH_TERMS_CATS = {
   7:["替代與所得效果","需求曲線","消費曲線與方程式"],
   8:["政府介入與補貼","勞動供給","跨期消費","顯示性偏好","物價指數"],
   9:["不確定性與風險","風險態度與保險"],
-  10:["生產函數與要素","短期生產結構","長期生產結構","成本與利潤","短期與長期成本","規模經濟與範疇經濟","要素價格與利潤極大化"]
+  10:["生產函數與要素","短期生產結構","長期生產結構","成本與利潤","短期與長期成本","規模經濟與範疇經濟","要素價格與利潤極大化"],
+  11:["市場結構與完全競爭","短期與長期均衡","產業供給與政府課稅"]
 };
 let glossMode="full", glossChapter=1;
 
