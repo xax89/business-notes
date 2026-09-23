@@ -499,6 +499,17 @@ const TERMS = {
 "Residual maker matrix":["Residual maker matrix","殘差製造矩陣 M","M = I - X(X'X)⁻¹X'；把 y 裡面可以被 X 解釋的部分扣掉，留下殘差。"],
 "AIC":["Akaike Information Criterion","赤池資訊準則 AIC","用來比較不同模型好壞的準則；同時考慮解釋力和模型複雜度。"],
 "BIC":["Bayesian Information Criterion","貝氏資訊準則 BIC","類似 AIC，但對模型複雜度的懲罰更重；傾向選擇比較簡單的模型。"],
+"CLRM":["Classical Linear Regression Model","古典線性迴歸模型 CLRM","計量經濟學的標準架構，包含線性、隨機抽樣、不完全共線、條件零平均、同變異數等五個假設。"],
+"BLUE":["Best Linear Unbiased Estimator","最佳線性不偏估計式 BLUE","在所有線性不偏估計式中，變異數最小的那一個；高斯-馬可夫定理說 OLS 就是 BLUE。"],
+"i.i.d.":["Independent and Identically Distributed","獨立同分配 i.i.d.","觀察值之間互相獨立，且來自同一個機率分配；OLS 小樣本理論的標準假設。"],
+"Zero conditional mean":["Zero conditional mean","條件零平均","在給定解釋變數的條件下，誤差項的期望值為 0；OLS 不偏性的關鍵假設。"],
+"Homoscedasticity":["Homoscedasticity","同變異數","在給定解釋變數的條件下，誤差項的變異數是常數，不隨 X 改變。"],
+"Unbiasedness":["Unbiasedness","不偏性","估計式的期望值等於真實母數：E(β̂) = β；抽樣分配的平均值等於真實值。"],
+"Gauss-Markov theorem":["Gauss-Markov theorem","高斯-馬可夫定理","在五個古典假設下，OLS 是最佳線性不偏估計式 (BLUE)。"],
+"Consistency":["Consistency","一致性","當樣本數 n 趨近無窮大時，估計式會機率收斂到真實母數。"],
+"Asymptotic normality":["Asymptotic normality","漸近常態","當樣本數 n 夠大時，√n(β̂ - β) 會趨近常態分配；大樣本推斷的基礎。"],
+"Central limit theorem":["Central limit theorem","中央極限定理","不管原始分配是什麼，大樣本下樣本平均會趨近常態分配；漸近常態的理論基礎。"],
+"Irrelevant variable":["Irrelevant variable","多餘變數","放進模型裡面，但其實對 y 根本沒有解釋力的變數；多放不會造成偏誤，但會降低效率。"],
 };
 
 
@@ -1158,7 +1169,7 @@ const CH4_SECTIONS = [
 {
   id:"4.1", title:"古典線性迴歸模型的假設",
   body:`
-  <p>古典線性迴歸模型（<span class="term" data-term="CLRM">Classical Linear Regression Model, CLRM</span>）是計量經濟學的起點。OLS 估計式之所以具有「最佳線性不偏估計式」(BLUE) 的美稱，完全建立在以下五個古典假設之上。每個假設都不是隨便假設的——如果哪個假設被違反，OLS 的某個性質就會跟著崩壞。</p>
+  <p><span class="term" data-term="CLRM">古典線性迴歸模型（Classical Linear Regression Model, CLRM）</span>是計量經濟學的起點。OLS 估計式之所以具有<span class="term" data-term="BLUE">「最佳線性不偏估計式」(BLUE)</span> 的美稱，完全建立在以下五個古典假設之上。每個假設都不是隨便假設的——如果哪個假設被違反，OLS 的某個性質就會跟著崩壞。</p>
 
   <div class="method-card mc-title" data-mc="clrm-assumptions">
     <div class="mc-check"><input type="checkbox" id="mc-ch4-0" data-mc="clrm-assumptions"><label for="mc-ch4-0" class="mc-lbl">學會</label></div>
@@ -1176,7 +1187,7 @@ const CH4_SECTIONS = [
   <p><b>如果違反</b>：模型形式不對（例如實際是二次式，你卻用線性式），估計出來的 β 就沒有意義。</p>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">假設 2：隨機抽樣 (Random Sampling)</h3>
-  <p><b>形式化敘述</b>：我們手上的 n 筆觀察值 {(x_i, y_i) : i=1,...,n} 是從母體中<b>獨立同分配 (i.i.d.)</b> 抽出來的。</p>
+  <p><b>形式化敘述</b>：我們手上的 n 筆觀察值 {(x_i, y_i) : i=1,...,n} 是從母體中<b><span class="term" data-term="i.i.d.">獨立同分配 (i.i.d.)</span></b> 抽出來的。</p>
   <p><b>解讀</b>：每一筆觀察值之間互相獨立，而且都來自同一個母體分配。</p>
   <p><b>如果違反</b>：</p>
   <ul>
@@ -1190,13 +1201,13 @@ const CH4_SECTIONS = [
   <div class="warn">常見的違反例子：虛擬變數陷阱（Dummy Variable Trap）——如果你有 m 個類別，卻放了 m 個虛擬變數，再加上截距項，就會產生完全共線。</div>
   <p><b>如果違反</b>：X'X 不可逆，OLS 估計式 β̂ = (X'X)⁻¹X'y 根本算不出來。</p>
 
-  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">假設 4：條件零平均 (Zero Conditional Mean)</h3>
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">假設 4：<span class="term" data-term="Zero conditional mean">條件零平均 (Zero Conditional Mean)</span></h3>
   <p><b>形式化敘述</b>：在給定所有解釋變數的條件下，誤差項 u 的平均值為 0：</p>
   <div class="formula"><span class="f-label">條件零平均</span>E(u | X₁, X₂, ..., Xₖ) = 0</div>
   <p><b>解讀</b>：這是<b>最關鍵</b>的一個假設，也是 OLS 不偏性的核心。它的意思是：誤差項裡面的東西，和我們放進模型的解釋變數都沒有關係。</p>
   <p><b>如果違反（內生性問題）</b>：OLS 估計式就會有偏誤，而且不一致。這是計量經濟學最頭痛的問題，解決方法包括工具變數（第 11 章）、追蹤資料固定效果（第 12 章）、實驗設計（第 14 章）等。</p>
 
-  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">假設 5：同變異數 (Homoscedasticity)</h3>
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">假設 5：<span class="term" data-term="Homoscedasticity">同變異數 (Homoscedasticity)</span></h3>
   <p><b>形式化敘述</b>：在給定解釋變數的條件下，誤差項 u 的變異數是一個常數，不隨 X 改變：</p>
   <div class="formula"><span class="f-label">同變異數</span>Var(u | X₁, X₂, ..., Xₖ) = σ²</div>
   <p><b>解讀</b>：所有觀察值的誤差變異程度都一樣大，不會隨著 x 變大而變大或變小。</p>
@@ -1213,9 +1224,9 @@ const CH4_SECTIONS = [
 {
   id:"4.2", title:"OLS 估計式的小樣本性質",
   body:`
-  <p>在五個古典假設下，OLS 估計式具有三個重要的小樣本性質：<b>不偏性、線性、最小變異數</b>。合起來就是著名的<b>高斯-馬可夫定理</b>——OLS 是 BLUE。</p>
+  <p>在五個古典假設下，OLS 估計式具有三個重要的小樣本性質：<b>不偏性、線性、最小變異數</b>。合起來就是著名的<b><span class="proper">高斯-馬可夫定理</span></b>——OLS 是 BLUE。</p>
 
-  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">4.2.1 不偏性 (Unbiasedness)</h3>
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">4.2.1 <span class="term" data-term="Unbiasedness">不偏性 (Unbiasedness)</span></h3>
   <p><b>定義</b>：OLS 估計式的期望值等於真實母數 β：</p>
   <div class="formula"><span class="f-label">不偏性</span>E(β̂ | X) = β</div>
 
@@ -1256,7 +1267,7 @@ const CH4_SECTIONS = [
   2. 解釋變數之間的共線性越嚴重（Rⱼ² 越接近 1），變異數越大，估計越不精確<br>
   3. 誤差變異數 σ² 越大，變異數越大</div>
 
-  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.2.3 高斯-馬可夫定理 (Gauss-Markov Theorem)</h3>
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.2.3 <span class="proper">高斯-馬可夫定理 (Gauss-Markov Theorem)</span></h3>
   <p><b>定理敘述</b>：在五個古典假設下，OLS 估計式是<b>最佳線性不偏估計式 (Best Linear Unbiased Estimator, BLUE)</b>。</p>
   <p>「BLUE」三個字母各代表：</p>
   <ul>
@@ -1283,7 +1294,7 @@ const CH4_SECTIONS = [
   body:`
   <p>小樣本性質需要比較強的假設（特別是同變異數和無自我相關）。如果樣本數很大，我們可以放寬這些假設，只需要比較弱的條件，OLS 就會有很好的大樣本性質：<b>一致性、漸近常態、漸近有效</b>。</p>
 
-  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">4.3.1 一致性 (Consistency)</h3>
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">4.3.1 <span class="term" data-term="Consistency">一致性 (Consistency)</span></h3>
   <p><b>定義</b>：當樣本數 n 趨近無窮大時，β̂ 會機率收斂到真實的 β：</p>
   <div class="formula"><span class="f-label">一致性</span>plim(β̂) = β, 當 n → ∞</div>
 
@@ -1303,14 +1314,14 @@ const CH4_SECTIONS = [
     </div>
   </div>
 
-  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.3.2 漸近常態 (Asymptotic Normality)</h3>
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.3.2 <span class="term" data-term="Asymptotic normality">漸近常態 (Asymptotic Normality)</span></h3>
   <p><b>定義</b>：當樣本數 n 夠大時，√n(β̂ - β) 會趨近一個常態分配：</p>
   <div class="formula"><span class="f-label">漸近常態</span>√n(β̂ - β) → N(0, (σ²/SSTₓ))</div>
-  <p>這就是中央極限定理在 OLS 上的應用——不管誤差項 u 原來是什麼分配，只要 n 夠大，β̂ 就會近似常態分配。</p>
+  <p>這就是<span class="proper">中央極限定理</span>在 OLS 上的應用——不管誤差項 u 原來是什麼分配，只要 n 夠大，β̂ 就會近似常態分配。</p>
 
   <div class="warn">考試重點：為什麼大樣本下不需要常態假設？<br>
   小樣本時，你需要 u 是常態分配，才能推導出 β̂ 是常態分配，才能用 t 分配、F 分配做檢定。<br>
-  大樣本時，根據中央極限定理，不管 u 是什麼分配，√n(β̂ - β) 都會趨近常態分配，所以還是可以做 t 檢定、F 檢定，只是用的是常態分配的臨界值，而不是 t 分配的臨界值（當 n 很大時，兩者幾乎一樣）。</div>
+  大樣本時，根據<span class="proper">中央極限定理</span>，不管 u 是什麼分配，√n(β̂ - β) 都會趨近常態分配，所以還是可以做 t 檢定、F 檢定，只是用的是常態分配的臨界值，而不是 t 分配的臨界值（當 n 很大時，兩者幾乎一樣）。</div>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.3.3 漸近有效性 (Asymptotic Efficiency)</h3>
   <p>在所有一致的估計式中，OLS 的漸近變異數是最小的（在某些規律條件下）。這是大樣本版本的 BLUE。</p>
@@ -1383,7 +1394,7 @@ const CH4_SECTIONS = [
   <p>講完了「漏放變數」的問題，我們來看相反的情況：<b>多放了一個根本無關的變數</b>（多餘變數）會怎麼樣？</p>
 
   <h3 style="margin-top:16px;font-size:16px;font-weight:600;">4.5.1 定義</h3>
-  <p>多餘變數 (Irrelevant Variable) 是指：放進模型裡面，但其實對 y 根本沒有解釋力的變數。也就是說，它的真實係數 βⱼ = 0。</p>
+  <p><span class="term" data-term="Irrelevant variable">多餘變數 (Irrelevant Variable)</span> 是指：放進模型裡面，但其實對 y 根本沒有解釋力的變數。也就是說，它的真實係數 βⱼ = 0。</p>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.5.2 對 OLS 性質的影響</h3>
   <p>如果你不小心放了一個多餘變數，會發生什麼事？</p>
@@ -1527,7 +1538,7 @@ const CH5_SECTIONS = [
   <div class="warn">考試重點：t 檢定需要哪些假設？<br>
   1. 古典假設 1-5（線性、隨機抽樣、不完全共線、條件零平均、同變異數）<br>
   2. 加上「常態性假設」：u | X ~ N(0, σ²)<br><br>
-  大樣本時，常態性假設可以放寬——根據中央極限定理，即使 u 不是常態，t 統計量還是會趨近常態分配，所以還是可以做 t 檢定。</div>
+  大樣本時，常態性假設可以放寬——根據<span class="proper">中央極限定理</span>，即使 u 不是常態，t 統計量還是會趨近常態分配，所以還是可以做 t 檢定。</div>
 
   <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：t 檢定是單一母數的檢定。如果要同時檢定多個母數（例如：兩個係數同時等於 0），就需要用 F 檢定。</p>`
 },
