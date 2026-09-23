@@ -1,0 +1,2455 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理會計（Hilton &amp; Platt）｜互動複習</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Ctext x='32' y='44' font-size='34' font-family='Georgia,serif' fill='white' text-anchor='middle'%3E%E2%88%91%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fs:16px;
+  --paper:#f6f0e2;
+  --ink:#2b251d;
+  --panel:#fffdf6;
+  --line:#e4d9bf;
+  --muted:#6f6555;
+  --nav-bg:#f1e9d5;
+  --nav-ink:#4a4234;
+  --nav-hover:#e7dcc0;
+  --nav-active:#3c6e8f;
+  --accent:#b5542e;
+  --accent-soft:#fbeae2;
+  --teal:#2c6e9e;
+  --teal-soft:#eef3f4;
+  --green:#1e7d32;
+  --hl:#ffe94a;
+  --radius:12px;
+  --blue:#2c6e9e;--green2:#3a7d44;--orange:#c06a24;--purple:#6b4e8e;--brown:#8a5a3b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif TC","PMingLiU","PingFang TC",serif;
+  font-size:var(--fs);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.8;
+  display:flex;
+  min-height:100vh;
+}
+body.dark{
+  --paper:#16130d;--ink:#e6e0d2;--panel:#201c14;--line:#3a3325;
+  --muted:#a0937a;--nav-bg:#1f1a10;--nav-ink:#cfc4ad;--nav-hover:#332b1b;
+  --nav-active:#4a8ab5;--accent:#e08a55;--accent-soft:#2f2014;
+  --teal:#5f9fc0;--teal-soft:#14242e;--green:#5cb56e;--hl:#5a4a1e;
+  --blue:#5f9fc0;--green2:#5cb56e;--orange:#d98a4a;--purple:#9b7fc0;--brown:#b08a5a;
+}
+/* ===== 側邊目錄（兩層） ===== */
+.sidebar{
+  width:280px;flex-shrink:0;background:var(--nav-bg);color:var(--nav-ink);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 18px 40px;
+  border-right:1px solid var(--line);
+}
+.sidebar .brand{font-weight:700;font-size:15px;letter-spacing:.02em;line-height:1.4;margin-bottom:4px;color:var(--ink)}
+.sidebar .brand .t2{font-size:12px;color:var(--muted);font-weight:400;margin-top:2px}
+.nav-chapter{
+  display:flex;align-items:center;gap:8px;width:100%;padding:4px 10px;border-radius:6px;
+  cursor:pointer;font-size:13.5px;font-weight:700;color:var(--ink);
+  border:none;background:none;text-align:left;margin-top:8px;font-family:inherit;line-height:1.45;
+}
+.nav-chapter:hover{background:var(--nav-hover)}
+.nav-chapter.active{background:var(--nav-active);color:#fff}
+.nav-chapter .num{font-size:11px;font-weight:600;opacity:.65;width:26px;flex-shrink:0}
+.nav-chapter.active .num{opacity:.9}
+.nav-chapter .tag{margin-left:auto;font-size:10px;opacity:.55;letter-spacing:.05em;font-weight:400}
+.nav-chapter .tag.done{color:var(--green2);opacity:1}
+.nav-sub{
+  display:block;width:100%;padding:3px 10px 3px 34px;border-radius:6px;
+  cursor:pointer;font-size:12.5px;color:var(--muted);border:none;background:none;text-align:left;font-family:inherit;line-height:1.45;
+}
+.nav-sub:hover{background:var(--nav-hover);color:var(--ink)}
+.nav-sub.active{color:var(--nav-active);font-weight:700}
+.nav-gloss{
+  display:flex;align-items:center;gap:8px;width:100%;padding:6px 10px;border-radius:6px;margin-top:10px;
+  cursor:pointer;font-size:13.5px;font-weight:700;color:#8a6d1a;border:1.5px dashed #d9b84a;background:#fffaf0;
+  text-align:left;font-family:inherit;line-height:1.45;transition:all .15s;
+}
+.nav-gloss:hover{border-color:#c9a227;color:#c9a227;background:#fff6dd}
+.nav-gloss svg{width:15px;height:15px;flex-shrink:0}
+.nav-gloss.active{background:#c9a227;color:#fff;border-style:solid}
+.search-panel{
+  position:fixed;top:66px;left:50%;transform:translateX(-50%);width:min(680px,92vw);max-height:62vh;overflow:auto;
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.16);z-index:60;
+}
+.search-panel .sp-item{display:block;width:100%;text-align:left;padding:10px 16px;border:none;border-bottom:1px solid var(--line);background:none;cursor:pointer;font-family:inherit;font-size:13.5px;color:var(--ink);line-height:1.5}
+.search-panel .sp-item:hover{background:var(--nav-hover)}
+.search-panel .sp-tag{display:inline-block;font-size:11px;color:var(--teal);font-weight:700;margin-right:8px;letter-spacing:.03em;white-space:nowrap}
+.search-panel .sp-item b{display:block;font-size:13.5px;margin:2px 0}
+.search-panel .sp-snip{display:block;font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search-panel .sp-count{padding:8px 16px;font-size:12px;color:var(--muted);text-align:center}
+.search-panel .sp-empty{padding:24px 16px;text-align:center;color:var(--muted);font-size:13.5px}
+body.dark .search-panel{background:#26221a;border-color:#4a4234}
+/* ===== 主內容 ===== */
+.main{flex:1;min-width:0;padding:28px 34px 80px}
+.topbar{
+  position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);padding:10px 0 14px;margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.searchbox{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 14px}
+.searchbox svg{width:16px;height:16px;opacity:.45;flex-shrink:0}
+.searchbox input{border:none;outline:none;background:none;font-size:14px;width:100%;color:var(--ink);font-family:inherit}
+.toolbtn{
+  display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;padding:8px 12px;font-size:13px;cursor:pointer;color:var(--ink);font-family:inherit;transition:all .15s;
+}
+.toolbtn:hover{border-color:var(--teal);color:var(--teal)}
+.toolbtn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.toolbtn svg{width:15px;height:15px}
+/* 章頭 */
+.chapter-head{border-left:8px solid var(--teal);padding:6px 0 10px 18px;margin:30px 0 18px}
+.chapter-head .kicker{display:inline-block;font-size:12px;letter-spacing:.15em;color:var(--teal);font-family:"Noto Sans TC",sans-serif;font-weight:600}
+.chapter-head h1{font-family:"Noto Serif TC",serif;font-size:27px;line-height:1.25;margin:2px 0 4px}
+.chapter-head p{color:var(--muted);font-size:14.5px;max-width:760px;margin-top:6px}
+/* 小節 */
+.section{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+.section-head{
+  display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:pointer;user-select:none;
+  font-family:"Noto Serif TC",serif;font-size:19px;font-weight:600;border-bottom:2px solid transparent;transition:border-color .15s;
+}
+.section.open .section-head{border-bottom-color:var(--teal)}
+.section-head .sec-num{color:var(--teal);font-size:12.5px;font-weight:700;font-family:"Noto Sans TC",sans-serif;letter-spacing:.08em;flex-shrink:0}
+.section-head .chev{width:18px;height:18px;margin-left:auto;transition:transform .2s;flex-shrink:0}
+.section.open .section-head .chev{transform:rotate(180deg)}
+.section-body{display:none;padding:4px 20px 18px}
+.section.open .section-body{display:block}
+.section-body p{margin:10px 0;font-size:14.8px}
+.section-body ul{margin:8px 0;padding-left:24px}
+.section-body li{margin:3px 0}
+/* callout 盒子（參考章節筆記風格） */
+.section-body .note{background:#fdf0c2;border-left:4px solid #d9a514;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px}
+.section-body .note::before{content:"重點與結論";display:block;font-family:"Noto Sans TC",sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.12em;color:#8a6d1a;margin-bottom:4px}
+.section-body .warn{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px}
+.section-body .warn::before{content:"考試重點";display:block;font-family:"Noto Sans TC",sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--accent);margin-bottom:4px}
+.section-body .src{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);margin-top:14px;padding-top:10px}
+.section-body .src summary{cursor:pointer;font-size:12.5px;color:var(--teal)}
+.section-body .src pre{white-space:pre-wrap;font-family:"Noto Serif TC",serif;font-size:13px;color:var(--muted);margin-top:8px;max-height:280px;overflow-y:auto}
+/* 公式卡 */
+.formula{background:#fbf4e6;border:1px dashed #c9b88f;border-radius:8px;padding:14px 18px;margin:12px 0;font-size:15.5px;text-align:center;font-family:"Noto Serif TC",serif}
+.formula .f-label{display:block;font-size:11.5px;color:#9a6a1f;letter-spacing:.08em;margin-bottom:4px;font-family:"Noto Sans TC",sans-serif;font-weight:700}
+.formula .f-note{display:block;font-size:12px;color:var(--muted);margin-top:4px;font-family:"Noto Sans TC",sans-serif}
+/* 術語 */
+.term{color:var(--green);font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,var(--green) 55%,transparent);border-radius:3px;padding:0 2px;transition:all .15s}
+.term:hover{background:var(--green);color:#fff;border-bottom:none}
+/* 專有名詞（人名／事件）深紫粗體 */
+.proper{color:#7b2cbf;font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,#7b2cbf 50%,transparent);border-radius:3px;padding:0 2px;transition:background .15s}
+.proper:hover{background:#7b2cbf;color:#fff;border-bottom:none}
+body.dark .proper{color:#b39ddb}
+body.dark .proper:hover{background:#b39ddb;color:#1a1420}
+/* 術語列表與知識卡：人物/書名類紫色粗體 */
+#termModalEn{color:var(--green)}
+#termModalEn.proper,#termModalZh.proper{color:#7b2cbf}
+body.dark #termModalEn.proper,body.dark #termModalZh.proper{color:#b39ddb}
+#termModalDef .proper{color:#7b2cbf;font-weight:700;border-bottom:1.5px dashed color-mix(in srgb,#7b2cbf 50%,transparent)}
+body.dark #termModalDef .proper{color:#b39ddb}
+.gloss-en.proper,.gloss-zh.proper{color:#7b2cbf}
+body.dark .gloss-en.proper,body.dark .gloss-zh.proper{color:#b39ddb}
+/* 例題 */
+.problem{background:#eae6da;border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:14px 0}
+.problem .p-head{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14.5px;color:var(--teal);margin-bottom:8px}
+.problem .p-body{font-size:14.5px}
+.problem .opts{margin:10px 0 4px;display:grid;gap:6px}
+.problem .opts div{padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.8px;background:var(--panel)}
+.opts .opt{cursor:pointer;transition:all .15s}
+.opts .opt:hover{border-color:var(--teal);background:var(--teal-soft)}
+.opts .opt.sel{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal) inset}
+.opts .opt.right{border-color:#1e7d32;background:#e7f3e4;color:#1e7d32;font-weight:700}
+.opts .opt.wrong{border-color:#c0392b;background:#fbeaea;color:#c0392b;font-weight:700}
+.opts[data-locked="1"] .opt{pointer-events:none;cursor:default}
+.prob-fb{margin-top:10px;font-size:14px;font-weight:700}
+.fb-ok{color:#1e7d32}
+.fb-no{color:#c0392b}
+body.dark .problem{background:#26221a}
+.ans-btn{
+  margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:none;border:1.5px solid var(--teal);
+  color:var(--teal);border-radius:8px;padding:7px 16px;font-size:13.5px;cursor:pointer;font-family:inherit;transition:all .15s;
+}
+.ans-btn:hover{background:var(--teal);color:#fff}
+.fav{
+  margin-left:auto;background:none;border:1.5px solid var(--line);color:var(--muted);border-radius:8px;
+  padding:3px 12px;font-size:12.5px;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;
+}
+.fav:hover{border-color:#c9a227;color:#c9a227}
+.fav.on{border-color:#c9a227;background:#fffaf0;color:#c9a227;font-weight:700}
+body.dark .fav.on{background:#3a3320}
+.ans{display:none;margin-top:12px;background:var(--teal-soft);border-radius:8px;padding:12px 16px;font-size:14px}
+.ans.show{display:block}
+.ans .a-label{font-weight:700;color:var(--teal);font-size:13px}
+.ans ul{margin:6px 0 2px;padding-left:22px}
+.ans li{margin:3px 0}
+.ans b{font-weight:700}
+/* 術語卡區 */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin:16px 0}
+.flip-card{perspective:900px;height:150px;cursor:pointer}
+.flip-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border-radius:12px;border:1px solid var(--line);padding:12px;text-align:center}
+.flip-front{background:var(--panel)}
+.flip-front .en{font-size:16px;font-weight:700;color:var(--teal);word-break:break-word}
+.flip-front .zh{font-size:13px;color:var(--muted)}
+.flip-back{background:var(--teal);color:#fff;transform:rotateY(180deg)}
+.flip-back .def{font-size:13px;line-height:1.6}
+.flip-hint{font-size:11px;opacity:.5;margin-top:4px}
+/* ===== 術語表（列表形式） ===== */
+.gloss-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.gloss-cats{display:flex;gap:6px;flex-wrap:wrap}
+.gloss-cat-btn{border:1px solid var(--line);background:var(--panel);border-radius:20px;padding:4px 13px;font-size:12.5px;cursor:pointer;color:var(--muted);transition:all .15s}
+.gloss-cat-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.gloss-progress{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
+.gloss-progress .bar{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.gloss-progress .fill{height:100%;background:var(--teal);width:0%;transition:width .3s}
+.gloss-progress .label{font-size:13px;color:var(--muted);white-space:nowrap}
+.gloss-group{margin-bottom:16px}
+.gloss-group h3{font-size:14px;color:var(--teal);margin:14px 0 8px;padding-left:10px;border-left:3px solid var(--teal);letter-spacing:.04em}
+.gloss-item{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:8px 0;display:flex;gap:12px;align-items:flex-start;transition:border-color .15s}
+.gloss-item.starred{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.gloss-check{width:24px;height:24px;border-radius:7px;border:2px solid var(--line);flex-shrink:0;cursor:pointer;display:grid;place-items:center;margin-top:2px;transition:all .15s;background:none;padding:0}
+.gloss-check svg{width:14px;height:14px;display:none;color:#fff}
+.gloss-check.done{background:var(--teal);border-color:var(--teal)}
+.gloss-check.done svg{display:block}
+.gloss-item.done .gloss-en{text-decoration:line-through;opacity:.55}
+.gloss-main{flex:1;min-width:0}
+.gloss-en{font-weight:700;color:var(--green);font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.gloss-zh{font-size:15px;color:var(--green);font-weight:700;margin-left:2px}
+.gloss-def{font-size:13.5px;margin-top:4px;line-height:1.8}
+.gloss-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
+.gloss-btn{border:1px solid var(--line);background:none;border-radius:7px;padding:3px 10px;font-size:11.5px;cursor:pointer;color:var(--muted);transition:all .15s}
+.gloss-btn:hover{color:var(--teal);border-color:var(--teal)}
+.gloss-btn.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+.gloss-note{display:none;margin-top:8px}
+.gloss-note.show{display:block}
+.gloss-note textarea{width:100%;min-height:56px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;background:var(--paper);color:var(--ink);font-family:inherit;resize:vertical}
+.gloss-note textarea:focus{outline:none;border-color:var(--teal)}
+.gloss-data-actions{display:flex;gap:8px;margin-left:auto}
+/* 搜尋高亮 */
+mark{background:var(--hl);color:inherit;border-radius:2px;padding:0 1px}
+mark.hl{background:var(--hl)}
+/* 重點高亮（使用者標記） */
+.userhl{background:var(--hl);border-radius:3px;cursor:pointer;box-shadow:0 0 0 2px var(--hl)}
+/* 畫記模式 */
+body.marking{cursor:crosshair}
+body.marking .section-body p,body.marking .section-body li,body.marking .section-body .note,body.marking .section-body .warn,body.marking .problem .p-body{cursor:crosshair;border-radius:3px;transition:box-shadow .12s}
+body.marking .section-body p:hover,body.marking .section-body li:hover,body.marking .section-body .note:hover,body.marking .section-body .warn:hover,body.marking .problem .p-body:hover{box-shadow:0 0 0 2px rgba(255,233,74,.45);background:rgba(255,233,74,.12)}
+/* 進度條 */
+.progress-strip{display:flex;gap:6px;margin:14px 0 6px}
+.progress-strip i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.progress-strip i.done{background:var(--teal)}
+.progress-strip i.na{background:none;border:1px dashed var(--line);height:3px}
+.progress-label{font-size:12px;color:var(--muted);margin-top:4px}
+.p-head .done-btn{border:1px solid var(--line);background:var(--panel);border-radius:7px;padding:3px 10px;font-size:12px;cursor:pointer;color:var(--muted);font-family:inherit;flex-shrink:0;transition:all .15s}
+.p-head .done-btn:hover{border-color:var(--green);color:var(--green)}
+.p-head .done-btn.on{background:#e3f0e3;border-color:var(--green);color:var(--green);font-weight:700}
+body.dark .p-head .done-btn.on{background:#1d2b1d}
+.prob-progress{font-size:13px;font-weight:600;color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:5px;background:var(--teal-soft);color:var(--teal);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:500}
+/* 提示條 */
+.banner{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--ink);margin-bottom:18px;display:flex;gap:10px;align-items:flex-start}
+.banner svg{width:18px;height:18px;flex-shrink:0;color:var(--accent);margin-top:2px}
+/* 空狀態 */
+.empty{display:none;text-align:center;padding:60px 20px;color:var(--muted)}
+.empty.show{display:block}
+.empty .big{font-size:40px;margin-bottom:10px}
+.chpage{font-size:12.5px;color:var(--muted);font-family:"Noto Sans TC",sans-serif}
+.chapter-head .ch-points{margin:10px 0 0;padding-left:22px;font-size:14.5px;color:var(--ink)}
+.chapter-head .ch-points li{margin:3px 0}
+/* 方法學習卡（左打勾＋方法名＋公式說明，底下例子） */
+.method-card{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;margin:12px 0;background:var(--panel);overflow:hidden;transition:opacity .2s}
+.method-card .mc-check{width:64px;flex-shrink:0;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;background:var(--panel)}
+.method-card .mc-check input{width:19px;height:19px;accent-color:var(--green);cursor:pointer}
+.method-card .mc-check .mc-lbl{font-size:11px;color:var(--muted)}
+.method-card .mc-check:has(input:checked){background:#eef7ec}
+.method-card .mc-check:has(input:checked) .mc-lbl{color:var(--green);font-weight:700}
+.method-card .mc-left{width:54px;flex-shrink:0;background:var(--teal-soft);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:10px 6px;font-family:"Noto Sans TC",sans-serif;font-weight:700;color:var(--teal);font-size:13.5px;text-align:center;line-height:1.5;writing-mode:vertical-rl;letter-spacing:.18em}
+.method-card .mc-body{flex:1;padding:12px 16px;font-size:14px;min-width:0}
+.method-card .mc-formula{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--ink)}
+.method-card .mc-detail{font-size:13px;color:var(--muted)}
+.method-card .mc-ex{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:13px}
+/* 學會：刪除線＋黯淡 */
+.method-card.learned{opacity:.55}
+.method-card.learned .mc-formula,.method-card.learned .mc-detail,.method-card.learned .mc-ex{text-decoration:line-through;text-decoration-thickness:1.5px}
+/* 標題式學習卡（標題橫排） */
+.method-card.mc-title .mc-left{writing-mode:initial;width:auto;min-width:96px;padding:10px 8px;font-size:13px}
+body.dark .method-card .mc-check:has(input:checked){background:#16241a}
+@media (max-width:900px){
+  .method-card{flex-wrap:wrap}
+  .method-card .mc-check{width:56px;border-right:1px solid var(--line);border-bottom:none;flex-direction:column;padding:6px}
+  .method-card .mc-left{flex:0 0 auto;width:auto;min-width:88px;border-right:1px solid var(--line);border-bottom:none;padding:8px 14px;writing-mode:initial}
+  .method-card .mc-body{width:100%}
+}
+/* 左右布局公式卡（左說明＋右公式＋底例子） */
+.f-split{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:12px 0;background:var(--panel)}
+.f-split .fs-row{display:flex;flex-wrap:wrap;align-items:stretch}
+.f-split .fs-left{flex:1 1 250px;padding:14px 16px;font-size:14px}
+.f-split .fs-label{font-family:"Noto Sans TC",sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--teal);margin-bottom:6px}
+.f-split .fs-left p{margin:0;font-size:14px}
+.f-split .fs-right{flex:1 1 280px;padding:14px 16px;border-left:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.f-split .fs-right .formula{margin:0;width:100%}
+.f-split .fs-ex{padding:10px 16px;border-top:1px dashed var(--line);background:#f6f1e3;font-size:13.5px}
+body.dark .f-split .fs-ex{background:#201c14}
+@media (max-width:900px){
+  .f-split .fs-right{border-left:none;border-top:1px solid var(--line)}
+}
+/* 比較表格 */
+.tblwrap{overflow-x:auto;margin:14px 0}
+.tblwrap table{border-collapse:separate;border-spacing:0;border:1px solid #e0d5ba;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(120,100,50,.10);width:100%;table-layout:fixed;background:var(--panel);font-size:13.5px}
+.tblwrap caption{caption-side:top;text-align:left;font-weight:800;font-size:14px;color:#4a3f2a;padding:2px 2px 8px;letter-spacing:.02em}
+.tblwrap th,.tblwrap td{border-right:1px solid #e8dfc8;border-bottom:1px solid #e8dfc8;padding:8px 10px;vertical-align:top;word-break:break-word}
+.tblwrap th{background:#e9dcb8;color:#4a3f2a;font-size:13px}
+.tblwrap th:last-child,.tblwrap td:last-child{border-right:none}
+.tblwrap tbody tr:last-child td{border-bottom:none}
+.tblwrap tbody tr:nth-child(even){background:#faf6ea}
+.tblwrap tbody tr:hover{background:#f5eeda}
+body.dark .tblwrap table{border-color:#3a3325;background:#201c14}
+body.dark .tblwrap th{background:#3a3325;color:#e6e0d2}
+body.dark .tblwrap caption{color:#cfc4ad}
+body.dark .tblwrap tbody tr:nth-child(even){background:#262119}
+/* SVG 示意圖 */
+.svgfig{margin:14px 0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+.svgfig figcaption{font-size:12.5px;color:var(--muted);margin-bottom:8px;font-family:"Noto Sans TC",sans-serif;line-height:1.5}
+.svgfig svg{width:100%;height:auto;display:block}
+.ax{stroke:#9a8f78;stroke-width:1.2}
+.axl{font-size:11px;fill:#6f6555;font-family:"Noto Sans TC",sans-serif}
+/* 概念圖方框／曲線／點（原缺樣式導致不顯示） */
+.svgfig .box{fill:var(--panel);stroke:#9a8f78;stroke-width:1.4}
+.svgfig .boxl{font-size:13px;font-weight:700;fill:var(--ink);text-anchor:middle;font-family:"Noto Sans TC",sans-serif}
+.svgfig .boxs{font-size:10.5px;fill:var(--muted);text-anchor:middle;font-family:"Noto Sans TC",sans-serif}
+.svgfig .curve{stroke:#2f5d62;stroke-width:2.2;fill:none}
+.svgfig .dot{fill:#b45309}
+.svgfig text .term{fill:var(--green);font-weight:700}
+.lb{font-size:12px;fill:#2b251d;font-family:"Noto Sans TC",sans-serif}
+body.dark .lb{fill:#e6e0d2}
+/* 深色模式的 callout 覆蓋 */
+body.dark .section-body .note{background:#332b1b;border-left-color:#d9a514}
+body.dark .section-body .note::before{color:#e5c15a}
+body.dark .formula{background:#2a2418;border-color:#8a7a50}
+body.dark .formula .f-label{color:#d8b36a}
+/* 響應式 */
+/* 行動端：側欄改為漢堡抽屜 */
+.nav-toggle{display:none}
+.nav-mask{display:none}
+@media (max-width:900px){
+  body{flex-direction:column}
+  .nav-toggle{display:flex}
+  .nav-mask{position:fixed;inset:0;background:rgba(20,16,8,.42);z-index:65;display:none}
+  body.nav-open .nav-mask{display:block}
+  .sidebar{
+    position:fixed;left:0;top:0;bottom:0;height:100vh;width:min(320px,86vw);z-index:70;
+    transform:translateX(-105%);transition:transform .28s ease;
+    border-right:1px solid var(--line);padding:24px 18px 48px;overflow-y:auto;
+  }
+  body.nav-open .sidebar{transform:translateX(0)}
+  .sidebar .brand{width:100%;padding-bottom:8px;margin-bottom:6px}
+  .nav-chapter{width:100%;margin:4px 0;padding:6px 10px}
+  .nav-chapter .tag{display:inline-block;margin-left:auto;font-size:11px;flex-shrink:0}
+  .nav-sub{width:100%;display:block;padding:5px 10px 5px 32px;margin:2px 0}
+  .nav-gloss{width:100%;margin-top:12px}
+  .main{padding:18px 14px 60px}
+  .cards-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  .search-panel{top:58px;width:calc(100vw - 24px)}
+}
+@media print{
+  .sidebar,.topbar,.banner,.no-print{display:none!important}
+  .section-body{display:block!important}
+  body{display:block}
+  .main{padding:0}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 側邊導航 ===== -->
+<nav class="sidebar" id="sidebar" aria-label="章節導航"></nav>
+<div class="nav-mask" id="navMask"></div>
+
+<!-- ===== 主內容 ===== -->
+<main class="main">
+  <div class="topbar no-print">
+    <a class="toolbtn home-btn" href="index.html" title="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 10.5 9-7.5 9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span>首頁</span></a>
+    <button class="toolbtn nav-toggle" id="navToggle" title="目錄">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <div class="searchbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" id="searchInput" placeholder="搜尋全書內容…">
+    </div>
+    <button class="toolbtn" id="markToggle" title="畫記模式：開啟後點文字直接高亮，關閉即儲存">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+    </button>
+    <button class="toolbtn" id="darkToggle" title="深色模式">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+    <button class="toolbtn" id="hlToggle" title="顯示／隱藏你的重點標記">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+    </button>
+  </div>
+
+  <div id="searchPanel" class="search-panel" style="display:none"></div>
+  <div id="chapterContent"></div>
+  <div class="empty" id="emptyState">
+    <div class="big">🔍</div>
+    <div>沒有找到符合「<span id="emptyKeyword"></span>」的內容</div>
+  </div>
+</main>
+
+<!-- ===== 術語卡模態 ===== -->
+<div id="termModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)closeTerm()">
+  <div style="background:var(--panel);border-radius:16px;max-width:480px;width:100%;padding:26px 28px;position:relative">
+    <button onclick="closeTerm()" style="position:absolute;top:14px;right:16px;border:none;background:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button>
+    <div id="termModalEn" style="font-size:22px;font-weight:700;font-family:Georgia,serif"></div>
+    <div id="termModalZh" style="font-size:15px;font-weight:700;margin:4px 0 12px;color:var(--green)"></div>
+    <div id="termModalDef" style="font-size:14.5px;line-height:1.9;color:var(--ink)"></div>
+  </div>
+</div>
+
+<script>
+/* ===== 資料：全書章節結構 ===== */
+const BOOK = [
+  {n:1, title:"管理會計的關鍵角色", subs:["1.1 管理會計與管理流程","1.2 管理會計的五大目標","1.3 管理 vs 財務會計","1.4 組織中的會計與財務結構","1.5 價值鏈、產能與大數據","1.6 職業與倫理"], done:true, points:["管理會計＝辨識、衡量、分析、詮釋與傳達資訊，以達成組織目標","四大管理流程：決策、規劃、指揮營運活動、控制","五大目標：提供決策/規劃資訊、協助指揮與控制、激勵員工、衡量績效、評估競爭地位","管理會計（內部管理者、不受規範）vs 財務會計（外部利害關係人、受GAAP規範）","CFO/主計長（controller）、財務長（treasurer）、內部稽核（internal auditor）角色分工","價值鏈＝從原料到最終交付的一連串價值創造活動；成本動因造成成本","產能：理論產能 vs 實務產能；區分資源供給成本/使用成本/未使用成本","平衡計分卡：財務/顧客/內部流程/學習成長四構面","大數據、資料分析、資料治理與管理會計的關係","IMA 倫理標準：勝任、保密、誠信、可信度"]},
+  {n:2, title:"基本成本管理概念", subs:["2.1 成本的意義與產品/期間成本","2.2 財務報表中的成本","2.3 製造作業與製造業成本","2.4 製造業成本流動與成本表","2.5 成本動因與變動/固定成本","2.6 成本管理與直接/間接/可控成本","2.7 經濟成本概念","2.8 服務業中的成本"], done:true, points:["成本＝為達成特定目的所犧牲的資源；費用＝資源被耗用於產生收入時","產品成本（inventoriable）→ 存貨，出售時轉為銷貨成本；期間成本 → 當期費用","銷貨毛利＝收入−銷貨成本；營業利益＝收入−銷貨成本−所有期間成本","四種製造流程：Job shop、Batch、Assembly、Continuous flow","三種製造業成本：直接原料、直接人工、製造費用（overhead）","主要成本（prime）＝直接原料+直接人工；轉換成本（conversion）＝直接人工+製造費用","製造成本流動：原料→在製品(WIP)→製成品→銷貨成本","成本動因＝造成成本發生之活動特徵；變動成本總額隨活動比例變動、單位不變","固定成本總額不變、單位固定成本隨活動下降","成本管理系統(CMS)：衡量資源消耗、消除非附加價值成本、評估活動效率","直接/間接成本視成本標的；可控/不可控視管理者影響力","機會成本、付現成本、沉沒成本、差異成本、邊際成本、平均成本"]},
+  {n:3, title:"分批成本制（Product Costing）", subs:["3.1 產品成本與分批vs分步成本制","3.2 製造成本流動與分錄","3.3 累積成本：材料/人工/製造費用","3.4 預定製造費用分攤率與分攤","3.5 過度/不足分攤製造費用的處理","3.6 成本表與兩階段成本分攤","3.7 實際vs正常成本制與專案成本制"], done:true, points:["分批成本制（job-order）用於小量異質產品；分步成本制（process）用於大量同質產品","製造成本流動：WIP→FGI→COGS；分批成本卡（job-cost record）累積每批成本","材料領用單、工時卡為來源文件；間接材料/人工進入製造費用","預定製造費用分攤率＝預算製造費用÷預算成本動因量（volume-based）","製造費用分攤＝預定分攤率×實際成本動因量；overhead application","不足分攤（underapplied）：實際>已分攤；過度分攤（overapplied）：實際<已分攤","結轉選項：全數結轉至銷貨成本（常見）；或按比例分攤（proration）至WIP/FGI/COGS","normal costing（預定分攤率）vs actual costing（期末實際分攤率）","兩階段分攤：第一階段成本分配到部門，第二階段部門分攤到產品","部門分攤率 vs 全廠分攤率；專案成本制（service/nonprofit 用）"]},
+
+  {n:4, title:"分步成本制（Process Costing）", subs:["4.1 分批 vs 分步成本制","4.2 約當產量（Equivalent Units）","4.3 加權平均法（Weighted-Average）","4.4 部門生產報告與成本流動","4.5 作業成本制（Operation Costing）"], done:true, points:["分步成本制用於大量、近同質產品的連續流程；分批制用於小量異質產品","約當產量＝部分完成品換算為完整完成之等值單位；直接材料與轉換成本分開算","約當產量＝完工轉出＋（期末在製品×完工百分比）","加權平均法將期初在製品成本與當期成本合併平均","加權平均四步驟：實體流動→約當產量→每單位成本→總成本分析","轉換成本＝直接人工＋製造費用","移入成本（transferred-in costs）＝前一部門移入後續部門之成本","作業成本制＝分批＋分步混合：直接原料用分批、轉換成本用分步"]},
+  {n:5, title:"作業基礎成本制（Activity-Based Costing）", subs:["5.1 傳統數量基礎 vs ABC","5.2 成本階層（Cost Hierarchy）","5.3 傳統 vs ABC：成本扭曲","5.4 ABC 成本分攤計算","5.5 顧客獲利能力與 TDABC"], done:true, points:["傳統數量基礎制用單一數量動因分攤overhead；ABC用多成本庫+多動因","ABC兩階段：資源→活動成本庫→成本標的（產品/服務/顧客）","成本階層四層：單位、批次、產品維續、廠房層級","成本扭曲兩因：產品線多樣性＋非單位層級成本","高產量標準品被高估、小量高複雜品被低估（傳統制下）","Pool rate＝成本庫成本÷動因量；分攤＝pool rate×實際動因量","成本動因三準則：相關性、衡量成本、行為效果","ABM用ABC資訊改善營運、消除非附加價值成本","顧客獲利能力分析是ABM應用；TDABC以時間衡量產能與動因"]},
+  {n:6, title:"成本行為與成本估計", subs:["6.1 成本行為、估計與預測","6.2 變動成本與固定成本","6.3 成本估計方法","6.4 學習曲線與其他成本行為","6.5 成本動因與實務產能"], done:true, points:["成本估計→成本行為→成本預測（LO6-1）","成本函數 Y＝a＋bX：a固定、b每單位變動、X動因量","變動成本每單位固定、總額隨量變；固定成本總額不變、每單位隨量下降","攸關範圍（relevant range）內成本行為假設成立","成本估計法：工程估計、帳戶分析、高低點、視覺比繪、迴歸（最準）","高低點法易受極端值影響","學習曲線：累積產量倍增→單位成本固定比率下降","階梯式成本與曲線式成本為其他行為型態","實務產能與單位層級/非單位層級動因"]},
+  {n:7, title:"成本-數量-利潤分析（CVP）", subs:["7.1 損益兩平分析","7.2 邊際貢獻率與兩平銷售額","7.3 CVP 圖與利潤圖","7.4 CVP 運用與假設","7.5 多產品銷售組合","7.6 邊際貢獻式損益表"], done:true, points:["損益兩平＝固定成本÷每單位邊際貢獻；邊際貢獻＝售價−單位變動成本","達目標利潤銷售量＝(固定成本+目標利潤)÷每單位CM","邊際貢獻率＝CM÷售價；兩平銷售額＝固定成本÷CM率","安全邊際＝預算銷售−兩平銷售","CVP假設：售價/單位變動成本/固定成本固定、銷售組合不變、存貨無變動","多產品用加權平均CM率求整體兩平","邊際貢獻式損益表：銷售額−變動成本＝CM；−固定成本＝營業利益","CVP圖：總成本線截距=固定成本、斜率=單位變動成本，與收入線交點=兩平"]},
+  {n:8, title:"變動成本法與品質/ESG成本", subs:["8.1 吸收 vs 變動成本法","8.2 兩種成本法的損益表","8.3 兩法營業利益的調節","8.4 變動成本法的優缺點與CVP","8.5 品質成本與ESG"], done:true, points:["唯一差異：固定製造費用。吸收法計入存貨、變動法計入期間費用","吸收法(全部成本法)為GAAP外部報導要求；變動法(直接成本法)利於內部決策","存貨增加(生產>銷售)→吸收法營業利益較高","調節：吸收−變動＝固定製造費用率×(期末存貨−期初存貨)","吸收法下生產過剩可虛增利潤；變動法利潤與銷售同向","品質四類成本：預防、鑑定、內部失敗、外部失敗","最理想投資於預防成本以降低失敗成本","ESG結果與成本之衡量與管理"]},
+  {n:9, title:"成本管理系統與 ABM", subs:[], done:false, points:["（待建）標準成本與直接成本分析"]},
+  {n:10, title:"標準成本與直接成本分析", subs:[], done:false, points:["（待建）彈性預算與製造費用分析"]},
+  {n:11, title:"彈性預算與製造費用分析", subs:[], done:false, points:["（待建）彈性預算與製造費用分析"]},
+  {n:12, title:"責任會計與平衡計分卡", subs:[], done:false, points:["（待建）責任會計與平衡計分卡"]},
+  {n:13, title:"投資中心與移轉訂價", subs:[], done:false, points:["（待建）投資中心與移轉訂價"]},
+  {n:14, title:"決策：攸關成本與效益", subs:[], done:false, points:["（待建）決策：攸關成本與效益"]},
+  {n:15, title:"目標成本與定價決策", subs:[], done:false, points:["（待建）目標成本與定價決策"]},
+  {n:16, title:"資本支出決策（Capital Expenditure）", subs:["16.1 資本預算與NPV","16.2 內部報酬率（IRR）","16.3 總成本法與增額成本法","16.4 稅後現金流量與折舊","16.5 投資排序與還本/ARR","16.6 通貨膨脹與資本預算"], done:true, points:["NPV＝未來現金流現值−初始投資；NPV≥0接受","折現率＝資金成本，可依風險調升","IRR＝使NPV=0之折現率；IRR≥門檻率(hurdle rate)接受","NPV較易應用；兩法共同假設：年底發生、金額確定、立即再投資、完全資本市場","總成本法納入全部現金流、增額法只納入差異；結論一致","收益類×(1−稅率)；折舊×稅率=稅盾；純現金流×1","MACRS用於稅務折舊表","獲利能力指數＝現金流現值(不含初始投資)÷初始投資","還本期與ARR不考量時間價值","通膨：名目現金流配名目利率、實質配實質，兩法結果相同"]},
+];
+
+
+/* ===== 術語資料（點擊卡片時顯示） ===== */
+const TERMS = {
+"Managerial accounting":["Managerial accounting","管理會計","辨識、衡量、分析、詮釋與傳達資訊，以達成組織目標的程序。管理會計工具與觀點被所有管理者使用。"],
+"Financial accounting":["Financial accounting","財務會計","使用會計資訊向組織外部利害關係人（股東、債權人、政府等）報導的程序，受 GAAP 規範。"],
+"Cost accounting system":["Cost accounting system","成本會計系統","組織整體會計系統中累積生產產品（商品與服務）成本資訊的一部分。"],
+"Cost accounting":["Cost accounting","成本會計","累積公司產出（商品與服務）成本資料的會計系統。"],
+"Decision making":["Decision making","決策","管理團隊在可行方案中做選擇，以達成組織目標的管理活動。"],
+"Planning":["Planning","規劃","將目標化為詳細的營運與財務描述（如預算）的管理活動。"],
+"Directing operational activities":["Directing operational activities","指揮營運活動","以日常運作方式經營組織的管理活動。"],
+"Controlling":["Controlling","控制","確保組織依預期方式運作並達成目標的管理活動。"],
+"Attention-directing function":["Attention-directing function","注意力導引功能","管理會計報告將管理者注意力導向需要其技能之議題的功能，但不必然解決問題。"],
+"Balanced scorecard":["Balanced scorecard","平衡計分卡","包含財務與非財務多種績效衡量構面的經營績效評估模型（Kaplan & Norton）。"],
+"Value chain":["Value chain","價值鏈","從取得原料與能源到最終交付產品與服務的一系列連結、創造價值的活動。"],
+"Cost driver":["Cost driver","成本動因","造成成本發生之活動或事件特徵，如生產量、訂單數、生產批數。"],
+"Cost relationship":["Cost relationship","成本關係","成本與成本動因之間的關聯（因果或非因果）。"],
+"Strategic cost management":["Strategic cost management","策略性成本管理","重視價值鏈中各活動成本關係，並管理這些關係以取得競爭優勢的過程。"],
+"Capacity":["Capacity","產能","組織投入資源於價值鏈後，在特定時期內能生產商品或服務的上限。"],
+"Theoretical capacity":["Theoretical capacity","理論產能","假設一切完美運作下，使用所提供資源能生產的上限。"],
+"Practical capacity":["Practical capacity","實務產能","允許正常中斷（設備停機、員工疲勞或生病）下能生產的上限。"],
+"Cost of resources supplied":["Cost of resources supplied","資源供給成本","提供資源（如員工工資、設備）所花費的成本，與實際使用量無關。"],
+"Cost of resources used":["Cost of resources used","資源使用成本","依實際產出比例分攤的資源成本（=供給成本×使用量/實務產能）。"],
+"Cost of resources unused":["Cost of resources unused","未使用資源成本（未使用產能成本）","資源供給成本減去資源使用成本的差額；即未使用產能之成本。"],
+"Big data":["Big data","大數據","組織內部產生的大量資料，加上可取得以補充脈絡的外部資料。"],
+"Data analytics":["Data analytics","資料分析","從大數據中發展出真實且有幫助之洞察的過程。"],
+"Data governance":["Data governance","資料治理","確保大量資料有效、可用且被正確記錄的組織程序與權責系統。"],
+"Data science":["Data science","資料科學","運用數學、機率、統計與電腦科學，將大量資料轉為有助決策之資訊。"],
+"Line positions":["Line positions","直線職位","直接參與商品或服務提供的主管職位。"],
+"Staff positions":["Staff positions","幕僚職位","監督支援組織整體使命之活動、間接參與營運的主管職位。"],
+"Chief financial officer (CFO)":["Chief financial officer (CFO)","財務長（CFO）","負責組織所有會計與財務功能的高階主管；又稱 controller 或 comptroller。"],
+"Controller (or comptroller)":["Controller (or comptroller)","主計長（controller）","小型公司對 CFO 之稱；非營利或政府組織稱 comptroller。"],
+"Treasurer":["Treasurer","財務長（treasurer）","負責籌措資金與保護組織資產，管理現金、投資、信用政策與保險。"],
+"Internal auditor":["Internal auditor","內部稽核","審查會計程序、記錄與報告，並向高階管理與董事會表達意見。"],
+"Expense":["Expense","費用","資源（資產）被耗用於產生收入時所發生之成本。"],
+"Product cost":["Product cost","產品成本","歸屬於存貨（採購或製造以供轉售之商品）的成本，又稱 inventoriable cost。"],
+"Period cost":["Period cost","期間成本","與發生期間相關而非與特定單位商品相關的成本，於當期認列為費用。"],
+"Inventoriable cost":["Inventoriable cost","可存貨成本","儲存為存貨成本直到商品出售為止的產品成本之別名。"],
+"Cost of goods sold":["Cost of goods sold","銷貨成本","存貨資產減少時，已售商品之產品成本被重新分類為之費用。"],
+"Gross profit":["Gross profit","銷貨毛利（毛利）","收入扣除銷貨成本（成本）後剩餘的部分，又稱 gross margin。"],
+"Operating income":["Operating income","營業利益（營業利潤）","收入扣除銷貨成本與所有期間成本後之利潤，又稱 operating profit。"],
+"Direct material":["Direct material","直接原料","耗用於製造過程、實體構成成品、且可容易追溯至產品的原料。"],
+"Raw material":["Raw material","原料","尚未進入生產過程之材料成本；進入生產後重新分類為直接原料。"],
+"Direct labor":["Direct labor","直接人工","直接從事產品生產之員工的薪資、工資與福利成本。"],
+"Manufacturing overhead":["Manufacturing overhead","製造費用","所有其他製造成本（間接原料、間接人工、其他製造成本），又稱 production overhead。"],
+"Indirect material":["Indirect material","間接原料","生產過程所需但不構成成品之材料；或成本太小不值得追溯之材料。"],
+"Indirect labor":["Indirect labor","間接人工","非直接加工於產品、但製造過程所需之人員成本。"],
+"Overtime premium":["Overtime premium","加班費差額","支付給超時工作員工之額外報酬；歸類為製造費用。"],
+"Idle time":["Idle time","閒置時間","因設備故障或換線等事件而無法有效生產之時間；成本歸入製造費用。"],
+"Prime costs":["Prime costs","主要成本","直接原料＋直接人工之合稱。"],
+"Conversion costs":["Conversion costs","轉換成本","直接人工＋製造費用之合稱；「轉換」原料為成品之成本。"],
+"Work-in-process inventory":["Work-in-process inventory","在製品存貨（WIP）","資產負債表日僅部分完成之製造產品。"],
+"Finished-goods inventory":["Finished-goods inventory","製成品存貨（FGI）","已製成、可銷售之製造產品。"],
+"Cost of goods manufactured":["Cost of goods manufactured","製成品成本","從在製品轉入製成品之直接原料、直接人工與製造費用總成本。"],
+"Cost management system (CMS)":["Cost management system (CMS)","成本管理系統","衡量資源消耗、辨識/消除非附加價值成本、評估活動效率與效能之管理規劃控制系統。"],
+"Non-value-added cost":["Non-value-added cost","非附加價值成本","可被消除而不損害產品品質、績效或認知價值之活動成本。"],
+"Activity-based costing (ABC)":["Activity-based costing (ABC)","作業基礎成本制","累積組織重要活動之成本，再依產品使用活動之方式分配至商品或服務。"],
+"Activity-based management (ABM)":["Activity-based management (ABM)","作業基礎管理","運用作業基礎成本制以改善組織營運。"],
+"Cost object":["Cost object","成本標的","被分配成本之實體（如特定產品、服務或部門）。"],
+"Direct cost":["Direct cost","直接成本","可追溯至特定成本標的之成本。"],
+"Indirect cost":["Indirect cost","間接成本","無法直接追溯至特定成本標的之成本。"],
+"Controllable cost":["Controllable cost","可控成本","特定管理者可控制或大幅影響其水準之成本。"],
+"Uncontrollable cost":["Uncontrollable cost","不可控成本","特定管理者無法顯著影響之成本。"],
+"Opportunity cost":["Opportunity cost","機會成本","因選擇某一行動而放棄另一替代行動所犧牲之效益。"],
+"Out-of-pocket cost":["Out-of-pocket cost","付現成本","因發生而必須支付現金或其他資產之成本。"],
+"Sunk cost":["Sunk cost","沉沒成本","已發生於過去、無法被當前或未來行動改變之成本；與未來決策無關。"],
+"Differential cost":["Differential cost","差異成本","兩種替代行動下成本差異之金額；又稱 incremental cost（增量成本）。"],
+"Marginal cost":["Marginal cost","邊際成本","多生產一單位產品所增加之成本（差異成本之特例）。"],
+"Average cost":["Average cost","平均成本","總成本除以生產數量之單位成本。"],
+"Variable cost":["Variable cost","變動成本","總額隨活動（成本動因）水準之變動而等比例變動之成本；單位變動成本不變。"],
+"Fixed cost":["Fixed cost","固定成本","總額不隨活動水準變動之成本；單位固定成本隨活動上升而下降。"],
+"Job-order costing":["Job-order costing","分批成本制","用於 job-shop 或批量生產：將成本分配至各批（job），再平均計算單位成本。"],
+"Process costing":["Process costing","分步成本制","用於大量同質產品之連續流動生產：累積全部成本再平均分配至所有單位。"],
+"Job":["Job","批次（工作）","分批成本制中每一不同批次的生產。"],
+"Job-cost record":["Job-cost record","分批成本卡","記錄某一批次所分配之直接原料、直接人工與製造費用的文件。"],
+"Material requisition form":["Material requisition form","材料領用單","授權從原料倉庫發放材料至生產部門之來源文件。"],
+"Source document":["Source document","來源文件","作為會計分錄依據之文件（如材料領用單、工時卡）。"],
+"Time record":["Time record","工時卡","記錄員工用於各生產批次之時間的表格。"],
+"Bill of materials":["Bill of materials","物料清單","列出例行生產產品所需之所有材料之清單。"],
+"Material-requirements planning (MRP)":["Material-requirements planning (MRP)","物料需求規劃","協助管理者安排製造過程各階段生產排程之作業管理工具。"],
+"Overhead application":["Overhead application","製造費用分攤","將製造費用成本分配至生產批次之程序，又稱 overhead absorption。"],
+"Predetermined overhead rate":["Predetermined overhead rate","預定製造費用分攤率","於會計期間開始前計算之費率：預算製造費用÷預算成本動因量。"],
+"Volume-based cost driver":["Volume-based cost driver","數量基礎成本動因","使成本大致與生產數量成比例分配之成本動因（如直接人工小時、機器小時）。"],
+"Normal costing":["Normal costing","正常成本制","直接原料與直接人工以實際成本、製造費用以預定分攤率計入 WIP 之制度。"],
+"Actual costing":["Actual costing","實際成本制","直接原料與直接人工以實際成本、製造費用以期末實際分攤率分配之制度。"],
+"Underapplied overhead":["Underapplied overhead","不足分攤製造費用","實際製造費用超過已分攤製造費用之差額。"],
+"Overapplied overhead":["Overapplied overhead","過度分攤製造費用","已分攤製造費用超過實際製造費用之差額。"],
+"Proration":["Proration","比例分攤","將不足/過度分攤製造費用按各帳戶剩餘已分攤製造費用比例，分配至 WIP、FGI 與 COGS。"],
+"Two-stage cost allocation":["Two-stage cost allocation","兩階段成本分攤","第一階段成本分配至生產部門，第二階段由部門分攤至生產批次之程序。"],
+"Departmental overhead rate":["Departmental overhead rate","部門製造費用分攤率","各生產部門不同之預定分攤率，通常基於不同成本動因。"],
+"Plantwide overhead rate":["Plantwide overhead rate","全廠製造費用分攤率","全廠僅使用單一分攤率（基於單一成本動因）。"],
+"Throughput time":["Throughput time","產出時間（循環時間）","將原料轉為可出貨製成品所需之平均時間，又稱 cycle time。"],
+"Cost distribution":["Cost distribution","成本分配（cost allocation）","第一階段中將製造費用成本分配到各部門（含服務部門）之步驟。"],
+"Service department cost allocation":["Service department cost allocation","服務部門成本分攤","將服務部門成本依各生產部門使用比例重新分配至生產部門之步驟。"],
+"Project costing":["Project costing","專案成本制","服務業與非營利組織採用之分批成本制變體，成本分配到專案/合約/案件/方案。"],
+"Supply chain":["Supply chain","供應鏈","所有商品、服務與資訊進出組織之流動。"],
+"Supply chain management":["Supply chain management","供應鏈管理","主動與供應鏈中部分或全部組織合作，以改善服務並管理或降低成本。"],
+"Responsibility accounting":["Responsibility accounting","責任會計","將成本追溯至發生成本之部門或工作中心，以促進成本管理。"],
+"Activity accounting":["Activity accounting","作業會計","強調組織活動之成本管理系統觀點。"],
+"Equivalent unit":["Equivalent unit","約當產量","將部分完成的產品換算為完整完成之等值單位數，使未完成品可與完成品合併計算單位成本。"],
+"Weighted-average method":["Weighted-average method","加權平均法","分步成本制之一法：將期初在製品成本與當期成本合併平均，不區分成本發生時點。"],
+"Departmental production report":["Departmental production report","部門生產報告","彙總部門之實體單位流動、約當產量、每約當單位成本與總成本分配的報告。"],
+"Transferred-in costs":["Transferred-in costs","移入成本","順序生產部門中，前一部門完工移入後續部門之成本，於後續部門視為已發生成本。"],
+"Operation costing":["Operation costing","作業成本制","分批與分步之混合制度：直接原料用分批法、轉換成本用分步法，適用於轉換相似但原料差異大的批量生產。"],
+"Hybrid product-costing system":["Hybrid product-costing system","混合產品成本制","兼具分批與分步成本制特徵之成本制，如作業成本制（operation costing）。"],
+"Batch manufacturing":["Batch manufacturing","批量生產","同時生產多種產品，各產品以批次為單位進行之製造方式。"],
+"Activity cost pool":["Activity cost pool","作業成本庫","ABC系統中，將性質相近之資源成本彙總之成本庫，作為成本分配之中介。"],
+"Cost hierarchy":["Cost hierarchy","成本階層","依活動與產量之關係將成本分層：單位、批次、產品維續、廠房層級。"],
+"Unit-level activity":["Unit-level activity","單位層級活動","每生產一單位即發生一次之活動，如直接材料、直接人工、機器運轉。"],
+"Batch-level activity":["Batch-level activity","批次層級活動","每生產一批即發生一次之活動，如機器整備、批次檢驗。"],
+"Product-sustaining-level activity":["Product-sustaining-level activity","產品維續層級活動","每產品線發生一次之活動，如工程設計、產品測試。"],
+"Facility-(or general-operations) level activity":["Facility-(or general-operations) level activity","廠房（一般營運）層級活動","為維持整體廠房運作而發生之活動，如廠房租金、廠長薪資、工廠保險。"],
+"Non-unit-level cost driver":["Non-unit-level cost driver","非單位層級成本動因","與產量不成比例之成本動因，如整備批數、設計小時。"],
+"Unit-level cost driver":["Unit-level cost driver","單位層級成本動因","與產量成比例之成本動因，如直接人工小時、機器小時。"],
+"Pool rate":["Pool rate","成本庫分攤率","ABC中成本庫總成本除以成本動因預算量之比率，用於分攤成本至成本標的。"],
+"Consumption ratio":["Consumption ratio","消耗比率","各成本標的耗用某活動成本動因之比例。"],
+"Customer-profitability analysis":["Customer-profitability analysis","顧客獲利能力分析","ABM之應用：判斷顧客相關成本之動因，評估各主要顧客關係之獲利能力。"],
+"Activity-based management (ABM)":["Activity-based management (ABM)","作業基礎管理","運用ABC資訊改善營運、消除非附加價值成本之管理方法。"],
+"Non-value-added activities":["Non-value-added activities","非附加價值活動","可消除而不損害產品品質、性能或價值之活動，如等待、重做、搬運。"],
+"Non-value-added costs":["Non-value-added costs","非附加價值成本","因非附加價值活動而發生之成本。"],
+"Time-driven activity-based costing (TDABC)":["Time-driven activity-based costing (TDABC)","時間驅動作業基礎成本制","ABC在服務業之變體：活動實務產能與成本動因量皆以時間衡量。"],
+"Volume-based (or throughput-based) costing system":["Volume-based (or throughput-based) costing system","數量基礎成本制","以單一數量基礎成本動因（如直接人工、機器小時）分攤全部製造費用之傳統成本制。"],
+"Relevant range":["Relevant range","攸關範圍","固定成本與變動成本之成本行為假設成立的產量（活動）範圍。"],
+"Cost behavior":["Cost behavior","成本行為","成本隨成本動因改變之反應方式（變動、固定、階梯、曲線等）。"],
+"Learning-curve phenomenon":["Learning-curve phenomenon","學習曲線現象","隨累積產量增加，每單位投入時間（成本）以固定比率下降之現象。"],
+"Break-even point":["Break-even point","損益兩平點","總收入＝總成本之產量（營業利益為零之產量）。"],
+"Contribution margin":["Contribution margin","邊際貢獻","售價減單位變動成本之差額，用於支應固定成本並形成利潤。"],
+"Contribution income statement":["Contribution income statement","邊際貢獻式損益表","將成本分為變動與固定之損益表：銷售額−變動成本＝邊際貢獻；−固定成本＝營業利益。"],
+"Margin of safety":["Margin of safety","安全邊際","預算（實際）銷售量/額超過損益兩平銷售量/額之差額，衡量銷售下降多少仍不致虧損。"],
+"Absorption costing":["Absorption costing","吸收成本法","全部成本法：將固定製造費用也計入產品成本（存貨），為GAAP外部報導所要求。"],
+"Variable costing":["Variable costing","變動成本法","直接成本法：僅將變動製造成本計入產品成本，固定製造費用視為期間成本。"],
+"Capital-budgeting decision":["Capital-budgeting decision","資本預算決策","長期投資決策，如投資於機器、廠房、專案，考量貨幣時間價值。"],
+"Hurdle rate":["Hurdle rate","資金門檻率","最低可接受之報酬率（minimum desired rate of return），IRR需達此標準才接受方案。"],
+"Net present value":["Net present value","淨現值","未來現金流入之現值減去初始投資成本之值；NPV≥0則接受投資方案。"],
+"Internal rate of return":["Internal rate of return","內部報酬率","使投資方案淨現值為零之折現率（time-adjusted rate of return）。"],
+"Discounted-cash-flow analysis":["Discounted-cash-flow analysis","折現現金流量分析","考量貨幣時間價值，以現值評估投資方案之方法，包括NPV與IRR。"],
+"After-tax cash flow":["After-tax cash flow","稅後現金流量","考量所得稅後之相關現金流量。收益類×(1−稅率)、折舊×稅率=稅盾、純現金流×1。"],
+"Depreciation tax shield":["Depreciation tax shield","折舊稅盾","折舊費用乘以稅率所產生之節稅現金流入。"],
+"Modified Accelerated Cost Recovery System (MACRS)":["Modified Accelerated Cost Recovery System (MACRS)","修正加速成本回收制度","美國稅法之折舊制度：將資產分為八類並規定各年折舊率。"],
+"Profitability index":["Profitability index","獲利能力指數","現金流現值（不含初始投資）除以初始投資之比率，用於資本受限下排序。"],
+"Payback period":["Payback period","還本期間","初始投資除以每年稅後現金流入所需之回收年數。"],
+"Accounting-rate-of-return method":["Accounting-rate-of-return method","會計報酬率法","以平均增額收入減平均增額費用（含折舊與所得稅）除以初始投資之報酬率評估方法。"],
+"Working capital":["Working capital","營運資金","投資於流動資產（存貨、應收帳款、現金）之資金，於投資案結束時可回收。"],
+"Nominal dollars":["Nominal dollars","名目元","未調整通貨膨脹之貨幣單位。"],
+"Real dollars":["Real dollars","實質元","經通貨膨脹調整後之貨幣單位。"],
+"Nominal interest rate":["Nominal interest rate","名目利率","未扣除通膨之利率。"],
+"Real interest rate":["Real interest rate","實質利率","扣除通膨後之利率。"],
+
+};
+
+
+/* ===== 第一章內容 ===== */
+const CH1_SECTIONS = [
+{
+  id:"1.1", title:"管理會計與管理流程",
+  body:`
+  <p><b>定義</b>：<span class="term" data-term="Managerial accounting">管理會計</span>＝辨識、衡量、分析、詮釋與傳達資訊，以達成組織目標的程序。管理會計的概念與工具被所有管理者使用，專業管理會計師是組織管理團隊中重要的策略夥伴。</p>
+  <p>組織追求目標時會取得<span class="term" data-term="Capacity">資源</span>、僱用員工並從事有組織的活動。管理團隊的日常工作包含<b>四大管理流程</b>：</p>
+  <ol>
+    <li><span class="term" data-term="Decision making">決策（Decision making）</span>：在可行方案中選擇</li>
+    <li><span class="term" data-term="Planning">規劃（Planning）</span>：將目標化為詳細營運與財務描述（如預算）</li>
+    <li><span class="term" data-term="Directing operational activities">指揮營運活動</span>：以日常運作經營組織</li>
+    <li><span class="term" data-term="Controlling">控制（Controlling）</span>：確保組織依預期運作並達成目標</li>
+  </ol>
+  <div class="method-card mc-title" data-mc="ma-process">
+    <div class="mc-check"><input type="checkbox" id="mc-ch1-1" data-mc="ma-process"><label for="mc-ch1-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">四大管理流程</div>
+    <div class="mc-body">
+      <div class="mc-formula">決策 → 規劃 → 指揮 → 控制</div>
+      <div class="mc-detail">以迪士尼擴建「星際大戰：銀河邊境」為例：先決定如何擴建（決策）、訂定詳盡擴建計畫（規劃）、營運主題樂園（指揮）、比較實際與預算成本（控制）。</div>
+      <div class="mc-ex">例子：每項管理活動都需要管理會計資訊支援。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：能辨識四大管理流程的定義與順序，並能舉例（尤其 planning 預算、controlling 比較實際與預算）。</div>`
+},
+{
+  id:"1.2", title:"管理會計的五大目標",
+  body:`
+  <p>管理會計活動透過以下<b>五大目標</b>為組織增加價值：</p>
+  <ul>
+    <li><b>1. 提供決策與規劃的資訊</b>：如迪士尼估計興建新樂園的設計與維護成本、訂定預算</li>
+    <li><b>2. 協助管理者指揮與控制營運活動</b>：提供客戶餐飲需求資料、比較實際成本與預算</li>
+    <li><b>3. 激勵管理者與員工朝向組織目標</b>：透過預算分配資源、凸顯實際與計畫之偏離</li>
+    <li><b>4. 衡量組織內活動、部門、管理者與員工的績效</b>：作為晉升、加薪與紅利之依據</li>
+    <li><b>5. 評估組織競爭地位並確保長期競爭力</b>：持續檢視內部流程、顧客滿意、創新學習與財務表現</li>
+  </ul>
+  <div class="warn">考試重點：能舉例說明每一目標，如「衡量部門績效→獎勵」「預算→激勵與資源配置」。</div>
+  <p><span class="term" data-term="Attention-directing function">注意力導引功能（attention-directing）</span>：管理會計報告常先將管理者注意力導向某議題（如電費超支），再提供相關資料協助解決，而非直接給答案。</p>
+  <div class="method-card mc-title" data-mc="bs">
+    <div class="mc-check"><input type="checkbox" id="mc-ch1-2" data-mc="bs"><label for="mc-ch1-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left"><span class="term" data-term="Balanced scorecard">平衡計分卡</span>四構面</div>
+    <div class="mc-body">
+      <div class="mc-formula">財務　＋　顧客　＋　內部流程　＋　學習與成長</div>
+      <div class="mc-detail">Kaplan &amp; Norton 提出之績效評估模型，納入財務與非財務衡量，用於評估競爭地位與長期競爭力。</div>
+      <div class="mc-ex">例子：迪士尼從股東（財務）、顧客（顧客）、必須卓越的活動（內部流程）、持續改善與創造價值（學習成長）四構面衡量。</div>
+    </div>
+  </div>`
+},
+{
+  id:"1.3", title:"管理 vs 財務會計",
+  body:`
+  <p>管理會計與財務會計都源自組織的核心會計系統，但差異更大。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:22%"><col style="width:39%"><col style="width:39%"></colgroup>
+    <thead><tr><th></th><th><span class="term" data-term="Managerial accounting">管理會計</span></th><th><span class="term" data-term="Financial accounting">財務會計</span></th></tr></thead>
+    <tbody>
+      <tr><td>資訊使用者</td><td>組織內部管理者</td><td>外部利害關係人（股東、債權人、工會、政府）</td></tr>
+      <tr><td>規範</td><td>非必要、不受規範</td><td>必要、須符合 GAAP（IASB、FASB、SEC）</td></tr>
+      <tr><td>資料來源</td><td>核心會計系統＋其他來源（含非財務資料）</td><td>幾乎僅來自核心會計系統之財務資料</td></tr>
+      <tr><td>報告性質</td><td>聚焦部門/地區/產品線；含歷史、估計與預測</td><td>聚焦整體企業；幾乎僅為歷史交易資料</td></tr>
+    </tbody>
+  </table></div>
+  <p><span class="term" data-term="Cost accounting system">成本會計系統（cost accounting system）</span>累積產品成本資料，同時服務管理會計（如訂價）與財務會計（如資產負債表存貨評價）兩用途。</p>
+  <div class="warn">考試重點：管理會計 vs 財務會計四大差異（使用者、規範、資料來源、報告性質）常以表格或比較題考出。</div>`
+},
+{
+  id:"1.4", title:"組織中的會計與財務結構",
+  body:`
+  <p>大型公司中，直接參與提供商品/服務的是<span class="term" data-term="Line positions">直線職位（line）</span>，如樂園總經理；間接支援營運的是<span class="term" data-term="Staff positions">幕僚職位（staff）</span>，如法律顧問、財務長。</p>
+  <ul>
+    <li><span class="term" data-term="Chief financial officer (CFO)">CFO / 主計長（controller）</span>：負責所有會計與財務功能，編製管理與財務會計資訊，參與各層級規劃與決策。</li>
+    <li><span class="term" data-term="Treasurer">財務長（treasurer）</span>：籌措資金、保護資產、管理現金與投資、信用政策與保險。</li>
+    <li><span class="term" data-term="Internal auditor">內部稽核</span>：審查會計程序、記錄與報告，向高階管理與董事會表達意見。</li>
+  </ul>
+  <p>管理會計師常被部署於<b>跨功能團隊</b>（cross-functional teams），與營運、行銷、設計工程、法務等合作，扮演策略夥伴與值得信賴的顧問角色。</p>
+  <div class="warn">考試重點：區分 CFO/controller、treasurer、internal auditor 三種職位職責；區分 line vs staff。</div>`
+},
+{
+  id:"1.5", title:"價值鏈、產能與大數據",
+  body:`
+  <p><span class="term" data-term="Value chain">價值鏈（value chain）</span>＝從取得原料與能源到最終交付產品與服務的一系列連結、價值創造活動。以 Whole Foods Market 為例包含：供應商發展、農/非農業生產、存貨管理與配送、行銷與客服、店內生產與零售、社區服務。</p>
+  <p>要取得持續競爭優勢，須（1）以較低成本提供同等品質，或（2）以同等成本提供較高品質。造成各活動成本發生之因素稱為<span class="term" data-term="Cost driver">成本動因（cost driver）</span>；重視並管理價值鏈成本關係的過程稱<b>策略性成本管理</b>。</p>
+  <div class="method-card mc-title" data-mc="capacity">
+    <div class="mc-check"><input type="checkbox" id="mc-ch1-3" data-mc="capacity"><label for="mc-ch1-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">產能與資源成本</div>
+    <div class="mc-body">
+      <div class="mc-formula">資源使用成本＝資源供給成本 ×（實際使用 ÷ 實務產能）</div>
+      <div class="mc-detail"><span class="term" data-term="Cost of resources unused">未使用產能成本</span>＝資源供給成本－資源使用成本。切勿把「供給但未使用」的成本誤當作產品成本。</div>
+      <div class="mc-ex">例子：披薩工班 2 小時工資 $22（供給），實務產能 20 個披薩；週一做 20 個→使用 $22、未使用 $0；週五做 1 個→使用 $1.10、未使用 $20.90。</div>
+    </div>
+  </div>
+  <p><span class="term" data-term="Big data">大數據（big data）</span>＝組織內部產生的巨量資料＋可取得的外部資料；<b>資料分析</b>＝從中發展洞察；<b>資料治理</b>＝確保資料有效、可用、正確；<b>資料科學</b>＝運用數學/統計/電腦科學將資料轉為決策資訊。</p>
+  <div class="warn">考試重點：區分資源供給成本／使用成本／未使用成本；了解理論產能 vs 實務產能。</div>`
+},
+{
+  id:"1.6", title:"職業與倫理",
+  body:`
+  <p>管理會計師的專業組織：<b>IMA</b>（美國管理會計師協會，出版《Strategic Finance》）、<b>CIMA</b>（英國特許管理會計師協會，海外主要組織）。</p>
+  <ul>
+    <li><b>CMA</b>（Certified Management Accountant，管理會計師認證）：由 IMA 自 1972 年舉辦。</li>
+    <li><b>CGMA</b>（Chartered Global Management Accountant）：由 AICPA 與 CIMA 合辦。</li>
+  </ul>
+  <p>持有認證者在美國平均總薪酬約比未認證同儕高 50%。</p>
+  <p><b>IMA 倫理標準</b>四大原則：誠實（Honesty）、公平（Fairness）、客觀（Objectivity）、責任（Responsibility）；四大標準：<b>勝任（Competence）、保密（Confidentiality）、誠信（Integrity）、可信度（Credibility）</b>。</p>
+  <div class="warn">考試重點：能列舉 IMA 倫理標準（勝任、保密、誠信、可信度）與四大原則；認識 CMA/CGMA。倫理不是奢侈品而是經濟運作的必要條件。</div>`
+},
+];
+
+const CH1_PROBLEMS = [
+{
+  q:"管理會計（Managerial Accounting）的核心定義是下列何者？",
+  opts:["(A) 僅記錄過往交易以對外報導","(B) 辨識、衡量、分析、詮釋與傳達資訊以達成組織目標","(C) 只服務於稅務申報","(D) 僅供外部投資人使用"],
+  ans:"<b>(B) 辨識、衡量、分析、詮釋與傳達資訊以達成組織目標。</b><ul><li>管理會計是內部導向，協助管理者做決策、規劃、指揮與控制</li><li>財務會計才以對外報導與外部使用者為主</li></ul>"
+},
+{
+  q:"下列何者「不是」管理團隊的四大管理流程之一？",
+  opts:["(A) 決策（Decision making）","(B) 規劃（Planning）","(C) 稽核（Auditing）","(D) 控制（Controlling）"],
+  ans:"<b>(C) 稽核（Auditing）。</b><ul><li>四大流程＝決策、規劃、指揮營運活動、控制</li><li>稽核是內部稽核之工作，不屬四大管理流程</li></ul>"
+},
+{
+  q:"「比較實際發生的成本與預算中規定的成本」最符合下列哪一項管理流程？",
+  opts:["(A) 決策","(B) 規劃","(C) 指揮營運活動","(D) 控制"],
+  ans:"<b>(D) 控制。</b><ul><li>控制＝確保組織依預期方式運作並達成目標，透過比較實際與計畫（預算）</li><li>規劃是先訂定預算；控制是後續核對執行結果</li></ul>"
+},
+{
+  q:"管理會計與財務會計最關鍵的差異在於：",
+  opts:["(A) 兩者皆受 GAAP 規範","(B) 管理會計服務內部管理者、不受規範；財務會計服務外部利害關係人、受規範","(C) 管理會計只用歷史資料","(D) 財務會計只服務管理階層"],
+  ans:"<b>(B) 管理會計服務內部管理者、不受規範；財務會計服務外部利害關係人、受規範。</b><ul><li>管理會計非必要、不受規範、含歷史+估計+預測、聚焦部門/產品線</li><li>財務會計必要、受 GAAP 規範、幾乎只用歷史交易資料、聚焦整體企業</li></ul>"
+},
+{
+  q:"某員工每週工作 48 小時（正常工時 40 小時），時薪 $16，加班費為 1.5 倍。其加班費差額（overtime premium）應歸類為何？",
+  opts:["(A) 直接人工 $768","(B) 製造費用 $64","(C) 直接人工 $128","(D) 期間成本 $64"],
+  ans:"<b>(B) 製造費用 $64。</b><ul><li>正常工資 $16×48=$768 屬直接人工；加班差額 ½×$16×8=$64 屬製造費用</li><li>加班費差額是因整體排程需求，非某一特定批次所致，故歸入 overhead</li></ul>"
+},
+{
+  q:"下列何者屬於「轉換成本（conversion costs）」？",
+  opts:["(A) 直接原料＋直接人工","(B) 直接原料＋製造費用","(C) 直接人工＋製造費用","(D) 直接原料＋直接人工＋製造費用"],
+  ans:"<b>(C) 直接人工＋製造費用。</b><ul><li>轉換成本＝將原料「轉換」為成品的成本＝直接人工＋製造費用</li><li>主要成本（prime cost）＝直接原料＋直接人工</li></ul>"
+},
+{
+  q:"關於平衡計分卡（Balanced Scorecard）的四個構面，下列何者正確？",
+  opts:["(A) 財務、顧客、內部流程、學習與成長","(B) 財務、成本、品質、時間","(C) 收入、費用、資產、權益","(D) 生產、行銷、人力、財務"],
+  ans:"<b>(A) 財務、顧客、內部流程、學習與成長。</b><ul><li>平衡計分卡由 Kaplan &amp; Norton 提出，含財務與非財務衡量</li><li>用於評估競爭地位與確保長期競爭力</li></ul>"
+},
+{
+  q:"披薩工班 2 小時工資 $22，實務產能 20 個披薩；某晚只做了 1 個披薩。該晚「未使用產能成本」為多少？",
+  opts:["(A) $0","(B) $1.10","(C) $20.90","(D) $22.00"],
+  ans:"<b>(C) $20.90。</b><ul><li>資源使用成本＝$22×(1/20)=$1.10；未使用產能成本＝$22−$1.10=$20.90</li><li>切勿把「供給但未使用」的資源成本誤當作產品成本</li></ul>"
+},
+{
+  q:"IMA 倫理標準中「勝任、保密、誠信、可信度」之英文為？",
+  opts:["(A) Honesty, Fairness, Objectivity, Responsibility","(B) Competence, Confidentiality, Integrity, Credibility","(C) Planning, Directing, Controlling, Deciding","(D) Cost, Price, Volume, Profit"],
+  ans:"<b>(B) Competence, Confidentiality, Integrity, Credibility。</b><ul><li>四大標準：勝任、保密、誠信、可信度</li><li>(A) 是四大原則（誠實、公平、客觀、責任）</li></ul>"
+},
+{
+  q:"成本會計系統（cost accounting system）的主要功能是？",
+  opts:["(A) 只計算稅額","(B) 累積公司產出（商品與服務）的成本資料","(C) 只服務於外部稽核","(D) 管理員工薪資發放"],
+  ans:"<b>(B) 累積公司產出（商品與服務）的成本資料。</b><ul><li>成本會計系統同時服務管理會計（訂價、決策）與財務會計（存貨評價）</li><li>是組織整體會計系統的一部分</li></ul>"
+},
+];
+
+const CH2_SECTIONS = [
+{
+  id:"2.1", title:"成本的意義與產品/期間成本",
+  body:`
+  <p><b>成本（cost）</b>＝為達成特定目的所犧牲、以放棄之資源衡量者。<b>費用（expense）</b>＝資源（資產）被耗用於產生收入時所發生之成本。</p>
+  <p><span class="term" data-term="Product cost">產品成本（product cost，又稱可存貨成本）</span>＝歸屬於存貨之成本，直到出售才轉為<span class="term" data-term="Cost of goods sold">銷貨成本</span>。零售商/批發商的產品成本＝進貨成本＋運費；製造商的產品成本＝製造成本。</p>
+  <p><span class="term" data-term="Period cost">期間成本（period cost）</span>＝與發生期間相關而非與特定商品單位相關的成本，於當期認列為費用：研發、銷售、管理成本皆屬期間成本。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:30%"><col style="width:35%"><col style="width:35%"></colgroup>
+    <thead><tr><th></th><th>產品成本</th><th>期間成本</th></tr></thead>
+    <tbody>
+      <tr><td>處理方式</td><td>資本化為存貨（資產）</td><td>當期直接認列為費用</td></tr>
+      <tr><td>認列時點</td><td>出售時轉為銷貨成本</td><td>發生期間</td></tr>
+      <tr><td>對象</td><td>零售商/批發商/製造商之商品</td><td>所有類型公司（研發、銷售、管理）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：能判斷某成本屬產品成本或期間成本；產品成本出售時轉銷貨成本、庫存為資產。</div>`
+},
+{
+  id:"2.2", title:"財務報表中的成本",
+  body:`
+  <p><span class="term" data-term="Gross profit">銷貨毛利（gross profit / gross margin）</span>＝收入 − 銷貨成本，反映生產/販售核心流程之獲利。<span class="term" data-term="Operating income">營業利益（operating income）</span>＝收入 − 銷貨成本 − 所有期間成本，不含融資（利息）、稅與異常事項。</p>
+  <p>製造商資產負債表有三種存貨：<span class="term" data-term="Raw material">原料</span>、<span class="term" data-term="Work-in-process inventory">在製品（WIP）</span>、<span class="term" data-term="Finished-goods inventory">製成品（FGI）</span>。</p>
+  <p><b>服務業</b>（如西南航空）：服務隨產隨銷、無法存貨，其產製服務之成本稱營運費用（operating expenses），皆為期間成本。</p>
+  <div class="warn">考試重點：製造商 vs 零售商 vs 服務業在損益表/資產負債表上之成本處理差異。</div>`
+},
+{
+  id:"2.3", title:"製造作業與製造業成本",
+  body:`
+  <p>四種製造流程（Hayes-Wheelwright 矩陣）：<b>Job shop</b>（低量客製，如訂製住宅）、<b>Batch</b>（多產品中量，如推土機）、<b>Assembly</b>（少數產品大量，如汽車裝配線）、<b>Continuous flow</b>（大量標準化商品，如煉油）。</p>
+  <p>製造業成本三分類：</p>
+  <ul>
+    <li><span class="term" data-term="Direct material">直接原料</span>：構成成品、可容易追溯（如汽車鋼板、電腦晶片）</li>
+    <li><span class="term" data-term="Direct labor">直接人工</span>：直接加工於產品之人員薪資與福利</li>
+    <li><span class="term" data-term="Manufacturing overhead">製造費用</span>（overhead）：間接原料＋間接人工＋其他製造費用（折舊、稅、保險、水電、加班費差額、閒置時間）</li>
+  </ul>
+  <div class="method-card mc-title" data-mc="cost-class">
+    <div class="mc-check"><input type="checkbox" id="mc-ch2-1" data-mc="cost-class"><label for="mc-ch2-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">製造成本結構</div>
+    <div class="mc-body">
+      <div class="mc-formula">主要成本＝直接原料＋直接人工；轉換成本＝直接人工＋製造費用</div>
+      <div class="mc-detail">總製造成本＝直接原料＋直接人工＋製造費用。</div>
+      <div class="mc-ex">例子：技師每週 48h、時薪$16、加班1.5倍 → 直接人工 $768、製造費用（加班差額）$64。</div>
+    </div>
+  </div>`
+},
+{
+  id:"2.4", title:"製造業成本流動與成本表",
+  body:`
+  <p>製造成本流動：<b>原料 → 在製品（WIP）→ 製成品（FGI）→ 銷貨成本（COGS）</b>。全部製造業成本（直接原料、直接人工、製造費用）借記 WIP；完工轉入 FGI；出售時轉入 COGS（費用）。</p>
+  <p><span class="term" data-term="Cost of goods manufactured">製成品成本</span>＝完工並從 WIP 轉入 FGI 之成本（注意：≠ 當期總製造成本，因可能有部分仍在 WIP）。</p>
+  <p>管理上編製兩份內部報表：<b>製成品成本表</b>（schedule of cost of goods manufactured）與<b>銷貨成本表</b>（schedule of cost of goods sold），連同損益表。</p>
+  <div class="warn">考試重點：能計算製成品成本與銷貨成本；了解成本流動方向（原料→WIP→FGI→COGS）。</div>`
+},
+{
+  id:"2.5", title:"成本動因與變動/固定成本",
+  body:`
+  <p><span class="term" data-term="Cost driver">成本動因</span>＝造成成本發生之活動或事件特徵（如生產量、生產批數、訂單數）。成本與動因相關性越高，成本行為分析越準確；但追蹤成本動因亦有成本，存在成本—效益取捨。</p>
+  <div class="method-card mc-title" data-mc="varfix">
+    <div class="mc-check"><input type="checkbox" id="mc-ch2-2" data-mc="varfix"><label for="mc-ch2-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">變動 vs 固定成本行為</div>
+    <div class="mc-body">
+      <div class="mc-formula">變動成本：總額隨活動等比例變動、單位不變；固定成本：總額不變、單位隨活動下降</div>
+      <div class="mc-detail"><span class="term" data-term="Variable cost">變動成本</span>例：LCD 螢幕 $100/台 → 總額隨產量增加；<span class="term" data-term="Fixed cost">固定成本</span>例：網路銷售經理年薪 $150,000 → 總額不變、單位隨產量稀釋。</div>
+      <div class="mc-ex">例子：產量 10→20 台，總變動成本 $1,000→$2,000（單位$100不變）；總固定成本 $150,000 不變、單位由 $15,000 降至 $7,500。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：活動增加時——總變動成本↑、單位變動成本不變、總固定成本不變、單位固定成本↓。這是成本行為核心。</div>`
+},
+{
+  id:"2.6", title:"成本管理與直接/間接/可控成本",
+  body:`
+  <p><b>成本管理系統（CMS）</b>目標：衡量資源消耗與未使用產能、辨識並消除非附加價值成本、評估活動效率與效能、評估新活動。強調以「活動」為焦點，稱作業會計（activity accounting）。</p>
+  <p><b>成本標的（cost object）</b>＝被分配成本的實體。可直接追溯者為<b>直接成本</b>；無法直接追溯者為<b>間接成本</b>。某成本可能是某部門的直接成本、同時是另一部門的間接成本。</p>
+  <p><b>可控/不可控成本</b>：視管理者能否影響（問題是「誰最有能力影響」而非「誰控制」）。生產督導可控制材料用量（數量）、採購經理較能影響材料價格。</p>
+  <div class="warn">考試重點：能判斷直接/間接（追溯能力）與可控/不可控（影響力）；理解成本管理系統與 ABC/ABM 之關聯。</div>`
+},
+{
+  id:"2.7", title:"經濟成本概念",
+  body:`
+  <ul>
+    <li><span class="term" data-term="Opportunity cost">機會成本</span>：因選擇某行動而放棄另一行動所犧牲之效益（如接受壘球訂單放棄棒球之利益）。經濟學觀點下與付現成本等價。</li>
+    <li><span class="term" data-term="Out-of-pocket cost">付現成本</span>：需支付現金或其他資產之成本。</li>
+    <li><span class="term" data-term="Sunk cost">沉沒成本</span>：已發生於過去、無法被當前/未來行動改變，與未來決策無關（如已購買設備之成本）。</li>
+    <li><span class="term" data-term="Differential cost">差異（增量）成本</span>：兩替代方案下成本之差異。</li>
+    <li><span class="term" data-term="Marginal cost">邊際成本</span>：多生產一單位之成本（差異成本特例）。</li>
+    <li><span class="term" data-term="Average cost">平均成本</span>：總成本 ÷ 數量。</li>
+  </ul>
+  <div class="warn">考試重點：沉沒成本與未來決策無關；機會成本須與付現成本同考量；能算邊際/平均成本之差別。</div>`
+},
+{
+  id:"2.8", title:"服務業中的成本",
+  body:`
+  <p>以 Gold's Gym 為例，服務業同樣適用各成本概念：</p>
+  <ul>
+    <li><b>產品 vs 期間成本</b>：健身房品牌商品存貨為產品成本；訓練員薪資、音樂版權、水電為期間成本（營運費用）。</li>
+    <li><b>變動 vs 固定</b>：消毒液隨訪客數變動（變動）；音樂服務費、經理薪資、保險、財產稅為固定。</li>
+    <li><b>直接 vs 間接</b>：就「某次飛輪課」為成本標的，教練費為直接成本；飛輪車折舊、館長薪資為間接成本。</li>
+    <li><b>機會/付現/沉沒</b>：改設女性專區所損失之自由重量客源＝機會成本；訓練員工資、水電＝付現成本；去年換橢圓機之花費＝沉沒成本。</li>
+  </ul>
+  <div class="warn">考試重點：服務業無存貨，成本皆為期間成本；其餘成本分類與製造業相同。</div>`
+},
+];
+
+const CH2_PROBLEMS = [
+{
+  q:"下列何者屬於「產品成本（product cost）」？",
+  opts:["(A) 銷售人員佣金","(B) 製造商的直接原料成本","(C) 公司總部的廣告費","(D) 研發新產品成本"],
+  ans:"<b>(B) 製造商的直接原料成本。</b><ul><li>產品成本＝歸屬於存貨之成本，於出售時轉為銷貨成本</li><li>佣金、廣告、研發皆為期間成本（當期費用）</li></ul>"
+},
+{
+  q:"一製造商年度銷貨成本為 $500,000，銷管費用為 $120,000，銷貨收入 $700,000。其營業利益（operating income）為何？",
+  opts:["(A) $80,000","(B) $120,000","(C) $200,000","(D) $500,000"],
+  ans:"<b>(A) $80,000。</b><ul><li>營業利益＝收入−銷貨成本−所有期間成本＝$700,000−$500,000−$120,000=$80,000</li><li>銷貨毛利＝$200,000；營業利益再扣銷管費用</li></ul>"
+},
+{
+  q:"下列何者屬於「製造費用（manufacturing overhead）」？",
+  opts:["(A) 裝配線員工工資","(B) 產品外殼塑膠原料","(C) 工廠監工薪資（間接人工）","(D) 董事長秘書薪資"],
+  ans:"<b>(C) 工廠監工薪資（間接人工）。</b><ul><li>間接人工、間接原料、其他製造成本（折舊/稅/保險/水電/加班差額/閒置時間）皆屬製造費用</li><li>裝配線工資＝直接人工；塑膠外殼＝直接原料；董事長秘書＝期間（管理）成本</li></ul>"
+},
+{
+  q:"某技師時薪 $14，某週因設備故障有 2 小時閒置時間。其當週 38 小時直接人工與閒置時間成本分類為何？",
+  opts:["(A) 直接人工 $532、製造費用 $28","(B) 直接人工 $560、製造費用 $0","(C) 直接人工 $28、製造費用 $532","(D) 直接人工 $532、期間成本 $28"],
+  ans:"<b>(A) 直接人工 $532、製造費用 $28。</b><ul><li>直接人工＝$14×38=$532；閒置時間成本＝$14×2=$28 屬製造費用</li><li>閒置時間為隨機事件，成本應分攤至所有批次，故入 overhead</li></ul>"
+},
+{
+  q:"產量從 10 台增加到 30 台時，固定成本 $150,000 的單位固定成本變化為何？",
+  opts:["(A) 由 $15,000 降至 $5,000","(B) 維持 $15,000 不變","(C) 由 $5,000 升至 $15,000","(D) 總額隨之上升"],
+  ans:"<b>(A) 由 $15,000 降至 $5,000。</b><ul><li>單位固定成本＝總固定成本÷數量：$150,000÷10=$15,000；÷30=$5,000</li><li>活動增加→總固定成本不變、單位固定成本下降</li></ul>"
+},
+{
+  q:"下列何者為「沉沒成本（sunk cost）」，且與未來決策無關？",
+  opts:["(A) 明年新增設備之預估成本","(B) 去年購買、現已故障之平板系統成本 $40,000","(C) 未來人事訓練費用","(D) 差異成本"],
+  ans:"<b>(B) 去年購買、現已故障之平板系統成本 $40,000。</b><ul><li>沉沒成本＝已發生於過去、無法被當前/未來行動改變</li><li>未來決策應基於未來成本，不應受沉沒成本影響</li></ul>"
+},
+{
+  q:"某縣政府在兩個回收廠址間抉擇：北址年運輸成本 $285,000、南址 $240,000。選擇北址的「差異/增量成本」為何？",
+  opts:["(A) $45,000","(B) $240,000","(C) $285,000","(D) $525,000"],
+  ans:"<b>(A) $45,000。</b><ul><li>差異成本＝$285,000−$240,000=$45,000（增量成本）</li><li>差異成本＝兩替代方案之成本差異</li></ul>"
+},
+{
+  q:"下列何者為「可控成本（controllable cost）」的最佳判斷標準？",
+  opts:["(A) 由誰實際支付","(B) 誰最有能力影響該成本水準","(C) 成本金額大小","(D) 是否為期間成本"],
+  ans:"<b>(B) 誰最有能力影響該成本水準。</b><ul><li>可控/不可控的關鍵是「管理者能否影響成本」，而非「誰控制」</li><li>例：生產督導可控制材料用量（數量），採購經理較能影響價格</li></ul>"
+},
+{
+  q:"「接受棒球訂單會使公司無法承接壘球訂單，因而放棄壘球之潛在利益」此為下列何者？",
+  opts:["(A) 沉沒成本","(B) 機會成本","(C) 付現成本","(D) 平均成本"],
+  ans:"<b>(B) 機會成本。</b><ul><li>機會成本＝因選擇某行動而放棄另一行動所犧牲之效益</li><li>沉沒成本已發生、付現成本需支付現金</li></ul>"
+},
+{
+  q:"四種製造流程中，煉油廠（大量標準化商品、連續流動）應採用何者？",
+  opts:["(A) Job shop","(B) Batch","(C) Assembly","(D) Continuous flow"],
+  ans:"<b>(D) Continuous flow。</b><ul><li>連續流動＝高產量、高度標準化之商品（如煉油、化工）</li><li>Job shop＝低量客製；Batch＝中量多產品；Assembly＝少數產品大量裝配</li></ul>"
+},
+];
+
+const CH3_SECTIONS = [
+{
+  id:"3.1", title:"產品成本與分批 vs 分步成本制",
+  body:`
+  <p>產品成本資訊用於：訂價、服務費率、產品組合、產量決策、控制與降低生產成本、績效衡量與資源配置。外界組織（公用事業、醫院、政府 cost-plus 合約）亦需產品成本。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:30%"><col style="width:35%"><col style="width:35%"></colgroup>
+    <thead><tr><th></th><th><span class="term" data-term="Job-order costing">分批成本制</span></th><th><span class="term" data-term="Process costing">分步成本制</span></th></tr></thead>
+    <tbody>
+      <tr><td>適用製程</td><td>Job shop / 批量生產（小量、異質）</td><td>連續流動（大量、同質）</td></tr>
+      <tr><td>成本歸屬</td><td>各批（job）分別累積再平均</td><td>全部成本平均分配至所有單位</td></tr>
+      <tr><td>例子</td><td>電影製作、訂製住宅、印刷、家具</td><td>化學、汽油、電力、晶片、啤酒</td></tr>
+    </tbody>
+  </table></div>
+  <p>服務業（會計師、律師、顧問）多採用分批（專案）成本制，將成本分配到案件/專案。</p>
+  <div class="warn">考試重點：能判斷何種產品用分批 vs 分步；服務業多用分批（專案）成本制。</div>`
+},
+{
+  id:"3.2", title:"製造成本流動與分錄",
+  body:`
+  <p>製造業成本流動：<b>直接原料、直接人工、製造費用 → WIP → FGI → COGS</b>。</p>
+  <ul>
+    <li>生產發生時，所有製造業成本<b>借記（增加）</b>WIP</li>
+    <li>產品完工：由 WIP <b>貸記</b>、FGI <b>借記</b>（轉移成本＝製成品成本）</li>
+    <li>出售時：由 FGI 貸記、<span class="term" data-term="Cost of goods sold">COGS</span> 借記（費用）</li>
+    <li>期末 COGS 結轉至 Income Summary</li>
+  </ul>
+  <div class="method-card mc-title" data-mc="flow">
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-1" data-mc="flow"><label for="mc-ch3-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">製造業成本帳流動</div>
+    <div class="mc-body">
+      <div class="mc-formula">原料 → 在製品(WIP) → 製成品(FGI) → 銷貨成本(COGS)</div>
+      <div class="mc-detail">Bradley Paper：直接原料$30,000＋直接人工$20,000＋製造費用$40,000，完工$60,000、售出$25,000 → WIP 餘$30,000、FGI 餘$35,000、COGS$25,000。</div>
+      <div class="mc-ex">例子：WIP 借 $90,000、貸 $60,000 → 餘 $30,000（未完工）</div>
+    </div>
+  </div>`
+},
+{
+  id:"3.3", title:"累積成本：材料/人工/製造費用",
+  body:`
+  <p>分批成本制用<span class="term" data-term="Job-cost record">分批成本卡（job-cost record）</span>累積每一批的直接原料、直接人工、製造費用，並記錄總成本與單位成本。</p>
+  <ul>
+    <li><b>直接原料</b>：由生產督導填<span class="term" data-term="Material requisition form">材料領用單（material requisition）</span>向倉庫領料，作為轉移原料成本至 WIP 之來源文件。</li>
+    <li><b>直接人工</b>：依<span class="term" data-term="Time record">工時卡（time record）</span>記錄每批耗時，乘時薪記入 WIP。間接人工（如清掃）入製造費用。</li>
+    <li><b>製造費用</b>：為異質之間接生產成本組合，無法直接追溯，故用「分攤」方式。</li>
+  </ul>
+  <p>例：Blue River job S116（80 片 12' SUP）直接原料$18,000、直接人工$12,000、製造費用$18,000 → 總成本$48,000、單位成本$600。</p>
+  <div class="warn">考試重點：材料領用單與工時卡為來源文件；間接材料/人工進入製造費用；分批成本卡記錄每批成本。</div>`
+},
+{
+  id:"3.4", title:"預定製造費用分攤率與分攤",
+  body:`
+  <p>製造費用無法直接追溯，故在期初以估計計算<span class="term" data-term="Predetermined overhead rate">預定製造費用分攤率（predetermined overhead rate）</span>，再以此率乘實際成本動因量分攤。</p>
+  <div class="formula"><span class="f-label">預定製造費用分攤率</span>預定製造費用分攤率 ＝ 預算製造費用 ÷ 預算成本動因量（活動基礎）</div>
+  <p>成本動因（activity base）傳統上多為<b>數量基礎</b>（volume-based）：直接人工小時、直接人工成本或機器小時，使成本大致與產量成比例。</p>
+  <div class="method-card mc-title" data-mc="rate">
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-2" data-mc="rate"><label for="mc-ch3-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">製造費用分攤</div>
+    <div class="mc-body">
+      <div class="mc-formula">分攤製造費用 ＝ 預定分攤率 × 實際成本動因量</div>
+      <div class="mc-detail">Blue River：預算製造費用$360,000÷40,000機器小時=$9/機器小時。job D38 用 30 機器小時 → 分攤 $270。</div>
+      <div class="mc-ex">例子：$9 × 30 = $270 借記 WIP、貸記 Manufacturing Overhead</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：能計算預定分攤率與分攤金額；能寫分錄（借 WIP、貸 Manufacturing Overhead）。</div>`
+},
+{
+  id:"3.5", title:"過度/不足分攤製造費用的處理",
+  body:`
+  <p><span class="term" data-term="Underapplied overhead">不足分攤（underapplied）</span>＝實際製造費用 &gt; 已分攤製造費用（預定率低估）；<span class="term" data-term="Overapplied overhead">過度分攤（overapplied）</span>＝已分攤 &gt; 實際（預定率高估）。</p>
+  <div class="method-card mc-title" data-mc="dispose">
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-3" data-mc="dispose"><label for="mc-ch3-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">過度/不足分攤之處理</div>
+    <div class="mc-body">
+      <div class="mc-formula">① 全數結轉至 COGS（常見、簡單）；② 比例分攤（proration）至 WIP/FGI/COGS</div>
+      <div class="mc-detail">不足分攤 → 借 COGS；過度分攤 → 貸（減少）COGS。比例分攤依各帳戶剩餘已分攤製造費用比例分配。</div>
+      <div class="mc-ex">例子：Blue River 不足分攤 $250（實際$34,450−已分攤$34,200）→ 借 COGS $250；若比例分攤：WIP 47.37%($118.43)、FGI 13.16%($32.90)、COGS 39.47%($98.67)。</div>
+    </div>
+  </div>
+  <p>期間時點：預算（期初）→ 分攤（期中）→ 實際（期末）。多數公司於年底將過度/不足分攤結轉至 COGS。</p>
+  <div class="warn">考試重點：能判斷不足/過度分攤，並寫結轉分錄（借或貸 COGS）；了解比例分攤之原理。</div>`
+},
+{
+  id:"3.6", title:"成本表與兩階段成本分攤",
+  body:`
+  <p>期中考常用兩張內部報表：<b>製成品成本表</b>（schedule of COGM）與<b>銷貨成本表</b>（schedule of COGS），連同損益表。</p>
+  <p><span class="term" data-term="Two-stage cost allocation">兩階段成本分攤（two-stage cost allocation）</span>：</p>
+  <ul>
+    <li><b>第一階段</b>：所有製造費用分配到生產部門（含成本分配 cost distribution），再把服務部門成本重新分配至生產部門（service department cost allocation）。</li>
+    <li><b>第二階段</b>：各生產部門依自己的預定分攤率將成本分攤至通過該部門之生產批次（overhead application）。</li>
+  </ul>
+  <p>部門分攤率（<span class="term" data-term="Departmental overhead rate">departmental</span>）通常比全廠單一分攤率（<span class="term" data-term="Plantwide overhead rate">plantwide</span>）更準確；作業基礎成本制（ABC）提供更精確之分配。</p>
+  <div class="warn">考試重點：能描述兩階段分攤流程（分配→分攤）；區分部門分攤率 vs 全廠分攤率。</div>`
+},
+{
+  id:"3.7", title:"實際 vs 正常成本制與專案成本制",
+  body:`
+  <p><span class="term" data-term="Normal costing">正常成本制（normal costing）</span>：直接原料、直接人工以實際金額入 WIP，製造費用以<b>預定分攤率</b>分攤（最常見）。</p>
+  <p><span class="term" data-term="Actual costing">實際成本制（actual costing）</span>：直接原料、直接人工以實際金額，製造費用以<b>期末實際分攤率</b>分配。缺點：季節性、大額付款時點、時效性問題，故少用。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:30%"><col style="width:35%"><col style="width:35%"></colgroup>
+    <thead><tr><th></th><th>實際成本制</th><th>正常成本制</th></tr></thead>
+    <tbody>
+      <tr><td>直接原料/人工</td><td>實際</td><td>實際</td></tr>
+      <tr><td>製造費用</td><td>期末實際分攤率</td><td>預定分攤率</td></tr>
+    </tbody>
+  </table></div>
+  <p><span class="term" data-term="Project costing">專案成本制（project costing）</span>：服務業與非營利組織之分批成本制變體，將成本分配到專案/合約/案件/方案/任務（如醫院 cases、顧問 engagements、政府 programs）。</p>
+  <div class="warn">考試重點：區分 actual vs normal costing；專案成本制適用於服務業與非營利組織。</div>`
+},
+];
+
+const CH3_PROBLEMS = [
+{
+  q:"下列何者較適合使用「分批成本制（job-order costing）」？",
+  opts:["(A) 煉油廠","(B) 訂製住宅營造商","(C) 電力公司","(D) 生產標準化晶片的晶圓廠"],
+  ans:"<b>(B) 訂製住宅營造商。</b><ul><li>分批成本制用於 job-shop/批量生產：小量、異質產品（訂製住宅、電影、印刷）</li><li>煉油、電力、標準晶片屬大量同質，用分步成本制</li></ul>"
+},
+{
+  q:"某公司預算製造費用 $360,000、預算機器小時 40,000 小時。job D38 使用 30 機器小時，其分攤之製造費用為何？",
+  opts:["(A) $270","(B) $9","(C) $1,200","(D) $36,000"],
+  ans:"<b>(A) $270。</b><ul><li>預定分攤率＝$360,000÷40,000=$9/機器小時</li><li>分攤製造費用＝$9×30=$270（借 WIP、貸 Manufacturing Overhead）</li></ul>"
+},
+{
+  q:"當「實際製造費用 &gt; 已分攤製造費用」時，稱為？",
+  opts:["(A) 過度分攤（overapplied）","(B) 不足分攤（underapplied）","(C) 比例分攤（proration）","(D) 正常分攤"],
+  ans:"<b>(B) 不足分攤（underapplied）。</b><ul><li>不足分攤＝實際製造費用超過已分攤製造費用之差額（預定率低估）</li><li>過度分攤＝已分攤超過實際（預定率高估）</li></ul>"
+},
+{
+  q:"公司不足分攤製造費用 $250，若採「全數結轉至銷貨成本」之方法，其分錄為？",
+  opts:["(A) 借 COGS $250、貸 Manufacturing Overhead $250","(B) 借 Manufacturing Overhead $250、貸 COGS $250","(C) 借 WIP $250、貸 Manufacturing Overhead $250","(D) 借 COGS $250、貸 WIP $250"],
+  ans:"<b>(A) 借 COGS $250、貸 Manufacturing Overhead $250。</b><ul><li>不足分攤→提高銷貨成本：借 COGS、貸 Manufacturing Overhead（將其沖零）</li><li>過度分攤則反向：借 Manufacturing Overhead、貸 COGS</li></ul>"
+},
+{
+  q:"正常成本制（normal costing）與實際成本制（actual costing）的差異在於？",
+  opts:["(A) 直接原料是否為實際成本","(B) 製造費用以預定分攤率（正常）vs 期末實際分攤率（實際）","(C) 直接人工是否為實際成本","(D) 兩者完全相同"],
+  ans:"<b>(B) 製造費用以預定分攤率（正常）vs 期末實際分攤率（實際）。</b><ul><li>兩者直接原料/人工皆為實際成本</li><li>差異在製造費用：正常用預定率、實際用期末實際率</li><li>實際成本制有季節性、付款時點、時效性缺點，故少用</li></ul>"
+},
+{
+  q:"「比例分攤（proration）」是把過度/不足分攤製造費用分配到下列哪些帳戶？",
+  opts:["(A) 僅 COGS","(B) WIP、FGI、COGS","(C) 僅 WIP","(D) 僅 FGI"],
+  ans:"<b>(B) WIP、FGI、COGS。</b><ul><li>比例分攤依各帳戶剩餘已分攤製造費用比例，分配至 WIP、FGI 與 COGS</li><li>因已分攤製造費用流經三個帳戶，故皆受預定率誤差影響</li></ul>"
+},
+{
+  q:"分批成本卡（job-cost record）主要累積下列哪三類成本？",
+  opts:["(A) 直接原料、直接人工、製造費用","(B) 原料、在製品、製成品","(C) 銷管費用、研發、廣告","(D) 固定、變動、半變動成本"],
+  ans:"<b>(A) 直接原料、直接人工、製造費用。</b><ul><li>分批成本卡記錄每一批的直接原料、直接人工與分攤之製造費用</li><li>並彙總總成本與單位成本</li></ul>"
+},
+{
+  q:"兩階段成本分攤中，「將所有製造費用分配至生產部門（含服務部門）並把服務部門成本再分配至生產部門」屬於哪一階段？",
+  opts:["(A) 第一階段","(B) 第二階段","(C) 無關","(D) 只屬於部門分攤"],
+  ans:"<b>(A) 第一階段。</b><ul><li>第一階段＝成本分配（cost distribution）＋服務部門成本分攤，把全部製造費用歸入生產部門</li><li>第二階段＝各生產部門以預定率將成本分攤至生產批次</li></ul>"
+},
+{
+  q:"Blue River job S116 總成本 $48,000、共 80 片 SUP，其單位成本為何？",
+  opts:["(A) $600","(B) $480","(C) $1,600","(D) $800"],
+  ans:"<b>(A) $600。</b><ul><li>單位成本＝總成本÷數量＝$48,000÷80=$600</li><li>分批成本制將每批成本平均至該批單位數</li></ul>"
+},
+{
+  q:"下列何者適用「專案成本制（project costing）」？",
+  opts:["(A) 大量標準化煉油廠","(B) 會計師事務所的審計案件","(C) 連續流動之化工廠","(D) 生產標準晶片的晶圓廠"],
+  ans:"<b>(B) 會計師事務所的審計案件。</b><ul><li>專案成本制＝服務業/非營利之分批成本制變體</li><li>醫院 cases、顧問 engagements、律師案件、政府 programs 皆適用</li></ul>"
+},
+];
+
+/* ===== 渲染 ===== */
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function escA(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+
+let currentChapter=1;
+/* 行動端抽屜開關 */
+const navToggle=document.getElementById("navToggle");
+const navMask=document.getElementById("navMask");
+function closeNav(){document.body.classList.remove("nav-open");}
+if(navToggle)navToggle.addEventListener("click",()=>{document.body.classList.toggle("nav-open");});
+if(navMask)navMask.addEventListener("click",closeNav);
+
+function getProgressState(){
+  let mc={};try{mc=JSON.parse(localStorage.getItem("ma_mc_learned_v1")||"{}")}catch(e){}
+  let dn={};try{dn=JSON.parse(localStorage.getItem("ma_done_v1")||"{}")}catch(e){}
+  return {mc,dn};
+}
+function chapterProgress(n){
+  const {mc,dn}=getProgressState();
+  const secs=CH_SECTIONS[n]||[];
+  let total=0,done=0;
+  secs.forEach(sec=>{
+    const keys=[...sec.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]);
+    total+=keys.length;done+=keys.filter(k=>mc[k]).length;
+  });
+  const probs=CH_PROBLEMS[n]||[];
+  total+=probs.length;done+=probs.filter((_,i)=>dn[n+"-"+(i+1)]).length;
+  return {done,total,pct:total?Math.round(done/total*100):0};
+}
+
+function refreshProgress(n){
+  const {mc}=getProgressState();
+  const secs=CH_SECTIONS[n]||[];
+  const strip=document.querySelector(".progress-strip");
+  const label=document.querySelector(".progress-label");
+  if(strip&&label){
+    const secMc=secs.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));
+    strip.innerHTML=secMc.map(a=>`<i class="${a.length?(a.every(k=>mc[k])?'done':''):'na'}"></i>`).join("");
+    const t=secMc.filter(a=>a.length).length,d=secMc.filter(a=>a.length&&a.every(k=>mc[k])).length;
+    label.textContent="本章方法卡小節已完成 "+d+" / "+t+(t?"（"+Math.round(d/t*100)+"%）":"（本章無方法卡）");
+  }
+  const probProg=document.getElementById("probProgress");
+  if(probProg){
+    const {dn}=getProgressState();
+    const probs=CH_PROBLEMS[n]||[];
+    probProg.textContent="（已做 "+probs.filter((_,i)=>dn[n+"-"+(i+1)]).length+" / "+probs.length+"）";
+  }
+  const tag=document.querySelector('.nav-chapter[data-ch="'+n+'"] .tag');
+  if(tag){const pct=chapterProgress(n).pct;tag.textContent=pct>=100?"✓ 100%":pct+"%";}
+}
+
+
+function renderSidebar(){
+  const sb=document.getElementById("sidebar");
+  let html=`<div class="brand">管理會計<div class="t2">研究所複習 · Hilton &amp; Platt 第 1–8、16 章</div></div>
+  <button class="nav-gloss" id="navGloss" title="統整全書術語，可篩選與打勾複習">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>術語複習表
+  </button>`;
+  BOOK.forEach(ch=>{
+    html+=`<button class="nav-chapter ${ch.n===currentChapter?'active':''}" data-ch="${ch.n}">
+      <span class="num">${ch.n}</span><span>${esc(ch.title)}</span>
+      ${ch.done?`<span class="tag done">${chapterProgress(ch.n).pct>=100?"✓ 100%":chapterProgress(ch.n).pct+"%"}</span>`:'<span class="tag">待建</span>'}
+    </button>`;
+    if(ch.subs&&ch.subs.length){
+      ch.subs.forEach(sub=>{
+        const id=(typeof sub==="string")?sub.slice(0,3):sub.id;
+        const title=(typeof sub==="string")?sub:sub.title;
+        html+=`<button class="nav-sub" data-ch="${ch.n}" data-sec="${id}">${esc(title)}</button>`;
+      });
+    }
+  });
+  sb.innerHTML=html;
+  const navGloss=sb.querySelector("#navGloss");
+  if(navGloss)navGloss.addEventListener("click",()=>{renderGlossaryFull();window.scrollTo({top:0,behavior:"smooth"});closeNav();});
+  sb.querySelectorAll(".nav-chapter").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const ch=BOOK[+b.dataset.ch-1];
+      if(ch.done){renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});closeNav();}
+      else{toast("第 "+ch.n+" 章尚未建置");}
+    });
+  });
+  sb.querySelectorAll(".nav-sub").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const ch=BOOK[+b.dataset.ch-1];
+      if(!ch.done){toast("第 "+ch.n+" 章尚未建置");return;}
+      closeNav();
+      if(currentChapter!==+b.dataset.ch)renderChapter(+b.dataset.ch);
+      const el=document.getElementById("sec-"+b.dataset.sec);
+      if(!el)return;
+      if(!el.classList.contains("open")){const h=el.querySelector(".section-head");if(h)h.click();}
+      setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),60);
+    });
+  });
+}
+
+function renderChapter(n){
+  currentChapter=n;
+  renderSidebar();
+  const book=BOOK[n-1];
+  const sections=CH_SECTIONS[n]||[];
+  const problems=CH_PROBLEMS[n]||[];
+  const c=document.getElementById("chapterContent");
+  const favStoreKey="ma_fav_v1";
+  let favState={};try{favState=JSON.parse(localStorage.getItem(favStoreKey)||"{}")}catch(e){}
+  let doneState={};try{doneState=JSON.parse(localStorage.getItem("ma_done_v1")||"{}")}catch(e){}
+  const favPool={};
+  let h=`<div class="chapter-head">
+    <span class="kicker">第 ${n} 章</span>
+    <h1>第${n}章 ${esc(book.title)}</h1>
+    <div class="chpage">管理會計（Hilton &amp; Platt）第 ${n} 章</div>
+    <ul class="ch-points">
+      ${book.points?book.points.map(p=>`<li>${esc(p)}</li>`).join(""):""}
+    </ul>
+    <div class="progress-strip">${(()=>{const{mc}=getProgressState();const secMc=sections.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));return secMc.map(a=>`<i class="${a.length?(a.every(k=>mc[k])?'done':''):'na'}"></i>`).join("")})()}</div>
+    <div class="progress-label">本章小節方法卡已學 ${(()=>{const{mc}=getProgressState();const secMc=sections.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));const t=secMc.filter(a=>a.length).length,d=secMc.filter(a=>a.length&&a.every(k=>mc[k])).length;return "本章方法卡小節已完成 "+d+" / "+t+(t?"（"+Math.round(d/t*100)+"%）":"（本章無方法卡）")})()}</div>
+  </div>`;
+  sections.forEach((s,i)=>{
+    h+=`<section class="section" id="sec-${s.id}">
+      <div class="section-head" onclick="toggleSec(this)">
+        <span class="sec-num">${s.id}</span><span>${esc(s.title)}</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="section-body">${s.body}</div>
+    </section>`;
+  });
+  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">例題演練 <span class="prob-progress" id="probProgress"></span></h1><p>先自己作答，再點「顯示答案」核對。</p></div>`;
+  problems.forEach((p,i)=>{
+    const fk=n+"-"+(i+1);
+    favPool[fk]={t:"第 "+n+" 章 · 例題 "+(i+1),q:p.q+(p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""),a:p.ans};
+    const isFav=!!favState[fk];
+    const isDone=!!doneState[fk];
+    h+=`<div class="problem" id="prob-${n}-${i+1}">
+      <div class="p-head"><button class="done-btn ${isDone?"on":""}" data-done="${fk}" title="標記已做過">${isDone?"☑ 做過":"☐ 做過"}</button><span>例題 ${i+1}</span><button class="fav ${isFav?"on":""}" data-fav="${fk}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
+      <div class="p-body"><p>${p.q}</p>${p.opts.length?`<div class="opts" data-pid="${fk}" data-correct="${(()=>{const m=p.ans.match(/^<b>\(([A-Da-d])\)/);return m?m[1].toUpperCase():"";})()}">${p.opts.map(o=>{const om=o.match(/^\(([A-Da-d])\)/);return `<div class="opt" data-ans="${om?om[1].toUpperCase():""}">${o}</div>`;}).join("")}</div>`:""}
+      <div class="prob-fb"></div>
+      <button class="ans-btn" onclick="toggleAns(this)">顯示答案</button>
+      <div class="ans"><span class="a-label">解答</span>：${p.ans}</div></div>
+    </div>`;
+  });
+  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">本章術語</h1><p>本章出現的術語：打勾＝已學會、★重點、✎筆記。全書術語總表在左側「術語複習表」。</p></div>
+  <div id="chGlossRoot"></div>`;
+  c.innerHTML=h;
+
+  glossMode="chapter";glossChapter=n;
+  renderGlossary();
+
+  // 例題收藏（錯題收集，存本機，與題庫頁共用 ma_fav_v1）
+  c.querySelectorAll(".fav").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const k=b.dataset.fav;
+      if(favState[k]){delete favState[k];}else{favState[k]=favPool[k];}
+      try{localStorage.setItem(favStoreKey,JSON.stringify(favState));}catch(e){}
+      const on=!!favState[k];
+      b.classList.toggle("on",on);
+      b.textContent=on?"★ 已收藏":"☆ 收藏";
+    });
+  });
+
+  // 例題做過標記（存 ma_done_v1）
+  refreshProgress(n);
+  c.querySelectorAll(".done-btn").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const k=b.dataset.done;
+      if(doneState[k]){delete doneState[k];}else{doneState[k]=true;}
+      try{localStorage.setItem("ma_done_v1",JSON.stringify(doneState));}catch(e){}
+      const on=!!doneState[k];
+      b.classList.toggle("on",on);
+      b.textContent=on?"☑ 做過":"☐ 做過";
+      refreshProgress(n);
+    });
+  });
+
+  // 例題點按作答：點選項 → 判對錯 → 自動做過、錯題自動收藏
+  c.querySelectorAll(".opts").forEach(box=>{
+    box.addEventListener("click",e=>{
+      const opt=e.target.closest(".opt");
+      if(!opt || box.dataset.locked) return;
+      box.dataset.locked="1";
+      const pid=box.dataset.pid, correct=box.dataset.correct;
+      const picked=opt.dataset.ans;
+      const isRight = !correct || (picked===correct);
+      opt.classList.add("sel");
+      if(isRight){ opt.classList.add("right"); }
+      else{
+        opt.classList.add("wrong");
+        if(correct) box.querySelectorAll(".opt").forEach(o=>{ if(o.dataset.ans===correct) o.classList.add("right"); });
+      }
+      const fb=box.parentElement.querySelector(".prob-fb");
+      if(fb) fb.innerHTML = isRight ? '<span class="fb-ok">✓ 答對了</span>' : `<span class="fb-no">✗ 答錯，正確答案是 ${correct}</span>`;
+      // 自動標記做過
+      if(!doneState[pid]){ doneState[pid]=true; try{localStorage.setItem("ma_done_v1",JSON.stringify(doneState));}catch(err){} refreshProgress(n); }
+      const prob=box.closest(".problem");
+      // 答錯自動進收藏
+      if(!isRight && !favState[pid]){ favState[pid]=favPool[pid]; try{localStorage.setItem(favStoreKey,JSON.stringify(favState));}catch(err){} }
+      // 同步按鈕狀態
+      const db=prob.querySelector(".done-btn"); if(db){ db.classList.add("on"); db.textContent="☑ 做過"; }
+      const favBtn=prob.querySelector(".fav"); if(favBtn && !isRight){ favBtn.classList.add("on"); favBtn.textContent="★ 已收藏"; }
+      // 直接展開解答
+      const ans=prob.querySelector(".ans"); if(ans) ans.style.display="block";
+    });
+  });
+
+  // 術語點擊（文內：課文名詞＋專有名詞都可開知識卡）
+  c.querySelectorAll(".term,.proper").forEach(t=>{
+    if(!t.dataset.term)return;
+    t.addEventListener("click",e=>{e.stopPropagation();openTerm(t.dataset.term);});
+  });
+  // 方法學習卡打勾（學會標記，存本機；學會＝刪除線＋黯淡）
+  const mcKey="ma_mc_learned_v1";
+  let mcState={};try{mcState=JSON.parse(localStorage.getItem(mcKey)||"{}")}catch(e){}
+  c.querySelectorAll(".method-card input[type=checkbox]").forEach(cb=>{
+    const k=cb.dataset.mc;
+    const card=cb.closest(".method-card");
+    const apply=()=>card.classList.toggle("learned",cb.checked);
+    cb.checked=!!mcState[k];
+    apply();
+    cb.addEventListener("change",()=>{mcState[k]=cb.checked;localStorage.setItem(mcKey,JSON.stringify(mcState));apply();refreshProgress(n);});
+  });
+  // 套用已存高亮
+  applyHighlights();
+}
+
+function toggleSec(head){
+  const sec=head.parentElement;
+  sec.classList.toggle("open");
+}
+function toggleAns(btn){
+  const ans=btn.nextElementSibling;
+  ans.classList.toggle("show");
+  btn.textContent=ans.classList.contains("show")?"隱藏答案":"顯示答案";
+}
+
+/* ===== 術語模態 ===== */
+const PROPER_TERMS=new Set(["Kaplan","Norton","Hayes-Wheelwright","IMA","CMA","CGMA","Sarbanes-Oxley","Enron","Arthur Andersen","Volkswagen"]);
+const PROPER_ZH=["卡普蘭","諾頓","海斯—惠爾賴特","IMA","管理會計師","沙賓法案","安隆","安達信","福斯"];
+function decorateDef(text){
+  let h=esc(text);
+  PROPER_ZH.forEach(n=>{if(n)h=h.split(n).join('<span class="proper">'+n+'</span>');});
+  return h;
+}
+function openTerm(key){
+  const t=TERMS[key];
+  if(!t){toast("暫無此術語資料");return;}
+  const enEl=document.getElementById("termModalEn");
+  const zhEl=document.getElementById("termModalZh");
+  const defEl=document.getElementById("termModalDef");
+  const proper=PROPER_TERMS.has(key);
+  enEl.textContent=t[0];
+  enEl.classList.toggle("proper",proper);
+  zhEl.textContent=t[1];
+  zhEl.classList.toggle("proper",proper);
+  defEl.innerHTML=decorateDef(t[2]);
+  const m=document.getElementById("termModal");
+  m.style.display="flex";
+}
+function closeTerm(){document.getElementById("termModal").style.display="none";}
+
+const CH4_SECTIONS = [
+{
+  id:"4.1", title:"分批 vs 分步成本制",
+  body:`
+  <p><b>分步成本制</b>（<span class="term" data-term="Process costing">process costing</span>）用於大量、近同質產品的生產（連續流程）；<b>分批成本制</b>（<span class="term" data-term="Job-order costing">job-order costing</span>）用於小量、異質產品。兩者目的相同：累積成本並分配至單位產品。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
+    <thead><tr><th></th><th>分批成本制</th><th>分步成本制</th></tr></thead>
+    <tbody>
+      <tr><td>產品</td><td>小量、異質</td><td>大量、近同質</td></tr>
+      <tr><td>成本歸屬</td><td>各批分開累積</td><td>依部門/作業累積後平均分配</td></tr>
+      <tr><td>單位成本</td><td>批次總成本 ÷ 該批數量</td><td>部門總成本 ÷ 約當產量</td></tr>
+      <tr><td>例子</td><td>印刷、家具、電影</td><td>煉油、化工、食品、晶片</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：能判斷哪種產品用分批或分步成本制。分步成本制是「部門」為中心。</div>`
+},
+{
+  id:"4.2", title:"約當產量（Equivalent Units）",
+  body:`
+  <p><b>約當產量</b>（<span class="term" data-term="Equivalent unit">equivalent unit</span>）＝將部分完成的產品換算為完整完成之等值單位數。</p>
+  <div class="formula"><span class="f-label">約當產量</span>約當產量 ＝ 完工並轉出單位 ＋（期末在製品單位 × 完工百分比）</div>
+  <p>直接原料與轉換成本（<span class="term" data-term="Conversion costs">conversion</span>，直接人工＋製造費用）的完工百分比常不同，須分開計算約當產量。</p>
+  <div class="method-card mc-title" data-mc="equnit">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-1" data-mc="equnit"><label for="mc-ch4-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">約當產量計算</div>
+    <div class="mc-body">
+      <div class="mc-formula">直接材料約當產量、轉換成本約當產量分開算</div>
+      <div class="mc-detail">期末在製品：直接材料 100% 完成、轉換 60% 完成，則分別以 100% 與 60% 計入約當產量。</div>
+      <div class="mc-ex">例子：60,000 完工 + 5,000 在製品（材料100%、轉換60%）→ 材料約當 65,000、轉換約當 63,000。</div>
+    </div>
+  </div>`
+},
+{
+  id:"4.3", title:"加權平均法（Weighted-Average Method）",
+  body:`
+  <p><span class="term" data-term="Weighted-average method">加權平均法</span>將<b>期初在製品成本</b>與<b>當期發生成本</b>合併平均，計算每約當單位成本，不區分成本發生於何時。</p>
+  <div class="method-card mc-title" data-mc="wa">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-2" data-mc="wa"><label for="mc-ch4-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">加權平均四步驟</div>
+    <div class="mc-body">
+      <div class="mc-formula">① 分析實體單位流動 → ② 算約當產量 → ③ 算每約當單位成本 → ④ 分析部門總成本</div>
+      <div class="mc-detail">每約當單位成本＝(期初在製品成本＋當期成本) ÷ 當期約當產量。最後將總成本分配至「完工轉出」與「期末在製品」。</div>
+      <div class="mc-ex">例子：材料 $195,000÷65,000=$3.00；轉換 $283,500÷63,000=$4.50；總 $7.50。完工 60,000×$7.50=$450,000。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：加權平均法不單獨追蹤期初在製品，直接合併平均。與 FIFO 法的差異在期初在製品處理。</div>`
+},
+{
+  id:"4.4", title:"部門生產報告與成本流動",
+  body:`
+  <p><span class="term" data-term="Departmental production report">部門生產報告</span>（departmental production report）彙總部門的實體單位流動、約當產量、每約當單位成本與總成本分配。</p>
+  <p>分步成本制的分錄與分批制相似，但常依部門設 WIP 帳戶。移入後續部門時借記該部門 WIP；出售時借記 COGS。</p>
+  <p><b>移入成本</b>（<span class="term" data-term="Transferred-in costs">transferred-in costs</span>）＝前一部門移入的成本，於後續部門視為已發生之成本。</p>
+  <div class="warn">考試重點：分步成本制可用「順序生產部門」；移入成本要計入後續部門的每約當單位成本。</div>`
+},
+{
+  id:"4.5", title:"作業成本制（Operation Costing）",
+  body:`
+  <p><span class="term" data-term="Operation costing">作業成本制</span>（operation costing）＝<b>分批與分步的混合</b>（<span class="term" data-term="Hybrid product-costing system">hybrid</span>），用於：<b>轉換作業各產品線相似、但直接原料差異大</b>的批量生產。</p>
+  <ul>
+    <li><b>直接原料</b>：以分批（job-order）方式追蹤至各批（各批直接原料不同）</li>
+    <li><b>轉換成本</b>（直接人工＋製造費用）：以分步（process）方式，依部門、用預定分攤率分攤</li>
+  </ul>
+  <div class="method-card mc-title" data-mc="opcost">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-3" data-mc="opcost"><label for="mc-ch4-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">作業成本制</div>
+    <div class="mc-body">
+      <div class="mc-formula">直接原料用分批法、轉換成本用分步法</div>
+      <div class="mc-detail">轉換成本預定分攤率＝預算轉換成本 ÷ 預算成本動因量。</div>
+      <div class="mc-ex">例子：MVP 專業籃球：直接原料$20 + 準備$7.50 + 完工$6 + 包裝$0.50 = $34/顆。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：作業成本制是混合制度；「直接原料差異大、轉換相似」為其適用條件。</div>`
+},
+];
+const CH4_PROBLEMS = [
+{
+  q:"下列何者最適合使用「分步成本制（process costing）」？",
+  opts:["(A) 訂製住宅營造商","(B) 煉油廠","(C) 廣告公司","(D) 訂製家具店"],
+  ans:"<b>(B) 煉油廠。</b><ul><li>分步成本制用於大量、近同質產品的連續流程（煉油、化工、食品、晶片）</li><li>訂製住宅、廣告、訂製家具屬小量異質，用分批成本制</li></ul>"
+},
+{
+  q:"約當產量（equivalent units）的意義是？",
+  opts:["(A) 實際完工的成品數量","(B) 將部分完成的產品換算為完整完成的等值單位數","(C) 期末存貨數量","(D) 期初在製品數量"],
+  ans:"<b>(B) 將部分完成的產品換算為完整完成的等值單位數。</b><ul><li>約當產量讓未完成品能與完成品合併計算單位成本</li><li>直接材料與轉換成本因完工%不同須分開計算</li></ul>"
+},
+{
+  q:"某部門期末有 5,000 單位在製品：直接材料 100% 完成、轉換成本 60% 完成；當期完工轉出 60,000 單位。則「轉換成本」約當產量為？",
+  opts:["(A) 65,000","(B) 63,000","(C) 60,000","(D) 5,000"],
+  ans:"<b>(B) 63,000。</b><ul><li>轉換約當產量＝60,000＋(5,000×60%)＝60,000＋3,000＝63,000</li><li>直接材料約當產量＝60,000＋(5,000×100%)＝65,000</li></ul>"
+},
+{
+  q:"加權平均法下，部門材料總成本 $195,000、材料約當產量 65,000；轉換總成本 $283,500、轉換約當產量 63,000。則每單位總成本為？",
+  opts:["(A) $7.50","(B) $3.00","(C) $4.50","(D) $6.00"],
+  ans:"<b>(A) $7.50。</b><ul><li>材料每單位＝$195,000÷65,000=$3.00；轉換＝$283,500÷63,000=$4.50</li><li>總每單位＝$3.00＋$4.50＝$7.50</li></ul>"
+},
+{
+  q:"加權平均法下，若完工轉出 60,000 單位、每單位 $7.50，則「完工轉出成本」為？",
+  opts:["(A) $450,000","(B) $480,000","(C) $195,000","(D) $283,500"],
+  ans:"<b>(A) $450,000。</b><ul><li>完工轉出成本＝60,000 × $7.50＝$450,000</li><li>期末在製品成本則以期末約當產量 × 每單位成本計算</li></ul>"
+},
+{
+  q:"「作業成本制（operation costing）」的適用條件是？",
+  opts:["(A) 直接原料與轉換作業各產品線都相同","(B) 直接原料差異大、但轉換作業各產品線相似","(C) 產品完全異質","(D) 大量同質標準化產品"],
+  ans:"<b>(B) 直接原料差異大、但轉換作業各產品線相似。</b><ul><li>作業成本制是分批＋分步混合：直接原料用分批、轉換成本用分步</li><li>(A) 轉換相似但原料須差異大；(C) 用分批；(D) 用分步</li></ul>"
+},
+{
+  q:"「移入成本（transferred-in costs）」指的是？",
+  opts:["(A) 期初在製品成本","(B) 前一部門移入後續部門的成本","(C) 直接原料成本","(D) 銷售費用"],
+  ans:"<b>(B) 前一部門移入後續部門的成本。</b><ul><li>順序生產部門中，前一部門完工的成本移入後續部門 WIP</li><li>移入成本須計入後續部門的每約當單位成本</li></ul>"
+},
+{
+  q:"部門生產報告（departmental production report）的四個步驟依序為？",
+  opts:["(A) 實體流動→約當產量→每單位成本→總成本分析","(B) 總成本→每單位成本→約當產量→實體流動","(C) 約當產量→實體流動→總成本→每單位成本","(D) 每單位成本→約當產量→實體流動→總成本"],
+  ans:"<b>(A) 實體流動→約當產量→每單位成本→總成本分析。</b><ul><li>四步驟：①分析實體單位流動②算約當產量③算每約當單位成本④分析總成本</li><li>加權平均法每單位成本是期初在製品＋當期成本之加權平均</li></ul>"
+},
+{
+  q:"加權平均法與 FIFO 法的主要差異在於？",
+  opts:["(A) 兩者完全相同","(B) 加權平均法將期初在製品成本與當期成本合併平均，FIFO 法分開處理","(C) FIFO 法不考慮完工百分比","(D) 加權平均法只用當期成本"],
+  ans:"<b>(B) 加權平均法將期初在製品成本與當期成本合併平均，FIFO 法分開處理。</b><ul><li>加權平均法不區分成本發生時點，直接合併平均</li><li>FIFO 法單獨追蹤期初在製品</li></ul>"
+},
+{
+  q:"分步成本制下，部門的「轉換成本（conversion costs）」包含？",
+  opts:["(A) 直接原料＋直接人工","(B) 直接人工＋製造費用","(C) 直接原料＋製造費用","(D) 僅直接人工"],
+  ans:"<b>(B) 直接人工＋製造費用。</b><ul><li>轉換成本＝將原料「轉換」為成品的成本＝直接人工＋製造費用</li><li>在分步成本制中常合併為單一成本類別計算約當產量</li></ul>"
+},
+];
+
+const CH5_SECTIONS = [
+{
+  id:"5.1", title:"傳統數量基礎成本制 vs ABC",
+  body:`
+  <p><b>傳統、數量基礎成本制</b>（<span class="term" data-term="Volume-based (or throughput-based) costing system">volume-based costing</span>）以<b>單一數量基礎成本動因</b>（如直接人工小時、機器小時）分攤全部製造費用。</p>
+  <p><b>作業基礎成本制</b>（<span class="term" data-term="Activity-based costing (ABC)">ABC</span>）將成本先累積於<b>作業成本庫</b>（activity cost pool），再依各成本庫的成本動因分配到成本標的（產品、服務、產品線、顧客）。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:30%"><col style="width:35%"><col style="width:35%"></colgroup>
+    <thead><tr><th></th><th>傳統成本制</th><th>ABC</th></tr></thead>
+    <tbody>
+      <tr><td>成本動因</td><td>單一、數量基礎</td><td>多個、依活動</td></tr>
+      <tr><td>分攤方式</td><td>全廠/部門單一分攤率</td><td>多成本庫、多分攤率</td></tr>
+      <tr><td>精確度</td><td>可能扭曲產品成本</td><td>較能反映資源消耗</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：ABC 用「兩階段」程序（第一階段分資源到活動成本庫、第二階段分成本庫到成本標的）；傳統制用單一分攤率。</div>`
+},
+{
+  id:"5.2", title:"成本階層（Cost Hierarchy）",
+  body:`
+  <p><span class="term" data-term="Cost hierarchy">成本階層</span>（LO5-3）將活動依其與產量之關係分四層：</p>
+  <ul>
+    <li><b>單位層級</b>（<span class="term" data-term="Unit-level activity">unit-level</span>）：每生產一單位發生一次，如直接材料、直接人工、機器運轉</li>
+    <li><b>批次層級</b>（<span class="term" data-term="Batch-level activity">batch-level</span>）：每生產一批發生一次，如機器整備（setup）、檢驗</li>
+    <li><b>產品維續層級</b>（<span class="term" data-term="Product-sustaining-level activity">product-sustaining</span>）：每產品線一次，如工程設計、產品測試</li>
+    <li><b>廠房層級</b>（<span class="term" data-term="Facility-(or general-operations) level activity">facility</span>）：維持整體廠房運作，如廠房租金、廠長薪資、工廠保險</li>
+  </ul>
+  <div class="warn">考試重點：能判斷某活動屬哪一層級。廠房層級成本最難歸屬，傳統制常扭曲之。</div>`
+},
+{
+  id:"5.3", title:"傳統 vs ABC：成本扭曲的原因",
+  body:`
+  <p>傳統數量基礎制易扭曲產品成本，原因有二（LO5-5）：</p>
+  <ul>
+    <li><b>產品線多樣性</b>（product-line diversity）：不同產品耗用支援活動比例不同</li>
+    <li><b>非單位層級成本</b>（non-unit-level costs）：如整備、設計等成本與產量不成比例</li>
+  </ul>
+  <div class="method-card mc-title" data-mc="abc-distortion">
+    <div class="mc-check"><input type="checkbox" id="mc-ch5-1" data-mc="abc-distortion"><label for="mc-ch5-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">成本扭曲</div>
+    <div class="mc-body">
+      <div class="mc-formula">無單一成本動因能捕捉產品與支援活動的複雜關係</div>
+      <div class="mc-detail">高產量、低複雜度的產品常被傳統制<b>高估</b>成本；小量、高複雜度產品常被<b>低估</b>。</div>
+      <div class="mc-ex">例子：Edgeworth Box 中兩張訂單（Box C52 20,000 單位 vs Box W29 10,000 單位）耗用支援服務比例不同，傳統制無法反映。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：低產量/高複雜度產品在傳統制下成本被低估（利潤被高估）；高產量/標準化產品被高估。這是 ABC 的價值所在。</div>`
+},
+{
+  id:"5.4", title:"ABC 成本分攤計算",
+  body:`
+  <div class="method-card mc-title" data-mc="abc-calc">
+    <div class="mc-check"><input type="checkbox" id="mc-ch5-2" data-mc="abc-calc"><label for="mc-ch5-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">ABC 兩階段計算</div>
+    <div class="mc-body">
+      <div class="mc-formula">Pool rate ＝ 成本庫總成本 ÷ 成本動因量；分攤 ＝ pool rate × 實際動因量</div>
+      <div class="mc-detail">每一成本庫選一個成本動因（如採購以原料成本%、設計以設計小時、整備以生產批數、機器以機器小時）。</div>
+      <div class="mc-ex">例子：整備$70/run×2run=$140；機器$3/hrs×24=$72。產品成本＝直接原料＋直接人工＋所有分攤之overhead。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：能算每個成本庫的分攤額並加總為產品 overhead。成本動因三準則：相關性、衡量成本、行為效果（LO5-6）。</div>`
+},
+{
+  id:"5.5", title:"顧客獲利能力分析與 TDABC",
+  body:`
+  <p><b>顧客獲利能力分析</b>（<span class="term" data-term="Customer-profitability analysis">customer-profitability analysis</span>）＝應用 ABC 判斷顧客相關成本的成本動因，評估各主要顧客關係的獲利能力（LO5-9）。</p>
+  <p><b>作業基礎管理</b>（<span class="term" data-term="Activity-based management (ABM)">ABM</span>）＝運用 ABC 資訊改善營運、消除非附加價值成本（LO5-8）。</p>
+  <p><b>時間驅動作業基礎成本制</b>（<span class="term" data-term="Time-driven activity-based costing (TDABC)">TDABC</span>）＝ABC 在服務業之變體：活動實務產能與成本動因量皆以<b>時間</b>衡量（LO5-10）。</p>
+  <div class="warn">考試重點：TDABC 用時間衡量產能與動因；ABM 用 ABC 資訊改善營運、消除非附加價值成本。</div>`
+},
+];
+const CH5_PROBLEMS = [
+{
+  q:"ABC 系統的第一階段程序是？",
+  opts:["(A) 將成本動因量分配到產品","(B) 將資源成本辨識並分配到作業成本庫","(C) 計算銷貨成本","(D) 設定全廠分攤率"],
+  ans:"<b>(B) 將資源成本辨識並分配到作業成本庫。</b><ul><li>第一階段：資源成本分入活動成本庫</li><li>第二階段：各成本庫以成本動因分配到成本標的</li></ul>"
+},
+{
+  q:"「機器整備（machine setup）」的成本最可能屬於哪一成本階層？",
+  opts:["(A) 單位層級","(B) 批次層級","(C) 產品維續層級","(D) 廠房層級"],
+  ans:"<b>(B) 批次層級。</b><ul><li>每生產一批發生一次整備（setup），與批數有關而非單位數</li><li>單位層級如直接材料；產品維續如設計；廠房如租金</li></ul>"
+},
+{
+  q:"下列何者屬於「廠房層級（facility-level）」成本？",
+  opts:["(A) 機器運轉耗電","(B) 廠房租金","(C) 產品測試","(D) 機器整備"],
+  ans:"<b>(B) 廠房租金。</b><ul><li>廠房層級＝維持整體廠房運作之成本（租金、廠長薪資、工廠保險）</li><li>機器耗電單位層級、測試產品維續、整備批次層級</li></ul>"
+},
+{
+  q:"傳統數量基礎成本制易「扭曲產品成本」，主要是因為哪兩個因素？",
+  opts:["(A) 產品線多樣性與非單位層級成本","(B) 直接材料價格波動","(C) 人工薪資上升","(D) 存貨過多"],
+  ans:"<b>(A) 產品線多樣性與非單位層級成本。</b><ul><li>單一數量動因無法捕捉產品與支援活動的複雜關係</li><li>非單位層級成本（整備、設計）與產量不成比例</li></ul>"
+},
+{
+  q:"ABC 下，若整備成本庫總成本 $70,000、預算生產批數 1,000，某訂單用 2 批，則其整備分攤額為？",
+  opts:["(A) $140","(B) $70","(C) $1,400","(D) $700"],
+  ans:"<b>(A) $140。</b><ul><li>Pool rate＝$70,000÷1,000=$70/批</li><li>分攤＝$70×2=$140</li></ul>"
+},
+{
+  q:"「作業基礎管理（ABM）」的主要目標是？",
+  opts:["(A) 只計算稅額","(B) 運用 ABC 資訊改善營運、消除非附加價值成本","(C) 只服務外部稽核","(D) 設定售價"],
+  ans:"<b>(B) 運用 ABC 資訊改善營運、消除非附加價值成本。</b><ul><li>ABM 是 ABC 資訊的使用者，聚焦流程改善</li><li>非附加價值成本：可消除而不損害品質/績效/價值之成本</li></ul>"
+},
+{
+  q:"時間驅動作業基礎成本制（TDABC）的特色是？",
+  opts:["(A) 只用機器小時","(B) 活動實務產能與成本動因量皆以時間衡量","(C) 不使用成本庫","(D) 只適用製造業"],
+  ans:"<b>(B) 活動實務產能與成本動因量皆以時間衡量。</b><ul><li>TDABC 是 ABC 的服務業變體</li><li>產能與動因皆以時間單位衡量</li></ul>"
+},
+{
+  q:"顧客獲利能力分析（customer-profitability analysis）是下列何者的應用？",
+  opts:["(A) 分批成本制","(B) 作業基礎管理（ABM）","(C) 分步成本制","(D) 標準成本制"],
+  ans:"<b>(B) 作業基礎管理（ABM）。</b><ul><li>顧客獲利能力分析以 ABC 判斷顧客相關成本動因，評估顧客獲利</li><li>是 ABM 的一種應用（LO5-9）</li></ul>"
+},
+{
+  q:"選擇成本動因的三個準則是？（LO5-6）",
+  opts:["(A) 相關性、衡量成本、行為效果","(B) 價格、數量、品質","(C) 時間、地點、人員","(D) 直接、間接、固定"],
+  ans:"<b>(A) 相關性、衡量成本、行為效果。</b><ul><li>①動因與成本庫成本發生之相關程度②衡量成本③可能導致的行為效果</li></ul>"
+},
+{
+  q:"ABC 下，某產品直接原料 $40,000＋各種 overhead 分攤 $8,496，共 20,000 單位。其每單位 overhead 成本為？",
+  opts:["(A) $0.4248","(B) $0.79","(C) $2.00","(D) $0.10"],
+  ans:"<b>(A) $0.4248。</b><ul><li>每單位 overhead＝$8,496÷20,000＝$0.4248</li><li>ABC 使小量、高複雜度產品每單位 overhead 高於大量標準品</li></ul>"
+},
+];
+
+const CH6_SECTIONS = [
+{
+  id:"6.1", title:"成本行為、估計與預測",
+  body:`
+  <p><b>成本估計</b>（cost estimation）＝估計成本與成本動因之間的關係；<b>成本行為</b>（<span class="term" data-term="Cost behavior">cost behavior</span>）＝成本隨動因改變的反應方式；<b>成本預測</b>（cost prediction）＝用估計的成本行為預測未來成本（LO6-1）。</p>
+  <div class="method-card mc-title" data-mc="costfun">
+    <div class="mc-check"><input type="checkbox" id="mc-ch6-1" data-mc="costfun"><label for="mc-ch6-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">成本函數</div>
+    <div class="mc-body">
+      <div class="mc-formula">Y ＝ a ＋ bX</div>
+      <div class="mc-detail">Y＝總成本；a＝固定成本（截距）；b＝每單位變動成本（斜率）；X＝成本動因量。</div>
+      <div class="mc-ex">例子：Y＝$20,000＋$5X，若生產 3,000 單位，總成本＝$20,000＋$15,000＝$35,000。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：成本函數 Y=a+bX 是成本行為的數學基礎，固定+變動構成總成本。</div>`
+},
+{
+  id:"6.2", title:"變動成本與固定成本",
+  body:`
+  <p><b>變動成本</b>（<span class="term" data-term="Variable cost">variable cost</span>）＝隨動因量<b>成比例</b>改變之成本（每單位固定，總額隨量變）。</p>
+  <p><b>固定成本</b>（<span class="term" data-term="Fixed cost">fixed cost</span>）＝在一定攸關範圍（<span class="term" data-term="Relevant range">relevant range</span>）內，不隨動因量改變之成本（總額固定，每單位隨量變而下降）。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:28%"><col style="width:36%"><col style="width:36%"></colgroup>
+    <thead><tr><th></th><th>變動成本</th><th>固定成本</th></tr></thead>
+    <tbody>
+      <tr><td>每單位成本</td><td>固定不變</td><td>隨產量增加而下降</td></tr>
+      <tr><td>總成本</td><td>隨產量成比例增加</td><td>在攸關範圍內不變</td></tr>
+      <tr><td>例子</td><td>直接材料、直接人工</td><td>廠房租金、廠長薪資</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：區分「總額」與「每單位」觀點。固定成本每單位隨量下降，變動成本每單位不變。</div>`
+},
+{
+  id:"6.3", title:"成本估計方法",
+  body:`
+  <div class="method-card mc-title" data-mc="est">
+    <div class="mc-check"><input type="checkbox" id="mc-ch6-2" data-mc="est"><label for="mc-ch6-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">成本估計法</div>
+    <div class="mc-body">
+      <div class="mc-formula">工程估計法、帳戶分析法、高低點法、視覺比繪法、最小平方法（迴歸）</div>
+      <div class="mc-detail">
+        <ul>
+          <li><b>工程估計法</b>：由工程師依實際作業分析</li>
+          <li><b>帳戶分析法</b>：依會計帳戶逐一分類固定/變動</li>
+          <li><b>高低點法</b>：用最高與最低產量兩點求斜率</li>
+          <li><b>最小平方法</b>（迴歸）：統計上最佳擬合</li>
+        </ul>
+      </div>
+      <div class="mc-ex">高低點法：最高點（產量8,000、成本$50,000）與最低點（2,000、$26,000）→ b＝($50,000-$26,000)/(8,000-2,000)=$4；a＝$50,000-$4×8,000=$18,000。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：高低點法只取兩點，易受極端值影響；迴歸（最小平方法）最準。</div>`
+},
+{
+  id:"6.4", title:"學習曲線與其他成本行為",
+  body:`
+  <p><b>學習曲線</b>（<span class="term" data-term="Learning-curve phenomenon">learning curve</span>）＝隨累積產量增加，每單位投入時間（成本）以固定比率下降的現象，常見於人工密集作業。</p>
+  <p>其他成本行為型態：階梯式成本（stepped costs，如額外監工人員）、曲線式成本（curvilinear costs，如學習曲線、經濟規模）。</p>
+  <div class="warn">考試重點：學習曲線反映「累積經驗→單位成本下降」；是預測人工成本的重要工具。</div>`
+},
+{
+  id:"6.5", title:"成本動因與實務產能",
+  body:`
+  <p><b>成本動因</b>（<span class="term" data-term="Cost driver">cost driver</span>）＝驅動成本變動之因素。管理者需區分<span class="term" data-term="Unit-level cost driver">單位層級動因</span>與<span class="term" data-term="Non-unit-level cost driver">非單位層級動因</span>。</p>
+  <p>實務產能相關：<span class="term" data-term="Practical capacity">實務產能</span>（practical capacity）＝考量正常中斷後之最大可達產能；單位成本計算可區分「使用之資源成本」與「未使用之資源成本」。</p>
+  <div class="warn">考試重點：能區分單位與非單位成本動因；成本函數的動因選擇影響估計品質。</div>`
+},
+];
+const CH6_PROBLEMS = [
+{
+  q:"成本函數 Y＝a＋bX 中，b 代表？",
+  opts:["(A) 固定成本","(B) 每單位變動成本（斜率）","(C) 總成本","(D) 成本動因量"],
+  ans:"<b>(B) 每單位變動成本（斜率）。</b><ul><li>Y＝a＋bX：a 固定成本、b 每單位變動成本、X 動因量</li><li>總成本＝固定＋變動</li></ul>"
+},
+{
+  q:"下列何者屬於「固定成本」？",
+  opts:["(A) 直接材料","(B) 廠房租金","(C) 直接人工","(D) 銷售佣金"],
+  ans:"<b>(B) 廠房租金。</b><ul><li>固定成本在攸關範圍內總額不變（租金、廠長薪資）</li><li>直接材料/人工/佣金屬變動成本</li></ul>"
+},
+{
+  q:"固定成本每單位成本會如何變化？",
+  opts:["(A) 固定不變","(B) 隨產量增加而下降","(C) 隨產量增加而上升","(D) 無法預測"],
+  ans:"<b>(B) 隨產量增加而下降。</b><ul><li>總額固定，分母（產量）越大每單位越低</li><li>變動成本才是每單位固定</li></ul>"
+},
+{
+  q:"高低點法下，最高點（8,000 單位、$50,000）與最低點（2,000 單位、$26,000），則每單位變動成本 b 為？",
+  opts:["(A) $4","(B) $5","(C) $3","(D) $6"],
+  ans:"<b>(A) $4。</b><ul><li>b＝($50,000-$26,000)÷(8,000-2,000)=$24,000÷6,000=$4</li><li>a＝$50,000-$4×8,000=$18,000</li></ul>"
+},
+{
+  q:"下列哪一項成本估計方法「統計上最精確、最不受極端值影響」？",
+  opts:["(A) 高低點法","(B) 視覺比繪法","(C) 最小平方法（迴歸）","(D) 帳戶分析法"],
+  ans:"<b>(C) 最小平方法（迴歸）。</b><ul><li>迴歸用全部資料點求最佳擬合線</li><li>高低點法只用兩點，易受極端值影響</li></ul>"
+},
+{
+  q:"「學習曲線」現象指的是？",
+  opts:["(A) 產量固定時成本不變","(B) 隨累積產量增加，每單位投入時間（成本）以固定比率下降","(C) 固定成本上升","(D) 價格下降"],
+  ans:"<b>(B) 隨累積產量增加，每單位投入時間（成本）以固定比率下降。</b><ul><li>學習曲線反映經驗累積→效率提升</li><li>常見於人工密集作業的成本預測</li></ul>"
+},
+{
+  q:"「攸關範圍（relevant range）」指的是？",
+  opts:["(A) 售價的範圍","(B) 固定成本與變動成本關係成立的產量範圍","(C) 存貨範圍","(D) 利潤範圍"],
+  ans:"<b>(B) 固定成本與變動成本關係成立的產量範圍。</b><ul><li>成本行為假設只在攸關範圍內成立</li><li>超出範圍後固定成本會跳升（階梯式）</li></ul>"
+},
+{
+  q:"學習曲線下，若累積產量加倍時每單位時間降至原先的 80%，此為「多少%」的學習曲線？",
+  opts:["(A) 60%","(B) 80%","(C) 100%","(D) 120%"],
+  ans:"<b>(B) 80%。</b><ul><li>學習曲線以產量倍增時單位成本下降之比率命名</li><li>80%學習曲線＝產量加倍→單位成本為80%</li></ul>"
+},
+{
+  q:"成本行為（cost behavior）指的是？",
+  opts:["(A) 成本的會計分錄","(B) 成本隨成本動因改變的反應方式","(C) 成本的分類","(D) 成本的報表呈現"],
+  ans:"<b>(B) 成本隨成本動因改變的反應方式。</b><ul><li>成本行為描述成本如何隨動因變動</li><li>成本估計＝估計此關係；成本預測＝用之預測</li></ul>"
+},
+{
+  q:"帳戶分析法（account analysis）的做法是？",
+  opts:["(A) 只用兩點","(B) 依會計帳戶逐一分類為固定/變動","(C) 工程師實地分析","(D) 統計迴歸"],
+  ans:"<b>(B) 依會計帳戶逐一分類為固定/變動。</b><ul><li>帳戶分析法：管理/會計人員依經驗將各帳戶分類</li><li>工程估計法才是工程師實地分析</li></ul>"
+},
+];
+
+const CH7_SECTIONS = [
+{
+  id:"7.1", title:"損益兩平分析（Break-Even）",
+  body:`
+  <p><b>損益兩平點</b>（<span class="term" data-term="Break-even point">break-even point</span>）＝總收入＝總成本之產量（營業利益＝0）。</p>
+  <div class="method-card mc-title" data-mc="be">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-1" data-mc="be"><label for="mc-ch7-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">損益兩平點</div>
+    <div class="mc-body">
+      <div class="mc-formula">兩平點（單位）＝ 固定成本 ÷ 每單位邊際貢獻；邊際貢獻＝售價－單位變動成本</div>
+      <div class="mc-detail">方程式法：售價×Q－變動成本×Q－固定成本＝0。</div>
+      <div class="mc-ex">例子：售價$20、變動成本$12、固定成本$40,000 → 兩平＝$40,000÷$8=5,000 單位。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：兩平點＝固定成本÷每單位邊際貢獻。達目標利潤時分子改為「固定成本＋目標利潤」。</div>`
+},
+{
+  id:"7.2", title:"邊際貢獻率與兩平銷售額",
+  body:`
+  <div class="method-card mc-title" data-mc="cmr">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-2" data-mc="cmr"><label for="mc-ch7-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">邊際貢獻率</div>
+    <div class="mc-body">
+      <div class="mc-formula">邊際貢獻率 ＝ 邊際貢獻 ÷ 售價；兩平銷售額 ＝ 固定成本 ÷ 邊際貢獻率</div>
+      <div class="mc-detail">邊際貢獻率代表每一元銷售額對固定成本與利潤的貢獻比例。</div>
+      <div class="mc-ex">例子：售價$20、變動$12 → CM率＝$8÷$20=40%；兩平銷售額＝$40,000÷0.40=$100,000。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：能算邊際貢獻率並用之求兩平銷售額。常用於多產品與銷售組合。</div>`
+},
+{
+  id:"7.3", title:"CVP 圖與利潤圖",
+  body:`
+  <p><b>CVP 圖</b>：橫軸數量、縱軸金額；畫出總收入線與總成本線（截距為固定成本），交點即兩平點。兩平點右側為利潤區、左側為虧損區。</p>
+  <p><b>利潤-數量圖</b>（profit-volume graph）：縱軸營業利益、橫軸數量，直線與數量軸交點即兩平點（LO7-4）。</p>
+  <div class="warn">考試重點：CVP 圖的總成本線斜率＝每單位變動成本、截距＝固定成本；能讀出兩平點與利潤區。</div>`
+},
+{
+  id:"7.4", title:"CVP 分析之運用與假設",
+  body:`
+  <p>CVP 分析可評估：固定成本變動、變動成本變動、售價變動對利潤之影響；亦可求達目標利潤之銷售量、安全邊際（<span class="term" data-term="Margin of safety">margin of safety</span>）。</p>
+  <div class="method-card mc-title" data-mc="margins">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-3" data-mc="margins"><label for="mc-ch7-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">安全邊際</div>
+    <div class="mc-body">
+      <div class="mc-formula">安全邊際 ＝ 預算/實際銷售額（量）－ 兩平銷售額（量）</div>
+      <div class="mc-detail">安全邊際衡量銷售下降多少仍不致虧損。</div>
+      <div class="mc-ex">例子：預算銷售 $120,000、兩平 $100,000 → 安全邊際＝$20,000。</div>
+    </div>
+  </div>
+  <p>CVP 假設（LO7-6）：(1)售價固定 (2)每單位變動成本固定 (3)固定成本固定（攸關範圍內）(4)銷售組合固定 (5)存貨無變動（生產＝銷售）。</p>
+  <div class="warn">考試重點：CVP 假設售價、變動成本、固定成本皆固定且銷售組合不變；違反時分析失真。</div>`
+},
+{
+  id:"7.5", title:"多產品銷售組合之兩平點",
+  body:`
+  <div class="method-card mc-title" data-mc="mix">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-4" data-mc="mix"><label for="mc-ch7-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">多產品兩平點</div>
+    <div class="mc-body">
+      <div class="mc-formula">加權平均邊際貢獻率；兩平銷售額＝固定成本÷加權平均CM率</div>
+      <div class="mc-detail">以銷售組合比例加權平均各產品邊際貢獻率，再求整體兩平銷售額。</div>
+      <div class="mc-ex">例子：產品A(CM率60%、佔60%)＋B(30%、佔40%) → 加權CM率＝0.36+0.12=48%。固定$120,000 → 兩平銷售額=$250,000。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：多產品以銷售組合權重算加權平均CM率。銷售組合改變會移動兩平點。</div>`
+},
+{
+  id:"7.6", title:"邊際貢獻式損益表",
+  body:`
+  <p><span class="term" data-term="Contribution income statement">邊際貢獻式損益表</span>（contribution income statement）將成本分為變動與固定：</p>
+  <div class="formula"><span class="f-label">CM損益表</span>銷售額 － 變動成本 ＝ 邊際貢獻；邊際貢獻 － 固定成本 ＝ 營業利益</div>
+  <p>此格式直接呼應 CVP 關係，便於內部決策；與傳統功能式損益表不同（後者將成本分為銷貨成本與期間費用）。</p>
+  <div class="warn">考試重點：邊際貢獻式損益表是 CVP 分析的基石，區分變動/固定成本。</div>`
+},
+];
+const CH7_PROBLEMS = [
+{
+  q:"售價 $20、單位變動成本 $12、固定成本 $40,000，則損益兩平點（單位）為？",
+  opts:["(A) 2,000","(B) 5,000","(C) 3,333","(D) 4,000"],
+  ans:"<b>(B) 5,000。</b><ul><li>每單位邊際貢獻＝$20-$12=$8</li><li>兩平＝$40,000÷$8=5,000 單位</li></ul>"
+},
+{
+  q:"承上題，邊際貢獻率為？",
+  opts:["(A) 60%","(B) 40%","(C) 50%","(D) 20%"],
+  ans:"<b>(B) 40%。</b><ul><li>邊際貢獻率＝$8÷$20=40%</li><li>兩平銷售額＝$40,000÷0.40=$100,000</li></ul>"
+},
+{
+  q:"若目標利潤為 $16,000，固定成本 $40,000、每單位邊際貢獻 $8，則需銷售幾單位？",
+  opts:["(A) 5,000","(B) 7,000","(C) 6,000","(D) 8,000"],
+  ans:"<b>(B) 7,000。</b><ul><li>達目標利潤銷售量＝(固定成本＋目標利潤)÷每單位CM</li><li>＝($40,000+$16,000)÷$8=7,000 單位</li></ul>"
+},
+{
+  q:"安全邊際（margin of safety）的意義是？",
+  opts:["(A) 固定成本與變動成本之差","(B) 預算銷售額超過兩平銷售額之金額","(C) 售價與成本之差","(D) 存貨數量"],
+  ans:"<b>(B) 預算銷售額超過兩平銷售額之金額。</b><ul><li>安全邊際＝預算銷售（量/額）－兩平銷售（量/額）</li><li>衡量銷售下降多少仍不致虧損</li></ul>"
+},
+{
+  q:"CVP 分析的主要假設「不包括」下列何者？",
+  opts:["(A) 售價固定","(B) 每單位變動成本固定","(C) 固定成本固定","(D) 存貨不斷累積"],
+  ans:"<b>(D) 存貨不斷累積。</b><ul><li>CVP 假設存貨無變動（生產＝銷售）</li><li>售價、單位變動成本、固定成本、銷售組合皆假設固定</li></ul>"
+},
+{
+  q:"多產品兩平點需使用何種邊際貢獻率？",
+  opts:["(A) 任一產品的","(B) 加權平均邊際貢獻率","(C) 最高產品的","(D) 最低產品的"],
+  ans:"<b>(B) 加權平均邊際貢獻率。</b><ul><li>以銷售組合比例加權平均各產品CM率</li><li>兩平銷售額＝固定成本÷加權平均CM率</li></ul>"
+},
+{
+  q:"邊際貢獻式損益表將成本分為？",
+  opts:["(A) 銷貨成本與期間費用","(B) 變動成本與固定成本","(C) 直接與間接","(D) 生產與銷售"],
+  ans:"<b>(B) 變動成本與固定成本。</b><ul><li>CM損益表：銷售額－變動成本＝邊際貢獻；－固定成本＝營業利益</li><li>呼應CVP關係，利於內部決策</li></ul>"
+},
+{
+  q:"CVP 圖中，總成本線的「截距」代表？",
+  opts:["(A) 每單位變動成本","(B) 固定成本","(C) 售價","(D) 邊際貢獻"],
+  ans:"<b>(B) 固定成本。</b><ul><li>總成本線截距＝固定成本、斜率＝每單位變動成本</li><li>與總收入線交點即兩平點</li></ul>"
+},
+{
+  q:"邊際貢獻（contribution margin）的定義是？",
+  opts:["(A) 售價－固定成本","(B) 售價－單位變動成本","(C) 銷售額－固定成本","(D) 營業利益"],
+  ans:"<b>(B) 售價－單位變動成本。</b><ul><li>邊際貢獻＝售價減變動成本，用於支應固定成本並形成利潤</li><li>是 CVP 分析的核心</li></ul>"
+},
+{
+  q:"售價$20、變動成本$12、固定成本$40,000，達目標利潤 $16,000 需銷售 $? 銷售額？",
+  opts:["(A) $140,000","(B) $100,000","(C) $120,000","(D) $80,000"],
+  ans:"<b>(A) $140,000。</b><ul><li>銷售量=(40,000+16,000)÷8=7,000；銷售額＝7,000×$20=$140,000</li><li>或＝($40,000+$16,000)÷0.40=$140,000</li></ul>"
+},
+];
+
+const CH8_SECTIONS = [
+{
+  id:"8.1", title:"吸收成本法 vs 變動成本法",
+  body:`
+  <p><b>吸收成本法</b>（<span class="term" data-term="Absorption costing">absorption costing</span>）＝<b>全部成本法</b>，將固定製造費用也納入產品成本（存貨吸收所有製造成本），為 GAAP/外部報導所要求。</p>
+  <p><b>變動成本法</b>（<span class="term" data-term="Variable costing">variable costing</span>）＝<b>直接成本法</b>，僅將變動製造成本（直接材料、直接人工、變動製造費用）計入產品成本；<b>固定製造費用視為期間成本</b>。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:32%"><col style="width:34%"><col style="width:34%"></colgroup>
+    <thead><tr><th>製造費用</th><th>吸收成本法</th><th>變動成本法</th></tr></thead>
+    <tbody>
+      <tr><td>變動製造費用</td><td>產品成本</td><td>產品成本</td></tr>
+      <tr><td>固定製造費用</td><td>產品成本（存貨）</td><td>期間成本（當期費用）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：唯一差異是<b>固定製造費用</b>的處理。吸收法計入存貨、變動法計入期間費用。</div>`
+},
+{
+  id:"8.2", title:"兩種成本法的損益表",
+  body:`
+  <div class="method-card mc-title" data-mc="absvar">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-1" data-mc="absvar"><label for="mc-ch8-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">吸收 vs 變動損益表</div>
+    <div class="mc-body">
+      <div class="mc-formula">變動法：銷售額－變動銷貨成本－變動銷管費用＝邊際貢獻；－固定成本＝營業利益</div>
+      <div class="mc-detail">吸收法：銷售額－銷貨成本（含固定製造費用）＝毛利；－銷管費用＝營業利益。</div>
+      <div class="mc-ex">當生產＞銷售（存貨增加）：吸收法營業利益較高（固定製造費用遞延於存貨）。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：當期初/期末存貨變動時，兩種方法營業利益不同；存貨增加→吸收法較高。</div>`
+},
+{
+  id:"8.3", title:"兩法營業利益的調節（Reconciliation）",
+  body:`
+  <div class="method-card mc-title" data-mc="recon">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-2" data-mc="recon"><label for="mc-ch8-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">營業利益調節</div>
+    <div class="mc-body">
+      <div class="mc-formula">吸收法營業利益 － 變動法營業利益 ＝ 固定製造費用率 ×（期末存貨單位－期初存貨單位）</div>
+      <div class="mc-detail">存貨增加（生產＞銷售）時，吸收法多遞延固定製造費用，營業利益較高。</div>
+      <div class="mc-ex">例子：固定製造費用率$10/單位，期末存貨較期初多 3,000 單位 → 吸收法高 $30,000。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：吸收法－變動法＝固定製造費用率×(期末存貨−期初存貨)。存貨變動方向決定差異。</div>`
+},
+{
+  id:"8.4", title:"變動成本法的優缺點與 CVP",
+  body:`
+  <ul>
+    <li><b>優點</b>：與 CVP 分析一致（區分變動/固定），利潤不受存貨增減影響，利於內部決策</li>
+    <li><b>缺點</b>：不符合 GAAP（外部報導需吸收法）、需同時兩套成本歸集</li>
+  </ul>
+  <p><b>CVP 意涵（LO8-5）</b>：變動成本法下，營業利益與銷售量同向變動，不受生產與銷售差異干擾；吸收法下若生產大於銷售，即使銷售下滑利潤仍可能上升。</p>
+  <div class="warn">考試重點：吸收法下「生產過剩」可虛增利潤（遞延固定製造費用）；變動成本法無此現象。</div>`
+},
+{
+  id:"8.5", title:"品質成本與 ESG",
+  body:`
+  <p><b>品質成本報告</b>（quality-cost report）追蹤四類品質成本：<b>預防成本</b>（prevention）、<b>鑑定成本</b>（appraisal）、<b>內部失敗成本</b>（internal failure）、<b>外部失敗成本</b>（external failure）。</p>
+  <p><b>ESG 結果與成本</b>：企業衡量環境（Environmental）、社會（Social）、治理（Governance）相關成本與成果，並管理其對績效之影響（LO8-9）。</p>
+  <div class="warn">考試重點：品質四類成本能分類；最理想是投資於預防成本以降低失敗成本。</div>`
+},
+];
+const CH8_PROBLEMS = [
+{
+  q:"吸收成本法與變動成本法唯一的差異在於如何處理？",
+  opts:["(A) 直接材料","(B) 直接人工","(C) 固定製造費用","(D) 變動製造費用"],
+  ans:"<b>(C) 固定製造費用。</b><ul><li>吸收法將固定製造費用計入產品成本（存貨）</li><li>變動法將固定製造費用視為期間成本</li></ul>"
+},
+{
+  q:"「變動成本法（variable costing）」又稱？",
+  opts:["(A) 全部成本法","(B) 直接成本法","(C) 標準成本法","(D) 分批成本法"],
+  ans:"<b>(B) 直接成本法。</b><ul><li>變動成本法只將變動製造成本計入產品</li><li>吸收成本法又稱全部成本法</li></ul>"
+},
+{
+  q:"當「生產＞銷售」（存貨增加）時，哪一方法的營業利益較高？",
+  opts:["(A) 變動成本法","(B) 吸收成本法","(C) 兩者相同","(D) 無法判斷"],
+  ans:"<b>(B) 吸收成本法。</b><ul><li>存貨增加→固定製造費用遞延於存貨，吸收法少認列費用</li><li>吸收法－變動法＝固定製造費用率×(期末存貨−期初存貨)，存貨增加故為正</li></ul>"
+},
+{
+  q:"固定製造費用率 $10/單位，期末存貨較期初多 3,000 單位，則吸收法營業利益比變動法高？",
+  opts:["(A) $30,000","(B) $3,000","(C) $10,000","(D) 相同"],
+  ans:"<b>(A) $30,000。</b><ul><li>差異＝$10×(3,000)=$30,000</li><li>存貨增加→吸收法多遞延固定製造費用</li></ul>"
+},
+{
+  q:"外部財務報導（GAAP）要求使用哪一種成本法？",
+  opts:["(A) 變動成本法","(B) 吸收成本法","(C) 皆可","(D) 標準成本法"],
+  ans:"<b>(B) 吸收成本法。</b><ul><li>吸收成本法（全部成本法）為 GAAP 外部報導所要求</li><li>變動成本法多用於內部決策與 CVP 分析</li></ul>"
+},
+{
+  q:"下列何者是變動成本法的「優點」？",
+  opts:["(A) 符合GAAP","(B) 利潤不受存貨增減影響、與CVP一致","(C) 計算簡單","(D) 外部可接受"],
+  ans:"<b>(B) 利潤不受存貨增減影響、與CVP一致。</b><ul><li>變動法區分變動/固定成本，利潤與銷售同向</li><li>缺點是不符合GAAP</li></ul>"
+},
+{
+  q:"「外部失敗成本（external failure costs）」的例子是？",
+  opts:["(A) 產品檢測","(B) 保固維修與退貨","(C) 員工訓練","(D) 製程品管"],
+  ans:"<b>(B) 保固維修與退貨。</b><ul><li>外部失敗成本：產品交到顧客後才發現瑕疵（保固、退貨、訴訟）</li><li>檢測屬鑑定成本、訓練屬預防成本</li></ul>"
+},
+{
+  q:"吸收成本法下，若「生產過剩」而銷售持平，則營業利益？",
+  opts:["(A) 下降","(B) 可能上升","(C) 不變","(D) 為零"],
+  ans:"<b>(B) 可能上升。</b><ul><li>生產過剩→更多固定製造費用遞延於存貨→當期認列費用減少</li><li>吸收法可因增產而虛增利潤</li></ul>"
+},
+{
+  q:"「預防成本（prevention costs）」指的是？",
+  opts:["(A) 檢查成品的成本","(B) 為防止瑕疵發生而投入的成本","(C) 報廢成本","(D) 保固成本"],
+  ans:"<b>(B) 為防止瑕疵發生而投入的成本。</b><ul><li>預防成本：品管設計、員工訓練、製程改善</li><li>檢查成品是鑑定成本、報廢是內部失敗、保固是外部失敗</li></ul>"
+},
+{
+  q:"吸收成本法營業利益 $100,000、固定製造費用率 $8/單位、期初存貨 2,000 單位、期末存貨 5,000 單位，則變動成本法營業利益為？",
+  opts:["(A) $76,000","(B) $124,000","(C) $100,000","(D) $90,000"],
+  ans:"<b>(A) $76,000。</b><ul><li>差異＝$8×(5,000−2,000)=$8×3,000=$24,000</li><li>存貨增加→吸收法較高，故變動法＝$100,000−$24,000=$76,000</li></ul>"
+},
+];
+
+const CH16_SECTIONS = [
+{
+  id:"16.1", title:"資本預算與現值方法",
+  body:`
+  <p><b>資本預算決策</b>（<span class="term" data-term="Capital-budgeting decision">capital budgeting</span>）＝長期投資決策（投資於機器、廠房、專案）。<b>折現現金流量分析</b>（discounted-cash-flow）考量貨幣時間價值。</p>
+  <div class="method-card mc-title" data-mc="npv">
+    <div class="mc-check"><input type="checkbox" id="mc-ch16-1" data-mc="npv"><label for="mc-ch16-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">NPV 法</div>
+    <div class="mc-body">
+      <div class="mc-formula">NPV ＝ 未來現金流入之現值 － 初始投資成本；NPV ≥ 0 則接受</div>
+      <div class="mc-detail">折現率＝組織取得投資資本之成本（資金成本）。折現率可依風險調升。</div>
+      <div class="mc-ex">例子：初始 $46,800、四年營運現金節省 $15,000、殘值 $2,400，折現率10% → NPV=$2,193＞0，接受。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：NPV≥0 接受。折現率是資金成本，可依風險調升。</div>`
+},
+{
+  id:"16.2", title:"內部報酬率（IRR）",
+  body:`
+  <div class="method-card mc-title" data-mc="irr">
+    <div class="mc-check"><input type="checkbox" id="mc-ch16-2" data-mc="irr"><label for="mc-ch16-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">IRR 法</div>
+    <div class="mc-body">
+      <div class="mc-formula">IRR ＝ 使 NPV＝0 之折現率；IRR ≥ 資金門檻率（hurdle rate）則接受</div>
+      <div class="mc-detail">資金門檻率（<span class="term" data-term="Hurdle rate">hurdle rate</span>）＝最低可接受報酬率。</div>
+      <div class="mc-ex">兩法共同假設：現金流量發生於年底、金額確定、再投資於其他專案、完全資本市場。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：IRR≥hurdle rate 接受；IRR 是 NPV=0 的折現率。NPV 較易應用，可調折現率反映風險。</div>`
+},
+{
+  id:"16.3", title:"總成本法與增額成本法",
+  body:`
+  <div class="method-card mc-title" data-mc="totalinc">
+    <div class="mc-check"><input type="checkbox" id="mc-ch16-3" data-mc="totalinc"><label for="mc-ch16-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">總成本 vs 增額成本法</div>
+    <div class="mc-body">
+      <div class="mc-formula">總成本法：納入所有方案之全部現金流量；增額成本法：只納入方案間之差異現金流量</div>
+      <div class="mc-detail">兩種方法對同一決策給出相同結論；增額法較簡潔。</div>
+      <div class="mc-ex">例子：舊機器處分收入、新機器殘值、營運現金節省、營運資金投入與回收。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：兩法結論一致；增額法只比較差異項目，更簡潔。</div>`
+},
+{
+  id:"16.4", title:"稅後現金流量與折舊",
+  body:`
+  <div class="method-card mc-title" data-mc="tax">
+    <div class="mc-check"><input type="checkbox" id="mc-ch16-4" data-mc="tax"><label for="mc-ch16-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">稅後現金流量</div>
+    <div class="mc-body">
+      <div class="mc-formula">收益類(現金流+損益表項) ×(1−稅率)；折舊(損益表項非現金) ×稅率＝稅盾；純現金流 ×1</div>
+      <div class="mc-detail"><b>折舊稅盾</b>（<span class="term" data-term="Depreciation tax shield">depreciation tax shield</span>）＝折舊×稅率，為節稅之現金流入。</div>
+      <div class="mc-ex">例子：薪資$42,000、稅率30% → 稅後流出$42,000×0.7=$29,400；折舊$8,000×0.3=$2,400 稅盾。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：區分三類：現金+損益表項×(1−t)；非現金損益表項(折舊)×t；純現金流×1。MACRS 用於稅務折舊表。</div>`
+},
+{
+  id:"16.5", title:"投資方案排序與其他方法",
+  body:`
+  <p><b>獲利能力指數</b>（<span class="term" data-term="Profitability index">profitability index</span>）＝(現金流現值，不含初始投資) ÷ 初始投資，用於在資本受限下排序。</p>
+  <div class="method-card mc-title" data-mc="payback">
+    <div class="mc-check"><input type="checkbox" id="mc-ch16-5" data-mc="payback"><label for="mc-ch16-5" class="mc-lbl">學會</label></div>
+    <div class="mc-left">還本期間與會計報酬率</div>
+    <div class="mc-body">
+      <div class="mc-formula">還本期＝初始投資÷每年稅後現金流入；會計報酬率＝(平均增額收入−平均增額費用)÷初始投資</div>
+      <div class="mc-detail">此兩法不考量貨幣時間價值，概念上劣於折現法，但常搭配使用。</div>
+      <div class="mc-ex">例子：初始$49,440、平均現金流入約$16,200 → 還本期約3年。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：還本與ARR不考量時間價值；獲利能力指數用於資本配給下排序。</div>`
+},
+{
+  id:"16.6", title:"通貨膨脹與資本預算（附錄）",
+  body:`
+  <p>通膨納入折現分析有兩種方式：</p>
+  <ul>
+    <li>以<b>名目元</b>（nominal dollars）衡量現金流，用<b>名目利率</b>折現</li>
+    <li>以<b>實質元</b>（real dollars）衡量現金流，用<b>實質利率</b>折現</li>
+  </ul>
+  <div class="warn">考試重點：名目與實質必須一致——名目現金流配名目折現率、實質配實質，兩法結果相同。</div>`
+},
+];
+const CH16_PROBLEMS = [
+{
+  q:"淨現值法（NPV）下，投資方案應接受的條件是？",
+  opts:["(A) NPV＜0","(B) NPV ≥ 0","(C) NPV＝0 才接受","(D) 看 IRR"],
+  ans:"<b>(B) NPV ≥ 0。</b><ul><li>NPV＝未來現金流現值−初始投資</li><li>NPV≥0 代表報酬超過資金成本，應接受</li></ul>"
+},
+{
+  q:"內部報酬率（IRR）的定義是？",
+  opts:["(A) 使NPV最大的折現率","(B) 使NPV＝0的折現率","(C) 資金成本","(D) 通膨率"],
+  ans:"<b>(B) 使NPV＝0的折現率。</b><ul><li>IRR＝讓現金流現值恰好等於初始投資之折現率</li><li>IRR≥資金門檻率則接受</li></ul>"
+},
+{
+  q:"折舊稅盾（depreciation tax shield）的金額是？",
+  opts:["(A) 折舊×(1−稅率)","(B) 折舊×稅率","(C) 折舊","(D) 稅前淨利×稅率"],
+  ans:"<b>(B) 折舊×稅率。</b><ul><li>折舊是非現金之損益表項，×稅率得節稅現金流入</li><li>收益類現金流才×(1−稅率)</li></ul>"
+},
+{
+  q:"某公司稅率30%，薪資費用$42,000，其「稅後現金流出」為？",
+  opts:["(A) $42,000","(B) $12,600","(C) $29,400","(D) $54,600"],
+  ans:"<b>(C) $29,400。</b><ul><li>薪資是現金流+損益表項 → ×(1−0.30)</li><li>=$42,000×0.70=$29,400</li></ul>"
+},
+{
+  q:"還本期間（payback period）的計算是？",
+  opts:["(A) 初始投資×每年現金流入","(B) 初始投資÷每年稅後現金流入","(C) 現金流入之現值","(D) 淨利÷投資"],
+  ans:"<b>(B) 初始投資÷每年稅後現金流入。</b><ul><li>還本期＝回收初始投資所需年數</li><li>不考量貨幣時間價值</li></ul>"
+},
+{
+  q:"獲利能力指數（profitability index）的定義是？",
+  opts:["(A) 初始投資÷現金流現值","(B) 現金流現值(不含初始投資)÷初始投資","(C) 淨現值×初始投資","(D) IRR÷門檻率"],
+  ans:"<b>(B) 現金流現值(不含初始投資)÷初始投資。</b><ul><li>用於資本配給下排序投資方案</li><li>指數越高代表每一元投資報酬越高</li></ul>"
+},
+{
+  q:"總成本法與增額成本法對同一投資決策的結論？",
+  opts:["(A) 可能不同","(B) 一定相同","(C) 相反","(D) 無關"],
+  ans:"<b>(B) 一定相同。</b><ul><li>總成本法納入全部現金流、增額法只納入差異</li><li>兩法對同一決策結論一致，增額法較簡潔</li></ul>"
+},
+{
+  q:"資本預算中，NPV 與 IRR 的共同假設「不包括」？",
+  opts:["(A) 現金流發生於年底","(B) 現金流金額確定","(C) 現金流立即再投資","(D) 稅率會變動"],
+  ans:"<b>(D) 稅率會變動。</b><ul><li>假設：年底發生、金額確定、立即再投資、完全資本市場</li><li>稅率固定是折現分析的基本前提</li></ul>"
+},
+{
+  q:"投資$40,000、每年稅後現金流入$8,000，其還本期間為？",
+  opts:["(A) 3年","(B) 4年","(C) 5年","(D) 6年"],
+  ans:"<b>(C) 5年。</b><ul><li>還本期＝$40,000÷$8,000=5年</li><li>（不考量時間價值）</li></ul>"
+},
+{
+  q:"通貨膨脹下，若以名目元衡量現金流，應使用何種折現率？",
+  opts:["(A) 實質利率","(B) 名目利率","(C) 無風險利率","(D) 門檻率"],
+  ans:"<b>(B) 名目利率。</b><ul><li>名目現金流配名目利率、實質現金流配實質利率</li><li>兩法結果相同</li></ul>"
+},
+];
+
+/* ===== 章節資料對照（每章完成後加入） ===== */
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,16:CH16_SECTIONS};
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,16:CH16_PROBLEMS};
+
+/* ===== 術語表（列表形式） ===== */
+const GLOSS_CATS = [
+  {name:"管理會計基礎", keys:["Managerial accounting","Financial accounting","Cost accounting","Cost accounting system","Decision making","Planning","Directing operational activities","Controlling","Attention-directing function","Balanced scorecard"]},
+  {name:"組織與策略", keys:["Line positions","Staff positions","Chief financial officer (CFO)","Controller (or comptroller)","Treasurer","Internal auditor","Value chain","Strategic cost management","Supply chain","Supply chain management"]},
+  {name:"產能與大數據", keys:["Capacity","Theoretical capacity","Practical capacity","Cost of resources supplied","Cost of resources used","Cost of resources unused","Big data","Data analytics","Data governance","Data science"]},
+  {name:"成本分類", keys:["Cost","Expense","Product cost","Period cost","Inventoriable cost","Cost of goods sold","Direct cost","Indirect cost","Controllable cost","Uncontrollable cost","Cost object","Non-value-added cost"]},
+  {name:"製造業成本", keys:["Direct material","Raw material","Direct labor","Indirect material","Indirect labor","Manufacturing overhead","Prime costs","Conversion costs","Overtime premium","Idle time"]},
+  {name:"存貨與報表", keys:["Work-in-process inventory","Finished-goods inventory","Cost of goods manufactured","Gross profit","Operating income"]},
+  {name:"成本行為與動因", keys:["Cost driver","Cost relationship","Variable cost","Fixed cost","Volume-based cost driver","Throughput time"]},
+  {name:"成本制度與管理", keys:["Cost management system (CMS)","Activity-based costing (ABC)","Activity-based management (ABM)","Activity accounting","Responsibility accounting"]},
+  {name:"經濟成本概念", keys:["Opportunity cost","Out-of-pocket cost","Sunk cost","Differential cost","Marginal cost","Average cost"]},
+  {name:"分批成本制", keys:["Job-order costing","Process costing","Job","Job-cost record","Material requisition form","Source document","Time record","Bill of materials","Material-requirements planning (MRP)"]},
+  {name:"製造費用分攤", keys:["Overhead application","Predetermined overhead rate","Normal costing","Actual costing","Underapplied overhead","Overapplied overhead","Proration","Two-stage cost allocation","Departmental overhead rate","Plantwide overhead rate","Cost distribution","Service department cost allocation","Project costing"]},
+
+  {name:"分步成本制", keys:["Process costing","Equivalent unit","Conversion costs","Weighted-average method","Departmental production report","Transferred-in costs","Operation costing","Hybrid product-costing system"]},
+  {name:"作業基礎成本制", keys:["Activity-based costing (ABC)","Activity-based management (ABM)","Activity cost pool","Cost driver","Cost hierarchy","Unit-level activity","Batch-level activity","Product-sustaining-level activity","Facility-(or general-operations) level activity","Time-driven activity-based costing (TDABC)","Customer-profitability analysis","Volume-based (or throughput-based) costing system"]},
+  {name:"成本行為與估計", keys:["Cost behavior","Relevant range","Learning-curve phenomenon","Variable cost","Fixed cost"]},
+  {name:"CVP分析", keys:["Break-even point","Contribution income statement","Margin of safety","Contribution margin"]},
+  {name:"變動成本法", keys:["Absorption costing","Variable costing"]},
+  {name:"資本支出決策", keys:["Capital-budgeting decision","Hurdle rate","Net present value","Internal rate of return","Depreciation tax shield","Profitability index","Payback period","Accounting-rate-of-return method","Discounted-cash-flow analysis"]},
+];
+
+const GLS = {
+  get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
+  set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+};
+
+const CH_TERMS_CATS = {
+  1:["管理會計基礎","組織與策略","產能與大數據"],
+  2:["成本分類","製造業成本","存貨與報表","成本行為與動因","成本制度與管理","經濟成本概念"],
+  3:["分批成本制","製造費用分攤"],
+  4:["分步成本制"],
+  5:["作業基礎成本制"],
+  6:["成本行為與估計"],
+  7:["CVP分析"],
+  8:["變動成本法"],
+  16:["資本支出決策"]
+};
+let glossMode="full", glossChapter=1;
+
+let glossCat="all", glossOnlyUnlearned=false;
+
+function renderGlossaryFull(){
+  glossMode="full";
+  currentChapter=0;
+  renderSidebar();
+  const c=document.getElementById("chapterContent");
+  c.innerHTML=`<div class="chapter-head">
+    <span class="kicker">全書複習</span>
+    <h1>術語複習表</h1>
+    <p>統整全書 ${Object.keys(TERMS).length} 個術語：打勾＝已學會、★重點、✎筆記。用分類按鈕與「只看未學會」篩選，進度自動統計，全部存在本機瀏覽器。</p>
+  </div>
+  <div id="glossFullRoot"></div>`;
+  glossCat="all";
+  renderGlossary();
+}
+function glossCatsForMode(){
+  if(glossMode==="full")return GLOSS_CATS;
+  const names=CH_TERMS_CATS[glossChapter]||[];
+  return GLOSS_CATS.filter(c=>names.includes(c.name));
+}
+function renderGlossary(){
+  const root=document.getElementById(glossMode==="full"?"glossFullRoot":"chGlossRoot");
+  if(!root)return;
+  const learned=GLS.get("ma-gloss-learned",[]);
+  const starred=GLS.get("ma-gloss-star",[]);
+  const notes=GLS.get("ma-gloss-notes",{});
+  const cats=glossCatsForMode();
+  const allKeys=cats.flatMap(c=>c.keys).filter(k=>TERMS[k]);
+  const total=allKeys.length;
+  const done=allKeys.filter(k=>learned.includes(k)).length;
+
+  let h=`<div class="gloss-toolbar">
+    <div class="gloss-cats">`;
+  if(glossMode==="full"){
+    h+=`<button class="gloss-cat-btn ${glossCat==="all"?"active":""}" data-cat="all">全部（${total}）</button>
+      ${cats.map(c=>`<button class="gloss-cat-btn ${glossCat===c.name?"active":""}" data-cat="${esc(c.name)}">${esc(c.name)}（${c.keys.filter(k=>TERMS[k]).length}）</button>`).join("")}`;
+  }else{
+    h+=`<span class="gloss-cat-label">本章術語 · ${cats.map(c=>esc(c.name)).join(" ／ ")}</span>`;
+  }
+  h+=`</div>
+    <div class="gloss-data-actions">
+      <button class="toolbtn ${glossOnlyUnlearned?"active":""}" id="onlyUnlearned" title="只看未學會">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </button>
+      <button class="toolbtn" id="exportGloss" title="匯出備份">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+      </button>
+      <button class="toolbtn" id="importGloss" title="匯入備份">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V9m0 0 4 4m-4-4-4 4M4 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="gloss-progress">
+    <div class="bar"><div class="fill" style="width:${total?done/total*100:0}%"></div></div>
+    <div class="label">已學會 ${done} / ${total}</div>
+  </div>`;
+
+  cats.forEach(cat=>{
+    if(glossMode==="full"&&glossCat!=="all"&&glossCat!==cat.name)return;
+    const items=cat.keys.filter(k=>TERMS[k]);
+    if(!items.length)return;
+    const catDone=items.filter(k=>learned.includes(k)).length;
+    h+=`<div class="gloss-group" data-gname="${esc(cat.name)}">
+      <h3>${esc(cat.name)}（${catDone}/${items.length}）</h3>
+      ${items.map(k=>{
+        const [en,zh,def]=TERMS[k];
+        const isLearned=learned.includes(k), isStarred=starred.includes(k);
+        const note=notes[k]||"";
+        if(glossOnlyUnlearned&&isLearned)return "";
+        const isProper=PROPER_TERMS.has(k);
+        return `<div class="gloss-item ${isLearned?"done":""} ${isStarred?"starred":""}" data-key="${esc(k)}">
+          <button class="gloss-check ${isLearned?"done":""}" onclick="toggleLearn(&quot;${escA(k)}&quot;)" title="標記已學會">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+          </button>
+          <div class="gloss-main">
+            <div class="gloss-en${isProper?" proper":""}">${esc(en)}<span class="gloss-zh${isProper?" proper":""}">${esc(zh)}</span></div>
+            <div class="gloss-def">${esc(def)}</div>
+            <div class="gloss-note ${note?"show":""}" data-note="wrap-${esc(k)}">
+              <textarea placeholder="寫下你自己的重點…" onchange="saveNote('${esc(k)}',this.value)">${esc(note)}</textarea>
+            </div>
+          </div>
+          <div class="gloss-actions">
+            <button class="gloss-btn ${isStarred?"active":""}" onclick="toggleStar(&quot;${escA(k)}&quot;)" title="重點畫記">★ 重點</button>
+            <button class="gloss-btn ${note?"active":""}" onclick="toggleNote(&quot;${escA(k)}&quot;)" title="個人筆記">✎ 筆記</button>
+          </div>
+        </div>`;
+      }).join("")}
+    </div>`;
+  });
+
+  root.innerHTML=h;
+  if(glossMode==="full"){
+    root.querySelectorAll(".gloss-cat-btn").forEach(b=>{
+      b.addEventListener("click",()=>{glossCat=b.dataset.cat;renderGlossary();});
+    });
+  }
+  document.getElementById("onlyUnlearned").addEventListener("click",e=>{
+    glossOnlyUnlearned=!glossOnlyUnlearned;
+    e.currentTarget.classList.toggle("active",glossOnlyUnlearned);
+    renderGlossary();
+  });
+  document.getElementById("exportGloss").addEventListener("click",exportGloss);
+  document.getElementById("importGloss").addEventListener("click",()=>{
+    const inp=document.createElement("input");
+    inp.type="file";inp.accept=".json";
+    inp.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>importGloss(r.result);r.readAsText(f);};
+    inp.click();
+  });
+}
+function toggleLearn(k){
+  let l=GLS.get("ma-gloss-learned",[]);
+  l=l.includes(k)?l.filter(x=>x!==k):[...l,k];
+  GLS.set("ma-gloss-learned",l);
+  renderGlossary();
+}
+function toggleStar(k){
+  let s=GLS.get("ma-gloss-star",[]);
+  s=s.includes(k)?s.filter(x=>x!==k):[...s,k];
+  GLS.set("ma-gloss-star",s);
+  renderGlossary();
+}
+function toggleNote(k){
+  const wrap=document.querySelector(`[data-note="wrap-${k}"]`);
+  if(wrap)wrap.classList.toggle("show");
+}
+function saveNote(k,v){
+  const notes=GLS.get("ma-gloss-notes",{});
+  notes[k]=v;
+  GLS.set("ma-gloss-notes",notes);
+  renderGlossary();
+}
+function exportGloss(){
+  const data={learned:GLS.get("ma-gloss-learned",[]),star:GLS.get("ma-gloss-star",[]),notes:GLS.get("ma-gloss-notes",{})};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="管理會計術語備份.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast("已匯出備份");
+}
+function importGloss(jsonStr){
+  try{
+    const d=JSON.parse(jsonStr);
+    if(d.learned&&Array.isArray(d.learned)){
+      const cur=GLS.get("ma-gloss-learned",[]);
+      GLS.set("ma-gloss-learned",[...new Set([...cur,...d.learned])]);
+    }
+    if(d.star&&Array.isArray(d.star)){
+      const cur=GLS.get("ma-gloss-star",[]);
+      GLS.set("ma-gloss-star",[...new Set([...cur,...d.star])]);
+    }
+    if(d.notes&&typeof d.notes==="object"){
+      const cur=GLS.get("ma-gloss-notes",{});
+      GLS.set("ma-gloss-notes",{...cur,...d.notes});
+    }
+    toast("已匯入並合併備份");
+    renderGlossary();
+  }catch(e){toast("備份檔案格式錯誤");}
+}
+
+/* ===== 全書搜尋 ===== */
+const searchInput=document.getElementById("searchInput");
+const searchPanel=document.getElementById("searchPanel");
+function stripHtml(t){return String(t||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();}
+function buildSearchIndex(){
+  const idx=[];
+  BOOK.forEach(ch=>{
+    if(!ch.done)return;
+    const n=ch.n;
+    idx.push({type:"ch",n,title:ch.title,text:ch.title});
+    (CH_SECTIONS[n]||[]).forEach(sec=>{
+      idx.push({type:"sec",n,id:sec.id,title:sec.title,text:sec.title+" "+stripHtml(sec.body)});
+    });
+    (CH_PROBLEMS[n]||[]).forEach((p,i)=>{
+      idx.push({type:"prob",n,no:i+1,text:stripHtml(p.q)+" "+stripHtml(p.ans||"")});
+    });
+  });
+  Object.keys(TERMS).forEach(k=>{
+    const [en,zh,def]=TERMS[k];
+    idx.push({type:"term",key:k,en,zh,def,text:en+" "+zh+" "+def});
+  });
+  return idx;
+}
+const SEARCH_IDX=buildSearchIndex();
+searchInput.addEventListener("input",()=>{
+  const kw=searchInput.value.trim().toLowerCase();
+  if(!kw){searchPanel.style.display="none";return;}
+  const hits=SEARCH_IDX.filter(x=>x.text.toLowerCase().includes(kw)).slice(0,40);
+  if(!hits.length){
+    searchPanel.innerHTML=`<div class="sp-empty">找不到「${esc(kw)}」相關內容，試試其他關鍵字。</div>`;
+    searchPanel.style.display="block";return;
+  }
+  searchPanel.innerHTML=hits.map(h=>{
+    if(h.type==="ch")return `<button class="sp-item" data-act="ch" data-n="${h.n}"><span class="sp-tag">第${h.n}章</span><b>${esc(h.title)}</b><span class="sp-snip">整章內容</span></button>`;
+    if(h.type==="sec")return `<button class="sp-item" data-act="sec" data-n="${h.n}" data-id="${esc(h.id)}"><span class="sp-tag">第${h.n}章·小節</span><b>${esc(h.title)}</b><span class="sp-snip">${esc(h.text.slice(0,70))}</span></button>`;
+    if(h.type==="prob")return `<button class="sp-item" data-act="prob" data-n="${h.n}" data-no="${h.no}"><span class="sp-tag">第${h.n}章·例題${h.no}</span><span class="sp-snip">${esc(h.text.slice(0,80))}</span></button>`;
+    return `<button class="sp-item" data-act="term" data-key="${esc(h.key)}"><span class="sp-tag">術語</span><b>${esc(h.en)} ${esc(h.zh)}</b><span class="sp-snip">${esc(h.def.slice(0,60))}</span></button>`;
+  }).join("")+`<div class="sp-count">找到 ${hits.length} 筆相關內容</div>`;
+  searchPanel.style.display="block";
+});
+searchPanel.addEventListener("click",e=>{
+  const item=e.target.closest(".sp-item");
+  if(!item)return;
+  const act=item.dataset.act;
+  searchPanel.style.display="none";
+  searchInput.value="";
+  if(act==="ch"){
+    renderChapter(+item.dataset.n);
+    window.scrollTo({top:0,behavior:"smooth"});
+  }else if(act==="sec"){
+    renderChapter(+item.dataset.n);
+    setTimeout(()=>{
+      const el=document.getElementById("sec-"+item.dataset.id);
+      if(el){el.classList.add("open");el.scrollIntoView({behavior:"smooth",block:"start"});}
+    },60);
+  }else if(act==="prob"){
+    renderChapter(+item.dataset.n);
+    setTimeout(()=>{
+      const el=document.getElementById("prob-"+item.dataset.n+"-"+item.dataset.no);
+      if(el)el.scrollIntoView({behavior:"smooth",block:"start"});
+    },60);
+  }else if(act==="term"){
+    openTerm(item.dataset.key);
+  }
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){searchPanel.style.display="none";searchInput.blur();}
+});
+
+
+/* ===== 重點標記 ===== */
+let hlEnabled=true;
+function getHls(){try{return JSON.parse(localStorage.getItem("ma-hl")||"[]")}catch(e){return[]}}
+function saveHls(h){localStorage.setItem("ma-hl",JSON.stringify(h))}
+
+document.addEventListener("mouseup",e=>{
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed)return;
+  const txt=sel.toString().trim();
+  if(txt.length<2||txt.length>300)return;
+  // 檢查是否點在工具列/按鈕上
+  if(e.target.closest(".toolbtn,.ans-btn,.flip-card,.term,.section-head"))return;
+  const range=sel.getRangeAt(0);
+  const el=range.startContainer.parentElement;
+  if(!el.closest(".section-body,.problem"))return;
+  const hls=getHls();
+  if(hls.some(h=>h.txt===txt))return;
+  hls.push({txt,time:Date.now()});
+  saveHls(hls);
+  applyHighlights();
+  toast("已加入重點標記（點黃色文字可移除）");
+});
+
+function applyHighlights(){
+  const hls=getHls();
+  document.querySelectorAll(".section-body .userhl,.problem .userhl").forEach(el=>el.outerHTML=el.textContent);
+  if(!hlEnabled)return;
+  hls.forEach(h=>{
+    document.querySelectorAll(".section-body p,.section-body .note,.section-body .warn,.problem .p-body").forEach(block=>{
+      const text=block.textContent;
+      if(!text.includes(h.txt))return;
+      if(block.querySelector(".userhl"))return;
+      const idx=text.indexOf(h.txt);
+      const frag=document.createDocumentFragment();
+      frag.appendChild(document.createTextNode(text.slice(0,idx)));
+      const m=document.createElement("mark");
+      m.className="userhl";m.textContent=h.txt;
+      m.addEventListener("click",()=>{
+        const arr=getHls().filter(x=>x.txt!==h.txt);
+        saveHls(arr);applyHighlights();toast("已移除重點標記");
+      });
+      frag.appendChild(m);
+      frag.appendChild(document.createTextNode(text.slice(idx+h.txt.length)));
+      block.replaceChildren(frag);
+    });
+  });
+}
+
+document.getElementById("hlToggle").addEventListener("click",e=>{
+  hlEnabled=!hlEnabled;
+  e.currentTarget.classList.toggle("active",hlEnabled);
+  applyHighlights();
+  toast(hlEnabled?"重點標記已顯示":"重點標記已隱藏");
+});
+
+/* ===== 畫記模式 / 深色 ===== */
+let markMode=false;
+const markBtn=document.getElementById("markToggle");
+markBtn.addEventListener("click",e=>{
+  markMode=!markMode;
+  document.body.classList.toggle("marking",markMode);
+  markBtn.classList.toggle("active",markMode);
+  toast(markMode?"畫記模式開啟：點文字即可高亮（再點一次關閉並儲存）":"畫記模式已關閉，重點已儲存");
+});
+document.addEventListener("click",e=>{
+  if(!markMode)return;
+  if(e.target.closest(".toolbtn,.ans-btn,.term,.section-head"))return;
+  if(e.target.closest(".userhl"))return;
+  const el=e.target.closest(".section-body p,.section-body li,.section-body .note,.section-body .warn,.problem .p-body");
+  if(!el)return;
+  e.preventDefault();e.stopPropagation();
+  const txt=el.textContent.trim();
+  if(txt.length<2||txt.length>500){toast("這段太長，請改用拖選文字畫重點");return;}
+  const hls=getHls();
+  if(hls.some(h=>h.txt===txt))return;
+  hls.push({txt,time:Date.now()});
+  saveHls(hls);
+  applyHighlights();
+  toast("已加入重點標記（點黃色文字可移除）");
+});
+document.getElementById("darkToggle").addEventListener("click",e=>{
+  document.body.classList.toggle("dark");
+  e.currentTarget.classList.toggle("active",document.body.classList.contains("dark"));
+});
+
+/* ===== toast ===== */
+function toast(msg){
+  let t=document.getElementById("toast");
+  if(!t){
+    t=document.createElement("div");
+    t.id="toast";
+    t.style.cssText="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#26303b;color:#fff;padding:10px 18px;border-radius:10px;font-size:13.5px;z-index:99;box-shadow:0 6px 24px rgba(0,0,0,.2);opacity:0;transition:opacity .25s;pointer-events:none";
+    document.body.appendChild(t);
+  }
+  t.textContent=msg;
+  t.style.opacity="1";
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>t.style.opacity="0",1800);
+}
+
+/* ===== 初始化 ===== */
+renderSidebar();
+renderChapter(1);
+</script>
+</body>
+</html>
