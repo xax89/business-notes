@@ -927,102 +927,297 @@ const CH3_PROBLEMS = [
 
 
 /* ===== 第四章：古典假設與 OLS 性質 ===== */
+/* ===== 第四章：古典假設與 OLS 性質（完整版） ===== */
 const CH4_SECTIONS = [
 {
   id:"4.1", title:"古典線性迴歸模型的假設",
   body:`
-  <p>古典線性迴歸模型（<span class="term" data-term="CLRM">CLRM</span>）有五個核心假設，是 OLS 估計式具有良好性質的基礎。</p>
-  <ol>
-    <li><b>線性</b>：y 是參數 β 的線性函數</li>
-    <li><b>隨機抽樣</b>：(x_i, y_i) 是獨立同分配 (i.i.d.)</li>
-    <li><b>不完全共線</b>：解釋變數之間無完全線性關係</li>
-    <li><b>條件零平均</b>：E(u|X) = 0</li>
-    <li><b>同變異數</b>：Var(u|X) = σ²（常數）</li>
-  </ol>
-  <div class="warn">考試重點：條件零平均假設 E(u|X)=0 是 OLS 不偏性的關鍵；如果違反，OLS 就會有偏誤。</div>`
+  <p>古典線性迴歸模型（<span class="term" data-term="CLRM">Classical Linear Regression Model, CLRM</span>）是計量經濟學的起點。OLS 估計式之所以具有「最佳線性不偏估計式」(BLUE) 的美稱，完全建立在以下五個古典假設之上。每個假設都不是隨便假設的——如果哪個假設被違反，OLS 的某個性質就會跟著崩壞。</p>
+
+  <div class="method-card mc-title" data-mc="clrm-assumptions">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-0" data-mc="clrm-assumptions"><label for="mc-ch4-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">五個古典假設總整理</div>
+    <div class="mc-body">
+      <div class="mc-formula">線性 → 隨機抽樣 → 不完全共線 → 條件零平均 → 同變異數</div>
+      <div class="mc-detail">前五個假設是小樣本推斷的基礎；加上「常態性假設」就可以做 t 檢定、F 檢定。</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">假設 1：線性 (Linearity)</h3>
+  <p><b>形式化敘述</b>：母體迴歸函數是參數 β 的線性函數：</p>
+  <div class="formula"><span class="f-label">線性假設</span>y = β₀ + β₁x₁ + β₂x₂ + ... + βₖxₖ + u</div>
+  <p><b>解讀</b>：「線性」指的是對<b>參數 β</b> 線性，不是對 x 線性。像 y = β₀ + β₁x + β₂x² 或 ln(y) = β₀ + β₁x 都還是線性模型，因為 β₀、β₁、β₂ 都是一次方的。</p>
+  <p><b>如果違反</b>：模型形式不對（例如實際是二次式，你卻用線性式），估計出來的 β 就沒有意義。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">假設 2：隨機抽樣 (Random Sampling)</h3>
+  <p><b>形式化敘述</b>：我們手上的 n 筆觀察值 {(x_i, y_i) : i=1,...,n} 是從母體中<b>獨立同分配 (i.i.d.)</b> 抽出來的。</p>
+  <p><b>解讀</b>：每一筆觀察值之間互相獨立，而且都來自同一個母體分配。</p>
+  <p><b>如果違反</b>：</p>
+  <ul>
+    <li>如果是時間序列資料，觀察值之間通常有自我相關（第 9 章），就違反了 i.i.d.</li>
+    <li>如果是追蹤資料，同一個人不同時間的觀察值也不是獨立的（第 12 章）</li>
+  </ul>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">假設 3：不完全共線 (No Perfect Collinearity)</h3>
+  <p><b>形式化敘述</b>：解釋變數之間不存在完全的線性關係，而且沒有任何一個解釋變數是常數。</p>
+  <p><b>解讀</b>：X 矩陣的各行（每個解釋變數）是線性獨立的，所以 X'X 是可逆的。</p>
+  <div class="warn">常見的違反例子：虛擬變數陷阱（Dummy Variable Trap）——如果你有 m 個類別，卻放了 m 個虛擬變數，再加上截距項，就會產生完全共線。</div>
+  <p><b>如果違反</b>：X'X 不可逆，OLS 估計式 β̂ = (X'X)⁻¹X'y 根本算不出來。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">假設 4：條件零平均 (Zero Conditional Mean)</h3>
+  <p><b>形式化敘述</b>：在給定所有解釋變數的條件下，誤差項 u 的平均值為 0：</p>
+  <div class="formula"><span class="f-label">條件零平均</span>E(u | X₁, X₂, ..., Xₖ) = 0</div>
+  <p><b>解讀</b>：這是<b>最關鍵</b>的一個假設，也是 OLS 不偏性的核心。它的意思是：誤差項裡面的東西，和我們放進模型的解釋變數都沒有關係。</p>
+  <p><b>如果違反（內生性問題）</b>：OLS 估計式就會有偏誤，而且不一致。這是計量經濟學最頭痛的問題，解決方法包括工具變數（第 11 章）、追蹤資料固定效果（第 12 章）、實驗設計（第 14 章）等。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">假設 5：同變異數 (Homoscedasticity)</h3>
+  <p><b>形式化敘述</b>：在給定解釋變數的條件下，誤差項 u 的變異數是一個常數，不隨 X 改變：</p>
+  <div class="formula"><span class="f-label">同變異數</span>Var(u | X₁, X₂, ..., Xₖ) = σ²</div>
+  <p><b>解讀</b>：所有觀察值的誤差變異程度都一樣大，不會隨著 x 變大而變大或變小。</p>
+  <p><b>如果違反（異變數，第 8 章）</b>：OLS 仍然是不偏的，但不再是 BLUE——變異數不是最小的，而且標準誤估計錯誤，導致 t 檢定、F 檢定都不可靠。</p>
+
+  <div class="warn">考試重點：五個假設各自對應 OLS 的哪個性質？<br>
+  • 假設 1-4 → 不偏性<br>
+  • 假設 1-5 → BLUE（最佳線性不偏）<br>
+  • 加上常態性假設 → 可以做 t/F 檢定</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：這些假設是後面所有章節的基礎。第 5 章的 t 檢定、F 檢定需要加上常態性假設；第 8 章講異變數如何違反假設 5；第 9 章講自我相關如何違反「獨立性」假設；第 10-11 章講內生性問題如何違反假設 4。</p>`
 },
+
 {
   id:"4.2", title:"OLS 估計式的小樣本性質",
   body:`
-  <p>在古典假設下，OLS 估計式有三個重要的小樣本性質：</p>
+  <p>在五個古典假設下，OLS 估計式具有三個重要的小樣本性質：<b>不偏性、線性、最小變異數</b>。合起來就是著名的<b>高斯-馬可夫定理</b>——OLS 是 BLUE。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">4.2.1 不偏性 (Unbiasedness)</h3>
+  <p><b>定義</b>：OLS 估計式的期望值等於真實母數 β：</p>
+  <div class="formula"><span class="f-label">不偏性</span>E(β̂ | X) = β</div>
+
+  <p><b>推導概要</b>：</p>
+  <p>從 OLS 的定義出發：</p>
+  <div class="formula">β̂ = (X'X)⁻¹X'y</div>
+  <p>把 y = Xβ + u 代入：</p>
+  <div class="formula">β̂ = (X'X)⁻¹X'(Xβ + u) = β + (X'X)⁻¹X'u</div>
+  <p>對 X 取條件期望值：</p>
+  <div class="formula">E(β̂ | X) = β + (X'X)⁻¹X'E(u | X) = β + 0 = β</div>
+  <p>因為假設 4（條件零平均）告訴我們 E(u | X) = 0，所以最後一項消失了。</p>
+
+  <div class="method-card mc-title" data-mc="unbiasedness">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-2" data-mc="unbiasedness"><label for="mc-ch4-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">不偏性的直覺</div>
+    <div class="mc-body">
+      <div class="mc-formula">如果重複抽樣很多次，每次都估計一次 β̂，這些 β̂ 的平均值會剛好等於真實的 β</div>
+      <div class="mc-detail">注意：不偏性是「抽樣分配」的性質，不是說你這次估計出來的 β̂ 就等於真實的 β。</div>
+      <div class="mc-ex">數值範例：如果真實的 β₁ = 0.5，你抽了 1000 個樣本，估計出 1000 個 β̂₁，這 1000 個數字的平均大約就是 0.5。</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.2.2 條件變異數矩陣</h3>
+  <p>在同變異數和無自我相關的假設下，β̂ 的條件變異數矩陣是：</p>
+  <div class="formula"><span class="f-label">條件變異數矩陣</span>Var(β̂ | X) = σ²(X'X)⁻¹</div>
+  <p>其中 σ² 是誤差項的變異數，X'X 是解釋變數的交叉乘積矩陣。</p>
+
+  <p><b>單一係數的變異數</b>：對於第 j 個係數 β̂ⱼ：</p>
+  <div class="formula">Var(β̂ⱼ | X) = σ² / [SSTⱼ · (1 - Rⱼ²)]</div>
+  <p>其中：</p>
   <ul>
-    <li><b>不偏性 (Unbiasedness)</b>：E(β̂|X) = β</li>
-    <li><b>最小變異數 (Efficiency)</b>：在所有線性不偏估計式中，OLS 的變異數最小</li>
-    <li><b>線性 (Linear)</b>：β̂ 是 y 的線性函數</li>
+    <li>SSTⱼ = Σ(x_ij - x̄ⱼ)² 是 xⱼ 的總變異</li>
+    <li>Rⱼ² 是把 xⱼ 對其他所有解釋變數迴歸的 R²</li>
   </ul>
-  <div class="formula"><span class="f-label">條件變異數矩陣</span>Var(β̂|X) = σ²(X'X)⁻¹</div>
+
+  <div class="warn">考試重點：從這個公式可以看出三件事：<br>
+  1. 樣本數越大（SSTⱼ 越大），變異數越小，估計越精確<br>
+  2. 解釋變數之間的共線性越嚴重（Rⱼ² 越接近 1），變異數越大，估計越不精確<br>
+  3. 誤差變異數 σ² 越大，變異數越大</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.2.3 高斯-馬可夫定理 (Gauss-Markov Theorem)</h3>
+  <p><b>定理敘述</b>：在五個古典假設下，OLS 估計式是<b>最佳線性不偏估計式 (Best Linear Unbiased Estimator, BLUE)</b>。</p>
+  <p>「BLUE」三個字母各代表：</p>
+  <ul>
+    <li><b>B (Best)</b>：在所有線性不偏估計式中，OLS 的變異數最小（最有效率）</li>
+    <li><b>L (Linear)</b>：β̂ 是 y 的線性函數</li>
+    <li><b>U (Unbiased)</b>：E(β̂) = β</li>
+    <li><b>E (Estimator)</b>：它是一個估計式（隨機變數）</li>
+  </ul>
+
   <div class="method-card mc-title" data-mc="blues">
     <div class="mc-check"><input type="checkbox" id="mc-ch4-1" data-mc="blues"><label for="mc-ch4-1" class="mc-lbl">學會</label></div>
-    <div class="mc-left">高斯-馬可夫定理 (BLUE)</div>
+    <div class="mc-left">高斯-馬可夫定理的意義</div>
     <div class="mc-body">
-      <div class="mc-formula">Best Linear Unbiased Estimator</div>
-      <div class="mc-detail">在古典假設下，OLS 是「最佳線性不偏估計式」——在所有線性不偏估計式中，OLS 的變異數最小。</div>
+      <div class="mc-formula">在所有「線性」且「不偏」的估計式中，OLS 是變異數最小的那一個</div>
+      <div class="mc-detail">注意：BLUE 只跟「其他線性不偏估計式」比。如果放棄線性或不偏的要求，可能可以找到變異數更小的估計式（例如壓縮估計式）。</div>
     </div>
-  </div>`
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：BLUE 是 OLS 在古典假設下的最高榮譽。第 8 章講異變數時，你會看到當同變異數假設被違反，OLS 就不再是 BLUE 了——此時 WLS 才是 BLUE。</p>`
 },
+
 {
   id:"4.3", title:"OLS 的大樣本性質",
   body:`
-  <p>當樣本數 n 趨近無窮大時，OLS 估計式有三個大樣本性質：</p>
+  <p>小樣本性質需要比較強的假設（特別是同變異數和無自我相關）。如果樣本數很大，我們可以放寬這些假設，只需要比較弱的條件，OLS 就會有很好的大樣本性質：<b>一致性、漸近常態、漸近有效</b>。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">4.3.1 一致性 (Consistency)</h3>
+  <p><b>定義</b>：當樣本數 n 趨近無窮大時，β̂ 會機率收斂到真實的 β：</p>
+  <div class="formula"><span class="f-label">一致性</span>plim(β̂) = β, 當 n → ∞</div>
+
+  <p><b>和不偏性的差別</b>：</p>
   <ul>
-    <li><b>一致性 (Consistency)</b>：β̂ 機率收斂到 β</li>
-    <li><b>漸近常態 (Asymptotic Normality)</b>：√n(β̂ - β) 趨近常態分配</li>
-    <li><b>漸近有效 (Asymptotic Efficiency)</b>：在一致估計式中，漸近變異數最小</li>
+    <li><b>不偏性</b>：不管樣本數多大或多小，E(β̂) 都等於 β</li>
+    <li><b>一致性</b>：樣本數越大，β̂ 越接近 β；當 n→∞，β̂ 會剛好等於 β</li>
   </ul>
-  <div class="warn">考試重點：小樣本性質需要古典假設（包括同變異數、無自我相關）；大樣本性質只需要更弱的假設。</div>`
+  <p>簡單說：不偏性是「平均來說準」，一致性是「樣本夠大就會越來越準」。</p>
+
+  <div class="method-card mc-title" data-mc="consistency">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-3" data-mc="consistency"><label for="mc-ch4-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">一致性的直覺</div>
+    <div class="mc-body">
+      <div class="mc-formula">樣本數越大，估計值的抽樣分配越集中在真實值附近</div>
+      <div class="mc-detail">如果你的估計式是不偏的，那它一定是一致的嗎？不一定！例如樣本變異數除以 n-2 是不偏的，但除以 n 的樣本變異數是一致的但不偏（小樣本時稍微低估）。</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.3.2 漸近常態 (Asymptotic Normality)</h3>
+  <p><b>定義</b>：當樣本數 n 夠大時，√n(β̂ - β) 會趨近一個常態分配：</p>
+  <div class="formula"><span class="f-label">漸近常態</span>√n(β̂ - β) → N(0, (σ²/SSTₓ))</div>
+  <p>這就是中央極限定理在 OLS 上的應用——不管誤差項 u 原來是什麼分配，只要 n 夠大，β̂ 就會近似常態分配。</p>
+
+  <div class="warn">考試重點：為什麼大樣本下不需要常態假設？<br>
+  小樣本時，你需要 u 是常態分配，才能推導出 β̂ 是常態分配，才能用 t 分配、F 分配做檢定。<br>
+  大樣本時，根據中央極限定理，不管 u 是什麼分配，√n(β̂ - β) 都會趨近常態分配，所以還是可以做 t 檢定、F 檢定，只是用的是常態分配的臨界值，而不是 t 分配的臨界值（當 n 很大時，兩者幾乎一樣）。</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.3.3 漸近有效性 (Asymptotic Efficiency)</h3>
+  <p>在所有一致的估計式中，OLS 的漸近變異數是最小的（在某些規律條件下）。這是大樣本版本的 BLUE。</p>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：大樣本性質是時間序列和追蹤資料分析的基礎——因為時間序列資料通常不滿足 i.i.d. 假設，所以小樣本理論不適用，必須靠大樣本性質（一致性、漸近常態）來做推斷。</p>`
 },
+
 {
   id:"4.4", title:"遺漏變數偏誤",
   body:`
-  <p>如果模型遺漏了一個相關的解釋變數，OLS 估計式會產生偏誤，稱為<b>遺漏變數偏誤 (Omitted Variable Bias)</b>。</p>
+  <p>遺漏變數偏誤是計量經濟學最常見的問題之一，也是內生性的三大來源之一。它的意思是：如果你應該放進模型的解釋變數沒有放進去，OLS 估計出來的係數就會有偏誤。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">4.4.1 簡單線性迴歸的例子</h3>
+  <p>假設真實的母體模型是：</p>
+  <div class="formula">y = β₀ + β₁x₁ + β₂x₂ + u</div>
+  <p>但是你不知道 x₂ 的存在（或者沒有 x₂ 的資料），所以你估計的是：</p>
+  <div class="formula">y = β₀ + β₁x₁ + v</div>
+  <p>其中 v = β₂x₂ + u，是一個「混合」了遺漏變數和真正誤差項的東西。</p>
+
+  <p>如果你硬要估計 β̂₁，它的期望值會是：</p>
   <div class="formula"><span class="f-label">偏誤公式</span>E(β̂₁) = β₁ + β₂·δ₁</div>
-  <p>其中 δ₁ 是遺漏變數 x₂ 對 x₁ 迴歸的係數。</p>
+  <p>其中 δ₁ 是把遺漏變數 x₂ 對 x₁ 迴歸的斜率係數：</p>
+  <div class="formula">x₂ = δ₀ + δ₁x₁ + 其他</div>
+
   <div class="method-card mc-title" data-mc="ovb">
     <div class="mc-check"><input type="checkbox" id="mc-ch4-2" data-mc="ovb"><label for="mc-ch4-2" class="mc-lbl">學會</label></div>
-    <div class="mc-left">遺漏變數偏誤的兩個條件</div>
+    <div class="mc-left">遺漏變數偏誤的兩個必要條件</div>
     <div class="mc-body">
-      <div class="mc-formula">遺漏變數偏誤發生的兩個必要條件</div>
-      <div class="mc-detail">1. 遺漏變數 x₂ 與依變數 y 有相關（β₂ ≠ 0）<br>2. 遺漏變數 x₂ 與其他解釋變數 x₁ 有相關（δ₁ ≠ 0）</div>
-      <div class="mc-ex">例子：估計教育對薪資的效果，如果遺漏能力變數，而能力同時影響教育選擇和薪資，就會有遺漏變數偏誤。</div>
+      <div class="mc-formula">只有同時滿足以下兩個條件，才會有遺漏變數偏誤</div>
+      <div class="mc-detail">
+      1. <b>β₂ ≠ 0</b>：遺漏變數 x₂ 對 y 有解釋力（和 y 有相關）<br>
+      2. <b>δ₁ ≠ 0</b>：遺漏變數 x₂ 和模型中已有的解釋變數 x₁ 有相關
+      </div>
+      <div class="mc-ex">如果只有一個條件成立，就不會有偏誤。例如：x₂ 和 x₁ 完全不相關（δ₁=0），即使 x₂ 對 y 有影響，也不會造成 β̂₁ 的偏誤。</div>
     </div>
-  </div>`
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.4.2 偏誤的方向</h3>
+  <p>遺漏變數造成的偏誤方向是 β₂·δ₁ 的符號：</p>
+  <ul>
+    <li>如果 β₂ 和 δ₁ 同號 → 偏誤是正的（β̂₁ 高估了 β₁）</li>
+    <li>如果 β₂ 和 δ₁ 異號 → 偏誤是負的（β̂₁ 低估了 β₁）</li>
+  </ul>
+
+  <div class="method-card mc-title" data-mc="ovb-direction">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-4" data-mc="ovb-direction"><label for="mc-ch4-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">數值範例：教育對薪資的效果</div>
+    <div class="mc-body">
+      <div class="mc-formula">真實模型：log(wage) = β₀ + β₁·教育年數 + β₂·能力 + u</div>
+      <div class="mc-detail">
+      • β₂ > 0：能力越強的人，薪資越高<br>
+      • δ₁ > 0：能力越強的人，通常受教育年數也越長<br>
+      • 所以偏誤 β₂·δ₁ > 0
+      </div>
+      <div class="mc-ex">結果：如果你沒有控制能力，估計出來的「教育對薪資的效果」β̂₁ 會<b>高估</b>真實的 β₁——因為你把「能力的效果」也算進去了，以為都是教育的功勞。</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.4.3 嚴重性：遺漏變數不只是偏誤，還會不一致</h3>
+  <p>更嚴重的是：遺漏變數造成的偏誤<b>不會隨著樣本數變大而消失</b>。也就是說，即使你有一萬筆資料，估計出來的 β̂₁ 還是有偏誤。這就是為什麼遺漏變數偏誤這麼頭痛——它不是「樣本數不夠大」的問題，而是模型設定本身就錯了。</p>
+
+  <div class="warn">考試重點：遺漏變數偏誤是因果推斷的核心問題。第 11 章的工具變數、第 12 章的追蹤資料固定效果、第 14 章的隨機實驗，本質上都是在解決遺漏變數偏誤的問題。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：遺漏變數是內生性的三大來源之一（另外兩個是測量誤差和聯立方程式偏誤，第 10 章）。解決方法包括：工具變數（第 11 章）、固定效果模型（第 12 章）、實驗設計（第 14 章）。</p>`
 },
+
 {
   id:"4.5", title:"多餘變數的效果",
   body:`
-  <p>如果模型加入了一個無關的解釋變數（與 y 無關），稱為<b>多餘變數 (Irrelevant Variable)</b>。</p>
+  <p>講完了「漏放變數」的問題，我們來看相反的情況：<b>多放了一個根本無關的變數</b>（多餘變數）會怎麼樣？</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">4.5.1 定義</h3>
+  <p>多餘變數 (Irrelevant Variable) 是指：放進模型裡面，但其實對 y 根本沒有解釋力的變數。也就是說，它的真實係數 βⱼ = 0。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.5.2 對 OLS 性質的影響</h3>
+  <p>如果你不小心放了一個多餘變數，會發生什麼事？</p>
   <ul>
-    <li><b>不偏性</b>：OLS 仍然是不偏的</li>
-    <li><b>有效性</b>：不再是 BLUE——變異數會變大（損失自由度）</li>
-    <li><b>不一致性</b>：仍然是一致的</li>
+    <li><b>不偏性</b>：OLS 仍然是不偏的。即使你多放了一個根本沒用的變數，其他變數的係數估計還是對的。</li>
+    <li><b>一致性</b>：OLS 仍然是一致的。</li>
+    <li><b>有效性</b>：OLS 不再是 BLUE——因為你浪費了自由度，估計的變異數會變大。</li>
   </ul>
-  <div class="warn">考試重點：遺漏變數 vs 多餘變數——遺漏變數會造成偏誤和不一致；多餘變數不會造成偏誤，但會造成無效率。</div>`
+
+  <div class="method-card mc-title" data-mc="irrelevant">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-5" data-mc="irrelevant"><label for="mc-ch4-5" class="mc-lbl">學會</label></div>
+    <div class="mc-left">遺漏變數 vs 多餘變數</div>
+    <div class="mc-body">
+      <div class="mc-formula">遺漏變數：有偏誤 + 不一致 + 無效率<br>多餘變數：不偏 + 一致 + 無效率</div>
+      <div class="mc-detail">兩者都會造成無效率（變異數變大），但差別在於：遺漏變數會讓你的估計值根本就是錯的（有偏誤）；多餘變數只是估計比較不精準，但估計值還是對的。</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">4.5.3 實務上的啟示</h3>
+  <p>從上面的比較可以得到一個重要的啟示：</p>
+  <div class="warn">模型設定的原則：「寧可多放，也不要漏放」。<br>
+  多放一個變數，最多就是浪費一點自由度，估計比較不精準；但漏放一個變數，你的估計值就整個錯了。<br>
+  當然，也不是放越多越好——如果放太多根本沒用的變數，變異數會膨脹到你的估計完全沒有檢定力。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：模型選擇的問題（放多少變數才夠）是第 6 章「函數形式與模型設定」和第 15 章「MLE」的主題。AIC、BIC 這些模型選擇準則，就是在「偏差」和「變異數」之間做取捨。</p>`
 }
 ];
 
 const CH4_PROBLEMS = [
 {
   id:"q4-1",
-  q:"在古典假設下，OLS 估計式的 BLUE 性質中，BLUE 代表什麼意思？",
-  a:"BLUE = Best Linear Unbiased Estimator（最佳線性不偏估計式）。代表在所有線性不偏估計式中，OLS 的變異數最小（最有效率）。",
+  q:"在古典假設下，OLS 估計式的 BLUE 性質中，BLUE 代表什麼意思？需要滿足哪些假設才能成立？",
+  a:"BLUE = Best Linear Unbiased Estimator（最佳線性不偏估計式）。<br><br>需要滿足的古典假設：<br>1. 線性（y 是 β 的線性函數）<br>2. 隨機抽樣（i.i.d.）<br>3. 不完全共線（解釋變數之間無完全線性關係）<br>4. 條件零平均（E(u|X) = 0）<br>5. 同變異數（Var(u|X) = σ²）<br><br>BLUE 的意思是：在所有線性不偏估計式中，OLS 的變異數最小。",
   difficulty:"easy",
   topic:"高斯-馬可夫定理"
 },
 {
   id:"q4-2",
-  q:"遺漏變數偏誤發生的兩個必要條件是什麼？",
-  a:"1. 遺漏變數與依變數 y 有相關（即它對 y 有解釋力）；2. 遺漏變數與模型中其他解釋變數有相關。",
+  q:"遺漏變數偏誤發生的兩個必要條件是什麼？請舉一個實際例子說明。",
+  a:"兩個必要條件：<br>1. 遺漏變數對依變數 y 有解釋力（β₂ ≠ 0）<br>2. 遺漏變數和模型中已有的解釋變數有相關（δ₁ ≠ 0）<br><br>範例：估計教育對薪資的效果。如果遺漏了「能力」變數：<br>• 能力和薪資正相關（β₂ > 0）<br>• 能力和教育年數正相關（δ₁ > 0）<br>• 所以偏誤 β₂·δ₁ > 0，教育的效果被高估了。",
   difficulty:"medium",
   topic:"遺漏變數偏誤"
 },
 {
   id:"q4-3",
-  q:"如果模型加入了一個無關的解釋變數（多餘變數），OLS 估計式會有什麼變化？",
-  a:"仍然是不偏的、一致的，但不再是最有效率的——因為損失了自由度，變異數會變大。",
+  q:"如果模型加入了一個無關的解釋變數（多餘變數），OLS 估計式會有什麼變化？和遺漏變數的後果有什麼不同？",
+  a:"多餘變數的影響：<br>• 仍然是不偏的、一致的<br>• 但不再是最有效率的——因為損失了自由度，變異數會變大<br><br>和遺漏變數的比較：<br>• 遺漏變數：有偏誤、不一致、無效率（嚴重）<br>• 多餘變數：不偏、一致、無效率（比較輕微）<br><br>所以實務上的原則是「寧可多放，也不要漏放」——因為漏放的後果嚴重太多了。",
   difficulty:"medium",
   topic:"多餘變數"
+},
+{
+  id:"q4-4",
+  q:"為什麼說「不偏性是小樣本性質，一致性是大樣本性質」？兩者有什麼不同？",
+  a:"不偏性：不管樣本數多大或多小，E(β̂) = β。這是對所有可能的樣本數都成立的性質。<br><br>一致性：當 n → ∞ 時，β̂ 會機率收斂到 β。也就是說，樣本數越大，估計值越接近真實值。<br><br>兩者的差別：<br>• 不偏性是「平均來說準」，不管樣本數大小<br>• 一致性是「樣本夠大就會越來越準」<br>• 不偏的估計式一定是一致的嗎？不一定。反之，一致的估計式也不一定是不偏的（小樣本時可能有偏誤，但樣本數變大後偏誤會消失）。",
+  difficulty:"hard",
+  topic:"不偏性 vs 一致性"
 }
 ];
+
+
 
 /* ===== 第五章：區間估計與假設檢定 ===== */
 const CH5_SECTIONS = [
