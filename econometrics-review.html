@@ -2170,15 +2170,15 @@ function renderChapter(n){
   h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">例題演練 <span class="prob-progress" id="probProgress"></span></h1><p>先自己作答，再點「顯示答案」核對。</p></div>`;
   problems.forEach((p,i)=>{
     const fk=n+"-"+(i+1);
-    favPool[fk]={t:"第 "+n+" 章 · 例題 "+(i+1),q:p.q+(p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""),a:p.ans};
+    favPool[fk]={t:"第 "+n+" 章 · 例題 "+(i+1),q:p.q+((p.opts&&p.opts.length)?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""),a:p.ans||p.a};
     const isFav=!!favState[fk];
     const isDone=!!doneState[fk];
     h+=`<div class="problem" id="prob-${n}-${i+1}">
       <div class="p-head"><button class="done-btn ${isDone?"on":""}" data-done="${fk}" title="標記已做過">${isDone?"☑ 做過":"☐ 做過"}</button><span>例題 ${i+1}</span><button class="fav ${isFav?"on":""}" data-fav="${fk}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
-      <div class="p-body"><p>${p.q}</p>${p.opts.length?`<div class="opts" data-pid="${fk}" data-correct="${(()=>{const m=p.ans.match(/^<b>\(([A-Da-d])\)/);return m?m[1].toUpperCase():"";})()}">${p.opts.map(o=>{const om=o.match(/^\(([A-Da-d])\)/);return `<div class="opt" data-ans="${om?om[1].toUpperCase():""}">${o}</div>`;}).join("")}</div>`:""}
+      <div class="p-body"><p>${p.q}</p>${(p.opts&&p.opts.length)?`<div class="opts" data-pid="${fk}" data-correct="${(()=>{const m=(p.ans||p.a).match(/^<b>\(([A-Da-d])\)/);return m?m[1].toUpperCase():"";})()}">${p.opts.map(o=>{const om=o.match(/^\(([A-Da-d])\)/);return `<div class="opt" data-ans="${om?om[1].toUpperCase():""}">${o}</div>`;}).join("")}</div>`:""}
       <div class="prob-fb"></div>
       <button class="ans-btn" onclick="toggleAns(this)">顯示答案</button>
-      <div class="ans"><span class="a-label">解答</span>：${p.ans}</div></div>
+      <div class="ans"><span class="a-label">解答</span>：${p.ans||p.a}</div></div>
     </div>`;
   });
   h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">本章術語</h1><p>本章出現的術語：打勾＝已學會、★重點、✎筆記。全書術語總表在左側「術語複習表」。</p></div>
