@@ -424,6 +424,14 @@ const BOOK = [
   {n:6, title:"函數形式與模型設定", subs:["6.1 對數線性模型","6.2 多項式模型與交互項","6.3 Chow 檢定與結構改變","6.4 模型設定誤差","6.5 模型選擇準則"], done:true, points:["雙對數模型係數是彈性","半對數模型係數是半彈性","交互項：邊際效果取決於另一變數水準","AIC/BIC 模型選擇準則，越小越好"]},
   {n:7, title:"虛擬變數與虛擬因變數", subs:["7.1 虛擬解釋變數","7.2 虛擬因變數與 LPM","7.3 Logit 與 Probit 模型","7.4 多類別與有序因變數模型","7.5 計數因變數模型"], done:true, points:["虛擬變數陷阱：m 個類別只能放 m-1 個","LPM 的問題：機率可能超出 [0,1]、必然有異變數","Logit/Probit 解決二元因變數問題","Poisson/負二項解決計數資料問題"]},
   {n:8, title:"異變數", subs:["8.1 異變數的意義與後果","8.2 異變數的偵測","8.3 加權最小平方法 WLS","8.4 穩健標準誤","8.5 常見異變數型態"], done:true, points:["異變數後果：不偏但無效率、標準誤估計錯誤","BP 檢定、White 檢定偵測異變數","WLS：知道異變數形式時的解決方法","穩健標準誤：不知道形式時最實用的方法"]},
+  {n:9, title:"自我相關", subs:["9.1 自我相關的意義與後果","9.2 自我相關的偵測","9.3 解決自我相關的方法","9.4 自我相關的來源"], done:true, points:["自我相關後果：不偏但無效率、標準誤估計錯誤","DW 統計量 ≈ 2(1-ρ̂)","Newey-West 穩健標準誤修正自我相關","自我相關主要出現在時間序列資料"]},
+  {n:10, title:"隨機解釋變數與測量誤差", subs:["10.1 嚴格外生性假設","10.2 隨機解釋變數的問題","10.3 測量誤差的後果","10.4 聯立方程式偏誤"], done:true, points:["內生性三來源：遺漏變數、測量誤差、聯立偏誤","解釋變數測量誤差：向零偏誤、不一致","依變數測量誤差：不要緊，只增加變異數"]},
+  {n:11, title:"工具變數與兩段最小平方法", subs:["11.1 工具變數的概念","11.2 兩段最小平方法 2SLS","11.3 弱工具變數","11.4 過度認定檢定","11.5 Hausman 檢定"], done:true, points:["工具變數兩條件：相關 + 排他性","2SLS：第一階段 x 對 z 迴歸，第二階段 y 對 x̂ 迴歸","弱工具變數：第一階段 F<10","Hausman 檢定：檢定是否存在內生性"]},
+  {n:12, title:"追蹤資料模型", subs:["12.1 追蹤資料的結構","12.2 混合最小平方法 Pooled OLS","12.3 固定效果模型 Fixed Effects","12.4 隨機效果模型 Random Effects","12.5 虛擬變數法 LSDV"], done:true, points:["FE：控制不隨時間改變的未觀測異質性","RE：假設個體效果和解釋變數不相關","Hausman 檢定選擇 FE vs RE","FE 無法估計不隨時間改變的變數效果"]},
+  {n:13, title:"時間序列模型", subs:["13.1 時間序列資料的特性","13.2 平穩性 Stationarity","13.3 自我相關函數 ACF 與 PACF","13.4 ARMA 與 ARIMA 模型","13.5 波動率模型 ARCH/GARCH"], done:true, points:["平穩性是時間序列分析的核心","虛假迴歸：非平穩序列迴歸會偽顯著","ARMA/ARIMA 建模平穩序列","ARCH/GARCH 建模波動率聚集"]},
+  {n:14, title:"自我選擇與效果模型", subs:["14.1 隨機控制實驗 RCT","14.2 差異中的差異 DiD","14.3 傾向得分匹配 PSM","14.4 斷點迴歸 RD"], done:true, points:["RCT 是因果推斷黃金標準","DiD：平行趨勢假設","PSM 只能解決可觀察變數的選擇偏誤","RD：利用門檻斷點估計因果效果"]},
+  {n:15, title:"最大概似估計 MLE", subs:["15.1 概似函數的概念","15.2 MLE 的性質","15.3 三大檢定：概似比、Wald、LM","15.4 MLE 的應用"], done:true, points:["MLE：選擇參數使得觀察到資料的機率最大","MLE 三大性質：一致、漸近常態、漸近有效","LRT/Wald/LM 三大檢定漸近等價","Logit/Probit/Poisson 都是 MLE 估計"]},
+  {n:16, title:"一般化動車法 GMM", subs:["16.1 動機條件與 GMM","16.2 GMM 的直覺","16.3 過度認定檢定","16.4 GMM 的應用：動態追蹤模型"], done:true, points:["GMM 只需要動機條件，不需要完整分配","OLS/IV 都是 GMM 的特例","Hansen J 檢定：工具變數外生性檢定","Arellano-Bond：動態追蹤模型的 GMM 估計"]},
 ];
 /* ===== 術語資料（點擊卡片時顯示） ===== */
 const TERMS = {
@@ -1392,12 +1400,648 @@ const CH8_PROBLEMS = [
 ];
 
 
+/* ===== 第九章：自我相關 ===== */
+const CH9_SECTIONS = [
+{
+  id:"9.1", title:"自我相關的意義與後果",
+  body:`
+  <p>古典假設中有一條是<b>無自我相關 (No Autocorrelation)</b>：誤差項之間不相關，Cov(u_i, u_j|X) = 0 for i ≠ j。</p>
+  <p>如果違反這個假設，誤差項之間存在相關，就稱為<span class="term" data-term="Autocorrelation">自我相關 (Autocorrelation)</span>或序列相關 (Serial Correlation)。</p>
+  <div class="formula"><span class="f-label">一階自我相關 AR(1)</span>u_t = ρu_{t-1} + ε_t</div>
+  <p><b>自我相關的後果</b>：</p>
+  <ul>
+    <li>OLS 估計式仍然是不偏的、一致的</li>
+    <li>但 OLS 不再是 BLUE（不再是最有效率的）</li>
+    <li>OLS 估計的標準誤是錯誤的，導致 t 檢定、F 檢定都不可靠</li>
+  </ul>
+  <div class="warn">考試重點：自我相關和異變數的後果很像——都是不偏但無效率、標準誤估計錯誤；差別在於自我相關主要出現在時間序列資料，異變數主要出現在橫斷面資料。</div>`
+},
+{
+  id:"9.2", title:"自我相關的偵測",
+  body:`
+  <p>最常用的自我相關偵測方法是 <span class="term" data-term="Durbin-Watson">Durbin-Watson (DW) 檢定</span>。</p>
+  <div class="formula"><span class="f-label">DW 統計量</span>DW = Σ(ê_t - ê_{t-1})² / Σê_t² ≈ 2(1 - ρ̂)</div>
+  <p>DW 統計量的解讀：</p>
+  <ul>
+    <li>DW ≈ 2：無自我相關</li>
+    <li>DW < 2：正自我相關（常見）</li>
+    <li>DW > 2：負自我相關（少見）</li>
+  </ul>
+  <div class="method-card mc-title" data-mc="dwtest">
+    <div class="mc-check"><input type="checkbox" id="mc-ch9-1" data-mc="dwtest"><label for="mc-ch9-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">DW 檢定的判斷</div>
+    <div class="mc-body">
+      <div class="mc-formula">DW ≈ 2(1-ρ̂)</div>
+      <div class="mc-detail">DW 統計量介於 0 到 4 之間。<br>如果 DW 顯著小於 2，代表存在正自我相關；<br>如果 DW 顯著大於 2，代表存在負自我相關。</div>
+    </div>
+  </div>`
+},
+{
+  id:"9.3", title:"解決自我相關的方法",
+  body:`
+  <p>常見的解決方法：</p>
+  <ol>
+    <li><b>Cochrane-Orcutt 估計</b>：假設 AR(1) 結構，先估計 ρ，再做一般化最小平方法 (GLS)</li>
+    <li><b>Newey-West 穩健標準誤</b>：類似異變數的穩健標準誤，但同時修正異變數和自我相關</li>
+    <li><b>一階差分法</b>：如果 ρ=1（隨機漫步），直接對變數取一階差分</li>
+  </ol>
+  <div class="warn">考試重點：Newey-West 穩健標準誤是實務上最常用的方法——不需要知道自我相關的確切形式，只要指定落後期數就可以修正標準誤。</div>`
+},
+{
+  id:"9.4", title:"自我相關的來源",
+  body:`
+  <p>時間序列資料中自我相關很常見，主要來源：</p>
+  <ul>
+    <li><b>慣性</b>：總體經濟變數（如 GDP、消費）有慣性，本期和下期的變動不會完全獨立</li>
+    <li><b>模型設定誤差</b>：遺漏了一個有自我相關的變數，或函數形式不對</li>
+    <li><b>資料平滑</b>：季節調整或移動平均造成的人為自我相關</li>
+  </ul>
+  <div class="warn">考試重點：如果自我相關是因為遺漏變數造成的，解決方法不是直接修正自我相關，而是把遺漏的變數加回模型。</div>`
+}
+];
+
+const CH9_PROBLEMS = [
+{
+  id:"q9-1",
+  q:"自我相關對 OLS 估計式的影響是什麼？",
+  a:"OLS 估計式仍然是不偏的、一致的，但不再是 BLUE（不再最有效率）；更嚴重的是，OLS 估計的標準誤是錯誤的，導致 t 檢定、F 檢定都不可靠。",
+  difficulty:"easy",
+  topic:"自我相關的後果"
+},
+{
+  id:"q9-2",
+  q:"Durbin-Watson 統計量大約是多少代表沒有自我相關？",
+  a:"DW ≈ 2 代表沒有自我相關。因為 DW ≈ 2(1-ρ̂)，如果 ρ̂=0（無自我相關），DW 就大約等於 2。",
+  difficulty:"easy",
+  topic:"DW 檢定"
+},
+{
+  id:"q9-3",
+  q:"Newey-West 穩健標準誤和 White 穩健標準誤有什麼差別？",
+  a:"White 穩健標準誤只修正異變數；Newey-West 穩健標準誤同時修正異變數和自我相關，適用於時間序列資料。",
+  difficulty:"medium",
+  topic:"穩健標準誤"
+}
+];
+
+/* ===== 第十章：隨機解釋變數與測量誤差 ===== */
+const CH10_SECTIONS = [
+{
+  id:"10.1", title:"嚴格外生性假設",
+  body:`
+  <p>古典假設中的「條件零平均」E(u|X)=0，也稱為<span class="term" data-term="Strict exogeneity">嚴格外生性 (Strict Exogeneity)</span>。</p>
+  <p>這個假設的意思是：誤差項 u 和所有期數的解釋變數都不相關，不僅是本期的解釋變數，也包括過去和未來的解釋變數。</p>
+  <div class="warn">考試重點：在時間序列模型中，嚴格外生性假設很難成立——因為誤差項可能和未來的解釋變數有相關（反饋效果）。</div>`
+},
+{
+  id:"10.2", title:"隨機解釋變數的問題",
+  body:`
+  <p>如果解釋變數 X 是隨機的，而且和誤差項 u 相關（Cov(X, u) ≠ 0），就稱為<b>內生性 (Endogeneity)</b>。</p>
+  <p>內生性的三個主要來源：</p>
+  <ol>
+    <li><b>遺漏變數</b>：漏了一個同時影響 x 和 y 的變數</li>
+    <li><b>測量誤差</b>：解釋變數的觀測值有誤差</li>
+    <li><b>聯立方程式偏誤</b>：y 同時影響 x，導致 x 和 u 相關</li>
+  </ol>
+  <div class="warn">考試重點：內生性問題是計量經濟學最重要的主題之一——只要有內生性，OLS 就會有偏誤且不一致，必須使用工具變數法解決。</div>`
+},
+{
+  id:"10.3", title:"測量誤差的後果",
+  body:`
+  <p>測量誤差分為兩種：</p>
+  <ol>
+    <li><b>依變數的測量誤差</b>：y 的觀測值有誤差 → 不影響 OLS 估計的一致性，只增加變異數</li>
+    <li><b>解釋變數的測量誤差</b>：x 的觀測值有誤差 → 導致 OLS 估計式不一致（向零偏誤）</li>
+  </ol>
+  <div class="formula"><span class="f-label">測量誤差偏誤</span>真實模型：y = βx* + u；觀測到的是 x = x* + e</div>
+  <p>此時 OLS 估計的 β̂ 會向零偏誤（偏誤方向永遠是往 0 的方向）。</p>
+  <div class="warn">考試重點：依變數的測量誤差不要緊，解釋變數的測量誤差很嚴重——會造成 OLS 不一致。</div>`
+},
+{
+  id:"10.4", title:"聯立方程式偏誤",
+  body:`
+  <p>如果 x 和 y 是互相影響的（如供給和需求），就會產生<b>聯立方程式偏誤 (Simultaneity Bias)</b>。</p>
+  <p>因為 y 同時影響 x，所以 x 和誤差項 u 是相關的，違反了嚴格外生性假設。</p>
+  <div class="method-card mc-title" data-mc="simultaneity">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-1" data-mc="simultaneity"><label for="mc-ch10-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">聯立方程式偏誤的直覺</div>
+    <div class="mc-body">
+      <div class="mc-formula">y = βx + u，而 x = γy + v</div>
+      <div class="mc-detail">因為 y 會影響 x，所以 x 和 u 是相關的（u 變動 → y 變動 → x 跟著變動），違反了 E(u|X)=0 的假設。</div>
+    </div>
+  </div>`
+}
+];
+
+const CH10_PROBLEMS = [
+{
+  id:"q10-1",
+  q:"內生性的三個主要來源是什麼？",
+  a:"1. 遺漏變數；2. 解釋變數的測量誤差；3. 聯立方程式偏誤（y 同時影響 x）。",
+  difficulty:"easy",
+  topic:"內生性來源"
+},
+{
+  id:"q10-2",
+  q:"解釋變數的測量誤差對 OLS 估計式有什麼影響？",
+  a:"會造成 OLS 估計式不一致（向零偏誤）。也就是說，即使樣本數很大，估計值也不會收斂到真實的母數，而是會偏向 0。",
+  difficulty:"medium",
+  topic:"測量誤差"
+},
+{
+  id:"q10-3",
+  q:"為什麼依變數的測量誤差不要緊？",
+  a:"因為依變數的測量誤差可以併入誤差項裡面，本質上就是增加了誤差項的變異數，但不會造成 x 和新的誤差項相關，所以 OLS 仍然是不偏且一致的。",
+  difficulty:"medium",
+  topic:"依變數測量誤差"
+}
+];
+
+/* ===== 第十一章：工具變數與兩段最小平方法 ===== */
+const CH11_SECTIONS = [
+{
+  id:"11.1", title:"工具變數的概念",
+  body:`
+  <p>當解釋變數有內生性問題時，最常用的解決方法是<span class="term" data-term="IV">工具變數法 (Instrumental Variables, IV)</span>。</p>
+  <p>工具變數 z 是一個新的變數，用來「工具化」內生變數 x：</p>
+  <ol>
+    <li>z 和 x 有相關（<b>相關條件</b>：Cov(z, x) ≠ 0）</li>
+    <li>z 和誤差項 u 不相關（<b>排他性條件</b>：Cov(z, u) = 0）</li>
+  </ol>
+  <div class="warn">考試重點：工具變數的兩個條件——相關條件可以檢定（第一階段 F 統計量），但排他性條件無法直接檢定，只能用理論說服。</div>`
+},
+{
+  id:"11.2", title:"兩段最小平方法 2SLS",
+  body:`
+  <p>工具變數的具體估計方法稱為<span class="term" data-term="2SLS">兩段最小平方法 (Two-Stage Least Squares, 2SLS)</span>：</p>
+  <div class="method-card mc-title" data-mc="2sls">
+    <div class="mc-check"><input type="checkbox" id="mc-ch11-1" data-mc="2sls"><label for="mc-ch11-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">2SLS 兩個階段</div>
+    <div class="mc-body">
+      <div class="mc-formula">第一階段：把內生變數 x 對所有外生變數和工具變數 z 做 OLS，取得 x 的預測值 x̂<br>第二階段：把 y 對 x̂（而不是 x）做 OLS</div>
+      <div class="mc-detail">2SLS 的係數就是 IV 估計量。注意：第二階段的標準誤是錯誤的，必須用正確的公式調整（或直接用統計軟體的 ivreg 指令）。</div>
+    </div>
+  </div>`
+},
+{
+  id:"11.3", title:"弱工具變數",
+  body:`
+  <p>如果工具變數 z 和內生變數 x 的相關性很弱，就稱為<b>弱工具變數 (Weak Instrument)</b>。</p>
+  <p>弱工具變數的後果：</p>
+  <ul>
+    <li>IV 估計式的偏誤很大（接近 OLS 的偏誤）</li>
+    <li>標準誤變大，檢定力變差</li>
+  </ul>
+  <p>診斷方法：看第一階段迴歸的 F 統計量，如果 F < 10，就是弱工具變數。</p>
+  <div class="warn">考試重點：弱工具變數是實務上常見的問題——找到「夠強」的工具變數很困難。經驗法則：第一階段 F > 10 才算夠強。</div>`
+},
+{
+  id:"11.4", title:"過度認定檢定",
+  body:`
+  <p>如果工具變數的個數 > 內生解釋變數的個數，稱為<b>過度認定 (Overidentification)</b>。</p>
+  <p>此時可以做<b>過度認定檢定 (Sargan 檢定 / Hansen J 檢定)</b>，檢定工具變數是否真的外生。</p>
+  <ul>
+    <li>H₀：所有工具變數都是外生的（和 u 不相關）</li>
+    <li>如果拒絕 H₀，代表至少有一個工具變數是內生的</li>
+  </ul>
+  <div class="warn">考試重點：過度認定檢定只能在「工具變數個數 > 內生變數個數」時才能做；如果剛好剛好（剛好認定），就沒有辦法檢定工具變數的外生性。</div>`
+},
+{
+  id:"11.5", title:"Hausman 檢定",
+  body:`
+  <p><span class="term" data-term="Hausman test">Hausman 檢定</span>用來比較 OLS 和 IV 估計式，判斷是否真的需要用 IV。</p>
+  <ul>
+    <li>H₀：解釋變數是外生的（OLS 和 IV 都是一致的，但 OLS 比較有效率）</li>
+    <li>H₁：解釋變數是內生的（OLS 不一致，只有 IV 一致）</li>
+  </ul>
+  <p>如果拒絕 H₀，代表存在內生性問題，應該使用 IV 估計。</p>
+  <div class="warn">考試重點：Hausman 檢定的直覺是——如果 OLS 和 IV 估計結果差很多，代表 OLS 有偏誤，也就是有內生性問題。</div>`
+}
+];
+
+const CH11_PROBLEMS = [
+{
+  id:"q11-1",
+  q:"工具變數需要滿足哪兩個條件？",
+  a:"1. 相關條件：工具變數 z 和內生變數 x 有相關（Cov(z, x) ≠ 0）；2. 排他性條件：工具變數 z 和誤差項 u 不相關（Cov(z, u) = 0）。",
+  difficulty:"easy",
+  topic:"工具變數條件"
+},
+{
+  id:"q11-2",
+  q:"什麼是弱工具變數？有什麼後果？",
+  a:"如果工具變數和內生變數的相關性很弱，就稱為弱工具變數。後果是 IV 估計式的偏誤很大（接近 OLS 的偏誤），而且標準誤變大、檢定力變差。",
+  difficulty:"medium",
+  topic:"弱工具變數"
+},
+{
+  id:"q11-3",
+  q:"Hausman 檢定的用途是什麼？",
+  a:"Hausman 檢定用來判斷是否真的存在內生性問題——比較 OLS 和 IV 估計式，如果兩者差很多，代表 OLS 有偏誤，應該使用 IV。",
+  difficulty:"medium",
+  topic:"Hausman 檢定"
+}
+];
+
+/* ===== 第十二章：追蹤資料模型 ===== */
+const CH12_SECTIONS = [
+{
+  id:"12.1", title:"追蹤資料的結構",
+  body:`
+  <p><span class="term" data-term="Panel data">追蹤資料 (Panel Data / Longitudinal Data)</span> 同時有橫斷面和時間序列兩個維度：</p>
+  <div class="formula"><span class="f-label">追蹤資料模型</span>y_{it} = β₀ + β₁x_{it} + a_i + u_{it}</div>
+  <ul>
+    <li>i 代表個體（如個人、廠商、國家）</li>
+    <li>t 代表時間（如年、季、月）</li>
+    <li>a_i 是個體效果（每個個體特有的、不隨時間改變的效果）</li>
+  </ul>
+  <div class="warn">考試重點：追蹤資料的最大好處是可以控制「不隨時間改變的未觀測異質性」（如個人的能力、廠商的文化），這些通常是遺漏變數偏誤的重要來源。</div>`
+},
+{
+  id:"12.2", title:"混合最小平方法 Pooled OLS",
+  body:`
+  <p>最簡單的做法是把所有時間的所有個體「攤平」，直接做 OLS，稱為<b>混合最小平方法 (Pooled OLS)</b>。</p>
+  <p>但是 Pooled OLS 忽略了個體效果 a_i，所以：</p>
+  <ul>
+    <li>如果 a_i 和 x_{it} 相關，Pooled OLS 就會有偏誤</li>
+    <li>標準誤也沒有考慮到同一個體的重複觀察之間的相關性</li>
+  </ul>
+  <div class="warn">考試重點：Pooled OLS 通常不是好方法——除非你確定個體效果 a_i 真的不存在。</div>`
+},
+{
+  id:"12.3", title:"固定效果模型 Fixed Effects",
+  body:`
+  <p><span class="term" data-term="Fixed effects">固定效果模型 (Fixed Effects, FE)</span> 把每個個體的截距項都當成不同的，也就是控制了所有不隨時間改變的個體特性。</p>
+  <div class="method-card mc-title" data-mc="fe">
+    <div class="mc-check"><input type="checkbox" id="mc-ch12-1" data-mc="fe"><label for="mc-ch12-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">固定效果模型的直覺</div>
+    <div class="mc-body">
+      <div class="mc-formula">每個個體有自己的截距項</div>
+      <div class="mc-detail">FE 的直覺是「組內變異」——只用每個個體隨時間變動的部分來識別係數，所以可以控制所有不隨時間改變的變數（即使你看不到、沒有測量）。</div>
+      <div class="mc-ex">例如：估計教育對薪資的效果，FE 可以控制個人的天生能力（因為能力不隨時間改變），解決遺漏變數偏誤。</div>
+    </div>
+  </div>`
+},
+{
+  id:"12.4", title:"隨機效果模型 Random Effects",
+  body:`
+  <p><span class="term" data-term="Random effects">隨機效果模型 (Random Effects, RE)</span> 假設個體效果 a_i 和解釋變數 x_{it} 不相關。</p>
+  <p>RE 的好處：</p>
+  <ul>
+    <li>可以估計不隨時間改變的變數的效果（FE 不行，因為這些變數被組內變異消掉了）</li>
+    <li>比 FE 更有效率（用了更多資訊）</li>
+  </ul>
+  <p>RE 的假設：a_i 和 x_{it} 不相關。如果這個假設不成立，RE 就會有偏誤。</p>
+  <div class="warn">考試重點：FE vs RE 的選擇——如果個體效果和解釋變數相關，用 FE；如果不相關，用 RE（因為 RE 比較有效率）。Hausman 檢定可以用來選擇。</div>`
+},
+{
+  id:"12.5", title:"虛擬變數法 LSDV",
+  body:`
+  <p>固定效果模型的另一種實現方式是「虛擬變數法 (Least Squares Dummy Variables, LSDV)」：直接加入 n-1 個個體虛擬變數。</p>
+  <p>LSDV 和 FE 估計出來的斜率係數是完全一樣的，只是 LSDV 多估了 n-1 個虛擬變數的係數（也就是每個個體的截距項）。</p>
+  <div class="warn">考試重點：FE 和 LSDV 是等價的（斜率係數一樣）；差別只是 FE 不估計個體截距，LSDV 會估計。如果個體很多（如 N=1000），LSDV 會很浪費自由度，此時用 FE 比較方便。</div>`
+}
+];
+
+const CH12_PROBLEMS = [
+{
+  id:"q12-1",
+  q:"追蹤資料的固定效果模型 (FE) 主要解決什麼問題？",
+  a:"FE 主要解決「不隨時間改變的未觀測異質性」造成的遺漏變數偏誤。它透過組內變異（每個個體隨時間變動的部分）來識別係數，所以可以控制所有不隨時間改變的變數，即使你沒有測量它們。",
+  difficulty:"medium",
+  topic:"固定效果模型"
+},
+{
+  id:"q12-2",
+  q:"固定效果模型和隨機效果模型的主要差別是什麼？",
+  a:"差別在於對個體效果 a_i 的假設不同：FE 假設 a_i 可以和 x_{it} 相關；RE 假設 a_i 和 x_{it} 不相關。如果假設 a_i 和 x 不相關，RE 比較有效率；如果這個假設不成立，RE 就會有偏誤，必須用 FE。",
+  difficulty:"hard",
+  topic:"FE vs RE"
+},
+{
+  id:"q12-3",
+  q:"為什麼固定效果模型無法估計不隨時間改變的變數的效果？",
+  a:"因為 FE 用的是組內變異（每個個體隨時間變動的部分），而不隨時間改變的變數（如性別、種族）在組內變異中會被消掉（因為對同一個個體來說，這個變數是常數），所以無法識別它的效果。",
+  difficulty:"hard",
+  topic:"FE 的限制"
+}
+];
+
+/* ===== 第十三章：時間序列模型 ===== */
+const CH13_SECTIONS = [
+{
+  id:"13.1", title:"時間序列資料的特性",
+  body:`
+  <p><span class="term" data-term="Time series">時間序列資料 (Time Series)</span> 是對同一個體在不同時間點的觀察。</p>
+  <p>時間序列資料和橫斷面資料最大的不同是：<b>時間順序很重要</b>，而且觀測值之間通常有自我相關。</p>
+  <div class="warn">考試重點：時間序列分析的核心問題是「平穩性」——如果序列不是平穩的，就會有虛假迴歸的問題。</div>`
+},
+{
+  id:"13.2", title:"平穩性 Stationarity",
+  body:`
+  <p><span class="term" data-term="Stationarity">平穩性 (Stationarity)</span> 是時間序列分析最核心的概念。</p>
+  <p>如果一個序列是「弱平穩」或「共變異數平穩」的，代表：</p>
+  <ol>
+    <li>平均數 E(y_t) = μ，不隨時間 t 改變</li>
+    <li>變異數 Var(y_t) = σ²，不隨時間 t 改變</li>
+    <li>共變異數 Cov(y_t, y_{t-k}) 只和落後期數 k 有關，不和時間 t 有關</li>
+  </ol>
+  <p>如果序列不是平穩的，就稱為「非平穩 (Nonstationary)」或「單整 (Integrated)」。</p>
+  <div class="warn">考試重點：大多數總體經濟變數（GDP、消費、物價）都是非平穩的，因為有趨勢。如果直接用 OLS 迴歸兩個非平穩序列，即使它們真的沒有關係，也常常會得到很顯著的係數——這就是「虛假迴歸 (Spurious Regression)」問題。</div>`
+},
+{
+  id:"13.3", title:"自我相關函數 ACF 與 PACF",
+  body:`
+  <p>描述時間序列相關結構的兩個工具：</p>
+  <ul>
+    <li><span class="term" data-term="ACF">自我相關函數 (ACF)</span>：y_t 和 y_{t-k} 的相關係數</li>
+    <li><span class="term" data-term="PACF">偏自我相關函數 (PACF)</span>：控制了中間期數的影響後，y_t 和 y_{t-k} 的淨相關</li>
+  </ul>
+  <p>ACF 和 PACF 用來判斷 ARMA 模型的 p 和 q 階數。</p>
+  <div class="method-card mc-title" data-mc="acf_pacf">
+    <div class="mc-check"><input type="checkbox" id="mc-ch13-1" data-mc="acf_pacf"><label for="mc-ch13-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">ARMA 模型的 ACF/PACF 圖特徵</div>
+    <div class="mc-body">
+      <div class="mc-formula">AR(p)：PACF 在 p 期後截尾；ACF 漸近趨近 0<br>MA(q)：ACF 在 q 期後截尾；PACF 漸近趨近 0</div>
+      <div class="mc-detail">看 ACF 和 PACF 圖的「截尾」位置，可以大致判斷 ARMA 模型的階數。</div>
+    </div>
+  </div>`
+},
+{
+  id:"13.4", title:"ARMA 與 ARIMA 模型",
+  body:`
+  <p>常見的時間序列模型：</p>
+  <ul>
+    <li><span class="term" data-term="AR(p)">AR(p) (AutoRegression)</span>：y_t 是過去 p 期 y 的線性函數</li>
+    <li><span class="term" data-term="MA(q)">MA(q) (Moving Average)</span>：y_t 是過去 q 期誤差項的線性函數</li>
+    <li><span class="term" data-term="ARMA(p,q)">ARMA(p,q)</span>：AR + MA 的組合</li>
+    <li><span class="term" data-term="ARIMA(p,d,q)">ARIMA(p,d,q)</span>：差分 d 次之後的 ARMA(p,q)</li>
+  </ul>
+  <div class="formula"><span class="f-label">AR(1) 模型</span>y_t = c + φ₁y_{t-1} + ε_t</div>
+  <div class="warn">考試重點：ARIMA 的 I 代表 Integrated——序列需要差分 d 次才能變成平穩。如果 d=0，就是 ARMA；如果 d=1，就是一階差分後平穩（隨機漫步）。</div>`
+},
+{
+  id:"13.5", title:"波動率模型 ARCH/GARCH",
+  body:`
+  <p>金融時間序列有一個常見現象：<b>波動率聚集 (Volatility Clustering)</b>——大的波動後面跟著大的波動，小的波動後面跟著小的波動。</p>
+  <p>為了建模這個現象，使用：</p>
+  <ul>
+    <li><span class="term" data-term="ARCH">ARCH(q)</span>：條件變異數是過去 q 期誤差平方的函數</li>
+    <li><span class="term" data-term="GARCH">GARCH(p,q)</span>：ARCH 的一般化，加入過去的條件變異數</li>
+  </ul>
+  <div class="formula"><span class="f-label">GARCH(1,1)</span>σ²_t = ω + αε²_{t-1} + βσ²_{t-1}</div>
+  <div class="warn">考試重點：ARCH/GARCH 模型是用來建模「變異數隨時間變動」的，不是用來建模平均數的。它們廣泛應用於金融資產報酬的波動率預測。</div>`
+}
+];
+
+const CH13_PROBLEMS = [
+{
+  id:"q13-1",
+  q:"什麼是虛假迴歸 (Spurious Regression)？",
+  a:"如果對兩個非平穩序列直接做 OLS 迴歸，即使它們真的沒有任何關係，也常常會得到很高的 R² 和很顯著的 t 統計量——這就是虛假迴歸。原因是非平穩序列有趨勢，兩個趨勢剛好同方向，看起來就像有關係。",
+  difficulty:"medium",
+  topic:"虛假迴歸"
+},
+{
+  id:"q13-2",
+  q:"AR(1) 和 MA(1) 模型的差別是什麼？",
+  a:"AR(1) 是 y_t 取決於過去一期的 y_{t-1}；MA(1) 是 y_t 取決於過去一期的誤差項 ε_{t-1}。ACF 和 PACF 的形狀不同：AR(1) 的 ACF 指數遞減、PACF 截尾；MA(1) 的 ACF 截尾、PACF 指數遞減。",
+  difficulty:"hard",
+  topic:"AR vs MA"
+},
+{
+  id:"q13-3",
+  q:"ARCH/GARCH 模型主要用來建模什麼？",
+  a:"ARCH/GARCH 模型主要用來建模「條件變異數隨時間變動」的現象，特別是金融時間序列的「波動率聚集」——大波動後面跟著大波動。它們不是用來建模平均數的。",
+  difficulty:"medium",
+  topic:"ARCH/GARCH"
+}
+];
+
+/* ===== 第十四章：自我選擇與效果模型 ===== */
+const CH14_SECTIONS = [
+{
+  id:"14.1", title:"隨機控制實驗 RCT",
+  body:`
+  <p><span class="term" data-term="RCT">隨機控制實驗 (Randomized Controlled Trial, RCT)</span> 是因果推斷的黃金標準。</p>
+  <p>做法：隨機把樣本分成處理組（接受處理）和控制組（不接受處理）。因為是隨機分配，所以處理組和控制組在所有其他變數上（包括可觀察和不可觀察的）的平均水準都會一樣。</p>
+  <p>此時，兩組的平均結果差異，就可以解讀成處理的因果效果。</p>
+  <div class="warn">考試重點：RCT 是因果推斷的黃金標準——因為隨機分配解決了所有的遺漏變數偏誤。但現實中很多問題無法做實驗，所以需要用「擬自然實驗」的方法。</div>`
+},
+{
+  id:"14.2", title:"差異中的差異 DiD",
+  body:`
+  <p><span class="term" data-term="DiD">差異中的差異 (Difference-in-Differences, DiD)</span> 是最常用的擬自然實驗方法之一。</p>
+  <p>做法：比較處理組在政策前後的變化，減去控制組在政策前後的變化。</p>
+  <div class="formula"><span class="f-label">DiD 估計量</span>DiD = (ŷ_處理,事後 - ŷ_處理,事前) - (ŷ_控制,事後 - ŷ_控制,事前)</div>
+  <p>DiD 的關鍵假設：<b>平行趨勢假設</b>——如果沒有政策，處理組和控制組的趨勢會平行。</p>
+  <div class="method-card mc-title" data-mc="did">
+    <div class="mc-check"><input type="checkbox" id="mc-ch14-1" data-mc="did"><label for="mc-ch14-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">DiD 的直覺</div>
+    <div class="mc-body">
+      <div class="mc-formula">處理組前後差 - 控制組前後差</div>
+      <div class="mc-detail">控制組的前後變化代表「時間趨勢」或「其他共同衝擊」，把這個減掉，剩下的就是政策本身的效果。</div>
+    </div>
+  </div>`
+},
+{
+  id:"14.3", title:"傾向得分匹配 PSM",
+  body:`
+  <p><span class="term" data-term="PSM">傾向得分匹配 (Propensity Score Matching, PSM)</span> 用來解決「可觀察變數造成的選擇偏誤」。</p>
+  <p>做法：</p>
+  <ol>
+    <li>先估計「接受處理的機率」（傾向得分），用 logistic 或 probit 迴歸</li>
+    <li>把處理組的每個人，和控制組中傾向得分最接近的人配對</li>
+    <li>比較配對後兩組的平均結果差異</li>
+  </ol>
+  <div class="warn">考試重點：PSM 只能解決「可觀察變數」造成的選擇偏誤；如果有「不可觀察變數」造成的選擇偏誤，PSM 就沒有用，需要用 FE 或 IV。</div>`
+},
+{
+  id:"14.4", title:"斷點迴歸 RD",
+  body:`
+  <p><span class="term" data-term="RD">斷點迴歸 (Regression Discontinuity, RD)</span> 利用隨機的「斷點」來估計因果效果。</p>
+  <p>適用情境：處理的分配是根據一個連續變數（稱為「Running Variable」）是否超過某個門檻來決定的。</p>
+  <div class="formula"><span class="f-label">處理分配規則</span>如果 x ≥ c，就接受處理；如果 x < c，就不接受處理</div>
+  <p>此時，在門檻 c 附近的人，幾乎可以說是隨機分配的（因為x 的微小差異可能是隨機的），所以在 c 附近的結果跳動，就可以解讀成處理的因果效果。</p>
+  <div class="warn">考試重點：RD 的識別假設是「如果沒有處理，結果變數在門檻附近應該是連續的」。如果結果變數在門檻處有跳動，那就可以歸因於處理的效果。</div>`
+}
+];
+
+const CH14_PROBLEMS = [
+{
+  id:"q14-1",
+  q:"隨機控制實驗 (RCT) 為什麼是因果推斷的黃金標準？",
+  a:"因為隨機分配確保了處理組和控制組在所有變數（包括可觀察和不可觀察的）上的平均水準都一樣，所以兩組的結果差異可以完全歸因於處理，不會有遺漏變數偏誤。",
+  difficulty:"easy",
+  topic:"RCT"
+},
+{
+  id:"q14-2",
+  q:"差異中的差異 (DiD) 的關鍵假設是什麼？",
+  a:"平行趨勢假設——如果沒有政策/處理，處理組和控制組的時間趨勢會是平行的。也就是說，控制組的時間趨勢，可以用來反事實地估計「處理組如果沒有接受處理，會怎麼樣」。",
+  difficulty:"medium",
+  topic:"DiD 假設"
+},
+{
+  id:"q14-3",
+  q:"傾向得分匹配 (PSM) 可以解決哪一種選擇偏誤？",
+  a:"PSM 只能解決「可觀察變數」造成的選擇偏誤——也就是說，兩組的差異都可以從你觀察到的 x 變數解釋。如果有「不可觀察變數」造成的選擇偏誤，PSM 就沒有用，需要用 FE、IV 或 DiD。",
+  difficulty:"medium",
+  topic:"PSM 的限制"
+}
+];
+
+/* ===== 第十五章：最大概似估計 MLE ===== */
+const CH15_SECTIONS = [
+{
+  id:"15.1", title:"概似函數的概念",
+  body:`
+  <p><span class="term" data-term="MLE">最大概似估計 (Maximum Likelihood Estimation, MLE)</span> 是一種非常一般化的估計方法，OLS 只是它的一個特例。</p>
+  <p>MLE 的想法：選擇一組參數，使得「觀察到這筆資料的機率（概似）」最大。</p>
+  <div class="formula"><span class="f-label">概似函數</span>L(β; y) = f(y₁, y₂, ..., yₙ | β)</div>
+  <p>實務上通常取對數，變成對數概似函數：ℓ(β) = log L(β; y)</p>
+  <div class="warn">考試重點：MLE 的核心思想是「哪一組參數，最有可能產生我們觀察到的資料？」——把這個問題數學化，就是最大化概似函數。</div>`
+},
+{
+  id:"15.2", title:"MLE 的性質",
+  body:`
+  <p>在常規條件滿足下，MLE 有三個重要的大樣本性質：</p>
+  <ol>
+    <li><b>一致性 (Consistency)</b>：MLE 機率收斂到真實母數</li>
+    <li><b>漸近常態 (Asymptotic Normality)</b>：√n(β̂_MLE - β) 趨近常態分配</li>
+    <li><b>漸近有效 (Asymptotic Efficiency)</b>：在所有一致估計式中，MLE 的漸近變異數最小（達到 Cramér-Rao 下界）</li>
+  </ol>
+  <div class="warn">考試重點：MLE 的大樣本性質非常好——一致性、漸近常態、漸近有效，是統計上最理想的估計式。但需要正確設定分配（需要知道 y 背後是什麼分配）。</div>`
+},
+{
+  id:"15.3", title:"三大檢定概似比、Wald、LM",
+  body:`
+  <p>MLE 架構下有三大經典假設檢定：</p>
+  <ol>
+    <li><span class="term" data-term="LRT">概似比檢定 (Likelihood Ratio Test, LRT)</span>：比較限制模型和未限制模型的對數概似值差異</li>
+    <li><span class="term" data-term="Wald test">Wald 檢定</span>：只估計限制模型，用估計量的抽樣分配來檢定限制條件</li>
+    <li><span class="term" data-term="LM test">Lagrange 乘數檢定 (LM 檢定)</span>：只估計未限制模型，看在限制下的 gradient 有多大</li>
+  </ol>
+  <p>三個檢定在大樣本下是漸近等價的。</p>
+  <div class="warn">考試重點：三個檢定的差別在於「需要估計幾個模型」——LRT 需要估計兩個（限制和未限制）；Wald 只需要估計未限制模型；LM 只需要估計限制模型。</div>`
+},
+{
+  id:"15.4", title:"MLE 的應用",
+  body:`
+  <p>MLE 是很多非線性模型的估計基礎：</p>
+  <ul>
+    <li>Logit / Probit 模型</li>
+    <li>Tobit 模型（受限依變數）</li>
+    <li>Poisson / 負二項回歸（計數資料）</li>
+    <li>Cox 比例風險模型（持續時間資料）</li>
+  </ul>
+  <div class="warn">考試重點：當你看到「非線性模型」（如 Logit、Probit、Poisson），幾乎都是用 MLE 估計的。</div>`
+}
+];
+
+const CH15_PROBLEMS = [
+{
+  id:"q15-1",
+  q:"MLE 的核心思想是什麼？",
+  a:"MLE 的核心思想是：選擇一組參數，使得「觀察到我們手上這筆資料的機率（概似）」最大。也就是說，哪一組母數，最有可能產生我們看到的資料？",
+  difficulty:"easy",
+  topic:"MLE 概念"
+},
+{
+  id:"q15-2",
+  q:"MLE 有哪三個重要的大樣本性質？",
+  a:"1. 一致性：MLE 機率收斂到真實母數；2. 漸近常態：√n(β̂_MLE - β) 趨近常態分配；3. 漸近有效：在所有一致估計式中，MLE 的漸近變異數最小。",
+  difficulty:"medium",
+  topic:"MLE 性質"
+},
+{
+  id:"q15-3",
+  q:"概似比檢定 (LRT)、Wald 檢定、LM 檢定，這三者的主要差別是什麼？",
+  a:"差別在於需要估計幾個模型：LRT 需要估計限制模型和未限制模型兩個；Wald 檢定只需要估計未限制模型；LM 檢定只需要估計限制模型。三者在大樣本下是漸近等價的。",
+  difficulty:"hard",
+  topic:"三大檢定"
+}
+];
+
+/* ===== 第十六章：一般化動車法 GMM ===== */
+const CH16_SECTIONS = [
+{
+  id:"16.1", title:"動機條件與 GMM",
+  body:`
+  <p><span class="term" data-term="GMM">一般化動車法 (Generalized Method of Moments, GMM)</span> 是一個非常一般化的估計架構，OLS、IV、MLE 都可以看成是 GMM 的特例。</p>
+  <p>GMM 的出發點是「動機條件 (Moment Condition)」：</p>
+  <div class="formula"><span class="f-label">動機條件</span>E[g(y_t, x_t, β)] = 0</div>
+  <p>也就是說，母體上某些條件平均數應該等於 0。GMM 就是選擇 β，使得樣本平均的 g 盡可能接近 0。</p>
+  <div class="warn">考試重點：GMM 的好處是很一般化——只要你能寫出動機條件，就可以用 GMM 估計，不需要完整指定分配（這點和 MLE 不同）。</div>`
+},
+{
+  id:"16.2", title:"GMM 的直覺",
+  body:`
+  <p>GMM 的直覺很簡單：</p>
+  <ol>
+    <li>先找到一組「動機條件」——母體上應該成立的條件平均數等式</li>
+    <li>用樣本平均代替母體平均</li>
+    <li>選擇 β，讓樣本平均盡可能接近 0</li>
+  </ol>
+  <p>如果動機條件的個數剛好等於參數個數，就是「恰好認定」，可以直接解出 β。</p>
+  <p>如果動機條件的個數 > 參數個數，就是「過度認定」，需要用加權的方式讓所有條件同時盡可能接近 0。</p>
+  <div class="warn">考試重點：IV 估計就是 GMM 的一個特例——工具變數的正交條件 E[z'u] = 0 就是動機條件。</div>`
+},
+{
+  id:"16.3", title:"過度認定檢定",
+  body:`
+  <p>在 GMM 架構下，當動機條件個數 > 參數個數時，可以做<b>過度認定檢定 (Hansen J 檢定)</b>：</p>
+  <ul>
+    <li>H₀：所有動機條件都是正確的（所有工具變數都是外生的）</li>
+    <li>如果拒絕 H₀，代表至少有一個動機條件是錯的</li>
+  </ul>
+  <div class="warn">考試重點：Hansen J 檢定是 GMM 架構下的「工具變數外生性檢定」——如果拒絕 H₀，代表你的工具變數有問題。</div>`
+},
+{
+  id:"16.4", title:"GMM 的應用：動態追蹤模型",
+  body:`
+  <p>GMM 最常見的應用之一是<b>動態追蹤模型 (Dynamic Panel Data)</b>。</p>
+  <p>動態追蹤模型就是把落後一期的 y 也放進解釋變數：</p>
+  <div class="formula"><span class="f-label">動態追蹤模型</span>y_{it} = βy_{i,t-1} + x_{it}'γ + a_i + u_{it}</div>
+  <p>此時 y_{i,t-1} 和誤差項是機械相關的（因為 y_{i,t-1} 包含了 a_i），所以 OLS 和 FE 都有偏誤。</p>
+  <p>解決方法：<span class="term" data-term="Arellano-Bond">Arellano-Bond 估計量</span>——用落後更多期的 y 作為工具變數，用 GMM 估計。</p>
+  <div class="warn">考試重點：動態追蹤模型的 Nickell 偏誤問題，是追蹤資料進階議題；解決方法是 Arellano-Bond 的 GMM 估計量。</div>`
+}
+];
+
+const CH16_PROBLEMS = [
+{
+  id:"q16-1",
+  q:"GMM 和 MLE 最大的差別是什麼？",
+  a:"MLE 需要完整指定 y 的分配（需要知道誤差項是什麼分配）；GMM 只需要設定動機條件（母體平均數等式），不需要完整指定分配，所以更一般化，也比較穩健。",
+  difficulty:"medium",
+  topic:"GMM vs MLE"
+},
+{
+  id:"q16-2",
+  q:"為什麼說 OLS 和 IV 都是 GMM 的特例？",
+  a:"因為 OLS 的動機條件是 E[x'u] = 0（解釋變數和誤差項正交）；IV 的動機條件是 E[z'u] = 0（工具變數和誤差項正交）。兩者都是 GMM 的一種特殊情況——只是用的動機條件不同。",
+  difficulty:"hard",
+  topic:"GMM 與 OLS/IV 的關係"
+},
+{
+  id:"q16-3",
+  q:"Hansen J 檢定的用途是什麼？",
+  a:"Hansen J 檢定是 GMM 架構下的過度認定檢定，用來檢定所有工具變數（動機條件）是否都是外生的。如果拒絕 H₀，代表至少有一個工具變數是內生的。",
+  difficulty:"medium",
+  topic:"Hansen J 檢定"
+}
+];
 
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS};
+
+
+
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS};
 
 /* ===== 第四章：古典假設與 OLS 性質 ===== */
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS};
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS};
 /* ===== 渲染 ===== */
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 function escA(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
