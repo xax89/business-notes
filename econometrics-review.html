@@ -2566,86 +2566,174 @@ const CH11_PROBLEMS = [
 }
 ];
 
+/* ===== 第十二章：追蹤資料模型（完整版） ===== */
 const CH12_SECTIONS = [
 {
   id:"12.1", title:"追蹤資料的結構",
   body:`
-  <p><span class="term" data-term="Panel data">追蹤資料 (Panel Data / Longitudinal Data)</span> 同時有橫斷面和時間序列兩個維度：</p>
+  <p>追蹤資料 (Panel Data / Longitudinal Data) 同時有橫斷面和時間序列兩個維度：</p>
+
   <div class="formula"><span class="f-label">追蹤資料模型</span>y_{it} = β₀ + β₁x_{it} + a_i + u_{it}</div>
+
   <ul>
-    <li>i 代表個體（如個人、廠商、國家）</li>
-    <li>t 代表時間（如年、季、月）</li>
-    <li>a_i 是個體效果（每個個體特有的、不隨時間改變的效果）</li>
+    <li><b>i</b>：個體（如個人、廠商、國家）</li>
+    <li><b>t</b>：時間（如年、季、月）</li>
+    <li><b>a_i</b>：個體效果（每個個體特有的、不隨時間改變的效果）</li>
+    <li><b>u_{it}</b>：隨機誤差項</li>
   </ul>
-  <div class="warn">考試重點：追蹤資料的最大好處是可以控制「不隨時間改變的未觀測異質性」（如個人的能力、廠商的文化），這些通常是遺漏變數偏誤的重要來源。</div>`
+
+  <div class="method-card mc-title" data-mc="panel-basic">
+    <div class="mc-check"><input type="checkbox" id="mc-ch12-0" data-mc="panel-basic"><label for="mc-ch12-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">追蹤資料的最大好處</div>
+    <div class="mc-body">
+      <div class="mc-formula">可以控制「不隨時間改變的未觀測異質性」</div>
+      <div class="mc-detail">
+      什麼是「未觀測異質性」？就是那些你沒有辦法測量、但每個人都不一樣的東西：<br>
+      • 個人的能力、動機<br>
+      • 廠商的文化、管理風格<br>
+      • 國家的制度、文化<br><br>
+      這些東西通常是遺漏變數偏誤的重要來源——因為它們和你的解釋變數有相關，也和依變數有相關。
+      </div>
+      <div class="mc-ex">
+      追蹤資料可以把這些「不隨時間改變」的東西「差差分」掉——這就是固定效果模型的核心邏輯。
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：追蹤資料模型是解決內生性問題的重要工具之一。和工具變數（第 11 章）比起來，固定效果模型更「乾淨」——因為它不需要找工具變數，只要你有追蹤資料就可以用。</p>`
 },
+
 {
-  id:"12.2", title:"混合最小平方法 Pooled OLS",
+  id:"12.2", title:"固定效果模型 (Fixed Effects, FE)",
   body:`
-  <p>最簡單的做法是把所有時間的所有個體「攤平」，直接做 OLS，稱為<b>混合最小平方法 (Pooled OLS)</b>。</p>
-  <p>但是 Pooled OLS 忽略了個體效果 a_i，所以：</p>
+  <p>固定效果模型 (Fixed Effects Model) 的邏輯是：把每個個體自己當作自己的控制組——「差差分」掉所有不隨時間改變的東西。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">12.2.1 內向轉換 (Within Transformation)</h3>
+  <p>固定效果估計的做法是：把每個變數減掉「這個個體在所有時間的平均值」，然後再跑 OLS。</p>
+
+  <div class="formula"><span class="f-label">內向轉換</span>ẏ_{it} = y_{it} - ȳ_i, ẋ_{it} = x_{it} - x̄_i</div>
+
+  <p>為什麼這樣做？因為：</p>
   <ul>
-    <li>如果 a_i 和 x_{it} 相關，Pooled OLS 就會有偏誤</li>
-    <li>標準誤也沒有考慮到同一個體的重複觀察之間的相關性</li>
+    <li>原來的模型：y_{it} = β₀ + β₁x_{it} + a_i + u_{it}</li>
+    <li>對每個個體取平均：ȳ_i = β₀ + β₁x̄_i + a_i + ū_i</li>
+    <li>兩式相減：ẏ_{it} = β₁ẋ_{it} + ů_{it}</li>
   </ul>
-  <div class="warn">考試重點：Pooled OLS 通常不是好方法——除非你確定個體效果 a_i 真的不存在。</div>`
-},
-{
-  id:"12.3", title:"固定效果模型 Fixed Effects",
-  body:`
-  <p><span class="term" data-term="Fixed effects">固定效果模型 (Fixed Effects, FE)</span> 把每個個體的截距項都當成不同的，也就是控制了所有不隨時間改變的個體特性。</p>
+
+  <p>看到了嗎？a_i 消失了！因為 a_i 對每個個體來說是常數，減掉個體平均值之後就被消掉了。</p>
+
   <div class="method-card mc-title" data-mc="fe">
     <div class="mc-check"><input type="checkbox" id="mc-ch12-1" data-mc="fe"><label for="mc-ch12-1" class="mc-lbl">學會</label></div>
     <div class="mc-left">固定效果模型的直覺</div>
     <div class="mc-body">
-      <div class="mc-formula">每個個體有自己的截距項</div>
-      <div class="mc-detail">FE 的直覺是「組內變異」——只用每個個體隨時間變動的部分來識別係數，所以可以控制所有不隨時間改變的變數（即使你看不到、沒有測量）。</div>
-      <div class="mc-ex">例如：估計教育對薪資的效果，FE 可以控制個人的天生能力（因為能力不隨時間改變），解決遺漏變數偏誤。</div>
+      <div class="mc-formula">
+      固定效果模型其實就是：把每個人「自己和自己比」<br>
+      不看人與人之間的差異，只看同一個人隨時間的變化
+      </div>
+      <div class="mc-detail">
+      範例：估計教育對薪資的效果。<br>
+      • 橫斷面 OLS：比較「有大學學歷的人」和「沒有大學學歷的人」的薪資差異——但這兩組人本來就不一樣（能力、家庭背景）<br>
+      • 固定效果：看「同一個人，在他上大學之前和上大學之後，薪資怎麼變化」——這樣就把「能力、家庭背景」這些不隨時間改變的東西都控制住了
+      </div>
     </div>
-  </div>`
+  </div>
+
+  <div class="warn">考試重點：固定效果模型的缺點是：它只能估計「隨時間改變」的變數的效果——因為不隨時間改變的變數（例如性別、種族），在內向轉換之後就被消掉了，根本估計不出來。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：固定效果模型是追蹤資料分析的核心。第 14 章講的差異中差異 (DiD) 方法，本質上就是一種「雙向固定效果模型」（個體固定效果 + 時間固定效果）。</p>`
 },
+
 {
-  id:"12.4", title:"隨機效果模型 Random Effects",
+  id:"12.3", title:"隨機效果模型 (Random Effects, RE)",
   body:`
-  <p><span class="term" data-term="Random effects">隨機效果模型 (Random Effects, RE)</span> 假設個體效果 a_i 和解釋變數 x_{it} 不相關。</p>
-  <p>RE 的好處：</p>
-  <ul>
-    <li>可以估計不隨時間改變的變數的效果（FE 不行，因為這些變數被組內變異消掉了）</li>
-    <li>比 FE 更有效率（用了更多資訊）</li>
-  </ul>
-  <p>RE 的假設：a_i 和 x_{it} 不相關。如果這個假設不成立，RE 就會有偏誤。</p>
-  <div class="warn">考試重點：FE vs RE 的選擇——如果個體效果和解釋變數相關，用 FE；如果不相關，用 RE（因為 RE 比較有效率）。Hausman 檢定可以用來選擇。</div>`
+  <p>隨機效果模型 (Random Effects Model) 和固定效果模型的差別在於：它假設「個體效果 a_i 和解釋變數 x 沒有相關」。</p>
+
+  <p>如果這個假設成立，那隨機效果模型就比固定效果模型更有效率（因為它用到了更多資訊——個體之間的差異也拿來用）。</p>
+
+  <div class="method-card mc-title" data-mc="re">
+    <div class="mc-check"><input type="checkbox" id="mc-ch12-2" data-mc="re"><label for="mc-ch12-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">固定效果 vs 隨機效果：怎麼選？</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      核心問題：a_i 和 x 有沒有相關？<br>
+      • 有相關 → 一定要用固定效果（RE 會有偏誤）<br>
+      • 沒相關 → 可以用隨機效果（更有效率）
+      </div>
+      <div class="mc-detail">
+      豪斯曼檢定 (Hausman Test)：就是用來檢定「a_i 和 x 到底有沒有相關」的。<br><br>
+      如果 Hausman 檢定拒絕了虛無假設（RE 和 FE 的係數估計差很多），那就代表 a_i 和 x 有相關，要用 FE。<br><br>
+      如果 Hausman 檢定不拒絕，那 RE 和 FE 都可以，RE 比較有效率。
+      </div>
+      <div class="mc-ex">
+      實務上，大部分時候我們都直接用 FE——因為「a_i 和 x 有相關」通常是很合理的假設（例如：能力和教育年數本來就有相關）。
+      </div>
+    </div>
+  </div>
+
+  <div class="warn">考試重點：隨機效果模型的假設（a_i 和 x 沒相關）其實很強，現實中很難成立。所以現在大部分應用研究都直接用固定效果模型，不太用隨機效果了。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：固定效果模型是解決「不隨時間改變的未觀測異質性」造成的內生性問題的利器。如果還有「隨時間改變的未觀測異質性」，那就需要配合工具變數或差異中差異方法。</p>`
 },
+
 {
-  id:"12.5", title:"虛擬變數法 LSDV",
+  id:"12.4", title:"追蹤資料的其他主題",
   body:`
-  <p>固定效果模型的另一種實現方式是「虛擬變數法 (Least Squares Dummy Variables, LSDV)」：直接加入 n-1 個個體虛擬變數。</p>
-  <p>LSDV 和 FE 估計出來的斜率係數是完全一樣的，只是 LSDV 多估了 n-1 個虛擬變數的係數（也就是每個個體的截距項）。</p>
-  <div class="warn">考試重點：FE 和 LSDV 是等價的（斜率係數一樣）；差別只是 FE 不估計個體截距，LSDV 會估計。如果個體很多（如 N=1000），LSDV 會很浪費自由度，此時用 FE 比較方便。</div>`
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">12.4.1 時間固定效果 (Time Fixed Effects)</h3>
+  <p>除了「個體固定效果」（控制住不隨時間改變的個體特性），我們還可以加「時間固定效果」——控制住所有個體共同面對的總體時間趨勢。</p>
+  <p>例如：景氣循環、政策變動、總體衝擊——這些東西對所有個體都有影響，就可以用時間固定效果來控制。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">12.4.2 聚集標準誤 (Clustered Standard Errors)</h3>
+  <p>追蹤資料有一個很重要的問題：同一個個體在不同時間點的觀察值，通常不是互相獨立的。</p>
+  <p>這時候你應該用「聚集標準誤」——把同一個個體的所有觀察值當成一個「群組」，在計算標準誤時把群組內的相關性考慮進去。</p>
+
+  <div class="method-card mc-title" data-mc="panel-advanced">
+    <div class="mc-check"><input type="checkbox" id="mc-ch12-3" data-mc="panel-advanced"><label for="mc-ch12-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">追蹤資料的現代做法</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      1. 雙向固定效果：個體 FE + 時間 FE<br>
+      2. 聚集標準誤：按個體聚集<br>
+      3. 穩健標準誤：處理異變數
+      </div>
+      <div class="mc-detail">
+      現在頂級期刊的追蹤資料論文，幾乎全部都是：雙向固定效果模型 + 聚集標準誤。<br><br>
+      這已經是標準配備了。
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：追蹤資料固定效果是現代應用計量經濟學最常用的方法之一。第 14 章講的差異中差異 (DiD)，本質上就是雙向固定效果模型的一種特例。</p>`
 }
 ];
 
 const CH12_PROBLEMS = [
 {
   id:"q12-1",
-  q:"追蹤資料的固定效果模型 (FE) 主要解決什麼問題？",
-  a:"FE 主要解決「不隨時間改變的未觀測異質性」造成的遺漏變數偏誤。它透過組內變異（每個個體隨時間變動的部分）來識別係數，所以可以控制所有不隨時間改變的變數，即使你沒有測量它們。",
+  q:"追蹤資料模型的最大好處是什麼？為什麼它可以解決遺漏變數偏誤？",
+  a:"最大好處：可以控制「不隨時間改變的未觀測異質性」。<br><br>什麼是未觀測異質性？就是那些你沒有辦法測量、但每個人都不一樣的東西：個人的能力、廠商的文化、國家的制度。<br><br>為什麼可以解決遺漏變數偏誤？因為固定效果模型的「內向轉換」會把這些「不隨時間改變」的東西差差分掉——它們在模型裡面就消失了，也就不會造成偏誤了。<br><br>這就是為什麼追蹤資料比橫斷面資料更適合做因果推斷。",
   difficulty:"medium",
-  topic:"固定效果模型"
+  topic:"追蹤資料的好處"
 },
 {
   id:"q12-2",
-  q:"固定效果模型和隨機效果模型的主要差別是什麼？",
-  a:"差別在於對個體效果 a_i 的假設不同：FE 假設 a_i 可以和 x_{it} 相關；RE 假設 a_i 和 x_{it} 不相關。如果假設 a_i 和 x 不相關，RE 比較有效率；如果這個假設不成立，RE 就會有偏誤，必須用 FE。",
-  difficulty:"hard",
-  topic:"FE vs RE"
+  q:"固定效果模型的「內向轉換」是什麼？為什麼它可以把個體效果 a_i 消掉？",
+  a:"內向轉換：把每個變數減掉「這個個體在所有時間的平均值」。<br><br>為什麼可以把 a_i 消掉？<br>1. 原來的模型：y_{it} = β₀ + β₁x_{it} + a_i + u_{it}<br>2. 對每個個體取平均：ȳ_i = β₀ + β₁x̄_i + a_i + ū_i<br>3. 兩式相減：ẏ_{it} = β₁ẋ_{it} + ů_{it}<br><br>看到了嗎？a_i 消失了！因為 a_i 對每個個體來說是常數，減掉個體平均值之後就被消掉了。",
+  difficulty:"medium",
+  topic:"固定效果與內向轉換"
 },
 {
   id:"q12-3",
-  q:"為什麼固定效果模型無法估計不隨時間改變的變數的效果？",
-  a:"因為 FE 用的是組內變異（每個個體隨時間變動的部分），而不隨時間改變的變數（如性別、種族）在組內變異中會被消掉（因為對同一個個體來說，這個變數是常數），所以無法識別它的效果。",
-  difficulty:"hard",
-  topic:"FE 的限制"
+  q:"固定效果模型和隨機效果模型的差別是什麼？什麼時候應該用哪一個？",
+  a:"差別在於：對「個體效果 a_i 和解釋變數 x 有沒有相關」的假設不同。<br><br>• <b>隨機效果</b>：假設 a_i 和 x 沒有相關。如果這個假設成立，RE 比 FE 更有效率（因為用到了更多資訊）。<br>• <b>固定效果</b>：不做這個假設，允許 a_i 和 x 有相關。<br><br>怎麼選？用 Hausman 檢定。<br>• 如果 Hausman 檢定拒絕虛無假設 → 代表 a_i 和 x 有相關 → 要用 FE<br>• 如果不拒絕 → RE 和 FE 都可以，RE 比較有效率<br><br>實務上，大部分時候我們都直接用 FE——因為「a_i 和 x 有相關」通常是很合理的假設。",
+  difficulty:"medium",
+  topic:"FE vs RE"
+},
+{
+  id:"q12-4",
+  q:"什麼是「聚集標準誤」？為什麼追蹤資料需要用它？",
+  a:"聚集標準誤 (clustered standard errors)：把同一個個體的所有觀察值當成一個「群組」，在計算標準誤時把群組內的相關性考慮進去。<br><br>為什麼追蹤資料需要用它？因為同一個個體在不同時間點的觀察值，通常不是互相獨立的——你的模型殘差裡面，可能有一些「不隨時間改變的個體特性」沒有被控制住，這會造成同一個人的殘差之間有相關。<br><br>如果不考慮這個相關性，你算出來的標準誤通常會太小——會以為係數很顯著，但其實根本不顯著。",
+  difficulty:"medium",
+  topic:"聚集標準誤"
 }
 ];
 
