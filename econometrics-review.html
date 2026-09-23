@@ -4364,7 +4364,7 @@ function refreshProgress(n){
 
 function renderSidebar(){
   const sb=document.getElementById("sidebar");
-  let html=`<div class="brand">管理會計<div class="t2">研究所複習 · Hilton &amp; Platt 第 1–16 章</div></div>
+  let html=`<div class="brand">計量經濟學<div class="t2">研究所複習 · Greene 第 6 版 第 1–25 章</div></div>
   <button class="nav-gloss" id="navGloss" title="統整全書術語，可篩選與打勾複習">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>術語複習表
   </button>`;
@@ -4419,7 +4419,7 @@ function renderChapter(n){
   let h=`<div class="chapter-head">
     <span class="kicker">第 ${n} 章</span>
     <h1>第${n}章 ${esc(book.title)}</h1>
-    <div class="chpage">管理會計（Hilton &amp; Platt）第 ${n} 章</div>
+    <div class="chpage">計量經濟學（Greene 第 6 版）第 ${n} 章</div>
     <ul class="ch-points">
       ${book.points?book.points.map(p=>`<li>${esc(p)}</li>`).join(""):""}
     </ul>
