@@ -3001,74 +3001,105 @@ const CH14_PROBLEMS = [
 ];
 
 /* ===== 第十五章：最大概似估計 MLE ===== */
+/* ===== 第十五章：最大概似估計 MLE（完整版） ===== */
 const CH15_SECTIONS = [
 {
-  id:"15.1", title:"概似函數的概念",
+  id:"15.1", title:"MLE 的基本概念",
   body:`
-  <p><span class="term" data-term="MLE">最大概似估計 (Maximum Likelihood Estimation, MLE)</span> 是一種非常一般化的估計方法，OLS 只是它的一個特例。</p>
-  <p>MLE 的想法：選擇一組參數，使得「觀察到這筆資料的機率（概似）」最大。</p>
-  <div class="formula"><span class="f-label">概似函數</span>L(β; y) = f(y₁, y₂, ..., yₙ | β)</div>
-  <p>實務上通常取對數，變成對數概似函數：ℓ(β) = log L(β; y)</p>
-  <div class="warn">考試重點：MLE 的核心思想是「哪一組參數，最有可能產生我們觀察到的資料？」——把這個問題數學化，就是最大化概似函數。</div>`
+  <p>最大概似估計 (Maximum Likelihood Estimation, MLE) 是一種非常一般化的估計方法。OLS 只是它的一個特例。</p>
+
+  <p>MLE 的核心邏輯很直覺：給定一組觀察到的數據，「哪一組參數值最有可能產生這些數據？」——MLE 就是要找出這組參數值。</p>
+
+  <div class="method-card mc-title" data-mc="mle-basic">
+    <div class="mc-check"><input type="checkbox" id="mc-ch15-0" data-mc="mle-basic"><label for="mc-ch15-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">MLE 的直覺</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      想像你今天賭博贏了 100 塊錢。<br>
+      你覺得這枚硬幣「正面的機率」是多少？<br>
+      MLE 會說：「最有可能的就是 100%」<br>
+      ——因為如果你賭贏了，那這枚硬幣一定是正面機率很高的那種。
+      </div>
+      <div class="mc-detail">
+      更正式一點說：<br>
+      1. 先假設你觀察到的數據服從某個機率分配（例如常態分配）<br>
+      2. 這個分配有一些未知的參數（例如：平均數 μ、變異數 σ²）<br>
+      3. MLE 就是要找出「哪一組參數值，會讓你觀察到的數據的「概似值」(likelihood) 最大」
+      </div>
+      <div class="mc-ex">
+      這就是 MLE 的核心邏輯：找到「最有可能產生觀察數據」的那組參數值。
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：MLE 是計量經濟學最重要的估計方法之一。OLS 只是 MLE 的一個特例——當你假設誤差項服從常態分配時，MLE 估計出來的結果就和 OLS 一模一樣。</p>`
 },
+
 {
-  id:"15.2", title:"MLE 的性質",
+  id:"15.2", title:"MLE 的優缺點",
   body:`
-  <p>在常規條件滿足下，MLE 有三個重要的大樣本性質：</p>
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">MLE 的優點</h3>
   <ol>
-    <li><b>一致性 (Consistency)</b>：MLE 機率收斂到真實母數</li>
-    <li><b>漸近常態 (Asymptotic Normality)</b>：√n(β̂_MLE - β) 趨近常態分配</li>
-    <li><b>漸近有效 (Asymptotic Efficiency)</b>：在所有一致估計式中，MLE 的漸近變異數最小（達到 Cramér-Rao 下界）</li>
+    <li><b>大樣本性質很好</b>：MLE 估計式是「一致性」、「漸近常態」、「漸近有效」的——在大樣本下，它是最有效的估計式。</li>
+    <li><b>很一般化</b>：不管是線性模型、非線性模型、離散選擇模型（Probit、Logit），都可以用 MLE 來估計。</li>
+    <li><b>有很多現成的檢定方法</b>：概似比檢定 (LRT)、Wald 檢定、LM 檢定——這三個是計量經濟學最重要的三大檢定方法。</li>
   </ol>
-  <div class="warn">考試重點：MLE 的大樣本性質非常好——一致性、漸近常態、漸近有效，是統計上最理想的估計式。但需要正確設定分配（需要知道 y 背後是什麼分配）。</div>`
-},
-{
-  id:"15.3", title:"三大檢定概似比、Wald、LM",
-  body:`
-  <p>MLE 架構下有三大經典假設檢定：</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">MLE 的缺點</h3>
   <ol>
-    <li><span class="term" data-term="LRT">概似比檢定 (Likelihood Ratio Test, LRT)</span>：比較限制模型和未限制模型的對數概似值差異</li>
-    <li><span class="term" data-term="Wald test">Wald 檢定</span>：只估計限制模型，用估計量的抽樣分配來檢定限制條件</li>
-    <li><span class="term" data-term="LM test">Lagrange 乘數檢定 (LM 檢定)</span>：只估計未限制模型，看在限制下的 gradient 有多大</li>
+    <li><b>需要正確指定分配</b>：MLE 需要你「完整指定」 y 的分配（假設誤差項是什麼分配）。如果分配假設錯了，MLE 估計就會有偏誤。</li>
+    <li><b>小樣本性質不一定好</b>：MLE 的優點都是「漸近」的——在大樣本下才成立。如果樣本數很小，MLE 的表現不一定比 OLS 好。</li>
   </ol>
-  <p>三個檢定在大樣本下是漸近等價的。</p>
-  <div class="warn">考試重點：三個檢定的差別在於「需要估計幾個模型」——LRT 需要估計兩個（限制和未限制）；Wald 只需要估計未限制模型；LM 只需要估計限制模型。</div>`
-},
-{
-  id:"15.4", title:"MLE 的應用",
-  body:`
-  <p>MLE 是很多非線性模型的估計基礎：</p>
-  <ul>
-    <li>Logit / Probit 模型</li>
-    <li>Tobit 模型（受限依變數）</li>
-    <li>Poisson / 負二項回歸（計數資料）</li>
-    <li>Cox 比例風險模型（持續時間資料）</li>
-  </ul>
-  <div class="warn">考試重點：當你看到「非線性模型」（如 Logit、Probit、Poisson），幾乎都是用 MLE 估計的。</div>`
+
+  <div class="method-card mc-title" data-mc="mle-compare">
+    <div class="mc-check"><input type="checkbox" id="mc-ch15-1" data-mc="mle-compare"><label for="mc-ch15-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">MLE vs OLS：怎麼選？</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      • 如果模型是線性的 → OLS 就夠了，不用特別用 MLE<br>
+      • 如果模型是非線性的（例如 Probit、Logit）→ 一定要用 MLE<br>
+      • 如果分配假設不確定 → 用 GMM（第 16 章）比較穩健
+      </div>
+      <div class="mc-detail">
+      簡單來說：MLE 是一個很強大的工具，但它需要你「很確定」你的模型設定是對的。如果你的模型設定不確定，那就用比較穩健的方法（例如 OLS + 穩健標準誤，或 GMM）。
+      </div>
+    </div>
+  </div>
+
+  <div class="warn">考試重點：三大檢定方法——概似比檢定 (LRT)、Wald 檢定、LM 檢定，都是從 MLE 框架裡面發展出來的。它們的本質都是：比較「限制模型」和「未限制模型」的適配程度。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：MLE 是計量經濟學最重要的估計方法之一。第 16 章講的 GMM，是 MLE 的一般化版本——不需要完整指定分配，只需要設定「動機條件」。</p>`
 }
 ];
 
 const CH15_PROBLEMS = [
 {
   id:"q15-1",
-  q:"MLE 的核心思想是什麼？",
-  a:"MLE 的核心思想是：選擇一組參數，使得「觀察到我們手上這筆資料的機率（概似）」最大。也就是說，哪一組母數，最有可能產生我們看到的資料？",
-  difficulty:"easy",
-  topic:"MLE 概念"
+  q:"最大概似估計 (MLE) 的基本邏輯是什麼？",
+  a:"MLE 的核心邏輯很直覺：給定一組觀察到的數據，「哪一組參數值最有可能產生這些數據？」——MLE 就是要找出這組參數值。<br><br>更正式一點說：<br>1. 先假設你觀察到的數據服從某個機率分配（例如常態分配）<br>2. 這個分配有一些未知的參數（例如：平均數 μ、變異數 σ²）<br>3. MLE 就是要找出「哪一組參數值，會讓你觀察到的數據的概似值 (likelihood) 最大」",
+  difficulty:"medium",
+  topic:"MLE 基本概念"
 },
 {
   id:"q15-2",
-  q:"MLE 有哪三個重要的大樣本性質？",
-  a:"1. 一致性：MLE 機率收斂到真實母數；2. 漸近常態：√n(β̂_MLE - β) 趨近常態分配；3. 漸近有效：在所有一致估計式中，MLE 的漸近變異數最小。",
+  q:"MLE 有什麼優點和缺點？",
+  a:"優點：<br>1. 大樣本性質很好：一致性、漸近常態、漸近有效<br>2. 很一般化：線性、非線性、離散選擇模型都可以用<br>3. 有很多現成的檢定方法（LRT、Wald、LM）<br><br>缺點：<br>1. 需要正確指定分配：如果分配假設錯了，MLE 估計就會有偏誤<br>2. 小樣本性質不一定好：MLE 的優點都是「漸近」的——在大樣本下才成立",
   difficulty:"medium",
-  topic:"MLE 性質"
+  topic:"MLE 優缺點"
 },
 {
   id:"q15-3",
-  q:"概似比檢定 (LRT)、Wald 檢定、LM 檢定，這三者的主要差別是什麼？",
-  a:"差別在於需要估計幾個模型：LRT 需要估計限制模型和未限制模型兩個；Wald 檢定只需要估計未限制模型；LM 檢定只需要估計限制模型。三者在大樣本下是漸近等價的。",
+  q:"為什麼說 OLS 是 MLE 的一個特例？",
+  a:"因為當你假設誤差項服從常態分配時，MLE 估計出來的結果就和 OLS 一模一樣。<br><br>更具體地說：<br>1. 如果你假設 u ~ N(0, σ²)<br>2. 然後用 MLE 來估計 β 和 σ²<br>3. 估計出來的 β̂ 就和 OLS 估計的結果完全一樣<br><br>所以 OLS 其實就是「假設誤差項常態分配下的 MLE」。",
   difficulty:"hard",
-  topic:"三大檢定"
+  topic:"OLS 與 MLE 的關係"
+},
+{
+  id:"q15-4",
+  q:"計量經濟學最重要的三大檢定方法是什麼？它們都是從哪個框架發展出來的？",
+  a:"三大檢定方法：<br>1. 概似比檢定 (Likelihood Ratio Test, LRT)<br>2. Wald 檢定<br>3. Lagrange 乘數檢定 (LM 檢定)<br><br>它們都是從 MLE 框架裡面發展出來的。<br><br>它們的本質都是：比較「限制模型」和「未限制模型」的適配程度——看加上限制條件之後，模型的適配程度下降了多少。<br><br>如果下降很多 → 拒絕限制條件；如果下降不多 → 不拒絕。",
+  difficulty:"medium",
+  topic:"三大檢定方法"
 }
 ];
 
