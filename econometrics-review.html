@@ -523,6 +523,103 @@ const TERMS = {
 "Restricted model":["Restricted model","受限模型","加上額外限制條件（例如：某些係數等於 0）之後的模型；SSR 比較大。"],
 "Type I error":["Type I error","型一誤差","虛無假設為真，卻拒絕了它；也就是「誤判有罪」的機率，通常記為 α。"],
 "Power":["Power","檢定力","虛無假設為偽，成功拒絕它的機率；等於 1 - 型二誤差機率。"],
+"Event study":["Event study","事件研究法","用來看公司發生某個事件（例如：併購、發布財報）之後，股價會有什麼『異常』反應的方法。"],
+"Abnormal return":["Abnormal return","異常報酬率 AR","實際報酬率減掉『預期的正常報酬率』；代表事件造成的額外影響。"],
+"Cumulative abnormal return":["Cumulative abnormal return","累積異常報酬率 CAR","把事件視窗裡面的 AR 全部加起來，看事件總共造成了多少異常報酬。"],
+"Market model":["Market model","市場模型","用來估計『正常報酬率』的模型：R_it = α_i + β_i R_mt + u_it。"],
+"Volatility clustering":["Volatility clustering","波動率聚集","大波動之後通常跟著大波動，小波動之後通常跟著小波動；財務資料的重要特性。"],
+"ARCH":["AutoRegressive Conditional Heteroskedasticity","ARCH 模型","對『條件變異數』建模的時間序列模型，用來捕捉波動率聚集。"],
+"GARCH":["Generalized ARCH","GARCH 模型","ARCH 的推廣版本：除了過去的衝擊平方之外，也把過去的變異數放進來。"],
+"Fat tails":["Fat tails","厚尾","極端值出現的機率，比常態分配預期的高很多；財務報酬率的重要特性。"],
+"Leverage effect":["Leverage effect","槓桿效果","股價下跌的時候，波動率通常會上升——因為公司的負債比率變高了，風險變大了。"],
+"CAPM":["Capital Asset Pricing Model","CAPM 資本資產定價模型","一檔資產的『超額報酬』，只和它的『市場 β』有關：E(R_i) - R_f = β_i · (E(R_m) - R_f)。"],
+"Fama-French model":["Fama-French model","Fama-French 三因子模型","除了市場因子之外，加上『規模因子』 (SMB) 和『賬面市值比因子』 (HML) 的資產定價模型。"],
+"Spatial autocorrelation":["Spatial autocorrelation","空間自我相關","相鄰地區的變數會互相影響；和時間序列自我相關很像，只不過是空間上的。"],
+"Spatial lag model":["Spatial lag model","空間落進模型","把『鄰居的 y』也放進模型當解釋變數的空間計量模型。"],
+"Spatial error model":["Spatial error model","空間誤差模型","假設空間相關在『誤差項』裡——有一些你沒有觀察到的因素，同時影響所有地區。"],
+"Spatial weight matrix":["Spatial weight matrix","空間權重矩陣 W","代表『i 和 j 有多鄰近』的矩陣元素；通常用相鄰或距離來定義。"],
+"VAR":["Vector Autoregression","向量自我迴歸 VAR","把好幾個變數『一起』放進來建模型的多變數時間序列模型。"],
+"SVAR":["Structural VAR","結構 VAR SVAR","在 VAR 的基礎上，加上一些識別限制，把混合的衝擊拆成乾淨的結構衝擊。"],
+"Impulse response function":["Impulse response function","衝擊反應函數 IRF","如果某個結構衝擊突然發生了，其他變數會怎麼樣『動態地』反應。"],
+"FEVD":["Forecast Error Variance Decomposition","預測誤差變異數分解 FEVD","告訴你某個變數的變異，可以被哪些衝擊解釋多少比例。"],
+"Bayesian statistics":["Bayesian statistics","貝氏統計","把參數 θ 也當成『隨機變數』的統計學派；結合事前信念和資料證據。"],
+"Prior distribution":["Prior distribution","事前分配","在看到資料之前，你對 θ 的『先驗信念』。"],
+"Posterior distribution":["Posterior distribution","事後分配","看到資料之後，你對 θ 的『事後信念』。"],
+"MCMC":["Markov Chain Monte Carlo","MCMC 馬可夫鏈蒙地卡羅","一組用來『從事後分配裡抽樣』的數值方法；讓貝氏統計變得實際可行。"],
+"Nonparametric estimation":["Nonparametric estimation","非參數估計","不需要預設函數形式，讓資料自己告訴你函數長什麼樣子的估計方法。"],
+"Kernel density estimation":["Kernel density estimation","核心密度估計 KDE","用來估計機率密度函數的非參數方法；在每個資料點上面放一個小小的核心函數。"],
+"Curse of dimensionality":["Curse of dimensionality","維數詛咒","非參數方法的缺點：當解釋變數的個數越多，需要的樣本數會爆炸式成長。"],
+"Duration model":["Duration model","持續時間模型","用來回答『某件事要花多久時間才會發生』的計量模型。"],
+"Hazard rate":["Hazard rate","危險率函數 h(t)","在你『已經活過 t』的條件下，下一個瞬間事件發生的機率。"],
+"Survival function":["Survival function","存活函數 S(t)","S(t) = P(T > t) = 『活到時間 t 之後』的機率。"],
+"Cox model":["Cox proportional hazards model","Cox 共比例風險模型","最有名的持續時間模型：h(t|x) = h₀(t) · exp(β'x)；半參數，不需要指定基準危險率。"],
+"Tobit model":["Tobit model","Tobit 模型","用來解決『因變數被設限』的問題——例如：消費支出不能是負的。"],
+"Sample selection bias":["Sample selection bias","樣本選擇偏誤","你的樣本不是『隨機抽的』——某些人比較容易被選進樣本，某些人比較不容易。"],
+"Heckman two-step":["Heckman two-step","Heckman 兩段法 Heckit","解決樣本選擇偏誤的方法：先用 Probit 估計選擇方程式，再把逆米爾斯比放進主迴歸。"],
+"Inverse Mills Ratio":["Inverse Mills Ratio","逆米爾斯比 IMR","φ(γ̂'x) / Φ(γ̂'x)；代表一個人被選進樣本的『殘餘程度』。"],
+"Poisson regression":["Poisson regression","Poisson 迴歸模型","用來估計計數資料的模型：E(y|x) = exp(β'x)；假設平均數等於變異數。"],
+"Negative binomial model":["Negative binomial model","負二項模型","放鬆了『平均數 = 變異數』假設的 Poisson 模型；用來處理過度分散的問題。"],
+"Probit model":["Probit model","Probit 模型","二元選擇模型：P(y=1|x) = Φ(x'β)；假設誤差項是標準常態分配。"],
+"Logit model":["Logit model","Logit 模型","二元選擇模型：P(y=1|x) = Λ(x'β) = 1/(1+exp(-x'β))；假設誤差項是 logistic 分配。"],
+"Marginal effect":["Marginal effect","邊際效果","x 變一單位，會讓 P(y=1|x) 改變多少；非線性模型一定要看邊際效果。"],
+"Multinomial logit":["Multinomial logit","多元 Logit 模型","多類別選擇模型：P(y=j|x) = exp(β_j'x) / Σ exp(β_k'x)；有 IIA 假設。"],
+"IIA":["Independence of Irrelevant Alternatives","獨立不相干選擇 IIA","Multinomial Logit 的假設：兩個選項之間的相對機率，不會受到第三個選項的影響。"],
+"Ordered probit":["Ordered probit","有序 Probit 模型","用於有順序的選擇（例如：教育程度）；有門檻參數 μ₁ < μ₂ < ...。"],
+"MLE":["Maximum Likelihood Estimation","最大概似估計 MLE","找一組參數值，讓『觀察到這份資料的概似值』最大的估計方法。"],
+"GMM":["Generalized Method of Moments","一般化動機法 GMM","不需要完整指定分配，只需要設定動機條件的一般化估計方法。"],
+"Moment condition":["Moment condition","動機條件","在母體裡面，某個條件應該要成立的數學敘述；GMM 的基礎。"],
+"Hansen J test":["Hansen J test","Hansen J 檢定","過度認定檢定——檢查所有工具變數（動機條件）是不是真的都是外生的。"],
+"Dynamic panel model":["Dynamic panel data model","動態追蹤模型","把『落進一期的 y』放進追蹤資料模型：y_it = ρ·y_i,t-1 + β·x_it + a_i + u_it。"],
+"Nickell bias":["Nickell bias","Nickell 偏誤","在動態追蹤模型中，就算你用固定效果估計，估計出來的 ρ̂ 還是有偏誤。"],
+"Arellano-Bond":["Arellano-Bond estimator","Arellano-Bond 估計法","解決動態追蹤模型內生性的方法：差分消掉個體效果，用 y 的落進項當工具變數。"],
+"System GMM":["System GMM","系統 GMM","同時估計差分方程式和水準方程式，用更多的工具變數，更有效率。"],
+"Panel data":["Panel data","追蹤資料/縱橫面資料","同時包含橫斷面與時間序列兩個維度的資料，追蹤同一組個體一段時間。"],
+"Fixed effects":["Fixed effects","固定效果 FE","控制所有『時間不變的個體特性』的追蹤資料模型估計方法。"],
+"Random effects":["Random effects","隨機效果 RE","把個體效果當成『隨機變數』的追蹤資料模型估計方法；假設個體效果和解釋變數不相關。"],
+"Hausman test":["Hausman test","Hausman 檢定","用來選擇固定效果還是隨機效果的檢定；檢定個體效果和解釋變數有沒有相關。"],
+"Instrumental variables":["Instrumental variables","工具變數 IV","用來解決內生性問題的方法：找一個和內生變數相關、但和誤差項不相關的變數。"],
+"2SLS":["Two Stage Least Squares","二段最小平方法 2SLS","用工具變數估計模型的方法：第一段用工具變數預測內生變數，第二段用預測值跑 OLS。"],
+"Identification problem":["Identification problem","識別問題","聯立方程式模型中，係數能不能從觀察資料裡估計出來的問題。"],
+"Simultaneity bias":["Simultaneity bias","聯立性偏誤","因為 y 和 x 是『同時決定』的，所以 OLS 估計會有偏誤。"],
+"Measurement error":["Measurement error","測量誤差","解釋變數有測量誤差的時候，OLS 估計會有偏誤（ attenuation bias ）。"],
+"Attenuation bias":["Attenuation bias","衰减偏誤","測量誤差造成的 OLS 偏誤——通常會把係數『往 0 的方向』低估。"],
+"Heteroscedasticity":["Heteroscedasticity","異變數","誤差項的變異數不是常數，會隨著 X 改變；OLS 還是不偏，但標準誤估計錯了。"],
+"Robust standard errors":["Robust standard errors","穩健標準誤","White 提出的異變數一致標準誤；不用假設同變異數也可以做正確的統計推斷。"],
+"Weighted least squares":["Weighted least squares","加權最小平方法 WLS","用來解決異變數的方法：給變異數大的觀測值比較小的權重。"],
+"Breusch-Pagan test":["Breusch-Pagan test","Breusch-Pagan 檢定","用來檢定異變數的統計檢定。"],
+"Autocorrelation":["Autocorrelation","自我相關","誤差項之間有相關——通常是時間序列資料；Ols 還是不偏，但標準誤估計錯了。"],
+"Durbin-Watson test":["Durbin-Watson test","Durbin-Watson 檢定","用來檢定一階自我相關的統計檢定。"],
+"Newey-West":["Newey-West standard errors","Newey-West 標準誤","同時處理異變數和自我相關的穩健標準誤。"],
+"Trending":["Trending","趨勢","時間序列變數隨時間成長或下降的走勢。"],
+"Stationarity":["Stationarity","定態","時間序列的統計性質（平均數、變異數）不會隨時間改變。"],
+"Unit root":["Unit root","單根","時間序列有趨勢、不是定態的；通常需要差分才能變成定態。"],
+"Cointegration":["Cointegration","共整合","兩個或多個非定態變數之間，存在長期的均衡關係。"],
+"AR model":["Autoregressive model","AR 自我迴歸模型","用自己的落進項來解釋自己的時間序列模型：y_t = c + φ₁y_t-1 + ... + u_t。"],
+"MA model":["Moving Average model","MA 移動平均模型","用過去的誤差項的線性組合來解釋 y 的時間序列模型。"],
+"ARMA model":["ARMA model","ARMA 混合模型","同時包含 AR 和 MA 部分的時間序列模型。"],
+"ARIMA model":["ARIMA model","ARIMA 模型","差分後的 ARMA 模型：用來處理非定態的時間序列。"],
+"Exponential smoothing":["Exponential smoothing","指數平滑法","一種預測方法：給過去的觀測值不同的權重，越近的權重越大。"],
+"Random walk":["Random walk","隨機漫步","y_t = y_t-1 + u_t；股價通常被認為接近隨機漫步。"],
+"Functional form misspecification":["Functional form misspecification","函數形式誤設定","你一開始假設的函數形式（例如：線性）和真實的函數形式不一樣。"],
+"Polynomial regression":["Polynomial regression","多項式迴歸","把 x 的二次方、三次方也放進模型：y = β₀ + β₁x + β₂x² + u。"],
+"Log-linear model":["Log-linear model","對數-線性模型","y 取對數、x 不取對數；係數解讀成『半彈性』。"],
+"Linear probability model":["Linear probability model","線性機率模型 LPM","直接用 OLS 估計二元 y 的模型：y = β₀ + β₁x + u。"],
+"Interaction term":["Interaction term","交互項","x₁·x₂ 放進模型；用來看 x₁ 對 y 的影響，会不会随 x₂ 改變。"],
+"Quasi-experiment":["Quasi-experiment","擬實驗","不是隨機分配，但可以用來估計因果效果的方法（例如：DiD、RD、PSM）。"],
+"Natural experiment":["Natural experiment","自然實驗","利用『自然發生的隨機事件』來估計因果效果。"],
+"Treatment effect":["Treatment effect","處理效果","某個『處理』（例如：上大學、接受政策）對 y 的因果效果。"],
+"Average treatment effect":["Average treatment effect","平均處理效果 ATE","整體來說，處理對 y 的平均因果效果。"],
+"ATE on treated":["Average treatment effect on the treated","處理組的平均處理效果 ATET","只有『有接受處理的人』，處理對他們的因果效果。"],
+"Selection on observables":["Selection on observables","依可觀測變數選擇","處理組和控制組的差異，都可以被觀察到的 x 解釋；這時候 PSM 就可以用。"],
+"Selection on unobservables":["Selection on unobservables","依不可觀測變數選擇","處理組和控制組的差異，有一部分是『你觀察不到的變數』造成的；這時候 PSM 沒用，需要用 IV 或 DiD。"],
+"Balanced panel":["Balanced panel","平衡追蹤資料","所有個體在所有期都有觀察值的追蹤資料。"],
+"Unbalanced panel":["Unbalanced panel","不平衡追蹤資料","有些個體在某些期沒有觀察值的追蹤資料。"],
+"Within estimator":["Within estimator","組內估計式","固定效果模型的估計方法：把 y 減掉組內平均，然後跑 OLS。"],
+"Between estimator":["Between estimator","組間估計式","只用『組間變異』（不同個體之間的差異）來估計的方法。"],
+"First-difference estimator":["First-difference estimator","一階差分估計式","把兩期相減，消掉個體效果，然後跑 OLS。"],
+"Cluster-robust standard errors":["Cluster-robust standard errors","集群穩健標準誤","追蹤資料常用的標準誤修正：考慮同一個體不同期之間的相關。"],
+"Long panel":["Long panel","長追蹤資料","期數 T 很大、個體數 N 比較小的追蹤資料。"],
+"Short panel":["Short panel","短追蹤資料","個體數 N 很大、期數 T 比較小的追蹤資料。"],
 };
 
 
@@ -5210,10 +5307,10 @@ const CH24_SECTIONS = [
   id:"24.1", title:"波動率模型 ARCH/GARCH",
   body:`
   <p>財務計量經濟學 (Financial Econometrics) 是計量經濟學最活躍的分支之一——因為財務資料有一些「和一般總體資料很不一樣」的特性。</p>
-  <p>最重要的特性之一：<b>波動率聚集</b> (Volatility Clustering)——大波動之後通常跟著大波動，小波動之後通常跟著小波動。</p>
+  <p>最重要的特性之一：<b><span class="term" data-term="Volatility clustering">波動率聚集</span> (Volatility Clustering)</b>——大波動之後通常跟著大波動，小波動之後通常跟著小波動。</p>
   <p>例如：股票報酬率。有幾天股票大漲大跌，接下來的好幾天也都會很大起大落；有幾天股票很平靜，接下來的好幾天也都風平浪靜。這就是「波動率聚集」。</p>
   <p>傳統的時間序列模型（AR、MA、ARMA）都是「對平均數建模」的——它們假設「變異數是固定的」 (homoskedastic)。但財務資料的「變異數」本身就會隨時間變化——這就是「異變數」 (heteroskedastic) 的問題。</p>
-  <p>解決方法：ARCH 模型 (AutoRegressive Conditional Heteroskedasticity)——由 <span class="proper">Engle (1982)</span> 提出，後來他因為這個拿到了諾貝爾經濟學獎。</p>
+  <p>解決方法：<span class="term" data-term="ARCH">ARCH 模型</span> (AutoRegressive Conditional Heteroskedasticity)——由 <span class="proper">Engle (1982)</span> 提出，後來他因為這個拿到了諾貝爾經濟學獎。</p>
   <p>ARCH(p) 模型的設定：</p>
   <div class="formula">
     y<sub>t</sub> = μ + u<sub>t</sub><br>
@@ -5227,7 +5324,7 @@ const CH24_SECTIONS = [
     傳統的模型：E(y<sub>t</sub> | I<sub>t-1</sub>) 是隨時間變的，但 Var(y<sub>t</sub> | I<sub>t-1</sub>) 是固定的。<br>
     ARCH 模型：E(y<sub>t</sub> | I<sub>t-1</sub>) 可以是固定的（甚至等於 0），但 Var(y<sub>t</sub> | I<sub>t-1</sub>) 是隨時間變的——它會隨著過去的波動而改變。
   </div>
-  <p>後來 <span class="proper">Bollerslev (1986)</span> 把它推廣成 GARCH (Generalized ARCH)——除了過去的衝擊平方之外，也把過去的變異數放進來：</p>
+  <p>後來 <span class="proper">Bollerslev (1986)</span> 把它推廣成 <span class="term" data-term="GARCH">GARCH</span> (Generalized ARCH)——除了過去的衝擊平方之外，也把過去的變異數放進來：</p>
   <div class="formula">
     σ<sub>t</sub>² = α₀ + α₁u<sub>t-1</sub>² + β₁σ<sub>t-1</sub>²
   </div>
@@ -5268,13 +5365,13 @@ const CH24_SECTIONS = [
   id:"24.3", title:"資產定價模型的計量檢定",
   body:`
   <p>財務計量經濟學的另一個重要主題：檢定資產定價模型。</p>
-  <p>最有名的：<b>CAPM</b> (Capital Asset Pricing Model)：</p>
+  <p>最有名的：<b><span class="term" data-term="CAPM">CAPM</span></b> (Capital Asset Pricing Model)：</p>
   <div class="formula">
     E(R<sub>i</sub>) - R<sub>f</sub> = β<sub>i</sub> · (E(R<sub>m</sub>) - R<sub>f</sub>)
   </div>
   <p>也就是說：一檔資產的「超額報酬」，只和它的「市場 β」有關。β 越高，預期報酬越高。</p>
   <p>但實證上發現：CAPM 根本解釋不了「橫斷面的報酬差異」——有一些特徵（例如：公司規模、账面市值比、動性）都可以解釋報酬，而 CAPM 的 β 反而解釋力很弱。</p>
-  <p>所以後來 <span class="proper">Fama 和 French (1992, 1993)</span> 提出了「三因子模型」 (Three-Factor Model)：除了市場因子之外，加上「規模因子」 (SMB: Small Minus Big) 和「账面市值比因子」 (HML: High Minus Low)。</p>
+  <p>所以後來 <span class="proper">Fama 和 French (1992, 1993)</span> 提出了「<span class="term" data-term="Fama-French model">三因子模型</span>」 (Three-Factor Model)：除了市場因子之外，加上「規模因子」 (SMB: Small Minus Big) 和「账面市值比因子」 (HML: High Minus Low)。</p>
   <div class="formula">
     R<sub>it</sub> - R<sub>ft</sub> = α<sub>i</sub> + β<sub>i,MKT</sub>(R<sub>mt</sub> - R<sub>ft</sub>) + β<sub>i,SMB</sub>SMB<sub>t</sub> + β<sub>i,HML</sub>HML<sub>t</sub> + u<sub>it</sub>
   </div>
