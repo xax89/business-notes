@@ -470,460 +470,652 @@ const TERMS = {
 
 /* ===== 第一章內容 ===== */
 /* ===== 第一章：計量經濟學與經濟模型 ===== */
+/* ===== 第一章：計量經濟學與經濟模型（完整版） ===== */
 const CH1_SECTIONS = [
 {
-  id:"1.1", title:"計量經濟學的本質與方法論",
+  id:"1.1", title:"什麼是計量經濟學",
   body:`
-  <p><span class="term" data-term="Econometrics">計量經濟學（econometrics）</span>是結合經濟理論、數理統計與實際經濟資料，對經濟關係進行估計、檢定與預測的社會科學分支。它不是單純的統計學，而是將經濟理論轉化為可驗證的實證命題。</p>
-  <p><b>方法論步驟</b>：</p>
-  <ol>
-    <li>根據經濟理論，確立研究主題與假說</li>
-    <li>設定計量模型（數學模型 + 隨機誤差項）</li>
-    <li>蒐集合適的資料（橫斷面、時間序列或追蹤資料）</li>
-    <li>選擇適當的估計方法（OLS、MLE、GMM 等）</li>
-    <li>檢定假說、解釋結果</li>
-    <li>模型診斷與預測</li>
-  </ol>
-  <div class="method-card mc-title" data-mc="econ-steps">
-    <div class="mc-check"><input type="checkbox" id="mc-ch1-1" data-mc="econ-steps"><label for="mc-ch1-1" class="mc-lbl">學會</label></div>
-    <div class="mc-left">計量分析五步驟</div>
+  <p>計量經濟學（<span class="term" data-term="Econometrics">Econometrics</span>）是一門結合經濟理論、統計方法和數據資料的學科，目的是用實際數據來檢驗經濟理論、估計經濟關係、做經濟預測和政策模擬。</p>
+
+  <p>簡單說：經濟理論告訴我們「A 可能會影響 B」，但到底影響多大？方向是正還是負？這就要靠計量經濟學來回答。</p>
+
+  <div class="method-card mc-title" data-mc="what-is-econometrics">
+    <div class="mc-check"><input type="checkbox" id="mc-ch1-1" data-mc="what-is-econometrics"><label for="mc-ch1-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">計量經濟學在做什麼？</div>
     <div class="mc-body">
-      <div class="mc-formula">理論 → 模型 → 資料 → 估計 → 解釋</div>
-      <div class="mc-detail">先有經濟理論引導，再用資料驗證；計量經濟不是「data mining」，而是有理論基礎的實證研究。</div>
+      <div class="mc-formula">經濟理論 → 模型設定 → 數據資料 → 估計推斷 → 政策建議</div>
+      <div class="mc-detail">舉個例子：經濟理論說「物價上漲會降低需求」，但到底物價漲 1%，需求會降多少？這就是計量經濟要回答的問題。</div>
+      <div class="mc-ex">數值範例：估計價格彈性。如果估計出來 β₁ = -0.8，意思是價格漲 1%，需求量平均下降 0.8%。</div>
     </div>
   </div>
-  <div class="warn">考試重點：計量經濟學是經濟理論、統計學與數學的交叉學科；與純統計學的差別在於有經濟理論引導。</div>`
-},
-{
-  id:"1.2", title:"經濟理論與計量模型",
-  body:`
-  <p>經濟理論通常以確定性的數學模型表達，例如凱恩斯消費函數：C = a + bY。但現實經濟行為存在隨機性，因此計量模型加入<span class="term" data-term="Error term">誤差項（error term）</span>ε，轉化為隨機模型：C = a + bY + ε。</p>
-  <p><b>模型組成</b>：</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">計量經濟學 vs 理論經濟學</h3>
   <ul>
-    <li><span class="term" data-term="Dependent variable">依變數 y</span>：被解釋的變數（如消費 C）</li>
-    <li><span class="term" data-term="Independent variable">自變數 x</span>：解釋變數（如所得 Y）</li>
-    <li>參數 β₀（截距）、β₁（斜率）：待估計的常數</li>
-    <li>誤差項 ε：代表所有未被模型涵蓋的影響因素</li>
+    <li><b>理論經濟學</b>：用數學模型描述經濟行為，告訴我們「應該是什麼關係」</li>
+    <li><b>計量經濟學</b>：用真實數據檢驗理論，告訴我們「實際上是什麼關係」</li>
   </ul>
-  <div class="note">為什麼需要誤差項？因為經濟現象複雜，無法列舉所有影響因素；同時也有測量誤差、隨機人為行為等。</div>
-  <div class="warn">考試重點：計量模型 = 數學模型 + 隨機誤差項；誤差項是計量模型與一般數學模型的關鍵差異。</div>`
+
+  <div class="warn">考試重點：計量經濟學的核心目標是「因果推斷」——不只是看兩個變數有沒有相關，而是要判斷「X 變數的改變，真的會造成 Y 變數的改變嗎？」這是第 10-14 章的主題。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：本章是整個計量經濟學的起點。後面所有章節都是在教你各種「估計方法」和「檢定方法」，幫你回答經濟理論提出的問題。</p>`
 },
+
 {
-  id:"1.3", title:"資料的類型與結構",
+  id:"1.2", title:"計量經濟學的方法論",
   body:`
-  <p>計量分析依資料結構分為三大類：</p>
-  <p><b>1. <span class="term" data-term="Cross-sectional data">橫斷面資料（cross-sectional data）</span></b></p>
-  <p>同一時間點上，多個個體的觀察值。例如：2020 年全國 1000 戶家庭的消費與所得。特點：每筆觀察是不同的個體，沒有時間先後順序。</p>
-  <p><b>2. <span class="term" data-term="Time series data">時間序列資料（time series data）</span></b></p>
-  <p>同一個體在不同時間點的連續觀察。例如：台灣 1980-2020 年的 GDP 年增率。特點：按時間排序，觀察值之間可能有自我相關。</p>
-  <p><b>3. <span class="term" data-term="Panel data">追蹤資料/縱橫面資料（panel data）</span></b></p>
-  <p>同時有橫斷面與時間序列兩個維度。例如：追蹤 100 家廠商 10 年的產量與成本。特點：結合兩者優點，可控制未觀測的個體異質性。</p>
+  <p>做一項計量經濟研究，通常會遵循以下五個步驟：</p>
+
+  <div class="method-card mc-title" data-mc="econ-steps">
+    <div class="mc-check"><input type="checkbox" id="mc-ch1-0" data-mc="econ-steps"><label for="mc-ch1-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">計量經濟研究的五個步驟</div>
+    <div class="mc-body">
+      <div class="mc-formula">1. 陳述假說 / 研究問題 → 2. 建立計量模型 → 3. 蒐集數據 → 4. 估計模型 → 5. 假設檢定與推論</div>
+      <div class="mc-detail">
+      1. <b>研究問題</b>：你想問什麼問題？（例如：教育對薪資的效果有多大？）<br>
+      2. <b>模型設定</b>：把研究問題寫成數學模型（迴歸式）<br>
+      3. <b>數據蒐集</b>：找需要的變數資料（個體層級、總體層級、時間序列、追蹤等）<br>
+      4. <b>估計模型</b>：用 OLS 或其他方法估計係數<br>
+      5. <b>假設檢定</b>：檢定你的假說對不對，係數顯著嗎？方向對嗎？
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">實證分析的兩大類型</h3>
+  <ul>
+    <li><b>結構式計量經濟 (Structural Econometrics)</b>：從經濟理論出發，建立結構模型，估計結構參數。特點是「理論先於數據」。</li>
+    <li><b>統計式計量經濟 (Statistical Econometrics)</b>：從數據出發，用統計方法找規律，比較不重視理論。特點是「數據先於理論」。</li>
+  </ul>
+
+  <p>現代計量經濟學的主流是「結構式」——強調要有經濟理論的基礎，不能只是盲目跑迴歸。</p>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：模型設定（步驟 2）是第 6 章的主題——怎麼選變數、怎麼選函數形式、怎麼避免設定偏誤。數據蒐集（步驟 3）會影響第 8 章異變數、第 9 章自我相關、第 12 章追蹤資料模型的選擇。</p>`
+},
+
+{
+  id:"1.3", title:"經濟模型與計量模型",
+  body:`
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">1.3.1 從經濟理論到計量模型</h3>
+  <p>經濟理論通常是用數學函數來表示的，例如需求理論：需求量是價格的函數 Qd = f(P)。</p>
+  <p>但現實世界不是這麼完美的——除了價格之外，還有很多其他因素會影響需求量（所得、偏好、替代品價格等），而且這些影響通常是隨機的、不確定的。</p>
+  <p>所以我們需要加入一個<b>誤差項</b> (error term) 來代表所有我們沒有觀察到的影響：</p>
+  <div class="formula"><span class="f-label">母體迴歸函數 PRF</span>y = β₀ + β₁x + u</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">1.3.2 母體迴歸函數 vs 樣本迴歸函數</h3>
+  <p>這是計量經濟學最基礎的一組概念，一定要搞清楚：</p>
+
+  <div class="tblwrap">
+    <table>
+      <thead>
+        <tr><th></th><th>母體迴歸函數 (PRF)</th><th>樣本迴歸函數 (SRF)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>代表</b></td><td>整個母體的真實關係</td><td>你手上這份樣本估計出來的關係</td></tr>
+        <tr><td><b>公式</b></td><td>y = β₀ + β₁x + u</td><td>ŷ = β̂₀ + β̂₁x</td></tr>
+        <tr><td><b>β 是什麼</b></td><td>真實的母數（未知的常數）</td><td>估計值（隨機變數）</td></tr>
+        <tr><td><b>u 是什麼</b></td><td>母體誤差項（真實存在）</td><td>殘差 ê = y - ŷ（估計出來的）</td></tr>
+        <tr><td><b>我們知道嗎</b></td><td>永遠不知道真實值（這就是為什麼要估計）</td><td>可以算出來</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="method-card mc-title" data-mc="prf-srf">
+    <div class="mc-check"><input type="checkbox" id="mc-ch1-3" data-mc="prf-srf"><label for="mc-ch1-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">PRF vs SRF 的直覺</div>
+    <div class="mc-body">
+      <div class="mc-formula">PRF 是「真相」，SRF 是「我們看到的影子」</div>
+      <div class="mc-detail">你永遠看不到 PRF 長什麼樣子，只能透過樣本估計出 SRF，然後猜測 PRF 大概是什麼。這就是「估計」和「推論」的本質。</div>
+      <div class="mc-ex">數值範例：如果真實的 PRF 是 y = 2 + 0.5x + u，你抽了 100 筆樣本，估計出來的 SRF 可能是 ŷ = 1.8 + 0.52x。β̂₀=1.8 不是真實的 β₀=2，但很接近。</div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：PRF/SRF 的區分是整個 OLS 理論的基礎。第 2-4 章都是在討論「從 SRF 推論 PRF」——也就是怎麼樣用樣本估計值來猜母體的真實值，以及這個猜測有多準。</p>`
+},
+
+{
+  id:"1.4", title:"資料型態",
+  body:`
+  <p>不同類型的資料，需要用不同的計量模型來分析。這是選擇方法時第一個要判斷的事情。</p>
+
   <div class="method-card mc-title" data-mc="data-types">
-    <div class="mc-check"><input type="checkbox" id="mc-ch1-2" data-mc="data-types"><label for="mc-ch1-2" class="mc-lbl">學會</label></div>
-    <div class="mc-left">三類資料比較</div>
+    <div class="mc-check"><input type="checkbox" id="mc-ch1-4" data-mc="data-types"><label for="mc-ch1-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">三種主要資料型態</div>
     <div class="mc-body">
-      <div class="mc-formula">橫斷面：多人同時點｜時間序列：一人多時點｜追蹤：多人多時點</div>
-      <div class="mc-detail">不同資料類型需要不同的估計方法：橫斷面用 OLS，時間序列需考慮定態與自我相關，追蹤資料有固定效果與隨機效果模型。</div>
+      <div class="mc-formula">橫斷面資料 → 時間序列資料 → 追蹤資料（面板資料）</div>
+      <div class="mc-detail">
+      1. <b>橫斷面資料 (Cross-sectional)</b>：同一時間點，很多個體的資料。例如：2025 年 1000 個人的薪資和教育年數。<br>
+      2. <b>時間序列資料 (Time series)</b>：同一個體，很多時間點的資料。例如：台灣過去 30 年的 GDP 成長率。<br>
+      3. <b>追蹤資料 / 面板資料 (Panel data)</b>：很多個體，每個個體很多時間點。例如：1000 個人，追蹤 10 年的薪資和就業狀況。
+      </div>
     </div>
   </div>
-  <div class="warn">考試重點：能分辨三種資料類型；追蹤資料同時有「個體」與「時間」兩個維度。</div>`
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">不同資料型態的挑戰</h3>
+  <ul>
+    <li><b>橫斷面資料</b>：主要擔心異變數（第 8 章）、內生性（第 10-11 章）</li>
+    <li><b>時間序列資料</b>：主要擔心自我相關（第 9 章）、定態問題（第 13 章）</li>
+    <li><b>追蹤資料</b>：可以同時處理個體效果和時間效果，是因果推斷的利器（第 12 章）</li>
+  </ul>
+
+  <div class="warn">考試重點：看到題目第一句話就要判斷是哪種資料型態——這會決定你要用什麼方法、要檢查什麼問題。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：橫斷面資料是第 2-8 章的主題；時間序列是第 9 章和第 13 章；追蹤資料是第 12 章。</p>`
 },
+
 {
-  id:"1.4", title:"因果關係與相關性",
+  id:"1.5", title:"因果關係 vs 相關關係",
   body:`
-  <p>計量經濟學的核心目標之一是推斷<span class="term" data-term="Causality">因果關係（causality）</span>，而不只是描述<span class="term" data-term="Correlation">相關性（correlation）</span>。</p>
-  <p><b>相關性</b>：兩個變數共同變動的統計現象。例如：冰淇淋銷售量與溺水人數呈正相關。</p>
-  <p><b>因果關係</b>：一個變數的改變「直接造成」另一個變數改變。冰淇淋銷售量增加並不會直接導致溺水人數增加，兩者的共同原因是「氣溫升高」。</p>
-  <div class="note">著名的相關但非因果範例：喝紅酒的人比較長壽。可能是因為喝紅酒的人通常收入較高、醫療資源較好，而非紅酒本身的效果。</div>
-  <p>計量經濟如何推斷因果？透過控制其他變數、運用實驗設計（自然實驗、工具變數、DID 等），試圖模擬隨機控制實驗的效果。</p>
-  <div class="warn">考試重點：相關不等於因果；計量經濟旨在透過統計方法從相關性中識別因果關係。</div>`
-},
-{
-  id:"1.5", title:"計量分析的步驟",
-  body:`
-  <p>一個完整的計量實證研究包含以下步驟：</p>
+  <p>這是計量經濟學最容易搞混、也最重要的一組概念。很多人以為「兩個變數有相關，就是有因果關係」——這是錯的！</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">1.5.1 相關不等於因果</h3>
+  <p>兩個變數 X 和 Y 有相關，可能有三種解釋：</p>
   <ol>
-    <li><b>研究問題與假說</b>：根據經濟理論或觀察提出研究問題</li>
-    <li><b>模型設定</b>：選擇依變數、解釋變數，設定函數形式（線性/非線性）</li>
-    <li><b>資料蒐集</b>：確保資料品質、變數定義一致</li>
-    <li><b>估計方法選擇</b>：OLS、工具變數、固定效果等</li>
-    <li><b>實證結果分析</b>：係數符號、顯著性、經濟意義</li>
-    <li><b>模型診斷</b>：檢定古典假設是否成立（無偏性、變異數齊一、無共線性等）</li>
-    <li><b>結論與政策建議</b>：根據結果提出解釋與建議</li>
+    <li><b>X 造成 Y</b>：真的是因果關係（你想要的）</li>
+    <li><b>Y 造成 X</b>：反向因果（因果關係反過來了）</li>
+    <li><b>Z 同時造成 X 和 Y</b>：第三變數效果（偽相關 / 混淆變數）</li>
   </ol>
-  <div class="method-card mc-title" data-mc="econ-research">
-    <div class="mc-check"><input type="checkbox" id="mc-ch1-3" data-mc="econ-research"><label for="mc-ch1-3" class="mc-lbl">學會</label></div>
-    <div class="mc-left">研究流程</div>
+
+  <div class="method-card mc-title" data-mc="causation">
+    <div class="mc-check"><input type="checkbox" id="mc-ch1-5" data-mc="causation"><label for="mc-ch1-5" class="mc-lbl">學會</label></div>
+    <div class="mc-left">經典範例：冰淇淋和溺水</div>
     <div class="mc-body">
-      <div class="mc-formula">問題 → 模型 → 資料 → 估計 → 檢定 → 解釋</div>
-      <div class="mc-detail">好的實證研究：理論紮實、資料品質好、方法適當、結果解釋謹慎。</div>
+      <div class="mc-formula">冰淇淋賣得越多 → 溺水的人越多 → 所以冰淇淋會造成溺水？</div>
+      <div class="mc-detail">當然不是！真正的原因是「夏天氣溫高」：天熱的時候，冰淇淋賣得多，去游泳的人也多，所以溺水的人也多。「天氣」就是第三變數 Z。</div>
+      <div class="mc-ex">這就是為什麼需要控制變數——如果不控制天氣，你會以為冰淇淋和溺水有因果關係，但其實都是天氣的效果。</div>
     </div>
   </div>
-  <div class="warn">考試重點：研究流程是必備觀念；模型診斷（檢定古典假設）是計量分析不可或缺的步驟。</div>`
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">1.5.2 怎麼判斷有沒有因果關係？</h3>
+  <p>要建立因果關係，需要滿足三個條件：</p>
+  <ol>
+    <li><b>時間順序</b>：X 發生在 Y 之前</li>
+    <li><b>共變性</b>：X 改變時，Y 也會跟著改變</li>
+    <li><b>排除其他解釋</b>：沒有其他變數 Z 可以同時解釋 X 和 Y</li>
+  </ol>
+  <p>第三個條件最難滿足，也是計量經濟學（特別是實用計量）大部分章節在處理的問題。</p>
+
+  <div class="warn">考試重點：計量經濟學的「黃金標準」是隨機控制實驗 (RCT)——隨機把人分成兩組，一組有 treatment，一組沒有，這樣就可以排除其他解釋。但大部分時候我們拿不到實驗資料，所以要用各種「擬實驗」方法：工具變數、固定效果、差異中差異、斷點迴歸等。這些都是第 11-14 章的主題。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：因果推斷是現代計量經濟學的核心。第 10 章講內生性問題（為什麼 OLS 估計不出因果效果）；第 11 章講工具變數；第 12 章講追蹤資料固定效果；第 14 章講實驗和擬實驗方法（RCT、DiD、PSM、RD）。</p>`
 }
 ];
 
 const CH1_PROBLEMS = [
 {
-  q:"計量經濟學與純粹統計學的主要差異為何？",
-  opts:["(A) 計量經濟學只處理時間序列資料","(B) 計量經濟學以經濟理論為引導，並應用於經濟現象","(C) 計量經濟學不用機率論","(D) 兩者完全相同"],
-  ans:"<b>(B) 計量經濟學以經濟理論為引導，並應用於經濟現象。</b><ul><li>純統計學是通用的方法論，可應用於任何領域</li><li>計量經濟學結合經濟理論與統計方法，專注於經濟關係的實證研究</li></ul>"
+  id:"q1-1",
+  q:"請解釋母體迴歸函數 (PRF) 和樣本迴歸函數 (SRF) 的差別。為什麼我們需要估計 SRF？",
+  a:"PRF 是整個母體的真實關係（y = β₀ + β₁x + u），β₀、β₁ 是未知的母數，u 是母體誤差項。<br><br>SRF 是從你手上這份樣本估計出來的關係（ŷ = β̂₀ + β̂₁x），β̂₀、β̂₁ 是估計值，ê = y - ŷ 是殘差。<br><br>我們需要估計 SRF，因為 PRF 的真實值永遠看不到，只能透過樣本來猜。計量經濟學的目標就是：用 SRF 的估計值，對 PRF 的母數做推論。",
+  difficulty:"easy",
+  topic:"PRF vs SRF"
 },
 {
-  q:"下列何者屬於橫斷面資料？",
-  opts:["(A) 台灣 1990-2020 年的 GDP 序列","(B) 2020 年全國 2000 戶家庭的所得與消費","(C) 某公司 10 年的營收資料","(D) 股價指數每日收盤價"],
-  ans:"<b>(B) 2020 年全國 2000 戶家庭的所得與消費。</b><ul><li>橫斷面資料：同一時間點，多個不同個體的觀察</li><li>時間序列：同一個體，多個時間點</li><li>(A)(C)(D) 都是時間序列資料</li></ul>"
+  id:"q1-2",
+  q:"為什麼「相關不等於因果」？請舉一個偽相關的例子，並說明第三變數是什麼。",
+  a:"兩個變數有相關，可能是：<br>1. X 真的造成 Y（真因果）<br>2. Y 造成 X（反向因果）<br>3. 第三變數 Z 同時造成 X 和 Y（偽相關）<br><br>經典例子：冰淇淋銷售量和溺水人數高度正相關。但不是冰淇淋造成溺水，而是第三變數「氣溫」——天熱的時候，冰淇淋賣得多，去游泳的人也多，所以溺水的人也多。<br><br>這就是為什麼需要控制變數——不控制 Z 的話，你會把 Z 的效果誤以為是 X 的效果。",
+  difficulty:"medium",
+  topic:"因果 vs 相關"
 },
 {
-  q:"在計量模型中，加入誤差項的主要原因是？",
-  opts:["(A) 讓模型更美觀","(B) 代表所有未被模型解釋的隨機因素","(C) 為了增加模型的複雜度","(D) 配合政府規定"],
-  ans:"<b>(B) 代表所有未被模型解釋的隨機因素。</b><ul><li>包括：模型設定誤差、變數遺漏、測量誤差、隨機人為行為等</li><li>誤差項是計量模型與一般確定性數學模型的關鍵差異</li></ul>"
+  id:"q1-3",
+  q:"橫斷面資料、時間序列資料、追蹤資料（面板資料）各有什麼特性？分別適合回答什麼問題？",
+  a:"• <b>橫斷面資料</b>：同一時間點，很多個體。適合看「同一時間點，A 特徵和 B 結果的關係」。例如：2025 年，教育年數和薪資的關係。<br>• <b>時間序列資料</b>：同一個體，很多時間點。適合看「隨著時間過去，變數怎麼變動」。例如：台灣過去 30 年的 GDP 成長率。<br>• <b>追蹤資料（面板資料）</b>：很多個體，每個個體很多時間點。結合了兩者的優點，可以控制個體固定效果，做更可信的因果推斷。",
+  difficulty:"medium",
+  topic:"資料型態"
 },
 {
-  q:"「冰淇淋銷售量與溺水人數呈現正相關」這個現象最能說明什麼？",
-  opts:["(A) 吃冰淇淋會導致溺水","(B) 相關性不等於因果關係","(C) 計量經濟學沒有應用價值","(D) 溺水的人都愛吃冰淇淋"],
-  ans:"<b>(B) 相關性不等於因果關係。</b><ul><li>兩者的共同原因是「氣溫升高」：天氣熱→冰淇淋賣得多→游泳的人多→溺水人數增加</li><li>計量經濟學的重要任務就是從相關性中識別真正的因果關係</li></ul>"
-},
-{
-  q:"追蹤資料（panel data）的特色是？",
-  opts:["(A) 只有橫斷面面向","(B) 只有時間序列面向","(C) 同時包含橫斷面與時間序列兩個面向","(D) 不包含任何個體資訊"],
-  ans:"<b>(C) 同時包含橫斷面與時間序列兩個面向。</b><ul><li>追蹤資料追蹤同一組個體一段時間，例如：100 家廠商追蹤 10 年</li><li>優點：可控制未觀測的個體異質性、增加樣本數、減少共線性</li></ul>"
-},
-{
-  q:"下列何者不是計量經濟學的主要任務？",
-  opts:["(A) 結構分析：估計經濟關係的參數","(B) 預測：對未來變數值做推估","(C) 政策評估：評估政策的效果","(D) 製作美麗的圖表"],
-  ans:"<b>(D) 製作美麗的圖表。</b><ul><li>三大任務：結構分析（structure analysis）、預測（prediction）、政策評估（policy evaluation）</li><li>製作圖表只是呈現結果的工具，不是計量經濟的核心任務</li></ul>"
-},
-{
-  q:"經濟理論的數學模型與計量模型的差異在於？",
-  opts:["(A) 數學模型比較簡單","(B) 計量模型加入了隨機誤差項","(C) 數學模型用圖形表示","(D) 兩者沒有差異"],
-  ans:"<b>(B) 計量模型加入了隨機誤差項。</b><ul><li>數學模型：確定性的函數關係，如 C = a + bY</li><li>計量模型：加入誤差項，如 C = a + bY + ε，成為隨機模型</li><li>這是因為現實經濟行為存在隨機性與不確定性</li></ul>"
-},
-{
-  q:"下列何者屬於時間序列資料？",
-  opts:["(A) 某年 500 家公司的營收","(B) 某年 1000 個人的教育年數與薪資","(C) 某公司 2000-2020 年每年的營業額","(D) 某縣市各鄉鎮的人口數"],
-  ans:"<b>(C) 某公司 2000-2020 年每年的營業額。</b><ul><li>時間序列：同一個體（這家公司）在不同時間點（20 年）的觀察</li><li>(A)(B)(D) 都是橫斷面資料</li></ul>"
+  id:"q1-4",
+  q:"計量經濟學研究的五個步驟是什麼？為什麼說「模型設定」是最關鍵的步驟？",
+  a:"五個步驟：<br>1. 陳述假說 / 研究問題<br>2. 建立計量模型（設定迴歸式）<br>3. 蒐集數據<br>4. 估計模型（跑 OLS）<br>5. 假設檢定與推論<br><br>模型設定最關鍵，因為如果你一開始模型就設定錯了（漏放重要變數、函數形式不對），後面估計得再怎麼精準，結果都是錯的——「GIGO」(Garbage In, Garbage Out)。第 4.4 節的遺漏變數偏誤就是最典型的例子。",
+  difficulty:"medium",
+  topic:"研究方法論"
 }
 ];
 
+
+
 /* ===== 第二章：簡單線性迴歸模型 ===== */
+/* ===== 第二章：簡單線性迴歸模型（完整版） ===== */
 const CH2_SECTIONS = [
 {
-  id:"2.1", title:"簡單線性迴歸的設定",
+  id:"2.1", title:"簡單線性迴歸模型的設定",
   body:`
-  <p><span class="term" data-term="Simple linear regression">簡單線性迴歸模型（simple linear regression model）</span>只有一個解釋變數，形式為：</p>
-  <div class="formula">
-    <span class="f-label">簡單線性迴歸母體模型</span>
-    y = β₀ + β₁x + u
-  </div>
-  <p>其中：</p>
+  <p>簡單線性迴歸模型 (Simple Linear Regression Model) 是最基礎的計量模型——只有一個解釋變數 X，用來解釋依變數 Y 的變動。</p>
+
+  <div class="formula"><span class="f-label">簡單線性迴歸模型</span>y = β₀ + β₁x + u</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">模型各部分的意義</h3>
   <ul>
-    <li><b>y</b>：<span class="term" data-term="Dependent variable">依變數（dependent variable）</span></li>
-    <li><b>x</b>：<span class="term" data-term="Independent variable">自變數（independent variable）</span></li>
-    <li><b>β₀</b>：<span class="term" data-term="Intercept">截距項（intercept）</span>，當 x=0 時 y 的期望值</li>
-    <li><b>β₁</b>：<span class="term" data-term="Slope">斜率係數（slope coefficient）</span>，x 每增加一單位，y 的平均變動量</li>
-    <li><b>u</b>：<span class="term" data-term="Error term">誤差項（error term）</span>，代表所有其他影響 y 的因素</li>
+    <li><b>y</b>：依變數 (dependent variable)、被解釋變數——你想要解釋的那個變數（例如：薪資）</li>
+    <li><b>x</b>：解釋變數 (independent variable)、自變數——用來解釋 y 的那個變數（例如：教育年數）</li>
+    <li><b>β₀</b>：截距項 (intercept)——當 x=0 時，y 的平均值</li>
+    <li><b>β₁</b>：斜率係數 (slope coefficient)——x 每增加一單位，y 平均變動多少</li>
+    <li><b>u</b>：誤差項 (error term)——所有我們沒有觀察到、但會影響 y 的因素</li>
   </ul>
-  <div class="note">母體迴歸函數（PRF）：E(y|x) = β₀ + β₁x，給定 x 下 y 的條件期望值。</div>
-  <div class="warn">考試重點：β₁ 的經濟意義是「邊效果」——其他條件不變下，x 每增加一單位，y 平均變動 β₁ 單位。</div>`
-},
-{
-  id:"2.2", title:"普通最小平方法 OLS",
-  body:`
-  <p><span class="term" data-term="OLS">普通最小平方法（Ordinary Least Squares, OLS）</span>是最常用的迴歸係數估計方法。其原理是選擇一條直線，使得所有觀測點到這條直線的垂直距離平方和最小。</p>
-  <div class="formula">
-    <span class="f-label">最小化目標</span>
-    min Σeᵢ² = Σ(yᵢ - β̂₀ - β̂₁xᵢ)²
-  </div>
-  <p>其中 <span class="term" data-term="Residuals">殘差 eᵢ（residual）</span> = yᵢ - ŷᵢ = 實際值 - 預測值。</p>
-  <p><b>OLS 估計式</b>：</p>
-  <div class="formula">
-    <span class="f-label">斜率估計式</span>
-    β̂₁ = Σ(xᵢ - x̄)(yᵢ - ȳ) / Σ(xᵢ - x̄)²
-  </div>
-  <div class="formula">
-    <span class="f-label">截距估計式</span>
-    β̂₀ = ȳ - β̂₁x̄
-  </div>
-  <div class="method-card mc-title" data-mc="ols-formula">
-    <div class="mc-check"><input type="checkbox" id="mc-ch2-1" data-mc="ols-formula"><label for="mc-ch2-1" class="mc-lbl">學會</label></div>
-    <div class="mc-left">OLS 公式</div>
+
+  <div class="method-card mc-title" data-mc="slope-meaning">
+    <div class="mc-check"><input type="checkbox" id="mc-ch2-1" data-mc="slope-meaning"><label for="mc-ch2-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">斜率係數 β₁ 的直覺</div>
     <div class="mc-body">
-      <div class="mc-formula">β̂₁ = 共變異數 / x 的變異數</div>
-      <div class="mc-detail">分子是 x 與 y 的共變異數（cov(x,y)），分母是 x 的變異數（var(x)）。β̂₁ 的符號與共變異數相同。</div>
+      <div class="mc-formula">β₁ = Δy / Δx</div>
+      <div class="mc-detail">x 每增加 1 單位，y 平均增加 β₁ 單位。<br>注意：這是「平均」的效果，不是說每個人都剛好增加 β₁。</div>
+      <div class="mc-ex">數值範例：如果 y = 薪資（萬元），x = 教育年數，估計出來 β₁ = 0.5，意思是：每多讀一年書，薪資平均增加 0.5 萬元。</div>
     </div>
   </div>
-  <div class="warn">考試重點：OLS 的核心是最小化殘差平方和；β̂₁ 的公式要會推導與計算。</div>`
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：簡單線性迴歸是多元線性迴歸（第 3 章）的基礎。一旦你理解了只有一個解釋變數的情況，加上更多解釋變數只是數學上的推廣，觀念是一樣的。</p>`
 },
+
 {
-  id:"2.3", title:"OLS 估計量的推導",
+  id:"2.2", title:"OLS 估計式的推導",
   body:`
-  <p>我們對殘差平方和 S(β₀, β₁) = Σ(yᵢ - β₀ - β₁xᵢ)² 分別對 β₀ 和 β₁ 偏微分，令其一階條件為 0，即可解出 OLS 估計式。</p>
-  <p><b>一階條件（FOC）</b>：</p>
-  <ol>
-    <li>∂S/∂β₀ = -2Σ(yᵢ - β₀ - β₁xᵢ) = 0</li>
-    <li>∂S/∂β₁ = -2Σxᵢ(yᵢ - β₀ - β₁xᵢ) = 0</li>
-  </ol>
-  <p>從第一個式子可以得到：Σeᵢ = 0（殘差和為 0）。</p>
-  <p>從第二個式子可以得到：Σxᵢeᵢ = 0（x 與殘差的交叉乘積和為 0）。</p>
-  <div class="note">這兩個性質很重要：OLS 殘差的平均值永遠為 0，且殘差與解釋變數 x 永遠不相關。</div>
-  <div class="warn">考試重點：OLS 兩個一階條件的解：殘差和為 0、殘差與 x 共變異為 0。</div>`
-},
-{
-  id:"2.4", title:"擬合優度 R²",
-  body:`
-  <p><span class="term" data-term="R-squared">判定係數（R-squared, R²）</span>用來衡量迴歸模型對資料的解釋能力。</p>
-  <div class="formula">
-    <span class="f-label">R² 的定義</span>
-    R² = ESS / TSS = 1 - RSS / TSS
+  <p>普通最小平方法 (Ordinary Least Squares, OLS) 是最常用的估計方法。它的目標是：找到一條直線，讓所有樣本點到這條直線的「垂直距離平方和」最小。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">2.2.1 最小化殘差平方和</h3>
+  <p>殘差 êᵢ = yᵢ - ŷᵢ = yᵢ - (β̂₀ + β̂₁xᵢ)，代表第 i 個樣本點到迴歸線的垂直距離。</p>
+  <p>OLS 要最小化的目標函數是：</p>
+  <div class="formula"><span class="f-label">殘差平方和 SSR</span>SSR = Σ êᵢ² = Σ (yᵢ - β̂₀ - β̂₁xᵢ)²</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">2.2.2 一階條件</h3>
+  <p>對 β̂₀ 和 β̂₁ 分別做偏微分，令其等於 0：</p>
+  <div class="formula">∂SSR/∂β̂₀ = -2 Σ (yᵢ - β̂₀ - β̂₁xᵢ) = 0</div>
+  <div class="formula">∂SSR/∂β̂₁ = -2 Σ xᵢ(yᵢ - β̂₀ - β̂₁xᵢ) = 0</div>
+
+  <p>解這兩個方程式，就可以得到 OLS 估計式：</p>
+  <div class="formula"><span class="f-label">OLS 斜率估計式</span>β̂₁ = Σ (xᵢ - x̄)(yᵢ - ȳ) / Σ (xᵢ - x̄)²</div>
+  <div class="formula"><span class="f-label">OLS 截距估計式</span>β̂₀ = ȳ - β̂₁x̄</div>
+
+  <div class="method-card mc-title" data-mc="ols-formula">
+    <div class="mc-check"><input type="checkbox" id="mc-ch2-0" data-mc="ols-formula"><label for="mc-ch2-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">OLS 公式的直覺</div>
+    <div class="mc-body">
+      <div class="mc-formula">β̂₁ = Cov(x,y) / Var(x)</div>
+      <div class="mc-detail">分子是 x 和 y 的共變異數（兩者一起變動的程度），分母是 x 的變異數（x 自己變動的程度）。<br>所以 β̂₁ 就是：x 每變動一單位，y 平均跟著變動多少。</div>
+      <div class="mc-ex">數值範例：如果 Cov(x,y) = 10，Var(x) = 20，那 β̂₁ = 10/20 = 0.5。</div>
+    </div>
   </div>
-  <p>其中：</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">2.2.3 OLS 的兩個代數性質</h3>
+  <ol>
+    <li><b>殘差和為 0</b>：Σ êᵢ = 0。這是從一階條件第一個式子直接得到的。</li>
+    <li><b>殘差和 x 不相關</b>：Σ xᵢêᵢ = 0。這是從一階條件第二個式子直接得到的。</li>
+  </ol>
+  <p>這兩個性質很重要，後面推導 OLS 的性質時會用到。</p>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：OLS 估計式是整個計量經濟學的基礎。第 3 章會把它推廣到多元迴歸（矩陣形式）；第 4 章會討論在什麼假設下，OLS 估計式有良好的性質（不偏、BLUE）。</p>`
+},
+
+{
+  id:"2.3", title:"擬合優度 R²",
+  body:`
+  <p>估計完迴歸線之後，你會想知道：這條線對數據的「解釋力」有多強？也就是說，y 的變動裡面，有多少比例是被 x 解釋掉的？</p>
+  <p>這個問題的答案就是<b>判定係數 R²</b> (R-squared)。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">2.3.1 變異數分解</h3>
+  <p>y 的總變動可以拆成兩部分：</p>
+  <div class="formula"><span class="f-label">變異數分解</span>SST = SSE + SSR</div>
   <ul>
-    <li><b>TSS（Total Sum of Squares）</b>：總變異 = Σ(yᵢ - ȳ)²</li>
-    <li><b>ESS（Explained Sum of Squares）</b>：解釋變異 = Σ(ŷᵢ - ȳ)²</li>
-    <li><b>RSS（Residual Sum of Squares）</b>：殘差平方和 = Σeᵢ²</li>
+    <li><b>SST (Total Sum of Squares)</b> = Σ (yᵢ - ȳ)²：y 的總變異（y 偏離平均值多少）</li>
+    <li><b>SSE (Explained Sum of Squares)</b> = Σ (ŷᵢ - ȳ)²：被模型解釋的變異（預測值偏離平均值多少）</li>
+    <li><b>SSR (Residual Sum of Squares)</b> = Σ (yᵢ - ŷᵢ)²：沒有被模型解釋的變異（殘差）</li>
   </ul>
-  <p>三者關係：TSS = ESS + RSS</p>
-  <p><b>R² 的解讀</b>：</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">2.3.2 R² 的定義</h3>
+  <div class="formula"><span class="f-label">判定係數 R²</span>R² = SSE / SST = 1 - SSR / SST</div>
+
+  <p>R² 的介於 0 和 1 之間：</p>
   <ul>
-    <li>R² = 1：模型完美解釋所有變異，所有點都落在迴歸線上</li>
-    <li>R² = 0：模型完全沒有解釋力，x 與 y 沒有線性關係</li>
-    <li>介於 0 與 1 之間：R² 越大，模型解釋力越強</li>
+    <li><b>R² = 1</b>：模型完美擬合，所有樣本點都剛好在迴歸線上（SSR=0）</li>
+    <li><b>R² = 0</b>：模型完全沒有解釋力，x 對 y 一點幫助都沒有（SSE=0）</li>
   </ul>
+
   <div class="method-card mc-title" data-mc="r2">
     <div class="mc-check"><input type="checkbox" id="mc-ch2-2" data-mc="r2"><label for="mc-ch2-2" class="mc-lbl">學會</label></div>
-    <div class="mc-left">R² 意義</div>
+    <div class="mc-left">R² 的正確解讀</div>
     <div class="mc-body">
-      <div class="mc-formula">R² = 1 - RSS/TSS</div>
-      <div class="mc-detail">R² 表示「y 的總變異中，有多少百分比被 x 解釋了」。例如 R²=0.73 表示 x 解釋了 y 變異的 73%。</div>
+      <div class="mc-formula">R² = y 的總變異中，有多少比例被 x 解釋掉了</div>
+      <div class="mc-detail">例如 R² = 0.3，意思是：y 的變動中，有 30% 可以被 x 解釋，剩下 70% 是其他因素造成的。</div>
+      <div class="mc-ex">注意：R² 高不代表模型就是對的。即使 R² 很高，也可能有遺漏變數偏誤（第 4.4 節）。同樣，R² 低也不代表模型就沒用——有時候你只是想要估計某個因果效果，不需要解釋所有 y 的變動。</div>
     </div>
   </div>
-  <div class="warn">考試重點：R² 介於 0 與 1；R² 越大表示模型擬合越好。注意 R² 高不一定代表模型正確。</div>`
+
+  <div class="warn">考試重點：在因果推斷的研究中，R² 通常不是最重要的指標。很多頂級期刊的論文 R² 可能只有 0.1 或 0.2，但因為係數估計是因果效果，還是很有價值。不要把 R² 當成評斷模型好壞的唯一標準。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：第 3 章會講「調整後 R²」——因為你放越多變數，R² 一定會越來越大（即使那些變數根本沒用），所以需要一個考慮自由度的指標。</p>`
 },
+
 {
-  id:"2.5", title:"範例：消費函數",
+  id:"2.4", title:"解釋變數的測量單位與係數解讀",
   body:`
-  <p>以凱恩斯消費函數為例：C = β₀ + β₁Y + u，其中 C 是消費，Y 是可支配所得。</p>
-  <p>假設我們有 5 筆觀察：</p>
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">2.4.1 改變測量單位會發生什麼事？</h3>
+  <p>如果你把 x 的單位從「元」改成「千元」，β̂₁ 會怎麼變？</p>
+  <p>答案是：β̂₁ 會放大 1000 倍。因為 x 變成原來的 1/1000，所以每增加 1 單位 x（也就是 1 千元），對應的 y 變動就是原來的 1000 倍。</p>
+
+  <p>這告訴我們一個重要的觀念：<b>係數的大小取決於變數的測量單位</b>。所以比較兩個變數的係數大小，來判斷誰的「影響力」比較大，是沒有意義的——因為單位不同。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">2.4.2 標準化係數</h3>
+  <p>如果你真的想要比較「誰的影響力比較大」，可以把所有變數都標準化（減掉平均值、除以標準差），再跑迴歸。這樣估計出來的係數就叫做「標準化係數」(standardized coefficient)，代表 x 每增加 1 個標準差，y 增加多少個標準差。</p>
+
+  <div class="method-card mc-title" data-mc="unit-change">
+    <div class="mc-check"><input type="checkbox" id="mc-ch2-3" data-mc="unit-change"><label for="mc-ch2-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">三種常見的模型形式與係數解讀</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      1. 線性-線性：y = β₀ + β₁x → x 增加 1 單位，y 增加 β₁ 單位<br>
+      2. 對數-線性：ln(y) = β₀ + β₁x → x 增加 1 單位，y 變動 100·β₁%<br>
+      3. 線性-對數：y = β₀ + β₁ln(x) → x 增加 1%，y 變動 β₁/100 單位
+      </div>
+      <div class="mc-detail">最常用的是「對數-線性」模型（恆常彈性模型）：如果 ln(y) 對 x 迴歸，那 β₁ 就是「半彈性」——x 增加一單位，y 變動百分之多少。</div>
+      <div class="mc-ex">數值範例：ln(wage) = 0 + 0.08·education → 每多受教育一年，薪資平均增加 8%。</div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：模型的函數形式選擇是第 6 章的主題——什麼時候要用對數、什麼時候要加平方項、什麼時候要加交互項。</p>`
+},
+
+{
+  id:"2.5", title:"簡單迴歸的實例：教育對薪資的效果",
+  body:`
+  <p>我們用一個最經典的例子來貫穿整個第 2 章：估計「教育對薪資的效果」。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">研究問題</h3>
+  <p>每多受一年教育，薪資會增加多少？</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">模型設定</h3>
+  <div class="formula">wage = β₀ + β₁·educ + u</div>
+  <p>其中 wage 是每小時工資（元），educ 是受教育年數。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">估計結果</h3>
+  <p>假設我們用 1000 筆樣本估計出來：</p>
+  <div class="formula">ŵage = -0.90 + 0.54·educ</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">結果解讀</h3>
   <ul>
-    <li>Y：10, 20, 30, 40, 50</li>
-    <li>C：11, 19, 28, 35, 42</li>
+    <li><b>截距 β̂₀ = -0.90</b>：如果一個人完全沒受過教育（educ=0），預期的每小時工資是 -0.90 元。這當然不合理——因為沒有人真的 educ=0，所以截距在這裡沒有實質意義。</li>
+    <li><b>斜率 β̂₁ = 0.54</b>：每多受一年教育，每小時工資平均增加 0.54 元。</li>
   </ul>
-  <p><b>計算步驟</b>：</p>
-  <ol>
-    <li>計算平均：Ȳ = 30, C̄ = 27</li>
-    <li>計算分子：Σ(Yᵢ - Ȳ)(Cᵢ - C̄) = 10×(-16) + 0 + 0 + 10×8 + 20×15 = 460</li>
-    <li>計算分母：Σ(Yᵢ - Ȳ)² = 400 + 100 + 0 + 100 + 400 = 1000</li>
-    <li>β̂₁ = 460 / 1000 = 0.46（邊際消費傾向）</li>
-    <li>β̂₀ = C̄ - β̂₁Ȳ = 27 - 0.46×30 = 13.2</li>
-  </ol>
-  <p>估計的消費函數：Ĉ = 13.2 + 0.46Y</p>
-  <div class="note">邊際消費傾向 MPC = 0.46，代表所得每增加 1 元，消費平均增加 0.46 元。</div>
-  <div class="warn">考試重點：能從原始資料計算 OLS 估計式；邊際消費傾向的經濟意義。</div>`
+
+  <div class="method-card mc-title" data-mc="wage-example">
+    <div class="mc-check"><input type="checkbox" id="mc-ch2-4" data-mc="wage-example"><label for="mc-ch2-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">這個估計有什麼問題？</div>
+    <div class="mc-body">
+      <div class="mc-formula">只有教育年數一個解釋變數，夠嗎？</div>
+      <div class="mc-detail">
+      不夠！一個人的薪資高低，除了教育年數之外，還有很多其他重要因素：<br>
+      • 工作經驗（ability）<br>
+      • 能力（ability）<br>
+      • 性別、種族<br>
+      • 產業別、職業別
+      </div>
+      <div class="mc-ex">如果這些因素都被放進誤差項 u 裡面，而它們又和教育年數有相關（例如：能力越強的人，通常受教育年數也越長），那就會有遺漏變數偏誤——估計出來的 0.54 不是「教育的真實效果」，而是混入了「能力的效果」。這就是第 4.4 節的主題。</div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：這個「教育對薪資效果」的例子會貫穿整本書。第 3 章會加入更多控制變數；第 4.4 節會討論遺漏變數偏誤；第 11 章會用工具變數解決這個問題；第 12 章會用追蹤資料固定效果解決這個問題。</p>`
 }
 ];
 
 const CH2_PROBLEMS = [
 {
-  q:"簡單線性迴歸模型 y = β₀ + β₁x + u 中，β₁ 代表什麼？",
-  opts:["(A) 當 x=0 時 y 的值","(B) x 每增加一單位，y 的平均變動量","(C) y 的平均數","(D) 誤差項的大小"],
-  ans:"<b>(B) x 每增加一單位，y 的平均變動量。</b><ul><li>β₁ 是斜率係數（slope coefficient）</li><li>β₀ 是截距項，代表當 x=0 時 y 的期望值</li></ul>"
+  id:"q2-1",
+  q:"OLS 估計式的目標是什麼？推導過程的一階條件是什麼？",
+  a:"OLS 的目標是最小化殘差平方和 SSR = Σ (yᵢ - β̂₀ - β̂₁xᵢ)²。<br><br>一階條件：對 β̂₀ 和 β̂₁ 分別做偏微分，令其等於 0：<br>• ∂SSR/∂β̂₀ = -2 Σ (yᵢ - β̂₀ - β̂₁xᵢ) = 0<br>• ∂SSR/∂β̂₁ = -2 Σ xᵢ(yᵢ - β̂₀ - β̂₁xᵢ) = 0<br><br>解這兩個方程式，就得到 β̂₁ = Cov(x,y)/Var(x)、β̂₀ = ȳ - β̂₁x̄。",
+  difficulty:"medium",
+  topic:"OLS 推導"
 },
 {
-  q:"OLS 方法的基本原理是？",
-  opts:["(A) 最大化殘差和","(B) 最小化殘差平方和","(C) 最小化殘差的絕對值和","(D) 讓殘差平均等於 1"],
-  ans:"<b>(B) 最小化殘差平方和。</b><ul><li>OLS = Ordinary Least Squares（普通最小平方法）</li><li>選擇一條直線，使所有觀測點到直線的垂直距離平方和最小</li></ul>"
+  id:"q2-2",
+  q:"R² 的定義是什麼？R² = 0.3 代表什麼意思？為什麼不能只看 R² 來判斷模型好壞？",
+  a:"R² = SSE / SST = 1 - SSR / SST，代表 y 的總變異中，有多少比例被模型解釋掉了。<br><br>R² = 0.3 的意思是：y 的變動中，有 30% 可以被解釋變數解釋，剩下 70% 是其他因素造成的。<br><br>不能只看 R² 的原因：<br>1. R² 高不代表模型就是對的——可能有遺漏變數偏誤<br>2. R² 低也不代表模型就沒用——如果你只是要估計某個因果效果，不需要解釋所有 y 的變動<br>3. 只要多放變數，R² 一定會變大（即使那些變數根本沒用）",
+  difficulty:"medium",
+  topic:"R² 判定係數"
 },
 {
-  q:"在簡單線性迴歸中，β̂₁ 的公式為？",
-  opts:["(A) Σ(xᵢ - x̄)(yᵢ - ȳ) / Σ(xᵢ - x̄)²","(B) Σ(xᵢ - x̄)(yᵢ - ȳ) / Σ(yᵢ - ȳ)²","(C) Σxᵢyᵢ / n","(D) ȳ / x̄"],
-  ans:"<b>(A) Σ(xᵢ - x̄)(yᵢ - ȳ) / Σ(xᵢ - x̄)²。</b><ul><li>分子是 x 與 y 的共變異數（cov(x,y)）</li><li>分母是 x 的變異數（var(x)）</li><li>β̂₁ 的符號與共變異數相同</li></ul>"
+  id:"q2-3",
+  q:"如果模型是 ln(wage) = β₀ + β₁·educ + u，估計出來 β̂₁ = 0.08，請解釋這個係數的意義。",
+  a:"這是「對數-線性」模型，係數解讀方式是：<br>x 每增加 1 單位，y 大約變動 100·β₁%。<br><br>所以 β̂₁ = 0.08 的意思是：每多受一年教育，薪資平均增加大約 8%。<br><br>注意：這是近似值（精確值是 e^0.08 - 1 ≈ 8.33%），但經濟學上通常直接說「增加 8%」。",
+  difficulty:"medium",
+  topic:"對數模型的係數解讀"
 },
 {
-  q:"R² 的定義為何？",
-  opts:["(A) RSS / TSS","(B) ESS / TSS","(C) TSS / ESS","(D) RSS / ESS"],
-  ans:"<b>(B) ESS / TSS。</b><ul><li>R² = ESS / TSS = 1 - RSS / TSS</li><li>ESS：解釋變異（Explained Sum of Squares）</li><li>TSS：總變異（Total Sum of Squares）</li><li>RSS：殘差平方和（Residual Sum of Squares）</li></ul>"
-},
-{
-  q:"如果 R² = 0.9，代表什麼意義？",
-  opts:["(A) 模型完全沒有解釋力","(B) x 解釋了 y 90% 的變異","(C) y 的值有 90% 是正確的","(D) 誤差項佔了 90%"],
-  ans:"<b>(B) x 解釋了 y 90% 的變異。</b><ul><li>R² 表示「y 的總變異中，有多少百分比被 x 解釋了」</li><li>R² = 1 表示完美擬合；R² = 0 表示完全沒有線性解釋力</li></ul>"
-},
-{
-  q:"OLS 估計的殘差有什麼性質？",
-  opts:["(A) 殘差和等於 1","(B) 殘差和等於 0","(C) 殘差恆為正","(D) 殘差與 x 相關"],
-  ans:"<b>(B) 殘差和等於 0。</b><ul><li>從 OLS 的一階條件可推得：Σeᵢ = 0</li><li>另一個性質：Σxᵢeᵢ = 0（殘差與 x 不相關）</li><li>這是 OLS 估計式的重要數學性質</li></ul>"
-},
-{
-  q:"在消費函數 C = β₀ + β₁Y + u 中，β₁ 的經濟意義是？",
-  opts:["(A) 自發性消費","(B) 邊際消費傾向","(C) 平均消費傾向","(D) 儲蓄率"],
-  ans:"<b>(B) 邊際消費傾向。</b><ul><li>β₁ = ΔC / ΔY，代表所得每增加 1 元，消費增加多少元</li><li>β₀ 是自發性消費（當所得為 0 時的消費水準）</li></ul>"
-},
-{
-  q:"下列何者不是 OLS 的性質？",
-  opts:["(A) 殘差和為 0","(B) 殘差與解釋變數 x 不相關","(C) 殘差恆為正值","(D) 迴歸線通過 (x̄, ȳ)"],
-  ans:"<b>(C) 殘差恆為正值。</b><ul><li>殘差可以是正的也可以是負的，代表觀測點在迴歸線上方或下方</li><li>(A)(B)(D) 都是 OLS 的重要性質</li></ul>"
+  id:"q2-4",
+  q:"為什麼說「簡單線性迴歸模型在現實中很少直接使用」？",
+  a:"因為現實世界中，依變數 y 通常會受到很多因素影響，而不是只有一個 x。如果你只放一個解釋變數，其他影響 y 的因素就會全部被放進誤差項 u 裡面。<br><br>如果這些遺漏的因素又和 x 有相關，就會造成遺漏變數偏誤——估計出來的 β̂₁ 不是真實的因果效果。<br><br>所以實務上我們通常會用多元線性迴歸（第 3 章），盡量把重要的控制變數都放進去。",
+  difficulty:"medium",
+  topic:"簡單迴歸的限制"
 }
 ];
 
+
+
 /* ===== 第三章：多元線性迴歸模型 ===== */
+/* ===== 第三章：多元線性迴歸模型（完整版） ===== */
 const CH3_SECTIONS = [
 {
-  id:"3.1", title:"多元迴歸的設定",
+  id:"3.1", title:"多元線性迴歸模型的設定",
   body:`
-  <p><span class="term" data-term="Multiple regression">多元線性迴歸模型（multiple linear regression model）</span>包含兩個或以上的解釋變數：</p>
-  <div class="formula">
-    <span class="f-label">多元線性迴歸母體模型</span>
-    y = β₀ + β₁x₁ + β₂x₂ + ... + βₖxₖ + u
+  <p>多元線性迴歸模型 (Multiple Linear Regression Model) 是現實中最常用的計量模型——一次放很多個解釋變數，同時解釋 y 的變動。</p>
+
+  <div class="formula"><span class="f-label">多元線性迴歸模型</span>y = β₀ + β₁x₁ + β₂x₂ + ... + βₖxₖ + u</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">為什麼要放很多個解釋變數？</h3>
+  <p>放更多解釋變數的主要目的是：<b>控制其他重要因素</b>，讓你估計出來的 β₁ 更接近「ceteris paribus」（其他條件不變）下的真實效果。</p>
+
+  <div class="method-card mc-title" data-mc="multiple-reg">
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-0" data-mc="multiple-reg"><label for="mc-ch3-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">「偏迴歸係數」的意義</div>
+    <div class="mc-body">
+      <div class="mc-formula">βⱼ = 在「控制住其他所有變數」的情況下，xⱼ 每增加 1 單位，y 平均變動多少</div>
+      <div class="mc-detail">這是多元迴歸最重要的觀念：每個係數都是「淨效果」——把其他變數的影響都扣掉之後，xⱼ 單獨對 y 的效果。</div>
+      <div class="mc-ex">範例：wage = β₀ + β₁·educ + β₂·exper + u。<br>β̂₁ = 0.07 的意思是：在「工作經驗相同」的條件下，每多受一年教育，薪資平均增加 7%。</div>
+    </div>
   </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">用矩陣形式寫更簡潔</h3>
+  <p>當解釋變數很多時，用矩陣寫起來更方便：</p>
+  <div class="formula"><span class="f-label">矩陣形式</span>y = Xβ + u</div>
   <p>其中：</p>
   <ul>
-    <li>k：解釋變數的個數</li>
-    <li>β₀：截距項</li>
-    <li>β₁, β₂, ..., βₖ：<span class="term" data-term="Partial regression coefficient">偏迴歸係數（partial regression coefficients）</span></li>
+    <li>y 是 n×1 的向量（n 筆觀察值的 y）</li>
+    <li>X 是 n×(k+1) 的矩陣（每一列是一筆觀察值的所有 x，第一欄都是 1（截距項））</li>
+    <li>β 是 (k+1)×1 的向量（所有係數）</li>
+    <li>u 是 n×1 的向量（誤差項）</li>
   </ul>
-  <div class="note">偏迴歸係數 βⱼ 的意義：控制其他所有變數不變下，xⱼ 每增加一單位，y 的平均變動量。這就是「其他條件不變（ceteris paribus）」的數學表達。</div>
-  <div class="warn">考試重點：多元迴歸的核心是「控制其他變數」；偏迴歸係數才是真正的邊際效果。</div>`
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：多元迴歸是整個應用計量經濟學的基礎。後面所有章節（異變數、自我相關、工具變數、追蹤資料）都是在多元迴歸的架構下，討論各種問題的診斷和解決方法。</p>`
 },
+
 {
-  id:"3.2", title:"OLS 的矩陣表示",
+  id:"3.2", title:"OLS 估計式的矩陣形式",
   body:`
-  <p>多元迴歸用矩陣表示更簡潔：</p>
-  <div class="formula">
-    <span class="f-label">矩陣形式</span>
-    y = Xβ + u
-  </div>
-  <p>其中：</p>
-  <ul>
-    <li><b>y</b>：n×1 的依變數向量</li>
-    <li><b>X</b>：n×(k+1) 的解釋變數矩陣（第一欄全為 1，對應截距項）</li>
-    <li><b>β</b>：(k+1)×1 的係數向量</li>
-    <li><b>u</b>：n×1 的誤差項向量</li>
-  </ul>
-  <p><b>OLS 估計式（矩陣形式）</b>：</p>
-  <div class="formula">
-    <span class="f-label">OLS 估計向量</span>
-    β̂ = (X'X)⁻¹X'y
-  </div>
-  <p>其中 X' 是 X 的轉置矩陣，(X'X)⁻¹ 是 X'X 的反矩陣。</p>
+  <p>用矩陣形式寫 OLS 估計式，非常簡潔漂亮：</p>
+
+  <div class="formula"><span class="f-label">OLS 估計式（矩陣形式）</span>β̂ = (X'X)⁻¹X'y</div>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">推導概要</h3>
+  <p>和簡單迴歸一樣，我們要最小化殘差平方和。用矩陣寫就是：</p>
+  <div class="formula">SSR = ê'ê = (y - Xβ̂)'(y - Xβ̂)</div>
+  <p>對 β̂ 做偏微分，令其等於 0：</p>
+  <div class="formula">∂SSR/∂β̂ = -2X'(y - Xβ̂) = 0</div>
+  <p>整理一下：</p>
+  <div class="formula">X'Xβ̂ = X'y</div>
+  <p>兩邊同乘 (X'X)⁻¹：</p>
+  <div class="formula">β̂ = (X'X)⁻¹X'y</div>
+
   <div class="method-card mc-title" data-mc="matrix-ols">
     <div class="mc-check"><input type="checkbox" id="mc-ch3-1" data-mc="matrix-ols"><label for="mc-ch3-1" class="mc-lbl">學會</label></div>
-    <div class="mc-left">矩陣推導</div>
+    <div class="mc-left">這個公式在說什麼？</div>
     <div class="mc-body">
-      <div class="mc-formula">min e'e = (y - Xβ)'(y - Xβ)</div>
-      <div class="mc-detail">對 β 微分並令一階條件為 0，可得 X'(y - Xβ̂) = 0，整理後得到 β̂ = (X'X)⁻¹X'y。</div>
+      <div class="mc-formula">β̂ = (X'X)⁻¹X'y</div>
+      <div class="mc-detail">
+      • X'y：X 和 y 的交叉乘積矩陣（x 和 y 的共變異）<br>
+      • X'X：X 自己的交叉乘積矩陣（x 之間的共變異）<br>
+      • 所以 β̂ 就是「共變異除以自己的變異」——和簡單迴歸的 β̂₁ = Cov(x,y)/Var(x) 是同一個觀念，只是推廣到多個變數。
+      </div>
+      <div class="mc-ex">注意：這個公式成立的前提是 X'X 是可逆的——也就是解釋變數之間沒有完全共線（古典假設 3）。</div>
     </div>
   </div>
-  <div class="warn">考試重點：β̂ = (X'X)⁻¹X'y 是計量經濟最重要的公式之一；要能說出每個矩陣的維度。</div>`
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">殘差的矩陣形式</h3>
+  <div class="formula">ê = y - Xβ̂ = y - X(X'X)⁻¹X'y = My</div>
+  <p>其中 M = I - X(X'X)⁻¹X' 稱為「殀差製造矩陣」 (residual-maker matrix)——它的作用就是把 y 裡面可以被 X 解釋的部分扣掉，留下不能解釋的部分。</p>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：矩陣形式的 OLS 是第 4 章推導 OLS 性質的基礎。不偏性推導、變異數推導，全部都是用矩陣代數做的。</p>`
 },
+
 {
-  id:"3.3", title:"偏迴歸係數的意義",
+  id:"3.3", title:"偏迴歸係數的直覺：殘差化 Frisch-Waugh-Lovell 定理",
   body:`
-  <p>多元迴歸與簡單迴歸最大的差別在於「控制其他變數」。</p>
-  <p>例如：估計工資方程式</p>
-  <div class="formula">
-    <span class="f-label">工資方程式範例</span>
-    log(wage) = β₀ + β₁edu + β₂exper + β₃tenure + u
+  <p>「偏迴歸係數」到底是什麼意思？為什麼說它是「控制住其他變數之後的淨效果」？</p>
+  <p>Frisch-Waugh-Lovell (FWL) 定理給了一個非常漂亮的直覺解釋：</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">FWL 定理的敘述</h3>
+  <p>如果你想估計 β₁（x₁ 的係數），有兩種方法會得到一模一樣的答案：</p>
+  <ol>
+    <li><b>方法一</b>：直接跑完整的多元迴歸 y = β₀ + β₁x₁ + β₂x₂ + ... + βₖxₖ + u，讀出 β̂₁</li>
+    <li><b>方法二</b>：<br>
+      (a) 把 y 對「除了 x₁ 之外的所有其他變數」跑迴歸，得到殘差 ỹ<br>
+      (b) 把 x₁ 對「除了 x₁ 之外的所有其他變數」跑迴歸，得到殘差 x̃₁<br>
+      (c) 把 ỹ 對 x̃₁ 跑簡單迴歸，斜率係數就是 β̂₁
+    </li>
+  </ol>
+
+  <div class="method-card mc-title" data-mc="fwl">
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-2" data-mc="fwl"><label for="mc-ch3-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">FWL 定理的直覺</div>
+    <div class="mc-body">
+      <div class="mc-formula">多元迴歸的 β̂₁ = 「把其他變數的影響都扣掉之後」，x₁ 對 y 的簡單迴歸斜率</div>
+      <div class="mc-detail">
+      為什麼要做「殘差化」？<br>
+      • 先把 y 裡面可以被 x₂...xₖ 解釋的部分扣掉 → 剩下的 ỹ 就是「y 裡面和其他變數無關的部分」<br>
+      • 再把 x₁ 裡面可以被 x₂...xₖ 解釋的部分扣掉 → 剩下的 x̃₁ 就是「x₁ 裡面和其他變數無關的部分」<br>
+      • 最後看這兩個「乾淨」的變數之間的關係，就是「控制住其他變數之後」的淨效果
+      </div>
+      <div class="mc-ex">這就是為什麼多元迴歸的 β₁ 叫做「偏迴歸係數」——它是「在給定其他變數的條件下」，x₁ 對 y 的邊際效果。</div>
+    </div>
   </div>
-  <p>其中：</p>
-  <ul>
-    <li><b>edu</b>：教育年數</li>
-    <li><b>exper</b>：工作經驗年數</li>
-    <li><b>tenure</b>：現職年資</li>
-  </ul>
-  <p><b>β₁ 的解讀</b>：控制工作經驗與現職年資不變下，教育年數每增加一年，工資平均增加 β₁×100%。</p>
-  <div class="note">如果只用簡單迴歸 log(wage) ~ edu，β̂₁ 可能會有偏誤，因為它沒有控制其他變數的影響。這就是「遺漏變數偏誤」（omitted variable bias）。</div>
-  <div class="warn">考試重點：偏迴歸係數 = 控制其他變數後的純效果；這是多元迴歸最強大的功能。</div>`
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：FWL 定理是理解「控制變數」這個觀念最有力的工具。後面講虛擬變數、固定效果模型、工具變數時，都會用到 FWL 的概念。</p>`
 },
+
 {
-  id:"3.4", title:"擬合優度與調整 R²",
+  id:"3.4", title:"擬合優度與調整後 R²",
   body:`
-  <p>在多元迴歸中，R² 的定義和簡單迴歸相同：R² = ESS / TSS。</p>
-  <p>但有一個重要特性：<b>只要增加任何一個解釋變數，R² 只會增加或不變，絕對不會減少</b>。</p>
-  <p>這是因為多一個變數，殘差平方和 RSS 只會變小或不變，因此 R² 只增不減。</p>
-  <p>為了懲罰過度使用解釋變數，我們使用<span class="term" data-term="Adjusted R-squared">調整後 R²（adjusted R-squared）</span>：</p>
-  <div class="formula">
-    <span class="f-label">調整 R²</span>
-    R̄² = 1 - (RSS/(n-k-1)) / (TSS/(n-1))
-  </div>
-  <p>其中 n 是樣本數，k 是解釋變數個數。</p>
-  <p><b>調整 R² 的特性</b>：</p>
-  <ul>
-    <li>新變數對 RSS 的貢獻如果不大，調整 R² 可能下降</li>
-    <li>調整 R² 可能為負值</li>
-    <li>用來比較不同變數個數的模型</li>
-  </ul>
+  <p>和簡單迴歸一樣，多元迴歸也可以算 R²：</p>
+  <div class="formula">R² = 1 - SSR / SST</div>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">問題：為什麼需要「調整後 R²」？</h3>
+  <p>因為只要你多放一個解釋變數，R² 一定會變大——即使那個變數根本沒用。原因是：放越多變數，SSR 只會變小或不變（不可能變大），所以 R² = 1 - SSR/SST 只會變大或不變。</p>
+  <p>這就造成一個誘因：為了讓 R² 看起來很高，你可以亂放一堆根本沒用的變數。這當然不是好事。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">解決方法：調整後 R² (Adjusted R²)</h3>
+  <p>調整後 R² 的公式：</p>
+  <div class="formula"><span class="f-label">調整後 R²</span>R̄² = 1 - (SSR/(n-k-1)) / (SST/(n-1))</div>
+  <p>和原本的 R² 差別在於：把「變數個數 k」考慮進去，用「自由度」來調整。</p>
+
   <div class="method-card mc-title" data-mc="adjusted-r2">
-    <div class="mc-check"><input type="checkbox" id="mc-ch3-2" data-mc="adjusted-r2"><label for="mc-ch3-2" class="mc-lbl">學會</label></div>
-    <div class="mc-left">R² vs 調整 R²</div>
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-3" data-mc="adjusted-r2"><label for="mc-ch3-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">調整後 R² 的性質</div>
     <div class="mc-body">
-      <div class="mc-formula">R²：只增不減｜調整 R²：可能下降</div>
-      <div class="mc-detail">R² 永遠鼓勵加變數；調整 R² 懲罰無意義的變數。模型選擇時，調整 R² 越大越好。</div>
+      <div class="mc-formula">
+      1. R̄² ≤ R²（一定比較小或一樣）<br>
+      2. 放一個「根本沒用」的變數（真實係數=0），R̄² 反而會變小<br>
+      3. R̄² 可能是負的
+      </div>
+      <div class="mc-detail">
+      重點是第 2 點：調整後 R² 會「懲罰」你放太多沒用的變數。所以它比較適合用來「選擇模型」——在一堆備選模型之間，選 R̄² 最高的那個。
+      </div>
+      <div class="mc-ex">
+      注意：R̄² 只是模型選擇的其中一個指標，不是萬靈丹。第 15 章講的 AIC、BIC 也是類似的概念——都是在「模型複雜度」和「解釋力」之間做取捨。
+      </div>
     </div>
   </div>
-  <div class="warn">考試重點：R² 隨解釋變數增加只增不減；調整 R² 懲罰變數個數，可能為負。</div>`
+
+  <div class="warn">考試重點：很多人以為 R² 越高模型越好，這是錯的。在因果推斷的研究中，你關心的是係數估計得對不對，而不是 R² 高不高。R² 高不代表你估計的因果效果就是對的；R² 低也不代表你的研究就沒價值。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：模型選擇（放多少變數才夠）是第 6 章和第 15 章的主題。AIC、BIC、交叉驗證這些方法，都是 R² 概念的延伸。</p>`
 },
+
 {
-  id:"3.5", title:"虛擬變數",
+  id:"3.5", title:"多重共線性 (Multicollinearity)",
   body:`
-  <p><span class="term" data-term="Dummy variable">虛擬變數（dummy variable）</span>又稱為類別變數，用 0 或 1 來表示質性特徵。例如：</p>
+  <p>古典假設 3 說的是「沒有<b>完全</b>共線」。但現實中，解釋變數之間通常會有「某種程度」的相關，只是不會完全共線而已。這就叫做「多重共線性」。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">3.5.1 什麼是多重共線性？</h3>
+  <p>如果兩個或多個解釋變數之間高度相關，我們就說有多重共線性問題。</p>
+  <p>注意：這不是「有沒有」的問題，而是「嚴不嚴重」的問題。解釋變數之間完全不相關的情況非常少見——多多少少都會有一點相關，這是正常的。只有當相關程度「太高」的時候，才會造成問題。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">3.5.2 多重共線性會造成什麼問題？</h3>
+  <p>如果多重共線性很嚴重，會發生以下狀況：</p>
   <ul>
-    <li>性別：D=1 表男性，D=0 表女性</li>
-    <li>學歷：D=1 表大學以上，D=0 表其他</li>
-    <li>區域：D=1 表都市，D=0 表鄉村</li>
+    <li><b>係數估計很不穩定</b>：稍微改變一下樣本，係數估計值就會跳來跳去</li>
+    <li><b>標準誤很大</b>：因為很難分別辨認出個別變數的個別效果</li>
+    <li><b>t 檢定不顯著</b>：即使整體 F 檢定很顯著，個別變數的 t 檢定都不顯著</li>
   </ul>
-  <p><b>虛擬變數係數的解讀</b>：</p>
-  <p>例如工資方程式：log(wage) = β₀ + β₁edu + δD + u</p>
-  <p>其中 D=1 表男性，D=0 表女性。</p>
-  <p>δ 的意義：控制教育年數不變下，男性相對於女性的工資差異（百分比）。</p>
-  <div class="warn"><span class="term" data-term="Dummy variable trap">虛擬變數陷阱（dummy variable trap）</span>：如果一個質性變數有 m 個類別，我們只能放入 m-1 個虛擬變數，否則會造成完全共線性（perfect collinearity），導致 OLS 無法估計。</div>
-  <div class="note">例如：性別有「男、女」兩個類別，只要放 1 個虛擬變數（男=1，女=0）就夠了。基準組（reference group）是 D=0 的那一組。</div>
-  <div class="warn">考試重點：m 個類別只能放 m-1 個虛擬變數，否則落入虛擬變數陷阱；基準組的選擇不影響模型整體解釋力。</div>`
+
+  <div class="method-card mc-title" data-mc="multicollinearity">
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-4" data-mc="multicollinearity"><label for="mc-ch3-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">怎麼診斷多重共線性？</div>
+    <div class="mc-body">
+      <div class="mc-formula">VIF (Variance Inflation Factor)</div>
+      <div class="mc-detail">
+      對每個解釋變數 xⱼ：<br>
+      1. 把 xⱼ 對其他所有解釋變數跑迴歸，得到 Rⱼ²<br>
+      2. 計算 VIFⱼ = 1 / (1 - Rⱼ²)
+      </div>
+      <div class="mc-ex">
+      判斷標準：<br>
+      • VIF < 5：完全沒問題<br>
+      • 5 < VIF < 10：有點嚴重，要注意<br>
+      • VIF > 10：非常嚴重，需要處理
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">3.5.3 怎麼解決多重共線性？</h3>
+  <ol>
+    <li><b>什麼都不做</b>：如果你的目的是「預測」，多重共線性不會影響預測的準確度，只是係數估計不準而已。</li>
+    <li><b>刪掉一個變數</b>：把共線性最嚴重的那個變數從模型中拿掉。但這樣可能會造成遺漏變數偏誤。</li>
+    <li><b>增加樣本數</b>：更多資料可以幫助你更精確地估計係數。</li>
+    <li><b>合併變數</b>：把高度相關的幾個變數，用主成分分析或因素分析合成一個新變數。</li>
+  </ol>
+
+  <div class="warn">考試重點：多重共線性不是「模型設定錯誤」的問題，而是「資料資訊不足」的問題——你的樣本沒有足夠的資訊，讓你同時辨認出兩個高度相關變數的個別效果。這和遺漏變數偏誤是不同層次的問題。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：多重共線性會讓你的估計比較不精確（無效率），但不會造成偏誤。這和第 8 章的異變數、第 9 章的自我相關是一樣的——它們都只影響效率，不影響不偏性。</p>`
 }
 ];
 
 const CH3_PROBLEMS = [
 {
-  q:"多元線性迴歸與簡單線性迴歸最大的差別是？",
-  opts:["(A) 多元迴歸用更多的資料","(B) 多元迴歸可以控制其他解釋變數的影響","(C) 多元迴歸的 R² 一定比較高","(D) 兩者沒有差異"],
-  ans:"<b>(B) 多元迴歸可以控制其他解釋變數的影響。</b><ul><li>偏迴歸係數代表「控制其他變數不變下」的邊際效果</li><li>這就是「其他條件不變（ceteris paribus）」的統計表達</li></ul>"
+  id:"q3-1",
+  q:"請解釋「偏迴歸係數」 (partial regression coefficient) 的意義。為什麼多元迴歸的係數叫做「偏」迴歸係數？",
+  a:"偏迴歸係數的意思是：<br>在「控制住其他所有變數」的條件下，xⱼ 每增加 1 單位，y 平均變動多少。<br><br>為什麼叫「偏」？因為它不是「xⱼ 對 y 的全部效果」，而是「扣掉其他變數可以解釋的部分之後，剩下的淨效果」——也就是「邊際的」、「部分的」效果。<br><br>Frisch-Waugh-Lovell 定理告訴我們：多元迴歸的 β̂ⱼ，等於把 y 和 xⱼ 都對其他變數殘差化之後，再跑簡單迴歸的斜率。",
+  difficulty:"medium",
+  topic:"偏迴歸係數"
 },
 {
-  q:"多元迴歸 β̂ = (X'X)⁻¹X'y 中，X 矩陣的維度是？",
-  opts:["(A) n×1","(B) n×k","(C) n×(k+1)","(D) (k+1)×(k+1)"],
-  ans:"<b>(C) n×(k+1)。</b><ul><li>n 是樣本數，k 是解釋變數個數</li><li>X 矩陣第一欄全為 1（對應截距項），所以是 k+1 欄</li></ul>"
+  id:"q3-2",
+  q:"為什麼需要「調整後 R²」？它和原本的 R² 有什麼不同？",
+  a:"因為只要多放一個變數，R² 一定會變大（即使那個變數根本沒用）——因為放越多變數，SSR 只會變小或不變，所以 R² = 1 - SSR/SST 只會變大或不變。<br><br>這就造成一個問題：為了讓 R² 看起來很高，你可以亂放一堆沒用的變數。<br><br>調整後 R² (R̄²) 把自由度考慮進去，用 SSR/(n-k-1) 除以 SST/(n-1)。這樣的話：<br>• 放一個真的有用的變數，R̄² 會變大<br>• 放一個根本沒用的變數，R̄² 反而會變小<br>所以 R̄² 比較適合用來選擇模型。",
+  difficulty:"medium",
+  topic:"調整後 R²"
 },
 {
-  q:"在多元迴歸中，增加一個解釋變數後，R² 會如何變化？",
-  opts:["(A) 一定增加","(B) 一定減少","(C) 可能增加也可能減少","(D) 一定不變"],
-  ans:"<b>(A) 一定增加。</b><ul><li>只要增加任何一個解釋變數，殘差平方和 RSS 只會變小或不變</li><li>因此 R² = 1 - RSS/TSS 只會增加或不變，絕對不會減少</li><li>這就是為什麼需要「調整 R²」來懲罰過度加變數</li></ul>"
+  id:"q3-3",
+  q:"什麼是多重共線性？它會造成什麼問題？怎麼診斷和處理？",
+  a:"多重共線性是指：解釋變數之間有高度相關（但不是完全共線）。<br><br>造成的問題：<br>• 係數估計很不穩定，稍微改一下樣本就跳來跳去<br>• 標準誤很大，t 檢定不顯著<br>• 很難分別辨認出個別變數的個別效果<br><br>診斷方法：計算 VIF (Variance Inflation Factor) = 1/(1-Rⱼ²)。VIF > 10 就算很嚴重。<br><br>處理方法：<br>1. 什麼都不做（如果只是要預測的話）<br>2. 刪掉共線性最嚴重的變數<br>3. 增加樣本數<br>4. 合併變數（主成分分析）",
+  difficulty:"medium",
+  topic:"多重共線性"
 },
 {
-  q:"調整 R² 的主要目的是？",
-  opts:["(A) 讓 R² 變大一點","(B) 懲罰無意義的解釋變數","(C) 讓計算更簡單","(D) 消除異常值的影響"],
-  ans:"<b>(B) 懲罰無意義的解釋變數。</b><ul><li>R² 永遠鼓勵加變數（只增不減）</li><li>調整 R² 考慮了變數個數，新變數如果沒有顯著解釋力，調整 R² 可能下降</li><li>用來比較不同變數個數的模型</li></ul>"
-},
-{
-  q:"虛擬變數的用途是？",
-  opts:["(A) 增加模型的複雜度","(B) 表達質性變數（如性別、學歷、區域）","(C) 減少樣本數","(D) 用來計算 R²"],
-  ans:"<b>(B) 表達質性變數（如性別、學歷、區域）。</b><ul><li>虛擬變數又稱為類別變數，用 0/1 表示質性特徵</li><li>例如：D=1 表男性，D=0 表女性</li></ul>"
-},
-{
-  q:"如果一個質性變數有 4 個類別，應該放入幾個虛擬變數？",
-  opts:["(A) 1 個","(B) 3 個","(C) 4 個","(D) 5 個"],
-  ans:"<b>(B) 3 個。</b><ul><li>m 個類別只能放入 m-1 個虛擬變數，否則會落入「虛擬變數陷阱」</li><li>第 m 個類別是基準組（reference group），對應所有虛擬變數都為 0 的情況</li><li>例如：4 個區域 → 放 3 個虛擬變數，基準組是第 4 個區域</li></ul>"
-},
-{
-  q:"「虛擬變數陷阱」指的是？",
-  opts:["(A) 虛擬變數都設成 0","(B) 放入所有類別的虛擬變數，造成完全共線性","(C) 虛擬變數太多導致 R² 下降","(D) 虛擬變數的係數無法解讀"],
-  ans:"<b>(B) 放入所有類別的虛擬變數，造成完全共線性。</b><ul><li>如果 m 個類別放了 m 個虛擬變數，再加截距項，會造成完全共線性</li><li>此時 (X'X) 沒有反矩陣，OLS 無法估計</li></ul>"
-},
-{
-  q:"在工資方程式 log(wage) = β₀ + β₁edu + δmale + u 中，δ 的意義是？",
-  opts:["(A) 教育對工資的效果","(B) 控制教育不變下，男性相對於女性的工資差異","(C) 女性的工資水準","(D) 男性的教育報酬率"],
-  ans:"<b>(B) 控制教育不變下，男性相對於女性的工資差異。</b><ul><li>male 是虛擬變數：male=1 表男性，male=0 表女性</li><li>δ 是性別工資差異的對數估計值（乘以 100% 就是百分比差異）</li><li>這就是多元迴歸「控制其他變數」的威力</li></ul>"
+  id:"q3-4",
+  q:"OLS 估計式的矩陣形式 β̂ = (X'X)⁻¹X'y 是怎麼推導出來的？",
+  a:"推導步驟：<br><br>1. 目標：最小化殘差平方和 SSR = ê'ê = (y - Xβ̂)'(y - Xβ̂)<br>2. 展開：SSR = y'y - 2β̂'X'y + β̂'X'Xβ̂<br>3. 對 β̂ 做偏微分：∂SSR/∂β̂ = -2X'y + 2X'Xβ̂<br>4. 令偏微分等於 0：-2X'y + 2X'Xβ̂ = 0<br>5. 整理：X'Xβ̂ = X'y<br>6. 兩邊乘 (X'X)⁻¹：β̂ = (X'X)⁻¹X'y",
+  difficulty:"hard",
+  topic:"OLS 矩陣推導"
 }
 ];
+
+
 
 
 /* ===== 第四章：古典假設與 OLS 性質 ===== */
