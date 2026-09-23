@@ -116,14 +116,14 @@ body.dark .search-panel{background:#26221a;border-color:#4a4234}
 /* 小節 */
 .section{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
 .section-head{
-  display:flex;align-items:center;gap:12px;padding:14px 28px;cursor:pointer;user-select:none;
+  display:flex;align-items:center;gap:12px;padding:14px 36px;cursor:pointer;user-select:none;
   font-family:"Noto Serif TC",serif;font-size:19px;font-weight:600;border-bottom:2px solid transparent;transition:border-color .15s;
 }
 .section.open .section-head{border-bottom-color:var(--teal)}
 .section-head .sec-num{color:var(--teal);font-size:12.5px;font-weight:700;font-family:"Noto Sans TC",sans-serif;letter-spacing:.08em;flex-shrink:0}
 .section-head .chev{width:18px;height:18px;margin-left:auto;transition:transform .2s;flex-shrink:0}
 .section.open .section-head .chev{transform:rotate(180deg)}
-.section-body{display:none;padding:4px 28px 18px}
+.section-body{display:none;padding:4px 36px 18px}
 .section.open .section-body{display:block}
 .section-body p{margin:10px 0;font-size:14.8px}
 .section-body ul{margin:8px 0;padding-left:24px}
@@ -974,7 +974,7 @@ const CH3_SECTIONS = [
   id:"3.3", title:"偏迴歸係數的直覺：殘差化 Frisch-Waugh-Lovell 定理",
   body:`
   <p>「偏迴歸係數」到底是什麼意思？為什麼說它是「控制住其他變數之後的淨效果」？</p>
-  <p>Frisch-Waugh-Lovell (FWL) 定理給了一個非常漂亮的直覺解釋：</p>
+  <p><span class="proper">Frisch-Waugh-Lovell (FWL) 定理</span>給了一個非常漂亮的直覺解釋：</p>
 
   <h3 style="margin-top:16px;font-size:16px;font-weight:600;">FWL 定理的敘述</h3>
   <p>如果你想估計 β₁（x₁ 的係數），有兩種方法會得到一模一樣的答案：</p>
@@ -1002,7 +1002,7 @@ const CH3_SECTIONS = [
     </div>
   </div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：FWL 定理是理解「控制變數」這個觀念最有力的工具。後面講虛擬變數、固定效果模型、工具變數時，都會用到 FWL 的概念。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：FWL 定理是理解「<span class="term" data-term="control-variable">控制變數</span>」這個觀念最有力的工具。後面講<span class="term" data-term="dummy-variable">虛擬變數</span>、<span class="term" data-term="fixed-effects">固定效果模型</span>、<span class="term" data-term="iv">工具變數</span>時，都會用到 FWL 的概念。</p>`
 },
 
 {
