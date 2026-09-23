@@ -432,6 +432,15 @@ const BOOK = [
   {n:14, title:"自我選擇與效果模型", subs:["14.1 隨機控制實驗 RCT","14.2 差異中的差異 DiD","14.3 傾向得分匹配 PSM","14.4 斷點迴歸 RD"], done:true, points:["RCT 是因果推斷黃金標準","DiD：平行趨勢假設","PSM 只能解決可觀察變數的選擇偏誤","RD：利用門檻斷點估計因果效果"]},
   {n:15, title:"最大概似估計 MLE", subs:["15.1 概似函數的概念","15.2 MLE 的性質","15.3 三大檢定：概似比、Wald、LM","15.4 MLE 的應用"], done:true, points:["MLE：選擇參數使得觀察到資料的機率最大","MLE 三大性質：一致、漸近常態、漸近有效","LRT/Wald/LM 三大檢定漸近等價","Logit/Probit/Poisson 都是 MLE 估計"]},
   {n:16, title:"一般化動車法 GMM", subs:["16.1 動機條件與 GMM","16.2 GMM 的直覺","16.3 過度認定檢定","16.4 GMM 的應用：動態追蹤模型"], done:true, points:["GMM 只需要動機條件，不需要完整分配","OLS/IV 都是 GMM 的特例","Hansen J 檢定：工具變數外生性檢定","Arellano-Bond：動態追蹤模型的 GMM 估計"]},
+  {n:17, title:"動態追蹤資料模型", subs:["17.1 動態追蹤模型的設定","17.2 落進因變數的內生性問題","17.3 Arellano-Bond 估計法","17.4 系統 GMM 估計法"], done:false, points:["動態追蹤模型：y_{it} = ρy_{i,t-1} + βx_{it} + u_{it}","落進因變數造成內生性：FE 估計有偏誤","Arellano-Bond：用落進兩期以上的變數當工具變數","系統 GMM：同時估計差分方程式和水準方程式"]},
+  {n:18, title:"離散選擇模型", subs:["18.1 二元選擇模型：Logit 與 Probit","18.2 邊際效果的計算","18.3 多類別選擇模型","18.4 有序選擇模型"], done:false, points:["Logit：誤差項服從邏輯分配","Probit：誤差項服從常態分配","邊際效果：機率對 x 的偏微分","多類別：Multinomial Logit / Nested Logit","有序：Ordered Probit / Ordered Logit"]},
+  {n:19, title:"受限因變數模型", subs:["19.1 設限迴歸模型 Tobit","19.2 樣本選擇模型","19.3 兩段法 Heckit","19.4 計數資料模型"], done:false, points:["Tobit：因變數在某個臨界值以下被設限","樣本選擇：樣本不是隨機抽的","Heckit：兩段法解決樣本選擇偏誤","Poisson / 負二項：計數資料模型"]},
+  {n:20, title:"持續時間模型", subs:["20.1 危險率函數 Hazard Rate","20.2 共比例風險模型 Cox","20.3 加速失敗時間模型","20.4 持續時間資料的應用"], done:false, points:["危險率函數：在活過 t 的條件下，下一個瞬間失敗的機率","Cox 模型：不需要指定基準危險率的形狀","AFT 模型：解釋變數直接影響存活時間","應用：失業期間、戰爭持續時間、客户流失"]},
+  {n:21, title:"非參數與半參數估計", subs:["21.1 非參數估計的概念","21.2 核心密度估計法 Kernel","21.3 局部迴歸 Lowess","21.4 半參數估計法"], done:false, points:["非參數：不預設函數形式，讓資料自己說話","核心密度估計：用平滑曲線估計機率密度函數","Lowess：局部加權迴歸，適合探索性資料分析","半參數：保留部分參數結構，其餘用非參數"]},
+  {n:22, title:"貝氏計量經濟學", subs:["22.1 貝氏定理的基本概念","22.2 事前分配與事後分配","22.3 MCMC 方法","22.4 貝氏 vs 古典統計"], done:false, points:["貝氏定理：事後分配 ∝ 事前分配 × 概似函數","事前分配：結合過去的知識或主觀判斷","MCMC：用蒙地卡羅方法抽樣事後分配","貝氏優點：可以結合事前資訊、直覺上容易解釋"]},
+  {n:23, title:"總體計量經濟模型", subs:["23.1 向量自我迴歸 VAR","23.2 結構 VAR SVAR","23.3 衝擊反應函數","23.4 預測誤差變異數分解"], done:false, points:["VAR：所有變數都互相當落進解釋變數","SVAR：加上結構式識別限制","衝擊反應函數：看一個變數的衝擊對其他變數的動態影響","變異數分解：看每個變數的變異可以被哪些衝擊解釋多少"]},
+  {n:24, title:"財務計量經濟學", subs:["24.1 波動率模型 ARCH/GARCH","24.2 隨機波動模型","24.3 事件研究法","24.4 資產定價模型的計量檢定"], done:false, points:["ARCH/GARCH：波動率聚集現象","事件研究：看公司事件前後股價的異常報酬","CAPM、Fama-French 因子模型的計量檢定","財務資料的特性：厚尾、波動率聚集、槓桿效果"]},
+  {n:25, title:"空間計量經濟學", subs:["25.1 空間自我相關","25.2 空間落進模型 Spatial Lag","25.3 空間誤差模型 Spatial Error","25.4 空間計量的應用"], done:false, points:["空間自我相關：相鄰地區的變數會互相影響","空間落進模型：y_{i} = ρWy_{j} + βx_{i} + u_{i}","空間誤差模型：誤差項有空間相關","應用：地區經濟成長、環污外部性、房屋價格"]},
 ];
 /* ===== 術語資料（點擊卡片時顯示） ===== */
 const TERMS = {
@@ -3202,6 +3211,321 @@ const CH16_PROBLEMS = [
 }
 ];
 
+/* ===== 第十七章：動態追蹤資料模型 ===== */
+const CH17_SECTIONS = [
+{
+  id:"17.1", title:"動態追蹤模型的設定",
+  body:`
+  <p>動態追蹤模型 (Dynamic Panel Data Model) 在追蹤模型的基礎上，加上「落進一期的 y」當作解釋變數：</p>
+  <div class="formula">y_{it} = ρ·y_{i,t-1} + β·x_{it} + a_i + u_{it}</div>
+  <p>為什麼要加落進一期的 y？因為很多經濟行為有「慣性」——今天的消費和昨天的消費很接近，今天的投資和昨天的投資很接近。</p>
+  `
+},
+{
+  id:"17.2", title:"落進因變數的內生性問題",
+  body:`
+  <p>問題來了：y_{i,t-1} 和誤差項 a_i 有相關！因為 a_i 是「個體效果」——它會同時影響所有期的 y，包括 y_{i,t-1}。</p>
+  <p>這時候如果你直接用固定效果模型估計，估計出來的 ρ̂ 會有偏誤——而且就算樣本數很大也救不了（不一致）。</p>
+  `
+},
+{
+  id:"17.3", title:"Arellano-Bond 估計法",
+  body:`
+  <p>解決方法：Arellano-Bond 估計法。它的邏輯是：先把模型差分，把個體效果 a_i 消掉，然後用「落進兩期以上的 y」當工具變數。</p>
+  <div class="formula">Δy_{it} = ρ·Δy_{i,t-1} + β·Δx_{it} + Δu_{it}</div>
+  <p>因為 Δy_{i,t-1} = y_{i,t-1} - y_{i,t-2}，而 y_{i,t-2} 和 Δu_{it} 沒有相關——所以 y_{i,t-2} 可以當工具變數。</p>
+  `
+},
+{
+  id:"17.4", title:"系統 GMM 估計法",
+  body:`
+  <p>系統 GMM (System GMM) 是 Arellano-Bond 的改良版——它同時估計「差分方程式」和「水準方程式」，用更多的工具變數，所以估計更有效率。</p>
+  <div class="warn">考試重點：動態追蹤模型的內生性問題，是現代總體計量經濟學最常遇到的問題之一。Arellano-Bond 和系統 GMM 是最常用的解決方法。</div>
+  `
+}
+];
+
+const CH17_PROBLEMS = [
+{id:"q17-1", q:"動態追蹤模型和一般追蹤模型有什麼不同？", a:"動態追蹤模型多了「落進一期的 y」當作解釋變數——用來捕捉經濟行為的「慣性」。", difficulty:"easy", topic:"動態追蹤模型"},
+{id:"q17-2", q:"為什麼落進一期的 y 會造成內生性問題？", a:"因為 y_{i,t-1} 和個體效果 a_i 有相關——a_i 是「個體效果」，它會同時影響所有期的 y，包括 y_{i,t-1}。", difficulty:"medium", topic:"內生性問題"},
+{id:"q17-3", q:"Arellano-Bond 估計法的基本邏輯是什麼？", a:"先把模型差分，把個體效果 a_i 消掉，然後用「落進兩期以上的 y」當工具變數。", difficulty:"medium", topic:"Arellano-Bond"}
+];
+
+/* ===== 第十八章：離散選擇模型 ===== */
+const CH18_SECTIONS = [
+{
+  id:"18.1", title:"二元選擇模型：Logit 與 Probit",
+  body:`
+  <p>二元選擇模型 (Binary Choice Model) 的依變數是 0/1 變數——例如：要不要上大學、要不要買車、要不要退休。</p>
+  <p>兩個最常用的模型：</p>
+  <ul>
+    <li><b>Logit 模型</b>：誤差項服從邏輯分配 (logistic distribution)</li>
+    <li><b>Probit 模型</b>：誤差項服從常態分配</li>
+  </ul>
+  <p>兩個模型估計出來的結果其實很接近——選哪個主要看你喜歡哪個分配假設。</p>
+  `
+},
+{
+  id:"18.2", title:"邊際效果的計算",
+  body:`
+  <p>Logit/Probit 模型的係數不能直接解讀——你要算「邊際效果」：x 變一單位，會讓 y=1 的機率改變多少。</p>
+  <div class="formula">邊際效果 = ∂P(y=1|x) / ∂x</div>
+  <p>邊際效果的大小取決於 x 的水準——在機率最接近 0.5 的地方，邊際效果最大。</p>
+  `
+},
+{
+  id:"18.3", title:"多類別選擇模型",
+  body:`
+  <p>如果選擇超過兩個（例如：要開車、搭公車、還是搭捷運？），就要用「多類別選擇模型」：</p>
+  <ul>
+    <li><b>Multinomial Logit</b>：最簡單，但有「獨立不相干選擇 (IIA)」的假設</li>
+    <li><b>Nested Logit</b>：把選擇分成幾個層次，放鬆 IIA 假設</li>
+  </ul>
+  `
+},
+{
+  id:"18.4", title:"有序選擇模型",
+  body:`
+  <p>如果選擇是「有順序的」（例如：教育程度：小學、中學、大學、研究所），就要用「有序選擇模型」：Ordered Probit / Ordered Logit。</p>
+  <div class="warn">考試重點：Logit 和 Probit 都是用 MLE 估計的——因為它們是非線性模型，OLS 沒辦法用。</div>
+  `
+}
+];
+
+const CH18_PROBLEMS = [
+{id:"q18-1", q:"Logit 和 Probit 模型的差別是什麼？", a:"差別在於誤差項的分配假設不同：Logit 假設服從邏輯分配；Probit 假設服從常態分配。", difficulty:"easy", topic:"Logit vs Probit"},
+{id:"q18-2", q:"為什麼 Logit/Probit 的係數不能直接解讀？", a:"因為它們是非線性模型——x 對 y 的影響不是「線性」的。你要算「邊際效果」：x 變一單位，會讓 y=1 的機率改變多少。", difficulty:"medium", topic:"邊際效果"},
+{id:"q18-3", q:"什麼是獨立不相干選擇 (IIA) 假設？", a:"IIA 假設：兩個選擇之間的相對機率，不會受到其他選擇的影響。", difficulty:"hard", topic:"IIA"}
+];
+
+/* ===== 第十九章：受限因變數模型 ===== */
+const CH19_SECTIONS = [
+{
+  id:"19.1", title:"設限迴歸模型 Tobit",
+  body:`
+  <p>Tobit 模型 (Tobin's Probit) 用來處理「因變數被設限」的情況——例如：大家的消費支出都是正的，沒有人消費負的。</p>
+  <p>如果你直接用 OLS 估計，估計出來的係數會有偏誤——因為你把「設限」的部分也當成連續變數來估計。</p>
+  `
+},
+{
+  id:"19.2", title:"樣本選擇模型",
+  body:`
+  <p>樣本選擇偏誤 (Sample Selection Bias) 是指：你的樣本不是「隨機抽的」——某些人比較容易被選進樣本，某些人比較不容易。</p>
+  <p>經典範例：估計「女性的薪資函數」——你只能看到「有工作的女性」的薪資，沒有工作的女性你看不到。但「要不要工作」本身是一個選擇——有能力的女性比較容易選擇出去工作。</p>
+  `
+},
+{
+  id:"19.3", title:"兩段法 Heckit",
+  body:`
+  <p>Heckman 兩段法 (Heckit) 是解決樣本選擇偏誤最經典的方法：</p>
+  <ol>
+    <li>第一段：先估計「選擇方程式」——估計每個人「被選進樣本」的機率</li>
+    <li>第二段：把「逆米爾斯比」 (Inverse Mills Ratio) 當作解釋變數放進主迴歸</li>
+  </ol>
+  <div class="warn">考試重點：Heckman 兩段法是解決樣本選擇偏誤最經典的方法，也是很多頂級期刊實證研究的標準配備。</div>
+  `
+},
+{
+  id:"19.4", title:"計數資料模型",
+  body:`
+  <p>如果依變數是「計數資料」（例如：生病次數、孩子數量、專利數量），就要用 Poisson 模型或負二項模型。</p>
+  <p>Poisson 模型的問題是：它假設「平均數 = 變異數」。如果這個假設不成立（通常都不成立），就要用負二項模型。</p>
+  `
+}
+];
+
+const CH19_PROBLEMS = [
+{id:"q19-1", q:"什麼是樣本選擇偏誤？請舉一個例子。", a:"樣本選擇偏誤：你的樣本不是「隨機抽的」——某些人比較容易被選進樣本。<br><br>範例：估計女性薪資函數——你只能看到「有工作的女性」的薪資，但「要不要工作」本身是一個選擇。", difficulty:"medium", topic:"樣本選擇偏誤"},
+{id:"q19-2", q:"Heckman 兩段法的基本邏輯是什麼？", a:"兩段：<br>1. 第一段：先估計「選擇方程式」——估計每個人「被選進樣本」的機率<br>2. 第二段：把「逆米爾斯比」當作解釋變數放進主迴歸<br><br>這樣就可以把「樣本選擇」造成的偏誤修正掉。", difficulty:"medium", topic:"Heckman"},
+{id:"q19-3", q:"Tobit 模型用來處理什麼問題？", a:"Tobit 模型用來處理「因變數被設限」的情況——例如：大家的消費支出都是正的，沒有人消費負的。<br><br>如果你直接用 OLS 估計，估計出來的係數會有偏誤。", difficulty:"easy", topic:"Tobit"}
+];
+
+/* ===== 第二十章：持續時間模型 ===== */
+const CH20_SECTIONS = [
+{
+  id:"20.1", title:"危險率函數 Hazard Rate",
+  body:`
+  <p>持續時間模型 (Duration Model) 用來分析「事件發生要花多久時間」——例如：失業多久會找到工作、婚姻多久會離婚、客戶多久會流失。</p>
+  <p>核心觀念是「危險率函數」 (Hazard Rate)：在活過 t 的條件下，下一個瞬間「失敗」的機率。</p>
+  `
+},
+{
+  id:"20.2", title:"共比例風險模型 Cox",
+  body:`
+  <p>Cox 模型 (Cox Proportional Hazards Model) 是最常用的持續時間模型。它的好處是：你不需要指定「基準危險率」的形狀——讓資料自己說話。</p>
+  `
+},
+{
+  id:"20.3", title:"加速失敗時間模型",
+  body:`
+  <p>加速失敗時間模型 (Accelerated Failure Time, AFT) 是另一種持續時間模型——它假設解釋變數會「加速」或「減慢」失敗的速度。</p>
+  <div class="warn">考試重點：持續時間模型常用在：失業期間分析、戰爭持續時間、客戶流失分析、醫學存活分析。</div>
+  `
+}
+];
+
+const CH20_PROBLEMS = [
+{id:"q20-1", q:"什麼是危險率函數 (Hazard Rate)？", a:"危險率函數：在活過 t 的條件下，下一個瞬間「失敗」的機率。", difficulty:"easy", topic:"危險率函數"},
+{id:"q20-2", q:"Cox 模型的好處是什麼？", a:"Cox 模型的好處是：你不需要指定「基準危險率」的形狀——讓資料自己說話。", difficulty:"medium", topic:"Cox 模型"},
+{id:"q20-3", q:"持續時間模型常用在哪些領域？", a:"失業期間分析、戰爭持續時間、客戶流失分析、醫學存活分析。", difficulty:"easy", topic:"持續時間模型應用"}
+];
+
+/* ===== 第二十一章：非參數與半參數估計 ===== */
+const CH21_SECTIONS = [
+{
+  id:"21.1", title:"非參數估計的概念",
+  body:`
+  <p>非參數估計 (Nonparametric Estimation) 和傳統的參數估計最大的不同：它不預設函數形式——讓資料自己說話。</p>
+  <p>好處：比較彈性，不會因為函數形式設定錯了就整個崩壞。<br>壞處：需要比較多的資料，而且估計出來的結果比較「難解讀」。</p>
+  `
+},
+{
+  id:"21.2", title:"核心密度估計法 Kernel",
+  body:`
+  <p>核心密度估計 (Kernel Density Estimation, KDE) 是最常用的非參數方法——用來估計機率密度函數。</p>
+  <p>直覺：在每個資料點附近放一個「核心函數」（例如常態分配），然後把它們加起來，就得到整個密度函數的估計。</p>
+  `
+},
+{
+  id:"21.3", title:"局部迴歸 Lowess",
+  body:`
+  <p>Lowess (Locally Weighted Scatterplot Smoothing) 是另一種常用的非參數方法——用來畫「平滑的迴歸曲線」。</p>
+  <div class="warn">考試重點：非參數方法常用在「探索性資料分析」——先看看資料長什麼樣子，再決定要用什麼樣的參數模型。</div>
+  `
+}
+];
+
+const CH21_PROBLEMS = [
+{id:"q21-1", q:"非參數估計和參數估計最大的不同是什麼？", a:"非參數估計不預設函數形式——讓資料自己說話。<br><br>好處：比較彈性，不會因為函數形式設定錯了就整個崩壞。<br>壞處：需要比較多的資料，而且估計出來的結果比較「難解讀」。", difficulty:"medium", topic:"非參數估計"},
+{id:"q21-2", q:"核心密度估計 (KDE) 用來做什麼？", a:"核心密度估計用來估計機率密度函數——用來看資料的分佈長什麼樣子。", difficulty:"easy", topic:"KDE"},
+{id:"q21-3", q:"Lowess 是什麼？", a:"Lowess (Locally Weighted Scatterplot Smoothing) 是一種局部加權迴歸方法——用來畫「平滑的迴歸曲線」。", difficulty:"medium", topic:"Lowess"}
+];
+
+/* ===== 第二十二章：貝氏計量經濟學 ===== */
+const CH22_SECTIONS = [
+{
+  id:"22.1", title:"貝氏定理的基本概念",
+  body:`
+  <p>貝氏計量經濟學 (Bayesian Econometrics) 和古典計量經濟學最大的不同：它把「參數」也當成隨機變數——不是固定的，而是有一個「分配」。</p>
+  <p>核心就是貝氏定理：</p>
+  <div class="formula">事後分配 ∝ 事前分配 × 概似函數</div>
+  `
+},
+{
+  id:"22.2", title:"事前分配與事後分配",
+  body:`
+  <p>事前分配 (Prior)：在看到資料之前，你對參數的「主觀認定」。<br>事後分配 (Posterior)：看到資料之後，你對參數的「更新後的認定」。</p>
+  <p>貝氏統計的核心就是：把事前分配和資料的概似函數結合起來，得到事後分配。</p>
+  `
+},
+{
+  id:"22.3", title:"MCMC 方法",
+  body:`
+  <p>MCMC (Markov Chain Monte Carlo) 是一組用來「抽樣事後分配」的方法。因為事後分配通常很複雜，你沒有辦法直接算出來——所以你用蒙地卡羅方法來抽樣。</p>
+  <div class="warn">考試重點：貝氏統計的優點：可以結合事前資訊、直覺上容易解釋（「參數有 95% 的機率落在這個區間」）。</div>
+  `
+}
+];
+
+const CH22_PROBLEMS = [
+{id:"q22-1", q:"貝氏統計和古典統計最大的不同是什麼？", a:"貝氏統計把「參數」也當成隨機變數——不是固定的，而是有一個「分配」。<br><br>古典統計認為參數是固定的，只是你不知道；貝氏統計認為參數本身就是隨機的。", difficulty:"medium", topic:"貝氏 vs 古典"},
+{id:"q22-2", q:"貝氏定理的公式是什麼？", a:"事後分配 ∝ 事前分配 × 概似函數<br><br>白話文：你本來對參數的認定（事前分配），加上看到資料之後的更新（概似函數），就得到你現在對參數的認定（事後分配）。", difficulty:"easy", topic:"貝氏定理"},
+{id:"q22-3", q:"MCMC 是什麼？用來做什麼？", a:"MCMC (Markov Chain Monte Carlo) 是一組用來「抽樣事後分配」的方法。<br><br>因為事後分配通常很複雜，你沒有辦法直接算出來——所以你用蒙地卡羅方法來抽樣。", difficulty:"medium", topic:"MCMC"}
+];
+
+/* ===== 第二十三章：總體計量經濟模型 ===== */
+const CH23_SECTIONS = [
+{
+  id:"23.1", title:"向量自我迴歸 VAR",
+  body:`
+  <p>向量自我迴歸 (Vector Autoregression, VAR) 是總體計量經濟學最經典的模型之一。它的邏輯很簡單：所有變數都互相當落進解釋變數。</p>
+  <div class="formula">y_t = c + A₁y_{t-1} + A₂y_{t-2} + ... + A_py_{t-p} + u_t</div>
+  <p>好處：不用你先驗說「誰是外生、誰是內生」——全部都一起放進來跑。</p>
+  `
+},
+{
+  id:"23.2", title:"結構 VAR SVAR",
+  body:`
+  <p>VAR 模型的問題是：它只是「統計上的」關係，沒有「經濟結構」的解釋。所以後來發展出「結構 VAR」 (Structural VAR, SVAR)——加上一些識別限制，讓模型有經濟學的解釋。</p>
+  `
+},
+{
+  id:"23.3", title:"衝擊反應函數",
+  body:`
+  <p>衝擊反應函數 (Impulse Response Function, IRF) 用來看：「如果某個變數突然受到一個衝擊，其他變數會怎麼樣動態反應？」</p>
+  <div class="warn">考試重點：VAR 和 SVAR 是總體計量經濟學最核心的工具——用來分析總體衝擊的效果，例如：貨幣政策衝擊、石油價格衝擊。</div>
+  `
+}
+];
+
+const CH23_PROBLEMS = [
+{id:"q23-1", q:"VAR 模型的基本邏輯是什麼？", a:"所有變數都互相當落進解釋變數——不用你先驗說「誰是外生、誰是內生」，全部都一起放進來跑。", difficulty:"easy", topic:"VAR"},
+{id:"q23-2", q:"衝擊反應函數 (IRF) 用來做什麼？", a:"用來看：「如果某個變數突然受到一個衝擊，其他變數會怎麼樣動態反應？」", difficulty:"medium", topic:"IRF"},
+{id:"q23-3", q:"SVAR 和 VAR 的差別是什麼？", a:"VAR 只是「統計上的」關係，沒有「經濟結構」的解釋。<br><br>SVAR (結構 VAR) 加上一些識別限制，讓模型有經濟學的解釋。", difficulty:"hard", topic:"SVAR"}
+];
+
+/* ===== 第二十四章：財務計量經濟學 ===== */
+const CH24_SECTIONS = [
+{
+  id:"24.1", title:"波動率模型 ARCH/GARCH",
+  body:`
+  <p>財務資料最重要的特性之一：「波動率聚集」 (Volatility Clustering)——大波動之後通常跟著大波動，小波動之後通常跟著小波動。</p>
+  <p>ARCH/GARCH 模型就是用來捕捉這個現象的——把「變異數」也當成時間序列來建模。</p>
+  `
+},
+{
+  id:"24.2", title:"事件研究法",
+  body:`
+  <p>事件研究法 (Event Study) 用來看：公司發生某個事件（例如：併購、裁併、發布財報）之後，股價會怎麼樣異常反應？</p>
+  <p>做法：先估計「正常報酬率」（用市場模型），然後看事件期間的「異常報酬率」累積起來有多少。</p>
+  `
+},
+{
+  id:"24.3", title:"資產定價模型的計量檢定",
+  body:`
+  <p>CAPM、Fama-French 因子模型——這些資產定價模型，都要用計量經濟學的方法來檢定：「這些因子真的可以解釋橫斷面的報酬差異嗎？」</p>
+  <div class="warn">考試重點：財務計量經濟學是計量經濟學最活躍的領域之一——尤其是高頻交易、波動率建模、風險管理。</div>
+  `
+}
+];
+
+const CH24_PROBLEMS = [
+{id:"q24-1", q:"ARCH/GARCH 模型用來處理什麼現象？", a:"用來處理「波動率聚集」現象——大波動之後通常跟著大波動，小波動之後通常跟著小波動。", difficulty:"medium", topic:"ARCH/GARCH"},
+{id:"q24-2", q:"事件研究法 (Event Study) 用來做什麼？", a:"用來看：公司發生某個事件之後，股價會怎麼樣異常反應？", difficulty:"easy", topic:"事件研究法"},
+{id:"q24-3", q:"財務資料有哪些和一般總體資料不一樣的特性？", a:"厚尾 (fat tails)、波動率聚集 (volatility clustering)、槓桿效果 (leverage effect)。", difficulty:"medium", topic:"財務資料特性"}
+];
+
+/* ===== 第二十五章：空間計量經濟學 ===== */
+const CH25_SECTIONS = [
+{
+  id:"25.1", title:"空間自我相關",
+  body:`
+  <p>空間計量經濟學 (Spatial Econometrics) 用來處理「空間相關」的問題——相鄰地區的變數會互相影響。</p>
+  <p>例如：A 縣市的經濟成長率，可能和隔壁 B 縣市的經濟成長率有相關——這就是「空間自我相關」。</p>
+  `
+},
+{
+  id:"25.2", title:"空間落進模型 Spatial Lag",
+  body:`
+  <p>空間落進模型 (Spatial Lag Model)：把「鄰居的 y」也放進模型當解釋變數：</p>
+  <div class="formula">y_i = ρ·W·y_j + β·x_i + u_i</div>
+  <p>W 是空間權重矩陣——用來定義「誰是你的鄰居」。</p>
+  `
+},
+{
+  id:"25.3", title:"空間誤差模型 Spatial Error",
+  body:`
+  <p>空間誤差模型 (Spatial Error Model)：問題不在 y 本身有空間相關，而是在「誤差項」有空間相關——有一些你沒有觀察到的空間因素，同時影響了所有地區。</p>
+  <div class="warn">考試重點：空間計量常用在：地區經濟成長、環污外部性、房屋價格分析。</div>
+  `
+}
+];
+
+const CH25_PROBLEMS = [
+{id:"q25-1", q:"什麼是空間自我相關？", a:"空間自我相關：相鄰地區的變數會互相影響。<br><br>例如：A 縣市的經濟成長率，可能和隔壁 B 縣市的經濟成長率有相關。", difficulty:"easy", topic:"空間自我相關"},
+{id:"q25-2", q:"空間落進模型 (Spatial Lag) 和空間誤差模型 (Spatial Error) 的差別是什麼？", a:"• 空間落進模型：問題在 y 本身有空間相關——把「鄰居的 y」也放進模型當解釋變數。<br>• 空間誤差模型：問題不在 y 本身，而是在「誤差項」有空間相關——有一些你沒有觀察到的空間因素，同時影響了所有地區。", difficulty:"medium", topic:"空間模型"},
+{id:"q25-3", q:"空間計量常用在哪些領域？", a:"地區經濟成長、環污外部性、房屋價格分析。", difficulty:"easy", topic:"空間計量應用"}
+];
 
 
 
@@ -3211,10 +3535,13 @@ const CH16_PROBLEMS = [
 
 
 
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS};
+
+
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS,17:CH17_SECTIONS,18:CH18_SECTIONS,19:CH19_SECTIONS,20:CH20_SECTIONS,21:CH21_SECTIONS,22:CH22_SECTIONS,23:CH23_SECTIONS,24:CH24_SECTIONS,25:CH25_SECTIONS};
 
 /* ===== 第四章：古典假設與 OLS 性質 ===== */
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS};
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS,17:CH17_PROBLEMS,18:CH18_PROBLEMS,19:CH19_PROBLEMS,20:CH20_PROBLEMS,21:CH21_PROBLEMS,22:CH22_PROBLEMS,23:CH23_PROBLEMS,24:CH24_PROBLEMS,25:CH25_PROBLEMS};
 /* ===== 渲染 ===== */
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 function escA(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
