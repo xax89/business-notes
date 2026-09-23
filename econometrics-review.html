@@ -1412,379 +1412,744 @@ const CH4_PROBLEMS = [
 
 
 /* ===== 第五章：區間估計與假設檢定 ===== */
+/* ===== 第五章：區間估計與假設檢定（完整版） ===== */
 const CH5_SECTIONS = [
 {
-  id:"5.1", title:"常態分配假設與小樣本理論",
+  id:"5.1", title:"區間估計與信賴區間",
   body:`
-  <p>除了五個古典假設外，小樣本推斷還需要<b>常態性假設</b>：</p>
-  <div class="formula"><span class="f-label">常態假設</span>u|X ~ N(0, σ²I)</div>
-  <p>在常態假設下，OLS 估計式也是常態分配的，這樣才能使用 t 檢定、F 檢定等小樣本統計方法。</p>
-  <div class="warn">考試重點：大樣本下不需要常態假設，因為根據中央極限定理，OLS 估計式會漸近常態。</div>`
+  <p>前幾章我們學了怎麼估計 β̂，但那只是一個「點估計」——單一數字。現實中，我們會想知道：這個估計值大概落在什麼範圍內？這就是「區間估計」 (interval estimation) 要回答的問題。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">5.1.1 信賴區間 (Confidence Interval)</h3>
+  <p>β₁ 的 95% 信賴區間是：</p>
+  <div class="formula"><span class="f-label">95% 信賴區間</span>β̂₁ ± t₀.₀₂₅, n-k-1 · se(β̂₁)</div>
+  <p>其中 se(β̂₁) 是標準誤 (standard error)——β̂₁ 抽樣分配的標準差。</p>
+
+  <p><b>怎麼解讀信賴區間？</b></p>
+  <p>「95% 信賴區間」的意思是：如果你重複抽樣很多次，每次都算一個信賴區間，那麼大約 95% 的信賴區間會蓋到真實的 β₁。</p>
+  <p>注意：不是「β₁ 有 95% 的機率落在這個區間裡」——因為 β₁ 是一個固定的常數，不是隨機變數。隨機的是信賴區間本身。</p>
+
+  <div class="method-card mc-title" data-mc="confidence-interval">
+    <div class="mc-check"><input type="checkbox" id="mc-ch5-0" data-mc="confidence-interval"><label for="mc-ch5-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">信賴區間的直覺</div>
+    <div class="mc-body">
+      <div class="mc-formula">信賴區間越窄 → 估計越精確</div>
+      <div class="mc-detail">
+      什麼因素會讓信賴區間變窄（估計更精確）？<br>
+      1. 樣本數 n 越大 → 標準誤越小 → 區間越窄<br>
+      2. 解釋變數的變異越大 → 標準誤越小 → 區間越窄<br>
+      3. 誤差變異數 σ² 越小 → 標準誤越小 → 區間越窄
+      </div>
+      <div class="mc-ex">範例：如果 β̂₁ = 0.08，se(β̂₁) = 0.03，n=1000，那 95% 信賴區間大約是 [0.02, 0.14]。意思是：真實的 β₁ 大概落在這個範圍裡面。</div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：信賴區間是假設檢定的基礎。第 5.2 節的 t 檢定，本質上就是看「信賴區間有沒有包含 0」。</p>`
 },
+
 {
-  id:"5.2", title:"單一係數的 t 檢定",
+  id:"5.2", title:"單一母數的 t 檢定",
   body:`
-  <p>檢定單一迴歸係數是否為零，使用 t 檢定：</p>
-  <div class="formula"><span class="f-label">t 統計量</span>t = (β̂ⱼ - βⱼ,₀) / se(β̂ⱼ) ~ t(n-k-1)</div>
-  <ul>
-    <li><b>虛無假設 H₀</b>：βⱼ = 0</li>
-    <li><b>對立假設 H₁</b>：βⱼ ≠ 0（雙尾）或 βⱼ > 0 / βⱼ < 0（單尾）</li>
-    <li><b>決策規則</b>：如果 |t| > 臨界值，或 p-value < α，就拒絕 H₀</li>
-  </ul>
+  <p>假設檢定 (hypothesis testing) 是計量經濟學最常用的推論工具。它的邏輯和法庭審判很像：先假設「無罪」（虛無假設），然後看證據夠不夠有力推翻這個假設。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">5.2.1 t 檢定的步驟</h3>
+  <p>檢定「β₁ = 0」的步驟：</p>
+  <ol>
+    <li><b>設定假設</b>：H₀: β₁ = 0 vs H₁: β₁ ≠ 0</li>
+    <li><b>計算 t 統計量</b>：t = β̂₁ / se(β̂₁)</li>
+    <li><b>找臨界值</b>：查 t 分配表，自由度 df = n - k - 1</li>
+    <li><b>判斷</b>：如果 |t| > 臨界值，就拒絕 H₀；否則不拒絕</li>
+  </ol>
+
+  <div class="formula"><span class="f-label">t 統計量</span>t = β̂ⱼ / se(β̂ⱼ)</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">5.2.2 p 值的意義</h3>
+  <p>p 值 (p-value) 是什麼？它的意思是：如果虛無假設 H₀ 是對的，你觀察到「和現在一樣極端」甚至更極端的 t 統計量的機率。</p>
+  <p>p 值越小，代表證據越強，越有理由拒絕 H₀。</p>
+
   <div class="method-card mc-title" data-mc="ttest">
     <div class="mc-check"><input type="checkbox" id="mc-ch5-1" data-mc="ttest"><label for="mc-ch5-1" class="mc-lbl">學會</label></div>
-    <div class="mc-left">t 檢定步驟</div>
+    <div class="mc-left">常用的判斷標準</div>
     <div class="mc-body">
-      <div class="mc-formula">H₀: βⱼ = 0 → 計算 t 統計量 → 比較臨界值 / p-value → 下結論</div>
-      <div class="mc-detail">自由度 = n - k - 1（n 是樣本數，k 是解釋變數個數，-1 是截距項）。</div>
+      <div class="mc-formula">
+      • p < 0.01 → 在 1% 水準下顯著（***）<br>
+      • p < 0.05 → 在 5% 水準下顯著（**）<br>
+      • p < 0.10 → 在 10% 水準下顯著（*）
+      </div>
+      <div class="mc-detail">
+      注意：「不顯著」不代表「沒有效果」——可能只是你的樣本數太小，檢定力不夠。<br>
+      同樣，「顯著」也不代表「效果很大」——只要樣本數夠大，再小的效果都會顯著。
+      </div>
+      <div class="mc-ex">
+      這就是為什麼現在越來越多人不喜歡只看「顯著與否」，而是要看「效果大小」和「信賴區間」。
+      </div>
     </div>
-  </div>`
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">5.2.3 單尾檢定 vs 雙尾檢定</h3>
+  <p>大部分時候我們做的是「雙尾檢定」——H₁: β₁ ≠ 0。</p>
+  <p>但如果你有很強的理論理由，預期 β₁ 的方向（例如：教育對薪資的效果應該是正的），也可以做「單尾檢定」——H₁: β₁ > 0 或 β₁ < 0。</p>
+  <p>單尾檢定的好處是：臨界值比較小，比較容易拒絕 H₀（檢定力比較高）。但缺點是：如果方向和你預期的相反，你就不能用這個檢定了。</p>
+
+  <div class="warn">考試重點：t 檢定需要哪些假設？<br>
+  1. 古典假設 1-5（線性、隨機抽樣、不完全共線、條件零平均、同變異數）<br>
+  2. 加上「常態性假設」：u | X ~ N(0, σ²)<br><br>
+  大樣本時，常態性假設可以放寬——根據中央極限定理，即使 u 不是常態，t 統計量還是會趨近常態分配，所以還是可以做 t 檢定。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：t 檢定是單一母數的檢定。如果要同時檢定多個母數（例如：兩個係數同時等於 0），就需要用 F 檢定。</p>`
 },
+
 {
-  id:"5.3", title:"信賴區間",
+  id:"5.3", title:"聯合假設檢定：F 檢定",
   body:`
-  <p>βⱼ 的 (1-α) 100% 信賴區間：</p>
-  <div class="formula"><span class="f-label">信賴區間</span>β̂ⱼ ± t_{α/2, n-k-1} · se(β̂ⱼ)</div>
-  <p>如果信賴區間不包含 0，代表在 α 顯著水準下，βⱼ 顯著不為零（與 t 檢定雙尾檢定等價）。</p>
-  <div class="warn">考試重點：信賴區間越窄，估計越精確；樣本數越大，信賴區間越窄。</div>`
-},
-{
-  id:"5.4", title:"聯合假設檢定與 F 檢定",
-  body:`
-  <p>當要同時檢定多個係數是否為零時，使用 <span class="term" data-term="F-test">F 檢定</span>：</p>
-  <div class="formula"><span class="f-label">F 統計量</span>F = ((R²_ur - R²_r) / q) / ((1 - R²_ur) / (n - k - 1)) ~ F(q, n-k-1)</div>
+  <p>t 檢定一次只能檢定一個母數。如果要同時檢定多個母數，就需要用 F 檢定 (F-test)。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">5.3.1 什麼是「聯合假設」？</h3>
+  <p>舉個例子：你想要檢定「x₂ 和 x₃ 一起對 y 沒有解釋力」——也就是 H₀: β₂ = 0 且 β₃ = 0。</p>
+  <p>這時候你不能分別跑兩個 t 檢定（一個檢定 β₂=0，一個檢定 β₃=0）。因為「同時做兩次檢定」會讓「型一誤差機率」變大。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">5.3.2 F 統計量的公式</h3>
+  <p>F 檢定的邏輯是：比較「受限模型」和「不受限模型」的 R²，看限制條件是不是真的讓模型變差很多。</p>
+
+  <div class="formula"><span class="f-label">F 統計量</span>F = ((SSRᵣ - SSRᵤᵣ) / q) / (SSRᵤᵣ / (n - k - 1))</div>
   <ul>
-    <li><b>R²_ur</b>：未限制模型的 R²</li>
-    <li><b>R²_r</b>：限制模型的 R²（加入虛無假設的限制條件）</li>
+    <li><b>SSRᵣ</b>：受限模型的殘差平方和（加上限制條件之後）</li>
+    <li><b>SSRᵤᵣ</b>：不受限模型的殘差平方和（不加上限制條件）</li>
     <li><b>q</b>：限制條件的個數</li>
+    <li><b>n - k - 1</b>：不受限模型的自由度</li>
   </ul>
+
+  <p>因為加上限制條件之後，SSR 只會變大或不變（不可能變小），所以分子永遠是正的。如果限制條件是對的（H₀ 是對的），那加上限制條件不應該讓 SSR 變差太多——所以 F 統計量應該很小。</p>
+  <p>如果 F 統計量很大，代表加上限制條件之後模型變差很多，那我們就有理由拒絕 H₀。</p>
+
   <div class="method-card mc-title" data-mc="ftest">
     <div class="mc-check"><input type="checkbox" id="mc-ch5-2" data-mc="ftest"><label for="mc-ch5-2" class="mc-lbl">學會</label></div>
-    <div class="mc-left">F 檢定的兩種應用</div>
+    <div class="mc-left">F 檢定的兩種常見用法</div>
     <div class="mc-body">
-      <div class="mc-formula">1. 整體 F 檢定：所有解釋變數的係數同時為零<br>2. 部分 F 檢定：部分解釋變數的係數同時為零</div>
-      <div class="mc-detail">整體 F 檢定的虛無假設是 H₀: β₁ = β₂ = ... = βₖ = 0。如果拒絕 H₀，代表模型整體是顯著的。</div>
+      <div class="mc-formula">
+      1. 整體顯性 F 檢定：H₀: β₁ = β₂ = ... = βₖ = 0<br>
+      2. 剔除部分變數 F 檢定：H₀: 某些係數同時等於 0
+      </div>
+      <div class="mc-detail">
+      第一種是最常見的：檢定「整體模型是不是有用」。如果 F 統計量很小，代表你的模型根本沒有解釋力。<br><br>
+      第二種用在模型選擇：檢定「把某些變數拿掉，模型會不會變差很多」。如果 F 統計量很小，代表那些變數真的可以拿掉。
+      </div>
     </div>
-  </div>`
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">5.3.3 F 檢定和 t 檢定的關係</h3>
+  <p>如果你的限制條件只有一個（q=1），那 F 統計量會剛好等於 t 統計量的平方：F = t²。</p>
+  <p>這時候兩個檢定是完全等價的——拒絕與否的結論會一模一樣。</p>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：F 檢定是模型選擇的重要工具。第 6 章講模型設定、第 15 章講 MLE 時，都會用到 F 檢定的觀念。</p>`
 },
+
 {
-  id:"5.5", title:"預測與預測區間",
+  id:"5.4", title:"信賴區間與假設檢定的常見誤用",
   body:`
-  <p>給定新的解釋變數值 x₀，對 y₀ 做預測：</p>
-  <div class="formula"><span class="f-label">點預測</span>ŷ₀ = x₀'β̂</div>
-  <p>預測誤差 e₀ = y₀ - ŷ₀，其變異數包括兩部分：</p>
-  <ul>
-    <li>係數估計的不確定性</li>
-    <li>誤差項的變異數 σ²</li>
-  </ul>
-  <p>因此<b>預測區間</b>會比<b>平均數的信賴區間</b>寬很多。</p>
-  <div class="warn">考試重點：預測區間比信賴區間寬，因為預測不僅包含係數估計的不確定性，還包含了誤差項的隨機變異。</div>`
+  <p>很多人用假設檢定都會用錯，以下是最常見的幾個錯誤：</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">5.4.1 「顯著」不等於「重要」</h3>
+  <p>很多人以為：只要 p < 0.05，就是「很重要的發現」。這是錯的。</p>
+  <p>如果你的樣本數很大，即使效果非常小（實際上沒什麼經濟意義），還是會「統計上顯著」。</p>
+  <p>例如：你發現「每多喝一杯咖啡，年薪增加 100 元」，p < 0.01——統計上非常顯著。但 100 元的年薪差異，實際上一點都不重要。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">5.4.2 「不顯著」不等於「沒有效果」</h3>
+  <p>相反地，如果你的樣本數很小，即使效果真的很大，也可能因為「檢定力不夠」而「不顯著」。</p>
+  <p>這時候你不能說「x 對 y 沒有效果」，只能說「這份資料沒有足夠的證據告訴我們 x 對 y 有效果」。</p>
+
+  <div class="method-card mc-title" data-mc="pvalue-misuse">
+    <div class="mc-check"><input type="checkbox" id="mc-ch5-3" data-mc="pvalue-misuse"><label for="mc-ch5-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">正確的報告方式</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      不要只說「顯著」或「不顯著」<br>
+      要報告：<br>
+      1. 效果大小（β̂ 是多少）<br>
+      2. 標準誤（se 是多少）<br>
+      3. 信賴區間（95% CI 是多少）<br>
+      4. p 值
+      </div>
+      <div class="mc-detail">
+      因為讀者需要知道「效果有多大」，才能判斷這個效果有沒有實質意義。光說「p < 0.05」一點意義都沒有。
+      </div>
+    </div>
+  </div>
+
+  <div class="warn">考試重點：現在頂級期刊（例如 AER、QJE）越來越不喜歡看星號（*、**、***），而是要看完整的信賴區間和效果大小。因為「顯著」和「重要」是兩件完全不同的事。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：這些「統計推斷的常見錯誤」是所有實證研究都要注意的。不管你用什麼方法（OLS、IV、DiD、RDD），都要避免這些誤用。</p>`
 }
 ];
 
 const CH5_PROBLEMS = [
 {
   id:"q5-1",
-  q:"t 檢定的自由度是多少？",
-  a:"自由度 = n - k - 1，其中 n 是樣本數，k 是解釋變數個數，減 1 是因為估計了截距項。",
-  difficulty:"easy",
-  topic:"t 檢定"
+  q:"請解釋什麼是 95% 信賴區間。為什麼說「β₁ 有 95% 的機率落在這個區間裡」是錯的？",
+  a:"95% 信賴區間是：β̂₁ ± t₀.₀₂₅ · se(β̂₁)。<br><br>正確的解讀是：如果你重複抽樣很多次，每次都算一個信賴區間，那麼大約 95% 的信賴區間會蓋到真實的 β₁。<br><br>為什麼說「β₁ 有 95% 的機率落在這個區間裡」是錯的？因為 β₁ 是一個固定的常數，不是隨機變數。要嘛在區間裡面，要嘛不在，沒有「機率」的問題。隨機的是信賴區間本身，不是 β₁。",
+  difficulty:"medium",
+  topic:"信賴區間"
 },
 {
   id:"q5-2",
-  q:"F 檢定的用途是什麼？",
-  a:"F 檢定用來同時檢定多個迴歸係數是否同時為零（聯合假設檢定），而不是一次只檢定一個係數。",
+  q:"t 檢定的邏輯是什麼？需要哪些假設？",
+  a:"t 檢定的邏輯：<br>1. 設定 H₀: β₁ = 0<br>2. 計算 t 統計量 = β̂₁ / se(β̂₁)<br>3. 看 t 統計量是不是「大到不合理」——如果是，就拒絕 H₀<br><br>需要的假設：<br>1. 古典假設 1-5（線性、隨機抽樣、不完全共線、條件零平均、同變異數）<br>2. 加上常態性假設：u | X ~ N(0, σ²)<br><br>大樣本時，常態性假設可以放寬——根據中央極限定理，t 統計量還是會趨近常態分配。",
+  difficulty:"medium",
+  topic:"t 檢定"
+},
+{
+  id:"q5-3",
+  q:"什麼是 F 檢定？什麼時候需要用 F 檢定，而不是用好幾個 t 檢定？",
+  a:"F 檢定是用來做「聯合假設檢定」的——一次檢定多個母數同時等於 0。<br><br>公式：F = ((SSRᵣ - SSRᵤᵣ)/q) / (SSRᵤᵣ/(n-k-1))<br><br>為什麼不能用好幾個 t 檢定？因為「同時做好幾次檢定」會讓型一誤差機率變大。例如：如果你做 20 次獨立的 t 檢定，每次都用 5% 的顯著水準，那至少有一次錯誤拒絕 H₀ 的機率會高達 64%。<br><br>F 檢定可以把多個檢定「合併成一個」，把型一誤差機率控制在你要的水準。",
   difficulty:"medium",
   topic:"F 檢定"
 },
 {
-  id:"q5-3",
-  q:"為什麼預測區間比信賴區間寬？",
-  a:"因為預測不僅包含了係數估計的不確定性（這是信賴區間也有的），還包含了誤差項的隨機變異，所以預測的不確定性更大，區間更寬。",
-  difficulty:"hard",
-  topic:"預測區間"
+  id:"q5-4",
+  q:"為什麼說「統計上顯著」不代表「經濟上重要」？請舉例說明。",
+  a:"因為只要樣本數夠大，即使效果非常小（實際上沒什麼經濟意義），還是會「統計上顯著」。<br><br>範例：你估計「每多喝一杯咖啡，年薪增加 100 元」，標準誤是 30 元，p < 0.01。統計上非常顯著。但 100 元的年薪差異，實際上一點都不重要——根本不會有人因為「每多喝一杯咖啡可以多賺 100 元」就改變行為。<br><br>所以正確的做法是：除了報告 p 值之外，還要報告效果大小和信賴區間，讓讀者判斷這個效果有沒有實質意義。",
+  difficulty:"medium",
+  topic:"p 值的誤用"
 }
 ];
 
-/* ===== 第六章：函數形式與模型設定 ===== */
+/* ===== 第六章：函數形式與模型設定（完整版） ===== */
 const CH6_SECTIONS = [
 {
-  id:"6.1", title:"對數線性模型",
+  id:"6.1", title:"多項式迴歸：加入平方項",
   body:`
-  <p>將 y 或 x 取對數，可以解釋成彈性或半彈性。</p>
-  <div class="formula"><span class="f-label">雙對數模型</span>ln(y) = β₀ + β₁ ln(x) + u</div>
-  <p>此時 β₁ 就是<b>彈性</b>：x 變動 1%，y 變動 β₁%。</p>
-  <div class="formula"><span class="f-label">半對數模型</span>ln(y) = β₀ + β₁ x + u</div>
-  <p>此時 β₁ 是<b>半彈性</b>：x 增加 1 單位，y 變動 100·β₁%。</p>
-  <div class="warn">考試重點：對數模型係數的解釋是考試重點——雙對數是彈性、半對數是半彈性（% 變動）。</div>`
-},
-{
-  id:"6.2", title:"多項式模型與交互項",
-  body:`
-  <p>如果邊際效果不是固定的，可以加入多項式項或交互項。</p>
+  <p>古典假設 1 說「y 是參數 β 的線性函數」，但這不代表 y 和 x 之間一定要是直線關係——你可以加入 x 的平方項、立方項，只要 β 還是一次方的就好。</p>
+
   <div class="formula"><span class="f-label">二次式模型</span>y = β₀ + β₁x + β₂x² + u</div>
-  <p>此時 x 對 y 的邊際效果是：∂y/∂x = β₁ + 2β₂x（取決於 x 的水準）。</p>
-  <div class="formula"><span class="f-label">交互項模型</span>y = β₀ + β₁x₁ + β₂x₂ + β₃x₁x₂ + u</div>
-  <p>此時 x₁ 對 y 的邊際效果是：∂y/∂x₁ = β₁ + β₃x₂（取決於 x₂ 的水準）。</p>
-  <div class="method-card mc-title" data-mc="interaction">
-    <div class="mc-check"><input type="checkbox" id="mc-ch6-1" data-mc="interaction"><label for="mc-ch6-1" class="mc-lbl">學會</label></div>
-    <div class="mc-left">交互項的解讀</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">什麼時候要加平方項？</h3>
+  <p>如果你懷疑 x 對 y 的「邊際效果」不是固定的——一開始效果很大，後來越來越小（報酬遞減），或是一開始效果很小，後來越來越大——那就應該加平方項。</p>
+
+  <p>在二次式模型裡，x 對 y 的邊際效果是：</p>
+  <div class="formula">Δy/Δx ≈ β₁ + 2β₂x</div>
+  <p>注意：邊際效果不是固定的 β₁，而是「和 x 有關」的——x 越大，邊際效果越接近 β₁ + 2β₂x。</p>
+
+  <div class="method-card mc-title" data-mc="quadratic">
+    <div class="mc-check"><input type="checkbox" id="mc-ch6-0" data-mc="quadratic"><label for="mc-ch6-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">經典範例：年資對薪資的效果</div>
     <div class="mc-body">
-      <div class="mc-formula">y = β₀ + β₁x₁ + β₂x₂ + β₃x₁x₂ + u</div>
-      <div class="mc-detail">x₁ 對 y 的邊際效果 = β₁ + β₃·x₂<br>如果 β₃ > 0，代表 x₂ 越大，x₁ 對 y 的邊際效果越強。</div>
+      <div class="mc-formula">log(wage) = β₀ + β₁·exper + β₂·exper² + u</div>
+      <div class="mc-detail">
+      為什麼要加 exper²？因為「工作經驗對薪資的效果」不是固定的：<br>
+      • 一開始，多做一年，薪資增加很多<br>
+      • 做了二三十年之後，再多做一年，薪資增加就很少了（甚至可能下降，因為快要退休了）
+      </div>
+      <div class="mc-ex">
+      如果估計出來 β₁ > 0、β₂ < 0，代表邊際效果遞減。<br>
+      那「效果最大的那一點」在哪里？就是讓 β₁ + 2β₂x = 0 的 x：x* = -β₁/(2β₂)。
+      </div>
     </div>
-  </div>`
+  </div>
+
+  <div class="warn">考試重點：解讀二次式模型的係數時，不要只看 β₁ 的大小和顯著性——因為邊際效果是「β₁ + 2β₂x」，要看你關心的 x 是在什麼水準。通常會在「x 的平均值」處計算邊際效果，再報告出來。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：函數形式選擇是模型設定的一環。如果函數形式選錯了（例如實際是二次式，你卻用線性式），就會造成模型設定偏誤，估計出來的係數就不對。</p>`
 },
+
 {
-  id:"6.3", title:"Chow 檢定與結構改變",
+  id:"6.2", title:"對數模型：彈性與半彈性",
   body:`
-  <p>如果資料可以分成兩個群體（如男性 vs 女性、戰前 vs 戰後），想要檢定兩個群體的迴歸係數是否相同，可以使用 <span class="term" data-term="Chow test">Chow 檢定</span>。</p>
-  <div class="formula"><span class="f-label">Chow F 統計量</span>F = ((RSS_p - RSS₁ - RSS₂) / k) / ((RSS₁ + RSS₂) / (n₁ + n₂ - 2k))</div>
-  <ul>
-    <li><b>RSS_p</b>：混合兩個群體一起迴歸的殘差平方和</li>
-    <li><b>RSS₁, RSS₂</b>：分別對兩個群體個別迴歸的殘差平方和</li>
-  </ul>
-  <div class="warn">考試重點：Chow 檢定的虛無假設是兩個群體的迴歸係數完全相同（包括截距和斜率）。</div>`
+  <p>對數模型是經濟學研究中最常用的模型形式之一——因為它的係數解讀非常直覺（彈性或半彈性）。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">三種常見的對數模型</h3>
+
+  <div class="tblwrap">
+    <table>
+      <thead>
+        <tr><th>模型形式</th><th>β₁ 的意義</th><th>適用情況</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>線性-線性</b><br>y = β₀ + β₁x</td><td>x 增加 1 單位，y 增加 β₁ 單位</td><td>y 本身有明顯的單位意義</td></tr>
+        <tr><td><b>對數-線性</b><br>ln(y) = β₀ + β₁x</td><td>x 增加 1 單位，y 大約變動 100·β₁%</td><td>常用在薪資、產出等「成長率」議題</td></tr>
+        <tr><td><b>線性-對數</b><br>y = β₀ + β₁ln(x)</td><td>x 增加 1%，y 變動 β₁/100 單位</td><td>常用在「x 變動百分比，y 變動多少」的議題</td></tr>
+        <tr><td><b>對數-對數</b><br>ln(y) = β₀ + β₁ln(x)</td><td>x 增加 1%，y 大約變動 β₁%</td><td>β₁ 就是「彈性」——常用在需求函數、生產函數</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="method-card mc-title" data-mc="log-model">
+    <div class="mc-check"><input type="checkbox" id="mc-ch6-1" data-mc="log-model"><label for="mc-ch6-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">為什麼經濟學家這麼愛用對數模型？</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      1. 係數解讀直覺（百分比）<br>
+      2. 可以減少極端值的影響<br>
+      3. 可以緩和異變數問題<br>
+      4. 對數-對數模型的 β₁ 就是彈性
+      </div>
+      <div class="mc-detail">
+      特別是「對數-對數」模型：β₁ 就是「價格彈性」、「所得彈性」——這是經濟學裡面最重要的參數之一。
+      </div>
+      <div class="mc-ex">
+      範例：ln(quantity) = -1.2·ln(price) → 價格漲 1%，需求量下降 1.2%。需求是有彈性的。
+      </div>
+    </div>
+  </div>
+
+  <div class="warn">考試重點：「對數-線性」模型的係數是近似值——精確值是 e^β₁ - 1。例如 β₁ = 0.08，大約是 8%，精確值是 e^0.08 - 1 ≈ 8.33%。但經濟學上通常直接說「增加 8%」就好。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：模型的函數形式選擇是第 6 章的主題。選擇對的函數形式，可以讓你的係數解讀更有意義，也可以減少模型設定偏誤。</p>`
 },
+
 {
-  id:"6.4", title:"模型設定誤差",
+  id:"6.3", title:"交互項 (Interaction Terms)",
   body:`
-  <p>模型設定誤差主要有兩種：</p>
+  <p>如果你懷疑「x₁ 對 y 的效果，會因為 x₂ 的不同而不同」——也就是說 x₁ 和 x₂ 之間有「交互作用」——那就應該在模型中加入交互項 x₁·x₂。</p>
+
+  <div class="formula"><span class="f-label">有交互項的模型</span>y = β₀ + β₁x₁ + β₂x₂ + β₃(x₁·x₂) + u</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">交互項的係數是什麼意思？</h3>
+  <p>x₁ 對 y 的邊際效果是：</p>
+  <div class="formula">Δy/Δx₁ = β₁ + β₃x₂</div>
+  <p>也就是說：x₁ 的效果大小，取決於 x₂ 是多少。</p>
+  <p>如果 β₃ > 0，代表 x₂ 越大，x₁ 的效果越強（互補效果）。</p>
+  <p>如果 β₃ < 0，代表 x₂ 越大，x₁ 的效果越弱（替代效果）。</p>
+
+  <div class="method-card mc-title" data-mc="interaction">
+    <div class="mc-check"><input type="checkbox" id="mc-ch6-2" data-mc="interaction"><label for="mc-ch6-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">經典範例：性別和教育對薪資的交互效果</div>
+    <div class="mc-body">
+      <div class="mc-formula">log(wage) = β₀ + β₁·educ + β₂·female + β₃·(educ·female) + u</div>
+      <div class="mc-detail">
+      這個模型在問什麼？它在問：「教育對薪資的效果，男生和女生是不是不一樣？」<br><br>
+      • β₁：男生的教育報酬率<br>
+      • β₃：女生的教育報酬率和男生差多少<br>
+      • β₁ + β₃：女生的教育報酬率
+      </div>
+      <div class="mc-ex">
+      如果 β₃ < 0 且顯著，代表「女生的教育報酬率比男生低」——即使多受教育一年，女生的薪資增加幅度還是比男生少。
+      </div>
+    </div>
+  </div>
+
+  <div class="warn">考試重點：只要你放了交互項 x₁·x₂，就一定要把 x₁ 和 x₂ 「個別項」也放進去。不然交互項的解讀就會變得很奇怪——因為你限制了「當 x₂=0 時，x₁ 的效果等於 0」，這通常不是你想要的。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：交互項是應用計量經濟學中非常重要的工具。第 7 章講虛擬變數時，也會用到交互項的觀念。</p>`
+},
+
+{
+  id:"6.4", title:"模型設定與函數形式選擇",
+  body:`
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">6.4.1 模型設定偏誤 (Specification Error)</h3>
+  <p>如果你的模型設定錯了——該放的變數沒放、函數形式不對、該有的交互項沒有加——那估計出來的係數就會有偏誤。</p>
+  <p>這就是為什麼說「模型設定是最關鍵的步驟」——一開始選錯了，後面做再多都沒用。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">6.4.2 怎麼選擇函數形式？</h3>
+  <p>沒有一套萬靈丹可以告訴你「哪個函數形式最好」。但有一些經驗法則：</p>
   <ol>
-    <li><b>遺漏變數 (Omitted Variable)</b>：漏了重要的解釋變數 → 有偏誤、不一致</li>
-    <li><b>多餘變數 (Irrelevant Variable)</b>：加了不必要的變數 → 不偏但無效率</li>
-    <li><b>函數形式誤差</b>：例如實際是二次式，但只用了線性式</li>
-    <li><b>衡量誤差</b>：變數的觀測值有誤差</li>
+    <li><b>看理論</b>：經濟理論通常會告訴你應該用什麼函數形式。例如：生產函數通常用 Cobb-Douglas（對數-對數）。</li>
+    <li><b>看殘差圖</b>：把殘差對 x 畫圖，看有沒有系統性的 pattern——如果有的話，代表函數形式可能不對。</li>
+    <li><b>看 R² 或 R̄²</b>：在幾個備選模型之間選 R̄² 最高的那個。</li>
+    <li><b>看 AIC / BIC</b>：這是更正式的模型選擇準則（第 15 章會講）。</li>
   </ol>
-  <div class="warn">考試重點：遺漏變數的後果比多餘變數嚴重——遺漏會造成偏誤，多餘只會造成無效率。</div>`
-},
-{
-  id:"6.5", title:"模型選擇準則",
-  body:`
-  <p>當有很多候選模型時，可以使用資訊準則來選擇最適模型：</p>
-  <ul>
-    <li><span class="term" data-term="AIC">AIC</span> (Akaike Information Criterion)：越小越好</li>
-    <li><span class="term" data-term="BIC">BIC</span> (Bayesian Information Criterion)：越小越好，對多餘變數的懲罰比 AIC 更重</li>
-    <li>調整 R²：越大越好</li>
-  </ul>
-  <div class="formula"><span class="f-label">AIC 公式</span>AIC = ln(RSS/n) + 2(k+1)/n</div>
-  <div class="warn">考試重點：AIC 和 BIC 都是「模型選擇」準則，不是「假設檢定」；兩者都是越小越好，BIC 懲罰變數個數更嚴格。</div>`
+
+  <div class="method-card mc-title" data-mc="model-selection">
+    <div class="mc-check"><input type="checkbox" id="mc-ch6-3" data-mc="model-selection"><label for="mc-ch6-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">模型選擇的原則</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      1. 理論優先：先問經濟理論說什麼<br>
+      2. 簡約原則：在差不多好的模型之間，選最簡單的那個<br>
+      3. 不要為了 R² 而 R²：R² 高不代表模型就是對的
+      </div>
+      <div class="mc-detail">
+      最糟糕的做法是：把所有可能的變數都放進去，看哪個係數顯著就留哪個——這就是「資料挖礦」(data mining)，很容易找到「看起來很顯著」但其實是隨機雜訊的結果。
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：模型選擇是計量經濟學最困難的問題之一。第 15 章講 AIC、BIC，第 14 章講實驗設計，都是在解決「怎麼選對模型」的問題。</p>`
 }
 ];
 
 const CH6_PROBLEMS = [
 {
   id:"q6-1",
-  q:"在雙對數模型 ln(y) = β₀ + β₁ ln(x) + u 中，β₁ 的經濟意義是什麼？",
-  a:"β₁ 是彈性：x 變動 1%，y 變動 β₁%。",
-  difficulty:"easy",
-  topic:"對數模型"
+  q:"為什麼要在模型中加入平方項？請舉一個實際的例子說明。",
+  a:"加入平方項是為了捕捉「邊際效果遞減（或遞增）」的非線性關係。<br><br>範例：年資對薪資的效果。一開始，多做一年，薪資增加很多；但做了二三十年之後，再多做一年，薪資增加就很少了。這就是邊際效果遞減。<br><br>模型：log(wage) = β₀ + β₁·exper + β₂·exper² + u。<br>如果 β₁ > 0、β₂ < 0，代表邊際效果遞減。效果最大的那一點在 x* = -β₁/(2β₂)。",
+  difficulty:"medium",
+  topic:"平方項與非線性"
 },
 {
   id:"q6-2",
-  q:"在模型 y = β₀ + β₁x₁ + β₂x₂ + β₃x₁x₂ + u 中，x₁ 對 y 的邊際效果是什麼？",
-  a:"∂y/∂x₁ = β₁ + β₃·x₂。代表 x₁ 對 y 的邊際效果取決於 x₂ 的水準。如果 β₃ > 0，代表 x₂ 越大，x₁ 的邊際效果越強。",
+  q:"對數-對數模型 ln(y) = β₀ + β₁ln(x) + u 的 β₁ 是什麼意思？為什麼經濟學家這麼愛用這個模型？",
+  a:"β₁ 就是「彈性」——x 增加 1%，y 大約變動 β₁%。<br><br>經濟學家愛用的原因：<br>1. 係數解讀直覺（百分比）<br>2. 可以減少極端值的影響<br>3. 可以緩和異變數問題<br>4. 對數-對數模型的 β₁ 就是彈性——這是經濟學裡面最重要的參數之一<br><br>範例：ln(quantity) = -1.2·ln(price) → 價格漲 1%，需求量下降 1.2%。需求是有彈性的。",
+  difficulty:"medium",
+  topic:"對數模型與彈性"
+},
+{
+  id:"q6-3",
+  q:"加入交互項 x₁·x₂ 的模型中，x₁ 對 y 的邊際效果是什麼？如果 β₃ > 0 代表什麼？",
+  a:"模型：y = β₀ + β₁x₁ + β₂x₂ + β₃(x₁·x₂) + u。<br><br>x₁ 對 y 的邊際效果是：Δy/Δx₁ = β₁ + β₃x₂。<br><br>也就是說：x₁ 的效果大小，取決於 x₂ 是多少。<br><br>如果 β₃ > 0，代表 x₂ 越大，x₁ 的效果越強（互補效果）。<br>如果 β₃ < 0，代表 x₂ 越大，x₁ 的效果越弱（替代效果）。<br><br>注意：只要你放了交互項 x₁·x₂，就一定要把 x₁ 和 x₂ 個別項也放進去。",
   difficulty:"medium",
   topic:"交互項"
 },
 {
-  id:"q6-3",
-  q:"AIC 和 BIC 兩個模型選擇準則，哪一個對變數個數的懲罰比較嚴格？",
-  a:"BIC 對變數個數的懲罰比 AIC 更嚴格。兩者都是越小越好，但 BIC 傾向選擇更精簡的模型。",
-  difficulty:"medium",
-  topic:"模型選擇準則"
+  id:"q6-4",
+  q:"什麼是「資料挖礦」 (data mining)？為什麼要避免？",
+  a:"資料挖礦是指：把所有可能的變數都放進去，看哪個係數顯著就留哪個——不管理論上說什麼。<br><br>為什麼要避免？因為只要你試夠多組模型，總會找到一些「看起來很顯著」的係數——但這只是隨機雜訊，不是真實的效果。<br><br>就像丟銅板丟 20 次，總會有幾次連續出現正面——這不代表銅板有問題，只是機率使然。<br><br>正確的做法是：先有理論，再找資料。不要反過來——先看資料長什麼樣子，再編一套理論。",
+  difficulty:"hard",
+  topic:"資料挖礦"
 }
 ];
 
-/* ===== 第七章：虛擬變數與虛擬因變數 ===== */
+/* ===== 第七章：虛擬變數與虛擬因變數（完整版） ===== */
 const CH7_SECTIONS = [
 {
-  id:"7.1", title:"虛擬解釋變數",
+  id:"7.1", title:"虛擬變數 (Dummy Variables) 的基本概念",
   body:`
-  <p><span class="term" data-term="Dummy variable">虛擬變數 (Dummy Variable)</span> 是只取 0 或 1 的變數，用來表達質性特徵（如性別、區域、時間等）。</p>
-  <div class="formula"><span class="f-label">性別虛擬變數</span>y = β₀ + β₁ female + u</div>
+  <p>虛擬變數 (dummy variable) 是用來表示「類別變數」的變數——它的值只能是 0 或 1，用來表示某個特徵「有」或「沒有」。</p>
+
+  <div class="formula"><span class="f-label">虛擬變數</span>D = 1 if 是女性, 0 if 是男性</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">虛擬變數的係數是什麼意思？</h3>
+  <p>如果模型是：y = β₀ + β₁D + u，那：</p>
   <ul>
-    <li>當 female=0（男性），y = β₀ + u</li>
-    <li>當 female=1（女性），y = β₀ + β₁ + u</li>
-    <li>β₁ 就是女性相對於男性的效果差異</li>
+    <li>當 D=0（男性）：E(y | D=0) = β₀</li>
+    <li>當 D=1（女性）：E(y | D=1) = β₀ + β₁</li>
   </ul>
-  <div class="warn">考試重點：虛擬變數陷阱 (Dummy Variable Trap)——如果有 m 個類別，只能放 m-1 個虛擬變數，否則會產生完全共線性。</div>`
-},
-{
-  id:"7.2", title:"虛擬因變數與線性機率模型",
-  body:`
-  <p>如果依變數 y 也是 0/1 的虛擬變數（如「是否上大學」、「是否買保險」），直接用 OLS 估計，稱為<span class="term" data-term="LPM">線性機率模型 (LPM)</span>。</p>
-  <div class="formula"><span class="f-label">LPM</span>y = β₀ + β₁x + u，其中 y 是 0/1 變數</div>
-  <p>此時 E(y|x) = P(y=1|x) = β₀ + β₁x，所以 β₁ 代表 x 增加一單位，y=1 的機率變動多少。</p>
-  <div class="method-card mc-title" data-mc="lpm">
-    <div class="mc-check"><input type="checkbox" id="mc-ch7-1" data-mc="lpm"><label for="mc-ch7-1" class="mc-lbl">學會</label></div>
-    <div class="mc-left">LPM 的問題</div>
+  <p>所以 β₁ 就是「女性和男性的 y 平均差多少」——也就是性別的效果。</p>
+
+  <div class="method-card mc-title" data-mc="dummy-basic">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-0" data-mc="dummy-basic"><label for="mc-ch7-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">經典範例：性別薪資差距</div>
     <div class="mc-body">
-      <div class="mc-formula">LPM 的兩大問題</div>
-      <div class="mc-detail">1. 機率可能超出 [0,1] 範圍（因為是線性的）<br>2. 必然有異變數（因為 Var(y|x) = p(1-p)，隨 x 變動）</div>
+      <div class="mc-formula">log(wage) = β₀ + β₁·female + u</div>
+      <div class="mc-detail">
+      如果 β̂₁ = -0.15，代表：女生的薪資比男生平均少大約 15%。<br><br>
+      注意：這是「沒有控制其他變數」的簡單迴歸——可能有遺漏變數偏誤。
+      </div>
+      <div class="mc-ex">
+      如果再加入教育年數、工作經驗等控制變數，β̂₁ 的大小可能會改變——這代表性別薪資差距當中有一部分是因為性別之間的教育和經驗差異造成的。
+      </div>
     </div>
-  </div>`
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">多個類別的虛擬變數：虛擬變數陷阱</h3>
+  <p>如果你有 m 個類別，你只需要放 m-1 個虛擬變數。因為如果你放了 m 個虛擬變數，再加上截距項，就會產生完全共線（古典假設 3 被違反）。這就叫做「虛擬變數陷阱」 (Dummy Variable Trap)。</p>
+
+  <div class="warn">考試重點：m 個類別 → 放 m-1 個虛擬變數。被省略的那一個類別就是「參考組」(reference group)——所有虛擬變數的係數都是「和參考組比起來，差多少」。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：虛擬變數是非常基礎的工具，幾乎所有實證研究都會用到。第 12 章的固定效果模型，本質上就是放了一大堆虛擬變數（每個個體一個）。</p>`
 },
+
 {
-  id:"7.3", title:"Logit 與 Probit 模型",
+  id:"7.2", title:"虛擬變數與交互項：斜率轉換模型",
   body:`
-  <p>為了解決 LPM 機率超出 [0,1] 的問題，使用非線性的機率模型：</p>
+  <p>前一節講的虛擬變數，只允許「兩組的截距不一樣」。但如果我們懷疑「兩組的斜率也不一樣」，那就需要加上「虛擬變數 × 連續變數」的交互項。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">7.2.1 截距轉換 vs 斜率轉換</h3>
+  <p>模型：y = β₀ + β₁D + β₂x + β₃(D·x) + u</p>
   <ul>
-    <li><span class="term" data-term="Logit">Logit 模型</span>：使用邏輯函數 Λ(z) = e^z / (1 + e^z)</li>
-    <li><span class="term" data-term="Probit">Probit 模型</span>：使用標準常態分配的累積分配函數 Φ(z)</li>
+    <li><b>D=0（男性）</b>：y = β₀ + β₂x → 截距 β₀，斜率 β₂</li>
+    <li><b>D=1（女性）</b>：y = (β₀+β₁) + (β₂+β₃)x → 截距 β₀+β₁，斜率 β₂+β₃</li>
   </ul>
-  <div class="formula"><span class="f-label">機率</span>P(y=1|x) = Λ(x'β) 或 Φ(x'β)</div>
-  <p>因為是非線性的，所以係數不能直接解讀成邊際效果，需要計算<b>邊際效果</b>：在 x 的均值處，x 增加一單位，y=1 的機率變動多少。</p>
-  <div class="warn">考試重點：Logit 和 Probit 都是用來解決二元因變數的問題；兩者的差別在於背後的分配假設不同（Logistic vs 標準常態）。</div>`
+  <p>所以：</p>
+  <ul>
+    <li>β₁：男女之間的「截距差異」</li>
+    <li>β₃：男女之間的「斜率差異」</li>
+  </ul>
+
+  <div class="method-card mc-title" data-mc="dummy-interaction">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-1" data-mc="dummy-interaction"><label for="mc-ch7-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">範例：性別和教育的交互效果</div>
+    <div class="mc-body">
+      <div class="mc-formula">log(wage) = β₀ + β₁·female + β₂·educ + β₃·(female·educ) + u</div>
+      <div class="mc-detail">
+      這個模型在問兩件事：<br>
+      1. 男生和女生的「起點薪資」是不是不一樣？（β₁）<br>
+      2. 教育對薪資的「邊際效果」，男生和女生是不是不一樣？（β₃）
+      </div>
+      <div class="mc-ex">
+      如果 β₃ < 0 且顯著，代表「女生的教育報酬率比男生低」。<br><br>
+      這比只放一個 female 虛擬變數來得更深入——因為它告訴你性別差異不只在「起點」，還在「成長速度」。
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：虛擬變數和交互項的組合，是「差異中差異」(DiD) 方法的基礎（第 14 章會講）。DiD 模型本質上就是「時間虛擬變數 × 處理組虛擬變數」的交互項。</p>`
 },
+
 {
-  id:"7.4", title:"多類別與有序因變數模型",
+  id:"7.3", title:"線性機率模型 (LPM)",
   body:`
-  <p>如果 y 有超過兩個類別，且類別之間沒有順序關係（如「選擇開車、搭公車、搭捷運」），使用：</p>
-  <ul>
-    <li><span class="term" data-term="Multinomial Logit">多類別 Logit (Multinomial Logit)</span></li>
-    <li>注意：存在「獨立性不相干備擇 (IIA)」的假設問題</li>
-  </ul>
-  <p>如果 y 是有序的類別（如「非常不滿意、不滿意、普通、滿意、非常滿意」），使用：</p>
-  <ul>
-    <li>有序 Logit / 有序 Probit</li>
-  </ul>
-  <div class="warn">考試重點：多類別（無序）用 Multinomial Logit；有序類別用 Ordered Logit / Probit。</div>`
+  <p>如果你的依變數 y 本身就是 0 或 1（例如：「有沒有上大學」「有沒有結婚」），那你用普通 OLS 跑迴歸，就叫做「線性機率模型」 (Linear Probability Model, LPM)。</p>
+
+  <div class="formula"><span class="f-label">LPM 模型</span>P(y=1 | x) = β₀ + β₁x</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">LPM 的係數是什麼意思？</h3>
+  <p>因為 y 是 0/1 變數，所以 E(y | x) = P(y=1 | x)。</p>
+  <p>所以 β₁ 的意思是：x 每增加 1 單位，「y=1 的機率」增加多少（以機率為單位）。</p>
+
+  <div class="method-card mc-title" data-mc="lpm">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-2" data-mc="lpm"><label for="mc-ch7-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">LPM 的優點和缺點</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      優點：簡單、係數解讀直覺<br>
+      缺點：
+      1. 預測值可能在 0 到 1 之外（機率不能小於 0 或大於 1）<br>
+      2. 必然有異變數問題<br>
+      3. 邊際效果是固定的（現實中通常不是）
+      </div>
+      <div class="mc-detail">
+      因為 y 是 0/1，所以變異數 Var(y|x) = p(1-p)，而 p 又取決於 x——所以變異數一定會隨 x 改變。這就是為什麼 LPM 一定有異變數。
+      </div>
+      <div class="mc-ex">
+      解法：用「穩健標準誤」(robust standard errors) 來處理異變數問題。現在所有統計軟體都可以輕鬆做到。
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">什麼時候可以用 LPM？</h3>
+  <p>如果你只是要估計「邊際效果」，而且你研究的對象大部分都在「機率 0.2 到 0.8」的中間地帶（而不是都很接近 0 或都很接近 1），那 LPM 其實是可以接受的。</p>
+  <p>但如果你想要做預測（預測某人「會不會」結婚），那 LPM 就不適合了——你應該用 Probit 或 Logit 模型（第 16 章會講）。</p>
+
+  <div class="warn">考試重點：LPM 最大的問題不是「預測值可能超出 0-1」，而是「必然有異變數」。但這個問題很好解決——用穩健標準誤就好了。所以在很多應用研究中，LPM 其實是很受歡迎的選擇。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：LPM 是二元選擇模型的最簡單版本。如果想要更完美的模型，可以用 Probit 或 Logit（第 16 章會講）。</p>`
 },
+
 {
-  id:"7.5", title:"計數因變數模型",
+  id:"7.4", title:"虛擬變數的進階應用：事件研究與時間趨勢",
   body:`
-  <p>如果 y 是計數資料（如「去醫院的次數」、「小孩的數目」），使用：</p>
-  <ul>
-    <li><span class="term" data-term="Poisson">Poisson 回歸</span>：假設 y 服從卜瓦松分配</li>
-    <li><span class="term" data-term="Negative Binomial">負二項回歸</span>：解決 Poisson 模型的過度分散問題</li>
-  </ul>
-  <div class="formula"><span class="f-label">Poisson 假設</span>E(y|x) = Var(y|x) = exp(x'β)</div>
-  <p>如果資料有「過度分散」（Var > E），Poisson 模型的標準誤會被低估，此時應該用負二項回歸或穩健標準誤。</p>
-  <div class="warn">考試重點：Poisson 模型的限制是平均數等於變異數；如果變異數大於平均數（過度分散），就需要用負二項模型。</div>`
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">7.4.1 時間趨勢變數</h3>
+  <p>如果你用的是時間序列資料，通常會有「時間趨勢」——y 隨著時間過去，有一個固定的成長或下降趨勢。</p>
+  <p>這時候你可以放一個「時間趨勢變數」t（t=1,2,3,...），來控制這個線性趨勢：</p>
+  <div class="formula">y_t = β₀ + β₁x_t + β₂t + u_t</div>
+  <p>β₂ 的意思是：在控制 x 之後，y 每過一年平均變動多少。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">7.4.2 季節性調整</h3>
+  <p>如果你的資料有季節性（例如：百貨公司的營業額，每年 12 月特別高），你可以放三個季節虛擬變數（第一季、第二季、第三季），來控制季節效果。</p>
+  <p>這樣你的迴歸就不會被季節性的波動干擾。</p>
+
+  <div class="method-card mc-title" data-mc="dummy-applications">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-3" data-mc="dummy-applications"><label for="mc-ch7-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">虛擬變數的萬用性</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      虛擬變數可以用來表示任何「類別」的東西：<br>
+      1. 性別、種族、地區<br>
+      2. 產業別、職業別<br>
+      3. 時間趨勢、季節性<br>
+      4. 政策實施前後<br>
+      5. 處理組 vs 控制組（DiD）
+      </div>
+      <div class="mc-detail">
+      可以說：只要你有「類別」的問題，就有虛擬變數的解決方案。它是計量經濟學最萬用的工具之一。
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：時間趨勢和季節性調整是時間序列分析（第 13 章）的基礎。政策實施前後的虛擬變數，是差異中差異（DiD）方法的基礎（第 14 章）。</p>`
 }
 ];
 
 const CH7_PROBLEMS = [
 {
   id:"q7-1",
-  q:"什麼是虛擬變數陷阱？",
-  a:"如果有 m 個類別，卻放入了 m 個虛擬變數，就會產生完全共線性（因為所有虛擬變數的和 = 1，和截距項完全共線），這就是虛擬變數陷阱。正確做法是放 m-1 個虛擬變數。",
-  difficulty:"easy",
-  topic:"虛擬變數陷阱"
+  q:"什麼是虛擬變數？如果有 m 個類別，應該放幾個虛擬變數？為什麼？",
+  a:"虛擬變數是用來表示類別變數的變數——值只能是 0 或 1，用來表示某個特徵「有」或「沒有」。<br><br>如果有 m 個類別，應該放 m-1 個虛擬變數。<br><br>為什麼？因為如果你放了 m 個虛擬變數，再加上截距項，就會產生完全共線——所有虛擬變數加起來永遠等於 1，和截距項完全共線。這就叫做「虛擬變數陷阱」。<br><br>被省略的那一個類別就是「參考組」——所有虛擬變數的係數都是「和參考組比起來，差多少」。",
+  difficulty:"medium",
+  topic:"虛擬變數基礎"
 },
 {
   id:"q7-2",
-  q:"線性機率模型 (LPM) 有什麼主要問題？",
-  a:"1. 預測的機率可能超出 [0,1] 範圍；2. 必然有異變數（因為 Var(y|x) = p(1-p)，隨 x 變動）。",
+  q:"如果模型是 log(wage) = β₀ + β₁·female + β₂·educ + β₃·(female·educ) + u，請解釋 β₁、β₂、β₃ 各自的意義。",
+  a:"• β₀：男性的「起點薪資」（當 educ=0 時）<br>• β₁：女性和男性的「起點薪資差異」<br>• β₂：男性的教育報酬率（每多受一年教育，男性薪資增加多少%）<br>• β₃：女性和男性的教育報酬率差異<br><br>所以：<br>• 男性的教育報酬率 = β₂<br>• 女性的教育報酬率 = β₂ + β₃<br><br>如果 β₃ < 0 且顯著，代表「女性的教育報酬率比男生低」。",
   difficulty:"medium",
-  topic:"LPM 問題"
+  topic:"虛擬變數與交互項"
 },
 {
   id:"q7-3",
-  q:"Logit 模型和 Probit 模型的主要差別是什麼？",
-  a:"差別在於背後的分配假設不同：Logit 使用 Logistic 分配的累積函數，Probit 使用標準常態分配的累積函數。兩者的結果通常非常接近，只有在尾部區域差異較大。",
+  q:"什麼是線性機率模型 (LPM)？它有什麼優點和缺點？",
+  a:"LPM 就是當依變數 y 是 0/1 變數時，直接用普通 OLS 跑迴歸：P(y=1|x) = β₀ + β₁x。<br><br>β₁ 的意思是：x 每增加 1 單位，y=1 的機率增加多少（以機率為單位）。<br><br>優點：簡單、係數解讀直覺。<br><br>缺點：<br>1. 預測值可能在 0 到 1 之外（機率不能小於 0 或大於 1）<br>2. 必然有異變數問題（因為 Var(y|x) = p(1-p)，會隨 x 改變）<br>3. 邊際效果是固定的（現實中通常不是）<br><br>解法：用「穩健標準誤」處理異變數問題。現在所有統計軟體都可以輕鬆做到。",
   difficulty:"medium",
-  topic:"Logit vs Probit"
+  topic:"LPM 線性機率模型"
+},
+{
+  id:"q7-4",
+  q:"什麼是「虛擬變數陷阱」？為什麼會發生？",
+  a:"虛擬變數陷阱是指：如果你有 m 個類別，卻放了 m 個虛擬變數，再加上截距項，就會產生完全共線。<br><br>為什麼？因為所有虛擬變數加起來永遠等於 1——每個人剛好屬於其中一個類別，所以虛擬變數的和永遠是 1，和截距項（也是永遠等於 1）完全共線。<br><br>解決方法：放 m-1 個虛擬變數，省略其中一個類別當作「參考組」。",
+  difficulty:"easy",
+  topic:"虛擬變數陷阱"
 }
 ];
 
-/* ===== 第八章：異變數 ===== */
+/* ===== 第八章：異變數（完整版） ===== */
 const CH8_SECTIONS = [
 {
-  id:"8.1", title:"異變數的意義與後果",
+  id:"8.1", title:"什麼是異變數 (Heteroscedasticity)",
   body:`
-  <p>古典假設中有一條是<b>同變異數 (Homoscedasticity)</b>：Var(u|X) = σ²（常數，不隨 X 改變）。</p>
-  <p>如果違反這個假設，誤差項的變異數隨 X 改變，就稱為<span class="term" data-term="Heteroscedasticity">異變數 (Heteroscedasticity)</span>。</p>
-  <div class="formula"><span class="f-label">異變數</span>Var(u|X) = σᵢ² ≠ 常數</div>
-  <p><b>異變數的後果</b>：</p>
-  <ul>
-    <li>OLS 估計式仍然是不偏的、一致的</li>
-    <li>但 OLS 不再是 BLUE（不再是最有效率的）</li>
-    <li>OLS 估計的標準誤是錯誤的，導致 t 檢定、F 檢定都不可靠</li>
-  </ul>
-  <div class="warn">考試重點：異變數不會造成 OLS 係數的偏誤，但會造成標準誤估計錯誤，使得假設檢定不可靠。</div>`
-},
-{
-  id:"8.2", title:"異變數的偵測",
-  body:`
-  <p>常見的異變數偵測方法：</p>
-  <ol>
-    <li><b>殘差圖</b>：畫殘差 vs 預測值，如果殘差的散佈隨預測值變大或變小，就有異變數</li>
-    <li><span class="term" data-term="Breusch-Pagan test">Breusch-Pagan (BP) 檢定</span>：把殘差平方對解釋變數迴歸，檢定所有係數是否為零</li>
-    <li><span class="term" data-term="White test">White 檢定</span>：BP 檢定的一般化，加入解釋變數的平方項和交互項</li>
-  </ol>
-  <div class="method-card mc-title" data-mc="bptest">
-    <div class="mc-check"><input type="checkbox" id="mc-ch8-1" data-mc="bptest"><label for="mc-ch8-1" class="mc-lbl">學會</label></div>
-    <div class="mc-left">BP 檢定步驟</div>
+  <p>古典假設 5 說「同變異數」——所有觀察值的誤差變異程度都一樣大。但現實中，這個假設經常被違反。如果誤差的變異數不是常數，而是隨 x 改變，那就叫做「異變數」。</p>
+
+  <div class="formula"><span class="f-label">同變異數</span>Var(u|X) = σ² (常數)<br><span class="f-label">異變數</span>Var(u|X) = σ²ᵢ (隨 i 改變)</div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">現實中為什麼會有異變數？</h3>
+  <p>最常見的情況是：x 越大，y 的變異程度也越大。</p>
+  <div class="method-card mc-title" data-mc="why-hetero">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-0" data-mc="why-hetero"><label for="mc-ch8-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">經典範例：所得和消費</div>
     <div class="mc-body">
-      <div class="mc-formula">1. 先做 OLS 迴歸，得到殘差 ê<br>2. 把 ê² 對 x₁, x₂, ..., xₖ 迴歸<br>3. 檢定所有斜率係數是否同時為零</div>
-      <div class="mc-detail">如果拒絕 H₀，代表存在異變數。BP 檢定的統計量是 n·R²，服從 χ²(k) 分配。</div>
+      <div class="mc-formula">消費 = β₀ + β₁·所得 + u</div>
+      <div class="mc-detail">
+      為什麼會有異變數？<br>
+      • 所得低的人：大部分錢都拿來買必需品，消費行為比較一致 → 變異數小<br>
+      • 所得高的人：有很多「可自由支配」的錢，有人花得多、有人花得少 → 變異數大
+      </div>
+      <div class="mc-ex">
+      所以 x 越大，y 的變異程度也越大——這就是最經典的異變數型態。
+      </div>
     </div>
-  </div>`
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：異變數是古典假設 5 被違反的情況。第 8.2 節會講它對 OLS 性質的影響，第 8.3 節會講怎麼診斷，第 8.4 節會講怎麼解決。</p>`
 },
+
 {
-  id:"8.3", title:"加權最小平方法 WLS",
+  id:"8.2", title:"異變數對 OLS 性質的影響",
   body:`
-  <p>如果知道異變數的形式（Var(uᵢ) = σ²·h(xᵢ)），可以使用<b>加權最小平方法 (WLS)</b>來解決。</p>
-  <div class="formula"><span class="f-label">WLS 直覺</span>給予變異數小的觀測值較大的權重，變異數大的觀測值較小的權重</div>
-  <p>做法：把所有變數除以 √h(xᵢ)，然後做 OLS。</p>
-  <p>WLS 在異變數存在時是 BLUE（比 OLS 更有效率）。</p>
-  <div class="warn">考試重點：WLS 需要知道異變數的形式；如果不知道確切形式，就使用下一節的穩健標準誤。</div>`
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">8.2.1 不偏性還在嗎？</h3>
+  <p>還在！異變數只違反了古典假設 5（同變異數），沒有違反假設 1-4。所以 OLS 估計式仍然是不偏的、一致的。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">8.2.2 BLUE 還在嗎？</h3>
+  <p>不在了！高斯-馬可夫定理需要同變異數假設。當同變異數被違反時，OLS 就不再是最有效率的估計式了——存在另一個「加權最小平方法」(WLS)，變異數比 OLS 更小。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">8.2.3 最大的問題：標準誤估計錯誤</h3>
+  <p>這才是最嚴重的問題！</p>
+  <p>OLS 內建的標準誤公式，是假設「同變異數」的。如果實際上有異變數，那你算出來的標準誤就是錯的——可能高估，也可能低估。</p>
+  <p>標準誤錯了，後面的 t 檢定、F 檢定、信賴區間就全部都錯了。</p>
+
+  <div class="method-card mc-title" data-mc="hetero-impact">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-1" data-mc="hetero-impact"><label for="mc-ch8-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">異變數的影響總整理</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      1. 不偏性：還在 ✅<br>
+      2. 一致性：還在 ✅<br>
+      3. BLUE：不在了 ❌<br>
+      4. 標準誤：估計錯誤 ❌<br>
+      5. t/F 檢定：不可靠 ❌
+      </div>
+      <div class="mc-detail">
+      重點是：OLS 係數估計值本身還是對的，只是標準誤估計錯了。<br>
+      這和「遺漏變數偏誤」是完全不同層次的問題——遺漏變數連係數估計都是錯的。
+      </div>
+    </div>
+  </div>
+
+  <div class="warn">考試重點：很多人以為「有異變數，OLS 就不能用了」——這是錯的。OLS 係數估計還是對的，只是標準誤不對。最簡單的解決方法不是「改用 WLS」，而是「用穩健標準誤」(robust standard errors)。現在所有統計軟體都可以輕鬆做到。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：異變數和第 9 章的自我相關，合起來稱為「球形誤差項」假設被違反。兩者的問題很像——都只影響標準誤，不影響係數估計。</p>`
 },
+
 {
-  id:"8.4", title:"穩健標準誤",
+  id:"8.3", title:"異變數的診斷：B-P 檢定與 White 檢定",
   body:`
-  <p>如果不知道異變數的確切形式，最實用的方法是使用<span class="term" data-term="Robust standard error">穩健標準誤 (Robust Standard Error)</span>，也稱為 White 標準誤或 HC 標準誤。</p>
-  <div class="formula"><span class="f-label">White 穩健變異數</span>Var_robust(β̂) = (X'X)⁻¹ X' diag(êᵢ²) X (X'X)⁻¹</div>
-  <p>穩健標準誤的好處：</p>
-  <ul>
-    <li>不需要知道異變數的確切形式</li>
-    <li>OLS 估計的係數不變，只是修正了標準誤的估計</li>
-    <li>大樣本下是一致的</li>
-  </ul>
-  <div class="warn">考試重點：穩健標準誤是實務上最常用的解決異變數的方法——它不改正估計係數，只修正標準誤，讓假設檢定重新變得可靠。</div>`
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">8.3.1 直覺診斷：畫殘差圖</h3>
+  <p>最簡單的診斷方法：把殘差 ê 對 x 畫圖。如果看到殘差的「散佈範圍」隨 x 改變（例如 x 越大，殘差散得越開），那就有異變數問題。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">8.3.2 正式的統計檢定：B-P 檢定</h3>
+  <p>Breusch-Pagan (B-P) 檢定的邏輯是：看看殘差的平方 ê²，和 x 之間有沒有關係。</p>
+  <p>如果同變異數是對的，那 ê² 應該和 x 完全沒有關係——因為變異數是常數，不隨 x 改變。</p>
+
+  <div class="method-card mc-title" data-mc="bptest">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-2" data-mc="bptest"><label for="mc-ch8-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">B-P 檢定的步驟</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      1. 先跑 OLS，得到殘差 ê<br>
+      2. 把 ê² 對所有解釋變數跑一個輔助迴歸<br>
+      3. 看這個輔助迴歸的 R² 是不是夠大<br>
+      4. 用 LM 統計量 = n·R²，和卡方分配比較
+      </div>
+      <div class="mc-detail">
+      如果 p < 0.05，就拒絕「同變異數」的虛無假設——代表有異變數問題。
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">8.3.3 White 檢定</h3>
+  <p>White 檢定是 B-P 檢定的一般化版本——它不只看 ê² 和 x 的線性關係，還加入 x 的平方項和交互項，可以偵測更複雜的異變數型態。</p>
+  <p>缺點是：如果解釋變數很多，輔助迴歸會跑很久（因為要放一堆 x² 和 x·x 交互項）。</p>
+
+  <div class="warn">考試重點：現在大部分人其實不會特別去跑 B-P 或 White 檢定——因為不管有沒有異變數，你都可以直接用「穩健標準誤」。穩健標準誤不管有沒有異變數，都是對的。所以與其檢查半天，不如直接用穩健標準誤就好了。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：診斷是為了解決問題。第 8.4 節會講怎麼解決異變數問題。</p>`
 },
+
 {
-  id:"8.5", title:"常見的異變數型態",
+  id:"8.4", title:"異變數的解決方法",
   body:`
-  <p>異變數在橫斷面資料中非常常見，特別是當解釋變數包含「規模變數」（如所得、銷售額、資產）時。</p>
-  <ul>
-    <li>所得越高的家庭，消費變異越大 → 消費對所得的迴歸有異變數</li>
-    <li>大公司的營收變異比小公司大 → 利潤對資產的迴歸有異變數</li>
-  </ul>
-  <p>解決方法：</p>
-  <ul>
-    <li>如果是規模相關的異變數，常常可以透過取對數來減緩</li>
-    <li>或者直接使用穩健標準誤</li>
-  </ul>
-  <div class="warn">考試重點：異變數在橫斷面資料中很常見，時間序列資料中比較少見（時間序列的問題比較常是自我相關）。</div>`
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">8.4.1 最簡單的方法：穩健標準誤 (Robust Standard Errors)</h3>
+  <p>這是現在最常用的方法。它的邏輯很簡單：<br>
+  「不管異變數長什麼樣子，我都直接估計一個『正確的』標準誤出來。」</p>
+  <p>係數估計值 β̂ 完全不變，只是把標準誤從「錯的」換成「對的」。</p>
+
+  <div class="method-card mc-title" data-mc="robust-se">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-3" data-mc="robust-se"><label for="mc-ch8-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">為什麼穩健標準誤這麼受歡迎？</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      1. 不需要假設異變數的「形式」<br>
+      2. 係數估計值完全不變<br>
+      3. 不管有沒有異變數，它都是對的
+      </div>
+      <div class="mc-detail">
+      這就是為什麼現在頂級期刊幾乎全部都用穩健標準誤。<br>
+      與其花一堆時間檢查有沒有異變數，不如直接用穩健標準誤，一勞永逸。
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">8.4.2 加權最小平方法 (WLS)</h3>
+  <p>如果你「知道」異變數的形式——例如 Var(u|x) = σ²·h(x)——那你可以用「加權最小平方法」(Weighted Least Squares, WLS)，讓變異數小的觀察值權重高一點，變異數大的觀察值權重低一點。</p>
+  <p>這樣估計出來的係數，比 OLS 更有效率（變異數更小）。</p>
+
+  <p>但問題是：現實中你通常不知道 h(x) 長什麼樣子。如果你猜錯了，WLS 反而會比 OLS 更糟。</p>
+
+  <div class="warn">考試重點：現在實務上，WLS 已經越來越少人用了——因為穩健標準誤更簡單、更穩健，不需要你猜異變數的形式。WLS 只在「你很確定異變數的形式」的時候才值得用。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：異變數是最常見的古典假設違反，但也是最容易解決的——用穩健標準誤就好了。相比之下，第 10 章講的「內生性問題」就難解多了。</p>`
 }
 ];
 
 const CH8_PROBLEMS = [
 {
   id:"q8-1",
-  q:"異變數對 OLS 估計式的影響是什麼？",
-  a:"OLS 估計式仍然是不偏的、一致的，但不再是 BLUE（不再最有效率）；更嚴重的是，OLS 估計的標準誤是錯誤的，導致 t 檢定、F 檢定都不可靠。",
+  q:"什麼是異變數？為什麼現實中很常見？請舉一個例子。",
+  a:"異變數是指：誤差的變異數不是常數，而是隨 x 改變。<br><br>為什麼很常見？因為「x 越大，y 的變異程度也越大」是很自然的現象。<br><br>範例：消費對所得的迴歸。<br>• 所得低的人：大部分錢都拿來買必需品，消費行為比較一致 → 變異數小<br>• 所得高的人：有很多「可自由支配」的錢，有人花得多、有人花得少 → 變異數大<br><br>所以 x 越大，y 的變異程度也越大——這就是最經典的異變數型態。",
   difficulty:"easy",
-  topic:"異變數的後果"
+  topic:"異變數的定義"
 },
 {
   id:"q8-2",
-  q:"White 穩健標準誤的優點是什麼？",
-  a:"不需要知道異變數的確切形式，只要是大樣本就可以用；而且 OLS 估計的係數不變，只修正了標準誤的估計，讓假設檢定重新變得可靠。",
+  q:"如果有異變數，OLS 估計式會怎麼樣？哪些性質還在，哪些性質不見了？",
+  a:"• <b>不偏性</b>：還在 ✅（因為異變數只違反假設 5，沒有違反假設 1-4）<br>• <b>一致性</b>：還在 ✅<br>• <b>BLUE</b>：不在了 ❌（高斯-馬可夫定理需要同變異數假設）<br>• <b>標準誤</b>：估計錯誤 ❌（OLS 內建的標準誤公式是假設同變異數的）<br>• <b>t/F 檢定</b>：不可靠 ❌（因為標準誤錯了）<br><br>重點：係數估計值本身還是對的，只是標準誤估計錯了。",
+  difficulty:"medium",
+  topic:"異變數的影響"
+},
+{
+  id:"q8-3",
+  q:"現在最常用來解決異變數問題的方法是什麼？為什麼它這麼受歡迎？",
+  a:"現在最常用的是「穩健標準誤」 (robust standard errors)。<br><br>為什麼受歡迎：<br>1. 不需要假設異變數的「形式」<br>2. 係數估計值完全不變，只是把標準誤換成對的<br>3. 不管有沒有異變數，它都是對的<br><br>這就是為什麼現在頂級期刊幾乎全部都用穩健標準誤。與其花一堆時間檢查有沒有異變數，不如直接用穩健標準誤，一勞永逸。",
   difficulty:"medium",
   topic:"穩健標準誤"
 },
 {
-  id:"q8-3",
-  q:"加權最小平方法 (WLS) 和穩健標準誤，兩者解決異變數的差別是什麼？",
-  a:"WLS 是重新估計係數（給不同觀測值不同權重），在知道異變數形式時可以得到 BLUE；穩健標準誤不改變估計的係數，只修正標準誤的估計，不需要知道異變數的確切形式。",
-  difficulty:"hard",
-  topic:"WLS vs 穩健標準誤"
+  id:"q8-4",
+  q:"什麼是加權最小平方法 (WLS)？它和 OLS 有什麼不同？為什麼現在比較少人用？",
+  a:"WLS 的邏輯：如果「知道」異變數的形式，那就給變異數小的觀察值比較高的權重，變異數大的觀察值比較低的權重。這樣估計出來的係數，比 OLS 更有效率（變異數更小）。<br><br>和 OLS 的不同：OLS 是每個觀察值權重都一樣；WLS 是依據變異數大小調整權重。<br><br>為什麼現在比較少人用？因為現實中你通常不知道異變數的形式。如果你猜錯了，WLS 反而會比 OLS 更糟。<br><br>現在大部分人選擇直接用穩健標準誤——不需要猜異變數的形式，而且不管有沒有異變數，標準誤都是對的。",
+  difficulty:"medium",
+  topic:"WLS 加權最小平方法"
 }
 ];
+
+
 
 
 /* ===== 第九章：自我相關 ===== */
