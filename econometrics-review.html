@@ -916,6 +916,1584 @@ const CH3_PROBLEMS = [
 
 const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS};
 const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS};
+/* ===== 渲染 ===== */
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function escA(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+
+let currentChapter=1;
+/* 行動端抽屜開關 */
+const navToggle=document.getElementById("navToggle");
+const navMask=document.getElementById("navMask");
+function closeNav(){document.body.classList.remove("nav-open");}
+if(navToggle)navToggle.addEventListener("click",()=>{document.body.classList.toggle("nav-open");});
+if(navMask)navMask.addEventListener("click",closeNav);
+
+function getProgressState(){
+  let mc={};try{mc=JSON.parse(localStorage.getItem("ma_mc_learned_v1")||"{}")}catch(e){}
+  let dn={};try{dn=JSON.parse(localStorage.getItem("ma_done_v1")||"{}")}catch(e){}
+  return {mc,dn};
+}
+function chapterProgress(n){
+  const {mc,dn}=getProgressState();
+  const secs=CH_SECTIONS[n]||[];
+  let total=0,done=0;
+  secs.forEach(sec=>{
+    const keys=[...sec.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]);
+    total+=keys.length;done+=keys.filter(k=>mc[k]).length;
+  });
+  const probs=CH_PROBLEMS[n]||[];
+  total+=probs.length;done+=probs.filter((_,i)=>dn[n+"-"+(i+1)]).length;
+  return {done,total,pct:total?Math.round(done/total*100):0};
+}
+
+function refreshProgress(n){
+  const {mc}=getProgressState();
+  const secs=CH_SECTIONS[n]||[];
+  const strip=document.querySelector(".progress-strip");
+  const label=document.querySelector(".progress-label");
+  if(strip&&label){
+    const secMc=secs.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));
+    strip.innerHTML=secMc.map(a=>`<i class="${a.length?(a.every(k=>mc[k])?'done':''):'na'}"></i>`).join("");
+    const t=secMc.filter(a=>a.length).length,d=secMc.filter(a=>a.length&&a.every(k=>mc[k])).length;
+    label.textContent="本章方法卡小節已完成 "+d+" / "+t+(t?"（"+Math.round(d/t*100)+"%）":"（本章無方法卡）");
+  }
+  const probProg=document.getElementById("probProgress");
+  if(probProg){
+    const {dn}=getProgressState();
+    const probs=CH_PROBLEMS[n]||[];
+    probProg.textContent="（已做 "+probs.filter((_,i)=>dn[n+"-"+(i+1)]).length+" / "+probs.length+"）";
+  }
+  const tag=document.querySelector('.nav-chapter[data-ch="'+n+'"] .tag');
+  if(tag){const pct=chapterProgress(n).pct;tag.textContent=pct>=100?"✓ 100%":pct+"%";}
+}
+
+
+function renderSidebar(){
+  const sb=document.getElementById("sidebar");
+  let html=`<div class="brand">管理會計<div class="t2">研究所複習 · Hilton &amp; Platt 第 1–16 章</div></div>
+  <button class="nav-gloss" id="navGloss" title="統整全書術語，可篩選與打勾複習">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>術語複習表
+  </button>`;
+  BOOK.forEach(ch=>{
+    html+=`<button class="nav-chapter ${ch.n===currentChapter?'active':''}" data-ch="${ch.n}">
+      <span class="num">${ch.n}</span><span>${esc(ch.title)}</span>
+      ${ch.done?`<span class="tag done">${chapterProgress(ch.n).pct>=100?"✓ 100%":chapterProgress(ch.n).pct+"%"}</span>`:'<span class="tag">待建</span>'}
+    </button>`;
+    if(ch.subs&&ch.subs.length){
+      ch.subs.forEach(sub=>{
+        const id=(typeof sub==="string")?sub.slice(0,3):sub.id;
+        const title=(typeof sub==="string")?sub:sub.title;
+        html+=`<button class="nav-sub" data-ch="${ch.n}" data-sec="${id}">${esc(title)}</button>`;
+      });
+    }
+  });
+  sb.innerHTML=html;
+  const navGloss=sb.querySelector("#navGloss");
+  if(navGloss)navGloss.addEventListener("click",()=>{renderGlossaryFull();window.scrollTo({top:0,behavior:"smooth"});closeNav();});
+  sb.querySelectorAll(".nav-chapter").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const ch=BOOK[+b.dataset.ch-1];
+      if(ch.done){renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});closeNav();}
+      else{toast("第 "+ch.n+" 章尚未建置");}
+    });
+  });
+  sb.querySelectorAll(".nav-sub").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const ch=BOOK[+b.dataset.ch-1];
+      if(!ch.done){toast("第 "+ch.n+" 章尚未建置");return;}
+      closeNav();
+      if(currentChapter!==+b.dataset.ch)renderChapter(+b.dataset.ch);
+      const el=document.getElementById("sec-"+b.dataset.sec);
+      if(!el)return;
+      if(!el.classList.contains("open")){const h=el.querySelector(".section-head");if(h)h.click();}
+      setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),60);
+    });
+  });
+}
+
+function renderChapter(n){
+  currentChapter=n;
+  renderSidebar();
+  const book=BOOK[n-1];
+  const sections=CH_SECTIONS[n]||[];
+  const problems=CH_PROBLEMS[n]||[];
+  const c=document.getElementById("chapterContent");
+  const favStoreKey="ma_fav_v1";
+  let favState={};try{favState=JSON.parse(localStorage.getItem(favStoreKey)||"{}")}catch(e){}
+  let doneState={};try{doneState=JSON.parse(localStorage.getItem("ma_done_v1")||"{}")}catch(e){}
+  const favPool={};
+  let h=`<div class="chapter-head">
+    <span class="kicker">第 ${n} 章</span>
+    <h1>第${n}章 ${esc(book.title)}</h1>
+    <div class="chpage">管理會計（Hilton &amp; Platt）第 ${n} 章</div>
+    <ul class="ch-points">
+      ${book.points?book.points.map(p=>`<li>${esc(p)}</li>`).join(""):""}
+    </ul>
+    <div class="progress-strip">${(()=>{const{mc}=getProgressState();const secMc=sections.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));return secMc.map(a=>`<i class="${a.length?(a.every(k=>mc[k])?'done':''):'na'}"></i>`).join("")})()}</div>
+    <div class="progress-label">本章小節方法卡已學 ${(()=>{const{mc}=getProgressState();const secMc=sections.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));const t=secMc.filter(a=>a.length).length,d=secMc.filter(a=>a.length&&a.every(k=>mc[k])).length;return "本章方法卡小節已完成 "+d+" / "+t+(t?"（"+Math.round(d/t*100)+"%）":"（本章無方法卡）")})()}</div>
+  </div>`;
+  sections.forEach((s,i)=>{
+    h+=`<section class="section" id="sec-${s.id}">
+      <div class="section-head" onclick="toggleSec(this)">
+        <span class="sec-num">${s.id}</span><span>${esc(s.title)}</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="section-body">${s.body}</div>
+    </section>`;
+  });
+  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">例題演練 <span class="prob-progress" id="probProgress"></span></h1><p>先自己作答，再點「顯示答案」核對。</p></div>`;
+  problems.forEach((p,i)=>{
+    const fk=n+"-"+(i+1);
+    favPool[fk]={t:"第 "+n+" 章 · 例題 "+(i+1),q:p.q+(p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""),a:p.ans};
+    const isFav=!!favState[fk];
+    const isDone=!!doneState[fk];
+    h+=`<div class="problem" id="prob-${n}-${i+1}">
+      <div class="p-head"><button class="done-btn ${isDone?"on":""}" data-done="${fk}" title="標記已做過">${isDone?"☑ 做過":"☐ 做過"}</button><span>例題 ${i+1}</span><button class="fav ${isFav?"on":""}" data-fav="${fk}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
+      <div class="p-body"><p>${p.q}</p>${p.opts.length?`<div class="opts" data-pid="${fk}" data-correct="${(()=>{const m=p.ans.match(/^<b>\(([A-Da-d])\)/);return m?m[1].toUpperCase():"";})()}">${p.opts.map(o=>{const om=o.match(/^\(([A-Da-d])\)/);return `<div class="opt" data-ans="${om?om[1].toUpperCase():""}">${o}</div>`;}).join("")}</div>`:""}
+      <div class="prob-fb"></div>
+      <button class="ans-btn" onclick="toggleAns(this)">顯示答案</button>
+      <div class="ans"><span class="a-label">解答</span>：${p.ans}</div></div>
+    </div>`;
+  });
+  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">本章術語</h1><p>本章出現的術語：打勾＝已學會、★重點、✎筆記。全書術語總表在左側「術語複習表」。</p></div>
+  <div id="chGlossRoot"></div>`;
+  c.innerHTML=h;
+
+  glossMode="chapter";glossChapter=n;
+  renderGlossary();
+
+  // 例題收藏（錯題收集，存本機，與題庫頁共用 ma_fav_v1）
+  c.querySelectorAll(".fav").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const k=b.dataset.fav;
+      if(favState[k]){delete favState[k];}else{favState[k]=favPool[k];}
+      try{localStorage.setItem(favStoreKey,JSON.stringify(favState));}catch(e){}
+      const on=!!favState[k];
+      b.classList.toggle("on",on);
+      b.textContent=on?"★ 已收藏":"☆ 收藏";
+    });
+  });
+
+  // 例題做過標記（存 ma_done_v1）
+  refreshProgress(n);
+  c.querySelectorAll(".done-btn").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const k=b.dataset.done;
+      if(doneState[k]){delete doneState[k];}else{doneState[k]=true;}
+      try{localStorage.setItem("ma_done_v1",JSON.stringify(doneState));}catch(e){}
+      const on=!!doneState[k];
+      b.classList.toggle("on",on);
+      b.textContent=on?"☑ 做過":"☐ 做過";
+      refreshProgress(n);
+    });
+  });
+
+  // 例題點按作答：點選項 → 判對錯 → 自動做過、錯題自動收藏
+  c.querySelectorAll(".opts").forEach(box=>{
+    box.addEventListener("click",e=>{
+      const opt=e.target.closest(".opt");
+      if(!opt || box.dataset.locked) return;
+      box.dataset.locked="1";
+      const pid=box.dataset.pid, correct=box.dataset.correct;
+      const picked=opt.dataset.ans;
+      const isRight = !correct || (picked===correct);
+      opt.classList.add("sel");
+      if(isRight){ opt.classList.add("right"); }
+      else{
+        opt.classList.add("wrong");
+        if(correct) box.querySelectorAll(".opt").forEach(o=>{ if(o.dataset.ans===correct) o.classList.add("right"); });
+      }
+      const fb=box.parentElement.querySelector(".prob-fb");
+      if(fb) fb.innerHTML = isRight ? '<span class="fb-ok">✓ 答對了</span>' : `<span class="fb-no">✗ 答錯，正確答案是 ${correct}</span>`;
+      // 自動標記做過
+      if(!doneState[pid]){ doneState[pid]=true; try{localStorage.setItem("ma_done_v1",JSON.stringify(doneState));}catch(err){} refreshProgress(n); }
+      const prob=box.closest(".problem");
+      // 答錯自動進收藏
+      if(!isRight && !favState[pid]){ favState[pid]=favPool[pid]; try{localStorage.setItem(favStoreKey,JSON.stringify(favState));}catch(err){} }
+      // 同步按鈕狀態
+      const db=prob.querySelector(".done-btn"); if(db){ db.classList.add("on"); db.textContent="☑ 做過"; }
+      const favBtn=prob.querySelector(".fav"); if(favBtn && !isRight){ favBtn.classList.add("on"); favBtn.textContent="★ 已收藏"; }
+      // 直接展開解答
+      const ans=prob.querySelector(".ans"); if(ans) ans.style.display="block";
+    });
+  });
+
+  // 術語點擊（文內：課文名詞＋專有名詞都可開知識卡）
+  c.querySelectorAll(".term,.proper").forEach(t=>{
+    if(!t.dataset.term)return;
+    t.addEventListener("click",e=>{e.stopPropagation();openTerm(t.dataset.term);});
+  });
+  // 方法學習卡打勾（學會標記，存本機；學會＝刪除線＋黯淡）
+  const mcKey="ma_mc_learned_v1";
+  let mcState={};try{mcState=JSON.parse(localStorage.getItem(mcKey)||"{}")}catch(e){}
+  c.querySelectorAll(".method-card input[type=checkbox]").forEach(cb=>{
+    const k=cb.dataset.mc;
+    const card=cb.closest(".method-card");
+    const apply=()=>card.classList.toggle("learned",cb.checked);
+    cb.checked=!!mcState[k];
+    apply();
+    cb.addEventListener("change",()=>{mcState[k]=cb.checked;localStorage.setItem(mcKey,JSON.stringify(mcState));apply();refreshProgress(n);});
+  });
+  // 套用已存高亮
+  applyHighlights();
+}
+
+function toggleSec(head){
+  const sec=head.parentElement;
+  sec.classList.toggle("open");
+}
+function toggleAns(btn){
+  const ans=btn.nextElementSibling;
+  ans.classList.toggle("show");
+  btn.textContent=ans.classList.contains("show")?"隱藏答案":"顯示答案";
+}
+
+/* ===== 術語模態 ===== */
+const PROPER_TERMS=new Set(["Kaplan","Norton","Hayes-Wheelwright","IMA","CMA","CGMA","Sarbanes-Oxley","Enron","Arthur Andersen","Volkswagen"]);
+const PROPER_ZH=["卡普蘭","諾頓","海斯—惠爾賴特","IMA","管理會計師","沙賓法案","安隆","安達信","福斯"];
+function decorateDef(text){
+  let h=esc(text);
+  PROPER_ZH.forEach(n=>{if(n)h=h.split(n).join('<span class="proper">'+n+'</span>');});
+  return h;
+}
+function openTerm(key){
+  const t=TERMS[key];
+  if(!t){toast("暫無此術語資料");return;}
+  const enEl=document.getElementById("termModalEn");
+  const zhEl=document.getElementById("termModalZh");
+  const defEl=document.getElementById("termModalDef");
+  const proper=PROPER_TERMS.has(key);
+  enEl.textContent=t[0];
+  enEl.classList.toggle("proper",proper);
+  zhEl.textContent=t[1];
+  zhEl.classList.toggle("proper",proper);
+  defEl.innerHTML=decorateDef(t[2]);
+  const m=document.getElementById("termModal");
+  m.style.display="flex";
+}
+function closeTerm(){document.getElementById("termModal").style.display="none";}
+
+const CH4_SECTIONS = [
+{
+  id:"4.1", title:"分批 vs 分步成本制",
+  body:`
+  <p><b>分步成本制</b>（<span class="term" data-term="Process costing">process costing</span>）用於大量、近同質產品的生產（連續流程）；<b>分批成本制</b>（<span class="term" data-term="Job-order costing">job-order costing</span>）用於小量、異質產品。兩者目的相同：累積成本並分配至單位產品。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
+    <thead><tr><th></th><th>分批成本制</th><th>分步成本制</th></tr></thead>
+    <tbody>
+      <tr><td>產品</td><td>小量、異質</td><td>大量、近同質</td></tr>
+      <tr><td>成本歸屬</td><td>各批分開累積</td><td>依部門/作業累積後平均分配</td></tr>
+      <tr><td>單位成本</td><td>批次總成本 ÷ 該批數量</td><td>部門總成本 ÷ 約當產量</td></tr>
+      <tr><td>例子</td><td>印刷、家具、電影</td><td>煉油、化工、食品、晶片</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：能判斷哪種產品用分批或分步成本制。分步成本制是「部門」為中心。</div>`
+},
+{
+  id:"4.2", title:"約當產量（Equivalent Units）",
+  body:`
+  <p><span class="term" data-term="Equivalent unit">約當產量（equivalent unit）</span>＝將部分完成的產品換算為完整完成之等值單位數。</p>
+  <div class="formula"><span class="f-label">約當產量</span>約當產量 ＝ 完工並轉出單位 ＋（期末在製品單位 × 完工百分比）</div>
+  <p>直接原料與轉換成本（<span class="term" data-term="Conversion costs">conversion</span>，直接人工＋製造費用）的完工百分比常不同，須分開計算約當產量。</p>
+  <div class="method-card mc-title" data-mc="equnit">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-1" data-mc="equnit"><label for="mc-ch4-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">約當產量計算</div>
+    <div class="mc-body">
+      <div class="mc-formula">直接材料約當產量、轉換成本約當產量分開算</div>
+      <div class="mc-detail">期末在製品：直接材料 100% 完成、轉換 60% 完成，則分別以 100% 與 60% 計入約當產量。</div>
+      <div class="mc-ex">例子：60,000 完工 + 5,000 在製品（材料100%、轉換60%）→ 材料約當 65,000、轉換約當 63,000。</div>
+    </div>
+  </div>`
+},
+{
+  id:"4.3", title:"加權平均法（Weighted-Average Method）",
+  body:`
+  <p><span class="term" data-term="Weighted-average method">加權平均法</span>將<b>期初在製品成本</b>與<b>當期發生成本</b>合併平均，計算每約當單位成本，不區分成本發生於何時。</p>
+  <div class="method-card mc-title" data-mc="wa">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-2" data-mc="wa"><label for="mc-ch4-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">加權平均四步驟</div>
+    <div class="mc-body">
+      <div class="mc-formula">① 分析實體單位流動 → ② 算約當產量 → ③ 算每約當單位成本 → ④ 分析部門總成本</div>
+      <div class="mc-detail">每約當單位成本＝(期初在製品成本＋當期成本) ÷ 當期約當產量。最後將總成本分配至「完工轉出」與「期末在製品」。</div>
+      <div class="mc-ex">例子：材料 $195,000÷65,000=$3.00；轉換 $283,500÷63,000=$4.50；總 $7.50。完工 60,000×$7.50=$450,000。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：加權平均法不單獨追蹤期初在製品，直接合併平均。與 FIFO 法的差異在期初在製品處理。</div>`
+},
+{
+  id:"4.4", title:"部門生產報告與成本流動",
+  body:`
+  <p><span class="term" data-term="Departmental production report">部門生產報告</span>（departmental production report）彙總部門的實體單位流動、約當產量、每約當單位成本與總成本分配。</p>
+  <p>分步成本制的分錄與分批制相似，但常依部門設 WIP 帳戶。移入後續部門時借記該部門 WIP；出售時借記 COGS。</p>
+  <p><b>移入成本</b>（<span class="term" data-term="Transferred-in costs">transferred-in costs</span>）＝前一部門移入的成本，於後續部門視為已發生之成本。</p>
+  <div class="warn">考試重點：分步成本制可用「順序生產部門」；移入成本要計入後續部門的每約當單位成本。</div>`
+},
+{
+  id:"4.5", title:"作業成本制（Operation Costing）",
+  body:`
+  <p><span class="term" data-term="Operation costing">作業成本制</span>（operation costing）＝<b>分批與分步的混合</b>（<span class="term" data-term="Hybrid product-costing system">hybrid</span>），用於：<b>轉換作業各產品線相似、但直接原料差異大</b>的批量生產。</p>
+  <ul>
+    <li><b>直接原料</b>：以分批（job-order）方式追蹤至各批（各批直接原料不同）</li>
+    <li><b>轉換成本</b>（直接人工＋製造費用）：以分步（process）方式，依部門、用預定分攤率分攤</li>
+  </ul>
+  <div class="method-card mc-title" data-mc="opcost">
+    <div class="mc-check"><input type="checkbox" id="mc-ch4-3" data-mc="opcost"><label for="mc-ch4-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">作業成本制</div>
+    <div class="mc-body">
+      <div class="mc-formula">直接原料用分批法、轉換成本用分步法</div>
+      <div class="mc-detail">轉換成本預定分攤率＝預算轉換成本 ÷ 預算成本動因量。</div>
+      <div class="mc-ex">例子：MVP 專業籃球：直接原料$20 + 準備$7.50 + 完工$6 + 包裝$0.50 = $34/顆。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：作業成本制是混合制度；「直接原料差異大、轉換相似」為其適用條件。</div>`
+},
+];
+const CH4_PROBLEMS = [
+{
+  q:"下列何者最適合使用「分步成本制（process costing）」？",
+  opts:["(A) 訂製住宅營造商","(B) 煉油廠","(C) 廣告公司","(D) 訂製家具店"],
+  ans:"<b>(B) 煉油廠。</b><ul><li>分步成本制用於大量、近同質產品的連續流程（煉油、化工、食品、晶片）</li><li>訂製住宅、廣告、訂製家具屬小量異質，用分批成本制</li></ul>"
+},
+{
+  q:"約當產量（equivalent units）的意義是？",
+  opts:["(A) 實際完工的成品數量","(B) 將部分完成的產品換算為完整完成的等值單位數","(C) 期末存貨數量","(D) 期初在製品數量"],
+  ans:"<b>(B) 將部分完成的產品換算為完整完成的等值單位數。</b><ul><li>約當產量讓未完成品能與完成品合併計算單位成本</li><li>直接材料與轉換成本因完工%不同須分開計算</li></ul>"
+},
+{
+  q:"某部門期末有 5,000 單位在製品：直接材料 100% 完成、轉換成本 60% 完成；當期完工轉出 60,000 單位。則「轉換成本」約當產量為？",
+  opts:["(A) 65,000","(B) 63,000","(C) 60,000","(D) 5,000"],
+  ans:"<b>(B) 63,000。</b><ul><li>轉換約當產量＝60,000＋(5,000×60%)＝60,000＋3,000＝63,000</li><li>直接材料約當產量＝60,000＋(5,000×100%)＝65,000</li></ul>"
+},
+{
+  q:"加權平均法下，部門材料總成本 $195,000、材料約當產量 65,000；轉換總成本 $283,500、轉換約當產量 63,000。則每單位總成本為？",
+  opts:["(A) $7.50","(B) $3.00","(C) $4.50","(D) $6.00"],
+  ans:"<b>(A) $7.50。</b><ul><li>材料每單位＝$195,000÷65,000=$3.00；轉換＝$283,500÷63,000=$4.50</li><li>總每單位＝$3.00＋$4.50＝$7.50</li></ul>"
+},
+{
+  q:"加權平均法下，若完工轉出 60,000 單位、每單位 $7.50，則「完工轉出成本」為？",
+  opts:["(A) $450,000","(B) $480,000","(C) $195,000","(D) $283,500"],
+  ans:"<b>(A) $450,000。</b><ul><li>完工轉出成本＝60,000 × $7.50＝$450,000</li><li>期末在製品成本則以期末約當產量 × 每單位成本計算</li></ul>"
+},
+{
+  q:"「作業成本制（operation costing）」的適用條件是？",
+  opts:["(A) 直接原料與轉換作業各產品線都相同","(B) 直接原料差異大、但轉換作業各產品線相似","(C) 產品完全異質","(D) 大量同質標準化產品"],
+  ans:"<b>(B) 直接原料差異大、但轉換作業各產品線相似。</b><ul><li>作業成本制是分批＋分步混合：直接原料用分批、轉換成本用分步</li><li>(A) 轉換相似但原料須差異大；(C) 用分批；(D) 用分步</li></ul>"
+},
+{
+  q:"「移入成本（transferred-in costs）」指的是？",
+  opts:["(A) 期初在製品成本","(B) 前一部門移入後續部門的成本","(C) 直接原料成本","(D) 銷售費用"],
+  ans:"<b>(B) 前一部門移入後續部門的成本。</b><ul><li>順序生產部門中，前一部門完工的成本移入後續部門 WIP</li><li>移入成本須計入後續部門的每約當單位成本</li></ul>"
+},
+{
+  q:"部門生產報告（departmental production report）的四個步驟依序為？",
+  opts:["(A) 實體流動→約當產量→每單位成本→總成本分析","(B) 總成本→每單位成本→約當產量→實體流動","(C) 約當產量→實體流動→總成本→每單位成本","(D) 每單位成本→約當產量→實體流動→總成本"],
+  ans:"<b>(A) 實體流動→約當產量→每單位成本→總成本分析。</b><ul><li>四步驟：①分析實體單位流動②算約當產量③算每約當單位成本④分析總成本</li><li>加權平均法每單位成本是期初在製品＋當期成本之加權平均</li></ul>"
+},
+{
+  q:"加權平均法與 FIFO 法的主要差異在於？",
+  opts:["(A) 兩者完全相同","(B) 加權平均法將期初在製品成本與當期成本合併平均，FIFO 法分開處理","(C) FIFO 法不考慮完工百分比","(D) 加權平均法只用當期成本"],
+  ans:"<b>(B) 加權平均法將期初在製品成本與當期成本合併平均，FIFO 法分開處理。</b><ul><li>加權平均法不區分成本發生時點，直接合併平均</li><li>FIFO 法單獨追蹤期初在製品</li></ul>"
+},
+{
+  q:"分步成本制下，部門的「轉換成本（conversion costs）」包含？",
+  opts:["(A) 直接原料＋直接人工","(B) 直接人工＋製造費用","(C) 直接原料＋製造費用","(D) 僅直接人工"],
+  ans:"<b>(B) 直接人工＋製造費用。</b><ul><li>轉換成本＝將原料「轉換」為成品的成本＝直接人工＋製造費用</li><li>在分步成本制中常合併為單一成本類別計算約當產量</li></ul>"
+},
+];
+
+const CH5_SECTIONS = [
+{
+  id:"5.1", title:"傳統數量基礎成本制 vs ABC",
+  body:`
+  <p><b>傳統、數量基礎成本制</b>（<span class="term" data-term="Volume-based (or throughput-based) costing system">volume-based costing</span>）以<b>單一數量基礎成本動因</b>（如直接人工小時、機器小時）分攤全部製造費用。</p>
+  <p><b>作業基礎成本制</b>（<span class="term" data-term="Activity-based costing (ABC)">ABC</span>）將成本先累積於<b>作業成本庫</b>（activity cost pool），再依各成本庫的成本動因分配到成本標的（產品、服務、產品線、顧客）。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:30%"><col style="width:35%"><col style="width:35%"></colgroup>
+    <thead><tr><th></th><th>傳統成本制</th><th>ABC</th></tr></thead>
+    <tbody>
+      <tr><td>成本動因</td><td>單一、數量基礎</td><td>多個、依活動</td></tr>
+      <tr><td>分攤方式</td><td>全廠/部門單一分攤率</td><td>多成本庫、多分攤率</td></tr>
+      <tr><td>精確度</td><td>可能扭曲產品成本</td><td>較能反映資源消耗</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：ABC 用「兩階段」程序（第一階段分資源到活動成本庫、第二階段分成本庫到成本標的）；傳統制用單一分攤率。</div>`
+},
+{
+  id:"5.2", title:"成本階層（Cost Hierarchy）",
+  body:`
+  <p><span class="term" data-term="Cost hierarchy">成本階層</span>（LO5-3）將活動依其與產量之關係分四層：</p>
+  <ul>
+    <li><b>單位層級</b>（<span class="term" data-term="Unit-level activity">unit-level</span>）：每生產一單位發生一次，如直接材料、直接人工、機器運轉</li>
+    <li><b>批次層級</b>（<span class="term" data-term="Batch-level activity">batch-level</span>）：每生產一批發生一次，如機器整備（setup）、檢驗</li>
+    <li><b>產品維續層級</b>（<span class="term" data-term="Product-sustaining-level activity">product-sustaining</span>）：每產品線一次，如工程設計、產品測試</li>
+    <li><b>廠房層級</b>（<span class="term" data-term="Facility-(or general-operations) level activity">facility</span>）：維持整體廠房運作，如廠房租金、廠長薪資、工廠保險</li>
+  </ul>
+  <div class="warn">考試重點：能判斷某活動屬哪一層級。廠房層級成本最難歸屬，傳統制常扭曲之。</div>`
+},
+{
+  id:"5.3", title:"傳統 vs ABC：成本扭曲的原因",
+  body:`
+  <p>傳統數量基礎制易扭曲產品成本，原因有二（LO5-5）：</p>
+  <ul>
+    <li><b>產品線多樣性</b>（product-line diversity）：不同產品耗用支援活動比例不同</li>
+    <li><b>非單位層級成本</b>（non-unit-level costs）：如整備、設計等成本與產量不成比例</li>
+  </ul>
+  <div class="method-card mc-title" data-mc="abc-distortion">
+    <div class="mc-check"><input type="checkbox" id="mc-ch5-1" data-mc="abc-distortion"><label for="mc-ch5-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">成本扭曲</div>
+    <div class="mc-body">
+      <div class="mc-formula">無單一成本動因能捕捉產品與支援活動的複雜關係</div>
+      <div class="mc-detail">高產量、低複雜度的產品常被傳統制<b>高估</b>成本；小量、高複雜度產品常被<b>低估</b>。</div>
+      <div class="mc-ex">例子：Edgeworth Box 中兩張訂單（Box C52 20,000 單位 vs Box W29 10,000 單位）耗用支援服務比例不同，傳統制無法反映。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：低產量/高複雜度產品在傳統制下成本被低估（利潤被高估）；高產量/標準化產品被高估。這是 ABC 的價值所在。</div>`
+},
+{
+  id:"5.4", title:"ABC 成本分攤計算",
+  body:`
+  <div class="method-card mc-title" data-mc="abc-calc">
+    <div class="mc-check"><input type="checkbox" id="mc-ch5-2" data-mc="abc-calc"><label for="mc-ch5-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">ABC 兩階段計算</div>
+    <div class="mc-body">
+      <div class="mc-formula">Pool rate ＝ 成本庫總成本 ÷ 成本動因量；分攤 ＝ pool rate × 實際動因量</div>
+      <div class="mc-detail">每一成本庫選一個成本動因（如採購以原料成本%、設計以設計小時、整備以生產批數、機器以機器小時）。</div>
+      <div class="mc-ex">例子：整備$70/run×2run=$140；機器$3/hrs×24=$72。產品成本＝直接原料＋直接人工＋所有分攤之overhead。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：能算每個成本庫的分攤額並加總為產品 overhead。成本動因三準則：相關性、衡量成本、行為效果（LO5-6）。</div>`
+},
+{
+  id:"5.5", title:"顧客獲利能力分析與 TDABC",
+  body:`
+  <p><b>顧客獲利能力分析</b>（<span class="term" data-term="Customer-profitability analysis">customer-profitability analysis</span>）＝應用 ABC 判斷顧客相關成本的成本動因，評估各主要顧客關係的獲利能力（LO5-9）。</p>
+  <p><b>作業基礎管理</b>（<span class="term" data-term="Activity-based management (ABM)">ABM</span>）＝運用 ABC 資訊改善營運、消除非附加價值成本（LO5-8）。</p>
+  <p><b>時間驅動作業基礎成本制</b>（<span class="term" data-term="Time-driven activity-based costing (TDABC)">TDABC</span>）＝ABC 在服務業之變體：活動實務產能與成本動因量皆以<b>時間</b>衡量（LO5-10）。</p>
+  <div class="warn">考試重點：TDABC 用時間衡量產能與動因；ABM 用 ABC 資訊改善營運、消除非附加價值成本。</div>`
+},
+];
+const CH5_PROBLEMS = [
+{
+  q:"ABC 系統的第一階段程序是？",
+  opts:["(A) 將成本動因量分配到產品","(B) 將資源成本辨識並分配到作業成本庫","(C) 計算銷貨成本","(D) 設定全廠分攤率"],
+  ans:"<b>(B) 將資源成本辨識並分配到作業成本庫。</b><ul><li>第一階段：資源成本分入活動成本庫</li><li>第二階段：各成本庫以成本動因分配到成本標的</li></ul>"
+},
+{
+  q:"「機器整備（machine setup）」的成本最可能屬於哪一成本階層？",
+  opts:["(A) 單位層級","(B) 批次層級","(C) 產品維續層級","(D) 廠房層級"],
+  ans:"<b>(B) 批次層級。</b><ul><li>每生產一批發生一次整備（setup），與批數有關而非單位數</li><li>單位層級如直接材料；產品維續如設計；廠房如租金</li></ul>"
+},
+{
+  q:"下列何者屬於「廠房層級（facility-level）」成本？",
+  opts:["(A) 機器運轉耗電","(B) 廠房租金","(C) 產品測試","(D) 機器整備"],
+  ans:"<b>(B) 廠房租金。</b><ul><li>廠房層級＝維持整體廠房運作之成本（租金、廠長薪資、工廠保險）</li><li>機器耗電單位層級、測試產品維續、整備批次層級</li></ul>"
+},
+{
+  q:"傳統數量基礎成本制易「扭曲產品成本」，主要是因為哪兩個因素？",
+  opts:["(A) 產品線多樣性與非單位層級成本","(B) 直接材料價格波動","(C) 人工薪資上升","(D) 存貨過多"],
+  ans:"<b>(A) 產品線多樣性與非單位層級成本。</b><ul><li>單一數量動因無法捕捉產品與支援活動的複雜關係</li><li>非單位層級成本（整備、設計）與產量不成比例</li></ul>"
+},
+{
+  q:"ABC 下，若整備成本庫總成本 $70,000、預算生產批數 1,000，某訂單用 2 批，則其整備分攤額為？",
+  opts:["(A) $140","(B) $70","(C) $1,400","(D) $700"],
+  ans:"<b>(A) $140。</b><ul><li>Pool rate＝$70,000÷1,000=$70/批</li><li>分攤＝$70×2=$140</li></ul>"
+},
+{
+  q:"「作業基礎管理（ABM）」的主要目標是？",
+  opts:["(A) 只計算稅額","(B) 運用 ABC 資訊改善營運、消除非附加價值成本","(C) 只服務外部稽核","(D) 設定售價"],
+  ans:"<b>(B) 運用 ABC 資訊改善營運、消除非附加價值成本。</b><ul><li>ABM 是 ABC 資訊的使用者，聚焦流程改善</li><li>非附加價值成本：可消除而不損害品質/績效/價值之成本</li></ul>"
+},
+{
+  q:"時間驅動作業基礎成本制（TDABC）的特色是？",
+  opts:["(A) 只用機器小時","(B) 活動實務產能與成本動因量皆以時間衡量","(C) 不使用成本庫","(D) 只適用製造業"],
+  ans:"<b>(B) 活動實務產能與成本動因量皆以時間衡量。</b><ul><li>TDABC 是 ABC 的服務業變體</li><li>產能與動因皆以時間單位衡量</li></ul>"
+},
+{
+  q:"顧客獲利能力分析（customer-profitability analysis）是下列何者的應用？",
+  opts:["(A) 分批成本制","(B) 作業基礎管理（ABM）","(C) 分步成本制","(D) 標準成本制"],
+  ans:"<b>(B) 作業基礎管理（ABM）。</b><ul><li>顧客獲利能力分析以 ABC 判斷顧客相關成本動因，評估顧客獲利</li><li>是 ABM 的一種應用（LO5-9）</li></ul>"
+},
+{
+  q:"選擇成本動因的三個準則是？（LO5-6）",
+  opts:["(A) 相關性、衡量成本、行為效果","(B) 價格、數量、品質","(C) 時間、地點、人員","(D) 直接、間接、固定"],
+  ans:"<b>(A) 相關性、衡量成本、行為效果。</b><ul><li>①動因與成本庫成本發生之相關程度②衡量成本③可能導致的行為效果</li></ul>"
+},
+{
+  q:"ABC 下，某產品直接原料 $40,000＋各種 overhead 分攤 $8,496，共 20,000 單位。其每單位 overhead 成本為？",
+  opts:["(A) $0.4248","(B) $0.79","(C) $2.00","(D) $0.10"],
+  ans:"<b>(A) $0.4248。</b><ul><li>每單位 overhead＝$8,496÷20,000＝$0.4248</li><li>ABC 使小量、高複雜度產品每單位 overhead 高於大量標準品</li></ul>"
+},
+];
+
+const CH6_SECTIONS = [
+{
+  id:"6.1", title:"成本行為、估計與預測",
+  body:`
+  <p><b>成本估計</b>（cost estimation）＝估計成本與成本動因之間的關係；<b>成本行為</b>（<span class="term" data-term="Cost behavior">cost behavior</span>）＝成本隨動因改變的反應方式；<b>成本預測</b>（cost prediction）＝用估計的成本行為預測未來成本（LO6-1）。</p>
+  <div class="method-card mc-title" data-mc="costfun">
+    <div class="mc-check"><input type="checkbox" id="mc-ch6-1" data-mc="costfun"><label for="mc-ch6-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">成本函數</div>
+    <div class="mc-body">
+      <div class="mc-formula">Y ＝ a ＋ bX</div>
+      <div class="mc-detail">Y＝總成本；a＝固定成本（截距）；b＝每單位變動成本（斜率）；X＝成本動因量。</div>
+      <div class="mc-ex">例子：Y＝$20,000＋$5X，若生產 3,000 單位，總成本＝$20,000＋$15,000＝$35,000。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：成本函數 Y=a+bX 是成本行為的數學基礎，固定+變動構成總成本。</div>`
+},
+{
+  id:"6.2", title:"變動成本與固定成本",
+  body:`
+  <p><b>變動成本</b>（<span class="term" data-term="Variable cost">variable cost</span>）＝隨動因量<b>成比例</b>改變之成本（每單位固定，總額隨量變）。</p>
+  <p><b>固定成本</b>（<span class="term" data-term="Fixed cost">fixed cost</span>）＝在一定攸關範圍（<span class="term" data-term="Relevant range">relevant range</span>）內，不隨動因量改變之成本（總額固定，每單位隨量變而下降）。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:28%"><col style="width:36%"><col style="width:36%"></colgroup>
+    <thead><tr><th></th><th>變動成本</th><th>固定成本</th></tr></thead>
+    <tbody>
+      <tr><td>每單位成本</td><td>固定不變</td><td>隨產量增加而下降</td></tr>
+      <tr><td>總成本</td><td>隨產量成比例增加</td><td>在攸關範圍內不變</td></tr>
+      <tr><td>例子</td><td>直接材料、直接人工</td><td>廠房租金、廠長薪資</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：區分「總額」與「每單位」觀點。固定成本每單位隨量下降，變動成本每單位不變。</div>`
+},
+{
+  id:"6.3", title:"成本估計方法",
+  body:`
+  <div class="method-card mc-title" data-mc="est">
+    <div class="mc-check"><input type="checkbox" id="mc-ch6-2" data-mc="est"><label for="mc-ch6-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">成本估計法</div>
+    <div class="mc-body">
+      <div class="mc-formula">工程估計法、帳戶分析法、高低點法、視覺比繪法、最小平方法（迴歸）</div>
+      <div class="mc-detail">
+        <ul>
+          <li><b>工程估計法</b>：由工程師依實際作業分析</li>
+          <li><b>帳戶分析法</b>：依會計帳戶逐一分類固定/變動</li>
+          <li><b>高低點法</b>：用最高與最低產量兩點求斜率</li>
+          <li><b>最小平方法</b>（迴歸）：統計上最佳擬合</li>
+        </ul>
+      </div>
+      <div class="mc-ex">高低點法：最高點（產量8,000、成本$50,000）與最低點（2,000、$26,000）→ b＝($50,000-$26,000)/(8,000-2,000)=$4；a＝$50,000-$4×8,000=$18,000。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：高低點法只取兩點，易受極端值影響；迴歸（最小平方法）最準。</div>`
+},
+{
+  id:"6.4", title:"學習曲線與其他成本行為",
+  body:`
+  <p><b>學習曲線</b>（<span class="term" data-term="Learning-curve phenomenon">learning curve</span>）＝隨累積產量增加，每單位投入時間（成本）以固定比率下降的現象，常見於人工密集作業。</p>
+  <p>其他成本行為型態：階梯式成本（stepped costs，如額外監工人員）、曲線式成本（curvilinear costs，如學習曲線、經濟規模）。</p>
+  <div class="warn">考試重點：學習曲線反映「累積經驗→單位成本下降」；是預測人工成本的重要工具。</div>`
+},
+{
+  id:"6.5", title:"成本動因與實務產能",
+  body:`
+  <p><b>成本動因</b>（<span class="term" data-term="Cost driver">cost driver</span>）＝驅動成本變動之因素。管理者需區分<span class="term" data-term="Unit-level cost driver">單位層級動因</span>與<span class="term" data-term="Non-unit-level cost driver">非單位層級動因</span>。</p>
+  <p>實務產能相關：<span class="term" data-term="Practical capacity">實務產能</span>（practical capacity）＝考量正常中斷後之最大可達產能；單位成本計算可區分「使用之資源成本」與「未使用之資源成本」。</p>
+  <div class="warn">考試重點：能區分單位與非單位成本動因；成本函數的動因選擇影響估計品質。</div>`
+},
+];
+const CH6_PROBLEMS = [
+{
+  q:"成本函數 Y＝a＋bX 中，b 代表？",
+  opts:["(A) 固定成本","(B) 每單位變動成本（斜率）","(C) 總成本","(D) 成本動因量"],
+  ans:"<b>(B) 每單位變動成本（斜率）。</b><ul><li>Y＝a＋bX：a 固定成本、b 每單位變動成本、X 動因量</li><li>總成本＝固定＋變動</li></ul>"
+},
+{
+  q:"下列何者屬於「固定成本」？",
+  opts:["(A) 直接材料","(B) 廠房租金","(C) 直接人工","(D) 銷售佣金"],
+  ans:"<b>(B) 廠房租金。</b><ul><li>固定成本在攸關範圍內總額不變（租金、廠長薪資）</li><li>直接材料/人工/佣金屬變動成本</li></ul>"
+},
+{
+  q:"固定成本每單位成本會如何變化？",
+  opts:["(A) 固定不變","(B) 隨產量增加而下降","(C) 隨產量增加而上升","(D) 無法預測"],
+  ans:"<b>(B) 隨產量增加而下降。</b><ul><li>總額固定，分母（產量）越大每單位越低</li><li>變動成本才是每單位固定</li></ul>"
+},
+{
+  q:"高低點法下，最高點（8,000 單位、$50,000）與最低點（2,000 單位、$26,000），則每單位變動成本 b 為？",
+  opts:["(A) $4","(B) $5","(C) $3","(D) $6"],
+  ans:"<b>(A) $4。</b><ul><li>b＝($50,000-$26,000)÷(8,000-2,000)=$24,000÷6,000=$4</li><li>a＝$50,000-$4×8,000=$18,000</li></ul>"
+},
+{
+  q:"下列哪一項成本估計方法「統計上最精確、最不受極端值影響」？",
+  opts:["(A) 高低點法","(B) 視覺比繪法","(C) 最小平方法（迴歸）","(D) 帳戶分析法"],
+  ans:"<b>(C) 最小平方法（迴歸）。</b><ul><li>迴歸用全部資料點求最佳擬合線</li><li>高低點法只用兩點，易受極端值影響</li></ul>"
+},
+{
+  q:"「學習曲線」現象指的是？",
+  opts:["(A) 產量固定時成本不變","(B) 隨累積產量增加，每單位投入時間（成本）以固定比率下降","(C) 固定成本上升","(D) 價格下降"],
+  ans:"<b>(B) 隨累積產量增加，每單位投入時間（成本）以固定比率下降。</b><ul><li>學習曲線反映經驗累積→效率提升</li><li>常見於人工密集作業的成本預測</li></ul>"
+},
+{
+  q:"「攸關範圍（relevant range）」指的是？",
+  opts:["(A) 售價的範圍","(B) 固定成本與變動成本關係成立的產量範圍","(C) 存貨範圍","(D) 利潤範圍"],
+  ans:"<b>(B) 固定成本與變動成本關係成立的產量範圍。</b><ul><li>成本行為假設只在攸關範圍內成立</li><li>超出範圍後固定成本會跳升（階梯式）</li></ul>"
+},
+{
+  q:"學習曲線下，若累積產量加倍時每單位時間降至原先的 80%，此為「多少%」的學習曲線？",
+  opts:["(A) 60%","(B) 80%","(C) 100%","(D) 120%"],
+  ans:"<b>(B) 80%。</b><ul><li>學習曲線以產量倍增時單位成本下降之比率命名</li><li>80%學習曲線＝產量加倍→單位成本為80%</li></ul>"
+},
+{
+  q:"成本行為（cost behavior）指的是？",
+  opts:["(A) 成本的會計分錄","(B) 成本隨成本動因改變的反應方式","(C) 成本的分類","(D) 成本的報表呈現"],
+  ans:"<b>(B) 成本隨成本動因改變的反應方式。</b><ul><li>成本行為描述成本如何隨動因變動</li><li>成本估計＝估計此關係；成本預測＝用之預測</li></ul>"
+},
+{
+  q:"帳戶分析法（account analysis）的做法是？",
+  opts:["(A) 只用兩點","(B) 依會計帳戶逐一分類為固定/變動","(C) 工程師實地分析","(D) 統計迴歸"],
+  ans:"<b>(B) 依會計帳戶逐一分類為固定/變動。</b><ul><li>帳戶分析法：管理/會計人員依經驗將各帳戶分類</li><li>工程估計法才是工程師實地分析</li></ul>"
+},
+];
+
+const CH7_SECTIONS = [
+{
+  id:"7.1", title:"損益兩平分析（Break-Even）",
+  body:`
+  <p><b>損益兩平點</b>（<span class="term" data-term="Break-even point">break-even point</span>）＝總收入＝總成本之產量（營業利益＝0）。</p>
+  <div class="method-card mc-title" data-mc="be">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-1" data-mc="be"><label for="mc-ch7-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">損益兩平點</div>
+    <div class="mc-body">
+      <div class="mc-formula">兩平點（單位）＝ 固定成本 ÷ 每單位邊際貢獻；邊際貢獻＝售價－單位變動成本</div>
+      <div class="mc-detail">方程式法：售價×Q－變動成本×Q－固定成本＝0。</div>
+      <div class="mc-ex">例子：售價$20、變動成本$12、固定成本$40,000 → 兩平＝$40,000÷$8=5,000 單位。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：兩平點＝固定成本÷每單位邊際貢獻。達目標利潤時分子改為「固定成本＋目標利潤」。</div>`
+},
+{
+  id:"7.2", title:"邊際貢獻率與兩平銷售額",
+  body:`
+  <div class="method-card mc-title" data-mc="cmr">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-2" data-mc="cmr"><label for="mc-ch7-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">邊際貢獻率</div>
+    <div class="mc-body">
+      <div class="mc-formula">邊際貢獻率 ＝ 邊際貢獻 ÷ 售價；兩平銷售額 ＝ 固定成本 ÷ 邊際貢獻率</div>
+      <div class="mc-detail">邊際貢獻率代表每一元銷售額對固定成本與利潤的貢獻比例。</div>
+      <div class="mc-ex">例子：售價$20、變動$12 → CM率＝$8÷$20=40%；兩平銷售額＝$40,000÷0.40=$100,000。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：能算邊際貢獻率並用之求兩平銷售額。常用於多產品與銷售組合。</div>`
+},
+{
+  id:"7.3", title:"CVP 圖與利潤圖",
+  body:`
+  <p><span class="term" data-term="CVP graph">CVP 圖</span>：橫軸數量、縱軸金額；畫出總收入線與總成本線（截距為固定成本），交點即兩平點。兩平點右側為利潤區、左側為虧損區。</p>
+  <p><span class="term" data-term="Profit-volume graph">利潤-數量圖（profit-volume graph）</span>：縱軸營業利益、橫軸數量，直線與數量軸交點即兩平點（LO7-4）。</p>
+  <div class="warn">考試重點：CVP 圖的總成本線斜率＝每單位變動成本、截距＝固定成本；能讀出兩平點與利潤區。</div>`
+},
+{
+  id:"7.4", title:"CVP 分析之運用與假設",
+  body:`
+  <p>CVP 分析可評估：固定成本變動、變動成本變動、售價變動對利潤之影響；亦可求達目標利潤之銷售量、安全邊際（<span class="term" data-term="Margin of safety">margin of safety</span>）。</p>
+  <div class="method-card mc-title" data-mc="margins">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-3" data-mc="margins"><label for="mc-ch7-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">安全邊際</div>
+    <div class="mc-body">
+      <div class="mc-formula">安全邊際 ＝ 預算/實際銷售額（量）－ 兩平銷售額（量）</div>
+      <div class="mc-detail">安全邊際衡量銷售下降多少仍不致虧損。</div>
+      <div class="mc-ex">例子：預算銷售 $120,000、兩平 $100,000 → 安全邊際＝$20,000。</div>
+    </div>
+  </div>
+  <p>CVP 假設（LO7-6）：(1)售價固定 (2)每單位變動成本固定 (3)固定成本固定（攸關範圍內）(4)銷售組合固定 (5)存貨無變動（生產＝銷售）。</p>
+  <div class="warn">考試重點：CVP 假設售價、變動成本、固定成本皆固定且銷售組合不變；違反時分析失真。</div>`
+},
+{
+  id:"7.5", title:"多產品銷售組合之兩平點",
+  body:`
+  <div class="method-card mc-title" data-mc="mix">
+    <div class="mc-check"><input type="checkbox" id="mc-ch7-4" data-mc="mix"><label for="mc-ch7-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">多產品兩平點</div>
+    <div class="mc-body">
+      <div class="mc-formula">加權平均邊際貢獻率；兩平銷售額＝固定成本÷加權平均CM率</div>
+      <div class="mc-detail">以銷售組合比例加權平均各產品邊際貢獻率，再求整體兩平銷售額。</div>
+      <div class="mc-ex">例子：產品A(CM率60%、佔60%)＋B(30%、佔40%) → 加權CM率＝0.36+0.12=48%。固定$120,000 → 兩平銷售額=$250,000。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：多產品以銷售組合權重算加權平均CM率。銷售組合改變會移動兩平點。</div>`
+},
+{
+  id:"7.6", title:"邊際貢獻式損益表",
+  body:`
+  <p><span class="term" data-term="Contribution income statement">邊際貢獻式損益表</span>（contribution income statement）將成本分為變動與固定：</p>
+  <div class="formula"><span class="f-label">CM損益表</span>銷售額 － 變動成本 ＝ 邊際貢獻；邊際貢獻 － 固定成本 ＝ 營業利益</div>
+  <p>此格式直接呼應 CVP 關係，便於內部決策；與傳統功能式損益表不同（後者將成本分為銷貨成本與期間費用）。</p>
+  <div class="warn">考試重點：邊際貢獻式損益表是 CVP 分析的基石，區分變動/固定成本。</div>`
+},
+];
+const CH7_PROBLEMS = [
+{
+  q:"售價 $20、單位變動成本 $12、固定成本 $40,000，則損益兩平點（單位）為？",
+  opts:["(A) 2,000","(B) 5,000","(C) 3,333","(D) 4,000"],
+  ans:"<b>(B) 5,000。</b><ul><li>每單位邊際貢獻＝$20-$12=$8</li><li>兩平＝$40,000÷$8=5,000 單位</li></ul>"
+},
+{
+  q:"承上題，邊際貢獻率為？",
+  opts:["(A) 60%","(B) 40%","(C) 50%","(D) 20%"],
+  ans:"<b>(B) 40%。</b><ul><li>邊際貢獻率＝$8÷$20=40%</li><li>兩平銷售額＝$40,000÷0.40=$100,000</li></ul>"
+},
+{
+  q:"若目標利潤為 $16,000，固定成本 $40,000、每單位邊際貢獻 $8，則需銷售幾單位？",
+  opts:["(A) 5,000","(B) 7,000","(C) 6,000","(D) 8,000"],
+  ans:"<b>(B) 7,000。</b><ul><li>達目標利潤銷售量＝(固定成本＋目標利潤)÷每單位CM</li><li>＝($40,000+$16,000)÷$8=7,000 單位</li></ul>"
+},
+{
+  q:"安全邊際（margin of safety）的意義是？",
+  opts:["(A) 固定成本與變動成本之差","(B) 預算銷售額超過兩平銷售額之金額","(C) 售價與成本之差","(D) 存貨數量"],
+  ans:"<b>(B) 預算銷售額超過兩平銷售額之金額。</b><ul><li>安全邊際＝預算銷售（量/額）－兩平銷售（量/額）</li><li>衡量銷售下降多少仍不致虧損</li></ul>"
+},
+{
+  q:"CVP 分析的主要假設「不包括」下列何者？",
+  opts:["(A) 售價固定","(B) 每單位變動成本固定","(C) 固定成本固定","(D) 存貨不斷累積"],
+  ans:"<b>(D) 存貨不斷累積。</b><ul><li>CVP 假設存貨無變動（生產＝銷售）</li><li>售價、單位變動成本、固定成本、銷售組合皆假設固定</li></ul>"
+},
+{
+  q:"多產品兩平點需使用何種邊際貢獻率？",
+  opts:["(A) 任一產品的","(B) 加權平均邊際貢獻率","(C) 最高產品的","(D) 最低產品的"],
+  ans:"<b>(B) 加權平均邊際貢獻率。</b><ul><li>以銷售組合比例加權平均各產品CM率</li><li>兩平銷售額＝固定成本÷加權平均CM率</li></ul>"
+},
+{
+  q:"邊際貢獻式損益表將成本分為？",
+  opts:["(A) 銷貨成本與期間費用","(B) 變動成本與固定成本","(C) 直接與間接","(D) 生產與銷售"],
+  ans:"<b>(B) 變動成本與固定成本。</b><ul><li>CM損益表：銷售額－變動成本＝邊際貢獻；－固定成本＝營業利益</li><li>呼應CVP關係，利於內部決策</li></ul>"
+},
+{
+  q:"CVP 圖中，總成本線的「截距」代表？",
+  opts:["(A) 每單位變動成本","(B) 固定成本","(C) 售價","(D) 邊際貢獻"],
+  ans:"<b>(B) 固定成本。</b><ul><li>總成本線截距＝固定成本、斜率＝每單位變動成本</li><li>與總收入線交點即兩平點</li></ul>"
+},
+{
+  q:"邊際貢獻（contribution margin）的定義是？",
+  opts:["(A) 售價－固定成本","(B) 售價－單位變動成本","(C) 銷售額－固定成本","(D) 營業利益"],
+  ans:"<b>(B) 售價－單位變動成本。</b><ul><li>邊際貢獻＝售價減變動成本，用於支應固定成本並形成利潤</li><li>是 CVP 分析的核心</li></ul>"
+},
+{
+  q:"售價$20、變動成本$12、固定成本$40,000，達目標利潤 $16,000 需銷售 $? 銷售額？",
+  opts:["(A) $140,000","(B) $100,000","(C) $120,000","(D) $80,000"],
+  ans:"<b>(A) $140,000。</b><ul><li>銷售量=(40,000+16,000)÷8=7,000；銷售額＝7,000×$20=$140,000</li><li>或＝($40,000+$16,000)÷0.40=$140,000</li></ul>"
+},
+];
+
+const CH8_SECTIONS = [
+{
+  id:"8.1", title:"吸收成本法 vs 變動成本法",
+  body:`
+  <p><b>吸收成本法</b>（<span class="term" data-term="Absorption costing">absorption costing</span>）＝<b>全部成本法</b>，將固定製造費用也納入產品成本（存貨吸收所有製造成本），為 GAAP/外部報導所要求。</p>
+  <p><b>變動成本法</b>（<span class="term" data-term="Variable costing">variable costing</span>）＝<b>直接成本法</b>，僅將變動製造成本（直接材料、直接人工、變動製造費用）計入產品成本；<b>固定製造費用視為期間成本</b>。</p>
+  <div class="tblwrap"><table><colgroup><col style="width:32%"><col style="width:34%"><col style="width:34%"></colgroup>
+    <thead><tr><th>製造費用</th><th>吸收成本法</th><th>變動成本法</th></tr></thead>
+    <tbody>
+      <tr><td>變動製造費用</td><td>產品成本</td><td>產品成本</td></tr>
+      <tr><td>固定製造費用</td><td>產品成本（存貨）</td><td>期間成本（當期費用）</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">考試重點：唯一差異是<b>固定製造費用</b>的處理。吸收法計入存貨、變動法計入期間費用。</div>`
+},
+{
+  id:"8.2", title:"兩種成本法的損益表",
+  body:`
+  <div class="method-card mc-title" data-mc="absvar">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-1" data-mc="absvar"><label for="mc-ch8-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">吸收 vs 變動損益表</div>
+    <div class="mc-body">
+      <div class="mc-formula">變動法：銷售額－變動銷貨成本－變動銷管費用＝邊際貢獻；－固定成本＝營業利益</div>
+      <div class="mc-detail">吸收法：銷售額－銷貨成本（含固定製造費用）＝毛利；－銷管費用＝營業利益。</div>
+      <div class="mc-ex">當生產＞銷售（存貨增加）：吸收法營業利益較高（固定製造費用遞延於存貨）。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：當期初/期末存貨變動時，兩種方法營業利益不同；存貨增加→吸收法較高。</div>`
+},
+{
+  id:"8.3", title:"兩法營業利益的調節（Reconciliation）",
+  body:`
+  <div class="method-card mc-title" data-mc="recon">
+    <div class="mc-check"><input type="checkbox" id="mc-ch8-2" data-mc="recon"><label for="mc-ch8-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">營業利益調節</div>
+    <div class="mc-body">
+      <div class="mc-formula">吸收法營業利益 － 變動法營業利益 ＝ 固定製造費用率 ×（期末存貨單位－期初存貨單位）</div>
+      <div class="mc-detail">存貨增加（生產＞銷售）時，吸收法多遞延固定製造費用，營業利益較高。</div>
+      <div class="mc-ex">例子：固定製造費用率$10/單位，期末存貨較期初多 3,000 單位 → 吸收法高 $30,000。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：吸收法－變動法＝固定製造費用率×(期末存貨−期初存貨)。存貨變動方向決定差異。</div>`
+},
+{
+  id:"8.4", title:"變動成本法的優缺點與 CVP",
+  body:`
+  <ul>
+    <li><b>優點</b>：與 CVP 分析一致（區分變動/固定），利潤不受存貨增減影響，利於內部決策</li>
+    <li><b>缺點</b>：不符合 GAAP（外部報導需吸收法）、需同時兩套成本歸集</li>
+  </ul>
+  <p><b>CVP 意涵（LO8-5）</b>：變動成本法下，營業利益與銷售量同向變動，不受生產與銷售差異干擾；吸收法下若生產大於銷售，即使銷售下滑利潤仍可能上升。</p>
+  <div class="warn">考試重點：吸收法下「生產過剩」可虛增利潤（遞延固定製造費用）；變動成本法無此現象。</div>`
+},
+{
+  id:"8.5", title:"品質成本與 ESG",
+  body:`
+  <p><b>品質成本報告</b>（quality-cost report）追蹤四類品質成本：<b>預防成本</b>（prevention）、<b>鑑定成本</b>（appraisal）、<b>內部失敗成本</b>（internal failure）、<b>外部失敗成本</b>（external failure）。</p>
+  <p><b>ESG 結果與成本</b>：企業衡量環境（Environmental）、社會（Social）、治理（Governance）相關成本與成果，並管理其對績效之影響（LO8-9）。</p>
+  <div class="warn">考試重點：品質四類成本能分類；最理想是投資於預防成本以降低失敗成本。</div>`
+},
+];
+const CH8_PROBLEMS = [
+{
+  q:"吸收成本法與變動成本法唯一的差異在於如何處理？",
+  opts:["(A) 直接材料","(B) 直接人工","(C) 固定製造費用","(D) 變動製造費用"],
+  ans:"<b>(C) 固定製造費用。</b><ul><li>吸收法將固定製造費用計入產品成本（存貨）</li><li>變動法將固定製造費用視為期間成本</li></ul>"
+},
+{
+  q:"「變動成本法（variable costing）」又稱？",
+  opts:["(A) 全部成本法","(B) 直接成本法","(C) 標準成本法","(D) 分批成本法"],
+  ans:"<b>(B) 直接成本法。</b><ul><li>變動成本法只將變動製造成本計入產品</li><li>吸收成本法又稱全部成本法</li></ul>"
+},
+{
+  q:"當「生產＞銷售」（存貨增加）時，哪一方法的營業利益較高？",
+  opts:["(A) 變動成本法","(B) 吸收成本法","(C) 兩者相同","(D) 無法判斷"],
+  ans:"<b>(B) 吸收成本法。</b><ul><li>存貨增加→固定製造費用遞延於存貨，吸收法少認列費用</li><li>吸收法－變動法＝固定製造費用率×(期末存貨−期初存貨)，存貨增加故為正</li></ul>"
+},
+{
+  q:"固定製造費用率 $10/單位，期末存貨較期初多 3,000 單位，則吸收法營業利益比變動法高？",
+  opts:["(A) $30,000","(B) $3,000","(C) $10,000","(D) 相同"],
+  ans:"<b>(A) $30,000。</b><ul><li>差異＝$10×(3,000)=$30,000</li><li>存貨增加→吸收法多遞延固定製造費用</li></ul>"
+},
+{
+  q:"外部財務報導（GAAP）要求使用哪一種成本法？",
+  opts:["(A) 變動成本法","(B) 吸收成本法","(C) 皆可","(D) 標準成本法"],
+  ans:"<b>(B) 吸收成本法。</b><ul><li>吸收成本法（全部成本法）為 GAAP 外部報導所要求</li><li>變動成本法多用於內部決策與 CVP 分析</li></ul>"
+},
+{
+  q:"下列何者是變動成本法的「優點」？",
+  opts:["(A) 符合GAAP","(B) 利潤不受存貨增減影響、與CVP一致","(C) 計算簡單","(D) 外部可接受"],
+  ans:"<b>(B) 利潤不受存貨增減影響、與CVP一致。</b><ul><li>變動法區分變動/固定成本，利潤與銷售同向</li><li>缺點是不符合GAAP</li></ul>"
+},
+{
+  q:"「外部失敗成本（external failure costs）」的例子是？",
+  opts:["(A) 產品檢測","(B) 保固維修與退貨","(C) 員工訓練","(D) 製程品管"],
+  ans:"<b>(B) 保固維修與退貨。</b><ul><li>外部失敗成本：產品交到顧客後才發現瑕疵（保固、退貨、訴訟）</li><li>檢測屬鑑定成本、訓練屬預防成本</li></ul>"
+},
+{
+  q:"吸收成本法下，若「生產過剩」而銷售持平，則營業利益？",
+  opts:["(A) 下降","(B) 可能上升","(C) 不變","(D) 為零"],
+  ans:"<b>(B) 可能上升。</b><ul><li>生產過剩→更多固定製造費用遞延於存貨→當期認列費用減少</li><li>吸收法可因增產而虛增利潤</li></ul>"
+},
+{
+  q:"「預防成本（prevention costs）」指的是？",
+  opts:["(A) 檢查成品的成本","(B) 為防止瑕疵發生而投入的成本","(C) 報廢成本","(D) 保固成本"],
+  ans:"<b>(B) 為防止瑕疵發生而投入的成本。</b><ul><li>預防成本：品管設計、員工訓練、製程改善</li><li>檢查成品是鑑定成本、報廢是內部失敗、保固是外部失敗</li></ul>"
+},
+{
+  q:"吸收成本法營業利益 $100,000、固定製造費用率 $8/單位、期初存貨 2,000 單位、期末存貨 5,000 單位，則變動成本法營業利益為？",
+  opts:["(A) $76,000","(B) $124,000","(C) $100,000","(D) $90,000"],
+  ans:"<b>(A) $76,000。</b><ul><li>差異＝$8×(5,000−2,000)=$8×3,000=$24,000</li><li>存貨增加→吸收法較高，故變動法＝$100,000−$24,000=$76,000</li></ul>"
+},
+];
+
+const CH9_SECTIONS = [
+{
+  id:"9.1", title:"ABM 與作業基礎管理",
+  body:`
+  <p><span class="term" data-term="Activity-based management (ABM)">作業基礎管理（ABM）</span>＝利用 ABC 資訊改善營運、消除非附加價值成本、增加顧客價值。ABM 將組織視為由一系列作業所構成的價值鏈。</p>
+  <p><b>兩階段觀點</b>：<b>成本面（cost view）</b>：資源→作業→成本標的（計算成本準確性）；<b>流程面（process view）</b>：作業為何執行、執行效率如何（管理與改善）。</p>
+  <div class="warn">考試重點：ABM 用 ABC 資訊做營運改善；區分成本面與流程面。</div>`
+},
+{
+  id:"9.2", title:"作業績效衡量與營業流程",
+  body:`
+  <p><b>作業績效衡量</b>：從效率（efficiency）、品質（quality）、時間（time）三構面衡量每項作業。常見指標：單位作業成本、作業週期時間、首次通過品質率。</p>
+  <p><b>非附加價值作業</b>（non-value-added activity）：對顧客無價值、可消除而不影響品質之作業，如搬運、等待、存貨儲存、重工。管理目標是辨識並消除。</p>
+  <div class="method-card mc-title" data-mc="abm-nva">
+    <div class="mc-check"><input type="checkbox" id="mc-ch9-1" data-mc="abm-nva"><label for="mc-ch9-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">ABM 改善步驟</div>
+    <div class="mc-body">
+      <div class="mc-formula">辨識作業 → 區分附加價值/非附加價值 → 分析成本 → 消除/改善</div>
+      <div class="mc-detail">持續改善（kaizen）：逐步消除非附加價值作業，縮短流程時間、降低成本。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：能判斷何者為非附加價值作業；ABM 核心是消除浪費。</div>`
+},
+{
+  id:"9.3", title:"顧客獲利能力分析",
+  body:`
+  <p><span class="term" data-term="Customer-profitability analysis">顧客獲利能力分析</span>＝將收入與成本分配到個別顧客，計算每位顧客之利潤貢獻。20/80 法則：20% 顧客貢獻 80% 利潤。</p>
+  <p><b>顧客成本驅動因素</b>：訂單次數、送貨次數、退回次數、客製化要求、技術支援時間。高服務水準顧客即使購買量大，也可能因服務成本高而獲利低。</p>
+  <div class="warn">考試重點：顧客獲利分析不只看銷售額，要扣除顧客專屬服務成本。</div>`
+},
+{
+  id:"9.4", title:"TDABC 與作業管理進階",
+  body:`
+  <p><span class="term" data-term="Time-driven activity-based costing (TDABC)">時間驅動作業基礎成本制（TDABC）</span>：以時間為唯一動因，估計每項作業所需時間，再乘以每分鐘成本率。</p>
+  <p><b>TDABC 優點</b>：易更新（新製程只需更新時間參數）、能衡量閒置產能、適合複雜多作業環境。</p>
+  <div class="warn">考試重點：TDABC 以時間為動因；能計算閒置產能成本。</div>`
+}
+];
+const CH9_PROBLEMS = [
+{
+  q:"作業基礎管理（ABM）的主要目的是？",
+  opts:["(A) 計算產品成本","(B) 利用ABC資訊改善營運","(C) 編製財務報表","(D) 計算稅額"],
+  ans:"<b>(B) 利用ABC資訊改善營運。</b><ul><li>ABM 是管理應用層，ABC 是成本計算層</li><li>ABM 消除非附加價值成本、提升顧客價值</li></ul>"
+},
+{
+  q:"下列何者「最可能」是非附加價值作業？",
+  opts:["(A) 產品設計","(B) 搬運原物料","(C) 顧客服務","(D) 生產加工"],
+  ans:"<b>(B) 搬運原物料。</b><ul><li>搬運、等待、儲存、重工為典型非附加價值作業</li><li>顧客不願為「搬運」額外付費</li></ul>"
+},
+{
+  q:"TDABC 與傳統 ABC 的主要差異在於？",
+  opts:["(A) 不用成本動因","(B) 以時間為主要動因","(C) 只用於服務業","(D) 不分配間接成本"],
+  ans:"<b>(B) 以時間為主要動因。</b><ul><li>TDABC 以作業時間為動因，較易更新與擴充</li><li>能計算閒置產能成本</li></ul>"
+},
+{
+  q:"20/80 法則在顧客獲利分析中指的是？",
+  opts:["(A) 20%產品占80%營收","(B) 20%顧客貢獻80%利潤","(C) 80%顧客貢獻20%利潤","(D) 20%成本占80%費用"],
+  ans:"<b>(B) 20%顧客貢獻80%利潤。</b><ul><li>少數顧客貢獻大部分利潤，另有些顧客可能獲利為負</li><li>管理重點是區分並管理不同獲利等級顧客</li></ul>"
+},
+{
+  q:"ABM 的「流程面（process view）」關心的是？",
+  opts:["(A) 產品成本計算","(B) 作業為何執行與效率如何","(C) 財務報表編製","(D) 稅務申報"],
+  ans:"<b>(B) 作業為何執行與效率如何。</b><ul><li>成本面：計算成本準確性</li><li>流程面：管理與改善營運流程</li></ul>"
+},
+{
+  q:"下列何者是 ABM 的核心目標？",
+  opts:["(A) 增加產量","(B) 消除非附加價值成本","(C) 提高售價","(D) 增加存貨"],
+  ans:"<b>(B) 消除非附加價值成本。</b><ul><li>ABM 辨識並消除對顧客無價值之作業</li><li>持續改善（kaizen）是核心精神</li></ul>"
+},
+{
+  q:"TDABC 中，每分鐘成本率的計算基礎是？",
+  opts:["(A) 實際產量","(B) 供給產能成本÷實際可用分鐘數","(C) 預算收入","(D) 直接人工小時"],
+  ans:"<b>(B) 供給產能成本÷實際可用分鐘數。</b><ul><li>TDABC 先算每分鐘資源成本率</li><li>再乘以各作業標準時間，得到作業成本</li></ul>"
+},
+{
+  q:"顧客獲利分析中，「負獲利顧客」指的是？",
+  opts:["(A) 購買量小的顧客","(B) 服務成本超過其貢獻毛利的顧客","(C) 新顧客","(D) 批發客戶"],
+  ans:"<b>(B) 服務成本超過其貢獻毛利的顧客。</b><ul><li>高服務要求顧客（大量小訂單、頻繁退貨）可能獲利為負</li><li>管理策略：提高訂單規模、收服務費、或放棄</li></ul>"
+}
+];
+
+const CH10_SECTIONS = [
+{
+  id:"10.1", title:"標準成本系統概論",
+  body:`
+  <p><span class="term" data-term="Standard cost">標準成本（standard cost）</span>＝事前預定的單位成本，作為績效衡量基準。標準成本系統將實際成本與標準成本比較，計算差異（variance）。</p>
+  <p><b>標準設定</b>：<b>理想標準</b>（ideal）：最高效率下無浪費；<b>實際可達標準</b>（practical）：允許正常損壞與休息，較常用。</p>
+  <div class="warn">考試重點：標準成本為預定成本；差異＝實際−標準。</div>`
+},
+{
+  id:"10.2", title:"直接材料差異分析",
+  body:`
+  <div class="method-card mc-title" data-mc="dmvar">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-1" data-mc="dmvar"><label for="mc-ch10-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">直接材料差異</div>
+    <div class="mc-body">
+      <div class="mc-formula">材料價格差異 ＝（實際價格－標準價格）×實際數量</div>
+      <div class="mc-formula">材料數量差異 ＝（實際數量－標準數量）×標準價格</div>
+      <div class="mc-detail">價格差異：採購部門負責；數量差異：生產部門負責。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：材料價格差異用實際採購量計算；數量差異用標準價格計算。</div>`
+},
+{
+  id:"10.3", title:"直接人工差異分析",
+  body:`
+  <div class="method-card mc-title" data-mc="dlvar">
+    <div class="mc-check"><input type="checkbox" id="mc-ch10-2" data-mc="dlvar"><label for="mc-ch10-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">直接人工差異</div>
+    <div class="mc-body">
+      <div class="mc-formula">工資率差異 ＝（實際工資率－標準工資率）×實際工時</div>
+      <div class="mc-formula">效率差異 ＝（實際工時－標準工時）×標準工資率</div>
+      <div class="mc-detail">工資率差異：排薪/勞務部門；效率差異：生產/現場主管。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：人工效率差異是管理重點；工資率差異通常較小。</div>`
+},
+{
+  id:"10.4", title:"差異調查與績效評估",
+  body:`
+  <p><b>例外管理</b>（management by exception）：只調查重大差異（金額或百分比超過門檻），不要追問所有小差異。</p>
+  <p><b>差異關聯性</b>：有利材料價格差異（買便宜料）可能伴隨不利數量差異（品質差報廢多）。單獨看某一差異會誤導。</p>
+  <div class="warn">考試重點：例外管理概念；差異間可能互為因果，須整體判讀。</div>`
+}
+];
+const CH10_PROBLEMS = [
+{
+  q:"標準成本系統中，「材料價格差異」的計算方式是？",
+  opts:["(A) (實際價格－標準價格)×標準數量","(B) (實際價格－標準價格)×實際數量","(C) (實際數量－標準數量)×標準價格","(D) (實際數量－標準數量)×實際價格"],
+  ans:"<b>(B) (實際價格－標準價格)×實際數量。</b><ul><li>價格差異：價格變動 × 實際用量</li><li>數量差異：用量變動 × 標準價格</li></ul>"
+},
+{
+  q:"材料數量差異應由哪個部門負責？",
+  opts:["(A) 採購部門","(B) 生產部門","(C) 銷售部門","(D) 人事部門"],
+  ans:"<b>(B) 生產部門。</b><ul><li>數量差異：生產過程中用料是否浪費</li><li>價格差異：採購部門議價能力</li></ul>"
+},
+{
+  q:"不利材料價格差異（買貴了）可能伴隨什麼有利差異？",
+  opts:["(A) 材料數量差異（品質佳、報廢少）","(B) 人工效率差異","(C) 工資率差異","(D) 無任何差異"],
+  ans:"<b>(A) 材料數量差異（品質佳、報廢少）。</b><ul><li>買高品質材料→價格貴但報廢少→數量有利</li><li>差異間常互為因果，不可只看單一差異</li></ul>"
+},
+{
+  q:"「例外管理（management by exception）」指的是？",
+  opts:["(A) 調查所有差異","(B) 只調查重大差異","(C) 不調查任何差異","(D) 只調查有利差異"],
+  ans:"<b>(B) 只調查重大差異。</b><ul><li>重大差異才值得追根究柢</li><li>小差異可能隨機發生，無需浪費管理資源</li></ul>"
+},
+{
+  q:"直接人工效率差異的計算方式是？",
+  opts:["(A) (實際工時－標準工時)×標準工資率","(B) (實際工資率－標準工資率)×實際工時","(C) (實際工時－標準工時)×實際工資率","(D) (實際工資率－標準工資率)×標準工時"],
+  ans:"<b>(A) (實際工時－標準工時)×標準工資率。</b><ul><li>效率差異：用時多寡 × 標準工資率</li><li>工資率差異：薪資高低 × 實際工時</li></ul>"
+},
+{
+  q:"標準成本每單位用料 5 公斤、每公斤 $10；實際生產 1,000 單位，用料 5,200 公斤。材料數量差異為？",
+  opts:["(A) $2,000 不利","(B) $2,000 有利","(C) $5,200 不利","(D) $5,000 有利"],
+  ans:"<b>(A) $2,000 不利。</b><ul><li>標準用量＝1,000×5＝5,000 公斤</li><li>數量差異＝(5,200−5,000)×$10＝$2,000 不利</li></ul>"
+},
+{
+  q:"每小時標準工資 $20、標準工時 3 小時/單位；實際生產 1,000 單位、耗時 3,200 小時。人工效率差異為？",
+  opts:["(A) $4,000 不利","(B) $4,000 有利","(C) $6,000 不利","(D) $6,000 有利"],
+  ans:"<b>(A) $4,000 不利。</b><ul><li>標準工時＝1,000×3＝3,000 小時</li><li>效率差異＝(3,200−3,000)×$20＝$4,000 不利</li></ul>"
+},
+{
+  q:"下列何者是「理想標準」的特色？",
+  opts:["(A) 允許正常損壞","(B) 無浪費、最高效率下的標準","(C) 員工容易達成","(D) 實務上最常使用"],
+  ans:"<b>(B) 無浪費、最高效率下的標準。</b><ul><li>理想標準：理論最大值，實際很難達成</li><li>實際可達標準：允許正常中斷，較常用於績效評估</li></ul>"
+}
+];
+
+const CH11_SECTIONS = [
+{
+  id:"11.1", title:"彈性預算概論",
+  body:`
+  <p><span class="term" data-term="Flexible budget">彈性預算（flexible budget）</span>＝依實際產量調整的預算，與靜態預算（static budget， planning budget）相對。</p>
+  <p><b>靜態預算差異</b>＝實際結果－靜態預算；<b>彈性預算差異</b>＝實際結果－彈性預算（同產量）；<b>銷售數量差異</b>＝彈性預算－靜態預算。</p>
+  <div class="warn">考試重點：彈性預算消除了產量差異，真正反映成本控制好壞。</div>`
+},
+{
+  id:"11.2", title:"製造費用彈性預算",
+  body:`
+  <p>製造費用分為變動與固定兩部分，彈性預算公式：<b>預算製造費用 ＝ 預算變動費用率×實際產量 ＋ 預算固定製造費用</b>。</p>
+  <div class="method-card mc-title" data-mc="ohflex">
+    <div class="mc-check"><input type="checkbox" id="mc-ch11-1" data-mc="ohflex"><label for="mc-ch11-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">製造費用差異</div>
+    <div class="mc-body">
+      <div class="mc-formula">變動製造費用總差異 ＝ 耗費差異＋效率差異</div>
+      <div class="mc-formula">固定製造費用總差異 ＝ 預算差異＋數量差異</div>
+      <div class="mc-detail">變動費用用三個成本（實際、彈性預算、已分攤）；固定費用另算產量差異。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：變動製費有耗費與效率差異；固定製費有預算與數量差異。</div>`
+},
+{
+  id:"11.3", title:"費用耗費與效率差異",
+  body:`
+  <p><b>變動製費耗費差異</b>（spending/rate）：實際變動製費－(實際投入×標準費率)；<b>變動製費效率差異</b>：(實際投入－標準投入)×標準費率。</p>
+  <p><b>意義</b>：耗費差異反映費用控管；效率差異反映動因使用效率（如機器小時是否浪費）。</p>
+  <div class="warn">考試重點：耗費差異看費率、效率差異看用量。</div>`
+},
+{
+  id:"11.4", title:"固定製造費用預算與數量差異",
+  body:`
+  <p><b>固定製費預算差異</b>（budget/spending variance）＝實際固定製費－預算固定製費；<b>固定製費數量差異</b>（volume variance）＝預算固定製費－已分攤固定製費。</p>
+  <p><b>數量差異意義</b>：實際產量偏離預算產量所造成的固定製費分攤差異。有利（F）表示產量超過預算；不利（U）表示閒置產能。</p>
+  <div class="warn">考試重點：固定製費數量差異不是花多花少，是用多用少（產能使用率）。</div>`
+}
+];
+const CH11_PROBLEMS = [
+{
+  q:"彈性預算與靜態預算的主要差異在於？",
+  opts:["(A) 彈性預算用於長期","(B) 彈性預算依實際產量調整","(C) 靜態預算較準確","(D) 彈性預算不含固定成本"],
+  ans:"<b>(B) 彈性預算依實際產量調整。</b><ul><li>靜態預算：原計畫產量下的預算</li><li>彈性預算：實際產量下應該花多少</li></ul>"
+},
+{
+  q:"變動製造費用的「效率差異」是因為？",
+  opts:["(A) 費用花多了","(B) 成本動因使用效率差","(C) 產量改變","(D) 固定成本增加"],
+  ans:"<b>(B) 成本動因使用效率差。</b><ul><li>效率差異＝(實際投入－標準投入)×標準費率</li><li>反映動因（如機時）用太多</li></ul>"
+},
+{
+  q:"固定製造費用的「數量差異」衡量的是？",
+  opts:["(A) 花了多少錢","(B) 產能使用程度","(C) 產品售價","(D) 員工效率"],
+  ans:"<b>(B) 產能使用程度。</b><ul><li>數量差異＝預算固定製費－已分攤固定製費</li><li>不利表示產量低於預算、閒置產能</li></ul>"
+},
+{
+  q:"彈性預算差異等於？",
+  opts:["(A) 實際－靜態預算","(B) 實際－彈性預算","(C) 彈性預算－靜態預算","(D) 靜態預算－彈性預算"],
+  ans:"<b>(B) 實際－彈性預算。</b><ul><li>彈性預算差異：成本控制是否良好</li><li>銷售數量差異：彈性－靜態，反映銷售量偏離</li></ul>"
+},
+{
+  q:"預算變動製費率 $5/機時、預算固定製費 $100,000；實際 8,000 機時。彈性預算製費為？",
+  opts:["(A) $140,000","(B) $40,000","(C) $100,000","(D) $80,000"],
+  ans:"<b>(A) $140,000。</b><ul><li>變動製費＝$5×8,000＝$40,000</li><li>總彈性預算＝$40,000＋$100,000＝$140,000</li></ul>"
+},
+{
+  q:"下列何者「不屬於」變動製造費用的差異？",
+  opts:["(A) 耗費差異","(B) 效率差異","(C) 數量差異","(D) 以上皆非"],
+  ans:"<b>(C) 數量差異。</b><ul><li>數量差異是固定製費的差異</li><li>變動製費只有耗費與效率差異</li></ul>"
+},
+{
+  q:"實際變動製費 $42,000、實際機時 8,000 小時、標準費率 $5/小時。變動製費耗費差異為？",
+  opts:["(A) $2,000 不利","(B) $2,000 有利","(C) $40,000 不利","(D) $42,000 有利"],
+  ans:"<b>(A) $2,000 不利。</b><ul><li>耗費差異＝$42,000－(8,000×$5)＝$42,000－$40,000＝$2,000 不利</li></ul>"
+},
+{
+  q:"固定製費數量差異有利（F）表示？",
+  opts:["(A) 花了較少錢","(B) 實際產量超過預算","(C) 產量低於預算","(D) 費用節省"],
+  ans:"<b>(B) 實際產量超過預算。</b><ul><li>有利數量差異→生產較多→固定製費分攤較多→閒置產能少</li><li>不是「花省錢」，是「用了多少產能」</li></ul>"
+}
+];
+
+const CH12_SECTIONS = [
+{
+  id:"12.1", title:"責任會計與組織分權",
+  body:`
+  <p><span class="term" data-term="Responsibility accounting">責任會計（responsibility accounting）</span>：將成本/收入/利潤歸屬到負責的經理人，依其控制範圍評估績效。</p>
+  <p><b>四種責任中心</b>：<b>成本中心</b>（只控成本，如廠務）、<b>收入中心</b>（只控收入，如業務）、<b>利潤中心</b>（控收入與成本，如事業部）、<b>投資中心</b>（控利潤與投資，如子公司）。</p>
+  <div class="warn">考試重點：能區分四種責任中心；主管只應為其可控項目負責。</div>`
+},
+{
+  id:"12.2", title:"預算與績效評估",
+  body:`
+  <p><b>參與式預算</b>（participative budgeting）：基層參與編製，提高接受度與合理性。</p>
+  <p><b>預算鬆散</b>（budget slack）：基層故意低估收入、高估成本，使預算容易達成。高階須適度調整。</p>
+  <div class="warn">考試重點：預算鬆散是常見議題；責任會計強調「可控性原則」。</div>`
+},
+{
+  id:"12.3", title:"平衡計分卡進階",
+  body:`
+  <p><span class="term" data-term="Balanced scorecard">平衡計分卡</span>四構面：<b>財務</b>、<b>顧客</b>、<b>內部流程</b>、<b>學習與成長</b>。由 <span class="proper">Kaplan</span> 與 <span class="proper">Norton</span> 提出。</p>
+  <p><b>策略地圖</b>（strategy map）：視覺化呈現四構面間因果關係，例如：員工訓練→流程改善→顧客滿意→財務績效。</p>
+  <div class="warn">考試重點：平衡計分卡不只是 KPI 列表，是策略溝通工具。</div>`
+},
+{
+  id:"12.4", title:"品質與時效績效指標",
+  body:`
+  <p><b>財務指標</b>：ROI、利潤、成本降低；<b>非財務指標</b>：客戶滿意度、週期時間、不良率、員工滿意度。</p>
+  <p><b>時效指標</b>：訂單交付週期、開發前置時間、存貨週轉率。JIT 環境下強調縮短週期。</p>
+  <div class="warn">考試重點：平衡計分卡結合財務與非財務指標，兼顧短期與長期。</div>`
+}
+];
+const CH12_PROBLEMS = [
+{
+  q:"工廠廠務經理最可能屬於哪種責任中心？",
+  opts:["(A) 成本中心","(B) 收入中心","(C) 利潤中心","(D) 投資中心"],
+  ans:"<b>(A) 成本中心。</b><ul><li>廠務只控成本，不管收入與投資</li><li>事業部總經理才是利潤或投資中心</li></ul>"
+},
+{
+  q:"責任會計的「可控性原則」指的是？",
+  opts:["(A) 經理為所有成本負責","(B) 經理只為其可控制的項目負責","(C) 高階為基層決策負責","(D) 所有成本都可控制"],
+  ans:"<b>(B) 經理只為其可控制的項目負責。</b><ul><li>不可控成本不應計入該主管績效</li><li>如生產經理不應為總公司廣告費負責</li></ul>"
+},
+{
+  q:"「預算鬆散（budget slack）」指的是？",
+  opts:["(A) 預算太緊","(B) 基層故意低估收入、高估成本","(C) 預算沒有依據","(D) 預算超過一年"],
+  ans:"<b>(B) 基層故意低估收入、高估成本。</b><ul><li>目的是讓預算容易達成、績效好看</li><li>管理上須適度審核與調整</li></ul>"
+},
+{
+  q:"平衡計分卡的四個構面「不包括」下列何者？",
+  opts:["(A) 財務","(B) 顧客","(C) 競爭對手","(D) 學習與成長"],
+  ans:"<b>(C) 競爭對手。</b><ul><li>四構面：財務、顧客、內部流程、學習與成長</li><li>由 Kaplan & Norton 提出</li></ul>"
+},
+{
+  q:"子公司總經理能控利潤與資本投資，屬於？",
+  opts:["(A) 成本中心","(B) 收入中心","(C) 利潤中心","(D) 投資中心"],
+  ans:"<b>(D) 投資中心。</b><ul><li>投資中心：同時控收入、成本與投資規模</li><li>評估指標如 ROI、剩餘利益</li></ul>"
+},
+{
+  q:"平衡計分卡中，「員工訓練程度」屬於哪個構面？",
+  opts:["(A) 財務","(B) 顧客","(C) 內部流程","(D) 學習與成長"],
+  ans:"<b>(D) 學習與成長。</b><ul><li>員工技能、系統能力、組織文化皆屬學習成長</li><li>是其他三個構面的基礎驅動力</li></ul>"
+},
+{
+  q:"參與式預算的主要優點是？",
+  opts:["(A) 預算較寬鬆","(B) 提高基層接受度與合理性","(C) 高階省事","(D) 不需要審核"],
+  ans:"<b>(B) 提高基層接受度與合理性。</b><ul><li>基層參與→預算更貼近實際、被接受度高</li><li>缺點是可能產生預算鬆散</li></ul>"
+},
+{
+  q:"下列何者是「非財務績效指標」？",
+  opts:["(A) 營業利益","(B) 投資報酬率","(C) 客戶滿意度","(D) 銷貨毛利"],
+  ans:"<b>(C) 客戶滿意度。</b><ul><li>非財務指標：滿意度、週期時間、不良率、員工士氣</li><li>財務指標：利潤、ROI、成本</li></ul>"
+}
+];
+
+const CH13_SECTIONS = [
+{
+  id:"13.1", title:"投資中心績效評估",
+  body:`
+  <p><b>投資報酬率（ROI）</b>＝營業利益÷營業資產。ROI 可分解為 <b>投資週轉率</b>（銷售÷資產）×<b>銷售利潤率</b>（利益÷銷售）。</p>
+  <div class="method-card mc-title" data-mc="roi">
+    <div class="mc-check"><input type="checkbox" id="mc-ch13-1" data-mc="roi"><label for="mc-ch13-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">ROI 分解（杜邦式）</div>
+    <div class="mc-body">
+      <div class="mc-formula">ROI ＝ 銷售利潤率 × 資產週轉率 ＝ (利益/銷售)×(銷售/資產)</div>
+      <div class="mc-detail">提高 ROI 可從：提升利潤率、提高資產週轉率兩方向著手。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：ROI 缺點是可能讓經理放棄高於資金成本但低於部門ROI的投資（目標錯置）。</div>`
+},
+{
+  id:"13.2", title:"剩餘利益與 EVA",
+  body:`
+  <p><b>剩餘利益（RI）</b>＝營業利益－(要求報酬率×營業資產)。RI 金額越大越好，與絕對規模有關。</p>
+  <p><b>經濟附加價值（EVA®）</b>＝稅後營業利益－(加權平均資金成本×投入資本)。由 Stern Stewart 推廣，強調股東價值創造。</p>
+  <div class="warn">考試重點：RI/EVA 鼓勵接受所有高於資金成本的投資，與目標一致；缺點是不同規模部門難比較。</div>`
+},
+{
+  id:"13.3", title:"移轉訂價基礎",
+  body:`
+  <p><span class="term" data-term="Transfer pricing">移轉訂價（transfer pricing）</span>＝組織內各部門間貨物/勞務移轉的計價方式。影響各部門利潤與整體稅負。</p>
+  <p><b>目標</b>：目標一致性（goal congruence）、部門自主權、準確績效衡量。</p>
+  <div class="warn">考試重點：移轉訂價影響部門績效與稅負跨國規劃。</div>`
+},
+{
+  id:"13.4", title:"移轉訂價方法",
+  body:`
+  <ul>
+    <li><b>市場基礎價格</b>（market-based）：外部市場價格，最理想（有競爭市場時）</li>
+    <li><b>成本基礎價格</b>：變動成本、吸收成本、成本加價</li>
+    <li><b>議價價格</b>（negotiated）：雙方協商，保留自主權但耗時</li>
+  </ul>
+  <div class="warn">考試重點：有閒置產能時，最低移轉價格＝變動成本；無閒置產能時＝市價。</div>`
+}
+];
+const CH13_PROBLEMS = [
+{
+  q:"ROI 的計算公式是？",
+  opts:["(A) 營業利益÷銷售","(B) 營業利益÷營業資產","(C) 銷售÷資產","(D) 淨利÷權益"],
+  ans:"<b>(B) 營業利益÷營業資產。</b><ul><li>ROI＝利潤/資產，衡量資本使用效率</li><li>可分解為銷售利潤率×資產週轉率</li></ul>"
+},
+{
+  q:"剩餘利益（RI）的公式是？",
+  opts:["(A) 營業利益÷資產","(B) 營業利益－(要求報酬率×營業資產)","(C) 銷售×利潤率","(D) 利潤÷銷售"],
+  ans:"<b>(B) 營業利益－(要求報酬率×營業資產)。</b><ul><li>RI 是超過最低要求報酬的剩餘金額</li><li>鼓勵接受所有高於資金成本的投資</li></ul>"
+},
+{
+  q:"ROI 作為績效指標的缺點是？",
+  opts:["(A) 太複雜","(B) 可能讓經理放棄高於資金成本但低於部門ROI的投資","(C) 無法計算","(D) 不考慮利潤"],
+  ans:"<b>(B) 可能讓經理放棄高於資金成本但低於部門ROI的投資。</b><ul><li>目標錯置：部門ROI 20%，新投資報酬15%但大於資金成本10%，經理可能拒絕</li><li>RI/EVA 可改善此問題</li></ul>"
+},
+{
+  q:"當移轉部門有「閒置產能」時，最低移轉價格為？",
+  opts:["(A) 市價","(B) 變動成本","(C) 吸收成本","(D) 雙方可協商任意價"],
+  ans:"<b>(B) 變動成本。</b><ul><li>有閒置產能→多做一單位不增加固定成本，最低底價是變動成本</li><li>無閒置產能→須放棄對外銷售，底價＝市價</li></ul>"
+},
+{
+  q:"下列何者「不是」常見的移轉訂價方法？",
+  opts:["(A) 市場基礎","(B) 成本基礎","(C) 議價","(D) 隨機決定"],
+  ans:"<b>(D) 隨機決定。</b><ul><li>三種主要方法：市價、成本基礎、議價</li><li>有競爭市場時，市價法最客觀</li></ul>"
+},
+{
+  q:"部門營業利益 $200,000、營業資產 $1,000,000，ROI 為？",
+  opts:["(A) 10%","(B) 20%","(C) 5%","(D) 50%"],
+  ans:"<b>(B) 20%。</b><ul><li>ROI＝$200,000÷$1,000,000＝20%</li></ul>"
+},
+{
+  q:"EVA® 與 RI 的主要差異在於？",
+  opts:["(A) EVA用會計利潤、RI用現金流","(B) EVA調整會計數字並用加權資金成本","(C) 完全相同","(D) RI只用於製造業"],
+  ans:"<b>(B) EVA調整會計數字並用加權資金成本。</b><ul><li>EVA 由 Stern Stewart 推廣，對 GAAP 數字做調整</li><li>更強調股東價值與經濟利潤</li></ul>"
+},
+{
+  q:"移轉訂價的主要目標「不包括」？",
+  opts:["(A) 目標一致性","(B) 部門自主權","(C) 績效衡量","(D) 節省所有稅"],
+  ans:"<b>(D) 節省所有稅。</b><ul><li>三目標：目標一致、自主權、準確衡量</li><li>跨國移轉訂價會影響稅負，但不是唯一目標</li></ul>"
+}
+];
+
+const CH14_SECTIONS = [
+{
+  id:"14.1", title:"攸關成本與攸關收入",
+  body:`
+  <p><span class="term" data-term="Relevant cost">攸關成本（relevant cost）</span>＝未來發生、且各方案間有差異之成本。兩條件：<b>未來發生</b>＋<b>方案間有差異</b>。</p>
+  <p><b>非攸關成本</b>：沉沒成本（已發生）、無差異未來成本。決策時應忽略。</p>
+  <div class="warn">考試重點：攸關成本兩條件：未來＋有差異。沉沒成本絕對不納入決策。</div>`
+},
+{
+  id:"14.2", title:"自制或購買決策",
+  body:`
+  <p><b>自制或購買（make-or-buy）</b>：比較自製成本與外購價格。只考慮攸關成本（變動成本＋可避免固定成本＋機會成本）。</p>
+  <p><b>關鍵</b>：如果有閒置產能可外出租賺錢，租金收入就是自製的機會成本。</p>
+  <div class="warn">考試重點：相關成本包含可避免固定成本與機會成本；不可避免固定成本無關。</div>`
+},
+{
+  id:"14.3", title:"特殊訂單決策",
+  body:`
+  <p><b>特殊訂單（special order）</b>：低於正常售價的額外訂單。決策原則：訂單價格＞單位變動成本（且有閒置產能），則接單有利。</p>
+  <p><b>注意</b>：不要分攤固定成本（已存在、無差異）；只看增額收入與增額成本。</p>
+  <div class="warn">考試重點：有閒置產能時，特殊訂單底價＝單位變動成本。</div>`
+},
+{
+  id:"14.4", title:"產品組合與限制因素",
+  body:`
+  <p><b>限制因素（constraint/bottleneck）</b>：產能不足的資源（如機時、材料）。最佳產品組合：在限制資源下最大化 <b>每單位限制因素邊際貢獻</b>。</p>
+  <p><b>步驟</b>：計算每產品單位邊際貢獻÷每單位限制因素→排序→優先生產最高者。</p>
+  <div class="warn">考試重點：不是選單位CM最高，是選「每單位限制因素CM」最高的產品。</div>`
+},
+{
+  id:"14.5", title:"繼續或停產部門",
+  body:`
+  <p><b>停產決策</b>：比較部門邊際貢獻與可避免固定成本。若邊際貢獻＞可避免固定成本，則應繼續（否則公司總利潤下降）。</p>
+  <p><b>注意</b>：不可避免固定成本（分攤總公司費用）即使停產仍會發生，與決策無關。</p>
+  <div class="warn">考試重點：停產後「消失的貢獻」要和「省下的可避免固定成本」比較。</div>`
+}
+];
+const CH14_PROBLEMS = [
+{
+  q:"攸關成本的兩個條件是？",
+  opts:["(A) 過去發生＋有差異","(B) 未來發生＋方案間有差異","(C) 現金支出＋固定成本","(D) 歷史成本＋可認列"],
+  ans:"<b>(B) 未來發生＋方案間有差異。</b><ul><li>沉沒成本（已花）不論選什麼都一樣，不攸關</li><li>無差異未來成本也不攸關</li></ul>"
+},
+{
+  q:"下列何者「不應」納入自制或購買決策？",
+  opts:["(A) 直接材料","(B) 直接人工","(C) 已設備折舊（沉沒）","(D) 可避免固定成本"],
+  ans:"<b>(C) 已設備折舊（沉沒）。</b><ul><li>沉沒成本已發生，無論自制或外購都一樣</li><li>變動成本＋可避免固定成本＋機會成本才攸關</li></ul>"
+},
+{
+  q:"有閒置產能時，特殊訂單的最低底價是？",
+  opts:["(A) 正常售價","(B) 單位變動成本","(C) 單位吸收成本","(D) 單位變動成本＋分攤固定成本"],
+  ans:"<b>(B) 單位變動成本。</b><ul><li>有閒置→固定成本已存在，不因接單增加</li><li>只要單價＞單位變動成本，就有貢獻</li></ul>"
+},
+{
+  q:"產品組合決策中，應優先生產何種產品？",
+  opts:["(A) 單位售價最高","(B) 單位邊際貢獻最高","(C) 每單位限制因素邊際貢獻最高","(D) 單位利潤最高"],
+  ans:"<b>(C) 每單位限制因素邊際貢獻最高。</b><ul><li>限制因素（如機時）有限，要最大化每小時CM</li><li>不是單看單位CM，是看「每瓶頸資源」CM</li></ul>"
+},
+{
+  q:"部門月邊際貢獻 $50,000、可避免固定成本 $30,000、分攤總公司費用 $40,000。應否停產？",
+  opts:["(A) 停產，因淨損失","(B) 繼續，因邊際貢獻大於可避免固定成本","(C) 停產，因固定成本高","(D) 無法判斷"],
+  ans:"<b>(B) 繼續，因邊際貢獻大於可避免固定成本。</b><ul><li>繼續：貢獻$50,000－可避免固定$30,000＝$20,000 對公司有幫助</li><li>分攤$40,000 即使停產仍會發生，不攸關</li></ul>"
+},
+{
+  q:"沉沒成本在決策中應如何處理？",
+  opts:["(A) 納入分析","(B) 完全忽略","(C) 乘以稅率","(D) 當作機會成本"],
+  ans:"<b>(B) 完全忽略。</b><ul><li>沉沒成本已發生、無法改變</li><li>與未來決策無關</li></ul>"
+},
+{
+  q:"機會成本在特殊訂決策中？",
+  opts:["(A) 不考慮","(B) 若閒置產能可出租，租金收入是接單的機會成本","(C) 等於固定成本","(D) 等於變動成本"],
+  ans:"<b>(B) 若閒置產能可出租，租金收入是接單的機會成本。</b><ul><li>接特殊訂單就放棄了租金收入</li><li>最低底價＝變動成本＋單位機會成本</li></ul>"
+},
+{
+  q:"「可避免固定成本（avoidable fixed cost）」在決策中？",
+  opts:["(A) 不攸關","(B) 是攸關成本，會隨方案消失","(C) 等於沉沒成本","(D) 與決策無關"],
+  ans:"<b>(B) 是攸關成本，會隨方案消失。</b><ul><li>停止某方案，這部分固定成本就可省下</li><li>不可避免固定成本（如折舊）才不攸關</li></ul>"
+}
+];
+
+const CH15_SECTIONS = [
+{
+  id:"15.1", title:"訂價的經濟學基礎",
+  body:`
+  <p><b>需求法則</b>：價格上升→需求量下降。廠商面對負斜率需求線，邊際收入（MR）小於價格。</p>
+  <p><b>最適訂價</b>：MR＝MC（邊際成本）時利潤最大。完全競爭廠商 MR＝P；獨占廠商 MR＜P。</p>
+  <div class="warn">考試重點：最適訂價在 MR＝MC 那一點；需求價格彈性高時訂價空間小。</div>`
+},
+{
+  id:"15.2", title:"成本基礎訂價法",
+  body:`
+  <p><b>成本加成訂價</b>（cost-plus pricing）：價格＝單位成本×(1＋加成率)。常見為「成本＋目標利潤」。</p>
+  <p><b>目標營業利潤訂價</b>：單位售價＝(單位成本＋目標利潤)。加成率取決於產品需求與競爭。</p>
+  <div class="warn">考試重點：成本加成法簡單但忽略市場需求；實務上常用於合約與零售。</div>`
+},
+{
+  id:"15.3", title:"目標成本法",
+  body:`
+  <p><span class="term" data-term="Target costing">目標成本法（target costing）</span>：由市場決定價格（可接受市價），再扣除目標利潤，倒推出可允許成本。</p>
+  <div class="method-card mc-title" data-mc="target">
+    <div class="mc-check"><input type="checkbox" id="mc-ch15-1" data-mc="target"><label for="mc-ch15-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">目標成本公式</div>
+    <div class="mc-body">
+      <div class="mc-formula">目標成本 ＝ 目標售價（市場可接受）－ 目標利潤</div>
+      <div class="mc-detail">源頭式管理：從產品設計階段就控制成本，不是事後算成本。日本 Toyota 常採用。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：目標成本是由市場價格倒推，與成本加成法方向相反。</div>`
+},
+{
+  id:"15.4", title:"其他訂價策略",
+  body:`
+  <ul>
+    <li><b>歧視訂價</b>（price discrimination）：不同市場/客群訂不同價，須可區隔且無法轉售</li>
+    <li><b>附產品訂價</b>（captive product）：印表機便宜、墨水貴</li>
+    <li><b>產品線訂價</b>：一系列產品間的價格階梯</li>
+    <li><b>心理訂價</b>：$9.99 而非 $10</li>
+  </ul>
+  <div class="warn">考試重點：短期訂價看變動成本與產能；長期訂價須涵蓋全部成本與合理利潤。</div>`
+}
+];
+const CH15_PROBLEMS = [
+{
+  q:"目標成本法的出發點是？",
+  opts:["(A) 成本＋利潤","(B) 市場可接受價格－目標利潤","(C) 競爭者價格","(D) 生產成本"],
+  ans:"<b>(B) 市場可接受價格－目標利潤。</b><ul><li>目標成本是由市場倒推，不是由成本加成</li><li>強調設計階段就控制成本</li></ul>"
+},
+{
+  q:"成本加成訂價法的缺點是？",
+  opts:["(A) 計算複雜","(B) 忽略市場需求與競爭","(C) 不能用於長期","(D) 不符合會計準則"],
+  ans:"<b>(B) 忽略市場需求與競爭。</b><ul><li>成本加成只看內部成本，不管顧客願付多少</li><li>可能訂太高賣不出去或太低賺太少</li></ul>"
+},
+{
+  q:"廠商利潤最大的訂價水準在？",
+  opts:["(A) 價格＝平均成本","(B) 邊際收入＝邊際成本","(C) 價格＝邊際成本","(D) 收入最大"],
+  ans:"<b>(B) 邊際收入＝邊際成本。</b><ul><li>MR＝MC 是利潤極大化條件</li><li>完全競爭下 MR＝P，故 P＝MC；獨占下 MR＜P</li></ul>"
+},
+{
+  q:"目標成本法「不強調」下列何者？",
+  opts:["(A) 產品設計階段成本管理","(B) 跨功能團隊合作","(C) 事後成本分析","(D) 市場導向"],
+  ans:"<b>(C) 事後成本分析。</b><ul><li>目標成本是源頭管理：設計時就決定成本</li><li>不是等生產完才算成本</li></ul>"
+},
+{
+  q:"短期特殊訂價主要參考？",
+  opts:["(A) 全部成本","(B) 變動成本與產能","(C) 固定成本","(D) 折舊"],
+  ans:"<b>(B) 變動成本與產能。</b><ul><li>有閒置產能時，只要單價＞變動成本就有貢獻</li><li>長期則必須涵蓋全部成本與利潤</li></ul>"
+},
+{
+  q:"印表機便宜、墨水很貴的策略稱為？",
+  opts:["(A) 歧視訂價","(B) 附產品訂價","(C) 心理訂價","(D) 目標成本"],
+  ans:"<b>(B) 附產品訂價。</b><ul><li>主產品低價吸引人，附屬耗材高價賺錢</li><li>如刮鬍刀刀柄便宜、刀片貴</li></ul>"
+},
+{
+  q:"市場可接受售價 $100、目標利潤率 20%，則目標單位成本為？",
+  opts:["(A) $20","(B) $80","(C) $100","(D) $120"],
+  ans:"<b>(B) $80。</b><ul><li>目標利潤＝$100×20%＝$20</li><li>目標成本＝$100－$20＝$80</li></ul>"
+},
+{
+  q:"歧視訂價成功的條件「不包括」？",
+  opts:["(A) 市場可區隔","(B) 各區隔需求彈性不同","(C) 產品可輕易轉售套利","(D) 廠商有訂價能力"],
+  ans:"<b>(C) 產品可輕易轉售套利。</b><ul><li>若低價買到可轉賣到高價市場，歧視失敗</li><li>須可區隔、無法轉售、彈性不同</li></ul>"
+}
+];
+
+
+const CH16_SECTIONS = [
+{
+  id:"16.1", title:"資本預算與現值方法",
+  body:`
+  <p><b>資本預算決策</b>（<span class="term" data-term="Capital-budgeting decision">capital budgeting</span>）＝長期投資決策（投資於機器、廠房、專案）。<b>折現現金流量分析</b>（discounted-cash-flow）考量貨幣時間價值。</p>
+  <div class="method-card mc-title" data-mc="npv">
+    <div class="mc-check"><input type="checkbox" id="mc-ch16-1" data-mc="npv"><label for="mc-ch16-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">NPV 法</div>
+    <div class="mc-body">
+      <div class="mc-formula">NPV ＝ 未來現金流入之現值 － 初始投資成本；NPV ≥ 0 則接受</div>
+      <div class="mc-detail">折現率＝組織取得投資資本之成本（資金成本）。折現率可依風險調升。</div>
+      <div class="mc-ex">例子：初始 $46,800、四年營運現金節省 $15,000、殘值 $2,400，折現率10% → NPV=$2,193＞0，接受。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：NPV≥0 接受。折現率是資金成本，可依風險調升。</div>`
+},
+{
+  id:"16.2", title:"內部報酬率（IRR）",
+  body:`
+  <div class="method-card mc-title" data-mc="irr">
+    <div class="mc-check"><input type="checkbox" id="mc-ch16-2" data-mc="irr"><label for="mc-ch16-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">IRR 法</div>
+    <div class="mc-body">
+      <div class="mc-formula">IRR ＝ 使 NPV＝0 之折現率；IRR ≥ 資金門檻率（hurdle rate）則接受</div>
+      <div class="mc-detail">資金門檻率（<span class="term" data-term="Hurdle rate">hurdle rate</span>）＝最低可接受報酬率。</div>
+      <div class="mc-ex">兩法共同假設：現金流量發生於年底、金額確定、再投資於其他專案、完全資本市場。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：IRR≥hurdle rate 接受；IRR 是 NPV=0 的折現率。NPV 較易應用，可調折現率反映風險。</div>`
+},
+{
+  id:"16.3", title:"總成本法與增額成本法",
+  body:`
+  <div class="method-card mc-title" data-mc="totalinc">
+    <div class="mc-check"><input type="checkbox" id="mc-ch16-3" data-mc="totalinc"><label for="mc-ch16-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">總成本 vs 增額成本法</div>
+    <div class="mc-body">
+      <div class="mc-formula">總成本法：納入所有方案之全部現金流量；增額成本法：只納入方案間之差異現金流量</div>
+      <div class="mc-detail">兩種方法對同一決策給出相同結論；增額法較簡潔。</div>
+      <div class="mc-ex">例子：舊機器處分收入、新機器殘值、營運現金節省、營運資金投入與回收。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：兩法結論一致；增額法只比較差異項目，更簡潔。</div>`
+},
+{
+  id:"16.4", title:"稅後現金流量與折舊",
+  body:`
+  <div class="method-card mc-title" data-mc="tax">
+    <div class="mc-check"><input type="checkbox" id="mc-ch16-4" data-mc="tax"><label for="mc-ch16-4" class="mc-lbl">學會</label></div>
+    <div class="mc-left">稅後現金流量</div>
+    <div class="mc-body">
+      <div class="mc-formula">收益類(現金流+損益表項) ×(1−稅率)；折舊(損益表項非現金) ×稅率＝稅盾；純現金流 ×1</div>
+      <div class="mc-detail"><b>折舊稅盾</b>（<span class="term" data-term="Depreciation tax shield">depreciation tax shield</span>）＝折舊×稅率，為節稅之現金流入。</div>
+      <div class="mc-ex">例子：薪資$42,000、稅率30% → 稅後流出$42,000×0.7=$29,400；折舊$8,000×0.3=$2,400 稅盾。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：區分三類：現金+損益表項×(1−t)；非現金損益表項(折舊)×t；純現金流×1。MACRS 用於稅務折舊表。</div>`
+},
+{
+  id:"16.5", title:"投資方案排序與其他方法",
+  body:`
+  <p><b>獲利能力指數</b>（<span class="term" data-term="Profitability index">profitability index</span>）＝(現金流現值，不含初始投資) ÷ 初始投資，用於在資本受限下排序。</p>
+  <div class="method-card mc-title" data-mc="payback">
+    <div class="mc-check"><input type="checkbox" id="mc-ch16-5" data-mc="payback"><label for="mc-ch16-5" class="mc-lbl">學會</label></div>
+    <div class="mc-left">還本期間與會計報酬率</div>
+    <div class="mc-body">
+      <div class="mc-formula">還本期＝初始投資÷每年稅後現金流入；會計報酬率＝(平均增額收入−平均增額費用)÷初始投資</div>
+      <div class="mc-detail">此兩法不考量貨幣時間價值，概念上劣於折現法，但常搭配使用。</div>
+      <div class="mc-ex">例子：初始$49,440、平均現金流入約$16,200 → 還本期約3年。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：還本與ARR不考量時間價值；獲利能力指數用於資本配給下排序。</div>`
+},
+{
+  id:"16.6", title:"通貨膨脹與資本預算（附錄）",
+  body:`
+  <p>通膨納入折現分析有兩種方式：</p>
+  <ul>
+    <li>以<b>名目元</b>（nominal dollars）衡量現金流，用<b>名目利率</b>折現</li>
+    <li>以<b>實質元</b>（real dollars）衡量現金流，用<b>實質利率</b>折現</li>
+  </ul>
+  <div class="warn">考試重點：名目與實質必須一致——名目現金流配名目折現率、實質配實質，兩法結果相同。</div>`
+},
+];
+const CH16_PROBLEMS = [
+{
+  q:"淨現值法（NPV）下，投資方案應接受的條件是？",
+  opts:["(A) NPV＜0","(B) NPV ≥ 0","(C) NPV＝0 才接受","(D) 看 IRR"],
+  ans:"<b>(B) NPV ≥ 0。</b><ul><li>NPV＝未來現金流現值−初始投資</li><li>NPV≥0 代表報酬超過資金成本，應接受</li></ul>"
+},
+{
+  q:"內部報酬率（IRR）的定義是？",
+  opts:["(A) 使NPV最大的折現率","(B) 使NPV＝0的折現率","(C) 資金成本","(D) 通膨率"],
+  ans:"<b>(B) 使NPV＝0的折現率。</b><ul><li>IRR＝讓現金流現值恰好等於初始投資之折現率</li><li>IRR≥資金門檻率則接受</li></ul>"
+},
+{
+  q:"折舊稅盾（depreciation tax shield）的金額是？",
+  opts:["(A) 折舊×(1−稅率)","(B) 折舊×稅率","(C) 折舊","(D) 稅前淨利×稅率"],
+  ans:"<b>(B) 折舊×稅率。</b><ul><li>折舊是非現金之損益表項，×稅率得節稅現金流入</li><li>收益類現金流才×(1−稅率)</li></ul>"
+},
+{
+  q:"某公司稅率30%，薪資費用$42,000，其「稅後現金流出」為？",
+  opts:["(A) $42,000","(B) $12,600","(C) $29,400","(D) $54,600"],
+  ans:"<b>(C) $29,400。</b><ul><li>薪資是現金流+損益表項 → ×(1−0.30)</li><li>=$42,000×0.70=$29,400</li></ul>"
+},
+{
+  q:"還本期間（payback period）的計算是？",
+  opts:["(A) 初始投資×每年現金流入","(B) 初始投資÷每年稅後現金流入","(C) 現金流入之現值","(D) 淨利÷投資"],
+  ans:"<b>(B) 初始投資÷每年稅後現金流入。</b><ul><li>還本期＝回收初始投資所需年數</li><li>不考量貨幣時間價值</li></ul>"
+},
+{
+  q:"獲利能力指數（profitability index）的定義是？",
+  opts:["(A) 初始投資÷現金流現值","(B) 現金流現值(不含初始投資)÷初始投資","(C) 淨現值×初始投資","(D) IRR÷門檻率"],
+  ans:"<b>(B) 現金流現值(不含初始投資)÷初始投資。</b><ul><li>用於資本配給下排序投資方案</li><li>指數越高代表每一元投資報酬越高</li></ul>"
+},
+{
+  q:"總成本法與增額成本法對同一投資決策的結論？",
+  opts:["(A) 可能不同","(B) 一定相同","(C) 相反","(D) 無關"],
+  ans:"<b>(B) 一定相同。</b><ul><li>總成本法納入全部現金流、增額法只納入差異</li><li>兩法對同一決策結論一致，增額法較簡潔</li></ul>"
+},
+{
+  q:"資本預算中，NPV 與 IRR 的共同假設「不包括」？",
+  opts:["(A) 現金流發生於年底","(B) 現金流金額確定","(C) 現金流立即再投資","(D) 稅率會變動"],
+  ans:"<b>(D) 稅率會變動。</b><ul><li>假設：年底發生、金額確定、立即再投資、完全資本市場</li><li>稅率固定是折現分析的基本前提</li></ul>"
+},
+{
+  q:"投資$40,000、每年稅後現金流入$8,000，其還本期間為？",
+  opts:["(A) 3年","(B) 4年","(C) 5年","(D) 6年"],
+  ans:"<b>(C) 5年。</b><ul><li>還本期＝$40,000÷$8,000=5年</li><li>（不考量時間價值）</li></ul>"
+},
+{
+  q:"通貨膨脹下，若以名目元衡量現金流，應使用何種折現率？",
+  opts:["(A) 實質利率","(B) 名目利率","(C) 無風險利率","(D) 門檻率"],
+  ans:"<b>(B) 名目利率。</b><ul><li>名目現金流配名目利率、實質現金流配實質利率</li><li>兩法結果相同</li></ul>"
+},
+];
+
 
 /* ===== 術語表（列表形式） ===== */
 const GLOSS_CATS = [
