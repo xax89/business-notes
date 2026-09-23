@@ -510,6 +510,19 @@ const TERMS = {
 "Asymptotic normality":["Asymptotic normality","漸近常態","當樣本數 n 夠大時，√n(β̂ - β) 會趨近常態分配；大樣本推斷的基礎。"],
 "Central limit theorem":["Central limit theorem","中央極限定理","不管原始分配是什麼，大樣本下樣本平均會趨近常態分配；漸近常態的理論基礎。"],
 "Irrelevant variable":["Irrelevant variable","多餘變數","放進模型裡面，但其實對 y 根本沒有解釋力的變數；多放不會造成偏誤，但會降低效率。"],
+"Interval estimation":["Interval estimation","區間估計","用一個區間來估計母數，而不是單一點估計值；信賴區間就是區間估計的一種。"],
+"Confidence interval":["Confidence interval","信賴區間","重複抽樣多次，大約某個百分比的區間會蓋到真實母數；用來衡量估計的精確度。"],
+"Standard error":["Standard error","標準誤","估計式抽樣分配的標準差；衡量估計值的不確定性。"],
+"Hypothesis testing":["Hypothesis testing","假設檢定","先假設某個母數的值，然後看證據夠不夠有力推翻這個假設的統計推論方法。"],
+"Null hypothesis":["Null hypothesis","虛無假設 H₀","預設為真的假設；通常是「沒有效果」或「沒有關係」，和法庭上的「無罪推定」很像。"],
+"t-test":["t-test","t 檢定","用 t 統計量來檢定單一母數是否等於某個值的假設檢定方法。"],
+"t-statistic":["t-statistic","t 統計量","t = β̂ⱼ / se(β̂ⱼ)；衡量估計值離虛無假設有多遠，以標準誤為單位。"],
+"p-value":["p-value","p 值","如果虛無假設為真，觀察到和現在一樣極端或更極端的檢定統計量的機率；越小代表證據越強。"],
+"F-test":["F-test","F 檢定","用 F 統計量來同時檢定多個母數聯合假設的檢定方法。"],
+"F-statistic":["F-statistic","F 統計量","比較受限模型和不受限模型的解釋力差異；用來檢定聯合假設。"],
+"Restricted model":["Restricted model","受限模型","加上額外限制條件（例如：某些係數等於 0）之後的模型；SSR 比較大。"],
+"Type I error":["Type I error","型一誤差","虛無假設為真，卻拒絕了它；也就是「誤判有罪」的機率，通常記為 α。"],
+"Power":["Power","檢定力","虛無假設為偽，成功拒絕它的機率；等於 1 - 型二誤差機率。"],
 };
 
 
@@ -1462,12 +1475,12 @@ const CH5_SECTIONS = [
 {
   id:"5.1", title:"區間估計與信賴區間",
   body:`
-  <p>前幾章我們學了怎麼估計 β̂，但那只是一個「點估計」——單一數字。現實中，我們會想知道：這個估計值大概落在什麼範圍內？這就是「區間估計」 (interval estimation) 要回答的問題。</p>
+  <p>前幾章我們學了怎麼估計 β̂，但那只是一個「點估計」——單一數字。現實中，我們會想知道：這個估計值大概落在什麼範圍內？這就是<span class="term" data-term="Interval estimation">「區間估計」 (interval estimation)</span> 要回答的問題。</p>
 
-  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">5.1.1 信賴區間 (Confidence Interval)</h3>
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">5.1.1 <span class="term" data-term="Confidence interval">信賴區間 (Confidence Interval)</span></h3>
   <p>β₁ 的 95% 信賴區間是：</p>
   <div class="formula"><span class="f-label">95% 信賴區間</span>β̂₁ ± t₀.₀₂₅, n-k-1 · se(β̂₁)</div>
-  <p>其中 se(β̂₁) 是標準誤 (standard error)——β̂₁ 抽樣分配的標準差。</p>
+  <p>其中 se(β̂₁) 是<span class="term" data-term="Standard error">標準誤 (standard error)</span>——β̂₁ 抽樣分配的標準差。</p>
 
   <p><b>怎麼解讀信賴區間？</b></p>
   <p>「95% 信賴區間」的意思是：如果你重複抽樣很多次，每次都算一個信賴區間，那麼大約 95% 的信賴區間會蓋到真實的 β₁。</p>
@@ -1494,9 +1507,9 @@ const CH5_SECTIONS = [
 {
   id:"5.2", title:"單一母數的 t 檢定",
   body:`
-  <p>假設檢定 (hypothesis testing) 是計量經濟學最常用的推論工具。它的邏輯和法庭審判很像：先假設「無罪」（虛無假設），然後看證據夠不夠有力推翻這個假設。</p>
+  <p><span class="term" data-term="Hypothesis testing">假設檢定 (hypothesis testing)</span> 是計量經濟學最常用的推論工具。它的邏輯和法庭審判很像：先假設「無罪」（<span class="term" data-term="Null hypothesis">虛無假設</span>），然後看證據夠不夠有力推翻這個假設。</p>
 
-  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">5.2.1 t 檢定的步驟</h3>
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">5.2.1 <span class="term" data-term="t-test">t 檢定</span>的步驟</h3>
   <p>檢定「β₁ = 0」的步驟：</p>
   <ol>
     <li><b>設定假設</b>：H₀: β₁ = 0 vs H₁: β₁ ≠ 0</li>
@@ -1505,10 +1518,10 @@ const CH5_SECTIONS = [
     <li><b>判斷</b>：如果 |t| > 臨界值，就拒絕 H₀；否則不拒絕</li>
   </ol>
 
-  <div class="formula"><span class="f-label">t 統計量</span>t = β̂ⱼ / se(β̂ⱼ)</div>
+  <div class="formula"><span class="f-label"><span class="term" data-term="t-statistic">t 統計量</span></span>t = β̂ⱼ / se(β̂ⱼ)</div>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">5.2.2 p 值的意義</h3>
-  <p>p 值 (p-value) 是什麼？它的意思是：如果虛無假設 H₀ 是對的，你觀察到「和現在一樣極端」甚至更極端的 t 統計量的機率。</p>
+  <p><span class="term" data-term="p-value">p 值 (p-value)</span> 是什麼？它的意思是：如果<span class="term" data-term="Null hypothesis">虛無假設</span> H₀ 是對的，你觀察到「和現在一樣極端」甚至更極端的 t 統計量的機率。</p>
   <p>p 值越小，代表證據越強，越有理由拒絕 H₀。</p>
 
   <div class="method-card mc-title" data-mc="ttest">
@@ -1546,16 +1559,16 @@ const CH5_SECTIONS = [
 {
   id:"5.3", title:"聯合假設檢定：F 檢定",
   body:`
-  <p>t 檢定一次只能檢定一個母數。如果要同時檢定多個母數，就需要用 F 檢定 (F-test)。</p>
+  <p>t 檢定一次只能檢定一個母數。如果要同時檢定多個母數，就需要用 <span class="term" data-term="F-test">F 檢定 (F-test)</span>。</p>
 
   <h3 style="margin-top:16px;font-size:16px;font-weight:600;">5.3.1 什麼是「聯合假設」？</h3>
   <p>舉個例子：你想要檢定「x₂ 和 x₃ 一起對 y 沒有解釋力」——也就是 H₀: β₂ = 0 且 β₃ = 0。</p>
-  <p>這時候你不能分別跑兩個 t 檢定（一個檢定 β₂=0，一個檢定 β₃=0）。因為「同時做兩次檢定」會讓「型一誤差機率」變大。</p>
+  <p>這時候你不能分別跑兩個 t 檢定（一個檢定 β₂=0，一個檢定 β₃=0）。因為「同時做兩次檢定」會讓「<span class="term" data-term="Type I error">型一誤差</span>機率」變大。</p>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">5.3.2 F 統計量的公式</h3>
   <p>F 檢定的邏輯是：比較「受限模型」和「不受限模型」的 R²，看限制條件是不是真的讓模型變差很多。</p>
 
-  <div class="formula"><span class="f-label">F 統計量</span>F = ((SSRᵣ - SSRᵤᵣ) / q) / (SSRᵤᵣ / (n - k - 1))</div>
+  <div class="formula"><span class="f-label"><span class="term" data-term="F-statistic">F 統計量</span></span>F = ((SSRᵣ - SSRᵤᵣ) / q) / (SSRᵤᵣ / (n - k - 1))</div>
   <ul>
     <li><b>SSRᵣ</b>：受限模型的殘差平方和（加上限制條件之後）</li>
     <li><b>SSRᵤᵣ</b>：不受限模型的殘差平方和（不加上限制條件）</li>
@@ -2113,7 +2126,7 @@ const CH8_SECTIONS = [
       4. 用 LM 統計量 = n·R²，和卡方分配比較
       </div>
       <div class="mc-detail">
-      如果 p < 0.05，就拒絕「同變異數」的虛無假設——代表有異變數問題。
+      如果 p < 0.05，就拒絕「同變異數」的<span class="term" data-term="Null hypothesis">虛無假設</span>——代表有異變數問題。
       </div>
     </div>
   </div>
@@ -2706,7 +2719,7 @@ const CH12_SECTIONS = [
       </div>
       <div class="mc-detail">
       <span class="term" data-term="Hausman test">豪斯曼檢定 (Hausman Test)</span>：就是用來檢定「a_i 和 x 到底有沒有相關」的。<br><br>
-      如果 Hausman 檢定拒絕了虛無假設（RE 和 FE 的係數估計差很多），那就代表 a_i 和 x 有相關，要用 FE。<br><br>
+      如果 Hausman 檢定拒絕了<span class="term" data-term="Null hypothesis">虛無假設</span>（RE 和 FE 的係數估計差很多），那就代表 a_i 和 x 有相關，要用 FE。<br><br>
       如果 Hausman 檢定不拒絕，那 RE 和 FE 都可以，RE 比較有效率。
       </div>
       <div class="mc-ex">
@@ -2840,8 +2853,8 @@ const CH13_SECTIONS = [
   </div>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">怎麼診斷單根？<span class="term" data-term="ADF test">ADF 檢定</span></h3>
-  <p>最常用的單根檢定是 Augmented Dickey-Fuller (ADF) 檢定。它的虛無假設是「有單根」（不是定態的）。</p>
-  <p>如果 p < 0.05，就拒絕「有單根」的虛無假設——代表這個時間序列是定態的。</p>
+  <p>最常用的單根檢定是 Augmented Dickey-Fuller (ADF) 檢定。它的<span class="term" data-term="Null hypothesis">虛無假設</span>是「有單根」（不是定態的）。</p>
+  <p>如果 p < 0.05，就拒絕「有單根」的<span class="term" data-term="Null hypothesis">虛無假設</span>——代表這個時間序列是定態的。</p>
 
   <div class="warn">考試重點：如果兩個變數都是「一階單整」 I(1)，而且它們之間有「共整合」 (cointegration) 關係，那直接跑 OLS 還是有意義的——長期來看，兩個變數會一起移動。這就是 Engle-Granger 共整合理論。</div>
 
@@ -3192,7 +3205,7 @@ const CH16_SECTIONS = [
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">Hansen J 檢定：過度認定檢定</h3>
   <p>如果你有「超過剛好足夠」的工具變數（也就是「過度認定」），那你就可以用 Hansen J 檢定來檢定：所有工具變數（動機條件）是不是真的都是外生的。</p>
-  <p>如果 Hansen J 檢定拒絕了虛無假設，那就代表：至少有一個工具變數是內生的——你的工具變數選擇有問題。</p>
+  <p>如果 Hansen J 檢定拒絕了<span class="term" data-term="Null hypothesis">虛無假設</span>，那就代表：至少有一個工具變數是內生的——你的工具變數選擇有問題。</p>
 
   <div class="method-card mc-title" data-mc="gmm-compare">
     <div class="mc-check"><input type="checkbox" id="mc-ch16-1" data-mc="gmm-compare"><label for="mc-ch16-1" class="mc-lbl">學會</label></div>
