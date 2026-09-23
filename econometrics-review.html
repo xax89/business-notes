@@ -474,6 +474,17 @@ const TERMS = {
 "Endogeneity":["Endogeneity","內生性","解釋變數與誤差項相關的情況；會導致 OLS 估計式偏誤且不一致。"],
 "Least squares":["Least squares","最小平方法","藉由最小化殘差平方和來估計模型參數的方法。"],
 "Projection":["Projection","投影","OLS 的幾何解釋：將 y 投影到 X 變數所張開的空間上。"],
+"Causal inference":["Causal inference","因果推斷","判斷 X 變數的改變是否真的造成 Y 變數改變的統計推斷過程；現代計量經濟學的核心。"],
+"Structural econometrics":["Structural econometrics","結構式計量經濟","從經濟理論出發建立結構模型，估計結構參數的計量經濟學分支。"],
+"Statistical econometrics":["Statistical econometrics","統計式計量經濟","從數據出發，用統計方法找規律，比較不重視理論的計量經濟學分支。"],
+"PRF":["Population Regression Function","母體迴歸函數 PRF","整個母體真實的迴歸關係：y = β₀ + β₁x + u。"],
+"SRF":["Sample Regression Function","樣本迴歸函數 SRF","用手上樣本估計出來的迴歸關係：ŷ = β̂₀ + β̂₁x。"],
+"Confounding variable":["Confounding variable","混淆變數/第三變數","同時影響 X 和 Y 的變數，會造成偽相關；需要被控制才能識別因果。"],
+"Spurious correlation":["Spurious correlation","偽相關","兩個變數表面上有相關，但其實是由第三個變數造成的，本身沒有因果關係。"],
+"RCT":["Randomized Controlled Trial","隨機控制實驗 RCT","將受試者隨機分配到處理組和控制組，是因果推斷的黃金標準。"],
+"DiD":["Difference-in-Differences","差異中差異 DiD","利用處理前後的變化差異，來估計處理效果的擬實驗方法。"],
+"PSM":["Propensity Score Matching","傾向得分匹配 PSM","根據傾向得分將處理組和控制組個體進行匹配，以解決選擇偏誤的方法。"],
+"RD":["Regression Discontinuity","斷點迴歸 RD","利用某個連續變數的臨界值附近的隨機化變異，來估計因果效果的方法。"],
 };
 
 
@@ -504,7 +515,7 @@ const CH1_SECTIONS = [
     <li><b>計量經濟學</b>：用真實數據檢驗理論，告訴我們「實際上是什麼關係」</li>
   </ul>
 
-  <div class="warn">考試重點：計量經濟學的核心目標是「因果推斷」——不只是看兩個變數有沒有相關，而是要判斷「X 變數的改變，真的會造成 Y 變數的改變嗎？」這是第 10-14 章的主題。</div>
+  <div class="warn">考試重點：計量經濟學的核心目標是「<span class="term" data-term="Causal inference">因果推斷</span>」——不只是看兩個變數有沒有相關，而是要判斷「X 變數的改變，真的會造成 Y 變數的改變嗎？」這是第 10-14 章的主題。</div>
 
   <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：本章是整個計量經濟學的起點。後面所有章節都是在教你各種「估計方法」和「檢定方法」，幫你回答經濟理論提出的問題。</p>`
 },
@@ -531,8 +542,8 @@ const CH1_SECTIONS = [
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">實證分析的兩大類型</h3>
   <ul>
-    <li><b>結構式計量經濟 (Structural Econometrics)</b>：從經濟理論出發，建立結構模型，估計結構參數。特點是「理論先於數據」。</li>
-    <li><b>統計式計量經濟 (Statistical Econometrics)</b>：從數據出發，用統計方法找規律，比較不重視理論。特點是「數據先於理論」。</li>
+    <li><span class="term" data-term="Structural econometrics">結構式計量經濟 (Structural Econometrics)</span>：從經濟理論出發，建立結構模型，估計結構參數。特點是「理論先於數據」。</li>
+    <li><span class="term" data-term="Statistical econometrics">統計式計量經濟 (Statistical Econometrics)</span>：從數據出發，用統計方法找規律，比較不重視理論。特點是「數據先於理論」。</li>
   </ul>
 
   <p>現代計量經濟學的主流是「結構式」——強調要有經濟理論的基礎，不能只是盲目跑迴歸。</p>
@@ -547,7 +558,7 @@ const CH1_SECTIONS = [
   <p>經濟理論通常是用數學函數來表示的，例如需求理論：需求量是價格的函數 Qd = f(P)。</p>
   <p>但現實世界不是這麼完美的——除了價格之外，還有很多其他因素會影響需求量（所得、偏好、替代品價格等），而且這些影響通常是隨機的、不確定的。</p>
   <p>所以我們需要加入一個<b>誤差項</b> (error term) 來代表所有我們沒有觀察到的影響：</p>
-  <div class="formula"><span class="f-label">母體迴歸函數 PRF</span>y = β₀ + β₁x + u</div>
+  <div class="formula"><span class="f-label"><span class="term" data-term="PRF">母體迴歸函數 PRF</span></span>y = β₀ + β₁x + u</div>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">1.3.2 母體迴歸函數 vs 樣本迴歸函數</h3>
   <p>這是計量經濟學最基礎的一組概念，一定要搞清楚：</p>
@@ -555,7 +566,7 @@ const CH1_SECTIONS = [
   <div class="tblwrap">
     <table>
       <thead>
-        <tr><th></th><th>母體迴歸函數 (PRF)</th><th>樣本迴歸函數 (SRF)</th></tr>
+        <tr><th></th><th><span class="term" data-term="PRF">母體迴歸函數 (PRF)</span></th><th><span class="term" data-term="SRF">樣本迴歸函數 (SRF)</span></th></tr>
       </thead>
       <tbody>
         <tr><td><b>代表</b></td><td>整個母體的真實關係</td><td>你手上這份樣本估計出來的關係</td></tr>
@@ -591,9 +602,9 @@ const CH1_SECTIONS = [
     <div class="mc-body">
       <div class="mc-formula">橫斷面資料 → 時間序列資料 → 追蹤資料（面板資料）</div>
       <div class="mc-detail">
-      1. <b>橫斷面資料 (Cross-sectional)</b>：同一時間點，很多個體的資料。例如：2025 年 1000 個人的薪資和教育年數。<br>
-      2. <b>時間序列資料 (Time series)</b>：同一個體，很多時間點的資料。例如：台灣過去 30 年的 GDP 成長率。<br>
-      3. <b>追蹤資料 / 面板資料 (Panel data)</b>：很多個體，每個個體很多時間點。例如：1000 個人，追蹤 10 年的薪資和就業狀況。
+      1. <span class="term" data-term="Cross-sectional data">橫斷面資料 (Cross-sectional)</span>：同一時間點，很多個體的資料。例如：2025 年 1000 個人的薪資和教育年數。<br>
+      2. <span class="term" data-term="Time series data">時間序列資料 (Time series)</span>：同一個體，很多時間點的資料。例如：台灣過去 30 年的 GDP 成長率。<br>
+      3. <span class="term" data-term="Panel data">追蹤資料 / 面板資料 (Panel data)</span>：很多個體，每個個體很多時間點。例如：1000 個人，追蹤 10 年的薪資和就業狀況。
       </div>
     </div>
   </div>
@@ -620,7 +631,7 @@ const CH1_SECTIONS = [
   <ol>
     <li><b>X 造成 Y</b>：真的是因果關係（你想要的）</li>
     <li><b>Y 造成 X</b>：反向因果（因果關係反過來了）</li>
-    <li><b>Z 同時造成 X 和 Y</b>：第三變數效果（偽相關 / 混淆變數）</li>
+    <li><b>Z 同時造成 X 和 Y</b>：第三變數效果（<span class="term" data-term="Spurious correlation">偽相關</span> / <span class="term" data-term="Confounding variable">混淆變數</span>）</li>
   </ol>
 
   <div class="method-card mc-title" data-mc="causation">
@@ -642,7 +653,7 @@ const CH1_SECTIONS = [
   </ol>
   <p>第三個條件最難滿足，也是計量經濟學（特別是實用計量）大部分章節在處理的問題。</p>
 
-  <div class="warn">考試重點：計量經濟學的「黃金標準」是隨機控制實驗 (RCT)——隨機把人分成兩組，一組有 treatment，一組沒有，這樣就可以排除其他解釋。但大部分時候我們拿不到實驗資料，所以要用各種「擬實驗」方法：工具變數、固定效果、差異中差異、斷點迴歸等。這些都是第 11-14 章的主題。</div>
+  <div class="warn">考試重點：計量經濟學的「黃金標準」是<span class="term" data-term="RCT">隨機控制實驗 (RCT)</span>——隨機把人分成兩組，一組有 treatment，一組沒有，這樣就可以排除其他解釋。但大部分時候我們拿不到實驗資料，所以要用各種「擬實驗」方法：<span class="term" data-term="iv">工具變數</span>、<span class="term" data-term="fixed-effects">固定效果</span>、<span class="term" data-term="DiD">差異中差異</span>、<span class="term" data-term="RD">斷點迴歸</span>等。這些都是第 11-14 章的主題。</div>
 
   <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：因果推斷是現代計量經濟學的核心。第 10 章講內生性問題（為什麼 OLS 估計不出因果效果）；第 11 章講工具變數；第 12 章講追蹤資料固定效果；第 14 章講實驗和擬實驗方法（RCT、DiD、PSM、RD）。</p>`
 }
@@ -2892,7 +2903,7 @@ const CH14_SECTIONS = [
 
   <div class="method-card mc-title" data-mc="rct">
     <div class="mc-check"><input type="checkbox" id="mc-ch14-0" data-mc="rct"><label for="mc-ch14-0" class="mc-lbl">學會</label></div>
-    <div class="mc-left">隨機控制實驗 (RCT)：因果推斷的黃金標準</div>
+    <div class="mc-left"><span class="term" data-term="RCT">隨機控制實驗 (RCT)</span>：因果推斷的黃金標準</div>
     <div class="mc-body">
       <div class="mc-formula">
       把受試者「隨機」分成兩組：<br>
