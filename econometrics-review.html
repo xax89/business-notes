@@ -492,6 +492,13 @@ const TERMS = {
 "Semi-elasticity":["Semi-elasticity","半彈性","x 增加 1 單位時，y 變動的百分比；對數-線性模型的係數就是半彈性。"],
 "Constant elasticity":["Constant elasticity","恆常彈性","雙對數模型的係數就是彈性——x 變動 1%，y 變動百分之多少。"],
 "Omitted variable bias":["Omitted variable bias","遺漏變數偏誤","模型中遺漏了重要解釋變數，導致 OLS 估計式偏誤；是實證研究最常見的問題。"],
+"Ceteris paribus":["Ceteris paribus","其他條件不變","拉丁文片語，經濟學分析中常用的假設：控制其他變數不變。"],
+"Multicollinearity":["Multicollinearity","多重共線性","解釋變數之間高度相關的情況；不會造成偏誤，但會讓估計不精確。"],
+"VIF":["Variance Inflation Factor","變異數膨脹因子 VIF","衡量多重共線性嚴重程度的指標：VIFⱼ = 1/(1-Rⱼ²)；VIF>10 代表共線性很嚴重。"],
+"Degrees of freedom":["Degrees of freedom","自由度","樣本觀察值個數減估計參數個數；用來調整 R² 等統計量。"],
+"Residual maker matrix":["Residual maker matrix","殘差製造矩陣 M","M = I - X(X'X)⁻¹X'；把 y 裡面可以被 X 解釋的部分扣掉，留下殘差。"],
+"AIC":["Akaike Information Criterion","赤池資訊準則 AIC","用來比較不同模型好壞的準則；同時考慮解釋力和模型複雜度。"],
+"BIC":["Bayesian Information Criterion","貝氏資訊準則 BIC","類似 AIC，但對模型複雜度的懲罰更重；傾向選擇比較簡單的模型。"],
 };
 
 
@@ -919,16 +926,16 @@ const CH3_SECTIONS = [
 {
   id:"3.1", title:"多元線性迴歸模型的設定",
   body:`
-  <p>多元線性迴歸模型 (Multiple Linear Regression Model) 是現實中最常用的計量模型——一次放很多個解釋變數，同時解釋 y 的變動。</p>
+  <p><span class="term" data-term="Multiple regression">多元線性迴歸模型 (Multiple Linear Regression Model)</span> 是現實中最常用的計量模型——一次放很多個解釋變數，同時解釋 y 的變動。</p>
 
   <div class="formula"><span class="f-label">多元線性迴歸模型</span>y = β₀ + β₁x₁ + β₂x₂ + ... + βₖxₖ + u</div>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">為什麼要放很多個解釋變數？</h3>
-  <p>放更多解釋變數的主要目的是：<b>控制其他重要因素</b>，讓你估計出來的 β₁ 更接近「ceteris paribus」（其他條件不變）下的真實效果。</p>
+  <p>放更多解釋變數的主要目的是：<b>控制其他重要因素</b>，讓你估計出來的 β₁ 更接近「<span class="term" data-term="Ceteris paribus">ceteris paribus</span>」（其他條件不變）下的真實效果。</p>
 
   <div class="method-card mc-title" data-mc="multiple-reg">
     <div class="mc-check"><input type="checkbox" id="mc-ch3-0" data-mc="multiple-reg"><label for="mc-ch3-0" class="mc-lbl">學會</label></div>
-    <div class="mc-left">「偏迴歸係數」的意義</div>
+    <div class="mc-left">「<span class="term" data-term="Partial regression coefficient">偏迴歸係數</span>」的意義</div>
     <div class="mc-body">
       <div class="mc-formula">βⱼ = 在「控制住其他所有變數」的情況下，xⱼ 每增加 1 單位，y 平均變動多少</div>
       <div class="mc-detail">這是多元迴歸最重要的觀念：每個係數都是「淨效果」——把其他變數的影響都扣掉之後，xⱼ 單獨對 y 的效果。</div>
@@ -983,7 +990,7 @@ const CH3_SECTIONS = [
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">殘差的矩陣形式</h3>
   <div class="formula">ê = y - Xβ̂ = y - X(X'X)⁻¹X'y = My</div>
-  <p>其中 M = I - X(X'X)⁻¹X' 稱為「殀差製造矩陣」 (residual-maker matrix)——它的作用就是把 y 裡面可以被 X 解釋的部分扣掉，留下不能解釋的部分。</p>
+  <p>其中 M = I - X(X'X)⁻¹X' 稱為「<span class="term" data-term="Residual maker matrix">殘差製造矩陣 M</span>」 (residual-maker matrix)——它的作用就是把 y 裡面可以被 X 解釋的部分扣掉，留下不能解釋的部分。</p>
 
   <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：矩陣形式的 OLS 是第 4 章推導 OLS 性質的基礎。不偏性推導、變異數推導，全部都是用矩陣代數做的。</p>`
 },
@@ -1033,10 +1040,10 @@ const CH3_SECTIONS = [
   <p>因為只要你多放一個解釋變數，R² 一定會變大——即使那個變數根本沒用。原因是：放越多變數，SSR 只會變小或不變（不可能變大），所以 R² = 1 - SSR/SST 只會變大或不變。</p>
   <p>這就造成一個誘因：為了讓 R² 看起來很高，你可以亂放一堆根本沒用的變數。這當然不是好事。</p>
 
-  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">解決方法：調整後 R² (Adjusted R²)</h3>
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">解決方法：<span class="term" data-term="Adjusted R-squared">調整後 R² (Adjusted R²)</span></h3>
   <p>調整後 R² 的公式：</p>
   <div class="formula"><span class="f-label">調整後 R²</span>R̄² = 1 - (SSR/(n-k-1)) / (SST/(n-1))</div>
-  <p>和原本的 R² 差別在於：把「變數個數 k」考慮進去，用「自由度」來調整。</p>
+  <p>和原本的 R² 差別在於：把「變數個數 k」考慮進去，用「<span class="term" data-term="Degrees of freedom">自由度</span>」來調整。</p>
 
   <div class="method-card mc-title" data-mc="adjusted-r2">
     <div class="mc-check"><input type="checkbox" id="mc-ch3-3" data-mc="adjusted-r2"><label for="mc-ch3-3" class="mc-lbl">學會</label></div>
@@ -1051,7 +1058,7 @@ const CH3_SECTIONS = [
       重點是第 2 點：調整後 R² 會「懲罰」你放太多沒用的變數。所以它比較適合用來「選擇模型」——在一堆備選模型之間，選 R̄² 最高的那個。
       </div>
       <div class="mc-ex">
-      注意：R̄² 只是模型選擇的其中一個指標，不是萬靈丹。第 15 章講的 AIC、BIC 也是類似的概念——都是在「模型複雜度」和「解釋力」之間做取捨。
+      注意：R̄² 只是模型選擇的其中一個指標，不是萬靈丹。第 15 章講的 <span class="term" data-term="AIC">AIC</span>、<span class="term" data-term="BIC">BIC</span> 也是類似的概念——都是在「模型複雜度」和「解釋力」之間做取捨。
       </div>
     </div>
   </div>
@@ -1064,7 +1071,7 @@ const CH3_SECTIONS = [
 {
   id:"3.5", title:"多重共線性 (Multicollinearity)",
   body:`
-  <p>古典假設 3 說的是「沒有<b>完全</b>共線」。但現實中，解釋變數之間通常會有「某種程度」的相關，只是不會完全共線而已。這就叫做「多重共線性」。</p>
+  <p>古典假設 3 說的是「沒有<b>完全</b>共線」。但現實中，解釋變數之間通常會有「某種程度」的相關，只是不會完全共線而已。這就叫做「<span class="term" data-term="Multicollinearity">多重共線性</span>」。</p>
 
   <h3 style="margin-top:16px;font-size:16px;font-weight:600;">3.5.1 什麼是多重共線性？</h3>
   <p>如果兩個或多個解釋變數之間高度相關，我們就說有多重共線性問題。</p>
@@ -1082,7 +1089,7 @@ const CH3_SECTIONS = [
     <div class="mc-check"><input type="checkbox" id="mc-ch3-4" data-mc="multicollinearity"><label for="mc-ch3-4" class="mc-lbl">學會</label></div>
     <div class="mc-left">怎麼診斷多重共線性？</div>
     <div class="mc-body">
-      <div class="mc-formula">VIF (Variance Inflation Factor)</div>
+      <div class="mc-formula"><span class="term" data-term="VIF">VIF (Variance Inflation Factor)</span></div>
       <div class="mc-detail">
       對每個解釋變數 xⱼ：<br>
       1. 把 xⱼ 對其他所有解釋變數跑迴歸，得到 Rⱼ²<br>
