@@ -418,7 +418,20 @@ body.dark .formula .f-label{color:#d8b36a}
 const BOOK = [
   {n:1, title:"計量經濟學與經濟模型", subs:["1.1 計量經濟學的本質與方法論","1.2 經濟理論與計量模型","1.3 資料的類型與結構","1.4 因果關係與相關性","1.5 計量分析的步驟"], done:true, points:["計量經濟學＝結合經濟理論、數理統計與經濟資料，以估計、檢定經濟關係並做預測","方法論：先驗理論→模型設定→資料蒐集→估計→檢定→解釋與預測","計量模型是數學模型的隨機化版本：加入誤差項 ε","資料類型：橫斷面(cross-section)、時間序列(time series)、追蹤/縱橫面(panel)","因果關係 vs 相關性：計量經濟旨在推斷因果，而非僅描述相關","迴歸分析：探討依變數 y 與解釋變數 x 之間的統計關係","計量經濟學的三大任務：結構分析、預測、政策評估"]},
   {n:2, title:"簡單線性迴歸模型", subs:["2.1 簡單線性迴歸的設定","2.2 普通最小平方法 OLS","2.3 OLS 估計量的推導","2.4 擬合優度 R²","2.5 範例：消費函數"], done:true, points:["簡單線性迴歸模型：y = β₀ + β₁x + u","OLS 原理：最小化殘差平方和 Σe²","β̂₁ = Σ(xi-x̄)(yi-ȳ) / Σ(xi-x̄)²","β̂₀ = ȳ - β̂₁x̄","殘差 e = y - ŷ = y - (β̂₀ + β̂₁x)","R² = ESS/TSS = 1 - RSS/TSS，介於 0 與 1 之間","R² 解釋：x 解釋了 y 變異的百分比","OLS 的幾何意義：y 對 x 的投影","最小平方法的直覺：找一條線使觀測點到直線的垂直距離平方和最小"]},
-  {n:3, title:"多元線性迴歸模型", subs:["3.1 多元迴歸的設定","3.2 OLS 的矩陣表示","3.3 偏迴歸係數的意義","3.4 擬合優度與調整 R²","3.5 虛擬變數"], done:true, points:["多元線性迴歸：y = β₀ + β₁x₁ + β₂x₂ + ... + βkxk + u","矩陣形式：y = Xβ + u，X 為 n×(k+1) 矩陣","OLS 估計量：β̂ = (X'X)⁻¹X'y","偏迴歸係數 βⱼ：控制其他變數不變下，xⱼ 對 y 的邊際效果","R² 隨解釋變數增加只增不減；調整 R² 懲罰變數個數","調整 R² = 1 - (RSS/(n-k-1)) / (TSS/(n-1))","虛擬變數(dummy variable)：0/1 變數，表達質性特徵","虛擬變數陷阱：若有 m 個類別，只能放 m-1 個虛擬變數","迴歸係數的個體經濟解讀：邊際效果"]}
+  {n:3, title:"多元線性迴歸模型", subs:["3.1 多元迴歸的設定","3.2 OLS 的矩陣表示","3.3 偏迴歸係數的意義","3.4 擬合優度與調整 R²","3.5 虛擬變數"], done:true, points:["多元線性迴歸：y = β₀ + β₁x₁ + β₂x₂ + ... + βkxk + u","矩陣形式：y = Xβ + u，X 為 n×(k+1) 矩陣","OLS 估計量：β̂ = (X'X)⁻¹X'y","偏迴歸係數 βⱼ：控制其他變數不變下，xⱼ 對 y 的邊際效果","R² 隨解釋變數增加只增不減；調整 R² 懲罰變數個數","調整 R² = 1 - (RSS/(n-k-1)) / (TSS/(n-1))","虛擬變數(dummy variable)：0/1 變數，表達質性特徵","虛擬變數陷阱：若有 m 個類別，只能放 m-1 個虛擬變數","迴歸係數的個體經濟解讀：邊際效果"]},
+  {n:4, title:"古典假設與 OLS 性質", subs:["4.1 古典線性迴歸模型的假設","4.2 OLS 估計式的小樣本性質","4.3 高斯-馬可夫定理與 BLUE","4.4 OLS 的大樣本性質","4.5 遺漏變數偏誤"], done:true, points:["古典假設：線性、隨機抽樣、不完全共線、零條件平均、同變異數、無自我相關","OLS 不偏性：E(β̂|X) = β","Var(β̂|X) = σ²(X'X)⁻¹","高斯-馬可夫定理：古典假設下 OLS 是 BLUE","大樣本性質：一致性、漸近常態","遺漏變數偏誤：兩個條件才會產生偏誤"]},
+  {n:5, title:"區間估計與假設檢定", subs:["5.1 常態分配假設與小樣本理論","5.2 單一係數的 t 檢定","5.3 信賴區間","5.4 聯合假設檢定與 F 檢定","5.5 預測與預測區間"], done:true, points:["常態假設：u|X ~ N(0, σ²I)","t 統計量 = (β̂ - β₀) / se(β̂) ~ t(n-k-1)","p-value < α 就拒絕 H₀","信賴區間：β̂ ± t·se(β̂)","F 檢定：檢定多個係數的聯合假設","整體 F 檢定：所有 βⱼ = 0","預測區間比信賴區間寬（包含誤差項變異）"]},
+  {n:6, title:"函數形式與模型設定", subs:["6.1 對數線性模型","6.2 多項式模型與交互項","6.3 結構改變的 Chow 檢定","6.4 模型設定誤差","6.5 模型選擇準則"], done:true, points:["半對數模型：β₁ 是半彈性（%變動）","雙對數模型：β₁ 是彈性","二次式模型：邊際效果 = β₁ + 2β₂x","交互項：邊際效果取決於另一個變數","Chow 檢定：檢定結構改變（係數是否跨群體相同）","遺漏變數：有偏誤、不一致","多餘變數：不偏但無效率","AIC/BIC：模型選擇準則，越小越好"]},
+  {n:7, title:"虛擬變數與虛擬因變數", subs:["7.1 虛擬解釋變數","7.2 虛擬因變數與線性機率模型","7.3 Logit 與 Probit 模型","7.4 多類別因變數模型","7.5 計數模型"], done:true, points:["虛擬變數：0/1 變數，表達質性特徵","虛擬變數陷阱：m 個類別只能放 m-1 個虛擬變數","線性機率模型 (LPM)：y = β₀ + β₁x + u，y 是 0/1 變數","LPM 的問題：機率可能超出 [0,1]、異變數","Logit 模型：使用邏輯函數，保證機率在 [0,1] 之間","Probit 模型：使用標準常態 CDF","多類別 Logit：Multinomial Logit (MNL)","有序 Logit/Probit：有序類別因變數","Poisson 回歸：計數因變數（如事件發生次數）"]},
+  {n:8, title:"異變數", subs:["8.1 異變數的意義與後果","8.2 異變數的偵測","8.3 加權最小平方法 WLS","8.4 穩健標準誤","8.5 常見異變數模型"], done:true, points:["同變異數假設：Var(u|X) = σ²","異變數：Var(u|X) 隨 X 變動","異變數的後果：OLS 不偏但不一致、標準誤估計錯誤","偵測方法：Goldfeld-Quandt 檢定、Breusch-Pagan 檢定、White 檢定","解決方法 1：加權最小平方法 (WLS)","WLS：給予變異數較小的觀測值較大權重","解決方法 2：穩健標準誤 (White / HC 標準誤)","穩健標準誤：不改變估計係數，只修正標準誤估計","常見異變數：橫斷面資料中的規模變數"]},
+  {n:9, title:"自我相關", subs:["9.1 自我相關的意義與後果","9.2 自我相關的偵測","9.3 一階自我相關 AR(1)","9.4 解決自我相關的方法","9.5 時間序列資料的自我相關"], done:true, points:["無自我相關假設：Cov(ui, uj|X) = 0 for i≠j","自我相關：誤差項之間存在相關","一階自我相關：ut = ρut-1 + εt","自我相關的後果：OLS 不偏但無效率、標準誤估計錯誤","偵測方法：Durbin-Watson 檢定","DW 統計量 = 2(1-ρ̂)，介於 0 與 4 之間","DW ≈ 2：無自我相關；DW < 2：正自我相關；DW > 2：負自我相關","解決方法 1：Cochrane-Orcutt 估計","解決方法 2：Newey-West 穩健標準誤","解決方法 3：一階差分法（如果 ρ=1）"]},
+  {n:10, title:"隨機解釋變數與測量誤差", subs:["10.1 隨機解釋變數","10.2 測量誤差的後果","10.3 測量誤差的解決方法","10.4 遺漏變數偏誤","10.5 聯立方程式偏誤"], done:true, points:["嚴格外生性假設：E(u|X) = 0","隨機解釋變數：X 與 u 相關","測量誤差：y 或 x 的觀測值與真實值有誤差","y 的測量誤差：不影響 OLS 估計的一致性","x 的測量誤差：導致 OLS 估計式不一致（向零偏誤）","解決方法：工具變數法 (IV)","遺漏變數偏誤：兩個條件才會產生偏誤","聯立方程式偏誤：y 同時影響 x，導致 x 與 u 相關"]},
+  {n:11, title:"工具變數與兩段最小平方法", subs:["11.1 工具變數的概念","11.2 工具變數的條件","11.3 兩段最小平方法 2SLS","11.4 弱工具變數","11.5 過度認定檢定"], done:true, points:["工具變數 (IV)：解決 x 與 u 相關的方法","工具變數 z 的兩個條件：(1) z 與 x 相關；(2) z 與 u 不相關","2SLS 步驟：第一階段 x 對 z 迴歸，取得預測值 x̂；第二階段 y 對 x̂ 迴歸","IV 估計式：z'x 的逆矩陣乘以 z'y","弱工具變數：z 與 x 相關性很弱","弱工具變數的後果：IV 估計式偏誤很大","過度認定檢定：當工具變數個數 > 內生變數個數時，檢定工具變數是否外生","Hausman 檢定：比較 OLS 與 IV 估計式，判斷是否存在內生性"]},
+  {n:12, title:"追蹤資料模型", subs:["12.1 追蹤資料的結構","12.2 混合最小平方法 Pooled OLS","12.3 固定效果模型 Fixed Effects","12.4 隨機效果模型 Random Effects","12.5 虛擬變數法 LSDV"], done:true, points:["追蹤資料 (Panel Data)：同時有橫斷面與時間序列兩個維度","混合 OLS：直接把所有資料放在一起做 OLS","固定效果模型 (FE)：每個個體有自己的截距項","固定效果的直覺：控制所有不隨時間變動的個體特性","虛擬變數法 (LSDV)：加入 n-1 個個體虛擬變數","隨機效果模型 (RE)：個體效果與解釋變數不相關","Hausman 檢定：選擇固定效果還是隨機效果","FE vs RE：如果個體效果與解釋變數相關，用 FE；否則用 RE","固定效果無法估計不隨時間變動的變數的效果"]},
+  {n:13, title:"時間序列模型", subs:["13.1 時間序列資料的特性","13.2 平穩性 Stationarity","13.3 自我相關函數 ACF 與 PACF","13.4 ARMA 與 ARIMA 模型","13.5 波動率模型 ARCH/GARCH"], done:true, points:["時間序列資料：對同一個體在不同時間點觀察","平穩性：序列的統計特性（平均數、變異數）不隨時間改變","虛假迴歸：兩個非平穩序列做迴歸，即使不相關也會得到顯著係數","單整階數：需要差分幾次才能變平穩","AR(p)：自我迴歸模型，y_t 取決於過去 p 期的 y","MA(q)：移動平均模型，y_t 取決過去 q 期的誤差項","ARMA(p,q)：AR + MA","ARIMA(p,d,q)：差分 d 次後的 ARMA","ARCH/GARCH：波動率聚集（大變動後面跟著大變動）"]},
+  {n:14, title:"自我選擇與效果模型", subs:["14.1 隨機控制實驗 RCT","14.2 差異中的差異 DiD","14.3 傾向得分匹配 PSM","14.4 斷點迴歸 RD","14.5 工具變數與自然實驗"], done:true, points:["隨機控制實驗 (RCT)：隨機分配處理組與控制組","RCT 是因果推斷的黃金標準","差異中的差異 (DiD)：比較處理前後，處理組與控制組的變化差異","DiD 的平行趨勢假設：處理組與控制組在沒有處理的情況下，趨勢會平行","傾向得分匹配 (PSM)：匹配處理組與控制組中傾向得分相近的個體","斷點迴歸 (RD)：利用隨機的斷點來估計因果效果","RD 的兩種類型：銳斷點 (Sharp RD) 與模糊斷點 (Fuzzy RD)","自然實驗：利用自然發生的隨機事件作為工具變數"]},
+  {n:15, title:"類別因變數模型", subs:["15.1 二元因變數模型","15.2 多類別因變數模型","15.3 有序因變數模型","15.4 計數因變數模型","15.5 持續時間模型"], done:true, points:["二元因變數：y = 0 或 1","Logit 模型：使用邏輯函數","Probit 模型：使用標準常態 CDF","邊際效果：在均值處，x 增加一單位，y=1 的機率變動多少","多類別 Logit：Multinomial Logit (MNL)","有序 Logit/Probit：有序類別（如满意度非常不滿意到非常滿意）","Poisson 回歸：計數因變數（如事件發生次數）","負二項回歸：解決 Poisson 模型的過度分散問題","Cox 比例風險模型：持續時間資料（如失業持續時間）"]},
+  {n:16, title:"縱橫面資料與時間序列進階", subs:["16.1 追蹤資料進階議題","16.2 動態追蹤模型","16.3 時間序列協整","16.4 結構改變與波動率","16.5 預測方法"], done:true, points:["動態追蹤模型：加入落後依變數作為解釋變數","動態追蹤模型的問題：Nickell 偏誤","解決方法：Arellano-Bond 估計量（GMM）","協整：兩個非平穩序列的線性組合是平穩的","誤差修正模型 (ECM)：結合長期均衡與短期調整","波動率聚集：高波動率後面跟著高波動率","ARCH/GARCH 模型：估計條件變異數","預測：樣本內預測 vs 樣本外預測","預測誤差指標：RMSE、MAE、MAPE"]},
 ];
 /* ===== 術語資料（點擊卡片時顯示） ===== */
 const TERMS = {
@@ -911,267 +924,6 @@ const CH3_PROBLEMS = [
   ans:"<b>(B) 控制教育不變下，男性相對於女性的工資差異。</b><ul><li>male 是虛擬變數：male=1 表男性，male=0 表女性</li><li>δ 是性別工資差異的對數估計值（乘以 100% 就是百分比差異）</li><li>這就是多元迴歸「控制其他變數」的威力</li></ul>"
 }
 ];
-
-const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS};
-
-/* ===== 第四章：古典假設與 OLS 性質 ===== */
-const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS};
-/* ===== 渲染 ===== */
-function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
-function escA(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
-
-let currentChapter=1;
-/* 行動端抽屜開關 */
-const navToggle=document.getElementById("navToggle");
-const navMask=document.getElementById("navMask");
-function closeNav(){document.body.classList.remove("nav-open");}
-if(navToggle)navToggle.addEventListener("click",()=>{document.body.classList.toggle("nav-open");});
-if(navMask)navMask.addEventListener("click",closeNav);
-
-function getProgressState(){
-  let mc={};try{mc=JSON.parse(localStorage.getItem("ma_mc_learned_v1")||"{}")}catch(e){}
-  let dn={};try{dn=JSON.parse(localStorage.getItem("ma_done_v1")||"{}")}catch(e){}
-  return {mc,dn};
-}
-function chapterProgress(n){
-  const {mc,dn}=getProgressState();
-  const secs=CH_SECTIONS[n]||[];
-  let total=0,done=0;
-  secs.forEach(sec=>{
-    const keys=[...sec.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]);
-    total+=keys.length;done+=keys.filter(k=>mc[k]).length;
-  });
-  const probs=CH_PROBLEMS[n]||[];
-  total+=probs.length;done+=probs.filter((_,i)=>dn[n+"-"+(i+1)]).length;
-  return {done,total,pct:total?Math.round(done/total*100):0};
-}
-
-function refreshProgress(n){
-  const {mc}=getProgressState();
-  const secs=CH_SECTIONS[n]||[];
-  const strip=document.querySelector(".progress-strip");
-  const label=document.querySelector(".progress-label");
-  if(strip&&label){
-    const secMc=secs.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));
-    strip.innerHTML=secMc.map(a=>`<i class="${a.length?(a.every(k=>mc[k])?'done':''):'na'}"></i>`).join("");
-    const t=secMc.filter(a=>a.length).length,d=secMc.filter(a=>a.length&&a.every(k=>mc[k])).length;
-    label.textContent="本章方法卡小節已完成 "+d+" / "+t+(t?"（"+Math.round(d/t*100)+"%）":"（本章無方法卡）");
-  }
-  const probProg=document.getElementById("probProgress");
-  if(probProg){
-    const {dn}=getProgressState();
-    const probs=CH_PROBLEMS[n]||[];
-    probProg.textContent="（已做 "+probs.filter((_,i)=>dn[n+"-"+(i+1)]).length+" / "+probs.length+"）";
-  }
-  const tag=document.querySelector('.nav-chapter[data-ch="'+n+'"] .tag');
-  if(tag){const pct=chapterProgress(n).pct;tag.textContent=pct>=100?"✓ 100%":pct+"%";}
-}
-
-
-function renderSidebar(){
-  const sb=document.getElementById("sidebar");
-  let html=`<div class="brand">管理會計<div class="t2">研究所複習 · Hilton &amp; Platt 第 1–16 章</div></div>
-  <button class="nav-gloss" id="navGloss" title="統整全書術語，可篩選與打勾複習">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>術語複習表
-  </button>`;
-  BOOK.forEach(ch=>{
-    html+=`<button class="nav-chapter ${ch.n===currentChapter?'active':''}" data-ch="${ch.n}">
-      <span class="num">${ch.n}</span><span>${esc(ch.title)}</span>
-      ${ch.done?`<span class="tag done">${chapterProgress(ch.n).pct>=100?"✓ 100%":chapterProgress(ch.n).pct+"%"}</span>`:'<span class="tag">待建</span>'}
-    </button>`;
-    if(ch.subs&&ch.subs.length){
-      ch.subs.forEach(sub=>{
-        const id=(typeof sub==="string")?sub.slice(0,3):sub.id;
-        const title=(typeof sub==="string")?sub:sub.title;
-        html+=`<button class="nav-sub" data-ch="${ch.n}" data-sec="${id}">${esc(title)}</button>`;
-      });
-    }
-  });
-  sb.innerHTML=html;
-  const navGloss=sb.querySelector("#navGloss");
-  if(navGloss)navGloss.addEventListener("click",()=>{renderGlossaryFull();window.scrollTo({top:0,behavior:"smooth"});closeNav();});
-  sb.querySelectorAll(".nav-chapter").forEach(b=>{
-    b.addEventListener("click",()=>{
-      const ch=BOOK[+b.dataset.ch-1];
-      if(ch.done){renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});closeNav();}
-      else{toast("第 "+ch.n+" 章尚未建置");}
-    });
-  });
-  sb.querySelectorAll(".nav-sub").forEach(b=>{
-    b.addEventListener("click",()=>{
-      const ch=BOOK[+b.dataset.ch-1];
-      if(!ch.done){toast("第 "+ch.n+" 章尚未建置");return;}
-      closeNav();
-      if(currentChapter!==+b.dataset.ch)renderChapter(+b.dataset.ch);
-      const el=document.getElementById("sec-"+b.dataset.sec);
-      if(!el)return;
-      if(!el.classList.contains("open")){const h=el.querySelector(".section-head");if(h)h.click();}
-      setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),60);
-    });
-  });
-}
-
-function renderChapter(n){
-  currentChapter=n;
-  renderSidebar();
-  const book=BOOK[n-1];
-  const sections=CH_SECTIONS[n]||[];
-  const problems=CH_PROBLEMS[n]||[];
-  const c=document.getElementById("chapterContent");
-  const favStoreKey="ma_fav_v1";
-  let favState={};try{favState=JSON.parse(localStorage.getItem(favStoreKey)||"{}")}catch(e){}
-  let doneState={};try{doneState=JSON.parse(localStorage.getItem("ma_done_v1")||"{}")}catch(e){}
-  const favPool={};
-  let h=`<div class="chapter-head">
-    <span class="kicker">第 ${n} 章</span>
-    <h1>第${n}章 ${esc(book.title)}</h1>
-    <div class="chpage">管理會計（Hilton &amp; Platt）第 ${n} 章</div>
-    <ul class="ch-points">
-      ${book.points?book.points.map(p=>`<li>${esc(p)}</li>`).join(""):""}
-    </ul>
-    <div class="progress-strip">${(()=>{const{mc}=getProgressState();const secMc=sections.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));return secMc.map(a=>`<i class="${a.length?(a.every(k=>mc[k])?'done':''):'na'}"></i>`).join("")})()}</div>
-    <div class="progress-label">本章小節方法卡已學 ${(()=>{const{mc}=getProgressState();const secMc=sections.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));const t=secMc.filter(a=>a.length).length,d=secMc.filter(a=>a.length&&a.every(k=>mc[k])).length;return "本章方法卡小節已完成 "+d+" / "+t+(t?"（"+Math.round(d/t*100)+"%）":"（本章無方法卡）")})()}</div>
-  </div>`;
-  sections.forEach((s,i)=>{
-    h+=`<section class="section" id="sec-${s.id}">
-      <div class="section-head" onclick="toggleSec(this)">
-        <span class="sec-num">${s.id}</span><span>${esc(s.title)}</span>
-        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
-      <div class="section-body">${s.body}</div>
-    </section>`;
-  });
-  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">例題演練 <span class="prob-progress" id="probProgress"></span></h1><p>先自己作答，再點「顯示答案」核對。</p></div>`;
-  problems.forEach((p,i)=>{
-    const fk=n+"-"+(i+1);
-    favPool[fk]={t:"第 "+n+" 章 · 例題 "+(i+1),q:p.q+(p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""),a:p.ans};
-    const isFav=!!favState[fk];
-    const isDone=!!doneState[fk];
-    h+=`<div class="problem" id="prob-${n}-${i+1}">
-      <div class="p-head"><button class="done-btn ${isDone?"on":""}" data-done="${fk}" title="標記已做過">${isDone?"☑ 做過":"☐ 做過"}</button><span>例題 ${i+1}</span><button class="fav ${isFav?"on":""}" data-fav="${fk}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
-      <div class="p-body"><p>${p.q}</p>${p.opts.length?`<div class="opts" data-pid="${fk}" data-correct="${(()=>{const m=p.ans.match(/^<b>\(([A-Da-d])\)/);return m?m[1].toUpperCase():"";})()}">${p.opts.map(o=>{const om=o.match(/^\(([A-Da-d])\)/);return `<div class="opt" data-ans="${om?om[1].toUpperCase():""}">${o}</div>`;}).join("")}</div>`:""}
-      <div class="prob-fb"></div>
-      <button class="ans-btn" onclick="toggleAns(this)">顯示答案</button>
-      <div class="ans"><span class="a-label">解答</span>：${p.ans}</div></div>
-    </div>`;
-  });
-  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">本章術語</h1><p>本章出現的術語：打勾＝已學會、★重點、✎筆記。全書術語總表在左側「術語複習表」。</p></div>
-  <div id="chGlossRoot"></div>`;
-  c.innerHTML=h;
-
-  glossMode="chapter";glossChapter=n;
-  renderGlossary();
-
-  // 例題收藏（錯題收集，存本機，與題庫頁共用 ma_fav_v1）
-  c.querySelectorAll(".fav").forEach(b=>{
-    b.addEventListener("click",()=>{
-      const k=b.dataset.fav;
-      if(favState[k]){delete favState[k];}else{favState[k]=favPool[k];}
-      try{localStorage.setItem(favStoreKey,JSON.stringify(favState));}catch(e){}
-      const on=!!favState[k];
-      b.classList.toggle("on",on);
-      b.textContent=on?"★ 已收藏":"☆ 收藏";
-    });
-  });
-
-  // 例題做過標記（存 ma_done_v1）
-  refreshProgress(n);
-  c.querySelectorAll(".done-btn").forEach(b=>{
-    b.addEventListener("click",()=>{
-      const k=b.dataset.done;
-      if(doneState[k]){delete doneState[k];}else{doneState[k]=true;}
-      try{localStorage.setItem("ma_done_v1",JSON.stringify(doneState));}catch(e){}
-      const on=!!doneState[k];
-      b.classList.toggle("on",on);
-      b.textContent=on?"☑ 做過":"☐ 做過";
-      refreshProgress(n);
-    });
-  });
-
-  // 例題點按作答：點選項 → 判對錯 → 自動做過、錯題自動收藏
-  c.querySelectorAll(".opts").forEach(box=>{
-    box.addEventListener("click",e=>{
-      const opt=e.target.closest(".opt");
-      if(!opt || box.dataset.locked) return;
-      box.dataset.locked="1";
-      const pid=box.dataset.pid, correct=box.dataset.correct;
-      const picked=opt.dataset.ans;
-      const isRight = !correct || (picked===correct);
-      opt.classList.add("sel");
-      if(isRight){ opt.classList.add("right"); }
-      else{
-        opt.classList.add("wrong");
-        if(correct) box.querySelectorAll(".opt").forEach(o=>{ if(o.dataset.ans===correct) o.classList.add("right"); });
-      }
-      const fb=box.parentElement.querySelector(".prob-fb");
-      if(fb) fb.innerHTML = isRight ? '<span class="fb-ok">✓ 答對了</span>' : `<span class="fb-no">✗ 答錯，正確答案是 ${correct}</span>`;
-      // 自動標記做過
-      if(!doneState[pid]){ doneState[pid]=true; try{localStorage.setItem("ma_done_v1",JSON.stringify(doneState));}catch(err){} refreshProgress(n); }
-      const prob=box.closest(".problem");
-      // 答錯自動進收藏
-      if(!isRight && !favState[pid]){ favState[pid]=favPool[pid]; try{localStorage.setItem(favStoreKey,JSON.stringify(favState));}catch(err){} }
-      // 同步按鈕狀態
-      const db=prob.querySelector(".done-btn"); if(db){ db.classList.add("on"); db.textContent="☑ 做過"; }
-      const favBtn=prob.querySelector(".fav"); if(favBtn && !isRight){ favBtn.classList.add("on"); favBtn.textContent="★ 已收藏"; }
-      // 直接展開解答
-      const ans=prob.querySelector(".ans"); if(ans) ans.style.display="block";
-    });
-  });
-
-  // 術語點擊（文內：課文名詞＋專有名詞都可開知識卡）
-  c.querySelectorAll(".term,.proper").forEach(t=>{
-    if(!t.dataset.term)return;
-    t.addEventListener("click",e=>{e.stopPropagation();openTerm(t.dataset.term);});
-  });
-  // 方法學習卡打勾（學會標記，存本機；學會＝刪除線＋黯淡）
-  const mcKey="ma_mc_learned_v1";
-  let mcState={};try{mcState=JSON.parse(localStorage.getItem(mcKey)||"{}")}catch(e){}
-  c.querySelectorAll(".method-card input[type=checkbox]").forEach(cb=>{
-    const k=cb.dataset.mc;
-    const card=cb.closest(".method-card");
-    const apply=()=>card.classList.toggle("learned",cb.checked);
-    cb.checked=!!mcState[k];
-    apply();
-    cb.addEventListener("change",()=>{mcState[k]=cb.checked;localStorage.setItem(mcKey,JSON.stringify(mcState));apply();refreshProgress(n);});
-  });
-  // 套用已存高亮
-  applyHighlights();
-}
-
-function toggleSec(head){
-  const sec=head.parentElement;
-  sec.classList.toggle("open");
-}
-function toggleAns(btn){
-  const ans=btn.nextElementSibling;
-  ans.classList.toggle("show");
-  btn.textContent=ans.classList.contains("show")?"隱藏答案":"顯示答案";
-}
-
-/* ===== 術語模態 ===== */
-const PROPER_TERMS=new Set(["Kaplan","Norton","Hayes-Wheelwright","IMA","CMA","CGMA","Sarbanes-Oxley","Enron","Arthur Andersen","Volkswagen"]);
-const PROPER_ZH=["卡普蘭","諾頓","海斯—惠爾賴特","IMA","管理會計師","沙賓法案","安隆","安達信","福斯"];
-function decorateDef(text){
-  let h=esc(text);
-  PROPER_ZH.forEach(n=>{if(n)h=h.split(n).join('<span class="proper">'+n+'</span>');});
-  return h;
-}
-function openTerm(key){
-  const t=TERMS[key];
-  if(!t){toast("暫無此術語資料");return;}
-  const enEl=document.getElementById("termModalEn");
-  const zhEl=document.getElementById("termModalZh");
-  const defEl=document.getElementById("termModalDef");
-  const proper=PROPER_TERMS.has(key);
-  enEl.textContent=t[0];
-  enEl.classList.toggle("proper",proper);
-  zhEl.textContent=t[1];
-  zhEl.classList.toggle("proper",proper);
-  defEl.innerHTML=decorateDef(t[2]);
-  const m=document.getElementById("termModal");
-  m.style.display="flex";
-}
-function closeTerm(){document.getElementById("termModal").style.display="none";}
 
 const CH4_SECTIONS = [
 {
@@ -2493,6 +2245,268 @@ const CH16_PROBLEMS = [
   ans:"<b>(B) 名目利率。</b><ul><li>名目現金流配名目利率、實質現金流配實質利率</li><li>兩法結果相同</li></ul>"
 },
 ];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS,4:CH4_SECTIONS,5:CH5_SECTIONS,6:CH6_SECTIONS,7:CH7_SECTIONS,8:CH8_SECTIONS,9:CH9_SECTIONS,10:CH10_SECTIONS,11:CH11_SECTIONS,12:CH12_SECTIONS,13:CH13_SECTIONS,14:CH14_SECTIONS,15:CH15_SECTIONS,16:CH16_SECTIONS};
+
+/* ===== 第四章：古典假設與 OLS 性質 ===== */
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS,4:CH4_PROBLEMS,5:CH5_PROBLEMS,6:CH6_PROBLEMS,7:CH7_PROBLEMS,8:CH8_PROBLEMS,9:CH9_PROBLEMS,10:CH10_PROBLEMS,11:CH11_PROBLEMS,12:CH12_PROBLEMS,13:CH13_PROBLEMS,14:CH14_PROBLEMS,15:CH15_PROBLEMS,16:CH16_PROBLEMS};
+/* ===== 渲染 ===== */
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function escA(s){return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"&#39;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+
+let currentChapter=1;
+/* 行動端抽屜開關 */
+const navToggle=document.getElementById("navToggle");
+const navMask=document.getElementById("navMask");
+function closeNav(){document.body.classList.remove("nav-open");}
+if(navToggle)navToggle.addEventListener("click",()=>{document.body.classList.toggle("nav-open");});
+if(navMask)navMask.addEventListener("click",closeNav);
+
+function getProgressState(){
+  let mc={};try{mc=JSON.parse(localStorage.getItem("ma_mc_learned_v1")||"{}")}catch(e){}
+  let dn={};try{dn=JSON.parse(localStorage.getItem("ma_done_v1")||"{}")}catch(e){}
+  return {mc,dn};
+}
+function chapterProgress(n){
+  const {mc,dn}=getProgressState();
+  const secs=CH_SECTIONS[n]||[];
+  let total=0,done=0;
+  secs.forEach(sec=>{
+    const keys=[...sec.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]);
+    total+=keys.length;done+=keys.filter(k=>mc[k]).length;
+  });
+  const probs=CH_PROBLEMS[n]||[];
+  total+=probs.length;done+=probs.filter((_,i)=>dn[n+"-"+(i+1)]).length;
+  return {done,total,pct:total?Math.round(done/total*100):0};
+}
+
+function refreshProgress(n){
+  const {mc}=getProgressState();
+  const secs=CH_SECTIONS[n]||[];
+  const strip=document.querySelector(".progress-strip");
+  const label=document.querySelector(".progress-label");
+  if(strip&&label){
+    const secMc=secs.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));
+    strip.innerHTML=secMc.map(a=>`<i class="${a.length?(a.every(k=>mc[k])?'done':''):'na'}"></i>`).join("");
+    const t=secMc.filter(a=>a.length).length,d=secMc.filter(a=>a.length&&a.every(k=>mc[k])).length;
+    label.textContent="本章方法卡小節已完成 "+d+" / "+t+(t?"（"+Math.round(d/t*100)+"%）":"（本章無方法卡）");
+  }
+  const probProg=document.getElementById("probProgress");
+  if(probProg){
+    const {dn}=getProgressState();
+    const probs=CH_PROBLEMS[n]||[];
+    probProg.textContent="（已做 "+probs.filter((_,i)=>dn[n+"-"+(i+1)]).length+" / "+probs.length+"）";
+  }
+  const tag=document.querySelector('.nav-chapter[data-ch="'+n+'"] .tag');
+  if(tag){const pct=chapterProgress(n).pct;tag.textContent=pct>=100?"✓ 100%":pct+"%";}
+}
+
+
+function renderSidebar(){
+  const sb=document.getElementById("sidebar");
+  let html=`<div class="brand">管理會計<div class="t2">研究所複習 · Hilton &amp; Platt 第 1–16 章</div></div>
+  <button class="nav-gloss" id="navGloss" title="統整全書術語，可篩選與打勾複習">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>術語複習表
+  </button>`;
+  BOOK.forEach(ch=>{
+    html+=`<button class="nav-chapter ${ch.n===currentChapter?'active':''}" data-ch="${ch.n}">
+      <span class="num">${ch.n}</span><span>${esc(ch.title)}</span>
+      ${ch.done?`<span class="tag done">${chapterProgress(ch.n).pct>=100?"✓ 100%":chapterProgress(ch.n).pct+"%"}</span>`:'<span class="tag">待建</span>'}
+    </button>`;
+    if(ch.subs&&ch.subs.length){
+      ch.subs.forEach(sub=>{
+        const id=(typeof sub==="string")?sub.slice(0,3):sub.id;
+        const title=(typeof sub==="string")?sub:sub.title;
+        html+=`<button class="nav-sub" data-ch="${ch.n}" data-sec="${id}">${esc(title)}</button>`;
+      });
+    }
+  });
+  sb.innerHTML=html;
+  const navGloss=sb.querySelector("#navGloss");
+  if(navGloss)navGloss.addEventListener("click",()=>{renderGlossaryFull();window.scrollTo({top:0,behavior:"smooth"});closeNav();});
+  sb.querySelectorAll(".nav-chapter").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const ch=BOOK[+b.dataset.ch-1];
+      if(ch.done){renderChapter(ch.n);window.scrollTo({top:0,behavior:"smooth"});closeNav();}
+      else{toast("第 "+ch.n+" 章尚未建置");}
+    });
+  });
+  sb.querySelectorAll(".nav-sub").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const ch=BOOK[+b.dataset.ch-1];
+      if(!ch.done){toast("第 "+ch.n+" 章尚未建置");return;}
+      closeNav();
+      if(currentChapter!==+b.dataset.ch)renderChapter(+b.dataset.ch);
+      const el=document.getElementById("sec-"+b.dataset.sec);
+      if(!el)return;
+      if(!el.classList.contains("open")){const h=el.querySelector(".section-head");if(h)h.click();}
+      setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),60);
+    });
+  });
+}
+
+function renderChapter(n){
+  currentChapter=n;
+  renderSidebar();
+  const book=BOOK[n-1];
+  const sections=CH_SECTIONS[n]||[];
+  const problems=CH_PROBLEMS[n]||[];
+  const c=document.getElementById("chapterContent");
+  const favStoreKey="ma_fav_v1";
+  let favState={};try{favState=JSON.parse(localStorage.getItem(favStoreKey)||"{}")}catch(e){}
+  let doneState={};try{doneState=JSON.parse(localStorage.getItem("ma_done_v1")||"{}")}catch(e){}
+  const favPool={};
+  let h=`<div class="chapter-head">
+    <span class="kicker">第 ${n} 章</span>
+    <h1>第${n}章 ${esc(book.title)}</h1>
+    <div class="chpage">管理會計（Hilton &amp; Platt）第 ${n} 章</div>
+    <ul class="ch-points">
+      ${book.points?book.points.map(p=>`<li>${esc(p)}</li>`).join(""):""}
+    </ul>
+    <div class="progress-strip">${(()=>{const{mc}=getProgressState();const secMc=sections.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));return secMc.map(a=>`<i class="${a.length?(a.every(k=>mc[k])?'done':''):'na'}"></i>`).join("")})()}</div>
+    <div class="progress-label">本章小節方法卡已學 ${(()=>{const{mc}=getProgressState();const secMc=sections.map(x=>[...x.body.matchAll(/data-mc="([^"]+)"/g)].map(m=>m[1]));const t=secMc.filter(a=>a.length).length,d=secMc.filter(a=>a.length&&a.every(k=>mc[k])).length;return "本章方法卡小節已完成 "+d+" / "+t+(t?"（"+Math.round(d/t*100)+"%）":"（本章無方法卡）")})()}</div>
+  </div>`;
+  sections.forEach((s,i)=>{
+    h+=`<section class="section" id="sec-${s.id}">
+      <div class="section-head" onclick="toggleSec(this)">
+        <span class="sec-num">${s.id}</span><span>${esc(s.title)}</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="section-body">${s.body}</div>
+    </section>`;
+  });
+  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">例題演練 <span class="prob-progress" id="probProgress"></span></h1><p>先自己作答，再點「顯示答案」核對。</p></div>`;
+  problems.forEach((p,i)=>{
+    const fk=n+"-"+(i+1);
+    favPool[fk]={t:"第 "+n+" 章 · 例題 "+(i+1),q:p.q+(p.opts.length?`<div class="opts">${p.opts.map(o=>`<div>${o}</div>`).join("")}</div>`:""),a:p.ans};
+    const isFav=!!favState[fk];
+    const isDone=!!doneState[fk];
+    h+=`<div class="problem" id="prob-${n}-${i+1}">
+      <div class="p-head"><button class="done-btn ${isDone?"on":""}" data-done="${fk}" title="標記已做過">${isDone?"☑ 做過":"☐ 做過"}</button><span>例題 ${i+1}</span><button class="fav ${isFav?"on":""}" data-fav="${fk}">${isFav?"★ 已收藏":"☆ 收藏"}</button></div>
+      <div class="p-body"><p>${p.q}</p>${p.opts.length?`<div class="opts" data-pid="${fk}" data-correct="${(()=>{const m=p.ans.match(/^<b>\(([A-Da-d])\)/);return m?m[1].toUpperCase():"";})()}">${p.opts.map(o=>{const om=o.match(/^\(([A-Da-d])\)/);return `<div class="opt" data-ans="${om?om[1].toUpperCase():""}">${o}</div>`;}).join("")}</div>`:""}
+      <div class="prob-fb"></div>
+      <button class="ans-btn" onclick="toggleAns(this)">顯示答案</button>
+      <div class="ans"><span class="a-label">解答</span>：${p.ans}</div></div>
+    </div>`;
+  });
+  h+=`<div class="chapter-head" style="margin-top:26px"><h1 style="font-size:22px">本章術語</h1><p>本章出現的術語：打勾＝已學會、★重點、✎筆記。全書術語總表在左側「術語複習表」。</p></div>
+  <div id="chGlossRoot"></div>`;
+  c.innerHTML=h;
+
+  glossMode="chapter";glossChapter=n;
+  renderGlossary();
+
+  // 例題收藏（錯題收集，存本機，與題庫頁共用 ma_fav_v1）
+  c.querySelectorAll(".fav").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const k=b.dataset.fav;
+      if(favState[k]){delete favState[k];}else{favState[k]=favPool[k];}
+      try{localStorage.setItem(favStoreKey,JSON.stringify(favState));}catch(e){}
+      const on=!!favState[k];
+      b.classList.toggle("on",on);
+      b.textContent=on?"★ 已收藏":"☆ 收藏";
+    });
+  });
+
+  // 例題做過標記（存 ma_done_v1）
+  refreshProgress(n);
+  c.querySelectorAll(".done-btn").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const k=b.dataset.done;
+      if(doneState[k]){delete doneState[k];}else{doneState[k]=true;}
+      try{localStorage.setItem("ma_done_v1",JSON.stringify(doneState));}catch(e){}
+      const on=!!doneState[k];
+      b.classList.toggle("on",on);
+      b.textContent=on?"☑ 做過":"☐ 做過";
+      refreshProgress(n);
+    });
+  });
+
+  // 例題點按作答：點選項 → 判對錯 → 自動做過、錯題自動收藏
+  c.querySelectorAll(".opts").forEach(box=>{
+    box.addEventListener("click",e=>{
+      const opt=e.target.closest(".opt");
+      if(!opt || box.dataset.locked) return;
+      box.dataset.locked="1";
+      const pid=box.dataset.pid, correct=box.dataset.correct;
+      const picked=opt.dataset.ans;
+      const isRight = !correct || (picked===correct);
+      opt.classList.add("sel");
+      if(isRight){ opt.classList.add("right"); }
+      else{
+        opt.classList.add("wrong");
+        if(correct) box.querySelectorAll(".opt").forEach(o=>{ if(o.dataset.ans===correct) o.classList.add("right"); });
+      }
+      const fb=box.parentElement.querySelector(".prob-fb");
+      if(fb) fb.innerHTML = isRight ? '<span class="fb-ok">✓ 答對了</span>' : `<span class="fb-no">✗ 答錯，正確答案是 ${correct}</span>`;
+      // 自動標記做過
+      if(!doneState[pid]){ doneState[pid]=true; try{localStorage.setItem("ma_done_v1",JSON.stringify(doneState));}catch(err){} refreshProgress(n); }
+      const prob=box.closest(".problem");
+      // 答錯自動進收藏
+      if(!isRight && !favState[pid]){ favState[pid]=favPool[pid]; try{localStorage.setItem(favStoreKey,JSON.stringify(favState));}catch(err){} }
+      // 同步按鈕狀態
+      const db=prob.querySelector(".done-btn"); if(db){ db.classList.add("on"); db.textContent="☑ 做過"; }
+      const favBtn=prob.querySelector(".fav"); if(favBtn && !isRight){ favBtn.classList.add("on"); favBtn.textContent="★ 已收藏"; }
+      // 直接展開解答
+      const ans=prob.querySelector(".ans"); if(ans) ans.style.display="block";
+    });
+  });
+
+  // 術語點擊（文內：課文名詞＋專有名詞都可開知識卡）
+  c.querySelectorAll(".term,.proper").forEach(t=>{
+    if(!t.dataset.term)return;
+    t.addEventListener("click",e=>{e.stopPropagation();openTerm(t.dataset.term);});
+  });
+  // 方法學習卡打勾（學會標記，存本機；學會＝刪除線＋黯淡）
+  const mcKey="ma_mc_learned_v1";
+  let mcState={};try{mcState=JSON.parse(localStorage.getItem(mcKey)||"{}")}catch(e){}
+  c.querySelectorAll(".method-card input[type=checkbox]").forEach(cb=>{
+    const k=cb.dataset.mc;
+    const card=cb.closest(".method-card");
+    const apply=()=>card.classList.toggle("learned",cb.checked);
+    cb.checked=!!mcState[k];
+    apply();
+    cb.addEventListener("change",()=>{mcState[k]=cb.checked;localStorage.setItem(mcKey,JSON.stringify(mcState));apply();refreshProgress(n);});
+  });
+  // 套用已存高亮
+  applyHighlights();
+}
+
+function toggleSec(head){
+  const sec=head.parentElement;
+  sec.classList.toggle("open");
+}
+function toggleAns(btn){
+  const ans=btn.nextElementSibling;
+  ans.classList.toggle("show");
+  btn.textContent=ans.classList.contains("show")?"隱藏答案":"顯示答案";
+}
+
+/* ===== 術語模態 ===== */
+const PROPER_TERMS=new Set(["Kaplan","Norton","Hayes-Wheelwright","IMA","CMA","CGMA","Sarbanes-Oxley","Enron","Arthur Andersen","Volkswagen"]);
+const PROPER_ZH=["卡普蘭","諾頓","海斯—惠爾賴特","IMA","管理會計師","沙賓法案","安隆","安達信","福斯"];
+function decorateDef(text){
+  let h=esc(text);
+  PROPER_ZH.forEach(n=>{if(n)h=h.split(n).join('<span class="proper">'+n+'</span>');});
+  return h;
+}
+function openTerm(key){
+  const t=TERMS[key];
+  if(!t){toast("暫無此術語資料");return;}
+  const enEl=document.getElementById("termModalEn");
+  const zhEl=document.getElementById("termModalZh");
+  const defEl=document.getElementById("termModalDef");
+  const proper=PROPER_TERMS.has(key);
+  enEl.textContent=t[0];
+  enEl.classList.toggle("proper",proper);
+  zhEl.textContent=t[1];
+  zhEl.classList.toggle("proper",proper);
+  defEl.innerHTML=decorateDef(t[2]);
+  const m=document.getElementById("termModal");
+  m.style.display="flex";
+}
+function closeTerm(){document.getElementById("termModal").style.display="none";}
+
 
 
 /* ===== 術語表（列表形式） ===== */
