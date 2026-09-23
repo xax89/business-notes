@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>計量經濟分析（Greene 第6版）｜互動複習</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f766e'/%3E%3Ctext x='32' y='44' font-size='34' font-family='Georgia,serif' fill='white' text-anchor='middle'%3E%E2%88%91%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fs:16px;
+  --paper:#f6f0e2;
+  --ink:#2b251d;
+  --panel:#fffdf6;
+  --line:#e4d9bf;
+  --muted:#6f6555;
+  --nav-bg:#f1e9d5;
+  --nav-ink:#4a4234;
+  --nav-hover:#e7dcc0;
+  --nav-active:#3c6e8f;
+  --accent:#b5542e;
+  --accent-soft:#fbeae2;
+  --teal:#2c6e9e;
+  --teal-soft:#eef3f4;
+  --green:#1e7d32;
+  --hl:#ffe94a;
+  --radius:12px;
+  --blue:#2c6e9e;--green2:#3a7d44;--orange:#c06a24;--purple:#6b4e8e;--brown:#8a5a3b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif TC","PMingLiU","PingFang TC",serif;
+  font-size:var(--fs);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.8;
+  display:flex;
+  min-height:100vh;
+}
+body.dark{
+  --paper:#16130d;--ink:#e6e0d2;--panel:#201c14;--line:#3a3325;
+  --muted:#a0937a;--nav-bg:#1f1a10;--nav-ink:#cfc4ad;--nav-hover:#332b1b;
+  --nav-active:#4a8ab5;--accent:#e08a55;--accent-soft:#2f2014;
+  --teal:#5f9fc0;--teal-soft:#14242e;--green:#5cb56e;--hl:#5a4a1e;
+  --blue:#5f9fc0;--green2:#5cb56e;--orange:#d98a4a;--purple:#9b7fc0;--brown:#b08a5a;
+}
+/* ===== 側邊目錄（兩層） ===== */
+.sidebar{
+  width:280px;flex-shrink:0;background:var(--nav-bg);color:var(--nav-ink);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 18px 40px;
+  border-right:1px solid var(--line);
+}
+.sidebar .brand{font-weight:700;font-size:15px;letter-spacing:.02em;line-height:1.4;margin-bottom:4px;color:var(--ink)}
+.sidebar .brand .t2{font-size:12px;color:var(--muted);font-weight:400;margin-top:2px}
+.nav-chapter{
+  display:flex;align-items:center;gap:8px;width:100%;padding:4px 10px;border-radius:6px;
+  cursor:pointer;font-size:13.5px;font-weight:700;color:var(--ink);
+  border:none;background:none;text-align:left;margin-top:8px;font-family:inherit;line-height:1.45;
+}
+.nav-chapter:hover{background:var(--nav-hover)}
+.nav-chapter.active{background:var(--nav-active);color:#fff}
+.nav-chapter .num{font-size:11px;font-weight:600;opacity:.65;width:26px;flex-shrink:0}
+.nav-chapter.active .num{opacity:.9}
+.nav-chapter .tag{margin-left:auto;font-size:10px;opacity:.55;letter-spacing:.05em;font-weight:400}
+.nav-chapter .tag.done{color:var(--green2);opacity:1}
+.nav-sub{
+  display:block;width:100%;padding:3px 10px 3px 34px;border-radius:6px;
+  cursor:pointer;font-size:12.5px;color:var(--muted);border:none;background:none;text-align:left;font-family:inherit;line-height:1.45;
+}
+.nav-sub:hover{background:var(--nav-hover);color:var(--ink)}
+.nav-sub.active{color:var(--nav-active);font-weight:700}
+.nav-gloss{
+  display:flex;align-items:center;gap:8px;width:100%;padding:6px 10px;border-radius:6px;margin-top:10px;
+  cursor:pointer;font-size:13.5px;font-weight:700;color:#8a6d1a;border:1.5px dashed #d9b84a;background:#fffaf0;
+  text-align:left;font-family:inherit;line-height:1.45;transition:all .15s;
+}
+.nav-gloss:hover{border-color:#c9a227;color:#c9a227;background:#fff6dd}
+.nav-gloss svg{width:15px;height:15px;flex-shrink:0}
+.nav-gloss.active{background:#c9a227;color:#fff;border-style:solid}
+.search-panel{
+  position:fixed;top:66px;left:50%;transform:translateX(-50%);width:min(680px,92vw);max-height:62vh;overflow:auto;
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.16);z-index:60;
+}
+.search-panel .sp-item{display:block;width:100%;text-align:left;padding:10px 16px;border:none;border-bottom:1px solid var(--line);background:none;cursor:pointer;font-family:inherit;font-size:13.5px;color:var(--ink);line-height:1.5}
+.search-panel .sp-item:hover{background:var(--nav-hover)}
+.search-panel .sp-tag{display:inline-block;font-size:11px;color:var(--teal);font-weight:700;margin-right:8px;letter-spacing:.03em;white-space:nowrap}
+.search-panel .sp-item b{display:block;font-size:13.5px;margin:2px 0}
+.search-panel .sp-snip{display:block;font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search-panel .sp-count{padding:8px 16px;font-size:12px;color:var(--muted);text-align:center}
+.search-panel .sp-empty{padding:24px 16px;text-align:center;color:var(--muted);font-size:13.5px}
+body.dark .search-panel{background:#26221a;border-color:#4a4234}
+/* ===== 主內容 ===== */
+.main{flex:1;min-width:0;padding:28px 34px 80px}
+.topbar{
+  position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);padding:10px 0 14px;margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.searchbox{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 14px}
+.searchbox svg{width:16px;height:16px;opacity:.45;flex-shrink:0}
+.searchbox input{border:none;outline:none;background:none;font-size:14px;width:100%;color:var(--ink);font-family:inherit}
+.toolbtn{
+  display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;padding:8px 12px;font-size:13px;cursor:pointer;color:var(--ink);font-family:inherit;transition:all .15s;
+}
+.toolbtn:hover{border-color:var(--teal);color:var(--teal)}
+.toolbtn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.toolbtn svg{width:15px;height:15px}
+/* 章頭 */
+.chapter-head{border-left:8px solid var(--teal);padding:6px 0 10px 18px;margin:30px 0 18px}
+.chapter-head .kicker{display:inline-block;font-size:12px;letter-spacing:.15em;color:var(--teal);font-family:"Noto Sans TC",sans-serif;font-weight:600}
+.chapter-head h1{font-family:"Noto Serif TC",serif;font-size:27px;line-height:1.25;margin:2px 0 4px}
+.chapter-head p{color:var(--muted);font-size:14.5px;max-width:760px;margin-top:6px}
+/* 小節 */
+.section{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+.section-head{
+  display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:pointer;user-select:none;
+  font-family:"Noto Serif TC",serif;font-size:19px;font-weight:600;border-bottom:2px solid transparent;transition:border-color .15s;
+}
+.section.open .section-head{border-bottom-color:var(--teal)}
+.section-head .sec-num{color:var(--teal);font-size:12.5px;font-weight:700;font-family:"Noto Sans TC",sans-serif;letter-spacing:.08em;flex-shrink:0}
+.section-head .chev{width:18px;height:18px;margin-left:auto;transition:transform .2s;flex-shrink:0}
+.section.open .section-head .chev{transform:rotate(180deg)}
+.section-body{display:none;padding:4px 20px 18px}
+.section.open .section-body{display:block}
+.section-body p{margin:10px 0;font-size:14.8px}
+.section-body ul{margin:8px 0;padding-left:24px}
+.section-body li{margin:3px 0}
+/* callout 盒子（參考章節筆記風格） */
+.section-body .note{background:#fdf0c2;border-left:4px solid #d9a514;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px}
+.section-body .note::before{content:"重點與結論";display:block;font-family:"Noto Sans TC",sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.12em;color:#8a6d1a;margin-bottom:4px}
+.section-body .warn{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px}
+.section-body .warn::before{content:"考試重點";display:block;font-family:"Noto Sans TC",sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--accent);margin-bottom:4px}
+.section-body .src{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);margin-top:14px;padding-top:10px}
+.section-body .src summary{cursor:pointer;font-size:12.5px;color:var(--teal)}
+.section-body .src pre{white-space:pre-wrap;font-family:"Noto Serif TC",serif;font-size:13px;color:var(--muted);margin-top:8px;max-height:280px;overflow-y:auto}
+/* 公式卡 */
+.formula{background:#fbf4e6;border:1px dashed #c9b88f;border-radius:8px;padding:14px 18px;margin:12px 0;font-size:15.5px;text-align:center;font-family:"Noto Serif TC",serif}
+.formula .f-label{display:block;font-size:11.5px;color:#9a6a1f;letter-spacing:.08em;margin-bottom:4px;font-family:"Noto Sans TC",sans-serif;font-weight:700}
+.formula .f-note{display:block;font-size:12px;color:var(--muted);margin-top:4px;font-family:"Noto Sans TC",sans-serif}
+/* 術語 */
+.term{color:var(--green);font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,var(--green) 55%,transparent);border-radius:3px;padding:0 2px;transition:all .15s}
+.term:hover{background:var(--green);color:#fff;border-bottom:none}
+/* 專有名詞（人名／事件）深紫粗體 */
+.proper{color:#7b2cbf;font-weight:700;cursor:pointer;border-bottom:1.5px dashed color-mix(in srgb,#7b2cbf 50%,transparent);border-radius:3px;padding:0 2px;transition:background .15s}
+.proper:hover{background:#7b2cbf;color:#fff;border-bottom:none}
+body.dark .proper{color:#b39ddb}
+body.dark .proper:hover{background:#b39ddb;color:#1a1420}
+/* 術語列表與知識卡：人物/書名類紫色粗體 */
+#termModalEn{color:var(--green)}
+#termModalEn.proper,#termModalZh.proper{color:#7b2cbf}
+body.dark #termModalEn.proper,body.dark #termModalZh.proper{color:#b39ddb}
+#termModalDef .proper{color:#7b2cbf;font-weight:700;border-bottom:1.5px dashed color-mix(in srgb,#7b2cbf 50%,transparent)}
+body.dark #termModalDef .proper{color:#b39ddb}
+.gloss-en.proper,.gloss-zh.proper{color:#7b2cbf}
+body.dark .gloss-en.proper,body.dark .gloss-zh.proper{color:#b39ddb}
+/* 例題 */
+.problem{background:#eae6da;border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:14px 0}
+.problem .p-head{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14.5px;color:var(--teal);margin-bottom:8px}
+.problem .p-body{font-size:14.5px}
+.problem .opts{margin:10px 0 4px;display:grid;gap:6px}
+.problem .opts div{padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.8px;background:var(--panel)}
+.opts .opt{cursor:pointer;transition:all .15s}
+.opts .opt:hover{border-color:var(--teal);background:var(--teal-soft)}
+.opts .opt.sel{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal) inset}
+.opts .opt.right{border-color:#1e7d32;background:#e7f3e4;color:#1e7d32;font-weight:700}
+.opts .opt.wrong{border-color:#c0392b;background:#fbeaea;color:#c0392b;font-weight:700}
+.opts[data-locked="1"] .opt{pointer-events:none;cursor:default}
+.prob-fb{margin-top:10px;font-size:14px;font-weight:700}
+.fb-ok{color:#1e7d32}
+.fb-no{color:#c0392b}
+body.dark .problem{background:#26221a}
+.ans-btn{
+  margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:none;border:1.5px solid var(--teal);
+  color:var(--teal);border-radius:8px;padding:7px 16px;font-size:13.5px;cursor:pointer;font-family:inherit;transition:all .15s;
+}
+.ans-btn:hover{background:var(--teal);color:#fff}
+.fav{
+  margin-left:auto;background:none;border:1.5px solid var(--line);color:var(--muted);border-radius:8px;
+  padding:3px 12px;font-size:12.5px;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;
+}
+.fav:hover{border-color:#c9a227;color:#c9a227}
+.fav.on{border-color:#c9a227;background:#fffaf0;color:#c9a227;font-weight:700}
+body.dark .fav.on{background:#3a3320}
+.ans{display:none;margin-top:12px;background:var(--teal-soft);border-radius:8px;padding:12px 16px;font-size:14px}
+.ans.show{display:block}
+.ans .a-label{font-weight:700;color:var(--teal);font-size:13px}
+.ans ul{margin:6px 0 2px;padding-left:22px}
+.ans li{margin:3px 0}
+.ans b{font-weight:700}
+/* 術語卡區 */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin:16px 0}
+.flip-card{perspective:900px;height:150px;cursor:pointer}
+.flip-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border-radius:12px;border:1px solid var(--line);padding:12px;text-align:center}
+.flip-front{background:var(--panel)}
+.flip-front .en{font-size:16px;font-weight:700;color:var(--teal);word-break:break-word}
+.flip-front .zh{font-size:13px;color:var(--muted)}
+.flip-back{background:var(--teal);color:#fff;transform:rotateY(180deg)}
+.flip-back .def{font-size:13px;line-height:1.6}
+.flip-hint{font-size:11px;opacity:.5;margin-top:4px}
+/* ===== 術語表（列表形式） ===== */
+.gloss-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.gloss-cats{display:flex;gap:6px;flex-wrap:wrap}
+.gloss-cat-btn{border:1px solid var(--line);background:var(--panel);border-radius:20px;padding:4px 13px;font-size:12.5px;cursor:pointer;color:var(--muted);transition:all .15s}
+.gloss-cat-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.gloss-progress{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
+.gloss-progress .bar{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.gloss-progress .fill{height:100%;background:var(--teal);width:0%;transition:width .3s}
+.gloss-progress .label{font-size:13px;color:var(--muted);white-space:nowrap}
+.gloss-group{margin-bottom:16px}
+.gloss-group h3{font-size:14px;color:var(--teal);margin:14px 0 8px;padding-left:10px;border-left:3px solid var(--teal);letter-spacing:.04em}
+.gloss-item{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:8px 0;display:flex;gap:12px;align-items:flex-start;transition:border-color .15s}
+.gloss-item.starred{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.gloss-check{width:24px;height:24px;border-radius:7px;border:2px solid var(--line);flex-shrink:0;cursor:pointer;display:grid;place-items:center;margin-top:2px;transition:all .15s;background:none;padding:0}
+.gloss-check svg{width:14px;height:14px;display:none;color:#fff}
+.gloss-check.done{background:var(--teal);border-color:var(--teal)}
+.gloss-check.done svg{display:block}
+.gloss-item.done .gloss-en{text-decoration:line-through;opacity:.55}
+.gloss-main{flex:1;min-width:0}
+.gloss-en{font-weight:700;color:var(--green);font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.gloss-zh{font-size:15px;color:var(--green);font-weight:700;margin-left:2px}
+.gloss-def{font-size:13.5px;margin-top:4px;line-height:1.8}
+.gloss-actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
+.gloss-btn{border:1px solid var(--line);background:none;border-radius:7px;padding:3px 10px;font-size:11.5px;cursor:pointer;color:var(--muted);transition:all .15s}
+.gloss-btn:hover{color:var(--teal);border-color:var(--teal)}
+.gloss-btn.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+.gloss-note{display:none;margin-top:8px}
+.gloss-note.show{display:block}
+.gloss-note textarea{width:100%;min-height:56px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;background:var(--paper);color:var(--ink);font-family:inherit;resize:vertical}
+.gloss-note textarea:focus{outline:none;border-color:var(--teal)}
+.gloss-data-actions{display:flex;gap:8px;margin-left:auto}
+/* 搜尋高亮 */
+mark{background:var(--hl);color:inherit;border-radius:2px;padding:0 1px}
+mark.hl{background:var(--hl)}
+/* 重點高亮（使用者標記） */
+.userhl{background:var(--hl);border-radius:3px;cursor:pointer;box-shadow:0 0 0 2px var(--hl)}
+/* 畫記模式 */
+body.marking{cursor:crosshair}
+body.marking .section-body p,body.marking .section-body li,body.marking .section-body .note,body.marking .section-body .warn,body.marking .problem .p-body{cursor:crosshair;border-radius:3px;transition:box-shadow .12s}
+body.marking .section-body p:hover,body.marking .section-body li:hover,body.marking .section-body .note:hover,body.marking .section-body .warn:hover,body.marking .problem .p-body:hover{box-shadow:0 0 0 2px rgba(255,233,74,.45);background:rgba(255,233,74,.12)}
+/* 進度條 */
+.progress-strip{display:flex;gap:6px;margin:14px 0 6px}
+.progress-strip i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.progress-strip i.done{background:var(--teal)}
+.progress-strip i.na{background:none;border:1px dashed var(--line);height:3px}
+.progress-label{font-size:12px;color:var(--muted);margin-top:4px}
+.p-head .done-btn{border:1px solid var(--line);background:var(--panel);border-radius:7px;padding:3px 10px;font-size:12px;cursor:pointer;color:var(--muted);font-family:inherit;flex-shrink:0;transition:all .15s}
+.p-head .done-btn:hover{border-color:var(--green);color:var(--green)}
+.p-head .done-btn.on{background:#e3f0e3;border-color:var(--green);color:var(--green);font-weight:700}
+body.dark .p-head .done-btn.on{background:#1d2b1d}
+.prob-progress{font-size:13px;font-weight:600;color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:5px;background:var(--teal-soft);color:var(--teal);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:500}
+/* 提示條 */
+.banner{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--ink);margin-bottom:18px;display:flex;gap:10px;align-items:flex-start}
+.banner svg{width:18px;height:18px;flex-shrink:0;color:var(--accent);margin-top:2px}
+/* 空狀態 */
+.empty{display:none;text-align:center;padding:60px 20px;color:var(--muted)}
+.empty.show{display:block}
+.empty .big{font-size:40px;margin-bottom:10px}
+.chpage{font-size:12.5px;color:var(--muted);font-family:"Noto Sans TC",sans-serif}
+.chapter-head .ch-points{margin:10px 0 0;padding-left:22px;font-size:14.5px;color:var(--ink)}
+.chapter-head .ch-points li{margin:3px 0}
+/* 方法學習卡（左打勾＋方法名＋公式說明，底下例子） */
+.method-card{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;margin:12px 0;background:var(--panel);overflow:hidden;transition:opacity .2s}
+.method-card .mc-check{width:64px;flex-shrink:0;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;background:var(--panel)}
+.method-card .mc-check input{width:19px;height:19px;accent-color:var(--green);cursor:pointer}
+.method-card .mc-check .mc-lbl{font-size:11px;color:var(--muted)}
+.method-card .mc-check:has(input:checked){background:#eef7ec}
+.method-card .mc-check:has(input:checked) .mc-lbl{color:var(--green);font-weight:700}
+.method-card .mc-left{width:54px;flex-shrink:0;background:var(--teal-soft);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:10px 6px;font-family:"Noto Sans TC",sans-serif;font-weight:700;color:var(--teal);font-size:13.5px;text-align:center;line-height:1.5;writing-mode:vertical-rl;letter-spacing:.18em}
+.method-card .mc-body{flex:1;padding:12px 16px;font-size:14px;min-width:0}
+.method-card .mc-formula{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--ink)}
+.method-card .mc-detail{font-size:13px;color:var(--muted)}
+.method-card .mc-ex{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:13px}
+/* 學會：刪除線＋黯淡 */
+.method-card.learned{opacity:.55}
+.method-card.learned .mc-formula,.method-card.learned .mc-detail,.method-card.learned .mc-ex{text-decoration:line-through;text-decoration-thickness:1.5px}
+/* 標題式學習卡（標題橫排） */
+.method-card.mc-title .mc-left{writing-mode:initial;width:auto;min-width:96px;padding:10px 8px;font-size:13px}
+body.dark .method-card .mc-check:has(input:checked){background:#16241a}
+@media (max-width:900px){
+  .method-card{flex-wrap:wrap}
+  .method-card .mc-check{width:56px;border-right:1px solid var(--line);border-bottom:none;flex-direction:column;padding:6px}
+  .method-card .mc-left{flex:0 0 auto;width:auto;min-width:88px;border-right:1px solid var(--line);border-bottom:none;padding:8px 14px;writing-mode:initial}
+  .method-card .mc-body{width:100%}
+}
+/* 左右布局公式卡（左說明＋右公式＋底例子） */
+.f-split{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:12px 0;background:var(--panel)}
+.f-split .fs-row{display:flex;flex-wrap:wrap;align-items:stretch}
+.f-split .fs-left{flex:1 1 250px;padding:14px 16px;font-size:14px}
+.f-split .fs-label{font-family:"Noto Sans TC",sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--teal);margin-bottom:6px}
+.f-split .fs-left p{margin:0;font-size:14px}
+.f-split .fs-right{flex:1 1 280px;padding:14px 16px;border-left:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.f-split .fs-right .formula{margin:0;width:100%}
+.f-split .fs-ex{padding:10px 16px;border-top:1px dashed var(--line);background:#f6f1e3;font-size:13.5px}
+body.dark .f-split .fs-ex{background:#201c14}
+@media (max-width:900px){
+  .f-split .fs-right{border-left:none;border-top:1px solid var(--line)}
+}
+/* 比較表格 */
+.tblwrap{overflow-x:auto;margin:14px 0}
+.tblwrap table{border-collapse:separate;border-spacing:0;border:1px solid #e0d5ba;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(120,100,50,.10);width:100%;table-layout:fixed;background:var(--panel);font-size:13.5px}
+.tblwrap caption{caption-side:top;text-align:left;font-weight:800;font-size:14px;color:#4a3f2a;padding:2px 2px 8px;letter-spacing:.02em}
+.tblwrap th,.tblwrap td{border-right:1px solid #e8dfc8;border-bottom:1px solid #e8dfc8;padding:8px 10px;vertical-align:top;word-break:break-word}
+.tblwrap th{background:#e9dcb8;color:#4a3f2a;font-size:13px}
+.tblwrap th:last-child,.tblwrap td:last-child{border-right:none}
+.tblwrap tbody tr:last-child td{border-bottom:none}
+.tblwrap tbody tr:nth-child(even){background:#faf6ea}
+.tblwrap tbody tr:hover{background:#f5eeda}
+body.dark .tblwrap table{border-color:#3a3325;background:#201c14}
+body.dark .tblwrap th{background:#3a3325;color:#e6e0d2}
+body.dark .tblwrap caption{color:#cfc4ad}
+body.dark .tblwrap tbody tr:nth-child(even){background:#262119}
+/* SVG 示意圖 */
+.svgfig{margin:14px 0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+.svgfig figcaption{font-size:12.5px;color:var(--muted);margin-bottom:8px;font-family:"Noto Sans TC",sans-serif;line-height:1.5}
+.svgfig svg{width:100%;height:auto;display:block}
+.ax{stroke:#9a8f78;stroke-width:1.2}
+.axl{font-size:11px;fill:#6f6555;font-family:"Noto Sans TC",sans-serif}
+/* 概念圖方框／曲線／點（原缺樣式導致不顯示） */
+.svgfig .box{fill:var(--panel);stroke:#9a8f78;stroke-width:1.4}
+.svgfig .boxl{font-size:13px;font-weight:700;fill:var(--ink);text-anchor:middle;font-family:"Noto Sans TC",sans-serif}
+.svgfig .boxs{font-size:10.5px;fill:var(--muted);text-anchor:middle;font-family:"Noto Sans TC",sans-serif}
+.svgfig .curve{stroke:#2f5d62;stroke-width:2.2;fill:none}
+.svgfig .dot{fill:#b45309}
+.svgfig text .term{fill:var(--green);font-weight:700}
+.lb{font-size:12px;fill:#2b251d;font-family:"Noto Sans TC",sans-serif}
+body.dark .lb{fill:#e6e0d2}
+/* 深色模式的 callout 覆蓋 */
+body.dark .section-body .note{background:#332b1b;border-left-color:#d9a514}
+body.dark .section-body .note::before{color:#e5c15a}
+body.dark .formula{background:#2a2418;border-color:#8a7a50}
+body.dark .formula .f-label{color:#d8b36a}
+/* 響應式 */
+/* 行動端：側欄改為漢堡抽屜 */
+.nav-toggle{display:none}
+.nav-mask{display:none}
+@media (max-width:900px){
+  body{flex-direction:column}
+  .nav-toggle{display:flex}
+  .nav-mask{position:fixed;inset:0;background:rgba(20,16,8,.42);z-index:65;display:none}
+  body.nav-open .nav-mask{display:block}
+  .sidebar{
+    position:fixed;left:0;top:0;bottom:0;height:100vh;width:min(320px,86vw);z-index:70;
+    transform:translateX(-105%);transition:transform .28s ease;
+    border-right:1px solid var(--line);padding:24px 18px 48px;overflow-y:auto;
+  }
+  body.nav-open .sidebar{transform:translateX(0)}
+  .sidebar .brand{width:100%;padding-bottom:8px;margin-bottom:6px}
+  .nav-chapter{width:100%;margin:4px 0;padding:6px 10px}
+  .nav-chapter .tag{display:inline-block;margin-left:auto;font-size:11px;flex-shrink:0}
+  .nav-sub{width:100%;display:block;padding:5px 10px 5px 32px;margin:2px 0}
+  .nav-gloss{width:100%;margin-top:12px}
+  .main{padding:18px 14px 60px}
+  .cards-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  .search-panel{top:58px;width:calc(100vw - 24px)}
+}
+@media print{
+  .sidebar,.topbar,.banner,.no-print{display:none!important}
+  .section-body{display:block!important}
+  body{display:block}
+  .main{padding:0}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 側邊導航 ===== -->
+<nav class="sidebar" id="sidebar" aria-label="章節導航"></nav>
+<div class="nav-mask" id="navMask"></div>
+
+<!-- ===== 主內容 ===== -->
+<main class="main">
+  <div class="topbar no-print">
+    <a class="toolbtn home-btn" href="index.html" title="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 10.5 9-7.5 9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span>首頁</span></a>
+    <button class="toolbtn nav-toggle" id="navToggle" title="目錄">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <div class="searchbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" id="searchInput" placeholder="搜尋全書內容…">
+    </div>
+    <button class="toolbtn" id="markToggle" title="畫記模式：開啟後點文字直接高亮，關閉即儲存">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+    </button>
+    <button class="toolbtn" id="darkToggle" title="深色模式">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+    <button class="toolbtn" id="hlToggle" title="顯示／隱藏你的重點標記">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+    </button>
+  </div>
+
+  <div id="searchPanel" class="search-panel" style="display:none"></div>
+  <div id="chapterContent"></div>
+  <div class="empty" id="emptyState">
+    <div class="big">🔍</div>
+    <div>沒有找到符合「<span id="emptyKeyword"></span>」的內容</div>
+  </div>
+</main>
+
+<!-- ===== 術語卡模態 ===== -->
+<div id="termModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)closeTerm()">
+  <div style="background:var(--panel);border-radius:16px;max-width:480px;width:100%;padding:26px 28px;position:relative">
+    <button onclick="closeTerm()" style="position:absolute;top:14px;right:16px;border:none;background:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button>
+    <div id="termModalEn" style="font-size:22px;font-weight:700;font-family:Georgia,serif"></div>
+    <div id="termModalZh" style="font-size:15px;font-weight:700;margin:4px 0 12px;color:var(--green)"></div>
+    <div id="termModalDef" style="font-size:14.5px;line-height:1.9;color:var(--ink)"></div>
+  </div>
+</div>
+
+<script>
+/* ===== 資料：全書章節結構 ===== */
+const BOOK = [
+  {n:1, title:"計量經濟學與經濟模型", subs:["1.1 計量經濟學的本質與方法論","1.2 經濟理論與計量模型","1.3 資料的類型與結構","1.4 因果關係與相關性","1.5 計量分析的步驟"], done:true, points:["計量經濟學＝結合經濟理論、數理統計與經濟資料，以估計、檢定經濟關係並做預測","方法論：先驗理論→模型設定→資料蒐集→估計→檢定→解釋與預測","計量模型是數學模型的隨機化版本：加入誤差項 ε","資料類型：橫斷面(cross-section)、時間序列(time series)、追蹤/縱橫面(panel)","因果關係 vs 相關性：計量經濟旨在推斷因果，而非僅描述相關","迴歸分析：探討依變數 y 與解釋變數 x 之間的統計關係","計量經濟學的三大任務：結構分析、預測、政策評估"]},
+  {n:2, title:"簡單線性迴歸模型", subs:["2.1 簡單線性迴歸的設定","2.2 普通最小平方法 OLS","2.3 OLS 估計量的推導","2.4 擬合優度 R²","2.5 範例：消費函數"], done:true, points:["簡單線性迴歸模型：y = β₀ + β₁x + u","OLS 原理：最小化殘差平方和 Σe²","β̂₁ = Σ(xi-x̄)(yi-ȳ) / Σ(xi-x̄)²","β̂₀ = ȳ - β̂₁x̄","殘差 e = y - ŷ = y - (β̂₀ + β̂₁x)","R² = ESS/TSS = 1 - RSS/TSS，介於 0 與 1 之間","R² 解釋：x 解釋了 y 變異的百分比","OLS 的幾何意義：y 對 x 的投影","最小平方法的直覺：找一條線使觀測點到直線的垂直距離平方和最小"]},
+  {n:3, title:"多元線性迴歸模型", subs:["3.1 多元迴歸的設定","3.2 OLS 的矩陣表示","3.3 偏迴歸係數的意義","3.4 擬合優度與調整 R²","3.5 虛擬變數"], done:true, points:["多元線性迴歸：y = β₀ + β₁x₁ + β₂x₂ + ... + βkxk + u","矩陣形式：y = Xβ + u，X 為 n×(k+1) 矩陣","OLS 估計量：β̂ = (X'X)⁻¹X'y","偏迴歸係數 βⱼ：控制其他變數不變下，xⱼ 對 y 的邊際效果","R² 隨解釋變數增加只增不減；調整 R² 懲罰變數個數","調整 R² = 1 - (RSS/(n-k-1)) / (TSS/(n-1))","虛擬變數(dummy variable)：0/1 變數，表達質性特徵","虛擬變數陷阱：若有 m 個類別，只能放 m-1 個虛擬變數","迴歸係數的個體經濟解讀：邊際效果"]},
+];
+
+
+/* ===== 術語資料（點擊卡片時顯示） ===== */
+const TERMS = {
+"Econometrics":["Econometrics","計量經濟學","結合經濟理論、數理統計與經濟資料，對經濟關係進行估計、檢定與預測的學科。"],
+"Econometric model":["Econometric model","計量模型","將經濟理論的數學模型加上隨機誤差項，形成可估計的統計模型。"],
+"Cross-sectional data":["Cross-sectional data","橫斷面資料","在同一時間點上，對多個個體（個人、廠商、國家等）觀察所得的資料。"],
+"Time series data":["Time series data","時間序列資料","對同一個體在不同時間點上連續觀察所得的資料。"],
+"Panel data":["Panel data","追蹤資料/縱橫面資料","同時包含橫斷面與時間序列兩個維度的資料，追蹤同一組個體一段時間。"],
+"Dependent variable":["Dependent variable","依變數/被解釋變數","模型中被解釋的變數，通常放在等號左邊，記為 y。"],
+"Independent variable":["Independent variable","自變數/解釋變數","用來解釋依變數變動的變數，放在等號右邊，記為 x。"],
+"Error term":["Error term","誤差項","模型中代表所有未被解釋因素的隨機變數，記為 u。"],
+"Regression analysis":["Regression analysis","迴歸分析","探討依變數 y 與一組解釋變數 x 之間統計關係的統計方法。"],
+"Simple linear regression":["Simple linear regression","簡單線性迴歸","只有一個解釋變數的線性迴歸模型：y = β₀ + β₁x + u。"],
+"OLS":["Ordinary Least Squares","普通最小平方法","一種估計迴歸係數的方法，藉由最小化殘差平方和求得估計值。"],
+"Residuals":["Residuals","殘差","實際觀察值 y 與迴歸預測值 ŷ 之間的差：e = y - ŷ。"],
+"Intercept":["Intercept","截距項","當所有解釋變數為 0 時，依變數的期望值，記為 β₀。"],
+"Slope":["Slope","斜率係數","解釋變數每增加一單位，依變數平均變動的幅度，記為 β₁。"],
+"R-squared":["R-squared","判定係數","迴歸模型解釋力的指標，介於 0 與 1 之間，等於解釋變異占總變異的比例。"],
+"Adjusted R-squared":["Adjusted R-squared","調整後判定係數","考量解釋變數個數後修正的 R²，用來比較不同變數個數的模型。"],
+"Multiple regression":["Multiple regression","多元迴歸模型","包含兩個或以上解釋變數的線性迴歸模型。"],
+"Partial regression coefficient":["Partial regression coefficient","偏迴歸係數","控制其他解釋變數不變下，某一解釋變數對依變數的邊際效果。"],
+"Dummy variable":["Dummy variable","虛擬變數","以 0/1 表示質性特徵（如性別、是否有大學學位）的變數。"],
+"Dummy variable trap":["Dummy variable trap","虛擬變數陷阱","在迴歸模型中放入所有類別的虛擬變數，導致完全共線性的問題。"],
+"Ceteris paribus":["Ceteris paribus","其他條件不變","拉丁文片語，經濟學分析中常用的假設：控制其他變數不變。"],
+"Causality":["Causality","因果關係","一個變數的改變直接造成另一個變數改變的關係；計量經濟旨在推斷因果。"],
+"Correlation":["Correlation","相關性","兩個變數之間共同變動的程度；相關不等於因果。"],
+"Prediction":["Prediction","預測","根據估計的模型，對未知的依變數數值做推估。"],
+"Structural analysis":["Structural analysis","結構分析","估計經濟關係的結構參數，以了解經濟體系的運作機制。"],
+"Policy evaluation":["Policy evaluation","政策評估","利用計量模型評估經濟政策的效果與影響。"],
+"Exogeneity":["Exogeneity","外生性","解釋變數與誤差項不相關的假設；OLS 一致性的關鍵假設。"],
+"Endogeneity":["Endogeneity","內生性","解釋變數與誤差項相關的情況；會導致 OLS 估計式偏誤且不一致。"],
+"Least squares":["Least squares","最小平方法","藉由最小化殘差平方和來估計模型參數的方法。"],
+"Projection":["Projection","投影","OLS 的幾何解釋：將 y 投影到 X 變數所張開的空間上。"],
+};
+
+
+/* ===== 第一章內容 ===== */
+/* ===== 第一章：計量經濟學與經濟模型 ===== */
+const CH1_SECTIONS = [
+{
+  id:"1.1", title:"計量經濟學的本質與方法論",
+  body:`
+  <p><span class="term" data-term="Econometrics">計量經濟學（econometrics）</span>是結合經濟理論、數理統計與實際經濟資料，對經濟關係進行估計、檢定與預測的社會科學分支。它不是單純的統計學，而是將經濟理論轉化為可驗證的實證命題。</p>
+  <p><b>方法論步驟</b>：</p>
+  <ol>
+    <li>根據經濟理論，確立研究主題與假說</li>
+    <li>設定計量模型（數學模型 + 隨機誤差項）</li>
+    <li>蒐集合適的資料（橫斷面、時間序列或追蹤資料）</li>
+    <li>選擇適當的估計方法（OLS、MLE、GMM 等）</li>
+    <li>檢定假說、解釋結果</li>
+    <li>模型診斷與預測</li>
+  </ol>
+  <div class="method-card mc-title" data-mc="econ-steps">
+    <div class="mc-check"><input type="checkbox" id="mc-ch1-1" data-mc="econ-steps"><label for="mc-ch1-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">計量分析五步驟</div>
+    <div class="mc-body">
+      <div class="mc-formula">理論 → 模型 → 資料 → 估計 → 解釋</div>
+      <div class="mc-detail">先有經濟理論引導，再用資料驗證；計量經濟不是「data mining」，而是有理論基礎的實證研究。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：計量經濟學是經濟理論、統計學與數學的交叉學科；與純統計學的差別在於有經濟理論引導。</div>`
+},
+{
+  id:"1.2", title:"經濟理論與計量模型",
+  body:`
+  <p>經濟理論通常以確定性的數學模型表達，例如凱恩斯消費函數：C = a + bY。但現實經濟行為存在隨機性，因此計量模型加入<span class="term" data-term="Error term">誤差項（error term）</span>ε，轉化為隨機模型：C = a + bY + ε。</p>
+  <p><b>模型組成</b>：</p>
+  <ul>
+    <li><span class="term" data-term="Dependent variable">依變數 y</span>：被解釋的變數（如消費 C）</li>
+    <li><span class="term" data-term="Independent variable">自變數 x</span>：解釋變數（如所得 Y）</li>
+    <li>參數 β₀（截距）、β₁（斜率）：待估計的常數</li>
+    <li>誤差項 ε：代表所有未被模型涵蓋的影響因素</li>
+  </ul>
+  <div class="note">為什麼需要誤差項？因為經濟現象複雜，無法列舉所有影響因素；同時也有測量誤差、隨機人為行為等。</div>
+  <div class="warn">考試重點：計量模型 = 數學模型 + 隨機誤差項；誤差項是計量模型與一般數學模型的關鍵差異。</div>`
+},
+{
+  id:"1.3", title:"資料的類型與結構",
+  body:`
+  <p>計量分析依資料結構分為三大類：</p>
+  <p><b>1. <span class="term" data-term="Cross-sectional data">橫斷面資料（cross-sectional data）</span></b></p>
+  <p>同一時間點上，多個個體的觀察值。例如：2020 年全國 1000 戶家庭的消費與所得。特點：每筆觀察是不同的個體，沒有時間先後順序。</p>
+  <p><b>2. <span class="term" data-term="Time series data">時間序列資料（time series data）</span></b></p>
+  <p>同一個體在不同時間點的連續觀察。例如：台灣 1980-2020 年的 GDP 年增率。特點：按時間排序，觀察值之間可能有自我相關。</p>
+  <p><b>3. <span class="term" data-term="Panel data">追蹤資料/縱橫面資料（panel data）</span></b></p>
+  <p>同時有橫斷面與時間序列兩個維度。例如：追蹤 100 家廠商 10 年的產量與成本。特點：結合兩者優點，可控制未觀測的個體異質性。</p>
+  <div class="method-card mc-title" data-mc="data-types">
+    <div class="mc-check"><input type="checkbox" id="mc-ch1-2" data-mc="data-types"><label for="mc-ch1-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">三類資料比較</div>
+    <div class="mc-body">
+      <div class="mc-formula">橫斷面：多人同時點｜時間序列：一人多時點｜追蹤：多人多時點</div>
+      <div class="mc-detail">不同資料類型需要不同的估計方法：橫斷面用 OLS，時間序列需考慮定態與自我相關，追蹤資料有固定效果與隨機效果模型。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：能分辨三種資料類型；追蹤資料同時有「個體」與「時間」兩個維度。</div>`
+},
+{
+  id:"1.4", title:"因果關係與相關性",
+  body:`
+  <p>計量經濟學的核心目標之一是推斷<span class="term" data-term="Causality">因果關係（causality）</span>，而不只是描述<span class="term" data-term="Correlation">相關性（correlation）</span>。</p>
+  <p><b>相關性</b>：兩個變數共同變動的統計現象。例如：冰淇淋銷售量與溺水人數呈正相關。</p>
+  <p><b>因果關係</b>：一個變數的改變「直接造成」另一個變數改變。冰淇淋銷售量增加並不會直接導致溺水人數增加，兩者的共同原因是「氣溫升高」。</p>
+  <div class="note">著名的相關但非因果範例：喝紅酒的人比較長壽。可能是因為喝紅酒的人通常收入較高、醫療資源較好，而非紅酒本身的效果。</div>
+  <p>計量經濟如何推斷因果？透過控制其他變數、運用實驗設計（自然實驗、工具變數、DID 等），試圖模擬隨機控制實驗的效果。</p>
+  <div class="warn">考試重點：相關不等於因果；計量經濟旨在透過統計方法從相關性中識別因果關係。</div>`
+},
+{
+  id:"1.5", title:"計量分析的步驟",
+  body:`
+  <p>一個完整的計量實證研究包含以下步驟：</p>
+  <ol>
+    <li><b>研究問題與假說</b>：根據經濟理論或觀察提出研究問題</li>
+    <li><b>模型設定</b>：選擇依變數、解釋變數，設定函數形式（線性/非線性）</li>
+    <li><b>資料蒐集</b>：確保資料品質、變數定義一致</li>
+    <li><b>估計方法選擇</b>：OLS、工具變數、固定效果等</li>
+    <li><b>實證結果分析</b>：係數符號、顯著性、經濟意義</li>
+    <li><b>模型診斷</b>：檢定古典假設是否成立（無偏性、變異數齊一、無共線性等）</li>
+    <li><b>結論與政策建議</b>：根據結果提出解釋與建議</li>
+  </ol>
+  <div class="method-card mc-title" data-mc="econ-research">
+    <div class="mc-check"><input type="checkbox" id="mc-ch1-3" data-mc="econ-research"><label for="mc-ch1-3" class="mc-lbl">學會</label></div>
+    <div class="mc-left">研究流程</div>
+    <div class="mc-body">
+      <div class="mc-formula">問題 → 模型 → 資料 → 估計 → 檢定 → 解釋</div>
+      <div class="mc-detail">好的實證研究：理論紮實、資料品質好、方法適當、結果解釋謹慎。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：研究流程是必備觀念；模型診斷（檢定古典假設）是計量分析不可或缺的步驟。</div>`
+}
+];
+
+const CH1_PROBLEMS = [
+{
+  q:"計量經濟學與純粹統計學的主要差異為何？",
+  opts:["(A) 計量經濟學只處理時間序列資料","(B) 計量經濟學以經濟理論為引導，並應用於經濟現象","(C) 計量經濟學不用機率論","(D) 兩者完全相同"],
+  ans:"<b>(B) 計量經濟學以經濟理論為引導，並應用於經濟現象。</b><ul><li>純統計學是通用的方法論，可應用於任何領域</li><li>計量經濟學結合經濟理論與統計方法，專注於經濟關係的實證研究</li></ul>"
+},
+{
+  q:"下列何者屬於橫斷面資料？",
+  opts:["(A) 台灣 1990-2020 年的 GDP 序列","(B) 2020 年全國 2000 戶家庭的所得與消費","(C) 某公司 10 年的營收資料","(D) 股價指數每日收盤價"],
+  ans:"<b>(B) 2020 年全國 2000 戶家庭的所得與消費。</b><ul><li>橫斷面資料：同一時間點，多個不同個體的觀察</li><li>時間序列：同一個體，多個時間點</li><li>(A)(C)(D) 都是時間序列資料</li></ul>"
+},
+{
+  q:"在計量模型中，加入誤差項的主要原因是？",
+  opts:["(A) 讓模型更美觀","(B) 代表所有未被模型解釋的隨機因素","(C) 為了增加模型的複雜度","(D) 配合政府規定"],
+  ans:"<b>(B) 代表所有未被模型解釋的隨機因素。</b><ul><li>包括：模型設定誤差、變數遺漏、測量誤差、隨機人為行為等</li><li>誤差項是計量模型與一般確定性數學模型的關鍵差異</li></ul>"
+},
+{
+  q:"「冰淇淋銷售量與溺水人數呈現正相關」這個現象最能說明什麼？",
+  opts:["(A) 吃冰淇淋會導致溺水","(B) 相關性不等於因果關係","(C) 計量經濟學沒有應用價值","(D) 溺水的人都愛吃冰淇淋"],
+  ans:"<b>(B) 相關性不等於因果關係。</b><ul><li>兩者的共同原因是「氣溫升高」：天氣熱→冰淇淋賣得多→游泳的人多→溺水人數增加</li><li>計量經濟學的重要任務就是從相關性中識別真正的因果關係</li></ul>"
+},
+{
+  q:"追蹤資料（panel data）的特色是？",
+  opts:["(A) 只有橫斷面面向","(B) 只有時間序列面向","(C) 同時包含橫斷面與時間序列兩個面向","(D) 不包含任何個體資訊"],
+  ans:"<b>(C) 同時包含橫斷面與時間序列兩個面向。</b><ul><li>追蹤資料追蹤同一組個體一段時間，例如：100 家廠商追蹤 10 年</li><li>優點：可控制未觀測的個體異質性、增加樣本數、減少共線性</li></ul>"
+},
+{
+  q:"下列何者不是計量經濟學的主要任務？",
+  opts:["(A) 結構分析：估計經濟關係的參數","(B) 預測：對未來變數值做推估","(C) 政策評估：評估政策的效果","(D) 製作美麗的圖表"],
+  ans:"<b>(D) 製作美麗的圖表。</b><ul><li>三大任務：結構分析（structure analysis）、預測（prediction）、政策評估（policy evaluation）</li><li>製作圖表只是呈現結果的工具，不是計量經濟的核心任務</li></ul>"
+},
+{
+  q:"經濟理論的數學模型與計量模型的差異在於？",
+  opts:["(A) 數學模型比較簡單","(B) 計量模型加入了隨機誤差項","(C) 數學模型用圖形表示","(D) 兩者沒有差異"],
+  ans:"<b>(B) 計量模型加入了隨機誤差項。</b><ul><li>數學模型：確定性的函數關係，如 C = a + bY</li><li>計量模型：加入誤差項，如 C = a + bY + ε，成為隨機模型</li><li>這是因為現實經濟行為存在隨機性與不確定性</li></ul>"
+},
+{
+  q:"下列何者屬於時間序列資料？",
+  opts:["(A) 某年 500 家公司的營收","(B) 某年 1000 個人的教育年數與薪資","(C) 某公司 2000-2020 年每年的營業額","(D) 某縣市各鄉鎮的人口數"],
+  ans:"<b>(C) 某公司 2000-2020 年每年的營業額。</b><ul><li>時間序列：同一個體（這家公司）在不同時間點（20 年）的觀察</li><li>(A)(B)(D) 都是橫斷面資料</li></ul>"
+}
+];
+
+/* ===== 第二章：簡單線性迴歸模型 ===== */
+const CH2_SECTIONS = [
+{
+  id:"2.1", title:"簡單線性迴歸的設定",
+  body:`
+  <p><span class="term" data-term="Simple linear regression">簡單線性迴歸模型（simple linear regression model）</span>只有一個解釋變數，形式為：</p>
+  <div class="formula">
+    <span class="f-label">簡單線性迴歸母體模型</span>
+    y = β₀ + β₁x + u
+  </div>
+  <p>其中：</p>
+  <ul>
+    <li><b>y</b>：<span class="term" data-term="Dependent variable">依變數（dependent variable）</span></li>
+    <li><b>x</b>：<span class="term" data-term="Independent variable">自變數（independent variable）</span></li>
+    <li><b>β₀</b>：<span class="term" data-term="Intercept">截距項（intercept）</span>，當 x=0 時 y 的期望值</li>
+    <li><b>β₁</b>：<span class="term" data-term="Slope">斜率係數（slope coefficient）</span>，x 每增加一單位，y 的平均變動量</li>
+    <li><b>u</b>：<span class="term" data-term="Error term">誤差項（error term）</span>，代表所有其他影響 y 的因素</li>
+  </ul>
+  <div class="note">母體迴歸函數（PRF）：E(y|x) = β₀ + β₁x，給定 x 下 y 的條件期望值。</div>
+  <div class="warn">考試重點：β₁ 的經濟意義是「邊效果」——其他條件不變下，x 每增加一單位，y 平均變動 β₁ 單位。</div>`
+},
+{
+  id:"2.2", title:"普通最小平方法 OLS",
+  body:`
+  <p><span class="term" data-term="OLS">普通最小平方法（Ordinary Least Squares, OLS）</span>是最常用的迴歸係數估計方法。其原理是選擇一條直線，使得所有觀測點到這條直線的垂直距離平方和最小。</p>
+  <div class="formula">
+    <span class="f-label">最小化目標</span>
+    min Σeᵢ² = Σ(yᵢ - β̂₀ - β̂₁xᵢ)²
+  </div>
+  <p>其中 <span class="term" data-term="Residuals">殘差 eᵢ（residual）</span> = yᵢ - ŷᵢ = 實際值 - 預測值。</p>
+  <p><b>OLS 估計式</b>：</p>
+  <div class="formula">
+    <span class="f-label">斜率估計式</span>
+    β̂₁ = Σ(xᵢ - x̄)(yᵢ - ȳ) / Σ(xᵢ - x̄)²
+  </div>
+  <div class="formula">
+    <span class="f-label">截距估計式</span>
+    β̂₀ = ȳ - β̂₁x̄
+  </div>
+  <div class="method-card mc-title" data-mc="ols-formula">
+    <div class="mc-check"><input type="checkbox" id="mc-ch2-1" data-mc="ols-formula"><label for="mc-ch2-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">OLS 公式</div>
+    <div class="mc-body">
+      <div class="mc-formula">β̂₁ = 共變異數 / x 的變異數</div>
+      <div class="mc-detail">分子是 x 與 y 的共變異數（cov(x,y)），分母是 x 的變異數（var(x)）。β̂₁ 的符號與共變異數相同。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：OLS 的核心是最小化殘差平方和；β̂₁ 的公式要會推導與計算。</div>`
+},
+{
+  id:"2.3", title:"OLS 估計量的推導",
+  body:`
+  <p>我們對殘差平方和 S(β₀, β₁) = Σ(yᵢ - β₀ - β₁xᵢ)² 分別對 β₀ 和 β₁ 偏微分，令其一階條件為 0，即可解出 OLS 估計式。</p>
+  <p><b>一階條件（FOC）</b>：</p>
+  <ol>
+    <li>∂S/∂β₀ = -2Σ(yᵢ - β₀ - β₁xᵢ) = 0</li>
+    <li>∂S/∂β₁ = -2Σxᵢ(yᵢ - β₀ - β₁xᵢ) = 0</li>
+  </ol>
+  <p>從第一個式子可以得到：Σeᵢ = 0（殘差和為 0）。</p>
+  <p>從第二個式子可以得到：Σxᵢeᵢ = 0（x 與殘差的交叉乘積和為 0）。</p>
+  <div class="note">這兩個性質很重要：OLS 殘差的平均值永遠為 0，且殘差與解釋變數 x 永遠不相關。</div>
+  <div class="warn">考試重點：OLS 兩個一階條件的解：殘差和為 0、殘差與 x 共變異為 0。</div>`
+},
+{
+  id:"2.4", title:"擬合優度 R²",
+  body:`
+  <p><span class="term" data-term="R-squared">判定係數（R-squared, R²）</span>用來衡量迴歸模型對資料的解釋能力。</p>
+  <div class="formula">
+    <span class="f-label">R² 的定義</span>
+    R² = ESS / TSS = 1 - RSS / TSS
+  </div>
+  <p>其中：</p>
+  <ul>
+    <li><b>TSS（Total Sum of Squares）</b>：總變異 = Σ(yᵢ - ȳ)²</li>
+    <li><b>ESS（Explained Sum of Squares）</b>：解釋變異 = Σ(ŷᵢ - ȳ)²</li>
+    <li><b>RSS（Residual Sum of Squares）</b>：殘差平方和 = Σeᵢ²</li>
+  </ul>
+  <p>三者關係：TSS = ESS + RSS</p>
+  <p><b>R² 的解讀</b>：</p>
+  <ul>
+    <li>R² = 1：模型完美解釋所有變異，所有點都落在迴歸線上</li>
+    <li>R² = 0：模型完全沒有解釋力，x 與 y 沒有線性關係</li>
+    <li>介於 0 與 1 之間：R² 越大，模型解釋力越強</li>
+  </ul>
+  <div class="method-card mc-title" data-mc="r2">
+    <div class="mc-check"><input type="checkbox" id="mc-ch2-2" data-mc="r2"><label for="mc-ch2-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">R² 意義</div>
+    <div class="mc-body">
+      <div class="mc-formula">R² = 1 - RSS/TSS</div>
+      <div class="mc-detail">R² 表示「y 的總變異中，有多少百分比被 x 解釋了」。例如 R²=0.73 表示 x 解釋了 y 變異的 73%。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：R² 介於 0 與 1；R² 越大表示模型擬合越好。注意 R² 高不一定代表模型正確。</div>`
+},
+{
+  id:"2.5", title:"範例：消費函數",
+  body:`
+  <p>以凱恩斯消費函數為例：C = β₀ + β₁Y + u，其中 C 是消費，Y 是可支配所得。</p>
+  <p>假設我們有 5 筆觀察：</p>
+  <ul>
+    <li>Y：10, 20, 30, 40, 50</li>
+    <li>C：11, 19, 28, 35, 42</li>
+  </ul>
+  <p><b>計算步驟</b>：</p>
+  <ol>
+    <li>計算平均：Ȳ = 30, C̄ = 27</li>
+    <li>計算分子：Σ(Yᵢ - Ȳ)(Cᵢ - C̄) = 10×(-16) + 0 + 0 + 10×8 + 20×15 = 460</li>
+    <li>計算分母：Σ(Yᵢ - Ȳ)² = 400 + 100 + 0 + 100 + 400 = 1000</li>
+    <li>β̂₁ = 460 / 1000 = 0.46（邊際消費傾向）</li>
+    <li>β̂₀ = C̄ - β̂₁Ȳ = 27 - 0.46×30 = 13.2</li>
+  </ol>
+  <p>估計的消費函數：Ĉ = 13.2 + 0.46Y</p>
+  <div class="note">邊際消費傾向 MPC = 0.46，代表所得每增加 1 元，消費平均增加 0.46 元。</div>
+  <div class="warn">考試重點：能從原始資料計算 OLS 估計式；邊際消費傾向的經濟意義。</div>`
+}
+];
+
+const CH2_PROBLEMS = [
+{
+  q:"簡單線性迴歸模型 y = β₀ + β₁x + u 中，β₁ 代表什麼？",
+  opts:["(A) 當 x=0 時 y 的值","(B) x 每增加一單位，y 的平均變動量","(C) y 的平均數","(D) 誤差項的大小"],
+  ans:"<b>(B) x 每增加一單位，y 的平均變動量。</b><ul><li>β₁ 是斜率係數（slope coefficient）</li><li>β₀ 是截距項，代表當 x=0 時 y 的期望值</li></ul>"
+},
+{
+  q:"OLS 方法的基本原理是？",
+  opts:["(A) 最大化殘差和","(B) 最小化殘差平方和","(C) 最小化殘差的絕對值和","(D) 讓殘差平均等於 1"],
+  ans:"<b>(B) 最小化殘差平方和。</b><ul><li>OLS = Ordinary Least Squares（普通最小平方法）</li><li>選擇一條直線，使所有觀測點到直線的垂直距離平方和最小</li></ul>"
+},
+{
+  q:"在簡單線性迴歸中，β̂₁ 的公式為？",
+  opts:["(A) Σ(xᵢ - x̄)(yᵢ - ȳ) / Σ(xᵢ - x̄)²","(B) Σ(xᵢ - x̄)(yᵢ - ȳ) / Σ(yᵢ - ȳ)²","(C) Σxᵢyᵢ / n","(D) ȳ / x̄"],
+  ans:"<b>(A) Σ(xᵢ - x̄)(yᵢ - ȳ) / Σ(xᵢ - x̄)²。</b><ul><li>分子是 x 與 y 的共變異數（cov(x,y)）</li><li>分母是 x 的變異數（var(x)）</li><li>β̂₁ 的符號與共變異數相同</li></ul>"
+},
+{
+  q:"R² 的定義為何？",
+  opts:["(A) RSS / TSS","(B) ESS / TSS","(C) TSS / ESS","(D) RSS / ESS"],
+  ans:"<b>(B) ESS / TSS。</b><ul><li>R² = ESS / TSS = 1 - RSS / TSS</li><li>ESS：解釋變異（Explained Sum of Squares）</li><li>TSS：總變異（Total Sum of Squares）</li><li>RSS：殘差平方和（Residual Sum of Squares）</li></ul>"
+},
+{
+  q:"如果 R² = 0.9，代表什麼意義？",
+  opts:["(A) 模型完全沒有解釋力","(B) x 解釋了 y 90% 的變異","(C) y 的值有 90% 是正確的","(D) 誤差項佔了 90%"],
+  ans:"<b>(B) x 解釋了 y 90% 的變異。</b><ul><li>R² 表示「y 的總變異中，有多少百分比被 x 解釋了」</li><li>R² = 1 表示完美擬合；R² = 0 表示完全沒有線性解釋力</li></ul>"
+},
+{
+  q:"OLS 估計的殘差有什麼性質？",
+  opts:["(A) 殘差和等於 1","(B) 殘差和等於 0","(C) 殘差恆為正","(D) 殘差與 x 相關"],
+  ans:"<b>(B) 殘差和等於 0。</b><ul><li>從 OLS 的一階條件可推得：Σeᵢ = 0</li><li>另一個性質：Σxᵢeᵢ = 0（殘差與 x 不相關）</li><li>這是 OLS 估計式的重要數學性質</li></ul>"
+},
+{
+  q:"在消費函數 C = β₀ + β₁Y + u 中，β₁ 的經濟意義是？",
+  opts:["(A) 自發性消費","(B) 邊際消費傾向","(C) 平均消費傾向","(D) 儲蓄率"],
+  ans:"<b>(B) 邊際消費傾向。</b><ul><li>β₁ = ΔC / ΔY，代表所得每增加 1 元，消費增加多少元</li><li>β₀ 是自發性消費（當所得為 0 時的消費水準）</li></ul>"
+},
+{
+  q:"下列何者不是 OLS 的性質？",
+  opts:["(A) 殘差和為 0","(B) 殘差與解釋變數 x 不相關","(C) 殘差恆為正值","(D) 迴歸線通過 (x̄, ȳ)"],
+  ans:"<b>(C) 殘差恆為正值。</b><ul><li>殘差可以是正的也可以是負的，代表觀測點在迴歸線上方或下方</li><li>(A)(B)(D) 都是 OLS 的重要性質</li></ul>"
+}
+];
+
+/* ===== 第三章：多元線性迴歸模型 ===== */
+const CH3_SECTIONS = [
+{
+  id:"3.1", title:"多元迴歸的設定",
+  body:`
+  <p><span class="term" data-term="Multiple regression">多元線性迴歸模型（multiple linear regression model）</span>包含兩個或以上的解釋變數：</p>
+  <div class="formula">
+    <span class="f-label">多元線性迴歸母體模型</span>
+    y = β₀ + β₁x₁ + β₂x₂ + ... + βₖxₖ + u
+  </div>
+  <p>其中：</p>
+  <ul>
+    <li>k：解釋變數的個數</li>
+    <li>β₀：截距項</li>
+    <li>β₁, β₂, ..., βₖ：<span class="term" data-term="Partial regression coefficient">偏迴歸係數（partial regression coefficients）</span></li>
+  </ul>
+  <div class="note">偏迴歸係數 βⱼ 的意義：控制其他所有變數不變下，xⱼ 每增加一單位，y 的平均變動量。這就是「其他條件不變（ceteris paribus）」的數學表達。</div>
+  <div class="warn">考試重點：多元迴歸的核心是「控制其他變數」；偏迴歸係數才是真正的邊際效果。</div>`
+},
+{
+  id:"3.2", title:"OLS 的矩陣表示",
+  body:`
+  <p>多元迴歸用矩陣表示更簡潔：</p>
+  <div class="formula">
+    <span class="f-label">矩陣形式</span>
+    y = Xβ + u
+  </div>
+  <p>其中：</p>
+  <ul>
+    <li><b>y</b>：n×1 的依變數向量</li>
+    <li><b>X</b>：n×(k+1) 的解釋變數矩陣（第一欄全為 1，對應截距項）</li>
+    <li><b>β</b>：(k+1)×1 的係數向量</li>
+    <li><b>u</b>：n×1 的誤差項向量</li>
+  </ul>
+  <p><b>OLS 估計式（矩陣形式）</b>：</p>
+  <div class="formula">
+    <span class="f-label">OLS 估計向量</span>
+    β̂ = (X'X)⁻¹X'y
+  </div>
+  <p>其中 X' 是 X 的轉置矩陣，(X'X)⁻¹ 是 X'X 的反矩陣。</p>
+  <div class="method-card mc-title" data-mc="matrix-ols">
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-1" data-mc="matrix-ols"><label for="mc-ch3-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">矩陣推導</div>
+    <div class="mc-body">
+      <div class="mc-formula">min e'e = (y - Xβ)'(y - Xβ)</div>
+      <div class="mc-detail">對 β 微分並令一階條件為 0，可得 X'(y - Xβ̂) = 0，整理後得到 β̂ = (X'X)⁻¹X'y。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：β̂ = (X'X)⁻¹X'y 是計量經濟最重要的公式之一；要能說出每個矩陣的維度。</div>`
+},
+{
+  id:"3.3", title:"偏迴歸係數的意義",
+  body:`
+  <p>多元迴歸與簡單迴歸最大的差別在於「控制其他變數」。</p>
+  <p>例如：估計工資方程式</p>
+  <div class="formula">
+    <span class="f-label">工資方程式範例</span>
+    log(wage) = β₀ + β₁edu + β₂exper + β₃tenure + u
+  </div>
+  <p>其中：</p>
+  <ul>
+    <li><b>edu</b>：教育年數</li>
+    <li><b>exper</b>：工作經驗年數</li>
+    <li><b>tenure</b>：現職年資</li>
+  </ul>
+  <p><b>β₁ 的解讀</b>：控制工作經驗與現職年資不變下，教育年數每增加一年，工資平均增加 β₁×100%。</p>
+  <div class="note">如果只用簡單迴歸 log(wage) ~ edu，β̂₁ 可能會有偏誤，因為它沒有控制其他變數的影響。這就是「遺漏變數偏誤」（omitted variable bias）。</div>
+  <div class="warn">考試重點：偏迴歸係數 = 控制其他變數後的純效果；這是多元迴歸最強大的功能。</div>`
+},
+{
+  id:"3.4", title:"擬合優度與調整 R²",
+  body:`
+  <p>在多元迴歸中，R² 的定義和簡單迴歸相同：R² = ESS / TSS。</p>
+  <p>但有一個重要特性：<b>只要增加任何一個解釋變數，R² 只會增加或不變，絕對不會減少</b>。</p>
+  <p>這是因為多一個變數，殘差平方和 RSS 只會變小或不變，因此 R² 只增不減。</p>
+  <p>為了懲罰過度使用解釋變數，我們使用<span class="term" data-term="Adjusted R-squared">調整後 R²（adjusted R-squared）</span>：</p>
+  <div class="formula">
+    <span class="f-label">調整 R²</span>
+    R̄² = 1 - (RSS/(n-k-1)) / (TSS/(n-1))
+  </div>
+  <p>其中 n 是樣本數，k 是解釋變數個數。</p>
+  <p><b>調整 R² 的特性</b>：</p>
+  <ul>
+    <li>新變數對 RSS 的貢獻如果不大，調整 R² 可能下降</li>
+    <li>調整 R² 可能為負值</li>
+    <li>用來比較不同變數個數的模型</li>
+  </ul>
+  <div class="method-card mc-title" data-mc="adjusted-r2">
+    <div class="mc-check"><input type="checkbox" id="mc-ch3-2" data-mc="adjusted-r2"><label for="mc-ch3-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">R² vs 調整 R²</div>
+    <div class="mc-body">
+      <div class="mc-formula">R²：只增不減｜調整 R²：可能下降</div>
+      <div class="mc-detail">R² 永遠鼓勵加變數；調整 R² 懲罰無意義的變數。模型選擇時，調整 R² 越大越好。</div>
+    </div>
+  </div>
+  <div class="warn">考試重點：R² 隨解釋變數增加只增不減；調整 R² 懲罰變數個數，可能為負。</div>`
+},
+{
+  id:"3.5", title:"虛擬變數",
+  body:`
+  <p><span class="term" data-term="Dummy variable">虛擬變數（dummy variable）</span>又稱為類別變數，用 0 或 1 來表示質性特徵。例如：</p>
+  <ul>
+    <li>性別：D=1 表男性，D=0 表女性</li>
+    <li>學歷：D=1 表大學以上，D=0 表其他</li>
+    <li>區域：D=1 表都市，D=0 表鄉村</li>
+  </ul>
+  <p><b>虛擬變數係數的解讀</b>：</p>
+  <p>例如工資方程式：log(wage) = β₀ + β₁edu + δD + u</p>
+  <p>其中 D=1 表男性，D=0 表女性。</p>
+  <p>δ 的意義：控制教育年數不變下，男性相對於女性的工資差異（百分比）。</p>
+  <div class="warn"><span class="term" data-term="Dummy variable trap">虛擬變數陷阱（dummy variable trap）</span>：如果一個質性變數有 m 個類別，我們只能放入 m-1 個虛擬變數，否則會造成完全共線性（perfect collinearity），導致 OLS 無法估計。</div>
+  <div class="note">例如：性別有「男、女」兩個類別，只要放 1 個虛擬變數（男=1，女=0）就夠了。基準組（reference group）是 D=0 的那一組。</div>
+  <div class="warn">考試重點：m 個類別只能放 m-1 個虛擬變數，否則落入虛擬變數陷阱；基準組的選擇不影響模型整體解釋力。</div>`
+}
+];
+
+const CH3_PROBLEMS = [
+{
+  q:"多元線性迴歸與簡單線性迴歸最大的差別是？",
+  opts:["(A) 多元迴歸用更多的資料","(B) 多元迴歸可以控制其他解釋變數的影響","(C) 多元迴歸的 R² 一定比較高","(D) 兩者沒有差異"],
+  ans:"<b>(B) 多元迴歸可以控制其他解釋變數的影響。</b><ul><li>偏迴歸係數代表「控制其他變數不變下」的邊際效果</li><li>這就是「其他條件不變（ceteris paribus）」的統計表達</li></ul>"
+},
+{
+  q:"多元迴歸 β̂ = (X'X)⁻¹X'y 中，X 矩陣的維度是？",
+  opts:["(A) n×1","(B) n×k","(C) n×(k+1)","(D) (k+1)×(k+1)"],
+  ans:"<b>(C) n×(k+1)。</b><ul><li>n 是樣本數，k 是解釋變數個數</li><li>X 矩陣第一欄全為 1（對應截距項），所以是 k+1 欄</li></ul>"
+},
+{
+  q:"在多元迴歸中，增加一個解釋變數後，R² 會如何變化？",
+  opts:["(A) 一定增加","(B) 一定減少","(C) 可能增加也可能減少","(D) 一定不變"],
+  ans:"<b>(A) 一定增加。</b><ul><li>只要增加任何一個解釋變數，殘差平方和 RSS 只會變小或不變</li><li>因此 R² = 1 - RSS/TSS 只會增加或不變，絕對不會減少</li><li>這就是為什麼需要「調整 R²」來懲罰過度加變數</li></ul>"
+},
+{
+  q:"調整 R² 的主要目的是？",
+  opts:["(A) 讓 R² 變大一點","(B) 懲罰無意義的解釋變數","(C) 讓計算更簡單","(D) 消除異常值的影響"],
+  ans:"<b>(B) 懲罰無意義的解釋變數。</b><ul><li>R² 永遠鼓勵加變數（只增不減）</li><li>調整 R² 考慮了變數個數，新變數如果沒有顯著解釋力，調整 R² 可能下降</li><li>用來比較不同變數個數的模型</li></ul>"
+},
+{
+  q:"虛擬變數的用途是？",
+  opts:["(A) 增加模型的複雜度","(B) 表達質性變數（如性別、學歷、區域）","(C) 減少樣本數","(D) 用來計算 R²"],
+  ans:"<b>(B) 表達質性變數（如性別、學歷、區域）。</b><ul><li>虛擬變數又稱為類別變數，用 0/1 表示質性特徵</li><li>例如：D=1 表男性，D=0 表女性</li></ul>"
+},
+{
+  q:"如果一個質性變數有 4 個類別，應該放入幾個虛擬變數？",
+  opts:["(A) 1 個","(B) 3 個","(C) 4 個","(D) 5 個"],
+  ans:"<b>(B) 3 個。</b><ul><li>m 個類別只能放入 m-1 個虛擬變數，否則會落入「虛擬變數陷阱」</li><li>第 m 個類別是基準組（reference group），對應所有虛擬變數都為 0 的情況</li><li>例如：4 個區域 → 放 3 個虛擬變數，基準組是第 4 個區域</li></ul>"
+},
+{
+  q:"「虛擬變數陷阱」指的是？",
+  opts:["(A) 虛擬變數都設成 0","(B) 放入所有類別的虛擬變數，造成完全共線性","(C) 虛擬變數太多導致 R² 下降","(D) 虛擬變數的係數無法解讀"],
+  ans:"<b>(B) 放入所有類別的虛擬變數，造成完全共線性。</b><ul><li>如果 m 個類別放了 m 個虛擬變數，再加截距項，會造成完全共線性</li><li>此時 (X'X) 沒有反矩陣，OLS 無法估計</li></ul>"
+},
+{
+  q:"在工資方程式 log(wage) = β₀ + β₁edu + δmale + u 中，δ 的意義是？",
+  opts:["(A) 教育對工資的效果","(B) 控制教育不變下，男性相對於女性的工資差異","(C) 女性的工資水準","(D) 男性的教育報酬率"],
+  ans:"<b>(B) 控制教育不變下，男性相對於女性的工資差異。</b><ul><li>male 是虛擬變數：male=1 表男性，male=0 表女性</li><li>δ 是性別工資差異的對數估計值（乘以 100% 就是百分比差異）</li><li>這就是多元迴歸「控制其他變數」的威力</li></ul>"
+}
+];
+
+const CH_SECTIONS={1:CH1_SECTIONS,2:CH2_SECTIONS,3:CH3_SECTIONS};
+const CH_PROBLEMS={1:CH1_PROBLEMS,2:CH2_PROBLEMS,3:CH3_PROBLEMS};
+
+/* ===== 術語表（列表形式） ===== */
+const GLOSS_CATS = [
+  {name:"基本概念", keys:["Economics","Scarcity","Rationality","Trade-off","Economic goods","Free goods","Centralized economy","Market economy"]},
+  {name:"經濟學分類", keys:["Microeconomics","Macroeconomics","Positive economics","Normative economics"]},
+  {name:"模型建構", keys:["Model","Endogenous variables","Exogenous variables","Nominal variables","Real variables","Optimization principle","Equilibrium principle"]},
+  {name:"邏輯謬誤", keys:["Fallacy of composition","Fallacy of division","Fallacy of course"]},
+  {name:"循環流轉", keys:["Household","Firm","Factor market","Goods and services market","Circular flow"]},
+  {name:"需求基礎", keys:["Demand","Quantity demanded","Demand function","Inverse demand function","Demand schedule","Market demand","Law of demand","Reservation price","Flow"]},
+  {name:"財貨分類", keys:["Substitution goods","Complementary goods","Unrelated goods","Normal goods","Inferior goods","Neutral goods","Conspicuous goods","Giffen goods"]},
+  {name:"網路外部性", keys:["Bandwagon effect","Snob effect"]},
+  {name:"彈性", keys:["Elasticity","Price elasticity of demand","Point elasticity","Arc elasticity","Unitary elasticity","Elastic","Inelastic","Perfectly elastic","Perfectly inelastic","Total expenditure","Cross elasticity","Income elasticity"]},
+  {name:"所得與恩格爾", keys:["Engel curve","Engel's law","Engel aggregation condition","Necessity","Luxury goods","Status goods"]},
+  {name:"供給基礎", keys:["Supply","Quantity supplied","Supply function","Inverse supply function","Supply schedule","Market supply","Law of supply","Joint products","Production substitutes"]},
+  {name:"供給彈性", keys:["Supply elasticity","Cross elasticity of supply","Cost elasticity of supply"]},
+  {name:"市場均衡", keys:["Equilibrium","Market clearing","Excess demand","Excess supply","Price mechanism","Stable equilibrium","Comparative static","Dynamic analysis","Correspondence principle","Partial equilibrium","General equilibrium"]},
+  {name:"福利與政府介入", keys:["Consumer surplus","Producer surplus","Social welfare","Deadweight loss","Lump sum tax","Excise tax","Ad valorem tax","Price ceiling","Price floor","Rent-seeking","Ramsey rule","Tax incidence"]},
+  {name:"效用理論", keys:["Utility","Total utility","Marginal utility","Law of diminishing marginal utility","Cardinal utility","Ordinal utility"]},
+  {name:"消費者均衡", keys:["Consumer equilibrium","Marginal utility of money","Paradox of value"]},
+  {name:"偏好與公理", keys:["Preference","Completeness","Reflexivity","Transitivity","Continuity","Monotonicity","Convexity","Lexicographic preference","Well-behaved preferences"]},
+  {name:"效用函數與無異曲線", keys:["Utility function","Indifference curve","Marginal rate of substitution","Positive monotonic transformation","Cobb-Douglas","Leontief","Perfect substitutes","Quasi-linear","Homothetic preferences"]},
+  {name:"預算限制", keys:["Budget constraint line","Consumption possibility set","Relative price","Numeraire","Endowment"]},
+  {name:"消費者均衡", keys:["Marshallian demand","Hicksian demand","Interior solution","Corner solution"]},
+  {name:"對偶性理論", keys:["Indirect utility function","Expenditure function","Roy's identity","Shephard's lemma"]},
+  {name:"替代與所得效果", keys:["Substitution effect","Income effect","Price effect","Compensated variation","Cost difference","Equivalent variation","Consumer surplus"]},
+  {name:"需求曲線", keys:["Ordinary demand curve","Compensated demand curve","Giffen paradox"]},
+  {name:"消費曲線與方程式", keys:["Income consumption curve","Price consumption curve","Engel curve","Engel aggregation","Slutsky equation"]},
+  {name:"政府介入與補貼", keys:["Price subsidy","Quantity subsidy","Lump-sum tax"]},
+  {name:"勞動供給", keys:["Time endowment","Full income","Backward bending labor supply"]},
+  {name:"跨期消費", keys:["Time preference","Discount factor","Intertemporal budget constraint","Euler equation","Consumption smoothing"]},
+  {name:"顯示性偏好", keys:["Direct revealed preference","Indirect revealed preference","WARP","SARP"]},
+  {name:"物價指數", keys:["True price index","Laspeyres index","Paasche index","Expenditure index"]},
+  {name:"不確定性與風險", keys:["Risk","Uncertainty","Fair game","St. Petersburg paradox","Expected utility"]},
+  {name:"物價指數", keys:["True price index","Laspeyres index","Paasche index","Expenditure index"]},
+  {name:"生產函數與要素", keys:["Production function","Factors of production","Fixed input","Variable input","Cobb-Douglas production function","Leontief production function","Linear production function","Stone-Geary production function","CES production function"]},
+  {name:"規模報酬與替代", keys:["Returns to scale","Homogeneous function","Homothetic function","Elasticity of substitution","Elasticity of productivity","Inada condition","Output elasticity"]},
+  {name:"短期生產結構", keys:["Total physical product","Average product","Marginal product","Law of diminishing marginal returns","Disguised unemployment","Marginal productivity theory of distribution","Euler's theorem"]},
+  {name:"長期生產結構", keys:["Isoquant","Marginal rate of technical substitution","Isocost curve","Production equilibrium","Expansion path"]},
+  {name:"成本與利潤", keys:["Economic cost","Explicit cost","Implicit cost","Opportunity cost","Economic profit","Accounting profit","Normal profit","Sunk cost","Pure rent"]},
+  {name:"短期與長期成本", keys:["Conditional factor demand","Short-run total cost","Total variable cost","Total fixed cost","Quasifixed cost","Short-run average cost","Average variable cost","Average fixed cost","Marginal cost","Envelope curve","Long-run total cost","Long-run average cost"]},
+  {name:"規模經濟與範疇經濟", keys:["Economies of scale","External economies of scale","Learning curve","Economies of scope"]},
+  {name:"要素價格與利潤極大化", keys:["Normal factor","Inferior factor","Neutral factor","Shephard's lemma","Hotelling lemma","Indirect profit function","Unconditional factor demand"]},
+  {name:"市場結構與完全競爭", keys:["Market structure","Homogeneous products","Differentiated products","Perfect competition","Price taker","Free entry and exit","Total revenue","Average revenue","Marginal revenue"]},
+  {name:"短期與長期均衡", keys:["Break-even point","Shut-down point","Short-run supply curve","Producer surplus","Minimum efficient scale","Pareto efficiency","Technical efficiency"]},
+  {name:"產業供給與政府課稅", keys:["Constant cost industry","Increasing cost industry","Decreasing cost industry","Lump sum tax","Specific commodity tax","Ad valorem tax"]},
+  {name:"獨占市場與進入障礙", keys:["Monopoly","Natural monopoly","Entry barrier","Price maker","Contestable market"]},
+  {name:"獨占均衡與訂價", keys:["Markup pricing","Single price policy","Multi-plant monopoly","Lerner index","Bain index","Concentration rate","Herfindahl index"]},
+  {name:"差別取價", keys:["Perfect price discrimination","All-or-nothing demand","Quantity discrimination","Nonlinear pricing","Market separating pricing","Uniform pricing"]},
+  {name:"政府管制", keys:["Average cost pricing","Marginal cost pricing","X-inefficiency"]},
+  {name:"寡占模型", keys:["Oligopoly","Pure oligopoly","Differentiated oligopoly","Reaction function","Iso-profit curve","Cournot equilibrium","Stackelberg model","First-mover advantage","Cartel","Cheating","Antitrust law","Bertrand model","Bertrand paradox","Price leadership","Kinked demand curve","Price rigidity"]},
+  {name:"賽局理論", keys:["Game theory","Player","Strategy","Payoff","Normal form","Extensive form","Information set","Dominant strategy","Nash equilibrium","Prisoner's dilemma","Backward induction","Subgame perfect Nash equilibrium","Pure strategy","Mixed strategy","Zero-sum game","Maxmin","Common knowledge","Complete information","Perfect information"]},
+  {name:"獨占性競爭市場", keys:["Monopolistic competition","Subjective demand","Objective demand","Symmetry assumption","Representative firm","Excess capacity","Product differentiation"]},
+  {name:"要素市場理論", keys:["Derived demand","Final demand","Value of average product","Value of marginal product","Marginal revenue product","Average factor cost","Marginal factor cost","Monopsony","Monopsonistic exploitation","Monopolistic exploitation","Bilateral monopoly","Compensation differential","Minimum wage","Involuntary unemployment"]},
+  {name:"一般均衡與福利經濟學", keys:["Partial equilibrium analysis","General equilibrium analysis","Exchange economy","Endowment","Contract curve","Pareto optimum","Pareto improvement","Competitive equilibrium","Walrasian equilibrium","Walras' law","Production possibility curve","Marginal rate of transformation","Utility possibility frontier","Grand utility possibility frontier","Rawlsian criterion","Utilitarian","Arrow's impossibility theorem","Voting paradox"]},
+  {name:"市場失靈與外部性", keys:["Market failure","Government failure","Externality","Pecuniary externality","Technological externality","Network externality","External cost","External benefit","Marginal social cost","Marginal social benefit","Pigouvian tax","Tradable emission permits","Coase theorem","Property rights","Rival","Nonrival","Excludability","Private good","Quasi-public good","Public good","Common resource","Free rider","Samuelson condition","Lindahl price","Clarke tax","Tragedy of the commons"]},
+  {name:"資訊經濟學", keys:["Symmetric information","Asymmetric information","Hidden information","Hidden action","Adverse selection","Moral hazard","Lemon market","Screening","Signaling","Pooling equilibrium","Separating equilibrium","Co-insurance","Deductible","Principal-agent problem"]},
+  {name:"國際貿易理論", keys:["International trade","Gains from trade","Terms of trade","Mercantilism","Price-Specie-Flow Mechanism","Absolute advantage","Comparative advantage","Labor theory of value","Input-output coefficient","Equal cost-difference","Ricardian model","Autarky","Gains from exchange","Gains from specialization","Inter-industry trade","Intra-industry trade"]},
+  {name:"貿易政策", keys:["Trade policy","Closed economy","Open economy","Large country","Small country","Import quota","Voluntary export restraint","Quota rent","Specific tax","Ad valorem tax","Deadweight loss","Consumption distortion loss","Production distortion loss","Optimum tariff","Prohibitive tariff","Export subsidy","Dumping","Antidumping duties","Countervailing duties","Infant industry","Rent seeking","Preferential trade area","Free trade area","Customs union","Common market","Economic union"]},
+];
+
+const GLS = {
+  get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
+  set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+};
+
+const CH_TERMS_CATS = {
+  1:["基本概念","經濟學分類","模型建構","邏輯謬誤","循環流轉"],
+  2:["需求基礎","財貨分類","網路外部性","彈性","所得與恩格爾"],
+  3:["供給基礎","供給彈性"],
+  4:["市場均衡","福利與政府介入"],
+  5:["效用理論","消費者均衡"],
+  6:["偏好與公理","效用函數與無異曲線","預算限制","消費者均衡","對偶性理論"],
+  7:["替代與所得效果","需求曲線","消費曲線與方程式"],
+  8:["政府介入與補貼","勞動供給","跨期消費","顯示性偏好","物價指數"],
+  9:["不確定性與風險","風險態度與保險"],
+  10:["生產函數與要素","短期生產結構","長期生產結構","成本與利潤","短期與長期成本","規模經濟與範疇經濟","要素價格與利潤極大化"],
+  11:["市場結構與完全競爭","短期與長期均衡","產業供給與政府課稅"],
+  12:["獨占市場與進入障礙","獨占均衡與訂價","差別取價","政府管制"],
+  13:["寡占模型","賽局理論"],
+  14:["獨占性競爭市場"],
+  15:["要素市場理論"],
+  16:["一般均衡與福利經濟學"],
+  17:["市場失靈與外部性"],
+  18:["資訊經濟學"],
+  19:["國際貿易理論"],
+  20:["貿易政策"]
+};
+let glossMode="full", glossChapter=1;
+
+let glossCat="all", glossOnlyUnlearned=false;
+
+function renderGlossaryFull(){
+  glossMode="full";
+  currentChapter=0;
+  renderSidebar();
+  const c=document.getElementById("chapterContent");
+  c.innerHTML=`<div class="chapter-head">
+    <span class="kicker">全書複習</span>
+    <h1>術語複習表</h1>
+    <p>統整全書 ${Object.keys(TERMS).length} 個術語：打勾＝已學會、★重點、✎筆記。用分類按鈕與「只看未學會」篩選，進度自動統計，全部存在本機瀏覽器。</p>
+  </div>
+  <div id="glossFullRoot"></div>`;
+  glossCat="all";
+  renderGlossary();
+}
+function glossCatsForMode(){
+  if(glossMode==="full")return GLOSS_CATS;
+  const names=CH_TERMS_CATS[glossChapter]||[];
+  return GLOSS_CATS.filter(c=>names.includes(c.name));
+}
+function renderGlossary(){
+  const root=document.getElementById(glossMode==="full"?"glossFullRoot":"chGlossRoot");
+  if(!root)return;
+  const learned=GLS.get("micro-gloss-learned",[]);
+  const starred=GLS.get("micro-gloss-star",[]);
+  const notes=GLS.get("micro-gloss-notes",{});
+  const cats=glossCatsForMode();
+  const allKeys=cats.flatMap(c=>c.keys).filter(k=>TERMS[k]);
+  const total=allKeys.length;
+  const done=allKeys.filter(k=>learned.includes(k)).length;
+
+  let h=`<div class="gloss-toolbar">
+    <div class="gloss-cats">`;
+  if(glossMode==="full"){
+    h+=`<button class="gloss-cat-btn ${glossCat==="all"?"active":""}" data-cat="all">全部（${total}）</button>
+      ${cats.map(c=>`<button class="gloss-cat-btn ${glossCat===c.name?"active":""}" data-cat="${esc(c.name)}">${esc(c.name)}（${c.keys.filter(k=>TERMS[k]).length}）</button>`).join("")}`;
+  }else{
+    h+=`<span class="gloss-cat-label">本章術語 · ${cats.map(c=>esc(c.name)).join(" ／ ")}</span>`;
+  }
+  h+=`</div>
+    <div class="gloss-data-actions">
+      <button class="toolbtn ${glossOnlyUnlearned?"active":""}" id="onlyUnlearned" title="只看未學會">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </button>
+      <button class="toolbtn" id="exportGloss" title="匯出備份">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+      </button>
+      <button class="toolbtn" id="importGloss" title="匯入備份">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V9m0 0 4 4m-4-4-4 4M4 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="gloss-progress">
+    <div class="bar"><div class="fill" style="width:${total?done/total*100:0}%"></div></div>
+    <div class="label">已學會 ${done} / ${total}</div>
+  </div>`;
+
+  cats.forEach(cat=>{
+    if(glossMode==="full"&&glossCat!=="all"&&glossCat!==cat.name)return;
+    const items=cat.keys.filter(k=>TERMS[k]);
+    if(!items.length)return;
+    const catDone=items.filter(k=>learned.includes(k)).length;
+    h+=`<div class="gloss-group" data-gname="${esc(cat.name)}">
+      <h3>${esc(cat.name)}（${catDone}/${items.length}）</h3>
+      ${items.map(k=>{
+        const [en,zh,def]=TERMS[k];
+        const isLearned=learned.includes(k), isStarred=starred.includes(k);
+        const note=notes[k]||"";
+        if(glossOnlyUnlearned&&isLearned)return "";
+        const isProper=PROPER_TERMS.has(k);
+        return `<div class="gloss-item ${isLearned?"done":""} ${isStarred?"starred":""}" data-key="${esc(k)}">
+          <button class="gloss-check ${isLearned?"done":""}" onclick="toggleLearn(&quot;${escA(k)}&quot;)" title="標記已學會">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+          </button>
+          <div class="gloss-main">
+            <div class="gloss-en${isProper?" proper":""}">${esc(en)}<span class="gloss-zh${isProper?" proper":""}">${esc(zh)}</span></div>
+            <div class="gloss-def">${esc(def)}</div>
+            <div class="gloss-note ${note?"show":""}" data-note="wrap-${esc(k)}">
+              <textarea placeholder="寫下你自己的重點…" onchange="saveNote('${esc(k)}',this.value)">${esc(note)}</textarea>
+            </div>
+          </div>
+          <div class="gloss-actions">
+            <button class="gloss-btn ${isStarred?"active":""}" onclick="toggleStar(&quot;${escA(k)}&quot;)" title="重點畫記">★ 重點</button>
+            <button class="gloss-btn ${note?"active":""}" onclick="toggleNote(&quot;${escA(k)}&quot;)" title="個人筆記">✎ 筆記</button>
+          </div>
+        </div>`;
+      }).join("")}
+    </div>`;
+  });
+
+  root.innerHTML=h;
+  if(glossMode==="full"){
+    root.querySelectorAll(".gloss-cat-btn").forEach(b=>{
+      b.addEventListener("click",()=>{glossCat=b.dataset.cat;renderGlossary();});
+    });
+  }
+  document.getElementById("onlyUnlearned").addEventListener("click",e=>{
+    glossOnlyUnlearned=!glossOnlyUnlearned;
+    e.currentTarget.classList.toggle("active",glossOnlyUnlearned);
+    renderGlossary();
+  });
+  document.getElementById("exportGloss").addEventListener("click",exportGloss);
+  document.getElementById("importGloss").addEventListener("click",()=>{
+    const inp=document.createElement("input");
+    inp.type="file";inp.accept=".json";
+    inp.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>importGloss(r.result);r.readAsText(f);};
+    inp.click();
+  });
+}
+function toggleLearn(k){
+  let l=GLS.get("micro-gloss-learned",[]);
+  l=l.includes(k)?l.filter(x=>x!==k):[...l,k];
+  GLS.set("micro-gloss-learned",l);
+  renderGlossary();
+}
+function toggleStar(k){
+  let s=GLS.get("micro-gloss-star",[]);
+  s=s.includes(k)?s.filter(x=>x!==k):[...s,k];
+  GLS.set("micro-gloss-star",s);
+  renderGlossary();
+}
+function toggleNote(k){
+  const wrap=document.querySelector(`[data-note="wrap-${k}"]`);
+  if(wrap)wrap.classList.toggle("show");
+}
+function saveNote(k,v){
+  const notes=GLS.get("micro-gloss-notes",{});
+  notes[k]=v;
+  GLS.set("micro-gloss-notes",notes);
+  renderGlossary();
+}
+function exportGloss(){
+  const data={learned:GLS.get("micro-gloss-learned",[]),star:GLS.get("micro-gloss-star",[]),notes:GLS.get("micro-gloss-notes",{})};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="總經術語備份.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast("已匯出備份");
+}
+function importGloss(jsonStr){
+  try{
+    const d=JSON.parse(jsonStr);
+    if(d.learned&&Array.isArray(d.learned)){
+      const cur=GLS.get("micro-gloss-learned",[]);
+      GLS.set("micro-gloss-learned",[...new Set([...cur,...d.learned])]);
+    }
+    if(d.star&&Array.isArray(d.star)){
+      const cur=GLS.get("micro-gloss-star",[]);
+      GLS.set("micro-gloss-star",[...new Set([...cur,...d.star])]);
+    }
+    if(d.notes&&typeof d.notes==="object"){
+      const cur=GLS.get("micro-gloss-notes",{});
+      GLS.set("micro-gloss-notes",{...cur,...d.notes});
+    }
+    toast("已匯入並合併備份");
+    renderGlossary();
+  }catch(e){toast("備份檔案格式錯誤");}
+}
+
+/* ===== 全書搜尋 ===== */
+const searchInput=document.getElementById("searchInput");
+const searchPanel=document.getElementById("searchPanel");
+function stripHtml(t){return String(t||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();}
+function buildSearchIndex(){
+  const idx=[];
+  BOOK.forEach(ch=>{
+    if(!ch.done)return;
+    const n=ch.n;
+    idx.push({type:"ch",n,title:ch.title,text:ch.title});
+    (CH_SECTIONS[n]||[]).forEach(sec=>{
+      idx.push({type:"sec",n,id:sec.id,title:sec.title,text:sec.title+" "+stripHtml(sec.body)});
+    });
+    (CH_PROBLEMS[n]||[]).forEach((p,i)=>{
+      idx.push({type:"prob",n,no:i+1,text:stripHtml(p.q)+" "+stripHtml(p.ans||"")});
+    });
+  });
+  Object.keys(TERMS).forEach(k=>{
+    const [en,zh,def]=TERMS[k];
+    idx.push({type:"term",key:k,en,zh,def,text:en+" "+zh+" "+def});
+  });
+  return idx;
+}
+const SEARCH_IDX=buildSearchIndex();
+searchInput.addEventListener("input",()=>{
+  const kw=searchInput.value.trim().toLowerCase();
+  if(!kw){searchPanel.style.display="none";return;}
+  const hits=SEARCH_IDX.filter(x=>x.text.toLowerCase().includes(kw)).slice(0,40);
+  if(!hits.length){
+    searchPanel.innerHTML=`<div class="sp-empty">找不到「${esc(kw)}」相關內容，試試其他關鍵字。</div>`;
+    searchPanel.style.display="block";return;
+  }
+  searchPanel.innerHTML=hits.map(h=>{
+    if(h.type==="ch")return `<button class="sp-item" data-act="ch" data-n="${h.n}"><span class="sp-tag">第${h.n}章</span><b>${esc(h.title)}</b><span class="sp-snip">整章內容</span></button>`;
+    if(h.type==="sec")return `<button class="sp-item" data-act="sec" data-n="${h.n}" data-id="${esc(h.id)}"><span class="sp-tag">第${h.n}章·小節</span><b>${esc(h.title)}</b><span class="sp-snip">${esc(h.text.slice(0,70))}</span></button>`;
+    if(h.type==="prob")return `<button class="sp-item" data-act="prob" data-n="${h.n}" data-no="${h.no}"><span class="sp-tag">第${h.n}章·例題${h.no}</span><span class="sp-snip">${esc(h.text.slice(0,80))}</span></button>`;
+    return `<button class="sp-item" data-act="term" data-key="${esc(h.key)}"><span class="sp-tag">術語</span><b>${esc(h.en)} ${esc(h.zh)}</b><span class="sp-snip">${esc(h.def.slice(0,60))}</span></button>`;
+  }).join("")+`<div class="sp-count">找到 ${hits.length} 筆相關內容</div>`;
+  searchPanel.style.display="block";
+});
+searchPanel.addEventListener("click",e=>{
+  const item=e.target.closest(".sp-item");
+  if(!item)return;
+  const act=item.dataset.act;
+  searchPanel.style.display="none";
+  searchInput.value="";
+  if(act==="ch"){
+    renderChapter(+item.dataset.n);
+    window.scrollTo({top:0,behavior:"smooth"});
+  }else if(act==="sec"){
+    renderChapter(+item.dataset.n);
+    setTimeout(()=>{
+      const el=document.getElementById("sec-"+item.dataset.id);
+      if(el){el.classList.add("open");el.scrollIntoView({behavior:"smooth",block:"start"});}
+    },60);
+  }else if(act==="prob"){
+    renderChapter(+item.dataset.n);
+    setTimeout(()=>{
+      const el=document.getElementById("prob-"+item.dataset.n+"-"+item.dataset.no);
+      if(el)el.scrollIntoView({behavior:"smooth",block:"start"});
+    },60);
+  }else if(act==="term"){
+    openTerm(item.dataset.key);
+  }
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){searchPanel.style.display="none";searchInput.blur();}
+});
+
+
+/* ===== 重點標記 ===== */
+let hlEnabled=true;
+function getHls(){try{return JSON.parse(localStorage.getItem("micro-hl")||"[]")}catch(e){return[]}}
+function saveHls(h){localStorage.setItem("micro-hl",JSON.stringify(h))}
+
+document.addEventListener("mouseup",e=>{
+  const sel=window.getSelection();
+  if(!sel||sel.isCollapsed)return;
+  const txt=sel.toString().trim();
+  if(txt.length<2||txt.length>300)return;
+  // 檢查是否點在工具列/按鈕上
+  if(e.target.closest(".toolbtn,.ans-btn,.flip-card,.term,.section-head"))return;
+  const range=sel.getRangeAt(0);
+  const el=range.startContainer.parentElement;
+  if(!el.closest(".section-body,.problem"))return;
+  const hls=getHls();
+  if(hls.some(h=>h.txt===txt))return;
+  hls.push({txt,time:Date.now()});
+  saveHls(hls);
+  applyHighlights();
+  toast("已加入重點標記（點黃色文字可移除）");
+});
+
+function applyHighlights(){
+  const hls=getHls();
+  document.querySelectorAll(".section-body .userhl,.problem .userhl").forEach(el=>el.outerHTML=el.textContent);
+  if(!hlEnabled)return;
+  hls.forEach(h=>{
+    document.querySelectorAll(".section-body p,.section-body .note,.section-body .warn,.problem .p-body").forEach(block=>{
+      const text=block.textContent;
+      if(!text.includes(h.txt))return;
+      if(block.querySelector(".userhl"))return;
+      const idx=text.indexOf(h.txt);
+      const frag=document.createDocumentFragment();
+      frag.appendChild(document.createTextNode(text.slice(0,idx)));
+      const m=document.createElement("mark");
+      m.className="userhl";m.textContent=h.txt;
+      m.addEventListener("click",()=>{
+        const arr=getHls().filter(x=>x.txt!==h.txt);
+        saveHls(arr);applyHighlights();toast("已移除重點標記");
+      });
+      frag.appendChild(m);
+      frag.appendChild(document.createTextNode(text.slice(idx+h.txt.length)));
+      block.replaceChildren(frag);
+    });
+  });
+}
+
+document.getElementById("hlToggle").addEventListener("click",e=>{
+  hlEnabled=!hlEnabled;
+  e.currentTarget.classList.toggle("active",hlEnabled);
+  applyHighlights();
+  toast(hlEnabled?"重點標記已顯示":"重點標記已隱藏");
+});
+
+/* ===== 畫記模式 / 深色 ===== */
+let markMode=false;
+const markBtn=document.getElementById("markToggle");
+markBtn.addEventListener("click",e=>{
+  markMode=!markMode;
+  document.body.classList.toggle("marking",markMode);
+  markBtn.classList.toggle("active",markMode);
+  toast(markMode?"畫記模式開啟：點文字即可高亮（再點一次關閉並儲存）":"畫記模式已關閉，重點已儲存");
+});
+document.addEventListener("click",e=>{
+  if(!markMode)return;
+  if(e.target.closest(".toolbtn,.ans-btn,.term,.section-head"))return;
+  if(e.target.closest(".userhl"))return;
+  const el=e.target.closest(".section-body p,.section-body li,.section-body .note,.section-body .warn,.problem .p-body");
+  if(!el)return;
+  e.preventDefault();e.stopPropagation();
+  const txt=el.textContent.trim();
+  if(txt.length<2||txt.length>500){toast("這段太長，請改用拖選文字畫重點");return;}
+  const hls=getHls();
+  if(hls.some(h=>h.txt===txt))return;
+  hls.push({txt,time:Date.now()});
+  saveHls(hls);
+  applyHighlights();
+  toast("已加入重點標記（點黃色文字可移除）");
+});
+document.getElementById("darkToggle").addEventListener("click",e=>{
+  document.body.classList.toggle("dark");
+  e.currentTarget.classList.toggle("active",document.body.classList.contains("dark"));
+});
+
+/* ===== toast ===== */
+function toast(msg){
+  let t=document.getElementById("toast");
+  if(!t){
+    t=document.createElement("div");
+    t.id="toast";
+    t.style.cssText="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#26303b;color:#fff;padding:10px 18px;border-radius:10px;font-size:13.5px;z-index:99;box-shadow:0 6px 24px rgba(0,0,0,.2);opacity:0;transition:opacity .25s;pointer-events:none";
+    document.body.appendChild(t);
+  }
+  t.textContent=msg;
+  t.style.opacity="1";
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>t.style.opacity="0",1800);
+}
+
+/* ===== 初始化 ===== */
+renderSidebar();
+renderChapter(1);
+</script>
+</body>
+</html>
