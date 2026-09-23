@@ -2872,75 +2872,131 @@ const CH13_PROBLEMS = [
 ];
 
 /* ===== 第十四章：自我選擇與效果模型 ===== */
+/* ===== 第十四章：自我選擇與效果模型（完整版） ===== */
 const CH14_SECTIONS = [
 {
-  id:"14.1", title:"隨機控制實驗 RCT",
+  id:"14.1", title:"實驗法與因果推斷",
   body:`
-  <p><span class="term" data-term="RCT">隨機控制實驗 (Randomized Controlled Trial, RCT)</span> 是因果推斷的黃金標準。</p>
-  <p>做法：隨機把樣本分成處理組（接受處理）和控制組（不接受處理）。因為是隨機分配，所以處理組和控制組在所有其他變數上（包括可觀察和不可觀察的）的平均水準都會一樣。</p>
-  <p>此時，兩組的平均結果差異，就可以解讀成處理的因果效果。</p>
-  <div class="warn">考試重點：RCT 是因果推斷的黃金標準——因為隨機分配解決了所有的遺漏變數偏誤。但現實中很多問題無法做實驗，所以需要用「擬自然實驗」的方法。</div>`
+  <p>追蹤資料固定效果模型可以解決「不隨時間改變的未觀測異質性」造成的內生性問題。但是如果還有「隨時間改變的未觀測異質性」，或者你根本沒有追蹤資料，那怎麼辦？</p>
+
+  <p>這時候就需要用到「實驗」或「擬實驗」的方法。</p>
+
+  <div class="method-card mc-title" data-mc="rct">
+    <div class="mc-check"><input type="checkbox" id="mc-ch14-0" data-mc="rct"><label for="mc-ch14-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">隨機控制實驗 (RCT)：因果推斷的黃金標準</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      把受試者「隨機」分成兩組：<br>
+      • 處理組：接受處理（例如：上某個課程）<br>
+      • 控制組：不接受處理
+      </div>
+      <div class="mc-detail">
+      為什麼隨機分配這麼重要？因為隨機分配可以確保：除了「有沒有接受處理」之外，處理組和控制組在其他所有方面（觀察得到的、觀察不到的）都是「平均來說一樣的」。<br><br>
+      這樣一來，處理組和控制組的結果差異，就可以歸因於「處理」本身——而不是其他的混淆變數。
+      </div>
+      <div class="mc-ex">
+      這就是為什麼醫學界那麼看重雙盲隨機對照實驗——因為它可以最有效地排除混淆變數。
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：RCT 是因果推斷的黃金標準。但是經濟學研究很難做真正的 RCT（成本太高、倫理問題），所以才會有各種「擬實驗」的方法——DiD、PSM、RD。</p>`
 },
+
 {
-  id:"14.2", title:"差異中的差異 DiD",
+  id:"14.2", title:"差異中差異 (DiD)",
   body:`
-  <p><span class="term" data-term="DiD">差異中的差異 (Difference-in-Differences, DiD)</span> 是最常用的擬自然實驗方法之一。</p>
-  <p>做法：比較處理組在政策前後的變化，減去控制組在政策前後的變化。</p>
-  <div class="formula"><span class="f-label">DiD 估計量</span>DiD = (ŷ_處理,事後 - ŷ_處理,事前) - (ŷ_控制,事後 - ŷ_控制,事前)</div>
-  <p>DiD 的關鍵假設：<b>平行趨勢假設</b>——如果沒有政策，處理組和控制組的趨勢會平行。</p>
+  <p>差異中差異 (Difference-in-Differences, DiD) 是最常用的擬自然實驗方法之一。它的邏輯很簡單：</p>
+
+  <div class="formula"><span class="f-label">DiD 估計式</span>DiD = (處理組後期 - 處理組前期) - (控制組後期 - 控制組前期)</div>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">DiD 的平行趨勢假設</h3>
+  <p>DiD 最重要的假設是「平行趨勢假設」：如果沒有政策衝擊，處理組和控制組的結果變化趨勢應該是平行的。</p>
+  <p>這個假設要怎麼檢查？最常用的方法是「事件研究圖」 (Event Study Plot)——看政策實施前，處理組和控制組的趨勢是不是真的平行。</p>
+
   <div class="method-card mc-title" data-mc="did">
     <div class="mc-check"><input type="checkbox" id="mc-ch14-1" data-mc="did"><label for="mc-ch14-1" class="mc-lbl">學會</label></div>
     <div class="mc-left">DiD 的直覺</div>
     <div class="mc-body">
-      <div class="mc-formula">處理組前後差 - 控制組前後差</div>
-      <div class="mc-detail">控制組的前後變化代表「時間趨勢」或「其他共同衝擊」，把這個減掉，剩下的就是政策本身的效果。</div>
+      <div class="mc-formula">
+      你想知道政策的效果是什麼。<br>
+      但是政策實施前後，本來就會有時間趨勢。<br>
+      所以你需要一個「沒有受到政策影響」的控制組，<br>
+      用它來「扣除掉」時間趨勢的部分。
+      </div>
+      <div class="mc-detail">
+      範例：某個縣市實施了最低工資政策，你想知道它對就業的影響。<br>
+      • 如果你只看這個縣市實施前後的就業變化——你不知道這是政策的效果，還是景氣循環造成的。<br>
+      • 如果你加一個「沒有實施最低工資政策」的鄰近縣市當控制組——你就可以把「景氣循環」的部分扣掉。<br><br>
+      這就是 DiD 的核心邏輯。
+      </div>
     </div>
-  </div>`
+  </div>
+
+  <div class="warn">考試重點：DiD 本質上就是「雙向固定效果模型」（個體固定效果 + 時間固定效果）——這和第 12 章講的追蹤資料固定效果是相通的。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：DiD 是現代勞動經濟、公共經濟最常用的因果推斷方法之一。它和第 12 章講的追蹤資料固定效果模型是相通的。</p>`
 },
+
 {
-  id:"14.3", title:"傾向得分匹配 PSM",
+  id:"14.3", title:"傾向得分匹配 (PSM) 與斷點迴歸 (RD)",
   body:`
-  <p><span class="term" data-term="PSM">傾向得分匹配 (Propensity Score Matching, PSM)</span> 用來解決「可觀察變數造成的選擇偏誤」。</p>
-  <p>做法：</p>
-  <ol>
-    <li>先估計「接受處理的機率」（傾向得分），用 logistic 或 probit 迴歸</li>
-    <li>把處理組的每個人，和控制組中傾向得分最接近的人配對</li>
-    <li>比較配對後兩組的平均結果差異</li>
-  </ol>
-  <div class="warn">考試重點：PSM 只能解決「可觀察變數」造成的選擇偏誤；如果有「不可觀察變數」造成的選擇偏誤，PSM 就沒有用，需要用 FE 或 IV。</div>`
-},
-{
-  id:"14.4", title:"斷點迴歸 RD",
-  body:`
-  <p><span class="term" data-term="RD">斷點迴歸 (Regression Discontinuity, RD)</span> 利用隨機的「斷點」來估計因果效果。</p>
-  <p>適用情境：處理的分配是根據一個連續變數（稱為「Running Variable」）是否超過某個門檻來決定的。</p>
-  <div class="formula"><span class="f-label">處理分配規則</span>如果 x ≥ c，就接受處理；如果 x < c，就不接受處理</div>
-  <p>此時，在門檻 c 附近的人，幾乎可以說是隨機分配的（因為x 的微小差異可能是隨機的），所以在 c 附近的結果跳動，就可以解讀成處理的因果效果。</p>
-  <div class="warn">考試重點：RD 的識別假設是「如果沒有處理，結果變數在門檻附近應該是連續的」。如果結果變數在門檻處有跳動，那就可以歸因於處理的效果。</div>`
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">14.3.1 傾向得分匹配 (PSM)</h3>
+  <p>傾向得分匹配 (Propensity Score Matching, PSM) 用來解決「可觀察變數造成的選擇偏誤」。</p>
+  <p>它的邏輯是：先估計每個人「接受處理的機率」（傾向得分），然後在處理組和控制組之間，找傾向得分很接近的人來匹配，再比較他們的結果差異。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">14.3.2 斷點迴歸 (RD)</h3>
+  <p>斷點迴歸 (Regression Discontinuity, RD) 利用隨機的「斷點」來估計因果效果。</p>
+  <p>例如：考試分數剛好及格 vs 剛好不及格——這兩組人其實很像，只是因為剛好跨過及格線，所以一個可以升級、一個不能。這時候你就可以用「及格線附近」的人來估計升級的效果。</p>
+
+  <div class="method-card mc-title" data-mc="rd">
+    <div class="mc-check"><input type="checkbox" id="mc-ch14-2" data-mc="rd"><label for="mc-ch14-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">RD 的直覺</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      斷點附近的人其實很像<br>
+      只是因為剛好跨過了某個門檻，<br>
+      所以一組接受了處理，另一組沒有
+      </div>
+      <div class="mc-detail">
+      這就好像「準隨機實驗」一樣——因為在斷點附近，誰會剛好跨過門檻、誰不會，幾乎是隨機的。<br><br>
+      所以你可以用斷點附近的樣本來估計因果效果。
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：這些「擬實驗」方法（RCT、DiD、PSM、RD）都是現代應用計量經濟學的核心工具，它們的目的都是解決內生性問題，估計真正的因果效果。</p>`
 }
 ];
 
 const CH14_PROBLEMS = [
 {
   id:"q14-1",
-  q:"隨機控制實驗 (RCT) 為什麼是因果推斷的黃金標準？",
-  a:"因為隨機分配確保了處理組和控制組在所有變數（包括可觀察和不可觀察的）上的平均水準都一樣，所以兩組的結果差異可以完全歸因於處理，不會有遺漏變數偏誤。",
-  difficulty:"easy",
+  q:"什麼是隨機控制實驗 (RCT)？為什麼說它是因果推斷的黃金標準？",
+  a:"隨機控制實驗 (RCT)：把受試者「隨機」分成兩組——處理組（接受處理）和控制組（不接受處理）。<br><br>為什麼是黃金標準？因為隨機分配可以確保：除了「有沒有接受處理」之外，處理組和控制組在其他所有方面（觀察得到的、觀察不到的）都是「平均來說一樣的」。<br><br>這樣一來，處理組和控制組的結果差異，就可以歸因於「處理」本身——而不是其他的混淆變數。<br><br>這就是為什麼醫學界那麼看重雙盲隨機對照實驗。",
+  difficulty:"medium",
   topic:"RCT"
 },
 {
   id:"q14-2",
-  q:"差異中的差異 (DiD) 的關鍵假設是什麼？",
-  a:"平行趨勢假設——如果沒有政策/處理，處理組和控制組的時間趨勢會是平行的。也就是說，控制組的時間趨勢，可以用來反事實地估計「處理組如果沒有接受處理，會怎麼樣」。",
+  q:"差異中差異 (DiD) 的估計式是什麼？它最重要的假設是什麼？",
+  a:"DiD 估計式：<br>DiD = (處理組後期 - 處理組前期) - (控制組後期 - 控制組前期)<br><br>最重要的假設：「平行趨勢假設」——如果沒有政策衝擊，處理組和控制組的結果變化趨勢應該是平行的。<br><br>怎麼檢查？用「事件研究圖」——看政策實施前，處理組和控制組的趨勢是不是真的平行。<br><br>DiD 本質上就是「雙向固定效果模型」（個體固定效果 + 時間固定效果）。",
   difficulty:"medium",
-  topic:"DiD 假設"
+  topic:"DiD"
 },
 {
   id:"q14-3",
-  q:"傾向得分匹配 (PSM) 可以解決哪一種選擇偏誤？",
-  a:"PSM 只能解決「可觀察變數」造成的選擇偏誤——也就是說，兩組的差異都可以從你觀察到的 x 變數解釋。如果有「不可觀察變數」造成的選擇偏誤，PSM 就沒有用，需要用 FE、IV 或 DiD。",
+  q:"傾向得分匹配 (PSM) 是什麼？它用來解決什麼問題？",
+  a:"傾向得分匹配 (PSM) 用來解決「可觀察變數造成的選擇偏誤」。<br><br>它的邏輯是：<br>1. 先估計每個人「接受處理的機率」（傾向得分）<br>2. 然後在處理組和控制組之間，找傾向得分很接近的人來匹配<br>3. 再比較他們的結果差異<br><br>它和工具變數的差別：PSM 只能解決「可觀察變數」造成的選擇偏誤；如果有「不可觀察變數」造成的選擇偏誤，PSM 就沒辦法了。",
   difficulty:"medium",
-  topic:"PSM 的限制"
+  topic:"PSM"
+},
+{
+  id:"q14-4",
+  q:"斷點迴歸 (RD) 的基本邏輯是什麼？為什麼它可以用來估計因果效果？",
+  a:"斷點迴歸 (RD) 利用隨機的「斷點」來估計因果效果。<br><br>範例：考試分數剛好及格 vs 剛好不及格——這兩組人其實很像，只是因為剛好跨過及格線，所以一個可以升級、一個不能。<br><br>為什麼可以用來估計因果效果？因為在斷點附近，誰會剛好跨過門檻、誰不會，幾乎是隨機的——這就好像「準隨機實驗」一樣。<br><br>所以你可以用斷點附近的樣本來估計因果效果。",
+  difficulty:"medium",
+  topic:"RD"
 }
 ];
 
