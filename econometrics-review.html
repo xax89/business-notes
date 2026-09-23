@@ -3104,72 +3104,101 @@ const CH15_PROBLEMS = [
 ];
 
 /* ===== 第十六章：一般化動車法 GMM ===== */
+/* ===== 第十六章：一般化動車法 GMM（完整版） ===== */
 const CH16_SECTIONS = [
 {
-  id:"16.1", title:"動機條件與 GMM",
+  id:"16.1", title:"GMM 的基本概念",
   body:`
-  <p><span class="term" data-term="GMM">一般化動車法 (Generalized Method of Moments, GMM)</span> 是一個非常一般化的估計架構，OLS、IV、MLE 都可以看成是 GMM 的特例。</p>
-  <p>GMM 的出發點是「動機條件 (Moment Condition)」：</p>
-  <div class="formula"><span class="f-label">動機條件</span>E[g(y_t, x_t, β)] = 0</div>
-  <p>也就是說，母體上某些條件平均數應該等於 0。GMM 就是選擇 β，使得樣本平均的 g 盡可能接近 0。</p>
-  <div class="warn">考試重點：GMM 的好處是很一般化——只要你能寫出動機條件，就可以用 GMM 估計，不需要完整指定分配（這點和 MLE 不同）。</div>`
+  <p>一般化動車法 (Generalized Method of Moments, GMM) 是計量經濟學最重要的估計方法之一。它是 MLE 的一般化版本——不需要完整指定分配，只需要設定「動機條件」。</p>
+
+  <div class="method-card mc-title" data-mc="gmm-basic">
+    <div class="mc-check"><input type="checkbox" id="mc-ch16-0" data-mc="gmm-basic"><label for="mc-ch16-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">GMM 的核心邏輯</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      動機條件 (moment condition)：<br>
+      E[z'u] = 0<br>
+      （工具變數和誤差項正交）
+      </div>
+      <div class="mc-detail">
+      GMM 的邏輯很簡單：<br>
+      1. 你有一些「母體的動機條件」——也就是「在母體裡面，某個條件應該要成立」<br>
+      2. 你要找到一組參數值，讓「樣本的動機條件」盡量接近「母體的動機條件」<br>
+      3. 這就是 GMM 的核心：找參數值，讓動機條件盡量成立
+      </div>
+      <div class="mc-ex">
+      最經典的例子就是工具變數：動機條件就是 E[z'u] = 0（工具變數和誤差項正交）。GMM 就是找參數值，讓「樣本平均的 z'u」盡量接近 0。
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：GMM 是 MLE 的一般化版本——MLE 需要你完整指定分配，GMM 只需要你設定動機條件。而且 OLS 和 IV 都是 GMM 的特例。</p>`
 },
+
 {
-  id:"16.2", title:"GMM 的直覺",
+  id:"16.2", title:"GMM 的優點與應用",
   body:`
-  <p>GMM 的直覺很簡單：</p>
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">GMM 的優點</h3>
   <ol>
-    <li>先找到一組「動機條件」——母體上應該成立的條件平均數等式</li>
-    <li>用樣本平均代替母體平均</li>
-    <li>選擇 β，讓樣本平均盡可能接近 0</li>
+    <li><b>更一般化</b>：不需要完整指定分配——只要設定動機條件就可以了。所以 GMM 比 MLE 更穩健。</li>
+    <li><b>OLS 和 IV 都是 GMM 的特例</b>：OLS 的動機條件是 E[x'u] = 0；IV 的動機條件是 E[z'u] = 0。兩者都是 GMM 的一種特殊情況。</li>
+    <li><b>可以同時處理異變數和自我相關</b>：GMM 可以很自然地把「異變數」和「自我相關」的問題處理掉，不用像 OLS 那樣事後再修正標準誤。</li>
   </ol>
-  <p>如果動機條件的個數剛好等於參數個數，就是「恰好認定」，可以直接解出 β。</p>
-  <p>如果動機條件的個數 > 參數個數，就是「過度認定」，需要用加權的方式讓所有條件同時盡可能接近 0。</p>
-  <div class="warn">考試重點：IV 估計就是 GMM 的一個特例——工具變數的正交條件 E[z'u] = 0 就是動機條件。</div>`
-},
-{
-  id:"16.3", title:"過度認定檢定",
-  body:`
-  <p>在 GMM 架構下，當動機條件個數 > 參數個數時，可以做<b>過度認定檢定 (Hansen J 檢定)</b>：</p>
-  <ul>
-    <li>H₀：所有動機條件都是正確的（所有工具變數都是外生的）</li>
-    <li>如果拒絕 H₀，代表至少有一個動機條件是錯的</li>
-  </ul>
-  <div class="warn">考試重點：Hansen J 檢定是 GMM 架構下的「工具變數外生性檢定」——如果拒絕 H₀，代表你的工具變數有問題。</div>`
-},
-{
-  id:"16.4", title:"GMM 的應用：動態追蹤模型",
-  body:`
-  <p>GMM 最常見的應用之一是<b>動態追蹤模型 (Dynamic Panel Data)</b>。</p>
-  <p>動態追蹤模型就是把落後一期的 y 也放進解釋變數：</p>
-  <div class="formula"><span class="f-label">動態追蹤模型</span>y_{it} = βy_{i,t-1} + x_{it}'γ + a_i + u_{it}</div>
-  <p>此時 y_{i,t-1} 和誤差項是機械相關的（因為 y_{i,t-1} 包含了 a_i），所以 OLS 和 FE 都有偏誤。</p>
-  <p>解決方法：<span class="term" data-term="Arellano-Bond">Arellano-Bond 估計量</span>——用落後更多期的 y 作為工具變數，用 GMM 估計。</p>
-  <div class="warn">考試重點：動態追蹤模型的 Nickell 偏誤問題，是追蹤資料進階議題；解決方法是 Arellano-Bond 的 GMM 估計量。</div>`
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">Hansen J 檢定：過度認定檢定</h3>
+  <p>如果你有「超過剛好足夠」的工具變數（也就是「過度認定」），那你就可以用 Hansen J 檢定來檢定：所有工具變數（動機條件）是不是真的都是外生的。</p>
+  <p>如果 Hansen J 檢定拒絕了虛無假設，那就代表：至少有一個工具變數是內生的——你的工具變數選擇有問題。</p>
+
+  <div class="method-card mc-title" data-mc="gmm-compare">
+    <div class="mc-check"><input type="checkbox" id="mc-ch16-1" data-mc="gmm-compare"><label for="mc-ch16-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">GMM vs MLE：怎麼選？</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      • 如果你的模型設定很確定 → MLE 比較有效率<br>
+      • 如果你的模型設定不確定 → GMM 比較穩健<br>
+      • 如果有異變數或自我相關 → GMM 可以同時處理
+      </div>
+      <div class="mc-detail">
+      簡單來說：MLE 是「很強但很脆」——如果你完全確定模型設定是對的，MLE 是最有效的；但如果你猜錯了，MLE 就會崩壞。<br><br>
+      GMM 是「比較弱但比較穩」——它不需要你那麼多假設，所以即使模型設定有點不準，GMM 還是可以估出還不錯的結果。
+      </div>
+    </div>
+  </div>
+
+  <div class="warn">考試重點：GMM 是現代計量經濟學的核心方法之一。現在頂級期刊的實證研究，幾乎全部都是用 GMM（或它的特例：OLS、IV、2SLS）。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：GMM 是計量經濟學的「萬用工具」——它把 OLS、IV、2SLS 全部統一起來了。理解 GMM，就等於理解了現代計量經濟學的核心架構。</p>`
 }
 ];
 
 const CH16_PROBLEMS = [
 {
   id:"q16-1",
-  q:"GMM 和 MLE 最大的差別是什麼？",
-  a:"MLE 需要完整指定 y 的分配（需要知道誤差項是什麼分配）；GMM 只需要設定動機條件（母體平均數等式），不需要完整指定分配，所以更一般化，也比較穩健。",
+  q:"GMM 的核心邏輯是什麼？它和 MLE 有什麼不同？",
+  a:"GMM 的核心邏輯：<br>1. 你有一些「母體的動機條件」——也就是「在母體裡面，某個條件應該要成立」<br>2. 你要找到一組參數值，讓「樣本的動機條件」盡量接近「母體的動機條件」<br><br>和 MLE 的不同：<br>• MLE 需要你完整指定 y 的分配（假設誤差項是什麼分配）<br>• GMM 只需要你設定動機條件，不需要完整指定分配<br><br>所以 GMM 比 MLE 更一般化、更穩健。",
   difficulty:"medium",
-  topic:"GMM vs MLE"
+  topic:"GMM 基本概念"
 },
 {
   id:"q16-2",
   q:"為什麼說 OLS 和 IV 都是 GMM 的特例？",
-  a:"因為 OLS 的動機條件是 E[x'u] = 0（解釋變數和誤差項正交）；IV 的動機條件是 E[z'u] = 0（工具變數和誤差項正交）。兩者都是 GMM 的一種特殊情況——只是用的動機條件不同。",
+  a:"因為 OLS 和 IV 都可以寫成 GMM 的一種特殊情況：<br>• OLS 的動機條件：E[x'u] = 0（解釋變數和誤差項正交）<br>• IV 的動機條件：E[z'u] = 0（工具變數和誤差項正交）<br><br>兩者都是 GMM 的一種特殊情況——只是用的動機條件不同。<br><br>所以 GMM 是一個「萬用框架」——OLS、IV、2SLS 全部都是 GMM 的特例。",
   difficulty:"hard",
   topic:"GMM 與 OLS/IV 的關係"
 },
 {
   id:"q16-3",
   q:"Hansen J 檢定的用途是什麼？",
-  a:"Hansen J 檢定是 GMM 架構下的過度認定檢定，用來檢定所有工具變數（動機條件）是否都是外生的。如果拒絕 H₀，代表至少有一個工具變數是內生的。",
+  a:"Hansen J 檢定是 GMM 架構下的「過度認定檢定」。<br><br>用途：檢定所有工具變數（動機條件）是不是都是外生的。<br><br>什麼是「過度認定」？就是你有「超過剛好足夠」的工具變數——這時候你就有「多餘」的工具變數可以拿來檢定。<br><br>如果 Hansen J 檢定拒絕了虛無假設 → 代表至少有一個工具變數是內生的——你的工具變數選擇有問題。",
   difficulty:"medium",
   topic:"Hansen J 檢定"
+},
+{
+  id:"q16-4",
+  q:"GMM 和 MLE 比起來，各有什麼優缺點？",
+  a:"MLE：<br>• 優點：如果模型設定正確，MLE 是最有效的（變異數最小）<br>• 缺點：需要你完整指定分配——如果分配假設錯了，MLE 就會崩壞<br><br>GMM：<br>• 優點：更一般化，只需要設定動機條件，不需要完整指定分配——比較穩健<br>• 缺點：如果模型設定正確，GMM 的效率會比 MLE 差一點（變異數大一點）<br><br>簡單來說：MLE 是「很強但很脆」；GMM 是「比較弱但比較穩」。",
+  difficulty:"medium",
+  topic:"GMM vs MLE"
 }
 ];
 
