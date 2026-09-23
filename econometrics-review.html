@@ -432,15 +432,15 @@ const BOOK = [
   {n:14, title:"自我選擇與效果模型", subs:["14.1 隨機控制實驗 RCT","14.2 差異中的差異 DiD","14.3 傾向得分匹配 PSM","14.4 斷點迴歸 RD"], done:true, points:["RCT 是因果推斷黃金標準","DiD：平行趨勢假設","PSM 只能解決可觀察變數的選擇偏誤","RD：利用門檻斷點估計因果效果"]},
   {n:15, title:"最大概似估計 MLE", subs:["15.1 概似函數的概念","15.2 MLE 的性質","15.3 三大檢定：概似比、Wald、LM","15.4 MLE 的應用"], done:true, points:["MLE：選擇參數使得觀察到資料的機率最大","MLE 三大性質：一致、漸近常態、漸近有效","LRT/Wald/LM 三大檢定漸近等價","Logit/Probit/Poisson 都是 MLE 估計"]},
   {n:16, title:"一般化動車法 GMM", subs:["16.1 動機條件與 GMM","16.2 GMM 的直覺","16.3 過度認定檢定","16.4 GMM 的應用：動態追蹤模型"], done:true, points:["GMM 只需要動機條件，不需要完整分配","OLS/IV 都是 GMM 的特例","Hansen J 檢定：工具變數外生性檢定","Arellano-Bond：動態追蹤模型的 GMM 估計"]},
-  {n:17, title:"動態追蹤資料模型", subs:["17.1 動態追蹤模型的設定","17.2 落進因變數的內生性問題","17.3 Arellano-Bond 估計法","17.4 系統 GMM 估計法"], done:false, points:["動態追蹤模型：y_{it} = ρy_{i,t-1} + βx_{it} + u_{it}","落進因變數造成內生性：FE 估計有偏誤","Arellano-Bond：用落進兩期以上的變數當工具變數","系統 GMM：同時估計差分方程式和水準方程式"]},
-  {n:18, title:"離散選擇模型", subs:["18.1 二元選擇模型：Logit 與 Probit","18.2 邊際效果的計算","18.3 多類別選擇模型","18.4 有序選擇模型"], done:false, points:["Logit：誤差項服從邏輯分配","Probit：誤差項服從常態分配","邊際效果：機率對 x 的偏微分","多類別：Multinomial Logit / Nested Logit","有序：Ordered Probit / Ordered Logit"]},
-  {n:19, title:"受限因變數模型", subs:["19.1 設限迴歸模型 Tobit","19.2 樣本選擇模型","19.3 兩段法 Heckit","19.4 計數資料模型"], done:false, points:["Tobit：因變數在某個臨界值以下被設限","樣本選擇：樣本不是隨機抽的","Heckit：兩段法解決樣本選擇偏誤","Poisson / 負二項：計數資料模型"]},
-  {n:20, title:"持續時間模型", subs:["20.1 危險率函數 Hazard Rate","20.2 共比例風險模型 Cox","20.3 加速失敗時間模型","20.4 持續時間資料的應用"], done:false, points:["危險率函數：在活過 t 的條件下，下一個瞬間失敗的機率","Cox 模型：不需要指定基準危險率的形狀","AFT 模型：解釋變數直接影響存活時間","應用：失業期間、戰爭持續時間、客户流失"]},
-  {n:21, title:"非參數與半參數估計", subs:["21.1 非參數估計的概念","21.2 核心密度估計法 Kernel","21.3 局部迴歸 Lowess","21.4 半參數估計法"], done:false, points:["非參數：不預設函數形式，讓資料自己說話","核心密度估計：用平滑曲線估計機率密度函數","Lowess：局部加權迴歸，適合探索性資料分析","半參數：保留部分參數結構，其餘用非參數"]},
-  {n:22, title:"貝氏計量經濟學", subs:["22.1 貝氏定理的基本概念","22.2 事前分配與事後分配","22.3 MCMC 方法","22.4 貝氏 vs 古典統計"], done:false, points:["貝氏定理：事後分配 ∝ 事前分配 × 概似函數","事前分配：結合過去的知識或主觀判斷","MCMC：用蒙地卡羅方法抽樣事後分配","貝氏優點：可以結合事前資訊、直覺上容易解釋"]},
-  {n:23, title:"總體計量經濟模型", subs:["23.1 向量自我迴歸 VAR","23.2 結構 VAR SVAR","23.3 衝擊反應函數","23.4 預測誤差變異數分解"], done:false, points:["VAR：所有變數都互相當落進解釋變數","SVAR：加上結構式識別限制","衝擊反應函數：看一個變數的衝擊對其他變數的動態影響","變異數分解：看每個變數的變異可以被哪些衝擊解釋多少"]},
-  {n:24, title:"財務計量經濟學", subs:["24.1 波動率模型 ARCH/GARCH","24.2 隨機波動模型","24.3 事件研究法","24.4 資產定價模型的計量檢定"], done:false, points:["ARCH/GARCH：波動率聚集現象","事件研究：看公司事件前後股價的異常報酬","CAPM、Fama-French 因子模型的計量檢定","財務資料的特性：厚尾、波動率聚集、槓桿效果"]},
-  {n:25, title:"空間計量經濟學", subs:["25.1 空間自我相關","25.2 空間落進模型 Spatial Lag","25.3 空間誤差模型 Spatial Error","25.4 空間計量的應用"], done:false, points:["空間自我相關：相鄰地區的變數會互相影響","空間落進模型：y_{i} = ρWy_{j} + βx_{i} + u_{i}","空間誤差模型：誤差項有空間相關","應用：地區經濟成長、環污外部性、房屋價格"]},
+  {n:17, title:"動態追蹤資料模型", subs:["17.1 動態追蹤模型的設定","17.2 落進因變數的內生性問題","17.3 Arellano-Bond 估計法","17.4 系統 GMM 估計法"], done:true, points:["動態追蹤模型：y_{it} = ρy_{i,t-1} + βx_{it} + u_{it}","落進因變數造成內生性：FE 估計有偏誤","Arellano-Bond：用落進兩期以上的變數當工具變數","系統 GMM：同時估計差分方程式和水準方程式"]},
+  {n:18, title:"離散選擇模型", subs:["18.1 二元選擇模型：Logit 與 Probit","18.2 邊際效果的計算","18.3 多類別選擇模型","18.4 有序選擇模型"], done:true, points:["Logit：誤差項服從邏輯分配","Probit：誤差項服從常態分配","邊際效果：機率對 x 的偏微分","多類別：Multinomial Logit / Nested Logit","有序：Ordered Probit / Ordered Logit"]},
+  {n:19, title:"受限因變數模型", subs:["19.1 設限迴歸模型 Tobit","19.2 樣本選擇模型","19.3 兩段法 Heckit","19.4 計數資料模型"], done:true, points:["Tobit：因變數在某個臨界值以下被設限","樣本選擇：樣本不是隨機抽的","Heckit：兩段法解決樣本選擇偏誤","Poisson / 負二項：計數資料模型"]},
+  {n:20, title:"持續時間模型", subs:["20.1 危險率函數 Hazard Rate","20.2 共比例風險模型 Cox","20.3 加速失敗時間模型","20.4 持續時間資料的應用"], done:true, points:["危險率函數：在活過 t 的條件下，下一個瞬間失敗的機率","Cox 模型：不需要指定基準危險率的形狀","AFT 模型：解釋變數直接影響存活時間","應用：失業期間、戰爭持續時間、客户流失"]},
+  {n:21, title:"非參數與半參數估計", subs:["21.1 非參數估計的概念","21.2 核心密度估計法 Kernel","21.3 局部迴歸 Lowess","21.4 半參數估計法"], done:true, points:["非參數：不預設函數形式，讓資料自己說話","核心密度估計：用平滑曲線估計機率密度函數","Lowess：局部加權迴歸，適合探索性資料分析","半參數：保留部分參數結構，其餘用非參數"]},
+  {n:22, title:"貝氏計量經濟學", subs:["22.1 貝氏定理的基本概念","22.2 事前分配與事後分配","22.3 MCMC 方法","22.4 貝氏 vs 古典統計"], done:true, points:["貝氏定理：事後分配 ∝ 事前分配 × 概似函數","事前分配：結合過去的知識或主觀判斷","MCMC：用蒙地卡羅方法抽樣事後分配","貝氏優點：可以結合事前資訊、直覺上容易解釋"]},
+  {n:23, title:"總體計量經濟模型", subs:["23.1 向量自我迴歸 VAR","23.2 結構 VAR SVAR","23.3 衝擊反應函數","23.4 預測誤差變異數分解"], done:true, points:["VAR：所有變數都互相當落進解釋變數","SVAR：加上結構式識別限制","衝擊反應函數：看一個變數的衝擊對其他變數的動態影響","變異數分解：看每個變數的變異可以被哪些衝擊解釋多少"]},
+  {n:24, title:"財務計量經濟學", subs:["24.1 波動率模型 ARCH/GARCH","24.2 隨機波動模型","24.3 事件研究法","24.4 資產定價模型的計量檢定"], done:true, points:["ARCH/GARCH：波動率聚集現象","事件研究：看公司事件前後股價的異常報酬","CAPM、Fama-French 因子模型的計量檢定","財務資料的特性：厚尾、波動率聚集、槓桿效果"]},
+  {n:25, title:"空間計量經濟學", subs:["25.1 空間自我相關","25.2 空間落進模型 Spatial Lag","25.3 空間誤差模型 Spatial Error","25.4 空間計量的應用"], done:true, points:["空間自我相關：相鄰地區的變數會互相影響","空間落進模型：y_{i} = ρWy_{j} + βx_{i} + u_{i}","空間誤差模型：誤差項有空間相關","應用：地區經濟成長、環污外部性、房屋價格"]},
 ];
 /* ===== 術語資料（點擊卡片時顯示） ===== */
 const TERMS = {
@@ -3216,316 +3216,1035 @@ const CH17_SECTIONS = [
 {
   id:"17.1", title:"動態追蹤模型的設定",
   body:`
-  <p>動態追蹤模型 (Dynamic Panel Data Model) 在追蹤模型的基礎上，加上「落進一期的 y」當作解釋變數：</p>
-  <div class="formula">y_{it} = ρ·y_{i,t-1} + β·x_{it} + a_i + u_{it}</div>
-  <p>為什麼要加落進一期的 y？因為很多經濟行為有「慣性」——今天的消費和昨天的消費很接近，今天的投資和昨天的投資很接近。</p>
+  <p>在第 12 章我們學了追蹤資料模型（固定效果、隨機效果、Hausman 檢定）。但那些模型都是「靜態」的——解釋變數只有當期的 x_{it}。</p>
+  <p>但很多經濟行為有「慣性」 (persistence)——今天的消費和昨天的消費很接近，今天的投資和昨天的投資很接近，今年的 GDP 成長率和去年的成長率很接近。為了捕捉這個「慣性」，我們要在模型裡加上「落進一期的 y」：</p>
+  <div class="formula">
+    y<sub>it</sub> = ρ·y<sub>i,t-1</sub> + β·x<sub>it</sub> + a<sub>i</sub> + u<sub>it</sub>
+  </div>
+  <p>這就是<b>動態追蹤模型</b> (Dynamic Panel Data Model)。</p>
+  <div class="method-card mc-title" data-mc="dynamic-panel">
+    <div class="mc-title">💡 為什麼要加落進一期的 y？</div>
+    <div class="mc-body">
+      <p><b>經濟直覺</b>：很多決策有「習慣形成」 (habit formation)——你昨天吃了牛肉麵，今天比較可能再吃一次，而不是突然改成吃壽司。</p>
+      <p><b>範例</b>：總體消費函數——Friedman 的�常所得假說、Modigliani 的生命週期假說，都隱含消費有動態調整的過程。</p>
+    </div>
+  </div>
+  <p><span class="term" data-term="dynamic-panel">前後關聯</span>：動態追蹤模型是第 12 章追蹤資料模型的延伸。它把「落進因變數」放進模型，造成新的內生性問題，需要用第 11 章的工具變數方法來解決。</p>
   `
 },
 {
   id:"17.2", title:"落進因變數的內生性問題",
   body:`
-  <p>問題來了：y_{i,t-1} 和誤差項 a_i 有相關！因為 a_i 是「個體效果」——它會同時影響所有期的 y，包括 y_{i,t-1}。</p>
-  <p>這時候如果你直接用固定效果模型估計，估計出來的 ρ̂ 會有偏誤——而且就算樣本數很大也救不了（不一致）。</p>
+  <p>問題來了：y<sub>i,t-1</sub> 和誤差項 a<sub>i</sub> 有相關！</p>
+  <p>為什麼？因為 a<sub>i</sub> 是「個體效果」——它代表第 i 個個體的「天生特性」（例如：一個人的能力、一家公司的生產力）。這些特性會同時影響所有期的 y：</p>
+  <div class="formula">
+    y<sub>i,t-1</sub> = ρ·y<sub>i,t-2</sub> + β·x<sub>i,t-1</sub> + a<sub>i</sub> + u<sub>i,t-1</sub>
+  </div>
+  <p>看到了嗎？y<sub>i,t-1</sub> 的式子裡面有 a<sub>i</sub>！所以 y<sub>i,t-1</sub> 和 a<sub>i</sub> 有相關。</p>
+  <p>那如果你直接用固定效果模型（FE）估計，會怎麼樣？FE 組內變換（within transformation）會把 y<sub>it</sub> 減掉「組內平均」ȳ<sub>i</sub>：</p>
+  <div class="formula">
+    y<sub>it</sub> - ȳ<sub>i</sub> = ρ·(y<sub>i,t-1</sub> - ȳ<sub>i,-1</sub>) + β·(x<sub>it</sub> - x̄<sub>i</sub>) + (u<sub>it</sub> - ū<sub>i</sub>)
+  </div>
+  <p>問題是：(y<sub>i,t-1</sub> - ȳ<sub>i,-1</sub>) 和 (u<sub>it</sub> - ū<sub>i</sub>) 還是有相關！因為 ȳ<sub>i,-1</sub> 裡面包含了 u<sub>i,t-1</sub>，而 u<sub>i,t-1</sub> 和 u<sub>it</sub> 沒有相關——但 ȳ<sub>i,-1</sub> 也包含了其他期的 u，那些可能和當期的 u 有相關。</p>
+  <div class="warn">
+    ⚠️ 考試重點：落進因變數的內生性問題，是 Nickell (1981) 最早指出的，所以也叫 <b>Nickell bias</b>。
+    <br><br>
+    重點：就算 N 很大（橫斷面個體很多），FE 估計還是有偏誤——這和「N 很大就 OLS 一致」的直覺不一樣！
+  </div>
+  <div class="method-card mc-title" data-mc="nickell-bias">
+    <div class="mc-title">💡 直覺：為什麼 N 很大也救不了？</div>
+    <div class="mc-body">
+      <p>因為偏誤的來源不是「抽樣誤差」，而是「機械式的數學關係」——你把 y<sub>i,t-1</sub> 減掉 ȳ<sub>i,-1</sub>，就一定會和 (u<sub>it</sub> - ū<sub>i</sub>) 有相關，不管你有多少個個體。</p>
+      <p>這和一般的「小樣本偏誤」不一樣——小樣本偏誤會隨著 N 變大而消失，但 Nickell bias 不會。</p>
+    </div>
+  </div>
+  <p><span class="term" data-term="nickell-bias">前後關聯</span>：這個問題的本質就是「內生性」——和第 10 章的「測量誤差造成的內生性」、第 11 章的「聯立性偏誤」是同一類問題。解決方法也一樣：找工具變數。</p>
   `
 },
 {
   id:"17.3", title:"Arellano-Bond 估計法",
   body:`
-  <p>解決方法：Arellano-Bond 估計法。它的邏輯是：先把模型差分，把個體效果 a_i 消掉，然後用「落進兩期以上的 y」當工具變數。</p>
-  <div class="formula">Δy_{it} = ρ·Δy_{i,t-1} + β·Δx_{it} + Δu_{it}</div>
-  <p>因為 Δy_{i,t-1} = y_{i,t-1} - y_{i,t-2}，而 y_{i,t-2} 和 Δu_{it} 沒有相關——所以 y_{i,t-2} 可以當工具變數。</p>
+  <p><span class="proper">Arellano 和 Bond (1991)</span> 提出了一個解決方法——也就是著名的 <b>Arellano-Bond 估計法</b>（也叫「差分 GMM」）。</p>
+  <p><b>第一步：差分，消掉個體效果 a<sub>i</sub></b></p>
+  <p>把原始模型減掉「落進一期」的式子，就把 a<sub>i</sub> 消掉了：</p>
+  <div class="formula">
+    y<sub>it</sub> - y<sub>i,t-1</sub> = ρ·(y<sub>i,t-1</sub> - y<sub>i,t-2</sub>) + β·(x<sub>it</sub> - x<sub>i,t-1</sub>) + (u<sub>it</sub> - u<sub>i,t-1</sub>)
+  </div>
+  <p>寫成：</p>
+  <div class="formula">
+    Δy<sub>it</sub> = ρ·Δy<sub>i,t-1</sub> + β·Δx<sub>it</sub> + Δu<sub>it</sub>
+  </div>
+  <p><b>第二步：找工具變數</b></p>
+  <p>問題是：Δy<sub>i,t-1</sub> = y<sub>i,t-1</sub> - y<sub>i,t-2</sub>，它和 Δu<sub>it</sub> = u<sub>it</sub> - u<sub>i,t-1</sub> 有相關（因為 y<sub>i,t-1</sub> 裡面有 u<sub>i,t-1</sub>）。</p>
+  <p>那什麼變數和 Δy<sub>i,t-1</sub> 有相關，但和 Δu<sub>it</sub> 沒有相關？</p>
+  <p>答案：y<sub>i,t-2</sub> 或更早的落進項！</p>
+  <ul>
+    <li>y<sub>i,t-2</sub> 和 Δy<sub>i,t-1</sub> = y<sub>i,t-1</sub> - y<sub>i,t-2</sub> 有相關（因為兩者都有 y<sub>i,t-2</sub>）</li>
+    <li>y<sub>i,t-2</sub> 和 Δu<sub>it</sub> = u<sub>it</sub> - u<sub>i,t-1</sub> 沒有相關（因為 u 是序列獨立的——第 9 章的自我相關假設）</li>
+  </ul>
+  <p>所以 y<sub>i,t-2</sub> 可以當 Δy<sub>i,t-1</sub> 的工具變數！</p>
+  <p>同理，y<sub>i,t-3</sub>、y<sub>i,t-4</sub> 等等，都可以當工具變數。</p>
+  <div class="method-card mc-title" data-mc="arellano-bond">
+    <div class="mc-title">💡 數值範例：怎麼找工具變數？</div>
+    <div class="mc-body">
+      <p>假設我們有 T=5 期的追蹤資料（t=1,2,3,4,5）。</p>
+      <p>對於 t=3：Δy<sub>i2</sub> = y<sub>i2</sub> - y<sub>i1</sub>。可以用 y<sub>i1</sub> 當工具變數嗎？不行！因為 y<sub>i1</sub> 和 Δu<sub>i3</sub> = u<sub>i3</sub> - u<sub>i2</sub> 沒有相關，但 y<sub>i1</sub> 和 Δy<sub>i2</sub> = y<sub>i2</sub> - y<sub>i1</sub> 有相關（因為 y<sub>i1</sub> 是 y<sub>i2</sub> 的落進）。等等，這樣好像可以？</p>
+      <p>哦不對，對於 t=3，我們要找的是 Δy<sub>i,t-1</sub> = Δy<sub>i2</sub> 的工具變數。這時候可以用 y<sub>i1</sub> 嗎？不行！因為 y<sub>i1</sub> 就是 Δy<sub>i2</sub> 的一部分（Δy<sub>i2</sub> = y<sub>i2</sub> - y<sub>i1</sub>），所以它們一定有相關——這不是「工具變數」，這是「用自己當自己的工具」！</p>
+      <p>正確的做法：對於 t=3，用 y<sub>i1</sub> 來當...等等，我搞混了。讓我重新理清楚。</p>
+      <p>模型：Δy<sub>it</sub> = ρ·Δy<sub>i,t-1</sub> + β·Δx<sub>it</sub> + Δu<sub>it</sub></p>
+      <p>對於 t=3：Δy<sub>i3</sub> = ρ·Δy<sub>i2</sub> + β·Δx<sub>i3</sub> + Δu<sub>i3</sub></p>
+      <p>這裡的內生解釋變數是 Δy<sub>i2</sub> = y<sub>i2</sub> - y<sub>i1</sub>。</p>
+      <p>什麼變數和 Δy<sub>i2</sub> 有相關，但和 Δu<sub>i3</sub> = u<sub>i3</sub> - u<sub>i2</sub> 沒有相關？</p>
+      <p>答案：y<sub>i1</sub>！</p>
+      <ul>
+        <li>y<sub>i1</sub> 和 Δy<sub>i2</sub> 有相關：因為 y<sub>i2</sub> 由 y<sub>i1</sub> 決定（模型設定），所以 y<sub>i1</sub> 和 y<sub>i2</sub> 有相關，當然和 Δy<sub>i2</sub> = y<sub>i2</sub> - y<sub>i1</sub> 也有相關。</li>
+        <li>y<sub>i1</sub> 和 Δu<sub>i3</sub> 沒有相關：因為 u 是序列獨立的，u<sub>i1</sub> 和 u<sub>i3</sub>、u<sub>i2</sub> 都沒有相關。而 y<sub>i1</sub> 是由更早的 y 和 u 決定的，所以它和 u<sub>i3</sub>、u<sub>i2</sub> 都沒有相關。</li>
+      </ul>
+      <p>所以 y<sub>i1</sub> 可以當 Δy<sub>i2</sub> 的工具變數！</p>
+      <p>同理：</p>
+      <ul>
+        <li>對於 t=4：用 y<sub>i1</sub>、y<sub>i2</sub> 當 Δy<sub>i3</sub> 的工具變數</li>
+        <li>對於 t=5：用 y<sub>i1</sub>、y<sub>i2</sub>、y<sub>i3</sub> 當 Δy<sub>i4</sub> 的工具變數</li>
+      </ul>
+      <p>期數越多，可用的工具變數就越多！</p>
+    </div>
+  </div>
+  <p><span class="proper">前後關聯</span>：Arellano-Bond 本質上就是「工具變數法」——和第 11 章的 2SLS 是同一個家族。只不過這裡的工具變數是「內生產生的」（用自己的落進項當工具變數），而不是「外生找的」。</p>
   `
 },
 {
   id:"17.4", title:"系統 GMM 估計法",
   body:`
-  <p>系統 GMM (System GMM) 是 Arellano-Bond 的改良版——它同時估計「差分方程式」和「水準方程式」，用更多的工具變數，所以估計更有效率。</p>
-  <div class="warn">考試重點：動態追蹤模型的內生性問題，是現代總體計量經濟學最常遇到的問題之一。Arellano-Bond 和系統 GMM 是最常用的解決方法。</div>
+  <p><span class="proper">Arellano 和 Bover (1995)、Blundell 和 Bond (1998)</span> 後來又提出了一個更有效率的方法——<b>系統 GMM</b> (System GMM)。</p>
+  <p><b>差分 GMM 的問題</b>：Arellano-Bond（差分 GMM）只用了「差分方程式」的資訊。但當 y 很「持久」（ρ 很接近 1）的時候，落進的 y 當工具變數會變得很「弱」——因為 y 變來變去都差不多，落進兩期的 y 對當期的 y 解釋力很差。</p>
+  <p><b>系統 GMM 的解法</b>：除了估計「差分方程式」之外，同時也估計「水準方程式」：</p>
+  <ul>
+    <li>差分方程式：Δy<sub>it</sub> = ρ·Δy<sub>i,t-1</sub> + β·Δx<sub>it</sub> + Δu<sub>it</sub>（工具變數用 y 的落進項）</li>
+    <li>水準方程式：y<sub>it</sub> = ρ·y<sub>i,t-1</sub> + β·x<sub>it</sub> + a<sub>i</sub> + u<sub>it</sub>（工具變數用 Δy<sub>it</sub>）</li>
+  </ul>
+  <p>為什麼 Δy<sub>it</sub> 可以當 y<sub>i,t-1</sub> 的工具變數？因為：</p>
+  <ul>
+    <li>Δy<sub>it</sub> = y<sub>it</sub> - y<sub>i,t-1</sub> 和 y<sub>i,t-1</sub> 有相關（兩者都有 y<sub>i,t-1</sub>）</li>
+    <li>Δy<sub>it</sub> 和 a<sub>i</sub> 沒有相關（因為長期來說，y 的變動和個體效果的水準應該是獨立的——這是一個「額外的假設」）</li>
+  </ul>
+  <div class="warn">
+    ⚠️ 考試重點：
+    <br><br>
+    <b>差分 GMM vs 系統 GMM</b>：
+    <ul>
+      <li>差分 GMM（Arellano-Bond）：只估計差分方程式，用 y 的落進項當工具變數</li>
+      <li>系統 GMM（Blundell-Bond）：同時估計差分方程式和水準方程式，用更多的工具變數，更有效率</li>
+    </ul>
+    <br>
+    但系統 GMM 多了一個假設：「初始條件是無關的」 (initial conditions are uncorrelated with individual effects)。如果這個假設不對，系統 GMM 反而會有偏誤。
+  </div>
+  <div class="method-card mc-title" data-mc="gmm-tests">
+    <div class="mc-title">💡 診斷檢定：你估計完之後要檢查什麼？</div>
+    <div class="mc-body">
+      <ol>
+        <li><b>序列相關檢定</b> (AR(1)、AR(2))：差分後的誤差項應該有 AR(1)（機械式的，因為 Δu<sub>it</sub> 和 Δu<sub>i,t-1</sub> 共用 u<sub>i,t-1</sub>），但不應該有 AR(2)。如果有 AR(2)，代表你的模型設定有問題。</li>
+        <li><b>Hansen J 檢定</b>：過度認定檢定——檢查工具變數是不是「外生」的。如果 p-value 很小，代表你的工具變數有問題。</li>
+        <li><b>工具變數數目</b>：工具變數不能太多！如果工具變數比樣本數還多，你會「過度適配」 (overfit)——Hansen J 檢定會變得很沒力。</li>
+      </ol>
+    </div>
+  </div>
+  <p><span class="term" data-term="system-gmm">前後關聯</span>：動態追蹤模型的 GMM 估計，是第 16 章 GMM 理論的直接應用——把「動機條件」寫成「矩條件」，然後用 GMM 估計。</p>
   `
 }
 ];
 
 const CH17_PROBLEMS = [
-{id:"q17-1", q:"動態追蹤模型和一般追蹤模型有什麼不同？", a:"動態追蹤模型多了「落進一期的 y」當作解釋變數——用來捕捉經濟行為的「慣性」。", difficulty:"easy", topic:"動態追蹤模型"},
-{id:"q17-2", q:"為什麼落進一期的 y 會造成內生性問題？", a:"因為 y_{i,t-1} 和個體效果 a_i 有相關——a_i 是「個體效果」，它會同時影響所有期的 y，包括 y_{i,t-1}。", difficulty:"medium", topic:"內生性問題"},
-{id:"q17-3", q:"Arellano-Bond 估計法的基本邏輯是什麼？", a:"先把模型差分，把個體效果 a_i 消掉，然後用「落進兩期以上的 y」當工具變數。", difficulty:"medium", topic:"Arellano-Bond"}
+{id:"q17-1", q:"什麼是 Nickell bias？為什麼它很特別？", a:"Nickell bias 是指：在動態追蹤模型中，就算你用固定效果（FE）估計，估計出來的 ρ̂ 還是有偏誤。<br><br>它特別的地方：就算 N 很大（橫斷面個體很多），這個偏誤也不會消失——這和一般的「小樣本偏誤」不一樣，小樣本偏誤會隨著 N 變大而消失，但 Nickell bias 不會。", difficulty:"hard", topic:"Nickell bias"},
+{id:"q17-2", q:"Arellano-Bond 估計法的兩個步驟是什麼？", a:"兩個步驟：<br>1. <b>差分</b>：把原始模型差分，把個體效果 a<sub>i</sub> 消掉，得到 Δy<sub>it</sub> = ρ·Δy<sub>i,t-1</sub> + β·Δx<sub>it</sub> + Δu<sub>it</sub><br>2. <b>找工具變數</b>：用 y 的落進項（y<sub>i,t-2</sub> 或更早）當 Δy<sub>i,t-1</sub> 的工具變數，然後用 2SLS/GMM 估計。", difficulty:"medium", topic:"Arellano-Bond"},
+{id:"q17-3", q:"差分 GMM 和系統 GMM 的差別是什麼？", a:"• <b>差分 GMM（Arellano-Bond）</b>：只估計差分方程式，用 y 的落進項當工具變數。<br>• <b>系統 GMM（Blundell-Bond）</b>：同時估計差分方程式和水準方程式，用更多的工具變數，所以更有效率。<br><br>但系統 GMM 多了一個假設：「初始條件和個體效果無關」。如果這個假設不對，系統 GMM 反而會有偏誤。", difficulty:"hard", topic:"GMM 比較"},
+{id:"q17-4", q:"你估計完動態追蹤模型之後，要做哪些診斷檢定？", a:"三個主要檢定：<br>1. <b>AR(1) 和 AR(2) 序列相關檢定</b>：差分後的誤差項應該有 AR(1)（機械式的），但不應該有 AR(2)。如果有 AR(2)，代表模型設定有問題。<br>2. <b>Hansen J 檢定</b>：過度認定檢定——檢查工具變數是不是外生的。<br>3. <b>工具變數數目檢查</b>：工具變數不能太多，否則會過度適配。", difficulty:"medium", topic:"GMM 診斷"}
 ];
+
 
 /* ===== 第十八章：離散選擇模型 ===== */
 const CH18_SECTIONS = [
 {
   id:"18.1", title:"二元選擇模型：Logit 與 Probit",
   body:`
-  <p>二元選擇模型 (Binary Choice Model) 的依變數是 0/1 變數——例如：要不要上大學、要不要買車、要不要退休。</p>
-  <p>兩個最常用的模型：</p>
+  <p>到目前為止，我們學的所有模型，依變數 y 都是「連續的」——例如：薪資、產出、消費、GDP。但很多時候，y 是「二元的」——你只有兩個選擇：要嘛是 1，要嘛是 0。</p>
+  <p>例如：</p>
   <ul>
-    <li><b>Logit 模型</b>：誤差項服從邏輯分配 (logistic distribution)</li>
-    <li><b>Probit 模型</b>：誤差項服從常態分配</li>
+    <li>你要不要上大學？（1=有上大學，0=沒有）</li>
+    <li>你要不要買車？（1=有買車，0=沒有）</li>
+    <li>公司倒閉了嗎？（1=倒閉，0=沒有）</li>
+    <li>你生病住院了嗎？（1=有住院，0=沒有）</li>
   </ul>
-  <p>兩個模型估計出來的結果其實很接近——選哪個主要看你喜歡哪個分配假設。</p>
+  <p>這時候你還能用 OLS 嗎？可以，那叫線性機率模型 (Linear Probability Model, LPM)。但 LPM 有兩個大問題：</p>
+  <ol>
+    <li>它預測出來的機率可能會 < 0 或 > 1——這不合理！機率怎麼可能小於 0 或大於 1？</li>
+    <li>它假設 x 對 y 的邊際效果是「固定不變」的——不管 x 是什麼值，多一單位的 x 都會讓機率改變一樣多。但直覺上應該不是這樣：當你已經 99% 確定要做某件事的時候，再多一個理由，你也不會再多 1% 的機率去做。</li>
+  </ol>
+  <p>所以我們需要一個「非線性」的模型，來保證預測出來的機率一定在 0 和 1 之間。</p>
+  <p>最常用的兩個模型：</p>
+  <div class="method-card mc-title" data-mc="logit-probit">
+    <div class="mc-title">💡 Logit vs Probit</div>
+    <div class="mc-body">
+      <table>
+        <tr><th></th><th>Logit 模型</th><th>Probit 模型</th></tr>
+        <tr><td>誤差項分配</td><td>邏輯分配 (Logistic)</td><td>標準常態分配</td></tr>
+        <tr><td>CDF 函數</td><td>Λ(z) = e^z / (1 + e^z)</td><td>Φ(z) = 標準常態分配的累積分布函數</td></tr>
+        <tr><td>尾巴厚度</td><td>比較厚（outliers 影響比較小）</td><td>比較薄</td></tr>
+        <tr><td>計算速度</td><td>比較快（有封閉解）</td><td>比較慢（要算數值積分）</td></tr>
+        <tr><td>實務上差異</td><td colspan="2">通常估計出來的結果非常接近——選哪個主要看你喜歡哪個分配假設</td></tr>
+      </table>
+    </div>
+  </div>
+  <p><b>潛在變數模型</b> (Latent Variable Model) 的觀念：</p>
+  <p>我們把「真實的」潛在變數 y* 想成「你有多想要上大學」——y* 越大，你越想上大學。但我們觀察不到 y*，只能觀察到 y：如果你 y* > 0，你就會選擇上大學（y=1）；如果你 y* ≤ 0，你就不會上大學（y=0）。</p>
+  <div class="formula">
+    y* = β₀ + β₁x + ε<br>
+    y = 1 如果 y* > 0；y = 0 如果 y* ≤ 0
+  </div>
+  <p>那 P(y=1|x) = P(y* > 0 | x) = P(β₀ + β₁x + ε > 0 | x) = P(ε > -β₀ - β₁x | x)</p>
+  <p>如果我們假設 ε 服從對稱的分配（例如標準常態分配），那 P(ε > -β₀ - β₁x) = P(ε < β₀ + β₁x) = F(β₀ + β₁x)，其中 F 是 ε 的 CDF。</p>
+  <p>所以：P(y=1|x) = F(β₀ + β₁x)</p>
+  <div class="warn">
+    ⚠️ 考試重點：
+    <ul>
+      <li>Logit：F 是邏輯分配的 CDF → F(z) = e^z / (1 + e^z)</li>
+      <li>Probit：F 是標準常態分配的 CDF → F(z) = Φ(z)</li>
+    </ul>
+    兩者都是「非線性」的——因為 F 是一個非線性函數。
+  </div>
+  <p><span class="term" data-term="binary-choice">前後關聯</span>：Logit 和 Probit 都是用 MLE 估計的——因為它們是非線性模型，OLS 沒辦法用。這是第 15 章 MLE 的直接應用。</p>
   `
 },
 {
   id:"18.2", title:"邊際效果的計算",
   body:`
-  <p>Logit/Probit 模型的係數不能直接解讀——你要算「邊際效果」：x 變一單位，會讓 y=1 的機率改變多少。</p>
-  <div class="formula">邊際效果 = ∂P(y=1|x) / ∂x</div>
-  <p>邊際效果的大小取決於 x 的水準——在機率最接近 0.5 的地方，邊際效果最大。</p>
+  <p>最重要的觀念：<b>Logit/Probit 的係數不能直接解讀！</b></p>
+  <p>為什麼？因為模型是非線性的：P(y=1|x) = F(β₀ + β₁x)。如果你把 β₁ 解讀成「x 變一單位，y 改變多少」，那就錯了！</p>
+  <p>正確的做法：算<b>邊際效果</b> (Marginal Effect)——x 變一單位，會讓 P(y=1|x) 改變多少。</p>
+  <div class="formula">
+    邊際效果 = ∂P(y=1|x) / ∂x = f(β₀ + β₁x) · β₁
+  </div>
+  <p>其中 f 是 F 的導函數（也就是機率密度函數）。</p>
+  <p>重點：邊際效果的大小取決於 x 的水準！在不同的 x 水準下，邊際效果不一樣。</p>
+  <div class="method-card mc-title" data-mc="marginal-effect">
+    <div class="mc-title">💡 數值範例：邊際效果怎麼算？</div>
+    <div class="mc-body">
+      <p>假設我們估計了一個 Probit 模型：</p>
+      <p>P(y=1|x) = Φ(-2 + 0.5x)</p>
+      <p>其中 x 是「教育年數」。</p>
+      <p>請問：教育年數多一年，會讓「想要上研究所」的機率增加多少？</p>
+      <p>答案：取決於你現在的教育年數！</p>
+      <ul>
+        <li>如果你現在是高中畢業（x=12）：Φ(-2 + 0.5×12) = Φ(4) ≈ 0.9999。邊際效果 = φ(4) × 0.5 ≈ 0.0001。意思是：你本來就幾乎確定要上研究所了，再多一年教育，對你機率的影響微乎其微。</li>
+        <li>如果你現在是大學畢業（x=16）：Φ(-2 + 0.5×16) = Φ(6) ≈ 1.0。邊際效果 = φ(6) × 0.5 ≈ 0。完全沒有影響。</li>
+        <li>如果你現在是國中畢業（x=9）：Φ(-2 + 0.5×9) = Φ(2.5) ≈ 0.9938。邊際效果 = φ(2.5) × 0.5 ≈ 0.003。還是很小。</li>
+        <li>如果你現在是國小畢業（x=6）：Φ(-2 + 0.5×6) = Φ(1) ≈ 0.8413。邊際效果 = φ(1) × 0.5 ≈ 0.12。嗯，有一點影響了。</li>
+        <li>如果你現在根本沒唸書（x=0）：Φ(-2 + 0) = Φ(-2) ≈ 0.0228。邊際效果 = φ(-2) × 0.5 ≈ 0.054。有影響。</li>
+      </ul>
+      <p>看到了嗎？邊際效果在「機率最接近 0.5」的地方最大！</p>
+      <p>一般來說，我們會報告兩種邊際效果：</p>
+      <ol>
+        <li><b>平均邊際效果</b> (Average Marginal Effect, AME)：對每個觀測值算一次邊際效果，然後取平均。</li>
+        <li><b>代表觀察值的邊際效果</b>：在「平均數」或「中位數」的 x 水準下算一次邊際效果。</li>
+      </ol>
+      <p>現在大部分的統計軟體（Stata、R）都會自動幫你算好，你只要記得「係數不能直接解讀，要看邊際效果」就好。</p>
+    </div>
+  </div>
+  <p><span class="proper">前後關聯</span>：這個「邊際效果隨 x 改變」的觀念，和第 6 章的「非線性模型」是相通的——只要模型是非線性的，邊際效果就不會是固定的。</p>
   `
 },
 {
   id:"18.3", title:"多類別選擇模型",
   body:`
-  <p>如果選擇超過兩個（例如：要開車、搭公車、還是搭捷運？），就要用「多類別選擇模型」：</p>
+  <p>如果選擇超過兩個，例如：你要怎麼去上班？</p>
   <ul>
-    <li><b>Multinomial Logit</b>：最簡單，但有「獨立不相干選擇 (IIA)」的假設</li>
-    <li><b>Nested Logit</b>：把選擇分成幾個層次，放鬆 IIA 假設</li>
+    <li>選項 1：開車</li>
+    <li>選項 2：搭公車</li>
+    <li>選項 3：搭捷運</li>
+    <li>選項 4：騎腳踏車</li>
   </ul>
+  <p>這時候就要用「多類別選擇模型」 (Multinomial Choice Model)。</p>
+  <p>最簡單的是 <b>Multinomial Logit</b>：</p>
+  <div class="formula">
+    P(y=j|x) = exp(β<sub>j</sub>'x) / Σ<sub>k=1</sub><sup>J</sup> exp(β<sub>k</sub>'x)
+  </div>
+  <p>但 Multinomial Logit 有一個很強的假設——<b>獨立不相干選擇</b> (Independence of Irrelevant Alternatives, IIA)：兩個選項之間的相對機率，不會受到第三個選項的影響。</p>
+  <div class="warn">
+    ⚠️ 考試重點：IIA 假設是什麼意思？舉個有名的「紅巴士/藍巴士」例子：
+    <br><br>
+    假設你有兩個選項：自己開車、搭紅巴士。假設一開始你選開車的機率是 0.5，搭紅巴士的機率是 0.5。
+    <br><br>
+    現在加入第三個選項：搭藍巴士。IIA 假設說：「開車 vs 紅巴士」的相對機率不會變——還是 1:1。所以新的機率應該是：開車 0.4、紅巴士 0.4、藍巴士 0.2。
+    <br><br>
+    但現實上：紅巴士和藍巴士基本上是「一樣的東西」（只差顏色），所以人們可能會把「搭巴士」當成一個選項，而不是兩個。正確的機率應該是：開車 0.5、紅巴士 0.25、藍巴士 0.25。
+    <br><br>
+    這就是 IIA 假設的問題——它假設紅巴士和藍巴士是「完全不同的選項」，但現實上它們可能很相似。
+  </div>
+  <p>要放鬆 IIA 假設，你可以用：</p>
+  <ul>
+    <li><b>Nested Logit</b>：把選擇分成幾個「巢」 (nest)——先選大類別（開車 vs 搭大眾運輸），再選小類別（紅巴士 vs 藍巴士）</li>
+    <li><b>Multinomial Probit</b>：假設誤差項有一般的共變異數矩陣——但計算起來很麻煩</li>
+  </ul>
+  <p><span class="term" data-term="multinomial-logit">前後關聯</span>：多類別選擇模型，是二元選擇模型的延伸——把「二選一」變成「多選一」。</p>
   `
 },
 {
   id:"18.4", title:"有序選擇模型",
   body:`
-  <p>如果選擇是「有順序的」（例如：教育程度：小學、中學、大學、研究所），就要用「有序選擇模型」：Ordered Probit / Ordered Logit。</p>
-  <div class="warn">考試重點：Logit 和 Probit 都是用 MLE 估計的——因為它們是非線性模型，OLS 沒辦法用。</div>
+  <p>如果選擇是「有順序的」，例如：教育程度：</p>
+  <ol>
+    <li>小學及以下</li>
+    <li>國中</li>
+    <li>高中/高職</li>
+    <li>大學/專科</li>
+    <li>研究所及以上</li>
+  </ol>
+  <p>這時候你不能直接用 Multinomial Logit——因為它把各個選項當成「沒有順序的」，但實際上「大學」比「高中」高，「研究所」比「大學」高。</p>
+  <p>正確的做法：用<b>有序選擇模型</b> (Ordered Choice Model)——最常見的是 Ordered Probit 或 Ordered Logit。</p>
+  <p>基本觀念：還是有一個潛在變數 y* = β'x + ε，只是現在 y* 被分成「好幾個門檻」：</p>
+  <div class="formula">
+    y = 1 如果 y* ≤ μ<sub>1</sub><br>
+    y = 2 如果 μ<sub>1</sub> < y* ≤ μ<sub>2</sub><br>
+    y = 3 如果 μ<sub>2</sub> < y* ≤ μ<sub>3</sub><br>
+    ...<br>
+    y = J 如果 y* > μ<sub>J-1</sub>
+  </div>
+  <p>其中 μ₁ < μ₂ < ... < μ<sub>J-1</sub> 是「門檻參數」——它們和 β 一起用 MLE 估計。</p>
+  <div class="method-card mc-title" data-mc="ordered-choice">
+    <div class="mc-title">💡 注意：邊際效果的符號！</div>
+    <div class="mc-body">
+      <p>在 Ordered Probit/Logit 裡，β 的符號「不一定」代表「x 越大，y 越大」！</p>
+      <p>為什麼？因為 β 影響的是 y*——如果 β > 0，代表 x 越大，y* 越大。但 y 是「y* 超過門檻的次數」——所以：</p>
+      <ul>
+        <li>對於「最底層」的選擇（y=1）：x 越大，P(y=1) 越小（因為 y* 比較大，比較不容易低於 μ₁）</li>
+        <li>對於「最頂層」的選擇（y=J）：x 越大，P(y=J) 越大</li>
+        <li>對於「中間」的選擇（y=2, 3, ...）：x 越大，P(y=j) 可能變大也可能變小——要看分布形狀</li>
+      </ul>
+      <p>所以千萬不要看到 β > 0 就說「x 越大，選擇第 j 類的機率越大」——這不一定對！一定要算邊際效果，看每個選擇的機率怎麼變。</p>
+    </div>
+  </div>
+  <p><span class="proper">前後關聯</span>：有序選擇模型和第 7 章的「有序羅吉斯迴歸」是同一個東西——只不過那時候是用在「醫學統計」的例子，現在是用在「經濟學」的例子。</p>
   `
 }
 ];
 
 const CH18_PROBLEMS = [
-{id:"q18-1", q:"Logit 和 Probit 模型的差別是什麼？", a:"差別在於誤差項的分配假設不同：Logit 假設服從邏輯分配；Probit 假設服從常態分配。", difficulty:"easy", topic:"Logit vs Probit"},
-{id:"q18-2", q:"為什麼 Logit/Probit 的係數不能直接解讀？", a:"因為它們是非線性模型——x 對 y 的影響不是「線性」的。你要算「邊際效果」：x 變一單位，會讓 y=1 的機率改變多少。", difficulty:"medium", topic:"邊際效果"},
-{id:"q18-3", q:"什麼是獨立不相干選擇 (IIA) 假設？", a:"IIA 假設：兩個選擇之間的相對機率，不會受到其他選擇的影響。", difficulty:"hard", topic:"IIA"}
+{id:"q18-1", q:"為什麼不能直接用 OLS 估計二元選擇模型？", a:"兩個主要問題：<br>1. <b>預測的機率可能 < 0 或 > 1</b>——這不合理！機率怎麼可能小於 0 或大於 1？<br>2. <b>邊際效果固定不變</b>——它假設 x 對 y 的影響是固定的，但直覺上應該不是這樣：當你已經 99% 確定要做某件事的時候，再多一個理由，你也不會再多 1% 的機率去做。", difficulty:"medium", topic:"OLS 的問題"},
+{id:"q18-2", q:"Logit 和 Probit 模型的差別是什麼？", a:"差別在於誤差項的分配假設不同：<br>• <b>Logit</b>：假設誤差項服從邏輯分配 (Logistic)，CDF 是 Λ(z) = e^z / (1 + e^z)<br>• <b>Probit</b>：假設誤差項服從標準常態分配，CDF 是 Φ(z)（標準常態的累積分布函數）<br><br>實務上兩者估計出來的結果非常接近——選哪個主要看你喜歡哪個分配假設。", difficulty:"easy", topic:"Logit vs Probit"},
+{id:"q18-3", q:"為什麼 Logit/Probit 的係數不能直接解讀？", a:"因為它們是非線性模型：P(y=1|x) = F(β₀ + β₁x)。<br><br>如果你把 β₁ 解讀成「x 變一單位，y 改變多少」，那就錯了！<br><br>正確的做法：算<b>邊際效果</b>——x 變一單位，會讓 P(y=1|x) 改變多少。邊際效果 = f(β₀ + β₁x) · β₁，其中 f 是 F 的導函數。<br><br>重點：邊際效果的大小取決於 x 的水準！在不同的 x 水準下，邊際效果不一樣。", difficulty:"medium", topic:"邊際效果"},
+{id:"q18-4", q:"什麼是獨立不相干選擇 (IIA) 假設？", a:"IIA 假設：兩個選擇之間的相對機率，不會受到第三個選擇的影響。<br><br>有名的例子：紅巴士/藍巴士問題——假設你本來有兩個選項：開車、搭紅巴士（各 50%）。現在加入第三個選項：搭藍巴士。IIA 假設說：「開車 vs 紅巴士」的相對機率不會變——還是 1:1。所以新的機率應該是：開車 0.4、紅巴士 0.4、藍巴士 0.2。<br><br>但現實上：紅巴士和藍巴士基本上是「一樣的東西」（只差顏色），所以人們可能會把「搭巴士」當成一個選項。正確的機率應該是：開車 0.5、紅巴士 0.25、藍巴士 0.25。<br><br>這就是 IIA 假設的問題——它假設紅巴士和藍巴士是「完全不同的選項」，但現實上它們可能很相似。", difficulty:"hard", topic:"IIA"}
 ];
+
 
 /* ===== 第十九章：受限因變數模型 ===== */
 const CH19_SECTIONS = [
 {
   id:"19.1", title:"設限迴歸模型 Tobit",
   body:`
-  <p>Tobit 模型 (Tobin's Probit) 用來處理「因變數被設限」的情況——例如：大家的消費支出都是正的，沒有人消費負的。</p>
-  <p>如果你直接用 OLS 估計，估計出來的係數會有偏誤——因為你把「設限」的部分也當成連續變數來估計。</p>
+  <p>到目前為止，我們假設 y 是「無限延伸」的——它可以從 -∞ 到 +∞。但現實上很多 y 是「被設限」的——它有一個「地板」或「天花板」，超過那個範圍的值你看不到。</p>
+  <p>最經典的例子：消費支出。你不可能消費「負的」——消費的最小值就是 0。所以如果有一些人根本沒有消費某項財貨（例如：有一些人完全不買煙、不喝酒、不打高爾夫球），他們的 y 就是「被設限在 0」。</p>
+  <div class="formula">
+    觀察到的 y = max(y*, 0)<br>
+    其中 y* = β₀ + β₁x + ε 是「潛在」的消費支出
+  </div>
+  <p>如果你直接用 OLS 估計 y 對 x 的迴歸，會發生什麼事？你會有偏誤！</p>
+  <p>為什麼？因為那些 y* ≤ 0 的人，他們的 y 被「截斷」在 0——你看不到他們「真實的」y* 是多少。這就造成了「樣本選擇偏誤」——你只用了「有消費」的人來估計，但「有消費」的人不是隨機抽的。</p>
+  <p>解決方法：Tobit 模型 (Tobin's Probit)——由 <span class="proper">James Tobin (1958)</span> 提出。</p>
+  <div class="warn">
+    ⚠️ 考試重點：Tobit 模型的重點是「設限」 (censoring)——你知道有一些人「低於門檻」，但你不知道他們確切是多少。<br><br>
+    這和「截斷」 (truncation) 不一樣——截斷是你「根本看不到」那些低於門檻的人，他們完全不在你的樣本裡。
+  </div>
+  <p><span class="term" data-term="tobit">前後關聯</span>：Tobit 模型和第 18 章的 Probit 模型有關——它們都是「潛在變數模型」家族的一員。Tobit 用 MLE 估計，這是第 15 章的應用。</p>
   `
 },
 {
   id:"19.2", title:"樣本選擇模型",
   body:`
-  <p>樣本選擇偏誤 (Sample Selection Bias) 是指：你的樣本不是「隨機抽的」——某些人比較容易被選進樣本，某些人比較不容易。</p>
-  <p>經典範例：估計「女性的薪資函數」——你只能看到「有工作的女性」的薪資，沒有工作的女性你看不到。但「要不要工作」本身是一個選擇——有能力的女性比較容易選擇出去工作。</p>
+  <p>更一般的問題是「樣本選擇偏誤」 (Sample Selection Bias)——你的樣本不是「隨機抽的」，某些人比較容易被選進樣本，某些人比較不容易。</p>
+  <div class="method-card mc-title" data-mc="sample-selection">
+    <div class="mc-title">💡 最經典的例子：估計女性薪資函數</div>
+    <div class="mc-body">
+      <p>假設你想估計：「教育程度對女性薪資的影響」。</p>
+      <p>你的資料裡，只有「有工作的女性」的薪資——「沒有工作的女性」你看不到她們的薪資（因為她們根本沒有薪資！）。</p>
+      <p>問題：「有工作的女性」是隨機抽的嗎？不是！通常「比較有能力的女性」比較容易選擇出去工作——她們的工資率比較高，所以工作的機會成本（留在家里的價值）相對比較低。</p>
+      <p>所以如果你只用「有工作的女性」來估計薪資函數，你估計出來的 β₁（教育的報酬）會有偏誤——因為你把「自願參與勞動市場」的選擇也混進去了。</p>
+    </div>
+  </div>
+  <p>為什麼 OLS 會有偏誤？我們來寫一下式子。</p>
+  <p>薪資方程式：ln(wage) = β₀ + β₁edu + u₁</p>
+  <p>勞動參與方程式：participate* = γ₀ + γ₁edu + γ₂kids + u₂（participate* 是潛在的「想要工作的意願」）</p>
+  <p>你只能在 participate* > 0 的情況下，觀察到 ln(wage)。</p>
+  <p>問題：u₁ 和 u₂ 可能有相關！因為「能力」這個你觀察不到的變數，會同時影響「你想不想工作」（u₂）和「你賺多少錢」（u₁）。所以 u₁ 和 u₂ 正相關。</p>
+  <p>那當你只用 participate* > 0 的樣本來估計薪資方程式時，你的誤差項 u₁ 已經被「條件化」了——你已經知道 u₂ > -γ₀ - γ₁edu - γ₂kids。如果 u₁ 和 u₂ 正相關，那你觀察到的 u₁ 就會「系統性地偏大」——這就是偏誤的來源。</p>
+  <p><span class="proper">前後關聯</span>：樣本選擇偏誤的本質，就是第 10 章的「漏掉變數偏誤」——你漏掉了「選擇方程式」的誤差項，而它和薪資方程式的解釋變數有相關。</p>
   `
 },
 {
   id:"19.3", title:"兩段法 Heckit",
   body:`
-  <p>Heckman 兩段法 (Heckit) 是解決樣本選擇偏誤最經典的方法：</p>
-  <ol>
-    <li>第一段：先估計「選擇方程式」——估計每個人「被選進樣本」的機率</li>
-    <li>第二段：把「逆米爾斯比」 (Inverse Mills Ratio) 當作解釋變數放進主迴歸</li>
-  </ol>
-  <div class="warn">考試重點：Heckman 兩段法是解決樣本選擇偏誤最經典的方法，也是很多頂級期刊實證研究的標準配備。</div>
+  <p><span class="proper">James Heckman (1979)</span> 提出了一個解決方法——也就是著名的「Heckman 兩段法」 (Heckit)。這篇論文後來讓他拿到了 2000 年的諾貝爾經濟學獎。</p>
+  <p><b>第一段：估計選擇方程式</b></p>
+  <p>先用 Probit 估計「選擇方程式」——估計每個人「被選進樣本」的機率：</p>
+  <div class="formula">
+    P(participate=1|x) = Φ(γ₀ + γ₁edu + γ₂kids)
+  </div>
+  <p>然後計算「逆米爾斯比」 (Inverse Mills Ratio, IMR)：</p>
+  <div class="formula">
+    IMR = φ(γ̂'x) / Φ(γ̂'x)
+  </div>
+  <p>其中 φ 是標準常態的 PDF，Φ 是標準常態的 CDF。</p>
+  <p>逆米爾斯比的直覺：它代表「一個人被選進樣本的『殘餘程度』」——也就是說，「在控制了觀察到的 x 之後，這個人『額外』有多想要參與勞動市場」。</p>
+  <p><b>第二段：把 IMR 放進主迴歸</b></p>
+  <p>然後把 IMR 當作一個「額外的解釋變數」放進薪資方程式：</p>
+  <div class="formula">
+    ln(wage) = β₀ + β₁edu + β₂·IMR + u₁
+  </div>
+  <p>這時候 OLS 估計出來的 β̂₁ 就沒有偏誤了！</p>
+  <p>為什麼？因為 IMR 已經把「選擇造成的偏誤」給「控制住了」——你等於把「你有多想要參與勞動市場」這個變數加進來，而它和原來的誤差項 u₁ 有相關。所以放進 IMR 之後，新的誤差項就和解釋變數沒有相關了。</p>
+  <div class="method-card mc-title" data-mc="heckman-test">
+    <div class="mc-title">💡 怎麼檢定「有沒有樣本選擇偏誤」？</div>
+    <div class="mc-body">
+      <p>很簡單：看第二段迴歸裡，IMR 的係數 β₂ 是不是顯著。</p>
+      <ul>
+        <li>如果 β₂ 顯著不等於 0：代表有樣本選擇偏誤——你本來的 OLS 估計是有問題的，Heckman 兩段法是有必要的。</li>
+        <li>如果 β₂ 不顯著：代表沒有樣本選擇偏誤——你本來的 OLS 估計就可以了，不用 Heckman。</li>
+      </ul>
+      <p>這就是一個「t 檢定」——直接看 IMR 的 t 值就好。</p>
+    </div>
+  </div>
+  <div class="warn">
+    ⚠️ 考試重點：
+    <ol>
+      <li><b>識別的關鍵</b>：Heckman 兩段法需要「排除限制」 (exclusion restriction)——你需要至少一個變數，它會影響「選擇方程式」（要不要工作），但不會影響「主方程式」（薪資多少）。<br><br>例如：「家裡有幾個小孩」會影響媽媽要不要工作（小孩多了，比較不想出去工作），但不會直接影響媽媽的薪資（老闆不管你家有幾個小孩，他只看你的生產力）。<br><br>如果沒有排除限制，Heckman 兩段法還是可以跑，但它「識別」完全靠「函數形式」——也就是靠 Probit 的常態分配假設。這樣很脆弱，很容易因為分配假設錯了就整個崩掉。</li>
+      <li><b>現在的做法</b>：現在大部分人不用「兩段法」了——直接用「最大概似法」 (MLE) 一次把選擇方程式和主方程式一起估計。這樣比較有效率，也比較穩健。</li>
+    </ol>
+  </div>
+  <p><span class="term" data-term="heckit">前後關聯</span>：Heckman 兩段法本質上就是「工具變數法」的一種——IMR 就是一個「控制變數」，用來把「樣本選擇造成的內生性」給修正掉。和第 11 章的 2SLS 是同一個家族。</p>
   `
 },
 {
   id:"19.4", title:"計數資料模型",
   body:`
-  <p>如果依變數是「計數資料」（例如：生病次數、孩子數量、專利數量），就要用 Poisson 模型或負二項模型。</p>
-  <p>Poisson 模型的問題是：它假設「平均數 = 變異數」。如果這個假設不成立（通常都不成立），就要用負二項模型。</p>
+  <p>如果依變數是「計數資料」 (Count Data)——也就是「次數」，例如：</p>
+  <ul>
+    <li>你過去一年感冒了幾次？</li>
+    <li>一家公司每年申請了幾個專利？</li>
+    <li>一個客戶過去一年打了幾次客服電話？</li>
+    <li>一個城市每年發生幾次地震？</li>
+  </ul>
+  <p>這時候 y 只能是 0, 1, 2, 3, ... 這種「非負整數」。它不是連續變數——所以 OLS 不一定合適。</p>
+  <p>最常用的模型：<b>Poisson 迴歸模型</b>。</p>
+  <div class="formula">
+    E(y|x) = exp(β'x)
+  </div>
+  <p>為什麼要用 exp？因為 exp 可以保證 E(y|x) 一定是正的——而 y 是計數資料，它的平均數當然必須是正的。</p>
+  <div class="warn">
+    ⚠️ 考試重點：Poisson 模型有一個很強的假設——「平均數 = 變異數」 (mean = variance)：<br><br>
+    Var(y|x) = E(y|x) = exp(β'x)<br><br>
+    但現實上，計數資料通常有「過度分散」 (overdispersion) 的問題——變異數比平均數大很多。例如：大部分人一年感冒 1-2 次，但有一些人特別容易感冒（過敏體質），一年可能感冒 10 次以上。所以變異數會比平均數大很多。<br><br>
+    如果過度分散存在，Poisson 模型的標準誤會「太小」——你很容易把不顯著的係數當成顯著。<br><br>
+    解決方法：用「負二項模型」 (Negative Binomial Model)——它放鬆了「平均數 = 變異數」的假設，允許變異數比平均數大。
+  </div>
+  <p><span class="proper">前後關聯</span>：Poisson 模型也是用 MLE 估計的——又是第 15 章的應用。</p>
   `
 }
 ];
 
 const CH19_PROBLEMS = [
-{id:"q19-1", q:"什麼是樣本選擇偏誤？請舉一個例子。", a:"樣本選擇偏誤：你的樣本不是「隨機抽的」——某些人比較容易被選進樣本。<br><br>範例：估計女性薪資函數——你只能看到「有工作的女性」的薪資，但「要不要工作」本身是一個選擇。", difficulty:"medium", topic:"樣本選擇偏誤"},
-{id:"q19-2", q:"Heckman 兩段法的基本邏輯是什麼？", a:"兩段：<br>1. 第一段：先估計「選擇方程式」——估計每個人「被選進樣本」的機率<br>2. 第二段：把「逆米爾斯比」當作解釋變數放進主迴歸<br><br>這樣就可以把「樣本選擇」造成的偏誤修正掉。", difficulty:"medium", topic:"Heckman"},
-{id:"q19-3", q:"Tobit 模型用來處理什麼問題？", a:"Tobit 模型用來處理「因變數被設限」的情況——例如：大家的消費支出都是正的，沒有人消費負的。<br><br>如果你直接用 OLS 估計，估計出來的係數會有偏誤。", difficulty:"easy", topic:"Tobit"}
+{id:"q19-1", q:"什麼是 Tobit 模型？它用來解決什麼問題？", a:"Tobit 模型用來解決「因變數被設限」的問題——例如：消費支出不能是負的，所以有一些人的 y 被「截斷」在 0。<br><br>如果你直接用 OLS 估計，估計出來的係數會有偏誤——因為你只用了「有消費」的人來估計，但「有消費」的人不是隨機抽的。<br><br>Tobit 模型透過 MLE 估計，把「設限」的部分也納入模型裡。", difficulty:"medium", topic:"Tobit"},
+{id:"q19-2", q:"什麼是樣本選擇偏誤？請舉一個例子。", a:"樣本選擇偏誤：你的樣本不是「隨機抽的」——某些人比較容易被選進樣本，某些人比較不容易。<br><br>最經典的例子：估計女性薪資函數——你只能看到「有工作的女性」的薪資，沒有工作的女性你看不到。但「要不要工作」本身是一個選擇——有能力的女性比較容易選擇出去工作。<br><br>所以如果你只用「有工作的女性」來估計薪資函數，你估計出來的係數會有偏誤。", difficulty:"medium", topic:"樣本選擇偏誤"},
+{id:"q19-3", q:"Heckman 兩段法的基本邏輯是什麼？", a:"兩個步驟：<br>1. <b>第一段</b>：先用 Probit 估計「選擇方程式」——估計每個人「被選進樣本」的機率，然後計算「逆米爾斯比」 (IMR)。<br>2. <b>第二段</b>：把 IMR 當作一個「額外的解釋變數」放進主迴歸，然後用 OLS 估計。<br><br>為什麼這樣就可以解決偏誤？因為 IMR 已經把「選擇造成的偏誤」給「控制住了」——你等於把「你有多想要參與勞動市場」這個變數加進來，而它和原來的誤差項有相關。所以放進 IMR 之後，新的誤差項就和解釋變數沒有相關了。", difficulty:"hard", topic:"Heckman"},
+{id:"q19-4", q:"Poisson 模型的主要假設是什麼？如果這個假設不對怎麼辦？", a:"Poisson 模型的主要假設：「平均數 = 變異數」 (mean = variance)：<br>Var(y|x) = E(y|x)<br><br>但現實上，計數資料通常有「過度分散」 (overdispersion) 的問題——變異數比平均數大很多。<br><br>如果過度分散存在，Poisson 模型的標準誤會「太小」——你很容易把不顯著的係數當成顯著。<br><br>解決方法：用「負二項模型」 (Negative Binomial Model)——它放鬆了「平均數 = 變異數」的假設，允許變異數比平均數大。", difficulty:"medium", topic:"Poisson"}
 ];
+
 
 /* ===== 第二十章：持續時間模型 ===== */
 const CH20_SECTIONS = [
 {
   id:"20.1", title:"危險率函數 Hazard Rate",
   body:`
-  <p>持續時間模型 (Duration Model) 用來分析「事件發生要花多久時間」——例如：失業多久會找到工作、婚姻多久會離婚、客戶多久會流失。</p>
-  <p>核心觀念是「危險率函數」 (Hazard Rate)：在活過 t 的條件下，下一個瞬間「失敗」的機率。</p>
+  <p>持續時間模型 (Duration Model) 用來回答一個問題：「某件事要花多久時間才會發生？」</p>
+  <p>例如：</p>
+  <ul>
+    <li>一個人失業了，要多久才會找到工作？</li>
+    <li>一場戰爭開打之後，要多久才會結束？</li>
+    <li>一個客戶註冊了，要多久才會取消訂閱？</li>
+    <li>一個病人吃了藥之後，要多久症狀才會好？</li>
+  </ul>
+  <p>核心觀念是「存活函數」 (Survival Function)：</p>
+  <div class="formula">
+    S(t) = P(T > t) = 「活到時間 t 之後」的機率
+  </div>
+  <p>也就是說，S(t) 代表「在時間 t 的時候，你還『活著』（事件還沒發生）的機率」。</p>
+  <p>那「危險率函數」 (Hazard Rate) h(t) 是什麼？它的定義是：</p>
+  <div class="formula">
+    h(t) = lim<sub>Δt→0</sub> P(t ≤ T < t+Δt | T ≥ t) / Δt
+  </div>
+  <p>白話文：在你「已經活過 t」的條件下，下一個瞬間「掛掉」（事件發生）的機率。</p>
+  <div class="method-card mc-title" data-mc="hazard-rate">
+    <div class="mc-title">💡 直覺：危險率函數是什麼意思？</div>
+    <div class="mc-body">
+      <p>想像一下：你在跑馬拉松。</p>
+      <ul>
+        <li>如果你剛跑出去 1 公里（t=1），這時候你「下一瞬間就放棄」的機率有多大？很小——你才剛開始，體力還很充足。</li>
+        <li>如果你已經跑了 40 公里（t=40），這時候你「下一瞬間就放棄」的機率有多大？很大——你已經快崩潰了，只要再撐一下下就到終點了，但你可能真的撐不住。</li>
+      </ul>
+      <p>所以危險率函數 h(t) 其實是「隨時間 t 變化的」——它可能一開始很低，中間升高，後面又降低（因為撐到最後的人，本來就是比較能撐的人）。</p>
+      <p>這和「一般的機率」不一樣——一般的機率是「整體的」，而危險率是「條件的」——它是在「你已經活到現在」的條件下，接下來會怎樣。</p>
+    </div>
+  </div>
+  <p><span class="term" data-term="duration-model">前後關聯</span>：持續時間模型和第 13 章的時間序列模型不一樣——時間序列模型關心的是「變數隨時間怎麼變」，而持續時間模型關心的是「事件什麼時候發生」。</p>
   `
 },
 {
   id:"20.2", title:"共比例風險模型 Cox",
   body:`
-  <p>Cox 模型 (Cox Proportional Hazards Model) 是最常用的持續時間模型。它的好處是：你不需要指定「基準危險率」的形狀——讓資料自己說話。</p>
+  <p>最有名的持續時間模型，是 <span class="proper">David Cox (1972)</span> 提出的「共比例風險模型」 (Cox Proportional Hazards Model)。</p>
+  <p>模型設定：</p>
+  <div class="formula">
+    h(t|x) = h₀(t) · exp(β'x)
+  </div>
+  <p>其中：</p>
+  <ul>
+    <li>h₀(t) 是「基準危險率」 (baseline hazard)——它代表「當 x=0 的時候」，危險率函數長什麼樣子。</li>
+    <li>exp(β'x) 是「比例調整因子」——它代表「你的 x 會把基準危險率放大或縮小多少倍」。</li>
+  </ul>
+  <p>重點：Cox 模型「不需要指定 h₀(t) 的函數形式」——你不需要假設它是指數分配、韋伯分配，或什麼其他分配。你只要假設「x 對危險率的影響是『成比例的』」就好——不管 h₀(t) 長什麼樣子，x 都只是把它「等比例放大或縮小」。</p>
+  <div class="warn">
+    ⚠️ 考試重點：Cox 模型為什麼這麼有名？<br><br>
+    因為它「半參數」——參數部分是 β（你要估計的係數），非參數部分是 h₀(t)（你不需要指定它的形狀）。<br><br>
+    這樣就很有彈性——你不用擔心「我假設的 h₀(t) 不對怎麼辦」。你只要關心 β 就好，h₀(t) 讓資料自己說話。
+  </div>
+  <p>那 β 怎麼解讀？exp(β<sub>j</sub>) 就是「危險率比」 (Hazard Ratio)：如果 x<sub>j</sub> 多一單位，危險率會變成原來的 exp(β<sub>j</sub>) 倍。</p>
+  <p>例如：如果你估計出來 β<sub>smoke</sub> = 0.5，那代表「抽煙的人，死亡的危險率是不抽煙的人的 exp(0.5) ≈ 1.65 倍」——也就是「抽煙會讓你死亡的危險率增加 65%」。</p>
+  <p><span class="proper">前後關聯</span>：Cox 模型用「部分概似函數」 (Partial Likelihood) 估計——這和第 15 章的 MLE 有點像，但又不完全一樣。</p>
   `
 },
 {
   id:"20.3", title:"加速失敗時間模型",
   body:`
-  <p>加速失敗時間模型 (Accelerated Failure Time, AFT) 是另一種持續時間模型——它假設解釋變數會「加速」或「減慢」失敗的速度。</p>
-  <div class="warn">考試重點：持續時間模型常用在：失業期間分析、戰爭持續時間、客戶流失分析、醫學存活分析。</div>
+  <p>另一種持續時間模型是「加速失敗時間模型」 (Accelerated Failure Time Model, AFT)。</p>
+  <p>和 Cox 模型的差別：Cox 模型假設「x 會按比例改變危險率」，而 AFT 模型假設「x 會直接改變『存活時間』本身」。</p>
+  <div class="formula">
+    ln(T) = β'x + ε
+  </div>
+  <p>白話文：你的解釋變數 x 會「加速」或「減慢」事件發生的速度——如果 β > 0，代表 x 越大，存活時間越長；如果 β < 0，代表 x 越大，存活時間越短。</p>
+  <div class="method-card mc-title" data-mc="censoring">
+    <div class="mc-title">💡 注意：設限觀察值！</div>
+    <div class="mc-body">
+      <p>持續時間資料有一個很重要的問題：「設限觀察值」 (censored observations)——你可能在研究結束的時候，有些人的事件「還沒發生」。</p>
+      <p>例如：你研究「失業期間」，但研究結束時，有一些人「還在失業中」——你不知道他們最後會失業多久，你只知道「至少已經失業了 T 期」。</p>
+      <p>這時候你不能直接把這些人「丟掉」——那會造成偏誤。你也不能直接把他們的 T 當成「最終的失業期間」——因為他們其實還沒結束。</p>
+      <p>正確的做法：在概似函數裡，把這些設限觀察值的「貢獻」寫成「存活機率」 (Survival Probability)，而不是「密度函數」。</p>
+    </div>
+  </div>
+  <div class="warn">
+    ⚠️ 考試重點：持續時間模型常用在哪些領域？<br><br>
+    <ul>
+      <li><b>勞動經濟學</b>：失業期間長短、再就業的機率</li>
+      <li><b>政治學</b>：戰爭持續時間、政權倒台的時間</li>
+      <li><b>行銷學</b>：客戶流失分析 (Churn Analysis)、訂閱制服務的續約率</li>
+      <li><b>醫學</b>：存活分析 (Survival Analysis)、新藥的療效評估</li>
+    </ul>
+  </div>
+  <p><span class="term" data-term="aft">前後關聯</span>：持續時間模型的觀念，其實和第 9 章的「自我相關」有一點關係——因為時間資料本來就有「序列相關」的特性。</p>
   `
 }
 ];
 
 const CH20_PROBLEMS = [
-{id:"q20-1", q:"什麼是危險率函數 (Hazard Rate)？", a:"危險率函數：在活過 t 的條件下，下一個瞬間「失敗」的機率。", difficulty:"easy", topic:"危險率函數"},
-{id:"q20-2", q:"Cox 模型的好處是什麼？", a:"Cox 模型的好處是：你不需要指定「基準危險率」的形狀——讓資料自己說話。", difficulty:"medium", topic:"Cox 模型"},
-{id:"q20-3", q:"持續時間模型常用在哪些領域？", a:"失業期間分析、戰爭持續時間、客戶流失分析、醫學存活分析。", difficulty:"easy", topic:"持續時間模型應用"}
+{id:"q20-1", q:"什麼是危險率函數 (Hazard Rate)？", a:"危險率函數 h(t) 的定義是：<br>h(t) = lim<sub>Δt→0</sub> P(t ≤ T < t+Δt | T ≥ t) / Δt<br><br>白話文：在你「已經活過 t」的條件下，下一個瞬間「掛掉」（事件發生）的機率。<br><br>它和一般的機率不一樣——一般的機率是「整體的」，而危險率是「條件的」——它是在「你已經活到現在」的條件下，接下來會怎樣。", difficulty:"medium", topic:"危險率函數"},
+{id:"q20-2", q:"Cox 模型的主要假設是什麼？它的好處是什麼？", a:"Cox 模型的主要假設：「共比例風險」 (Proportional Hazards)——x 對危險率的影響是「成比例的」：<br>h(t|x) = h₀(t) · exp(β'x)<br><br>其中 h₀(t) 是「基準危險率」——你不需要指定它的函數形式。<br><br>好處：它是「半參數」模型——參數部分是 β（你要估計的係數），非參數部分是 h₀(t)（你不需要指定它的形狀）。這樣就很有彈性——你不用擔心「我假設的 h₀(t) 不對怎麼辦」。", difficulty:"hard", topic:"Cox 模型"},
+{id:"q20-3", q:"Cox 模型的 Hazard Ratio 是什麼意思？", a:"exp(β<sub>j</sub>) 就是「危險率比」 (Hazard Ratio)：如果 x<sub>j</sub> 多一單位，危險率會變成原來的 exp(β<sub>j</sub>) 倍。<br><br>例如：如果你估計出來 β<sub>smoke</sub> = 0.5，那代表「抽煙的人，死亡的危險率是不抽煙的人的 exp(0.5) ≈ 1.65 倍」——也就是「抽煙會讓你死亡的危險率增加 65%」。", difficulty:"medium", topic:"Hazard Ratio"},
+{id:"q20-4", q:"什麼是「設限觀察值」 (Censored Observation)？為什麼這很重要？", a:"設限觀察值：你可能在研究結束的時候，有些人的事件「還沒發生」。<br><br>例如：你研究「失業期間」，但研究結束時，有一些人「還在失業中」——你不知道他們最後會失業多久，你只知道「至少已經失業了 T 期」。<br><br>為什麼重要？因為如果你直接把這些人「丟掉」，會造成偏誤。你也不能直接把他們的 T 當成「最終的失業期間」——因為他們其實還沒結束。<br><br>正確的做法：在概似函數裡，把這些設限觀察值的「貢獻」寫成「存活機率」 (Survival Probability)，而不是「密度函數」。", difficulty:"medium", topic:"設限觀察值"}
 ];
+
 
 /* ===== 第二十一章：非參數與半參數估計 ===== */
 const CH21_SECTIONS = [
 {
   id:"21.1", title:"非參數估計的概念",
   body:`
-  <p>非參數估計 (Nonparametric Estimation) 和傳統的參數估計最大的不同：它不預設函數形式——讓資料自己說話。</p>
-  <p>好處：比較彈性，不會因為函數形式設定錯了就整個崩壞。<br>壞處：需要比較多的資料，而且估計出來的結果比較「難解讀」。</p>
+  <p>到目前為止，我們學的所有模型，都是「參數模型」 (Parametric Model)——也就是你一開始就「預設」了函數的形狀：線性的、指數的、Logit 的，等等。</p>
+  <p>但問題是：如果你的「預設」是錯的，整個模型就會壞掉——不論你有多少資料，估計出來的結果都是有偏誤的。這就是「函數形式誤設定」 (Functional Form Misspecification) 的問題——我們在第 6 章有討論過。</p>
+  <p>那有沒有一種方法，「不需要預設函數形式」，讓資料自己告訴你函數長什麼樣子？</p>
+  <p>有！那就是「非參數估計」 (Nonparametric Estimation)。</p>
+  <div class="method-card mc-title" data-mc="nonparametric">
+    <div class="mc-title">💡 參數 vs 非參數</div>
+    <div class="mc-body">
+      <table>
+        <tr><th></th><th>參數模型</th><th>非參數模型</th></tr>
+        <tr><td>函數形式</td><td>一開始就預設好（例如：線性）</td><td>不預設，讓資料自己說話</td></tr>
+        <tr><td>資料需求</td><td>比較少就可以</td><td>需要很多資料</td></tr>
+        <tr><td>解讀難度</td><td>容易——看係數就好</td><td>比較難——你要看圖形</td></tr>
+        <tr><td>穩健性</td><td>差——函數形式錯了就全壞</td><td>好——不管真實函數長什麼樣子，它都能估計</td></tr>
+      </table>
+    </div>
+  </div>
+  <p><b>缺點：維數詛咒</b> (Curse of Dimensionality)</p>
+  <p>非參數估計有一個很大的問題——當解釋變數的個數越多，需要的樣本數會「爆炸式成長」。</p>
+  <p>為什麼？因為非參數的觀念是「在每個 x 附近，找一些鄰近的 y 來平均」。如果 x 只有 1 維（只有一個解釋變數），那要找「鄰近的」很容易——但如果 x 有 10 維，你要在「10 維空間」裡找鄰近的點，就很難了——因為大部分的點都離你很遠。</p>
+  <div class="warn">
+    ⚠️ 考試重點：維數詛咒 (Curse of Dimensionality)——非參數方法通常只用在「低維度」的情況（1-2 個解釋變數）。如果解釋變數太多，非參數方法就不好用了。<br><br>
+    這時候你可以用「半參數模型」 (Semiparametric Model)——一部分用參數的（線性的部分），一部分用非參數的（非線性的部分）。
+  </div>
+  <p><span class="term" data-term="nonparametric">前後關聯</span>：非參數估計和第 6 章的「函數形式誤設定」是直接相關的——它就是用來解決「我不知道真實函數長什麼樣子」的問題。</p>
   `
 },
 {
   id:"21.2", title:"核心密度估計法 Kernel",
   body:`
-  <p>核心密度估計 (Kernel Density Estimation, KDE) 是最常用的非參數方法——用來估計機率密度函數。</p>
-  <p>直覺：在每個資料點附近放一個「核心函數」（例如常態分配），然後把它們加起來，就得到整個密度函數的估計。</p>
+  <p>最經典的非參數方法，是「核心密度估計」 (Kernel Density Estimation, KDE)——用來估計機率密度函數。</p>
+  <p>觀念很簡單：你有一堆資料點 x₁, x₂, ..., x<sub>n</sub>，你想估計它們背後的機率密度函數 f(x) 長什麼樣子。</p>
+  <p>方法：在每個資料點 x<sub>i</sub> 上面，放一個小小的「核心函數」 (Kernel Function) K——通常是一個小小的常態分配，中心在 x<sub>i</sub>。然後把這些小函數全部加起來，就得到整個密度函數的估計。</p>
+  <div class="formula">
+    f̂(x) = (1 / (n·h)) · Σ<sub>i=1</sub><sup>n</sup> K((x - x<sub>i</sub>) / h)
+  </div>
+  <p>其中 h 是「頻寬」 (bandwidth)——它控制了你要把每個核心函數「弄多寬」。</p>
+  <div class="method-card mc-title" data-mc="bandwidth">
+    <div class="mc-title">💡 頻寬 h 的選擇：最重要的決定！</div>
+    <div class="mc-body">
+      <p>h 太小：你會得到一個「很凹凸不平」的曲線——每個資料點都會造成一個「尖峰」，看起來很不穩定。</p>
+      <p>h 太大：你會得到一個「很平滑」的曲線——但它可能把真實的形狀都「洗掉」了，只剩下一個大概的輪廓。</p>
+      <p>最佳的 h 是「平衡」這兩個的——不要太凹凸，也不要太平滑。統計學家已經發展出很多「自動選 h」的方法，現在軟體都會自動幫你選好。</p>
+    </div>
+  </div>
+  <p>KDE 常用在「探索性資料分析」——先看看你的資料長什麼樣子，再決定要選什麼樣的參數模型。例如：你可以用 KDE 看看薪資的分配是「常態分配」還是「右偏分配」，再決定要用 ln(wage) 還是 wage 當依變數。</p>
+  <p><span class="proper">前後關聯</span>：核心密度估計和第 18 章的 Logit/Probit 模型有一點關係——Logit 用的「邏輯分配」，其實就是一個核心函數。</p>
   `
 },
 {
   id:"21.3", title:"局部迴歸 Lowess",
   body:`
-  <p>Lowess (Locally Weighted Scatterplot Smoothing) 是另一種常用的非參數方法——用來畫「平滑的迴歸曲線」。</p>
-  <div class="warn">考試重點：非參數方法常用在「探索性資料分析」——先看看資料長什麼樣子，再決定要用什麼樣的參數模型。</div>
+  <p>另一個常用的非參數方法，是「局部加權散佈圖平滑法」 (Locally Weighted Scatterplot Smoothing, Lowess)——用來畫「平滑的迴歸曲線」。</p>
+  <p>觀念：你想畫一條曲線，描述 y 怎麼隨 x 改變。對於每個 x 的位置，你「只拿附近的資料點」來做一個局部的 OLS 迴歸——然後用那個局部迴歸的「預測值」，當成這一點的平滑值。</p>
+  <p>為什麼要「局部」？因為如果你用全部的資料來做一個「全局」的 OLS 迴歸，你就必須預設「y 和 x 是線性的」——但 Lowess 不用！它在每個小區域裡，都可以有不同的斜率——所以它可以畫出「彎來彎去」的曲線。</p>
+  <div class="warn">
+    ⚠️ 考試重點：非參數方法的主要用途：<br><br>
+    <ol>
+      <li><b>探索性資料分析</b> (EDA)：先看看資料長什麼樣子，再決定要用什麼樣的參數模型。</li>
+      <li><b>模型診斷</b>：如果你用 OLS 估計了一個線性模型，可以畫 Lowess 看看——如果 Lowess 曲線和「一條直線」差很多，代表你的「線性」假設可能有問題。</li>
+    </ol>
+    <br>
+    非參數方法比較少用來「估計係數」——因為它們本來就沒有「係數」的概念。它們主要是用來「看圖」的。
+  </div>
+  <p><span class="term" data-term="lowess">前後關聯</span>：Lowess 和第 6 章的「多項式迴歸」、「樣條函數」是同一個家族的——都是用來「放鬆線性假設」的方法。只不過樣條函數還是「參數的」（你要預設有幾個 breakpoint），而 Lowess 是「非參數的」。</p>
   `
 }
 ];
 
 const CH21_PROBLEMS = [
-{id:"q21-1", q:"非參數估計和參數估計最大的不同是什麼？", a:"非參數估計不預設函數形式——讓資料自己說話。<br><br>好處：比較彈性，不會因為函數形式設定錯了就整個崩壞。<br>壞處：需要比較多的資料，而且估計出來的結果比較「難解讀」。", difficulty:"medium", topic:"非參數估計"},
-{id:"q21-2", q:"核心密度估計 (KDE) 用來做什麼？", a:"核心密度估計用來估計機率密度函數——用來看資料的分佈長什麼樣子。", difficulty:"easy", topic:"KDE"},
-{id:"q21-3", q:"Lowess 是什麼？", a:"Lowess (Locally Weighted Scatterplot Smoothing) 是一種局部加權迴歸方法——用來畫「平滑的迴歸曲線」。", difficulty:"medium", topic:"Lowess"}
+{id:"q21-1", q:"參數模型和非參數模型的主要差別是什麼？", a:"主要差別：<br>• <b>參數模型</b>：一開始就預設了函數的形狀（例如：線性的）。好處：需要的資料比較少、容易解讀。壞處：如果函數形式錯了，整個模型就會壞掉。<br>• <b>非參數模型</b>：不預設函數形式，讓資料自己說話。好處：比較穩健——不管真實函數長什麼樣子，它都能估計。壞處：需要比較多的資料、比較難解讀。", difficulty:"medium", topic:"參數 vs 非參數"},
+{id:"q21-2", q:"什麼是「維數詛咒」 (Curse of Dimensionality)？", a:"維數詛咒：當解釋變數的個數越多，非參數估計需要的樣本數會「爆炸式成長」。<br><br>為什麼？因為非參數的觀念是「在每個 x 附近，找一些鄰近的 y 來平均」。如果 x 只有 1 維（只有一個解釋變數），那要找「鄰近的」很容易——但如果 x 有 10 維，你要在「10 維空間」裡找鄰近的點，就很難了——因為大部分的點都離你很遠。<br><br>所以非參數方法通常只用在「低維度」的情況（1-2 個解釋變數）。", difficulty:"hard", topic:"維數詛咒"},
+{id:"q21-3", q:"核心密度估計 (KDE) 是用來做什麼的？頻寬 h 怎麼影響結果？", a:"KDE 用來估計機率密度函數——用來看資料的分佈長什麼樣子。<br><br>頻寬 h 的影響：<br>• h 太小：你會得到一個「很凹凸不平」的曲線——每個資料點都會造成一個「尖峰」，看起來很不穩定。<br>• h 太大：你會得到一個「很平滑」的曲線——但它可能把真實的形狀都「洗掉」了，只剩下一個大概的輪廓。<br><br>最佳的 h 是「平衡」這兩個的——不要太凹凸，也不要太平滑。", difficulty:"medium", topic:"KDE"},
+{id:"q21-4", q:"Lowess 是什麼？它和一般的 OLS 有什麼不一樣？", a:"Lowess (Locally Weighted Scatterplot Smoothing) 是一種「局部加權迴歸」方法——用來畫「平滑的迴歸曲線」。<br><br>和一般 OLS 的差別：一般 OLS 是「全局」的——它用全部的資料，估計出「一條直線」。Lowess 是「局部」的——對於每個 x 的位置，它「只拿附近的資料點」來做一個局部的 OLS 迴歸。<br><br>所以 Lowess 可以畫出「彎來彎去」的曲線——它不需要預設 y 和 x 是線性的。", difficulty:"medium", topic:"Lowess"}
 ];
+
 
 /* ===== 第二十二章：貝氏計量經濟學 ===== */
 const CH22_SECTIONS = [
 {
   id:"22.1", title:"貝氏定理的基本概念",
   body:`
-  <p>貝氏計量經濟學 (Bayesian Econometrics) 和古典計量經濟學最大的不同：它把「參數」也當成隨機變數——不是固定的，而是有一個「分配」。</p>
-  <p>核心就是貝氏定理：</p>
-  <div class="formula">事後分配 ∝ 事前分配 × 概似函數</div>
+  <p>到目前為止，我們學的所有統計方法，都是「古典統計」 (Classical Statistics) 的觀點——也就是把參數 θ 當成「固定的」未知常數。你不知道 θ 是多少，但它就是「固定的」——你只是沒看到而已。你用資料來「猜」它大概是多少，然後做假設檢定。</p>
+  <p>但「貝氏統計」 (Bayesian Statistics) 的觀點完全不一樣——它把參數 θ 也當成「隨機變數」！θ 不是固定的，它有一個「機率分配」。</p>
+  <p>為什麼要這樣想？因為你「本來就有一些想法」——在看到資料之前，你就對 θ 有一些「先驗的信念」。貝氏統計就是把這些「先驗的信念」，和「資料裡的資訊」結合起來，得到「事後的信念」。</p>
+  <div class="formula">
+    貝氏定理：<br>
+    P(θ|data) ∝ P(data|θ) · P(θ)
+  </div>
+  <p>翻譯成白話文：</p>
+  <ul>
+    <li>P(θ)：<b>事前分配</b> (Prior Distribution)——在看到資料之前，你對 θ 的「先驗信念」</li>
+    <li>P(data|θ)：<b>概似函數</b> (Likelihood)——給定 θ，觀察到這份資料的機率有多大</li>
+    <li>P(θ|data)：<b>事後分配</b> (Posterior Distribution)——看到資料之後，你對 θ 的「事後信念」</li>
+  </ul>
+  <p>所以貝氏定理說：事後分配 ∝ 事前分配 × 概似函數。</p>
+  <div class="method-card mc-title" data-mc="bayes-example">
+    <div class="mc-title">💡 數值範例：貝氏定理怎麼用？</div>
+    <div class="mc-body">
+      <p>假設你在做疾病篩檢。某個疾病的盛行率是 1%（也就是 100 個人裡面有 1 個得病）。你的檢測有 99% 的準確率——也就是說，如果你真的得病了，檢測會有 99% 的機率呈現「陽性」；如果你沒有得病，檢測會有 99% 的機率呈現「陰性」。</p>
+      <p>問題：如果你檢測出來是「陽性」，你真的得病的機率有多大？</p>
+      <p>大部分人會說：大概 99% 吧？但這是錯的！</p>
+      <p>用貝氏定理算一下：</p>
+      <ul>
+        <li>事前機率：P(得病) = 0.01</li>
+        <li>P(陽性|得病) = 0.99（真陽性率）</li>
+        <li>P(陽性|沒得病) = 0.01（偽陽性率）</li>
+      </ul>
+      <p>那 P(得病|陽性) = P(陽性|得病)·P(得病) / P(陽性)</p>
+      <p>P(陽性) = P(陽性|得病)·P(得病) + P(陽性|沒得病)·P(沒得病) = 0.99×0.01 + 0.01×0.99 = 0.0198</p>
+      <p>所以 P(得病|陽性) = 0.99×0.01 / 0.0198 = 0.5 = 50%</p>
+      <p>看到了嗎？就算檢測有 99% 的準確率，如果你檢測出來是陽性，你真的得病的機率只有 50%！因為這個疾病本來就很罕見（事前機率很低），所以大部分的「陽性」其實都是「偽陽性」。</p>
+      <p>這就是貝氏統計的威力——它把「事前機率」考慮進去了，而不是只看檢測的準確率。</p>
+    </div>
+  </div>
+  <p><span class="proper">前後關聯</span>：貝氏統計和第 15 章的 MLE 有關——MLE 就是「完全不考慮事前分配」的貝氏統計（也就是事前分配是「均勻分配」的時候，事眾數就等於 MLE）。</p>
   `
 },
 {
   id:"22.2", title:"事前分配與事後分配",
   body:`
-  <p>事前分配 (Prior)：在看到資料之前，你對參數的「主觀認定」。<br>事後分配 (Posterior)：看到資料之後，你對參數的「更新後的認定」。</p>
-  <p>貝氏統計的核心就是：把事前分配和資料的概似函數結合起來，得到事後分配。</p>
+  <p>貝氏統計的核心，就是「事前分配」和「事後分配」。</p>
+  <p><b>事前分配</b> (Prior)：你在看到資料之前，對 θ 的信念。它可以是：</p>
+  <ul>
+    <li><b>資訊性事前分配</b> (Informative Prior)：你真的有一些「先驗的知識」——例如：你之前做過類似的研究，知道 θ 大概在什麼範圍。</li>
+    <li><b>非資訊性事前分配</b> (Non-informative Prior)：你其實什麼都不知道——這時候你用「均勻分配」，代表「所有的 θ 值都一樣可能」。這樣的話，事後分配就和概似函數成正比——也就是說，貝氏統計就變成和 MLE 差不多了。</li>
+  </ul>
+  <p>那「事前分配」的選擇，會不會影響你的結果？</p>
+  <p>答案：當樣本數很大的時候，事前分配的影響會很小——因為「資料裡的資訊」遠遠大於「你事前的信念」。但當樣本數很小的時候，事前分配的影響就會很大。</p>
+  <div class="warn">
+    ⚠️ 考試重點：貝氏統計 vs 古典統計——最大的哲學差別：<br><br>
+    • <b>古典統計</b>：參數 θ 是固定的，你的資料是隨機的。你說「這個信賴區間有 95% 的機率會涵蓋 θ」——但注意，這個「95%」是指「如果你重複抽樣很多次，有 95% 的信賴區間會涵蓋 θ」。不是指「這一次算出來的區間，有 95% 的機率涵蓋 θ」——因為 θ 是固定的，它要嘛就在區間裡，要嘛就不在，沒有「機率」的問題。<br><br>
+    • <b>貝氏統計</b>：參數 θ 是隨機的，你的資料是固定的。你可以直接說：「θ 有 95% 的機率落在這個區間裡」——因為 θ 本身就有一個分配，你可以算它落在某個範圍的機率。<br><br>
+    這兩種說法，聽起來差不多，但哲學上完全不一樣！
+  </div>
+  <p><span class="term" data-term="bayesian">前後關聯</span>：貝氏統計現在越來越流行，因為電腦運算能力越來越強——以前你根本算不出事後分配，現在有了 MCMC 方法，什麼模型都可以算。</p>
   `
 },
 {
   id:"22.3", title:"MCMC 方法",
   body:`
-  <p>MCMC (Markov Chain Monte Carlo) 是一組用來「抽樣事後分配」的方法。因為事後分配通常很複雜，你沒有辦法直接算出來——所以你用蒙地卡羅方法來抽樣。</p>
-  <div class="warn">考試重點：貝氏統計的優點：可以結合事前資訊、直覺上容易解釋（「參數有 95% 的機率落在這個區間」）。</div>
+  <p>那「事後分配」到底怎麼算？如果事前分配和概似函數都是「好算的」（例如：常態分配），那事後分配也會是「好算的」——這叫「共軛分配」 (Conjugate Prior)。</p>
+  <p>但大部分時候，事前分配和概似函數都很複雜——你根本沒有辦法「解析地」算出事後分配的公式。</p>
+  <p>這時候怎麼辦？用數值方法！最有名的就是 <b>MCMC</b> (Markov Chain Monte Carlo)。</p>
+  <p>MCMC 的觀念：你不用真的「算出」事後分配的公式——你只要「從事後分配裡抽樣」就好。如果你能抽到夠多的樣本，你就可以用這些樣本來近似事後分配的各種特性（平均數、變異數、信賴區間，等等）。</p>
+  <p>最有名的 MCMC 演算法：</p>
+  <ul>
+    <li><b>Metropolis-Hastings 演算法</b>：最基本的 MCMC 方法</li>
+    <li><b>Gibbs Sampling</b>：當模型有很多參數的時候，很常用——一次抽一個參數，把其他的當成固定的</li>
+  </ul>
+  <div class="method-card mc-title" data-mc="mcmc">
+    <div class="mc-title">💡 為什麼 MCMC 這麼重要？</div>
+    <div class="mc-body">
+      <p>因為它讓貝氏統計變得「實際可行」了！在 MCMC 發明之前，貝氏統計只能用在一些很簡單的模型上——因為你沒有辦法算複雜模型的事後分配。</p>
+      <p>但有了 MCMC 之後，不管你的模型多複雜，你都可以用電腦跑模擬，從事後分配裡抽樣。所以現在貝氏統計在很多領域都越來越流行——尤其是在「複雜模型」的應用上（例如：多層次模型、空間模型、動態模型）。</p>
+    </div>
+  </div>
+  <div class="warn">
+    ⚠️ 考試重點：貝氏統計的優點和缺點：<br><br>
+    <b>優點</b>：
+    <ol>
+      <li>可以「正式地」把事前資訊納入分析——如果你真的有一些先驗的知識，貝氏統計可以很自然地把它們放進模型裡。</li>
+      <li>直覺上比較容易解釋——你可以說「θ 有 95% 的機率落在這個區間裡」，這比古典統計的「信賴區間」直覺多了。</li>
+      <li>對於複雜模型，貝氏方法有時候比古典方法更容易計算——因為 MCMC 是「模組化」的，你可以一個部分一個部分地建模型。</li>
+    </ol>
+    <br>
+    <b>缺點</b>：
+    <ol>
+      <li>事前分配的選擇可能會有爭議——如果不同的人選不同的事前分配，可能會得到不同的結論。</li>
+      <li>計算時間比較長——MCMC 需要跑很多次模擬，比 OLS、MLE 慢很多。</li>
+      <li>很難跟別人解釋——大部分人還是比較習慣古典統計的語言。</li>
+    </ol>
+  </div>
+  <p><span class="proper">前後關聯</span>：貝氏計量經濟學是現在計量經濟學的一個重要分支——尤其是在「複雜模型」（例如：動態追蹤模型、空間模型）的應用上，越來越多人用貝氏方法。</p>
   `
 }
 ];
 
 const CH22_PROBLEMS = [
-{id:"q22-1", q:"貝氏統計和古典統計最大的不同是什麼？", a:"貝氏統計把「參數」也當成隨機變數——不是固定的，而是有一個「分配」。<br><br>古典統計認為參數是固定的，只是你不知道；貝氏統計認為參數本身就是隨機的。", difficulty:"medium", topic:"貝氏 vs 古典"},
-{id:"q22-2", q:"貝氏定理的公式是什麼？", a:"事後分配 ∝ 事前分配 × 概似函數<br><br>白話文：你本來對參數的認定（事前分配），加上看到資料之後的更新（概似函數），就得到你現在對參數的認定（事後分配）。", difficulty:"easy", topic:"貝氏定理"},
-{id:"q22-3", q:"MCMC 是什麼？用來做什麼？", a:"MCMC (Markov Chain Monte Carlo) 是一組用來「抽樣事後分配」的方法。<br><br>因為事後分配通常很複雜，你沒有辦法直接算出來——所以你用蒙地卡羅方法來抽樣。", difficulty:"medium", topic:"MCMC"}
+{id:"q22-1", q:"貝氏統計和古典統計最大的差別是什麼？", a:"最大的差別：對「參數 θ」的看法不一樣。<br><br>• <b>古典統計</b>：參數 θ 是「固定的」未知常數——它就是那個值，只不過你不知道。你用資料來「猜」它大概是多少。<br>• <b>貝氏統計</b>：參數 θ 是「隨機的」——它有一個機率分配。你可以說「θ 有 95% 的機率落在這個區間裡」。<br><br>哲學上：古典統計認為「資料是隨機的，參數是固定的」；貝氏統計認為「資料是固定的，參數是隨機的」。", difficulty:"medium", topic:"貝氏 vs 古典"},
+{id:"q22-2", q:"貝氏定理的公式是什麼？事前分配、概似函數、事後分配各是什麼意思？", a:"貝氏定理：<br>P(θ|data) ∝ P(data|θ) · P(θ)<br><br>• <b>事前分配</b> P(θ)：在看到資料之前，你對 θ 的「先驗信念」。<br>• <b>概似函數</b> P(data|θ)：給定 θ，觀察到這份資料的機率有多大。<br>• <b>事後分配</b> P(θ|data)：看到資料之後，你對 θ 的「事後信念」。<br><br>白話文：你本來對 θ 的信念（事前分配），加上看到資料之後的更新（概似函數），就得到你現在對 θ 的信念（事後分配）。", difficulty:"easy", topic:"貝氏定理"},
+{id:"q22-3", q:"什麼是 MCMC？它用來做什麼？", a:"MCMC (Markov Chain Monte Carlo) 是一組用來「從事後分配裡抽樣」的方法。<br><br>為什麼需要 MCMC？因為大部分時候，事前分配和概似函數都很複雜——你根本沒有辦法「解析地」算出事後分配的公式。<br><br>MCMC 的觀念：你不用真的「算出」事後分配的公式——你只要「從事後分配裡抽樣」就好。如果你能抽到夠多的樣本，你就可以用這些樣本來近似事後分配的各種特性（平均數、變異數、信賴區間，等等）。", difficulty:"medium", topic:"MCMC"},
+{id:"q22-4", q:"貝氏統計有什麼優點和缺點？", a:"<b>優點</b>：<br>1. 可以「正式地」把事前資訊納入分析——如果你真的有一些先驗的知識，貝氏統計可以很自然地把它們放進模型裡。<br>2. 直覺上比較容易解釋——你可以說「θ 有 95% 的機率落在這個區間裡」，這比古典統計的「信賴區間」直覺多了。<br><br><b>缺點</b>：<br>1. 事前分配的選擇可能會有爭議——如果不同的人選不同的事前分配，可能會得到不同的結論。<br>2. 計算時間比較長——MCMC 需要跑很多次模擬，比 OLS、MLE 慢很多。<br>3. 很難跟別人解釋——大部分人還是比較習慣古典統計的語言。", difficulty:"medium", topic:"貝氏優缺點"}
 ];
+
 
 /* ===== 第二十三章：總體計量經濟模型 ===== */
 const CH23_SECTIONS = [
 {
   id:"23.1", title:"向量自我迴歸 VAR",
   body:`
-  <p>向量自我迴歸 (Vector Autoregression, VAR) 是總體計量經濟學最經典的模型之一。它的邏輯很簡單：所有變數都互相當落進解釋變數。</p>
-  <div class="formula">y_t = c + A₁y_{t-1} + A₂y_{t-2} + ... + A_py_{t-p} + u_t</div>
-  <p>好處：不用你先驗說「誰是外生、誰是內生」——全部都一起放進來跑。</p>
+  <p>在第 13 章我們學了單變數的時間序列模型（AR、MA、ARMA、ARIMA）——那些模型都是「只有一個變數」的。但現實上，總體經濟的變數是「互相影響」的——GDP 會影響物價，物價會影響利率，利率又會影響 GDP。你不能把它們「分開」來個別建模。</p>
+  <p>所以 <span class="proper">Sims (1980)</span> 提出了「向量自我迴歸」 (Vector Autoregression, VAR)——把所有的變數「一起」放進來建模型。</p>
+  <p>VAR(p) 的模型設定：</p>
+  <div class="formula">
+    y<sub>t</sub> = c + A<sub>1</sub>y<sub>t-1</sub> + A<sub>2</sub>y<sub>t-2</sub> + ... + A<sub>p</sub>y<sub>t-p</sub> + u<sub>t</sub>
+  </div>
+  <p>其中：</p>
+  <ul>
+    <li>y<sub>t</sub> 是一個「k×1」的向量——裡面有 k 個變數（例如：GDP 成長率、通膨率、利率）</li>
+    <li>A<sub>i</sub> 是一個「k×k」的係數矩陣——代表「所有變數的落進項，對所有變數的當期值的影響」</li>
+    <li>u<sub>t</sub> 是誤差項向量——它的共變異數矩陣是 Σ</li>
+  </ul>
+  <p><b>VAR 的精神</b>：你不需要「先驗」說「誰是外生變數、誰是內生變數」——所有的變數都「互相」當落進解釋變數。你把「因果關係」的問題先放下，先把「動態關係」描述好。</p>
+  <div class="warn">
+    ⚠️ 考試重點：VAR 模型的優點和缺點：<br><br>
+    <b>優點</b>：
+    <ol>
+      <li>不用你先驗區分外生和內生——所有變數都是「自己解釋自己，也解釋別人」。</li>
+      <li>可以捕捉變數之間的「動態互動」——GDP 衝擊會怎麼影響物價？物價衝擊會怎麼影響 GDP？這些都可以從 VAR 裡算出來。</li>
+      <li>預測能力通常比「結構式模型」好——因為它是「讓資料自己說話」的。</li>
+    </ol>
+    <br>
+    <b>缺點</b>：
+    <ol>
+      <li>需要估計的參數太多了！如果有 k 個變數、p 期落進，那你要估計 k²p 個係數。如果 k=5、p=4，那你要估計 5×5×4 = 100 個係數——如果你的樣本數不夠大，根本估計不起來。</li>
+      <li>「結構式的解釋」比較困難——VAR 只是一個「統計的」關係，你很難從中說出「經濟學的」因果故事。</li>
+    </ol>
+  </div>
+  <p><span class="term" data-term="var">前後關聯</span>：VAR 是第 13 章單變數時間序列模型的「多變數版」——把 AR 從「一個變數」推廣到「好幾個變數」。</p>
   `
 },
 {
   id:"23.2", title:"結構 VAR SVAR",
   body:`
-  <p>VAR 模型的問題是：它只是「統計上的」關係，沒有「經濟結構」的解釋。所以後來發展出「結構 VAR」 (Structural VAR, SVAR)——加上一些識別限制，讓模型有經濟學的解釋。</p>
+  <p>VAR 模型有一個問題：它的誤差項 u<sub>t</sub> 是「互相相關」的——也就是說，u<sub>t</sub> 的共變異數矩陣 Σ 不是「對角矩陣」。</p>
+  <p>這造成了什麼問題？你沒辦法「乾淨地」說出「某個變數的衝擊」是什麼意思——因為所有的衝擊都「混在一起」了。</p>
+  <p>例如：你看到 GDP 突然跳升——這是「技術衝擊」造成的？還是「貨幣政策衝擊」造成的？還是「財政政策衝擊」造成的？你根本分不出來——因為它們都混在 u<sub>t</sub> 裡面了。</p>
+  <p>所以我們需要「結構式」的識別限制——把「混合的」衝擊，拆成「乾淨的」結構衝擊。這就是 <b>結構 VAR</b> (Structural VAR, SVAR)。</p>
+  <p>做法：把誤差項 u<sub>t</sub> 寫成「結構衝擊」 ε<sub>t</sub> 的線性組合：</p>
+  <div class="formula">
+    u<sub>t</sub> = B·ε<sub>t</sub>
+  </div>
+  <p>其中 ε<sub>t</sub> 是「結構衝擊」——它們彼此之間「獨立」的（共變異數矩陣是對角矩陣），而且它們有「經濟學的解釋」（例如：貨幣政策衝擊、技術衝擊）。</p>
+  <p>但問題來了：你怎麼知道 B 長什麼樣子？你需要「識別限制」 (identification restrictions)——也就是你要先驗地假設「某些結構衝擊，不會影響某些變數」。</p>
+  <div class="method-card mc-title" data-mc="svar-identification">
+    <div class="mc-title">💡 最常用的識別方法：Cholesky 分解</div>
+    <div class="mc-body">
+      <p>最簡單的識別方法：假設 B 是「下三角矩陣」 (Lower Triangular Matrix)——也就是說，變數的排序有「因果的順序」。</p>
+      <p>例如：你把變數排成「GDP → 物價 → 利率」。這代表：</p>
+      <ol>
+        <li>GDP 衝擊可以「立刻」影響所有變數（GDP、物價、利率）</li>
+        <li>物價衝擊不會「立刻」影響 GDP，但會「立刻」影響物價和利率</li>
+        <li>利率衝擊不會「立刻」影響 GDP 和物價，但會「立刻」影響利率</li>
+      </ol>
+      <p>為什麼這樣排？因為貨幣政策（利率）通常是「最慢」反應的——它需要先看 GDP 和物價的變化，才會調整利率。所以利率衝擊不會「立刻」影響 GDP 和物價。</p>
+      <p>但注意：這個「排序」是你「先驗」決定的——不同的排序會得到不同的結果。這就是 SVAR 最受批評的地方。</p>
+    </div>
+  </div>
+  <p><span class="proper">前後關聯</span>：SVAR 的「識別問題」，其實和第 11 章的「聯立方程式識別」是同一個概念——你需要一些「先驗的限制」，才能把「統計關係」變成「因果關係」。</p>
   `
 },
 {
   id:"23.3", title:"衝擊反應函數",
   body:`
-  <p>衝擊反應函數 (Impulse Response Function, IRF) 用來看：「如果某個變數突然受到一個衝擊，其他變數會怎麼樣動態反應？」</p>
-  <div class="warn">考試重點：VAR 和 SVAR 是總體計量經濟學最核心的工具——用來分析總體衝擊的效果，例如：貨幣政策衝擊、石油價格衝擊。</div>
+  <p>估計完 VAR 之後，你最常做的分析，就是看「衝擊反應函數」 (Impulse Response Function, IRF)。</p>
+  <p>IRF 在回答一個問題：如果「某個結構衝擊」突然發生了（例如：貨幣政策意外緊縮，利率上升 1 個百分點），那「其他變數」（GDP、物價）會怎麼樣「動態地」反應？</p>
+  <p>你可以畫一張圖：橫軸是「時間」（衝擊發生後的第 0 期、第 1 期、第 2 期...），縱軸是「變數偏離原本路徑的幅度」。這張圖就是 IRF。</p>
+  <div class="method-card mc-title" data-mc="irf-example">
+    <div class="mc-title">💡 範例：貨幣政策衝擊的 IRF</div>
+    <div class="mc-body">
+      <p>假設你估計了一個 VAR，然後給「利率衝擊」一個 1 個百分點的跳升。你想知道 GDP 會怎麼反應。</p>
+      <p>理論上應該是：</p>
+      <ul>
+        <li><b>第 0 期</b>：GDP 幾乎不變——因為貨幣政策的效果需要時間才會傳遞到實體經濟。</li>
+        <li><b>第 1-4 期</b>：GDP 開始下降——因為利率上升，大家不願意借錢消費和投資了。</li>
+        <li><b>第 8-12 期</b>：GDP 跌到最低點——效果最大的時候。</li>
+        <li><b>第 20 期以後</b>：GDP 慢慢回到原本的水準——因為長期來說，貨幣政策是「中立的」。</li>
+      </ul>
+      <p>這就是一條「先降、後升」的 IRF 曲線。</p>
+      <p>如果你估計出來的 IRF 是「GDP 立刻就下降」或「GDP 先上升」，那代表你的模型可能有問題——和經濟理論的預期不一致。</p>
+    </div>
+  </div>
+  <p>另一個常用的分析：「預測誤差變異數分解」 (Forecast Error Variance Decomposition, FEVD)——它告訴你：「某個變數的變異，可以被哪些衝擊解釋多少比例？」</p>
+  <p>例如：GDP 的變異，有 70% 可以被「技術衝擊」解釋，20% 可以被「貨幣政策衝擊」解釋，10% 可以被「財政政策衝擊」解釋——這樣你就知道「哪個衝擊對 GDP 最重要」。</p>
+  <div class="warn">
+    ⚠️ 考試重點：VAR/SVAR 是總體計量經濟學最核心的工具——幾乎所有「總體政策分析」都會用到。例如：評估「升息對通膨的影響」、「政府支出乘數有多大」、「石油價格衝擊對經濟的影響」——這些都可以用 VAR/SVAR 來做。
+  </div>
+  <p><span class="term" data-term="irf">前後關聯</span>：VAR/SVAR 和第 9 章的「自我相關」、第 13 章的「時間序列模型」是直接相關的——VAR 本質上就是「多變數的 AR 模型」。</p>
   `
 }
 ];
 
 const CH23_PROBLEMS = [
-{id:"q23-1", q:"VAR 模型的基本邏輯是什麼？", a:"所有變數都互相當落進解釋變數——不用你先驗說「誰是外生、誰是內生」，全部都一起放進來跑。", difficulty:"easy", topic:"VAR"},
-{id:"q23-2", q:"衝擊反應函數 (IRF) 用來做什麼？", a:"用來看：「如果某個變數突然受到一個衝擊，其他變數會怎麼樣動態反應？」", difficulty:"medium", topic:"IRF"},
-{id:"q23-3", q:"SVAR 和 VAR 的差別是什麼？", a:"VAR 只是「統計上的」關係，沒有「經濟結構」的解釋。<br><br>SVAR (結構 VAR) 加上一些識別限制，讓模型有經濟學的解釋。", difficulty:"hard", topic:"SVAR"}
+{id:"q23-1", q:"什麼是 VAR 模型？它和第 13 章的單變數 AR 模型有什麼不一樣？", a:"VAR (Vector Autoregression) 是「多變數的 AR 模型」——把好幾個變數「一起」放進來建模型：<br>y<sub>t</sub> = c + A<sub>1</sub>y<sub>t-1</sub> + ... + A<sub>p</sub>y<sub>t-p</sub> + u<sub>t</sub><br><br>和單變數 AR 模型的差別：AR 模型只有「一個變數」，它的落進項來解釋自己。VAR 有「好幾個變數」——所有變數的落進項，都會用來解釋每一個變數。<br><br>VAR 的精神：你不需要「先驗」說「誰是外生變數、誰是內生變數」——所有的變數都「互相」當落進解釋變數。", difficulty:"medium", topic:"VAR"},
+{id:"q23-2", q:"VAR 模型有什麼優點和缺點？", a:"<b>優點</b>：<br>1. 不用你先驗區分外生和內生——所有變數都是「自己解釋自己，也解釋別人」。<br>2. 可以捕捉變數之間的「動態互動」——GDP 衝擊會怎麼影響物價？物價衝擊會怎麼影響 GDP？這些都可以從 VAR 裡算出來。<br>3. 預測能力通常比「結構式模型」好。<br><br><b>缺點</b>：<br>1. 需要估計的參數太多了！如果有 k 個變數、p 期落進，那你要估計 k²p 個係數。如果 k=5、p=4，那你要估計 100 個係數——如果你的樣本數不夠大，根本估計不起來。<br>2. 「結構式的解釋」比較困難——VAR 只是一個「統計的」關係，你很難從中說出「經濟學的」因果故事。", difficulty:"medium", topic:"VAR 優缺點"},
+{id:"q23-3", q:"什麼是 SVAR？為什麼需要它？", a:"SVAR (Structural VAR) 是「結構式 VAR」——它在 VAR 的基礎上，加上一些「識別限制」，把「混合的」衝擊，拆成「乾淨的」結構衝擊。<br><br>為什麼需要它？因為 VAR 的誤差項 u<sub>t</sub> 是「互相相關」的——你沒辦法「乾淨地」說出「某個變數的衝擊」是什麼意思。例如：你看到 GDP 突然跳升——這是「技術衝擊」造成的？還是「貨幣政策衝擊」造成的？你根本分不出來——因為它們都混在 u<sub>t</sub> 裡面了。<br><br>SVAR 透過「先驗的識別限制」（例如：假設某些衝擊不會立刻影響某些變數），把這些混合的衝擊拆開。", difficulty:"hard", topic:"SVAR"},
+{id:"q23-4", q:"什麼是衝擊反應函數 (IRF)？它用來做什麼？", a:"IRF (Impulse Response Function) 在回答一個問題：如果「某個結構衝擊」突然發生了（例如：貨幣政策意外緊縮，利率上升 1 個百分點），那「其他變數」（GDP、物價）會怎麼樣「動態地」反應？<br><br>你可以畫一張圖：橫軸是「時間」（衝擊發生後的第 0 期、第 1 期、第 2 期...），縱軸是「變數偏離原本路徑的幅度」。這張圖就是 IRF。<br><br>用途：看「政策效果的時間動態」——例如：升息之後，GDP 要過幾季才會開始下降？效果最大的時候是在第幾季？效果多久才會消失？", difficulty:"medium", topic:"IRF"}
 ];
+
 
 /* ===== 第二十四章：財務計量經濟學 ===== */
 const CH24_SECTIONS = [
 {
   id:"24.1", title:"波動率模型 ARCH/GARCH",
   body:`
-  <p>財務資料最重要的特性之一：「波動率聚集」 (Volatility Clustering)——大波動之後通常跟著大波動，小波動之後通常跟著小波動。</p>
-  <p>ARCH/GARCH 模型就是用來捕捉這個現象的——把「變異數」也當成時間序列來建模。</p>
+  <p>財務計量經濟學 (Financial Econometrics) 是計量經濟學最活躍的分支之一——因為財務資料有一些「和一般總體資料很不一樣」的特性。</p>
+  <p>最重要的特性之一：<b>波動率聚集</b> (Volatility Clustering)——大波動之後通常跟著大波動，小波動之後通常跟著小波動。</p>
+  <p>例如：股票報酬率。有幾天股票大漲大跌，接下來的好幾天也都會很大起大落；有幾天股票很平靜，接下來的好幾天也都風平浪靜。這就是「波動率聚集」。</p>
+  <p>傳統的時間序列模型（AR、MA、ARMA）都是「對平均數建模」的——它們假設「變異數是固定的」 (homoskedastic)。但財務資料的「變異數」本身就會隨時間變化——這就是「異變數」 (heteroskedastic) 的問題。</p>
+  <p>解決方法：ARCH 模型 (AutoRegressive Conditional Heteroskedasticity)——由 <span class="proper">Engle (1982)</span> 提出，後來他因為這個拿到了諾貝爾經濟學獎。</p>
+  <p>ARCH(p) 模型的設定：</p>
+  <div class="formula">
+    y<sub>t</sub> = μ + u<sub>t</sub><br>
+    u<sub>t</sub> = σ<sub>t</sub>·z<sub>t</sub>, z<sub>t</sub> ~ i.i.d. N(0,1)<br>
+    σ<sub>t</sub>² = α₀ + α₁u<sub>t-1</sub>² + ... + α<sub>p</sub>u<sub>t-p</sub>²
+  </div>
+  <p>重點：σ<sub>t</sub>² 不是固定的——它是「時間 t 的條件變異數」，而且它會「落進」過去的衝擊平方。如果昨天股票大跌（u<sub>t-1</sub>² 很大），那今天的波動率 σ<sub>t</sub>² 也會變大——這就是「波動率聚集」。</p>
+  <div class="warn">
+    ⚠️ 考試重點：ARCH 模型的核心精神：<br><br>
+    它不是對「平均數」建模，而是對「變異數」建模。<br><br>
+    傳統的模型：E(y<sub>t</sub> | I<sub>t-1</sub>) 是隨時間變的，但 Var(y<sub>t</sub> | I<sub>t-1</sub>) 是固定的。<br>
+    ARCH 模型：E(y<sub>t</sub> | I<sub>t-1</sub>) 可以是固定的（甚至等於 0），但 Var(y<sub>t</sub> | I<sub>t-1</sub>) 是隨時間變的——它會隨著過去的波動而改變。
+  </div>
+  <p>後來 <span class="proper">Bollerslev (1986)</span> 把它推廣成 GARCH (Generalized ARCH)——除了過去的衝擊平方之外，也把過去的變異數放進來：</p>
+  <div class="formula">
+    σ<sub>t</sub>² = α₀ + α₁u<sub>t-1</sub>² + β₁σ<sub>t-1</sub>²
+  </div>
+  <p>GARCH(1,1) 是最常用的——它只要 3 個參數，就可以捕捉到很豐富的波動率動態。</p>
+  <p><span class="term" data-term="garch">前後關聯</span>：ARCH/GARCH 是第 8 章「異變數」的時間序列版本——第 8 章的異變數是「橫斷面」的，ARCH/GARCH 的異變數是「時間序列」的。</p>
   `
 },
 {
   id:"24.2", title:"事件研究法",
   body:`
-  <p>事件研究法 (Event Study) 用來看：公司發生某個事件（例如：併購、裁併、發布財報）之後，股價會怎麼樣異常反應？</p>
-  <p>做法：先估計「正常報酬率」（用市場模型），然後看事件期間的「異常報酬率」累積起來有多少。</p>
+  <p>財務計量經濟學另一個常用的工具：<b>事件研究法</b> (Event Study)。</p>
+  <p>事件研究法在回答一個問題：「公司發生某個事件（例如：併購、裁併、發布財報、CEO 突然離職），股價會有什麼『異常』的反應？」</p>
+  <p>做法分成幾個步驟：</p>
+  <ol>
+    <li><b>定義事件和事件視窗</b>：你要研究什麼事件？你想看事件前後多久的股價反應？</li>
+    <li><b>估計「正常報酬率」</b>：用事件發生之前的一段時間，估計「市場模型」：R<sub>it</sub> = α<sub>i</sub> + β<sub>i</sub>R<sub>mt</sub> + u<sub>it</sub>。這個模型告訴你「在沒有事件的情況下，這家公司的股價應該會怎麼走」。</li>
+    <li><b>計算「異常報酬率」</b> (Abnormal Return, AR)：AR<sub>it</sub> = R<sub>it</sub> - (α̂<sub>i</sub> + β̂<sub>i</sub>R<sub>mt</sub>)。也就是「實際報酬率」減掉「預期的正常報酬率」。</li>
+    <li><b>累積異常報酬率</b> (Cumulative Abnormal Return, CAR)：把事件視窗裡面的 AR 全部加起來，看「事件總共造成了多少異常報酬」。</li>
+    <li><b>統計檢定</b>：檢定 CAR 是不是「顯著不等於 0」——如果顯著，代表這個事件真的對股價有影響。</li>
+  </ol>
+  <div class="method-card mc-title" data-mc="event-study">
+    <div class="mc-title">💡 事件研究法的應用</div>
+    <div class="mc-body">
+      <p>事件研究法是財務經濟學最常用的實證工具之一：</p>
+      <ul>
+        <li>公司理財：併購公告對併購方和被併購方股價的影響</li>
+        <li>會計：盈餘公告對股價的影響——市場會不會「意外」？</li>
+        <li>法律：訴訟結果對公司股價的影響——這可以用來計算「訴訟的損害賠償應該是多少」</li>
+        <li>總體：央行升息對銀行股的影響</li>
+      </ul>
+      <p>事件研究法的好處：它可以用「股價的反應」來衡量「事件的價值」——因為股價是「市場對這個事件的評價」。</p>
+    </div>
+  </div>
+  <p><span class="proper">前後關聯</span>：事件研究法的本質，就是「雙重差分」 (DiD) 的一種——把「事件期」和「估計期」的報酬率拿來比較，看有沒有「異常」的差異。</p>
   `
 },
 {
   id:"24.3", title:"資產定價模型的計量檢定",
   body:`
-  <p>CAPM、Fama-French 因子模型——這些資產定價模型，都要用計量經濟學的方法來檢定：「這些因子真的可以解釋橫斷面的報酬差異嗎？」</p>
-  <div class="warn">考試重點：財務計量經濟學是計量經濟學最活躍的領域之一——尤其是高頻交易、波動率建模、風險管理。</div>
+  <p>財務計量經濟學的另一個重要主題：檢定資產定價模型。</p>
+  <p>最有名的：<b>CAPM</b> (Capital Asset Pricing Model)：</p>
+  <div class="formula">
+    E(R<sub>i</sub>) - R<sub>f</sub> = β<sub>i</sub> · (E(R<sub>m</sub>) - R<sub>f</sub>)
+  </div>
+  <p>也就是說：一檔資產的「超額報酬」，只和它的「市場 β」有關。β 越高，預期報酬越高。</p>
+  <p>但實證上發現：CAPM 根本解釋不了「橫斷面的報酬差異」——有一些特徵（例如：公司規模、账面市值比、動性）都可以解釋報酬，而 CAPM 的 β 反而解釋力很弱。</p>
+  <p>所以後來 <span class="proper">Fama 和 French (1992, 1993)</span> 提出了「三因子模型」 (Three-Factor Model)：除了市場因子之外，加上「規模因子」 (SMB: Small Minus Big) 和「账面市值比因子」 (HML: High Minus Low)。</p>
+  <div class="formula">
+    R<sub>it</sub> - R<sub>ft</sub> = α<sub>i</sub> + β<sub>i,MKT</sub>(R<sub>mt</sub> - R<sub>ft</sub>) + β<sub>i,SMB</sub>SMB<sub>t</sub> + β<sub>i,HML</sub>HML<sub>t</sub> + u<sub>it</sub>
+  </div>
+  <p>這個模型解釋力比 CAPM 好很多——所以現在大部分的實證研究都用 Fama-French 三因子（或五因子）模型。</p>
+  <div class="warn">
+    ⚠️ 考試重點：財務資料有哪些和一般總體資料不一樣的特性？<br><br>
+    <ol>
+      <li><b>厚尾</b> (Fat Tails)：極端值出現的機率，比常態分配預期的高很多。股價大跌或大漲 10% 的機率，比常態分配預測的高很多。</li>
+      <li><b>波動率聚集</b> (Volatility Clustering)：大波動之後跟著大波動，小波動之後跟著小波動。</li>
+      <li><b>槓桿效果</b> (Leverage Effect)：股價下跌的時候，波動率通常會上升——因為公司的負債比率變高了，風險變大了。</li>
+      <li><b>不對稱性</b> (Asymmetry)：壞消息對波動率的影響，比好消息大。</li>
+    </ol>
+    <br>
+    這些特性，都是為什麼財務計量需要「專門的模型」——不能直接用一般的 OLS。
+  </div>
+  <p><span class="term" data-term="financial-econometrics">前後關聯</span>：財務計量經濟學其實是「把前面學過的所有方法，應用到財務資料上」——ARCH/GARCH 是時間序列模型，事件研究法是 DiD，Fama-French 模型是多因子迴歸。</p>
   `
 }
 ];
 
 const CH24_PROBLEMS = [
-{id:"q24-1", q:"ARCH/GARCH 模型用來處理什麼現象？", a:"用來處理「波動率聚集」現象——大波動之後通常跟著大波動，小波動之後通常跟著小波動。", difficulty:"medium", topic:"ARCH/GARCH"},
-{id:"q24-2", q:"事件研究法 (Event Study) 用來做什麼？", a:"用來看：公司發生某個事件之後，股價會怎麼樣異常反應？", difficulty:"easy", topic:"事件研究法"},
-{id:"q24-3", q:"財務資料有哪些和一般總體資料不一樣的特性？", a:"厚尾 (fat tails)、波動率聚集 (volatility clustering)、槓桿效果 (leverage effect)。", difficulty:"medium", topic:"財務資料特性"}
+{id:"q24-1", q:"什麼是「波動率聚集」 (Volatility Clustering)？為什麼這對財務計量很重要？", a:"波動率聚集：大波動之後通常跟著大波動，小波動之後通常跟著小波動。<br><br>為什麼重要？因為傳統的時間序列模型（AR、MA、ARMA）都是「對平均數建模」的——它們假設「變異數是固定的」。但財務資料的「變異數」本身就會隨時間變化——所以你不能直接用一般的時間序列模型，你需要「對變異數建模」的模型，例如 ARCH/GARCH。", difficulty:"medium", topic:"波動率聚集"},
+{id:"q24-2", q:"ARCH 模型和傳統的 AR 模型有什麼不一樣？", a:"主要差別：傳統的 AR 模型是「對平均數建模」的——它假設變異數是固定的。ARCH 模型是「對變異數建模」的——它把「條件變異數」當成一個會隨時間變化的變數。<br><br>ARCH(p) 的設定：<br>σ<sub>t</sub>² = α₀ + α₁u<sub>t-1</sub>² + ... + α<sub>p</sub>u<sub>t-p</sub>²<br><br>也就是說：今天的變異數，會隨著過去的衝擊平方而改變。如果昨天股票大跌（u<sub>t-1</sub>² 很大），那今天的波動率也會變大——這就是「波動率聚集」。", difficulty:"medium", topic:"ARCH"},
+{id:"q24-3", q:"事件研究法 (Event Study) 是什麼？它的主要步驟是什麼？", a:"事件研究法用來看：公司發生某個事件之後，股價會有什麼「異常」的反應？<br><br>主要步驟：<br>1. <b>定義事件和事件視窗</b>：你要研究什麼事件？你想看事件前後多久的股價反應？<br>2. <b>估計「正常報酬率」</b>：用事件發生之前的一段時間，估計「市場模型」。<br>3. <b>計算「異常報酬率」</b> (AR)：實際報酬率 - 預期的正常報酬率。<br>4. <b>累積異常報酬率</b> (CAR)：把事件視窗裡面的 AR 全部加起來。<br>5. <b>統計檢定</b>：檢定 CAR 是不是「顯著不等於 0」。", difficulty:"medium", topic:"事件研究法"},
+{id:"q24-4", q:"財務資料有哪些和一般總體資料不一樣的特性？", a:"四個主要特性：<br>1. <b>厚尾</b> (Fat Tails)：極端值出現的機率，比常態分配預期的高很多。<br>2. <b>波動率聚集</b> (Volatility Clustering)：大波動之後跟著大波動，小波動之後跟著小波動。<br>3. <b>槓桿效果</b> (Leverage Effect)：股價下跌的時候，波動率通常會上升。<br>4. <b>不對稱性</b> (Asymmetry)：壞消息對波動率的影響，比好消息大。<br><br>這些特性，都是為什麼財務計量需要「專門的模型」——不能直接用一般的 OLS。", difficulty:"medium", topic:"財務資料特性"}
 ];
+
 
 /* ===== 第二十五章：空間計量經濟學 ===== */
 const CH25_SECTIONS = [
 {
   id:"25.1", title:"空間自我相關",
   body:`
-  <p>空間計量經濟學 (Spatial Econometrics) 用來處理「空間相關」的問題——相鄰地區的變數會互相影響。</p>
-  <p>例如：A 縣市的經濟成長率，可能和隔壁 B 縣市的經濟成長率有相關——這就是「空間自我相關」。</p>
+  <p>到目前為止，我們學的所有模型，都隱含一個假設：「不同觀測值之間是獨立的」。也就是說，A 縣市的經濟成長率，和 B 縣市的經濟成長率，是沒有關係的。</p>
+  <p>但現實上，這個假設通常是錯的！尤其是「空間上」相鄰的觀測值——A 縣市和 B 縣市如果是隔壁，它們的經濟成長率通常會互相影響。這就是「空間自我相關」 (Spatial Autocorrelation)。</p>
+  <p>為什麼會有空間相關？</p>
+  <ul>
+    <li><b>外溢效果</b> (Spillover Effect)：A 縣市蓋了一個新的科學園區，B 縣市的就業率也會跟著提升——因為有些人會住在 B 縣市，去 A 縣市上班。</li>
+    <li><b>政策模仿</b>：A 縣市實施了一個新的社會福利政策，B 縣市看到效果不錯，也會跟著實施類似的政策。</li>
+    <li><b>共同的衝擊</b>：整個區域都遇到了經濟不景氣——所以大家的成長率一起往下掉。</li>
+  </ul>
+  <div class="warn">
+    ⚠️ 考試重點：空間自我相關和第 9 章的「時間序列自我相關」很像，只不過第 9 章的「相關」是「時間上」的（今天和昨天相關），而空間自我相關是「空間上」的（A 地和 B 地相關）。<br><br>
+    兩者的問題也很像：如果你的模型有「自我相關」，但你沒有把它考慮進去，你的估計就會有偏誤或無效率。
+  </div>
+  <p><span class="term" data-term="spatial-autocorrelation">前後關聯</span>：空間計量經濟學是第 9 章「自我相關」的空間版本——把「時間上的相關」推廣到「空間上的相關」。</p>
   `
 },
 {
   id:"25.2", title:"空間落進模型 Spatial Lag",
   body:`
-  <p>空間落進模型 (Spatial Lag Model)：把「鄰居的 y」也放進模型當解釋變數：</p>
-  <div class="formula">y_i = ρ·W·y_j + β·x_i + u_i</div>
-  <p>W 是空間權重矩陣——用來定義「誰是你的鄰居」。</p>
+  <p>最簡單的空間計量模型，是「空間落進模型」 (Spatial Lag Model)：</p>
+  <div class="formula">
+    y<sub>i</sub> = ρ · Σ<sub>j</sub> w<sub>ij</sub> y<sub>j</sub> + β · x<sub>i</sub> + u<sub>i</sub>
+  </div>
+  <p>其中：</p>
+  <ul>
+    <li>w<sub>ij</sub> 是「空間權重矩陣」的元素——它代表「i 和 j 有多『鄰近』」。如果 i 和 j 是隔壁的縣市，w<sub>ij</sub> 就比較大；如果 i 和 j 隔很遠，w<sub>ij</sub> 就比較小（甚至等於 0）。</li>
+    <li>Σ<sub>j</sub> w<sub>ij</sub> y<sub>j</sub> 就是「你的鄰居們的 y 的加權平均」——也就是「你的鄰居平均來說，表現得怎麼樣」。</li>
+    <li>ρ 是空間落進係數——它告訴你「鄰居的表現，對你自己的表現，有多大的影響」。如果 ρ > 0，代表「鄰居表現好，你也會跟著變好」——這就是「正向的空間外溢效果」。</li>
+  </ul>
+  <p>為什麼不能直接用 OLS 估計？因為右邊有「鄰居的 y」，而左邊有「自己的 y」——這兩者是「同時決定」的！你們的 y 會互相影響——你的 y 影響鄰居的 y，鄰居的 y 又影響你的 y。這就是「聯立性偏誤」——和第 11 章的問題一樣。</p>
+  <p>解決方法：用工具變數法（2SLS）或 MLE 估計。工具變數通常用「鄰居的 x」——也就是「你鄰居的解釋變數」，因為它會影響「鄰居的 y」，但不會直接影響「你的 y」。</p>
+  <div class="method-card mc-title" data-mc="spatial-weight">
+    <div class="mc-title">💡 空間權重矩陣 W 怎麼定義？</div>
+    <div class="mc-body">
+      <p>最常用的定義方法：</p>
+      <ol>
+        <li><b>相鄰矩陣</b> (Contiguity Matrix)：如果兩個縣市有「共同邊界」，w<sub>ij</sub> = 1；否則 w<sub>ij</sub> = 0。這是最簡單的定義。</li>
+        <li><b>距離矩陣</b> (Distance Matrix)：w<sub>ij</sub> 是「i 和 j 之間距離」的某個函數——例如：w<sub>ij</sub> = 1 / d<sub>ij</sub>，距離越近，權重越大。</li>
+        <li><b>k-nearest neighbors</b>：對於每個地區 i，找「離它最近的 k 個鄰居」，把它們的權重設成相等，其他的都設成 0。這樣可以確保每個地區都有「剛好 k 個鄰居」。</li>
+      </ol>
+      <p>注意：W 通常會「列標準化」 (row-standardized)——讓每一行的總和等於 1。這樣的話，Σ<sub>j</sub> w<sub>ij</sub> y<sub>j</sub> 就剛好是「鄰居的 y 的加權平均」——直覺上比較好解讀。</p>
+    </div>
+  </div>
+  <p><span class="proper">前後關聯</span>：空間落進模型的估計，其實和第 11 章的「工具變數法」、第 16 章的 GMM 是直接相關的——都是用來解決「聯立性偏誤」的問題。</p>
   `
 },
 {
   id:"25.3", title:"空間誤差模型 Spatial Error",
   body:`
-  <p>空間誤差模型 (Spatial Error Model)：問題不在 y 本身有空間相關，而是在「誤差項」有空間相關——有一些你沒有觀察到的空間因素，同時影響了所有地區。</p>
-  <div class="warn">考試重點：空間計量常用在：地區經濟成長、環污外部性、房屋價格分析。</div>
+  <p>另一種空間模型：「空間誤差模型」 (Spatial Error Model)。</p>
+  <p>它和空間落進模型不一樣——空間落進模型假設「y 本身有空間相關」，而空間誤差模型假設「問題出在誤差項」——有一些你沒有觀察到的空間因素，同時影響了所有地區。</p>
+  <div class="formula">
+    y<sub>i</sub> = β · x<sub>i</sub> + u<sub>i</sub><br>
+    u<sub>i</sub> = λ · Σ<sub>j</sub> w<sub>ij</sub> u<sub>j</sub> + ε<sub>i</sub>
+  </div>
+  <p>也就是說：你的誤差項 u<sub>i</sub>，會和你鄰居的誤差項 u<sub>j</sub> 有相關。為什麼？因為你和你的鄰居，都受到一些「共同的、你沒有觀察到的因素」的影響——例如：整個區域的天氣、整個區域的文化、整個區域的產業結構。</p>
+  <div class="method-card mc-title" data-mc="spatial-lag-vs-error">
+    <div class="mc-title">💡 空間落進模型 vs 空間誤差模型</div>
+    <div class="mc-body">
+      <table>
+        <tr><th></th><th>空間落進模型 (Spatial Lag)</th><th>空間誤差模型 (Spatial Error)</th></tr>
+        <tr><td>空間相關在哪裡？</td><td>y 本身有空間相關——你的 y 會直接影響鄰居的 y</td><td>誤差項有空間相關——有一些你沒觀察到的因素，同時影響你和鄰居</td></tr>
+        <tr><td>經濟學解讀</td><td>「外溢效果」——你的表現會直接影響鄰居的表現</td><td>「共同的未觀察因素」——你和鄰居剛好都受到同一個因素的影響，但你們兩個之間沒有直接的互相影響</td></tr>
+        <tr><td>估計方法</td><td>需要用 2SLS/GMM/MLE（因為有聯立性偏誤）</td><td>可以用 GLS 或 MLE</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="warn">
+    ⚠️ 考試重點：空間計量經濟學常用在哪些領域？<br><br>
+    <ol>
+      <li><b>地區經濟成長</b>：鄰近縣市的成長率會不會互相影響？有沒有「收斂」的現象？</li>
+      <li><b>環境經濟學</b>：空氣污染的外溢效果——A 縣市的工廠排放，會不會影響 B 縣市的空氣品質？</li>
+      <li><b>公共經濟學</b>：地方政府的租稅競爭——A 縣市降稅，B 縣市會不會跟著降稅？</li>
+      <li><b>不動產經濟學</b>：房屋價格的空間相關——你家的房價，會不會受鄰居的房價影響？</li>
+    </ol>
+  </div>
+  <p><span class="term" data-term="spatial-econometrics">前後關聯</span>：空間計量經濟學是計量經濟學的一個「比較新」的分支——隨著 GIS 地理資訊系統越來越普及，越來越多研究會把「空間」的因素納入分析。</p>
   `
 }
 ];
 
 const CH25_PROBLEMS = [
-{id:"q25-1", q:"什麼是空間自我相關？", a:"空間自我相關：相鄰地區的變數會互相影響。<br><br>例如：A 縣市的經濟成長率，可能和隔壁 B 縣市的經濟成長率有相關。", difficulty:"easy", topic:"空間自我相關"},
-{id:"q25-2", q:"空間落進模型 (Spatial Lag) 和空間誤差模型 (Spatial Error) 的差別是什麼？", a:"• 空間落進模型：問題在 y 本身有空間相關——把「鄰居的 y」也放進模型當解釋變數。<br>• 空間誤差模型：問題不在 y 本身，而是在「誤差項」有空間相關——有一些你沒有觀察到的空間因素，同時影響了所有地區。", difficulty:"medium", topic:"空間模型"},
-{id:"q25-3", q:"空間計量常用在哪些領域？", a:"地區經濟成長、環污外部性、房屋價格分析。", difficulty:"easy", topic:"空間計量應用"}
+{id:"q25-1", q:"什麼是空間自我相關？為什麼它很重要？", a:"空間自我相關：相鄰地區的變數會互相影響——A 縣市的經濟成長率，可能和隔壁 B 縣市的經濟成長率有相關。<br><br>為什麼重要？因為我們之前學的所有模型，都隱含一個假設：「不同觀測值之間是獨立的」。但現實上，這個假設通常是錯的——尤其是空間上相鄰的觀測值。<br><br>如果你的模型有空間相關，但你沒有把它考慮進去，你的估計就會有偏誤或無效率。", difficulty:"medium", topic:"空間自我相關"},
+{id:"q25-2", q:"空間落進模型 (Spatial Lag Model) 是什麼？", a:"空間落進模型：把「鄰居的 y」也放進模型當解釋變數：<br>y<sub>i</sub> = ρ · Σ<sub>j</sub> w<sub>ij</sub> y<sub>j</sub> + β · x<sub>i</sub> + u<sub>i</sub><br><br>其中 w<sub>ij</sub> 是「空間權重矩陣」的元素——它代表「i 和 j 有多『鄰近』」。<br><br>ρ 是空間落進係數——它告訴你「鄰居的表現，對你自己的表現，有多大的影響」。如果 ρ > 0，代表「鄰居表現好，你也會跟著變好」——這就是「正向的空間外溢效果」。", difficulty:"medium", topic:"空間落進模型"},
+{id:"q25-3", q:"空間權重矩陣 W 通常怎麼定義？", a:"最常用的定義方法：<br>1. <b>相鄰矩陣</b>：如果兩個縣市有「共同邊界」，w<sub>ij</sub> = 1；否則 w<sub>ij</sub> = 0。<br>2. <b>距離矩陣</b>：w<sub>ij</sub> 是「i 和 j 之間距離」的某個函數——例如：w<sub>ij</sub> = 1 / d<sub>ij</sub>，距離越近，權重越大。<br>3. <b>k-nearest neighbors</b>：對於每個地區 i，找「離它最近的 k 個鄰居」，把它們的權重設成相等，其他的都設成 0。<br><br>注意：W 通常會「列標準化」——讓每一行的總和等於 1。這樣的話，Σ<sub>j</sub> w<sub>ij</sub> y<sub>j</sub> 就剛好是「鄰居的 y 的加權平均」——直覺上比較好解讀。", difficulty:"medium", topic:"空間權重矩陣"},
+{id:"q25-4", q:"空間落進模型和空間誤差模型有什麼不一樣？", a:"主要差別：空間相關「在哪裡」。<br><br>• <b>空間落進模型 (Spatial Lag)</b>：空間相關在「y 本身」——你的 y 會直接影響鄰居的 y。經濟學解讀：「外溢效果」——你的表現會直接影響鄰居的表現。<br><br>• <b>空間誤差模型 (Spatial Error)</b>：空間相關在「誤差項」——有一些你沒有觀察到的因素，同時影響你和鄰居。經濟學解讀：「共同的未觀察因素」——你和鄰居剛好都受到同一個因素的影響，但你們兩個之間沒有直接的互相影響。", difficulty:"hard", topic:"空間模型比較"}
 ];
+
 
 
 
