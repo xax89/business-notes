@@ -2738,93 +2738,136 @@ const CH12_PROBLEMS = [
 ];
 
 /* ===== 第十三章：時間序列模型 ===== */
+/* ===== 第十三章：時間序列模型（完整版） ===== */
 const CH13_SECTIONS = [
 {
   id:"13.1", title:"時間序列資料的特性",
   body:`
-  <p><span class="term" data-term="Time series">時間序列資料 (Time Series)</span> 是對同一個體在不同時間點的觀察。</p>
-  <p>時間序列資料和橫斷面資料最大的不同是：<b>時間順序很重要</b>，而且觀測值之間通常有自我相關。</p>
-  <div class="warn">考試重點：時間序列分析的核心問題是「平穩性」——如果序列不是平穩的，就會有虛假迴歸的問題。</div>`
-},
-{
-  id:"13.2", title:"平穩性 Stationarity",
-  body:`
-  <p><span class="term" data-term="Stationarity">平穩性 (Stationarity)</span> 是時間序列分析最核心的概念。</p>
-  <p>如果一個序列是「弱平穩」或「共變異數平穩」的，代表：</p>
-  <ol>
-    <li>平均數 E(y_t) = μ，不隨時間 t 改變</li>
-    <li>變異數 Var(y_t) = σ²，不隨時間 t 改變</li>
-    <li>共變異數 Cov(y_t, y_{t-k}) 只和落後期數 k 有關，不和時間 t 有關</li>
-  </ol>
-  <p>如果序列不是平穩的，就稱為「非平穩 (Nonstationary)」或「單整 (Integrated)」。</p>
-  <div class="warn">考試重點：大多數總體經濟變數（GDP、消費、物價）都是非平穩的，因為有趨勢。如果直接用 OLS 迴歸兩個非平穩序列，即使它們真的沒有關係，也常常會得到很顯著的係數——這就是「虛假迴歸 (Spurious Regression)」問題。</div>`
-},
-{
-  id:"13.3", title:"自我相關函數 ACF 與 PACF",
-  body:`
-  <p>描述時間序列相關結構的兩個工具：</p>
+  <p>時間序列資料 (Time Series Data) 是同一個個體、很多時間點的觀察值。例如：台灣過去 30 年的 GDP 成長率。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">時間序列和橫斷面的差別</h3>
   <ul>
-    <li><span class="term" data-term="ACF">自我相關函數 (ACF)</span>：y_t 和 y_{t-k} 的相關係數</li>
-    <li><span class="term" data-term="PACF">偏自我相關函數 (PACF)</span>：控制了中間期數的影響後，y_t 和 y_{t-k} 的淨相關</li>
+    <li><b>順序性</b>：時間序列的觀察值有時間順序——第 1 期、第 2 期、...、第 T 期。橫斷面資料的觀察值沒有順序。</li>
+    <li><b>自我相關</b>：時間序列的觀察值之間通常有很強的自我相關（第 9 章講過）。</li>
+    <li><b>趨勢與季節性</b>：時間序列通常有時間趨勢、季節性等結構性特性。</li>
   </ul>
-  <p>ACF 和 PACF 用來判斷 ARMA 模型的 p 和 q 階數。</p>
-  <div class="method-card mc-title" data-mc="acf_pacf">
-    <div class="mc-check"><input type="checkbox" id="mc-ch13-1" data-mc="acf_pacf"><label for="mc-ch13-1" class="mc-lbl">學會</label></div>
-    <div class="mc-left">ARMA 模型的 ACF/PACF 圖特徵</div>
+
+  <div class="method-card mc-title" data-mc="time-series-basic">
+    <div class="mc-check"><input type="checkbox" id="mc-ch13-0" data-mc="time-series-basic"><label for="mc-ch13-0" class="mc-lbl">學會</label></div>
+    <div class="mc-left">時間序列分析的核心問題</div>
     <div class="mc-body">
-      <div class="mc-formula">AR(p)：PACF 在 p 期後截尾；ACF 漸近趨近 0<br>MA(q)：ACF 在 q 期後截尾；PACF 漸近趨近 0</div>
-      <div class="mc-detail">看 ACF 和 PACF 圖的「截尾」位置，可以大致判斷 ARMA 模型的階數。</div>
+      <div class="mc-formula">
+      1. 預測：未來會怎麼走？<br>
+      2. 因果關係：x 真的會影響 y 嗎？
+      </div>
+      <div class="mc-detail">
+      第一種是「預測導向」——關心的是怎麼用過去的資料來預測未來。ARIMA、GARCH 這些模型都是為了預測。<br><br>
+      第二種是「結構導向」——關心的是因果關係。這就需要用到計量經濟的方法（例如：Granger 因果檢定、VAR 模型）。
+      </div>
     </div>
-  </div>`
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：時間序列模型是總體計量經濟學的基礎。第 9 章講的自我相關，就是時間序列資料最常見的問題之一。</p>`
 },
+
 {
-  id:"13.4", title:"ARMA 與 ARIMA 模型",
+  id:"13.2", title:"定態與單根 (Stationarity and Unit Root)",
   body:`
-  <p>常見的時間序列模型：</p>
-  <ul>
-    <li><span class="term" data-term="AR(p)">AR(p) (AutoRegression)</span>：y_t 是過去 p 期 y 的線性函數</li>
-    <li><span class="term" data-term="MA(q)">MA(q) (Moving Average)</span>：y_t 是過去 q 期誤差項的線性函數</li>
-    <li><span class="term" data-term="ARMA(p,q)">ARMA(p,q)</span>：AR + MA 的組合</li>
-    <li><span class="term" data-term="ARIMA(p,d,q)">ARIMA(p,d,q)</span>：差分 d 次之後的 ARMA(p,q)</li>
-  </ul>
-  <div class="formula"><span class="f-label">AR(1) 模型</span>y_t = c + φ₁y_{t-1} + ε_t</div>
-  <div class="warn">考試重點：ARIMA 的 I 代表 Integrated——序列需要差分 d 次才能變成平穩。如果 d=0，就是 ARMA；如果 d=1，就是一階差分後平穩（隨機漫步）。</div>`
+  <p>定態 (stationarity) 是時間序列分析最重要的觀念之一。如果一個時間序列是「定態」的，代表它的統計性質（平均值、變異數、自我相關結構）不會隨時間改變。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">為什麼定態這麼重要？</h3>
+  <p>如果時間序列不是定態的（也就是有「單根」），那你直接跑 OLS 可能會得到「偽迴歸」 (spurious regression) 的結果——看起來 R² 很高、係數很顯著，但其實兩個變數之間根本沒有關係。</p>
+
+  <div class="method-card mc-title" data-mc="stationarity">
+    <div class="mc-check"><input type="checkbox" id="mc-ch13-1" data-mc="stationarity"><label for="mc-ch13-1" class="mc-lbl">學會</label></div>
+    <div class="mc-left">偽迴歸的經典例子</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      把「台灣的颱風數量」對「蘇聯的石油產量」跑迴歸<br>
+      可能 R² 很高、t 統計量很顯著
+      </div>
+      <div class="mc-detail">
+      但這兩個變數之間根本沒有任何關係！<br><br>
+      為什麼會這樣？因為兩個變數都有「時間趨勢」——隨著時間過去，它們都慢慢成長。如果你把兩個有共同趨勢的變數放在一起，看起來就會很「相關」。<br><br>
+      這就是為什麼時間序列分析要先檢查定態——如果兩個變數都不是定態，你直接跑迴歸很可能會得到無意義的結果。
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">怎麼診斷單根？ADF 檢定</h3>
+  <p>最常用的單根檢定是 Augmented Dickey-Fuller (ADF) 檢定。它的虛無假設是「有單根」（不是定態的）。</p>
+  <p>如果 p < 0.05，就拒絕「有單根」的虛無假設——代表這個時間序列是定態的。</p>
+
+  <div class="warn">考試重點：如果兩個變數都是「一階單整」 I(1)，而且它們之間有「共整合」 (cointegration) 關係，那直接跑 OLS 還是有意義的——長期來看，兩個變數會一起移動。這就是 Engle-Granger 共整合理論。</div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：定態和共整合是時間序列分析的基礎。所有時間序列模型（AR、MA、ARIMA、VAR）都建立在定態（或差分後定態）的假設上。</p>`
 },
+
 {
-  id:"13.5", title:"波動率模型 ARCH/GARCH",
+  id:"13.3", title:"ARMA 模型",
   body:`
-  <p>金融時間序列有一個常見現象：<b>波動率聚集 (Volatility Clustering)</b>——大的波動後面跟著大的波動，小的波動後面跟著小的波動。</p>
-  <p>為了建模這個現象，使用：</p>
-  <ul>
-    <li><span class="term" data-term="ARCH">ARCH(q)</span>：條件變異數是過去 q 期誤差平方的函數</li>
-    <li><span class="term" data-term="GARCH">GARCH(p,q)</span>：ARCH 的一般化，加入過去的條件變異數</li>
-  </ul>
-  <div class="formula"><span class="f-label">GARCH(1,1)</span>σ²_t = ω + αε²_{t-1} + βσ²_{t-1}</div>
-  <div class="warn">考試重點：ARCH/GARCH 模型是用來建模「變異數隨時間變動」的，不是用來建模平均數的。它們廣泛應用於金融資產報酬的波動率預測。</div>`
+  <p>ARMA 模型是最經典的時間序列模型，用來描述一個變數自己隨時間的變化規律。</p>
+
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">13.3.1 AR(p)：自我迴歸模型</h3>
+  <p>AR(p) 模型：把 y_t 對自己的落後期跑迴歸：</p>
+  <div class="formula">y_t = c + φ₁y_{t-1} + φ₂y_{t-2} + ... + φ_p y_{t-p} + ε_t</div>
+  <p>直覺：現在的 y 會受到過去 p 期的 y 影響。</p>
+
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">13.3.2 MA(q)：移動平均模型</h3>
+  <p>MA(q) 模型：把 y_t 寫成過去 q 期的誤差項的加權平均：</p>
+  <div class="formula">y_t = ε_t + θ₁ε_{t-1} + θ₂ε_{t-2} + ... + θ_q ε_{t-q}</div>
+  <p>直覺：現在的 y 會受到過去 q 期的「突發衝擊」影響。</p>
+
+  <div class="method-card mc-title" data-mc="arma">
+    <div class="mc-check"><input type="checkbox" id="mc-ch13-2" data-mc="arma"><label for="mc-ch13-2" class="mc-lbl">學會</label></div>
+    <div class="mc-left">ARMA(p,q)：兩個合起來</div>
+    <div class="mc-body">
+      <div class="mc-formula">
+      ARMA(p,q) = AR(p) + MA(q)<br>
+      y_t = c + φ₁y_{t-1} + ... + φ_p y_{t-p} + ε_t + θ₁ε_{t-1} + ... + θ_q ε_{t-q}
+      </div>
+      <div class="mc-detail">
+      怎麼選擇 p 和 q？最常用的方法是看 ACF（自我相關函數）和 PACF（偏自我相關函數）的圖形。<br><br>
+      另外也可以用 AIC、BIC 這些模型選擇準則，選 AIC/BIC 最小的那個。
+      </div>
+      <div class="mc-ex">
+      ARMA 模型主要是用來做「預測」——根據過去的趨勢，預測未來會怎麼走。
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：ARMA 模型是時間序列預測的基礎。如果要做多變數的時間序列預測，就要用 VAR (Vector Autoregression) 模型。</p>`
 }
 ];
 
 const CH13_PROBLEMS = [
 {
   id:"q13-1",
-  q:"什麼是虛假迴歸 (Spurious Regression)？",
-  a:"如果對兩個非平穩序列直接做 OLS 迴歸，即使它們真的沒有任何關係，也常常會得到很高的 R² 和很顯著的 t 統計量——這就是虛假迴歸。原因是非平穩序列有趨勢，兩個趨勢剛好同方向，看起來就像有關係。",
+  q:"什麼是「定態」 (stationarity)？為什麼時間序列分析這麼重視定態？",
+  a:"定態是指：一個時間序列的統計性質（平均值、變異數、自我相關結構）不會隨時間改變。<br><br>為什麼重要？如果時間序列不是定態的（有單根），那你直接跑 OLS 可能會得到「偽迴歸」的結果——看起來 R² 很高、係數很顯著，但其實兩個變數之間根本沒有關係。<br><br>範例：把「台灣的颱風數量」對「蘇聯的石油產量」跑迴歸，可能 R² 很高——但這兩個變數根本沒有任何關係！只是因為它們都有時間趨勢，看起來就很「相關」。",
   difficulty:"medium",
-  topic:"虛假迴歸"
+  topic:"定態與單根"
 },
 {
   id:"q13-2",
-  q:"AR(1) 和 MA(1) 模型的差別是什麼？",
-  a:"AR(1) 是 y_t 取決於過去一期的 y_{t-1}；MA(1) 是 y_t 取決於過去一期的誤差項 ε_{t-1}。ACF 和 PACF 的形狀不同：AR(1) 的 ACF 指數遞減、PACF 截尾；MA(1) 的 ACF 截尾、PACF 指數遞減。",
-  difficulty:"hard",
-  topic:"AR vs MA"
+  q:"什麼是「偽迴歸」 (spurious regression)？為什麼會發生？",
+  a:"偽迴歸是指：兩個根本沒有關係的變數，因為它們都有時間趨勢，所以跑迴歸看起來會很「顯著」。<br><br>為什麼會發生？因為如果兩個變數都有共同的趨勢（都隨時間慢慢成長），那它們之間的相關性看起來就會很高——但其實這只是「共同趨勢」造成的假象，不是真的有因果關係。<br><br>解決方法：先檢查定態（ADF 檢定）。如果兩個變數都不是定態，要麼先差分，要麼檢查共整合關係。",
+  difficulty:"medium",
+  topic:"偽迴歸"
 },
 {
   id:"q13-3",
-  q:"ARCH/GARCH 模型主要用來建模什麼？",
-  a:"ARCH/GARCH 模型主要用來建模「條件變異數隨時間變動」的現象，特別是金融時間序列的「波動率聚集」——大波動後面跟著大波動。它們不是用來建模平均數的。",
+  q:"AR(p) 模型和 MA(q) 模型有什麼不同？",
+  a:"• <b>AR(p)（自我迴歸）</b>：把 y_t 對自己的落後期跑迴歸。直覺：現在的 y 會受到過去 p 期的 y 影響。<br>• <b>MA(q)（移動平均）</b>：把 y_t 寫成過去 q 期的誤差項的加權平均。直覺：現在的 y 會受到過去 q 期的「突發衝擊」影響。<br><br>ARMA(p,q) 就是兩個合起來——同時包含落後 y 和落後誤差。<br><br>主要用途：時間序列預測。",
   difficulty:"medium",
-  topic:"ARCH/GARCH"
+  topic:"ARMA 模型"
+},
+{
+  id:"q13-4",
+  q:"什麼是共整合 (cointegration)？它解決了什麼問題？",
+  a:"共整合是指：兩個或多個「各自不是定態」的時間序列，它們的「線性組合」卻是定態的。<br><br>例如：消費 C_t 和所得 Y_t 都是一階單整 I(1)（都不是定態的），但如果 (C_t - β₀ - β₁Y_t) 是定態的，那我們就說 C 和 Y 有共整合關係。<br><br>它解決了什麼問題？如果兩個變數有共整合關係，那直接跑 OLS 還是有意義的——長期來看，兩個變數會一起移動，不會有偽迴歸的問題。<br><br>這就是 Engle-Granger 共整合理論。",
+  difficulty:"hard",
+  topic:"共整合"
 }
 ];
 
