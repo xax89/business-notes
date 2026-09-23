@@ -790,7 +790,7 @@ const CH1_SECTIONS = [
 
   <div class="warn">考試重點：計量經濟學的「黃金標準」是<span class="term" data-term="RCT">隨機控制實驗 (RCT)</span>——隨機把人分成兩組，一組有 treatment，一組沒有，這樣就可以排除其他解釋。但大部分時候我們拿不到實驗資料，所以要用各種「擬實驗」方法：<span class="term" data-term="iv">工具變數</span>、<span class="term" data-term="fixed-effects">固定效果</span>、<span class="term" data-term="DiD">差異中差異</span>、<span class="term" data-term="RD">斷點迴歸</span>等。這些都是第 11-14 章的主題。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：因果推斷是現代計量經濟學的核心。第 10 章講內生性問題（為什麼 OLS 估計不出因果效果）；第 11 章講工具變數；第 12 章講追蹤資料固定效果；第 14 章講實驗和擬實驗方法（RCT、DiD、PSM、RD）。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：因果推斷是現代計量經濟學的核心。第 10 章講<span class="term" data-term="Endogeneity">內生性</span>問題（為什麼 OLS 估計不出因果效果）；第 11 章講工具變數；第 12 章講追蹤資料固定效果；第 14 章講實驗和擬實驗方法（RCT、DiD、PSM、RD）。</p>`
 }
 ];
 
@@ -1315,7 +1315,7 @@ const CH4_SECTIONS = [
   <p><b>形式化敘述</b>：在給定所有解釋變數的條件下，誤差項 u 的平均值為 0：</p>
   <div class="formula"><span class="f-label">條件零平均</span>E(u | X₁, X₂, ..., Xₖ) = 0</div>
   <p><b>解讀</b>：這是<b>最關鍵</b>的一個假設，也是 OLS 不偏性的核心。它的意思是：誤差項裡面的東西，和我們放進模型的解釋變數都沒有關係。</p>
-  <p><b>如果違反（內生性問題）</b>：OLS 估計式就會有偏誤，而且不一致。這是計量經濟學最頭痛的問題，解決方法包括工具變數（第 11 章）、追蹤資料固定效果（第 12 章）、實驗設計（第 14 章）等。</p>
+  <p><b>如果違反（<span class="term" data-term="Endogeneity">內生性</span>問題）</b>：OLS 估計式就會有偏誤，而且不一致。這是計量經濟學最頭痛的問題，解決方法包括工具變數（第 11 章）、追蹤資料固定效果（第 12 章）、實驗設計（第 14 章）等。</p>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">假設 5：<span class="term" data-term="Homoscedasticity">同變異數 (Homoscedasticity)</span></h3>
   <p><b>形式化敘述</b>：在給定解釋變數的條件下，誤差項 u 的變異數是一個常數，不隨 X 改變：</p>
@@ -1328,7 +1328,7 @@ const CH4_SECTIONS = [
   • 假設 1-5 → BLUE（最佳線性不偏）<br>
   • 加上常態性假設 → 可以做 t/F 檢定</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：這些假設是後面所有章節的基礎。第 5 章的 t 檢定、F 檢定需要加上常態性假設；第 8 章講異變數如何違反假設 5；第 9 章講自我相關如何違反「獨立性」假設；第 10-11 章講內生性問題如何違反假設 4。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：這些假設是後面所有章節的基礎。第 5 章的 t 檢定、F 檢定需要加上常態性假設；第 8 章講異變數如何違反假設 5；第 9 章講自我相關如何違反「獨立性」假設；第 10-11 章講<span class="term" data-term="Endogeneity">內生性</span>問題如何違反假設 4。</p>`
 },
 
 {
@@ -1993,7 +1993,7 @@ const CH6_SECTIONS = [
   3. 避免資料挖礦：不要把所有可能的變數都放進去，看哪個顯著就留哪個<br><br>
   另外，R² 高不代表模型就是對的——R² 只是衡量「解釋力」，不是衡量「正確性」。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：模型選擇是計量經濟學最困難的問題之一。第 15 章講 AIC、BIC，第 14 章講實驗設計，都是在解決「怎麼選對模型」的問題。另外，第 10 章講內生性問題時，也會提到「模型設定錯誤是內生性的來源之一」。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：模型選擇是計量經濟學最困難的問題之一。第 15 章講 AIC、BIC，第 14 章講實驗設計，都是在解決「怎麼選對模型」的問題。另外，第 10 章講<span class="term" data-term="Endogeneity">內生性</span>問題時，也會提到「模型設定錯誤是內生性的來源之一」。</p>`
 }
 ];
 
@@ -2180,7 +2180,7 @@ const CH7_SECTIONS = [
   <ul>
     <li><b>異變數問題</b>：用「穩健標準誤」(robust standard errors) 來處理。現在所有統計軟體都可以輕鬆做到。</li>
     <li><b>預測值超出 0-1</b>：如果你只是要估計邊際效果，這其實不是大問題——只要你研究的對象大部分都在「機率 0.2 到 0.8」的中間地帶就好。但如果你想要做預測，那 LPM 就不適合了。</li>
-    <li><b>邊際效果固定</b>：如果你想要邊際效果會隨 x 改變，那應該用 Probit 或 Logit 模型（第 16 章會講）。</li>
+    <li><b>邊際效果固定</b>：如果你想要邊際效果會隨 x 改變，那應該用 Probit 或 <span class="term" data-term="Logit model">Logit 模型</span>（第 16 章會講）。</li>
   </ul>
 
   <div class="warn">考試重點：LPM 最大的問題不是「預測值可能超出 0-1」，而是「必然有異變數」。但這個問題很好解決——用穩健標準誤就好了。所以在很多應用研究中，LPM 其實是很受歡迎的選擇。<br><br>
@@ -2363,7 +2363,7 @@ const CH8_SECTIONS = [
   <div class="warn">考試重點：很多人以為「有異變數，OLS 就不能用了」——這是錯的。OLS 係數估計還是對的，只是標準誤不對。最簡單的解決方法不是「改用 WLS」，而是「用穩健標準誤」(robust standard errors)。現在所有統計軟體都可以輕鬆做到。<br><br>
   另外，記住：異變數和遺漏變數偏誤是完全不同層次的問題。遺漏變數偏誤是「係數估計就錯了」，異變數是「係數估計對，但標準誤錯了」。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：異變數和第 9 章的自我相關，合起來稱為「球形誤差項」假設被違反。兩者的問題很像——都只影響標準誤，不影響係數估計。另外，第 10 章講的「內生性問題」，才是真正會讓係數估計偏誤的問題。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：異變數和第 9 章的自我相關，合起來稱為「球形誤差項」假設被違反。兩者的問題很像——都只影響標準誤，不影響係數估計。另外，第 10 章講的「<span class="term" data-term="Endogeneity">內生性</span>問題」，才是真正會讓係數估計偏誤的問題。</p>`
 },
 
 {
@@ -2485,7 +2485,7 @@ const CH8_SECTIONS = [
   2. WLS：最有效率，但需要你猜對異變數的形式<br>
   3. 取對數：一舉兩得（緩和異變數 + 係數解讀更有意義），但 y 必須是正數</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：異變數是最常見的古典假設違反，但也是最容易解決的——用穩健標準誤就好了。相比之下，第 10 章講的「內生性問題」就難解多了。另外，第 9 章講的「自我相關」，也是用類似的方法來解決（穩健標準誤 / GLS）。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：異變數是最常見的古典假設違反，但也是最容易解決的——用穩健標準誤就好了。相比之下，第 10 章講的「<span class="term" data-term="Endogeneity">內生性</span>問題」就難解多了。另外，第 9 章講的「自我相關」，也是用類似的方法來解決（穩健標準誤 / GLS）。</p>`
 }
 ];
 
@@ -2679,13 +2679,13 @@ const CH9_SECTIONS = [
 {
   id:"9.4", title:"自我相關的解決方法",
   body:`
-  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">9.4.1 最簡單的方法：Newey-West 標準誤</h3>
-  <p>和異變數的穩健標準誤很像——Newey-West 標準誤可以同時處理「異變數」和「自我相關」的問題。</p>
+  <h3 style="margin-top:16px;font-size:16px;font-weight:600;">9.4.1 最簡單的方法：<span class="term" data-term="Newey-West">Newey-West 標準誤</span></h3>
+  <p>和異變數的穩健標準誤很像——<span class="term" data-term="Newey-West">Newey-West 標準誤</span>可以同時處理「異變數」和「自我相關」的問題。</p>
   <p>係數估計值完全不變，只是把標準誤換成「對的」。這是現在最常用的方法。</p>
 
   <div class="method-card mc-title" data-mc="newey-west">
     <div class="mc-check"><input type="checkbox" id="mc-ch9-3" data-mc="newey-west"><label for="mc-ch9-3" class="mc-lbl">學會</label></div>
-    <div class="mc-left">Newey-West 標準誤的優點</div>
+    <div class="mc-left"><span class="term" data-term="Newey-West">Newey-West 標準誤</span>的優點</div>
     <div class="mc-body">
       <div class="mc-formula">
       1. 可以同時處理異變數和自我相關<br>
@@ -2694,8 +2694,8 @@ const CH9_SECTIONS = [
       4. 不管有沒有自我相關，它都是對的
       </div>
       <div class="mc-detail">
-      這就是為什麼現在時間序列的實證研究，幾乎全部都用 Newey-West 標準誤。<br>
-      與其花一堆時間檢查、猜測自我相關的形式，不如直接用 Newey-West 標準誤，一勞永逸。
+      這就是為什麼現在時間序列的實證研究，幾乎全部都用 <span class="term" data-term="Newey-West">Newey-West 標準誤</span>。<br>
+      與其花一堆時間檢查、猜測自我相關的形式，不如直接用 <span class="term" data-term="Newey-West">Newey-West 標準誤</span>，一勞永逸。
       </div>
       <div class="mc-ex">
       怎麼用？<br>
@@ -2734,9 +2734,9 @@ const CH9_SECTIONS = [
   <p>有時候，自我相關其實是因為「模型設定不對」——你漏放了落後解釋變數。</p>
   <p>這時候，最根本的解決方法不是「用 FGLS 或 Newey-West」，而是「把落後解釋變數加進模型裡」。這樣自我相關的問題就會自然消失。</p>
 
-  <div class="warn">考試重點：現在實務上，FGLS 已經越來越少人用了——因為 Newey-West 標準誤更簡單、更穩健，不需要你猜測自我相關的形式。FGLS 只在「你很確定自我相關的形式」的時候才值得用。<br><br>
+  <div class="warn">考試重點：現在實務上，FGLS 已經越來越少人用了——因為 <span class="term" data-term="Newey-West">Newey-West 標準誤</span>更簡單、更穩健，不需要你猜測自我相關的形式。FGLS 只在「你很確定自我相關的形式」的時候才值得用。<br><br>
   另外，記住三個解決方法的優缺點：<br>
-  1. Newey-West 標準誤：最簡單、最常用，但沒有解決「效率」問題<br>
+  1. <span class="term" data-term="Newey-West">Newey-West 標準誤</span>：最簡單、最常用，但沒有解決「效率」問題<br>
   2. FGLS：最有效率，但需要你猜對自我相關的形式<br>
   3. 加入落後解釋變數：最根本的解決方法，但需要你知道正確的模型設定<br><br>
   最後，記住：如果模型裡面有落後解釋變數，DW 檢定就不能用了——要用 BG 檢定。</div>
@@ -2809,7 +2809,7 @@ const CH10_SECTIONS = [
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">為什麼內生性這麼常見？</h3>
   <p>因為現實世界中，「隨機實驗」是很少見的。大部分時候，我們觀察到的都是「自然發生」的資料——不是隨機分配的。</p>
-  <p>在這種情況下，解釋變數 x 通常不是「隨機」的——它是「人們自己選擇」的。而人們的選擇，又和我們沒觀察到的東西有關。這就造成了內生性問題。</p>
+  <p>在這種情況下，解釋變數 x 通常不是「隨機」的——它是「人們自己選擇」的。而人們的選擇，又和我們沒觀察到的東西有關。這就造成了<span class="term" data-term="Endogeneity">內生性</span>問題。</p>
 
   <div class="warn">考試重點：內生性是現代計量經濟學的核心問題。<br><br>
   三大來源：<br>
@@ -2819,7 +2819,7 @@ const CH10_SECTIONS = [
   為什麼嚴重？因為它會讓 OLS 估計式「有偏誤」而且「不一致」——就算你有再多的資料，估計出來的結果還是錯的。<br><br>
   這和異變數、自我相關完全不同層次——那些問題只是標準誤不對，係數估計還是對的。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：內生性是現代計量經濟學的核心問題。第 11 章講工具變數 (IV)，第 12 章講追蹤資料固定效果，第 14 章講實驗和擬實驗方法——這些方法的目的都是解決內生性問題。另外，第 4.4 節講的「遺漏變數偏誤」，就是內生性的第一大來源。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：內生性是現代計量經濟學的核心問題。第 11 章講工具變數 (IV)，第 12 章講追蹤資料固定效果，第 14 章講實驗和擬實驗方法——這些方法的目的都是解決<span class="term" data-term="Endogeneity">內生性</span>問題。另外，第 4.4 節講的「遺漏變數偏誤」，就是內生性的第一大來源。</p>`
 },
 
 {
@@ -2937,15 +2937,15 @@ const CH10_SECTIONS = [
   解決方法：找到一個「只影響 x、不影響 y」的變數（除了透過 x 之外），用它來當工具變數。這樣就可以把 x 對 y 的「真實效果」分離出來。<br><br>
   另外，記住：聯立方程式偏誤的本質，就是「x 和 u 有相關」——因為 x 是由 y 一起決定的，所以 x 裡面包含了 u 的資訊。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：聯立方程式偏誤是內生性的第三大來源。解決方法一樣是工具變數 (IV)，第 11 章會詳細講。另外，第 14 章講的「自然實驗」和「差異中差異」，也是解決內生性問題的重要方法。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：聯立方程式偏誤是內生性的第三大來源。解決方法一樣是工具變數 (IV)，第 11 章會詳細講。另外，第 14 章講的「自然實驗」和「差異中差異」，也是解決<span class="term" data-term="Endogeneity">內生性</span>問題的重要方法。</p>`
 },
 
 {
   id:"10.4", title:"內生性的解決方法總覽",
   body:`
   <h3 style="margin-top:16px;font-size:16px;font-weight:600;">10.4.1 為什麼 OLS 不行了？</h3>
-  <p>因為 OLS 假設 x 和 u 是「獨立的」（條件零平均）。但如果有內生性問題，x 和 u 就不是獨立的——這時候 OLS 估計式就會有偏誤，而且不一致。</p>
-  <p>這和異變數、自我相關完全不同層次——那些問題只是標準誤不對，係數估計還是對的。但內生性問題是「係數估計就錯了」。</p>
+  <p>因為 OLS 假設 x 和 u 是「獨立的」（條件零平均）。但如果有<span class="term" data-term="Endogeneity">內生性</span>問題，x 和 u 就不是獨立的——這時候 OLS 估計式就會有偏誤，而且不一致。</p>
+  <p>這和異變數、自我相關完全不同層次——那些問題只是標準誤不對，係數估計還是對的。但<span class="term" data-term="Endogeneity">內生性</span>問題是「係數估計就錯了」。</p>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">10.4.2 有哪些解決方法？</h3>
   <div class="tblwrap">
@@ -2957,7 +2957,7 @@ const CH10_SECTIONS = [
         <tr><td>工具變數 (IV)</td><td>遺漏變數、測量誤差、反向因果</td><td>第 11 章</td></tr>
         <tr><td>固定效果模型</td><td>不隨時間改變的遺漏變數</td><td>第 12 章</td></tr>
         <tr><td>差異中差異 (DiD)</td><td>政策實施前後的效果</td><td>第 14 章</td></tr>
-        <tr><td>隨機實驗</td><td>所有內生性問題（最完美的方法）</td><td>第 14 章</td></tr>
+        <tr><td>隨機實驗</td><td>所有<span class="term" data-term="Endogeneity">內生性</span>問題（最完美的方法）</td><td>第 14 章</td></tr>
         <tr><td>斷點迴歸 (RDD)</td><td>有明確門檻的政策效果</td><td>第 14 章</td></tr>
       </tbody>
     </table>
@@ -2986,7 +2986,7 @@ const CH10_SECTIONS = [
   因為只有「隨機」的 x 變動，才能保證 x 和 u 是獨立的——這樣 OLS 估計式才會是不偏的、一致的。<br><br>
   接下來的第 11-14 章，就是在講這些解決方法。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：本章是內生性問題的總論。接下來的第 11 章（工具變數）、第 12 章（固定效果）、第 14 章（實驗和擬實驗方法），都是在講怎麼解決內生性問題。另外，第 15 章講 MLE 時，也會提到「如果有內生性問題，MLE 也會有偏誤」。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：本章是<span class="term" data-term="Endogeneity">內生性</span>問題的總論。接下來的第 11 章（工具變數）、第 12 章（固定效果）、第 14 章（實驗和擬實驗方法），都是在講怎麼解決<span class="term" data-term="Endogeneity">內生性</span>問題。另外，第 15 章講 MLE 時，也會提到「如果有<span class="term" data-term="Endogeneity">內生性</span>問題，MLE 也會有偏誤」。</p>`
 }
 ];
 
@@ -3026,7 +3026,7 @@ const CH11_SECTIONS = [
 {
   id:"11.1", title:"工具變數 (IV) 的基本概念",
   body:`
-  <p>工具變數 (Instrumental Variables, IV) 是解決內生性問題最經典的方法。它的邏輯很聰明：既然你自己的 x 不可信（和誤差項有相關），那我就找一個「替代變數」z，它和 x 有關，但和 u 沒關，然後用 z 來「預測」x，再用預測出來的 x 來估計 y。</p>
+  <p>工具變數 (Instrumental Variables, IV) 是解決<span class="term" data-term="Endogeneity">內生性</span>問題最經典的方法。它的邏輯很聰明：既然你自己的 x 不可信（和誤差項有相關），那我就找一個「替代變數」z，它和 x 有關，但和 u 沒關，然後用 z 來「預測」x，再用預測出來的 x 來估計 y。</p>
 
   <div class="method-card mc-title" data-mc="iv-basic">
     <div class="mc-check"><input type="checkbox" id="mc-ch11-0" data-mc="iv-basic"><label for="mc-ch11-0" class="mc-lbl">學會</label></div>
@@ -3050,7 +3050,7 @@ const CH11_SECTIONS = [
     </div>
   </div>
 
-  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">為什麼 IV 可以解決內生性問題？</h3>
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">為什麼 IV 可以解決<span class="term" data-term="Endogeneity">內生性</span>問題？</h3>
   <p>因為 IV 把 x 的變動「分解」成兩部分：</p>
   <ul>
     <li><b>好的部分</b>：x 裡面可以被 z 解釋的那部分——這部分和 u 沒有相關，因為 z 和 u 沒有相關。</li>
@@ -3064,7 +3064,7 @@ const CH11_SECTIONS = [
   其中排他性是最難滿足的——因為你永遠不知道你的工具變數是不是真的沒有其他路徑影響 y。<br><br>
   另外，記住：IV 的邏輯就是「把 x 裡面髒的部分洗掉，留下乾淨的部分，再用來估計」。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：工具變數是解決內生性問題最經典的方法。第 10 章講的三大內生性來源（遺漏變數、測量誤差、反向因果），都可以用 IV 來解決。另外，第 16 章講的 GMM，是 IV 方法的一般化版本。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：工具變數是解決<span class="term" data-term="Endogeneity">內生性</span>問題最經典的方法。第 10 章講的三大內生性來源（遺漏變數、測量誤差、反向因果），都可以用 IV 來解決。另外，第 16 章講的 GMM，是 IV 方法的一般化版本。</p>`
 },
 
 {
@@ -3121,7 +3121,7 @@ const CH11_SECTIONS = [
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">弱工具變數會造成什麼問題？</h3>
   <ol>
-    <li><b>偏誤很大</b>：即使是大樣本，IV 估計式還是會有偏誤，而且偏誤的方向會「往 OLS 那邊偏」——也就是說，你以為你解決了內生性問題，但其實結果還是和 OLS 差不多。</li>
+    <li><b>偏誤很大</b>：即使是大樣本，IV 估計式還是會有偏誤，而且偏誤的方向會「往 OLS 那邊偏」——也就是說，你以為你解決了<span class="term" data-term="Endogeneity">內生性</span>問題，但其實結果還是和 OLS 差不多。</li>
     <li><b>標準誤很大</b>：因為工具變數和 x 的相關性很弱，「可用的資訊」很少，所以估計很不精確。</li>
   </ol>
 
@@ -3186,18 +3186,18 @@ const CH11_SECTIONS = [
   </div>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">11.4.2 IV vs OLS：什麼時候用哪個？</h3>
-  <p>如果你懷疑有內生性問題（例如：遺漏變數、測量誤差、反向因果），那你應該用 IV 而不是 OLS。</p>
-  <p>但如果你不確定有沒有內生性問題，那你可以做「Hausman 檢定」——來檢定「OLS 和 IV 的結果是不是有系統性的差異」。如果 Hausman 檢定拒絕虛無假設，代表 OLS 有偏誤，你應該用 IV。</p>
-  <p>但要注意：IV 的標準誤通常比 OLS 大很多——因為 IV 只用了「一部分」的 x 變異來估計效果。所以如果你不確定有沒有內生性問題，用 OLS 可能會有偏誤；但如果你確定有內生性問題，用 IV 雖然有偏誤，但至少是一致的。</p>
+  <p>如果你懷疑有<span class="term" data-term="Endogeneity">內生性</span>問題（例如：遺漏變數、測量誤差、反向因果），那你應該用 IV 而不是 OLS。</p>
+  <p>但如果你不確定有沒有<span class="term" data-term="Endogeneity">內生性</span>問題，那你可以做「<span class="term" data-term="Hausman test">Hausman 檢定</span>」——來檢定「OLS 和 IV 的結果是不是有系統性的差異」。如果 <span class="term" data-term="Hausman test">Hausman 檢定</span>拒絕虛無假設，代表 OLS 有偏誤，你應該用 IV。</p>
+  <p>但要注意：IV 的標準誤通常比 OLS 大很多——因為 IV 只用了「一部分」的 x 變異來估計效果。所以如果你不確定有沒有<span class="term" data-term="Endogeneity">內生性</span>問題，用 OLS 可能會有偏誤；但如果你確定有<span class="term" data-term="Endogeneity">內生性</span>問題，用 IV 雖然有偏誤，但至少是一致的。</p>
 
   <div class="warn">考試重點：找好的工具變數是應用計量經濟學最困難的任務之一。<br><br>
   常見的策略：<br>
   1. 自然實驗：找一個「隨機」的政策變動<br>
   2. 地理距離：找一個「距離」變數<br>
   3. 歷史事件：找一個「歷史」的隨機事件<br><br>
-  另外，記住：IV 的標準誤通常比 OLS 大很多——因為 IV 只用了「一部分」的 x 變異來估計效果。所以如果你不確定有沒有內生性問題，用 OLS 可能會有偏誤；但如果你確定有內生性問題，用 IV 雖然有偏誤，但至少是一致的。</div>
+  另外，記住：IV 的標準誤通常比 OLS 大很多——因為 IV 只用了「一部分」的 x 變異來估計效果。所以如果你不確定有沒有<span class="term" data-term="Endogeneity">內生性</span>問題，用 OLS 可能會有偏誤；但如果你確定有<span class="term" data-term="Endogeneity">內生性</span>問題，用 IV 雖然有偏誤，但至少是一致的。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：工具變數是解決內生性問題最經典的方法。第 12 章講固定效果模型時，也會提到「固定效果 + IV」的組合。第 14 章講的「自然實驗」和「斷點迴歸」，其實也是在找好的工具變數。另外，第 16 章講的 GMM，是 IV 方法的一般化版本。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：工具變數是解決<span class="term" data-term="Endogeneity">內生性</span>問題最經典的方法。第 12 章講固定效果模型時，也會提到「固定效果 + IV」的組合。第 14 章講的「自然實驗」和「斷點迴歸」，其實也是在找好的工具變數。另外，第 16 章講的 GMM，是 IV 方法的一般化版本。</p>`
 }
 ];
 
@@ -3288,7 +3288,7 @@ const CH12_SECTIONS = [
   為什麼可以解決遺漏變數偏誤？因為固定效果模型的「內向轉換」會把這些「不隨時間改變」的東西差差分掉——它們在模型裡面就消失了，也就不會造成偏誤了。<br><br>
   這就是為什麼追蹤資料比橫斷面資料更適合做因果推斷。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：追蹤資料模型是解決內生性問題的重要工具之一。和工具變數（第 11 章）比起來，固定效果模型更「乾淨」——因為它不需要找工具變數，只要你有追蹤資料就可以用。另外，第 14 章講的差異中差異 (DiD) 方法，本質上就是一種「雙向固定效果模型」。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：追蹤資料模型是解決<span class="term" data-term="Endogeneity">內生性</span>問題的重要工具之一。和工具變數（第 11 章）比起來，固定效果模型更「乾淨」——因為它不需要找工具變數，只要你有追蹤資料就可以用。另外，第 14 章講的差異中差異 (DiD) 方法，本質上就是一種「雙向固定效果模型」。</p>`
 },
 
 {
@@ -3365,15 +3365,15 @@ const CH12_SECTIONS = [
       </div>
       <div class="mc-detail">
       <span class="term" data-term="Hausman test">豪斯曼檢定 (Hausman Test)</span>：就是用來檢定「a_i 和 x 到底有沒有相關」的。<br><br>
-      如果 Hausman 檢定拒絕了虛無假設（RE 和 FE 的係數估計差很多），那就代表 a_i 和 x 有相關，要用 FE。<br><br>
-      如果 Hausman 檢定不拒絕，那 RE 和 FE 都可以，RE 比較有效率。
+      如果 <span class="term" data-term="Hausman test">Hausman 檢定</span>拒絕了虛無假設（RE 和 FE 的係數估計差很多），那就代表 a_i 和 x 有相關，要用 FE。<br><br>
+      如果 <span class="term" data-term="Hausman test">Hausman 檢定</span>不拒絕，那 RE 和 FE 都可以，RE 比較有效率。
       </div>
       <div class="mc-ex">
       實務上，大部分時候我們都直接用 FE——因為「a_i 和 x 有相關」通常是很合理的假設（例如：能力和教育年數本來就有相關）。<br><br>
       <b>數值範例</b>：<br>
       • FE 估計出來的 β̂₁ = 0.08<br>
       • RE 估計出來的 β̂₁ = 0.12<br>
-      • Hausman 檢定 p = 0.02（小於 0.05）<br><br>
+      • <span class="term" data-term="Hausman test">Hausman 檢定</span> p = 0.02（小於 0.05）<br><br>
       結論：RE 和 FE 的係數估計差很多，而且統計上顯著——代表 a_i 和 x 有相關，所以應該用 FE 而不是 RE。
       </div>
     </div>
@@ -3386,10 +3386,10 @@ const CH12_SECTIONS = [
   <p>如果 a_i 的變異數很小（也就是說，個體之間的差異不大），那權重就會比較平均——這時候 RE 就比較接近混合 OLS。</p>
 
   <div class="warn">考試重點：隨機效果模型的假設（a_i 和 x 沒相關）其實很強，現實中很難成立。所以現在大部分應用研究都直接用固定效果模型，不太用隨機效果了。<br><br>
-  另外，記住：Hausman 檢定就是用來檢定「a_i 和 x 到底有沒有相關」的。如果 Hausman 檢定拒絕虛無假設，那就代表 a_i 和 x 有相關，要用 FE 而不是 RE。<br><br>
+  另外，記住：<span class="term" data-term="Hausman test">Hausman 檢定</span>就是用來檢定「a_i 和 x 到底有沒有相關」的。如果 <span class="term" data-term="Hausman test">Hausman 檢定</span>拒絕虛無假設，那就代表 a_i 和 x 有相關，要用 FE 而不是 RE。<br><br>
   最後，隨機效果模型是用 GLS 來估計的——它本質上就是對變數做某種加權轉換，然後再跑 OLS。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：固定效果模型是解決「不隨時間改變的未觀測異質性」造成的內生性問題的利器。如果還有「隨時間改變的未觀測異質性」，那就需要配合工具變數或差異中差異方法。另外，第 8 章講的異變數，在追蹤資料模型裡面也很常見——要用穩健標準誤來處理。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：固定效果模型是解決「不隨時間改變的未觀測異質性」造成的<span class="term" data-term="Endogeneity">內生性</span>問題的利器。如果還有「隨時間改變的未觀測異質性」，那就需要配合工具變數或差異中差異方法。另外，第 8 章講的異變數，在追蹤資料模型裡面也很常見——要用穩健標準誤來處理。</p>`
 },
 
 {
@@ -3429,13 +3429,13 @@ const CH12_SECTIONS = [
   </div>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">12.4.3 固定效果 + 工具變數</h3>
-  <p>固定效果模型只能解決「不隨時間改變的未觀測異質性」造成的內生性問題。如果還有「隨時間改變的未觀測異質性」，那就需要配合工具變數。</p>
+  <p>固定效果模型只能解決「不隨時間改變的未觀測異質性」造成的<span class="term" data-term="Endogeneity">內生性</span>問題。如果還有「隨時間改變的未觀測異質性」，那就需要配合工具變數。</p>
   <p>這就是「固定效果工具變數模型」 (Fixed Effects Instrumental Variables, FEIV)——它結合了固定效果和工具變數的優點。</p>
 
   <div class="warn">考試重點：現在頂級期刊的追蹤資料論文，幾乎全部都是：雙向固定效果模型 + 聚集標準誤。<br><br>
   這已經是標準配備了。如果你寫論文的時候不用聚集標準誤，評審一定會要求你加上去。<br><br>
   另外，記住：聚集標準誤的目的是處理「同一個個體在不同時間點的觀察值，通常不是互相獨立的」這個問題。如果不用聚集標準誤，你通常會「低估」標準誤。<br><br>
-  最後，固定效果模型只能解決「不隨時間改變的未觀測異質性」造成的內生性問題。如果還有「隨時間改變的未觀測異質性」，那就需要配合工具變數。</div>
+  最後，固定效果模型只能解決「不隨時間改變的未觀測異質性」造成的<span class="term" data-term="Endogeneity">內生性</span>問題。如果還有「隨時間改變的未觀測異質性」，那就需要配合工具變數。</div>
 
   <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：追蹤資料固定效果是現代應用計量經濟學最常用的方法之一。第 14 章講的差異中差異 (DiD)，本質上就是雙向固定效果模型的一種特例。另外，第 11 章講的工具變數，也可以和固定效果模型結合使用。</p>`
 }
@@ -3668,7 +3668,7 @@ const CH13_SECTIONS = [
   Granger 因果檢定的邏輯很簡單：如果 x 真的會「造成」y，那 x 的過去值應該可以幫助預測 y——即使你已經把 y 的過去值都考慮進去了。<br><br>
   但要注意：Granger 因果 ≠ 真正的因果關係。它只是「預測上」的因果——x 的過去值能不能幫助預測 y。不代表 x 真的「造成」y。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：VAR 模型和 Granger 因果檢定是總體時間序列分析的核心工具。另外，第 10 章講的內生性問題，在時間序列資料裡面也很常見——VAR 模型某種程度上就是用來處理這個問題的。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：VAR 模型和 Granger 因果檢定是總體時間序列分析的核心工具。另外，第 10 章講的<span class="term" data-term="Endogeneity">內生性</span>問題，在時間序列資料裡面也很常見——VAR 模型某種程度上就是用來處理這個問題的。</p>`
 }
 ];
 
@@ -3709,7 +3709,7 @@ const CH14_SECTIONS = [
 {
   id:"14.1", title:"實驗法與因果推斷",
   body:`
-  <p>追蹤資料固定效果模型可以解決「不隨時間改變的未觀測異質性」造成的內生性問題。但是如果還有「隨時間改變的未觀測異質性」，或者你根本沒有追蹤資料，那怎麼辦？</p>
+  <p>追蹤資料固定效果模型可以解決「不隨時間改變的未觀測異質性」造成的<span class="term" data-term="Endogeneity">內生性</span>問題。但是如果還有「隨時間改變的未觀測異質性」，或者你根本沒有追蹤資料，那怎麼辦？</p>
 
   <p>這時候就需要用到「實驗」或「擬實驗」的方法。</p>
 
@@ -3853,12 +3853,12 @@ const CH14_SECTIONS = [
     <li><b>Fuzzy RD (FRD)</b>：分數超過門檻，只是「增加」接受處理的機率，不是「一定」會接受處理。這時候你可以用門檻本身當工具變數，來估計 LATE (Local Average Treatment Effect)。</li>
   </ul>
 
-  <div class="warn">考試重點：這些「擬實驗」方法（RCT、DiD、PSM、RD）都是現代應用計量經濟學的核心工具，它們的目的都是解決內生性問題，估計真正的因果效果。<br><br>
+  <div class="warn">考試重點：這些「擬實驗」方法（RCT、DiD、PSM、RD）都是現代應用計量經濟學的核心工具，它們的目的都是解決<span class="term" data-term="Endogeneity">內生性</span>問題，估計真正的因果效果。<br><br>
   PSM 的假設很強——它要求你把所有「可能影響選擇」的變數都觀察到。如果你漏了一個關鍵的變數（例如：能力），那 PSM 還是會有偏誤。<br><br>
   RD 的好處是：它比較「可信」——因為斷點附近的人真的很像，你不需要假設太多東西。<br><br>
   另外，RD 有兩種類型：Sharp RD（超過門檻就一定接受處理）和 Fuzzy RD（超過門檻只是增加接受處理的機率）。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：這些「擬實驗」方法（RCT、DiD、PSM、RD）都是現代應用計量經濟學的核心工具，它們的目的都是解決內生性問題，估計真正的因果效果。另外，第 11 章講的工具變數，和 Fuzzy RD 有密切的關係——RD 斷點本身就是一個工具變數。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：這些「擬實驗」方法（RCT、DiD、PSM、RD）都是現代應用計量經濟學的核心工具，它們的目的都是解決<span class="term" data-term="Endogeneity">內生性</span>問題，估計真正的因果效果。另外，第 11 章講的工具變數，和 Fuzzy RD 有密切的關係——RD 斷點本身就是一個工具變數。</p>`
 },
 
 {
@@ -3871,7 +3871,7 @@ const CH14_SECTIONS = [
         <tr><th>方法</th><th>適合解決什麼問題？</th><th>需要什麼資料？</th><th>主要假設</th></tr>
       </thead>
       <tbody>
-        <tr><td>RCT</td><td>所有內生性問題</td><td>隨機分配的實驗資料</td><td>隨機分配</td></tr>
+        <tr><td>RCT</td><td>所有<span class="term" data-term="Endogeneity">內生性</span>問題</td><td>隨機分配的實驗資料</td><td>隨機分配</td></tr>
         <tr><td>工具變數 (IV)</td><td>遺漏變數、測量誤差、反向因果</td><td>一個好的工具變數</td><td>相關性 + 排他性</td></tr>
         <tr><td>固定效果 (FE)</td><td>不隨時間改變的遺漏變數</td><td>追蹤資料</td><td>嚴格外生性</td></tr>
         <tr><td>DiD</td><td>政策實施前後的效果</td><td>處理組 + 控制組 + 前後期</td><td>平行趨勢</td></tr>
@@ -3900,11 +3900,11 @@ const CH14_SECTIONS = [
     </div>
   </div>
 
-  <div class="warn">考試重點：現代應用計量經濟學的核心，就是「因果推斷」——用各種方法來解決內生性問題，估計真正的因果效果。<br><br>
+  <div class="warn">考試重點：現代應用計量經濟學的核心，就是「因果推斷」——用各種方法來解決<span class="term" data-term="Endogeneity">內生性</span>問題，估計真正的因果效果。<br><br>
   這些方法的共同點是：它們都試圖「找到一個隨機的變異來源」——也就是說，找到一個「隨機」的 x 變動，而不是「人們自己選擇」的 x 變動。<br><br>
   因為只有「隨機」的 x 變動，才能保證 x 和 u 是獨立的——這樣 OLS 估計式才會是不偏的、一致的。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：本章是因果推斷方法的總論。前面講的第 11 章（工具變數）和第 12 章（固定效果），都是解決內生性問題的重要方法。本章介紹的 RCT、DiD、PSM、RD，是現代應用計量經濟學最常用的因果推斷工具。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：本章是因果推斷方法的總論。前面講的第 11 章（工具變數）和第 12 章（固定效果），都是解決<span class="term" data-term="Endogeneity">內生性</span>問題的重要方法。本章介紹的 RCT、DiD、PSM、RD，是現代應用計量經濟學最常用的因果推斷工具。</p>`
 }
 ];
 
@@ -4222,16 +4222,16 @@ const CH16_SECTIONS = [
   <p>但 LPM 有兩個問題：<br>
   1. 預測值可能在 0 到 1 之外（機率不能小於 0 或大於 1）<br>
   2. 邊際效果是固定的（現實中通常不是）</p>
-  <p>如果想要更完美的模型，那就用 Probit 或 Logit 模型。</p>
+  <p>如果想要更完美的模型，那就用 Probit 或 <span class="term" data-term="Logit model">Logit 模型</span>。</p>
 
-  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">16.3.2 Probit 模型</h3>
-  <p>Probit 模型假設：潛在變數 y* = x'β + ε，其中 ε 服從標準常態分配。<br>
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">16.3.2 <span class="term" data-term="Probit model">Probit 模型</span></h3>
+  <p><span class="term" data-term="Probit model">Probit 模型</span>假設：潛在變數 y* = x'β + ε，其中 ε 服從標準常態分配。<br>
   觀察到的 y = 1 如果 y* > 0，否則 y = 0。</p>
   <div class="formula">P(y=1 | x) = Φ(x'β)</div>
   <p>其中 Φ 是標準常態分配的 CDF（累積分配函數）。</p>
 
-  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">16.3.3 Logit 模型</h3>
-  <p>Logit 模型和 Probit 很像，只是它假設 ε 服從「logistic 分配」而不是「常態分配」。</p>
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">16.3.3 <span class="term" data-term="Logit model">Logit 模型</span></h3>
+  <p><span class="term" data-term="Logit model">Logit 模型</span>和 Probit 很像，只是它假設 ε 服從「logistic 分配」而不是「常態分配」。</p>
   <div class="formula">P(y=1 | x) = Λ(x'β) = 1 / (1 + exp(-x'β))</div>
   <p>其中 Λ 是 logistic 分配的 CDF。</p>
 
@@ -4251,14 +4251,14 @@ const CH16_SECTIONS = [
       • 如果你想要係數可以解讀成「勝算比」 (odds ratio) → 用 Logit
       </div>
       <div class="mc-ex">
-      <b>數值範例</b>：假設你估計出來一個 Logit 模型，β̂₁ = 0.5。<br><br>
+      <b>數值範例</b>：假設你估計出來一個 <span class="term" data-term="Logit model">Logit 模型</span>，β̂₁ = 0.5。<br><br>
       這代表：x 每增加 1 單位，「勝算比」 (odds ratio) 就變成原來的 exp(0.5) ≈ 1.65 倍——也就是說，y=1 的勝算增加了 65%。<br><br>
       注意：這是「勝算比」的解讀，不是「機率」的解讀。如果你想要「機率」的邊際效果，那你要看 ∂P(y=1|x)/∂x——這和 x 的水準有關，不是固定的。
       </div>
     </div>
   </div>
 
-  <div class="warn">考試重點：如果你的依變數 y 是 0/1 的二元變數，那你可以用 Probit 或 Logit 模型。<br><br>
+  <div class="warn">考試重點：如果你的依變數 y 是 0/1 的二元變數，那你可以用 Probit 或 <span class="term" data-term="Logit model">Logit 模型</span>。<br><br>
   兩個模型的差別很小——大部分時候，你用 Probit 還是 Logit，估計出來的邊際效果差不多。<br><br>
   選哪一個，主要看：<br>
   • 如果你想和常態分配的假設一致 → 用 Probit<br>
@@ -4305,7 +4305,7 @@ const CH17_SECTIONS = [
 {
   id:"17.1", title:"動態追蹤模型的設定",
   body:`
-  <p>在第 12 章我們學了追蹤資料模型（固定效果、隨機效果、Hausman 檢定）。但那些模型都是「靜態」的——解釋變數只有當期的 x_{it}。</p>
+  <p>在第 12 章我們學了追蹤資料模型（固定效果、隨機效果、<span class="term" data-term="Hausman test">Hausman 檢定</span>）。但那些模型都是「靜態」的——解釋變數只有當期的 x_{it}。</p>
   <p>但很多經濟行為有「慣性」 (persistence)——今天的消費和昨天的消費很接近，今天的投資和昨天的投資很接近，今年的 GDP 成長率和去年的成長率很接近。為了捕捉這個「慣性」，我們要在模型裡加上「落進一期的 y」：</p>
   <div class="formula">
     y<sub>it</sub> = ρ·y<sub>i,t-1</sub> + β·x<sub>it</sub> + a<sub>i</sub> + u<sub>it</sub>
@@ -4318,7 +4318,7 @@ const CH17_SECTIONS = [
       <p><b>範例</b>：總體消費函數——Friedman 的�常所得假說、Modigliani 的生命週期假說，都隱含消費有動態調整的過程。</p>
     </div>
   </div>
-  <p><span class="term" data-term="dynamic-panel">前後關聯</span>：動態追蹤模型是第 12 章追蹤資料模型的延伸。它把「落進因變數」放進模型，造成新的內生性問題，需要用第 11 章的工具變數方法來解決。</p>
+  <p><span class="term" data-term="dynamic-panel">前後關聯</span>：動態追蹤模型是第 12 章追蹤資料模型的延伸。它把「落進因變數」放進模型，造成新的<span class="term" data-term="Endogeneity">內生性</span>問題，需要用第 11 章的工具變數方法來解決。</p>
   `
 },
 {
@@ -4336,7 +4336,7 @@ const CH17_SECTIONS = [
   </div>
   <p>問題是：(y<sub>i,t-1</sub> - ȳ<sub>i,-1</sub>) 和 (u<sub>it</sub> - ū<sub>i</sub>) 還是有相關！因為 ȳ<sub>i,-1</sub> 裡面包含了 u<sub>i,t-1</sub>，而 u<sub>i,t-1</sub> 和 u<sub>it</sub> 沒有相關——但 ȳ<sub>i,-1</sub> 也包含了其他期的 u，那些可能和當期的 u 有相關。</p>
   <div class="warn">
-    ⚠️ 考試重點：落進因變數的內生性問題，是 Nickell (1981) 最早指出的，所以也叫 <b>Nickell bias</b>。
+    ⚠️ 考試重點：落進因變數的<span class="term" data-term="Endogeneity">內生性</span>問題，是 Nickell (1981) 最早指出的，所以也叫 <b><span class="term" data-term="Nickell bias">Nickell bias</span></b>。
     <br><br>
     重點：就算 N 很大（橫斷面個體很多），FE 估計還是有偏誤——這和「N 很大就 OLS 一致」的直覺不一樣！
   </div>
@@ -4344,7 +4344,7 @@ const CH17_SECTIONS = [
     <div class="mc-title">💡 直覺：為什麼 N 很大也救不了？</div>
     <div class="mc-body">
       <p>因為偏誤的來源不是「抽樣誤差」，而是「機械式的數學關係」——你把 y<sub>i,t-1</sub> 減掉 ȳ<sub>i,-1</sub>，就一定會和 (u<sub>it</sub> - ū<sub>i</sub>) 有相關，不管你有多少個個體。</p>
-      <p>這和一般的「小樣本偏誤」不一樣——小樣本偏誤會隨著 N 變大而消失，但 Nickell bias 不會。</p>
+      <p>這和一般的「小樣本偏誤」不一樣——小樣本偏誤會隨著 N 變大而消失，但 <span class="term" data-term="Nickell bias">Nickell bias</span> 不會。</p>
     </div>
   </div>
   <p><span class="term" data-term="nickell-bias">前後關聯</span>：這個問題的本質就是「內生性」——和第 10 章的「測量誤差造成的內生性」、第 11 章的「聯立性偏誤」是同一類問題。解決方法也一樣：找工具變數。</p>
@@ -4353,7 +4353,7 @@ const CH17_SECTIONS = [
 {
   id:"17.3", title:"Arellano-Bond 估計法",
   body:`
-  <p><span class="proper">Arellano 和 Bond (1991)</span> 提出了一個解決方法——也就是著名的 <b>Arellano-Bond 估計法</b>（也叫「差分 GMM」）。</p>
+  <p><span class="proper">Arellano 和 Bond (1991)</span> 提出了一個解決方法——也就是著名的 <b><span class="term" data-term="Arellano-Bond">Arellano-Bond 估計法</span></b>（也叫「差分 GMM」）。</p>
   <p><b>第一步：差分，消掉個體效果 a<sub>i</sub></b></p>
   <p>把原始模型減掉「落進一期」的式子，就把 a<sub>i</sub> 消掉了：</p>
   <div class="formula">
@@ -4404,9 +4404,9 @@ const CH17_SECTIONS = [
 {
   id:"17.4", title:"系統 GMM 估計法",
   body:`
-  <p><span class="proper">Arellano 和 Bover (1995)、Blundell 和 Bond (1998)</span> 後來又提出了一個更有效率的方法——<b>系統 GMM</b> (System GMM)。</p>
+  <p><span class="proper">Arellano 和 Bover (1995)、Blundell 和 Bond (1998)</span> 後來又提出了一個更有效率的方法——<b><span class="term" data-term="System GMM">系統 GMM</span></b> (System GMM)。</p>
   <p><b>差分 GMM 的問題</b>：Arellano-Bond（差分 GMM）只用了「差分方程式」的資訊。但當 y 很「持久」（ρ 很接近 1）的時候，落進的 y 當工具變數會變得很「弱」——因為 y 變來變去都差不多，落進兩期的 y 對當期的 y 解釋力很差。</p>
-  <p><b>系統 GMM 的解法</b>：除了估計「差分方程式」之外，同時也估計「水準方程式」：</p>
+  <p><b><span class="term" data-term="System GMM">系統 GMM</span> 的解法</b>：除了估計「差分方程式」之外，同時也估計「水準方程式」：</p>
   <ul>
     <li>差分方程式：Δy<sub>it</sub> = ρ·Δy<sub>i,t-1</sub> + β·Δx<sub>it</sub> + Δu<sub>it</sub>（工具變數用 y 的落進項）</li>
     <li>水準方程式：y<sub>it</sub> = ρ·y<sub>i,t-1</sub> + β·x<sub>it</sub> + a<sub>i</sub> + u<sub>it</sub>（工具變數用 Δy<sub>it</sub>）</li>
@@ -4419,13 +4419,13 @@ const CH17_SECTIONS = [
   <div class="warn">
     ⚠️ 考試重點：
     <br><br>
-    <b>差分 GMM vs 系統 GMM</b>：
+    <b>差分 GMM vs <span class="term" data-term="System GMM">系統 GMM</span></b>：
     <ul>
       <li>差分 GMM（Arellano-Bond）：只估計差分方程式，用 y 的落進項當工具變數</li>
-      <li>系統 GMM（Blundell-Bond）：同時估計差分方程式和水準方程式，用更多的工具變數，更有效率</li>
+      <li><span class="term" data-term="System GMM">系統 GMM</span>（Blundell-Bond）：同時估計差分方程式和水準方程式，用更多的工具變數，更有效率</li>
     </ul>
     <br>
-    但系統 GMM 多了一個假設：「初始條件是無關的」 (initial conditions are uncorrelated with individual effects)。如果這個假設不對，系統 GMM 反而會有偏誤。
+    但<span class="term" data-term="System GMM">系統 GMM</span> 多了一個假設：「初始條件是無關的」 (initial conditions are uncorrelated with individual effects)。如果這個假設不對，<span class="term" data-term="System GMM">系統 GMM</span> 反而會有偏誤。
   </div>
   <div class="method-card mc-title" data-mc="gmm-tests">
     <div class="mc-title">💡 診斷檢定：你估計完之後要檢查什麼？</div>
@@ -4474,7 +4474,7 @@ const CH18_SECTIONS = [
     <div class="mc-title">💡 Logit vs Probit</div>
     <div class="mc-body">
       <table>
-        <tr><th></th><th>Logit 模型</th><th>Probit 模型</th></tr>
+        <tr><th></th><th><span class="term" data-term="Logit model">Logit 模型</span></th><th><span class="term" data-term="Probit model">Probit 模型</span></th></tr>
         <tr><td>誤差項分配</td><td>邏輯分配 (Logistic)</td><td>標準常態分配</td></tr>
         <tr><td>CDF 函數</td><td>Λ(z) = e^z / (1 + e^z)</td><td>Φ(z) = 標準常態分配的累積分布函數</td></tr>
         <tr><td>尾巴厚度</td><td>比較厚（outliers 影響比較小）</td><td>比較薄</td></tr>
@@ -4517,7 +4517,7 @@ const CH18_SECTIONS = [
   <div class="method-card mc-title" data-mc="marginal-effect">
     <div class="mc-title">💡 數值範例：邊際效果怎麼算？</div>
     <div class="mc-body">
-      <p>假設我們估計了一個 Probit 模型：</p>
+      <p>假設我們估計了一個 <span class="term" data-term="Probit model">Probit 模型</span>：</p>
       <p>P(y=1|x) = Φ(-2 + 0.5x)</p>
       <p>其中 x 是「教育年數」。</p>
       <p>請問：教育年數多一年，會讓「想要上研究所」的機率增加多少？</p>
@@ -4552,11 +4552,11 @@ const CH18_SECTIONS = [
     <li>選項 4：騎腳踏車</li>
   </ul>
   <p>這時候就要用「多類別選擇模型」 (Multinomial Choice Model)。</p>
-  <p>最簡單的是 <b>Multinomial Logit</b>：</p>
+  <p>最簡單的是 <b><span class="term" data-term="Multinomial logit">Multinomial Logit</span></b>：</p>
   <div class="formula">
     P(y=j|x) = exp(β<sub>j</sub>'x) / Σ<sub>k=1</sub><sup>J</sup> exp(β<sub>k</sub>'x)
   </div>
-  <p>但 Multinomial Logit 有一個很強的假設——<b>獨立不相干選擇</b> (Independence of Irrelevant Alternatives, IIA)：兩個選項之間的相對機率，不會受到第三個選項的影響。</p>
+  <p>但 <span class="term" data-term="Multinomial logit">Multinomial Logit</span> 有一個很強的假設——<b>獨立不相干選擇</b> (Independence of Irrelevant Alternatives, IIA)：兩個選項之間的相對機率，不會受到第三個選項的影響。</p>
   <div class="warn">
     ⚠️ 考試重點：IIA 假設是什麼意思？舉個有名的「紅巴士/藍巴士」例子：
     <br><br>
@@ -4587,7 +4587,7 @@ const CH18_SECTIONS = [
     <li>大學/專科</li>
     <li>研究所及以上</li>
   </ol>
-  <p>這時候你不能直接用 Multinomial Logit——因為它把各個選項當成「沒有順序的」，但實際上「大學」比「高中」高，「研究所」比「大學」高。</p>
+  <p>這時候你不能直接用 <span class="term" data-term="Multinomial logit">Multinomial Logit</span>——因為它把各個選項當成「沒有順序的」，但實際上「大學」比「高中」高，「研究所」比「大學」高。</p>
   <p>正確的做法：用<b>有序選擇模型</b> (Ordered Choice Model)——最常見的是 Ordered Probit 或 Ordered Logit。</p>
   <p>基本觀念：還是有一個潛在變數 y* = β'x + ε，只是現在 y* 被分成「好幾個門檻」：</p>
   <div class="formula">
@@ -4637,7 +4637,7 @@ const CH19_SECTIONS = [
   </div>
   <p>如果你直接用 OLS 估計 y 對 x 的迴歸，會發生什麼事？你會有偏誤！</p>
   <p>為什麼？因為那些 y* ≤ 0 的人，他們的 y 被「截斷」在 0——你看不到他們「真實的」y* 是多少。這就造成了「樣本選擇偏誤」——你只用了「有消費」的人來估計，但「有消費」的人不是隨機抽的。</p>
-  <p>解決方法：Tobit 模型 (Tobin's Probit)——由 <span class="proper">James Tobin (1958)</span> 提出。</p>
+  <p>解決方法：<span class="term" data-term="Tobit model">Tobit 模型</span> (Tobin's Probit)——由 <span class="proper">James Tobin (1958)</span> 提出。</p>
 
   <h3 style="margin-top:20px;font-size:16px;font-weight:600;">設限 vs 截斷</h3>
   <p>很多人會搞混「設限」 (censoring) 和「截斷」 (truncation)：</p>
@@ -4648,7 +4648,7 @@ const CH19_SECTIONS = [
 
   <div class="method-card mc-title" data-mc="tobit-basic">
     <div class="mc-check"><input type="checkbox" id="mc-ch19-0" data-mc="tobit-basic"><label for="mc-ch19-0" class="mc-lbl">學會</label></div>
-    <div class="mc-left">Tobit 模型的直覺</div>
+    <div class="mc-left"><span class="term" data-term="Tobit model">Tobit 模型</span>的直覺</div>
     <div class="mc-body">
       <div class="mc-formula">
       想像你在調查「每個月在咖啡上花多少錢」。<br><br>
@@ -4658,16 +4658,16 @@ const CH19_SECTIONS = [
       </div>
       <div class="mc-detail">
       你會低估「教育程度對咖啡消費的影響」——因為那些「教育程度很高但不喝咖啡」的人，他們的 y 被截斷在 0，而不是「真的消費 0」。<br><br>
-      Tobit 模型的好處：它把「 y* ≤ 0 的人」的資訊也納入考慮——它知道這些人「如果 y* 是正的，應該會消費多少」，只不過他們剛好落在 0 以下。
+      <span class="term" data-term="Tobit model">Tobit 模型</span>的好處：它把「 y* ≤ 0 的人」的資訊也納入考慮——它知道這些人「如果 y* 是正的，應該會消費多少」，只不過他們剛好落在 0 以下。
       </div>
     </div>
   </div>
 
-  <div class="warn">考試重點：Tobit 模型的重點是「設限」 (censoring)——你知道有一些人「低於門檻」，但你不知道他們確切是多少。<br><br>
+  <div class="warn">考試重點：<span class="term" data-term="Tobit model">Tobit 模型</span>的重點是「設限」 (censoring)——你知道有一些人「低於門檻」，但你不知道他們確切是多少。<br><br>
   這和「截斷」 (truncation) 不一樣——截斷是你「根本看不到」那些低於門檻的人，他們完全不在你的樣本裡。<br><br>
-  另外，記住：Tobit 模型透過 MLE 估計，把「設限」的部分也納入模型裡。</div>
+  另外，記住：<span class="term" data-term="Tobit model">Tobit 模型</span>透過 MLE 估計，把「設限」的部分也納入模型裡。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：Tobit 模型和第 18 章的 Probit 模型有關——它們都是「潛在變數模型」家族的一員。Tobit 用 MLE 估計，這是第 15 章的應用。另外，Tobit 模型估計出來的係數也不能直接解讀成「邊際效果」——和 Probit/Logit 一樣，你要另外計算邊際效果。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：<span class="term" data-term="Tobit model">Tobit 模型</span>和第 18 章的 <span class="term" data-term="Probit model">Probit 模型</span>有關——它們都是「潛在變數模型」家族的一員。Tobit 用 MLE 估計，這是第 15 章的應用。另外，<span class="term" data-term="Tobit model">Tobit 模型</span>估計出來的係數也不能直接解讀成「邊際效果」——和 Probit/Logit 一樣，你要另外計算邊際效果。</p>`
 },
 
 {
@@ -4767,8 +4767,8 @@ const CH19_SECTIONS = [
   </ul>
   <p>這時候 y 只能是 0, 1, 2, 3, ... 這種「非負整數」。它不是連續變數——所以 OLS 不一定合適。</p>
 
-  <h3 style="margin-top:20px;font-size:16px;font-weight:600;">Poisson 迴歸模型</h3>
-  <p>最常用的模型：<b>Poisson 迴歸模型</b>。</p>
+  <h3 style="margin-top:20px;font-size:16px;font-weight:600;"><span class="term" data-term="Poisson regression">Poisson 迴歸模型</span></h3>
+  <p>最常用的模型：<b><span class="term" data-term="Poisson regression">Poisson 迴歸模型</span></b>。</p>
   <div class="formula">
     E(y|x) = exp(β'x)
   </div>
@@ -5034,7 +5034,7 @@ const CH21_SECTIONS = [
   方法：在每個資料點 x<sub>i</sub> 上面，放一個小小的「核心函數」 (Kernel Function) K——通常是一個小小的常態分配，中心在 x<sub>i</sub>。然後把這些小函數全部加起來，就得到整個密度函數的估計。<br><br>
   其中 h 是「頻寬」 (bandwidth)——它控制了你要把每個核心函數「弄多寬」。選擇合適的 h 很重要——太小會太多雜訊，太大會遺失重要資訊。</div>
 
-  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：核心密度估計和第 18 章的 Logit/Probit 模型有一點關係——Logit 用的「邏輯分配」，其實就是一個核心函數。</p>`
+  <p style="margin-top:16px;color:var(--muted);font-size:13px;"><b>前後章節關聯</b>：核心密度估計和第 18 章的 Logit/<span class="term" data-term="Probit model">Probit 模型</span>有一點關係——Logit 用的「邏輯分配」，其實就是一個核心函數。</p>`
 },
 
 {
